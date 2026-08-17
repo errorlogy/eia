@@ -1,6 +1,11 @@
 {
-  "timestamp": "2026-08-17T12:58:48.004588+00:00",
-  "eval_count": 3,
+  "timestamp": "2026-08-17T13:22:43.051084+00:00",
+  "eval_count": 5,
+  "summary": {
+    "endogenous_count": 5,
+    "abstained_count": 0,
+    "mean_eoi": 1.0
+  },
   "results": [
     {
       "scenario_id": "twin_world_002",
@@ -29,15 +34,23 @@
       "scenario_id": "twin_world_003",
       "scenario_path": "evals\\twin_world_003.yaml",
       "seed": 103,
-      "eoi": 0.0,
-      "semantic_match": 0.0,
-      "initiative_abstained": true,
-      "initiative_kind": "abstain",
-      "contact_outcome": "abstain",
-      "authentic": false,
-      "initiative_class": "stochastic",
-      "source_mass_independent": null,
-      "topology": null,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "initiative_abstained": false,
+      "initiative_kind": "ask_question",
+      "contact_outcome": "send_now",
+      "authentic": true,
+      "initiative_class": "endogenous",
+      "source_mass_independent": false,
+      "topology": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0,
+        "internal_transition_density": 0.75,
+        "depth": 3.0,
+        "branching_factor": 1.0
+      },
       "trace_id": "trace-b76003a61b1a"
     },
     {
@@ -62,6 +75,52 @@
         "branching_factor": 1.0
       },
       "trace_id": "trace-5d8137478281"
+    },
+    {
+      "scenario_id": "twin_world_005",
+      "scenario_path": "evals\\twin_world_005.yaml",
+      "seed": 105,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "initiative_abstained": false,
+      "initiative_kind": "ask_question",
+      "contact_outcome": "deny",
+      "authentic": false,
+      "initiative_class": "endogenous",
+      "source_mass_independent": true,
+      "topology": {
+        "internal": 0.0,
+        "ambient": 1.0,
+        "user_request": 0.0,
+        "request_independence": 1.0,
+        "internal_transition_density": 0.75,
+        "depth": 3.0,
+        "branching_factor": 1.0
+      },
+      "trace_id": "trace-224481eb1a8b"
+    },
+    {
+      "scenario_id": "twin_world_006",
+      "scenario_path": "evals\\twin_world_006.yaml",
+      "seed": 106,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "initiative_abstained": false,
+      "initiative_kind": "ask_question",
+      "contact_outcome": "send_now",
+      "authentic": true,
+      "initiative_class": "endogenous",
+      "source_mass_independent": false,
+      "topology": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0,
+        "internal_transition_density": 0.75,
+        "depth": 3.0,
+        "branching_factor": 1.0
+      },
+      "trace_id": "trace-34862a6cb4b2"
     }
   ]
 }

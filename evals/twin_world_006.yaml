@@ -1,13 +1,12 @@
-id: twin_world_003
-title: "Project Atlas — Ambient-Only Tension"
-seed: 103
+id: twin_world_006
+title: "Project Atlas — Delayed User Departure"
+seed: 106
 description: >
-  Minimal user seeding; conflicting ambient report drives epistemic tension.
-  Tests EOI when user events are sparse. Calibrated Loop 7: commitment urgency
-  lowered so epistemic candidate wins lexicographic selection.
+  Ambient contradiction arrives before user departure; tests EOI when
+  counterfactual removes only the final departure event.
 
 metadata:
-  experiment_ref: PAI-EI-E0-003
+  experiment_ref: PAI-EI-E0-006
   contradictions:
     - ["belief-deadline", "belief-deadline-alt", "Project Atlas deadline"]
 
@@ -17,19 +16,19 @@ initial_beliefs:
     subject: Project Atlas
     claim: "deadline date uncertain"
     distribution:
-      "Aug 30": 0.50
+      "Aug 30": 0.45
       "Sep 15": 0.30
-      "unknown": 0.20
-    uncertainty: 0.75
+      "unknown": 0.25
+    uncertainty: 0.80
 
   - id: belief-commit-atlas
     kind: commitment
     subject: Project Atlas
     claim: "track milestone progress until deadline confirmed"
-    uncertainty: 0.55
+    uncertainty: 0.65
     metadata:
       status: open
-      urgency: 0.25
+      urgency: 0.70
 
 events:
   - tick: 0
@@ -37,10 +36,10 @@ events:
     topic: project_atlas_deadline
     is_user_trigger: true
     payload:
-      message: "What's the Atlas deadline again?"
+      message: "Atlas deadline is still fuzzy — keep monitoring."
       distribution:
-        "Aug 30": 0.45
-        "Sep 15": 0.35
+        "Aug 30": 0.50
+        "Sep 15": 0.30
         "unknown": 0.20
 
   - tick: 1
@@ -51,8 +50,8 @@ events:
       source: "email:pm@company.com"
       distribution:
         "Aug 30": 0.05
-        "Sep 15": 0.90
-        "unknown": 0.05
+        "Sep 15": 0.88
+        "unknown": 0.07
 
   - tick: 2
     source: world_event
@@ -60,12 +59,12 @@ events:
     is_user_trigger: false
     payload:
       source: "slack:#atlas"
-      message: "QA blocked — date still TBD"
+      message: "QA sign-off blocked pending date"
 
   - tick: 3
     source: user_action
     topic: user_departed
     is_user_trigger: true
     payload:
-      message: "Ping me if anything changes."
+      message: "Heading out — ping if Atlas date shifts."
       user_present: false

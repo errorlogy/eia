@@ -15,28 +15,30 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 2. `docs/LOOP_PLAN.md` — current priorities
 3. `docs/LOOP_LOG.md` — last iteration + blockers
 4. `docs/META_LOOP.md` — A/B/C cycle definition
-5. `docs/DEVELOPMENT_LOOP.md` — execute protocol
-6. Git: `git status`, `git log -5 --oneline`, `pytest -q`
+5. Git: `git status`, `git log -5 --oneline`, `pytest -q`
 
 ### Run meta-loop
 
-**Loop A (PLAN):** Refresh `docs/LOOP_PLAN.md` if state changed (tests, commits, parallel agent work). Check owner column — skip tasks marked `dev-loop IN PROGRESS` unless you are that loop.
+**Loop A (PLAN):** Refresh `docs/LOOP_PLAN.md` if state changed.
 
-**Loop C (EXECUTE):** Pick top unblocked task from LOOP_PLAN. Implement minimal diff. Tracks: code (`src/eia/`), math (`docs/MATHEMATICS.md`), research (`research/`), NAMM (`src/eia/namm/`). Tests must pass. Commit + push `origin/main`. English only.
+**Loop C (EXECUTE):** Pick top unblocked task from LOOP_PLAN. Tests must pass. Commit + push `origin/main`. English only.
 
-**Loop B (REVIEW):** If last execute was this session or every 3rd execute: append RETROSPECTIVE to `docs/LOOP_LOG.md`; update `docs/PLAN_DELTA.md` if IMPLEMENTATION_PLAN assumptions changed; reprioritize LOOP_PLAN; update this file.
+**Loop B (REVIEW):** Append RETROSPECTIVE to `docs/LOOP_LOG.md`; update `docs/PLAN_DELTA.md` if needed; update this file.
 
 ### Current priority (#1)
 
-**Commit Loop 2:** SourceMass topology (`src/eia/audit/topology.py`) + AuthenticReason integration — tests pass (34). Owner: dev-loop. **Do not redo Loop 1** — already committed as `779ddcb` with paired-eoi-report-002.
+**SourceMass vs AuthenticReason κ study** on the 5-scenario eval set using `kappa_bin_agreement()` from `src/eia/audit/source_mass_mapping.py`. Record results in `research/source-mass-kappa-report.md`.
 
-If Loop 2 already committed, proceed to **NAMM-013 live wire** (LOOP_PLAN #2).
+### Completed this session (Loops 5–7)
+
+- Loop 5 (`01b2564`): EOI threshold calibration + SourceMass mapping
+- Loop 6 (`a3f7988`): paired-eoi-report-003 on `autonomous_question`
+- Loop 7: twin_world_003 calibrated + twin_world_005–006 evals
 
 ### Stop if
 
 - Tests fail after 2 fix attempts → log blocker, stop
 - Push fails → log blocker, stop
-- Task owned by parallel agent and in progress → do next P1 task (e.g. math §9 update)
 
 ### Author
 

@@ -46,7 +46,13 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ---
 
-## Pending deltas (draft — apply after Loop 1 completes)
+### 2026-08-17 — Loops 5–7 completed (RQ2–RQ4 + eval expansion)
+
+- **Section:** §7 PAI-EI benchmark, §4 R4
+- **Delta:** RQ2 threshold calibration, RQ3 SourceMass mapping, RQ4 paired EOI-003 shipped. Eval suite expanded to 5 scenarios; twin_world_003 abstain bug calibrated (commitment urgency).
+- **Rationale:** Loops 5–7 commits `01b2564`, `a3f7988`, + eval commit.
+
+---
 
 | Trigger | Proposed delta |
 |---------|----------------|

@@ -49,7 +49,21 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Results:** main EOI=1.0, starter EOI=1.0, delta=0.0; both epistemic ask + contact
 - **Finding:** SourceMass partition differs (internal vs ambient) but RI=1.0 and class agreement on main
 - **Tests:** 50 passed
+- **Commit:** a3f7988
+
+## Loop 7 — twin_world_003 calibration + eval expansion (2026-08-17)
+
+- **Done:** Calibrated twin_world_003 (urgency 0.25 → epistemic wins); added twin_world_005–006; run_evals.py summary block
+- **Eval results:** 5 scenarios, mean EOI=1.0, 5/5 endogenous initiative; 003 fixed from abstain
+- **Tests:** 50 passed
 - **Commit:** (this session)
+
+### RETROSPECTIVE (Loops 5–7)
+
+- RQ2/RQ3 closed: threshold crosswalk + SourceMass mapping enable κ studies.
+- Paired EOI-003 confirms starter-native scenario works on main with delta 0.0.
+- Eval harness now covers sparse-user, pure-ambient, and delayed-departure variants.
+- SourceMass partition vocabulary still diverges (internal vs ambient) while RI agrees — track in RQ5.
 
 ---
 

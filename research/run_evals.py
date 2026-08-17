@@ -55,6 +55,11 @@ def main() -> int:
     payload = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "eval_count": len(results),
+        "summary": {
+            "endogenous_count": sum(1 for r in results if r["initiative_class"] == "endogenous"),
+            "abstained_count": sum(1 for r in results if r["initiative_abstained"]),
+            "mean_eoi": round(sum(r["eoi"] for r in results) / len(results), 4) if results else 0.0,
+        },
         "results": results,
     }
     OUTPUT.write_text(json.dumps(payload, indent=2), encoding="utf-8")
