@@ -1,24 +1,44 @@
-# PAI-EI-E0-001 — Unprompted Epistemic Question (Twin World Test)
+# PAI-EI-E0-001 — Twin World Test
 
-**Phase:** E0 (simulation only — no real humans, sensors, or side effects)  
-**Status:** scaffold — implementation pending  
-**Spec reference:** PROACTIVE AI architecture §31
+**Experiment ID:** `PAI-EI-E0-001`  
+**Stage:** E0 (simulation)  
+**Hypotheses:** H1 (drive-state → endogenous initiative), H3 (Contact Governor reduces burden)
 
-## Purpose
+## Run
 
-First PROACTIVE AI experiment aligned with NAMM experiment conventions (`config.yaml` + report).
+```powershell
+# From repo root
+pip install -e ".[dev]"
 
-Tests whether full P4 architecture (drives + Contact Governor + counterfactual replay) beats P3 predictive baseline on EOI and initiative precision while keeping contact burden low.
+# Full demo with rich output + causal trace
+eia demo
 
-## Run (when simulator exists)
+# Minimal JSON output
+eia run
 
-```bash
-# Future: pai run-experiment --id PAI-EI-E0-001
+# Replay exported trace
+eia replay --trace traces/<trace_id>.jsonl
+
+# Unit tests
+pytest tests/ -v
 ```
 
-## Related NAMM experiments
+## What to expect
 
-- NAMM-2026-004 — meta-evaluator fixed points (AI thinking topology)
-- NAMM-2026-007 — raw tensor invariants (first operational signal)
+1. Scenario `scenarios/twin_world_001.yaml` runs without API keys
+2. After user departure + quiet period, system forms **one endogenous question** about Project Atlas deadline
+3. Contact Governor **approves** (EVSI > interruption cost)
+4. Twin run removes last user event → **EOI > 0.5** printed
+5. Causal trace JSONL exported to `traces/`
+6. NAMM stub may log `internal_experiment` intent when epistemic drive > threshold
 
-See [`docs/NAMM_INTEGRATION.md`](../../docs/NAMM_INTEGRATION.md).
+## Success criteria (MVP-0 partial)
+
+| Metric | Target | MVP-0 status |
+|--------|--------|--------------|
+| EOI | > P3 baseline | Twin run implemented |
+| Trace completeness | Full DAG | observation → contact decision |
+| Abstain present | Yes | `best_or_abstain()` mandatory |
+| Governor reject demo | Yes | See `test_contact_governor_rejects_low_value` |
+
+See [`DEMO.md`](../../DEMO.md) for causal explanation.

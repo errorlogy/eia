@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "eia"
+version = "0.1.0"
+description = "Endogenous Initiative Architecture — P4/P5 proactive agency with causal tracing"
+readme = "README.md"
+license = { text = "CC-BY-4.0" }
+requires-python = ">=3.12"
+authors = [{ name = "Roman Kuznetsov", email = "research@anthemium.tech" }]
+keywords = [
+    "endogenous-initiative",
+    "proactive-ai",
+    "agent-architecture",
+    "causal-tracing",
+    "anthemium",
+    "pai-ei-benchmark",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "click>=8.1",
+    "pydantic>=2.0",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.scripts]
+eia = "eia.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/eia"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

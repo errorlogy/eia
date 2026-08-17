@@ -38,6 +38,17 @@ Both programs share falsifiable gates, causal traces, and experiment manifests u
 
 See [architecture specification](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) §5, §26–27.
 
+### Quick start (MVP-0)
+
+```powershell
+pip install -e ".[dev]"
+eia demo
+eia replay --trace traces/<trace_id>.jsonl
+pytest tests/ -v
+```
+
+See [`DEMO.md`](./DEMO.md) for causal walkthrough of what `eia demo` produces.
+
 ### Quick start (NAMM sibling clone)
 
 ```powershell
@@ -53,11 +64,12 @@ Integration details: [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md).
 
 ## Prerequisites
 
-At documentation stage (v0.1), no additional software is required.
+- **Python 3.12+** — `pip install -e ".[dev]"` then `eia demo`
+- **Git** — version control
 
-For future MVP-0 implementation:
+At documentation-only stage, no database or API keys required for MVP-0 demo.
 
-- **Python 3.11+** — services and simulator
+For future MVP-1+:
 - **PostgreSQL 15+** (pgvector optional) — state and memory
 - **Docker / Docker Compose** — local lab
 - **Git** — version control

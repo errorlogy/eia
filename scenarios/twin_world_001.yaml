@@ -1,0 +1,71 @@
+id: twin_world_001
+title: "Project Atlas — Unprompted Epistemic Question"
+seed: 101
+description: >
+  User discusses Project Atlas deadline ambiguity, creates a tracking commitment,
+  then leaves without clarifying. After quiet period, drives accumulate from
+  BeliefField gradients — system forms endogenous clarifying question.
+
+metadata:
+  experiment_ref: PAI-EI-E0-001
+  contradictions:
+    - ["belief-deadline", "belief-deadline-alt", "Project Atlas deadline"]
+
+initial_beliefs:
+  - id: belief-deadline
+    kind: categorical
+    subject: Project Atlas
+    claim: "deadline date uncertain"
+    distribution:
+      "Aug 30": 0.35
+      "Sep 15": 0.30
+      "unknown": 0.35
+    uncertainty: 0.80
+
+  - id: belief-commit-atlas
+    kind: commitment
+    subject: Project Atlas
+    claim: "track milestone progress until deadline confirmed"
+    uncertainty: 0.65
+    metadata:
+      status: open
+      urgency: 0.75
+
+events:
+  - tick: 0
+    source: user_message
+    topic: project_atlas_deadline
+    is_user_trigger: true
+    payload:
+      message: "We need to ship Project Atlas soon — maybe end of August?"
+      distribution:
+        "Aug 30": 0.55
+        "Sep 15": 0.25
+        "unknown": 0.20
+
+  - tick: 1
+    source: user_message
+    topic: commitment_created
+    is_user_trigger: true
+    payload:
+      message: "Please keep track of Atlas milestones until we confirm the date."
+      urgency: 0.75
+
+  - tick: 2
+    source: world_event
+    topic: conflicting_deadline_report
+    is_user_trigger: false
+    payload:
+      source: "email:pm@company.com"
+      distribution:
+        "Aug 30": 0.05
+        "Sep 15": 0.85
+        "unknown": 0.10
+
+  - tick: 3
+    source: user_action
+    topic: user_departed
+    is_user_trigger: true
+    payload:
+      message: "Gotta run — we'll figure out the date later."
+      user_present: false

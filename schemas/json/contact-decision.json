@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/errorlogy/eia/schemas/contact-decision.json",
+  "title": "ContactDecision",
+  "type": "object",
+  "required": ["id", "timestamp", "initiative_id", "outcome", "contact_score"],
+  "properties": {
+    "id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "initiative_id": { "type": "string" },
+    "outcome": {
+      "enum": ["send_now", "defer_until_context", "internal_research", "deny", "abstain"]
+    },
+    "contact_score": { "type": "number" },
+    "reason": { "type": "string" }
+  }
+}

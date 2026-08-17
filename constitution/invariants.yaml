@@ -1,0 +1,65 @@
+version: "0.1.0"
+constitution_id: eia-lab-constitution-v0.1
+
+invariants:
+  - id: no_covert_sensing
+    description: "Sensor has physically verifiable state; revocation stops stream immediately"
+    enforced_by: [sensor_fabric, edge_perception]
+
+  - id: no_llm_to_actuator
+    description: "Every command passes typed schema, policy engine, risk tier, capability token"
+    enforced_by: [action_governor, tool_gateway]
+
+  - id: no_untrusted_observation_to_instruction
+    description: "External text/speech/pages marked as data, not system commands"
+    enforced_by: [observation_normalizer, taint_tracker]
+
+  - id: immutable_base_constraints
+    description: "Cognitive core may propose amendments but not apply them"
+    enforced_by: [constitution_service]
+
+  - id: contact_is_consumable_resource
+    description: "Budgets, cooldown, quiet hours, fatigue penalty"
+    enforced_by: [contact_governor]
+
+  - id: causal_explainability
+    description: "Structured decision record for every act — not 'LLM decided so'"
+    enforced_by: [audit_plane, causal_trace]
+
+  - id: observation_separate_from_identification
+    description: "Presence/activity do not imply identity without separate permission"
+    enforced_by: [edge_perception, privacy_policy]
+
+  - id: no_raw_sensor_memory_by_default
+    description: "Local minimization first; features only when needed"
+    enforced_by: [memory_system, privacy_policy]
+
+  - id: safety_loop_no_llm
+    description: "Physical emergency loop is deterministic and local"
+    enforced_by: [safety_plane]
+
+  - id: uncertainty_increases_caution
+    description: "High uncertainty must not automatically increase contacts"
+    enforced_by: [contact_governor, drive_engine]
+
+  - id: high_impact_requires_approval
+    description: "Finance, medicine, access, public messages need explicit clearance"
+    enforced_by: [action_governor, approval_workflow]
+
+  - id: system_identifies_as_ai
+    description: "No human impersonation in external contact"
+    enforced_by: [dialogue_presence, contact_governor]
+
+contact_policy:
+  daily_budget: 2
+  quiet_hours: [22, 7]
+  min_evsi: 0.20
+  fatigue_nonlinear: true
+
+drive_policy:
+  no_llm_mood: true
+  source: belief_field_gradients
+  antigravity_note: >
+    Drives computed from structural tension (entropy, inconsistency energy,
+    commitment debt) — orthogonal to embedding similarity plateau.
+    NAMM K_A/K_H metaphor: machine-native signal is compact; human narrative mood is not used.

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/errorlogy/eia/schemas/motivation.json",
+  "title": "Motivation",
+  "type": "object",
+  "required": ["id", "timestamp", "signals"],
+  "properties": {
+    "id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["drive", "intensity"],
+        "properties": {
+          "drive": { "enum": ["epistemic", "coherence", "commitment"] },
+          "intensity": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "dominant_drive": { "type": ["string", "null"] }
+  }
+}

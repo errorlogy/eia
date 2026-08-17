@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/errorlogy/eia/schemas/initiative.json",
+  "title": "Initiative",
+  "type": "object",
+  "required": ["id", "timestamp", "candidate", "abstained", "parent_motivation_id"],
+  "properties": {
+    "id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "abstained": { "type": "boolean" },
+    "parent_motivation_id": { "type": "string" },
+    "evsi": { "type": "number" },
+    "candidate": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "kind": { "enum": ["ask_question", "internal_research", "observe", "abstain"] },
+        "question_text": { "type": ["string", "null"] },
+        "expected_info_gain": { "type": "number" }
+      }
+    }
+  }
+}

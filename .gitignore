@@ -130,3 +130,4 @@ build/
 # Eval reports with sensitive data (keep templates in repo)
 evals/reports/*.private.*
 harnesses/**/output/
+traces/
