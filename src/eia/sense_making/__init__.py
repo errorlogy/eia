@@ -155,7 +155,7 @@ class SenseMakingEngine:
                 f"BeliefField snapshot: entropy={ep:.3f}, "
                 f"coherence_tension={co:.3f}, contradictions={len(self.field.contradictions)}"
             ),
-            epistemic_threshold_met=ep >= self.EPistemic_THRESHOLD,
+            epistemic_threshold_met=ep >= self.EPISTEMIC_THRESHOLD,
             coherence_threshold_met=co >= self.COHERENCE_THRESHOLD,
             namm_topology_ref="NAMM-2026-006" if co >= self.COHERENCE_THRESHOLD else None,
         )

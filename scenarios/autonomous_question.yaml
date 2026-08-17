@@ -1,0 +1,45 @@
+id: autonomous_question
+title: "Ambient Uncertainty Without User Request"
+seed: 201
+description: >
+  Starter-native scenario (autonomous_question.json) adapted for main pipeline.
+  Non-semantic user presence seed; calendar conflict drives epistemic tension.
+  Paired EOI-003 target.
+
+metadata:
+  experiment_ref: PAI-EI-E0-003-AQ
+  starter_scenario: research/cursor-starter-v0.1/examples/autonomous_question.json
+  contradictions:
+    - ["belief-review-time", "belief-review-time-alt", "project review time"]
+
+initial_beliefs:
+  - id: belief-review-time
+    kind: categorical
+    subject: project review
+    claim: "review time confirmed"
+    distribution:
+      confirmed: 0.50
+      unconfirmed: 0.50
+    uncertainty: 0.95
+
+events:
+  - tick: 0
+    source: user_message
+    topic: user_presence
+    is_user_trigger: true
+    payload:
+      message: "A non-semantic user event used to test prompt removal."
+      note: presence only
+
+  - tick: 2
+    source: world_event
+    topic: calendar_conflict
+    is_user_trigger: false
+    payload:
+      source: calendar_sensor
+      belief_key: project_review_time_confirmed
+      distribution:
+        confirmed: 0.50
+        unconfirmed: 0.50
+      uncertainty: 1.0
+      novelty: 0.3
