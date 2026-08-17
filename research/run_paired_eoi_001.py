@@ -206,6 +206,19 @@ def run_starter() -> dict:
     }
 
 
+def _threshold_calibration_payload() -> dict:
+    sys.path.insert(0, str(ROOT / "src"))
+    from eia.audit.eoi_calibration import calibrate_thresholds
+
+    cal = calibrate_thresholds()
+    return {
+        "starter_similarity_threshold": cal.starter_similarity_threshold,
+        "main_structural_threshold": cal.main_structural_threshold,
+        "main_authentic_threshold": cal.main_authentic_threshold,
+        "notes": list(cal.notes),
+    }
+
+
 def main(report_id: str = "paired-eoi-report-002") -> int:
     main_result = run_main()
     starter_result = run_starter()
@@ -217,6 +230,7 @@ def main(report_id: str = "paired-eoi-report-002") -> int:
         ),
         "eoi_delta": None,
         "contact_agreement": None,
+        "threshold_calibration": _threshold_calibration_payload(),
     }
     if main_result["eoi"] is not None and starter_result["eoi"] is not None:
         agreement["eoi_delta"] = round(main_result["eoi"] - starter_result["eoi"], 4)

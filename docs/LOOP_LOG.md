@@ -34,7 +34,14 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** 3 eval scenarios (twin_world_002–004), `research/run_evals.py`, `research/eval_eoi_log.json`
 - **EOI results:** 002=1.0 (endogenous), 003=0.0 (abstained), 004=1.0 (endogenous, ambient SourceMass)
 - **Tests:** 37 passed
-- **Commit:** (pending push)
+- **Commit:** c544324
+
+## Loop 5 — RQ2 + RQ3 EOI calibration + SourceMass mapping (2026-08-17)
+
+- **Done:** `eoi_calibration.py` (threshold crosswalk), `source_mass_mapping.py` (AuthenticReason ↔ SourceMass), `research/eoi-threshold-calibration.md`, MATHEMATICS.md §9 update
+- **Tests:** 50 passed (+13 calibration/mapping tests)
+- **Finding:** Starter δ=0.75 stricter than main structural 0.50 on partial fingerprint matches; exact match → EOI 1.0 on both
+- **Commit:** (this session)
 
 ---
 

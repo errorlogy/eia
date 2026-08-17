@@ -283,6 +283,18 @@ from eia.audit.topology import (  # noqa: E402
     SourceMass,
     TopologyMetrics,
 )
+from eia.audit.eoi_calibration import (  # noqa: E402
+    ThresholdCalibration,
+    calibrate_thresholds,
+    starter_fingerprint_similarity,
+    structural_eoi_score,
+)
+from eia.audit.source_mass_mapping import (  # noqa: E402
+    SourceMassPartition,
+    classify_source_mass,
+    compare_verdict_to_topology,
+    kappa_bin_agreement,
+)
 
 __all__ = [
     "DEFAULT_TWIN_POLICY",
@@ -293,6 +305,14 @@ __all__ = [
     "AuthenticReasonVerdict",
     "CausalTrace",
     "CausalTraceTopology",
+    "ThresholdCalibration",
+    "calibrate_thresholds",
+    "starter_fingerprint_similarity",
+    "structural_eoi_score",
+    "SourceMassPartition",
+    "classify_source_mass",
+    "compare_verdict_to_topology",
+    "kappa_bin_agreement",
     "EOI_AUTHENTIC_THRESHOLD",
     "EOI_ENDOGENOUS_THRESHOLD",
     "EOIScorer",

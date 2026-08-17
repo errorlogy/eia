@@ -228,6 +228,20 @@ EOI estimate:
 
 Threshold for authentic reason: \(\theta = 0.50\) (`EOI_AUTHENTIC_THRESHOLD`).
 
+### Threshold calibration (RQ2)
+
+Implementation: `src/eia/audit/eoi_calibration.py`. Paired report: `research/eoi-threshold-calibration.md`.
+
+| Gate | Threshold | Semantics |
+|------|-----------|-----------|
+| Starter fingerprint retain | \(\delta = 0.75\) | Trial counts toward EOI when \(S \geq 0.75\) |
+| Main structural match | \(2/4\) fields \(\Rightarrow 0.50\) | `EOIScorer.score()` base before robustness bonus |
+| Main authentic reason | \(\theta = 0.50\) | `EOI_AUTHENTIC_THRESHOLD` in discriminator |
+
+**Crosswalk:** Exact kind+motive+target match yields \(S = 1.0\) on both; partial matches diverge (starter stricter). Harmonized twin policy is prerequisite for numeric EOI comparison.
+
+**SourceMass ↔ AuthenticReason (RQ3):** `src/eia/audit/source_mass_mapping.py` maps RI bins and partitions to `AuthenticReasonCode` (κ study helper).
+
 ### What EOI measures
 
 - Robustness to removal of recent user input (under stated policy)
