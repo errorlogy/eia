@@ -20,6 +20,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `src/eia/audit/topology.py`, integrated into `AuthenticReasonDiscriminator` as supplementary signal
 - **Tests:** 34 passed (+3 topology tests)
 - **Metrics:** twin_world request_independence recorded in authentic verdict topology payload
+- **Commit:** e566915
+
+## Loop 3 — NAMM-013 sandbox live (2026-08-17)
+
+- **Done:** `NammAdapter.run_sandbox()`, `SandboxCertificate`, certificate schema, docs/NAMM_SANDBOX.md
+- **Live result:** NAMM-2026-013 verified, hypothesis_confirmed=true, d_med_lift=7440.5%
+- **Tests:** 37 passed (+3 sandbox tests)
 - **Commit:** (pending push)
 
 ---

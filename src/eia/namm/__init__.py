@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
+import sys
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -15,6 +18,46 @@ from eia.ids import new_id
 from eia.scheduler import PipelineStage
 from eia.schemas.motivation import DriveKind, Motivation
 from eia.sense_making import ComprehensionResult
+
+DEFAULT_NAMM_ROOT = Path(os.environ.get("NAMM_ROOT", "C:/Users/Public/NAMM"))
+
+
+@dataclass(frozen=True, slots=True)
+class SandboxCertificate:
+    """Certificate reference returned by NAMM sandbox delegation."""
+
+    experiment_id: str
+    status: str  # verified | stub | error | not_installed
+    hypothesis_confirmed: bool | None = None
+    certificate_path: str | None = None
+    result_path: str | None = None
+    metrics: dict[str, Any] = field(default_factory=dict)
+    error: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "experiment_id": self.experiment_id,
+            "status": self.status,
+            "hypothesis_confirmed": self.hypothesis_confirmed,
+            "certificate_path": self.certificate_path,
+            "result_path": self.result_path,
+            "metrics": self.metrics,
+            "error": self.error,
+        }
+
+
+CERTIFICATE_SCHEMA = {
+    "type": "object",
+    "required": ["experiment_id", "protocol", "status"],
+    "properties": {
+        "experiment_id": {"type": "string"},
+        "protocol": {"type": "string"},
+        "status": {"type": "string", "enum": ["VERIFIED", "PENDING", "REJECTED"]},
+        "d_med_lift": {"type": "string"},
+        "pipeline_compliance": {"type": "string"},
+        "z_star_mean": {"type": "number"},
+    },
+}
 
 
 @dataclass
@@ -56,8 +99,10 @@ class NammAdapter:
     coherence_threshold: float = 0.20
     log_dir: Path = field(default_factory=lambda: Path("traces/namm_intents"))
     config_path: Path | None = None
+    namm_root: Path = field(default_factory=lambda: DEFAULT_NAMM_ROOT)
     intents: list[InternalExperimentIntent] = field(default_factory=list)
     hooks: list[NammHook] = field(default_factory=list)
+    sandbox_runs: list[SandboxCertificate] = field(default_factory=list)
     _stage_config: dict[str, Any] = field(default_factory=dict, repr=False)
 
     def __post_init__(self) -> None:
@@ -183,6 +228,70 @@ class NammAdapter:
 
         return intent
 
+    def run_sandbox(self, experiment_id: str) -> SandboxCertificate:
+        """Delegate to NAMM CLI run-experiment when install is available."""
+        artifacts_dir = self.namm_root / "experiments" / experiment_id / "artifacts"
+        cert_path = artifacts_dir / "certificate.json"
+        result_path = artifacts_dir / "result.json"
+
+        if not self.namm_root.exists():
+            cert = SandboxCertificate(
+                experiment_id=experiment_id,
+                status="not_installed",
+                error=f"NAMM root not found: {self.namm_root}",
+            )
+            self.sandbox_runs.append(cert)
+            self._persist_certificate(cert)
+            return cert
+
+        try:
+            proc = subprocess.run(
+                [sys.executable, "-m", "namm", "run-experiment", "--id", experiment_id],
+                cwd=str(self.namm_root),
+                capture_output=True,
+                text=True,
+                timeout=120,
+                check=False,
+            )
+            if proc.returncode != 0:
+                cert = SandboxCertificate(
+                    experiment_id=experiment_id,
+                    status="error",
+                    error=(proc.stderr or proc.stdout or "namm run-experiment failed").strip(),
+                )
+                self.sandbox_runs.append(cert)
+                self._persist_certificate(cert)
+                return cert
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            cert = SandboxCertificate(
+                experiment_id=experiment_id,
+                status="error",
+                error=str(exc),
+            )
+            self.sandbox_runs.append(cert)
+            self._persist_certificate(cert)
+            return cert
+
+        metrics: dict[str, Any] = {}
+        hypothesis_confirmed = None
+        if result_path.exists():
+            result_data = json.loads(result_path.read_text(encoding="utf-8"))
+            hypothesis_confirmed = result_data.get("hypothesis_confirmed")
+            metrics = result_data.get("metrics_summary", {})
+
+        status = "verified" if cert_path.exists() else "stub"
+        cert = SandboxCertificate(
+            experiment_id=experiment_id,
+            status=status,
+            hypothesis_confirmed=hypothesis_confirmed,
+            certificate_path=str(cert_path) if cert_path.exists() else None,
+            result_path=str(result_path) if result_path.exists() else None,
+            metrics=metrics,
+        )
+        self.sandbox_runs.append(cert)
+        self._persist_certificate(cert)
+        return cert
+
     def on_intention_genesis(self, candidate_count: int, max_evsi: float) -> NammHook | None:
         """Optional hook when competing candidates exceed threshold."""
         for exp in self._stage_experiments("intention_genesis"):
@@ -247,3 +356,13 @@ class NammAdapter:
             ),
             encoding="utf-8",
         )
+
+    def _persist_certificate(self, cert: SandboxCertificate) -> None:
+        self.log_dir.mkdir(parents=True, exist_ok=True)
+        path = self.log_dir / f"sandbox-{cert.experiment_id}.json"
+        payload = {
+            "kind": "namm_sandbox_certificate",
+            "certificate_schema": CERTIFICATE_SCHEMA,
+            **cert.to_dict(),
+        }
+        path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
