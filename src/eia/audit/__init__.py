@@ -278,6 +278,11 @@ from eia.audit.authentic_reason import (  # noqa: E402
     AuthenticReasonVerdict,
     EOI_AUTHENTIC_THRESHOLD,
 )
+from eia.audit.topology import (  # noqa: E402
+    CausalTraceTopology,
+    SourceMass,
+    TopologyMetrics,
+)
 
 __all__ = [
     "DEFAULT_TWIN_POLICY",
@@ -287,9 +292,12 @@ __all__ = [
     "AuthenticReasonDiscriminator",
     "AuthenticReasonVerdict",
     "CausalTrace",
+    "CausalTraceTopology",
     "EOI_AUTHENTIC_THRESHOLD",
     "EOI_ENDOGENOUS_THRESHOLD",
     "EOIScorer",
+    "SourceMass",
+    "TopologyMetrics",
     "TraceEdge",
     "TraceMetadata",
     "TraceNode",

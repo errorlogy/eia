@@ -11,10 +11,11 @@ from pydantic import BaseModel, Field
 from eia.ids import new_id
 
 from eia.audit import CausalTrace, TraceNodeKind
+from eia.audit.topology import CausalTraceTopology, TopologyMetrics
 from eia.governor import GovernorState
 from eia.schemas.contact import ContactDecision, ContactOutcome
 from eia.schemas.initiative import Initiative
-from eia.schemas.motivation import Motivation
+from eia.schemas.motivation import Motivation, MotivationSignal
 
 EOI_AUTHENTIC_THRESHOLD = 0.50
 
@@ -41,6 +42,8 @@ class AuthenticReasonCode(str, Enum):
     ENDOGENOUS = "initiative_endogenous"
     EXOGENOUS = "initiative_exogenous"
     STOCHASTIC = "initiative_stochastic"
+    SOURCE_MASS_INDEPENDENT = "source_mass_independent"
+    SOURCE_MASS_USER_DOMINATED = "source_mass_user_dominated"
 
 
 class AuthenticReasonVerdict(BaseModel):
@@ -54,6 +57,8 @@ class AuthenticReasonVerdict(BaseModel):
     reason_codes: list[AuthenticReasonCode] = Field(default_factory=list)
     failed_checks: list[str] = Field(default_factory=list)
     summary: str = ""
+    topology: dict[str, float] | None = None
+    source_mass_independent: bool | None = None
 
 
 class AuthenticReasonDiscriminator:
@@ -67,6 +72,24 @@ class AuthenticReasonDiscriminator:
     ) -> None:
         self.eoi_threshold = eoi_threshold
         self.min_structural_error = min_structural_error
+        self.source_mass_independence_threshold = 0.50
+
+    def _measure_topology(self, trace: CausalTrace) -> TopologyMetrics | None:
+        return CausalTraceTopology(trace).measure_initiative()
+
+    def _topology_payload(self, metrics: TopologyMetrics | None) -> dict[str, float] | None:
+        if metrics is None:
+            return None
+        sm = metrics.source_mass
+        return {
+            "internal": round(sm.internal, 4),
+            "ambient": round(sm.ambient, 4),
+            "user_request": round(sm.user_request, 4),
+            "request_independence": round(sm.request_independence, 4),
+            "internal_transition_density": round(metrics.internal_transition_density, 4),
+            "depth": float(metrics.depth),
+            "branching_factor": round(metrics.branching_factor, 4),
+        }
 
     def _has_causal_chain(self, trace: CausalTrace) -> bool:
         kinds = {n.kind for n in trace.nodes}
@@ -210,6 +233,19 @@ class AuthenticReasonDiscriminator:
             codes.append(AuthenticReasonCode.SPAM_BURDEN)
             failed.append("not_random_spam")
 
+        topology_metrics = self._measure_topology(trace)
+        topology_payload = self._topology_payload(topology_metrics)
+        source_mass_independent = None
+        if topology_metrics is not None:
+            source_mass_independent = (
+                topology_metrics.source_mass.request_independence
+                >= self.source_mass_independence_threshold
+            )
+            if source_mass_independent:
+                codes.append(AuthenticReasonCode.SOURCE_MASS_INDEPENDENT)
+            else:
+                codes.append(AuthenticReasonCode.SOURCE_MASS_USER_DOMINATED)
+
         is_authentic = has_chain and structural and eoi >= self.eoi_threshold and gov_ok and spam_ok
 
         initiative_class = self._classify_initiative(
@@ -241,4 +277,6 @@ class AuthenticReasonDiscriminator:
             reason_codes=codes,
             failed_checks=failed,
             summary=summary,
+            topology=topology_payload,
+            source_mass_independent=source_mass_independent,
         )
