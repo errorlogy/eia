@@ -27,6 +27,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `NammAdapter.run_sandbox()`, `SandboxCertificate`, certificate schema, docs/NAMM_SANDBOX.md
 - **Live result:** NAMM-2026-013 verified, hypothesis_confirmed=true, d_med_lift=7440.5%
 - **Tests:** 37 passed (+3 sandbox tests)
+- **Commit:** 2adf1f9
+
+## Loop 4 — Expand evals (2026-08-17)
+
+- **Done:** 3 eval scenarios (twin_world_002–004), `research/run_evals.py`, `research/eval_eoi_log.json`
+- **EOI results:** 002=1.0 (endogenous), 003=0.0 (abstained), 004=1.0 (endogenous, ambient SourceMass)
+- **Tests:** 37 passed
 - **Commit:** (pending push)
 
 ---
