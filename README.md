@@ -1,6 +1,6 @@
 # Endogenous Initiative Architecture (EIA)
 
-**Program name:** **Endogenous Initiative Architecture (EIA)** · *RU:*     
+**Program name:** **Endogenous Initiative Architecture (EIA)**  
 **Legacy / benchmark prefix:** PROACTIVE AI · **PAI-EI** benchmark
 
 Research platform for AI systems with **endogenous initiative** (P4–P5 proactivity) — the ability to form internal reasons, questions, and bounded actions without a current human request, based on memory, sensory context, uncertainty, and a value model.
@@ -10,12 +10,11 @@ Research platform for AI systems with **endogenous initiative** (P4–P5 proacti
 
 ---
 
-## EN — Overview
+## Overview
 
 | File / directory | Purpose |
 |---|---|
-| [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) | Full architecture specification (English) |
-| [`PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md) | Full architecture specification (Russian) |
+| [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) | Full architecture specification |
 | [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) | Implementation & development plan (R0–R11, MVP-0–3, repo strategy) |
 | [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md) | Integration with [NAMM experiments](https://github.com/errorlogy/namm-experiments) |
 | [`experiments/PAI-EI-E0-001/`](./experiments/PAI-EI-E0-001/) | First experiment scaffold (Twin World Test) |
@@ -37,7 +36,7 @@ Both programs share falsifiable gates, causal traces, and experiment manifests u
 - **Dual-controller** — Contact Governor and Action Governor independent of LLM
 - **Phased roadmap** — digital-only MVP-0 → bounded embodiment MVP-3
 
-See [EN specification](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) §5, §26–27.
+See [architecture specification](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) §5, §26–27.
 
 ### Quick start (NAMM sibling clone)
 
@@ -52,55 +51,7 @@ Integration details: [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md).
 
 ---
 
-## RU — 
-
-**Endogenous Initiative Architecture (EIA)** · *  *
-
-   AI-  ** ** (P4–P5) —        ,       ,  ,    .
-
-** :** [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md)
-
-|  /  |  |
-|---|---|
-| [`PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md) |    (RU) |
-| [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) | Full architecture specification (EN) |
-| [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) |     (R0–R11, MVP-0–3) |
-| [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md) |   [NAMM experiments](https://github.com/errorlogy/namm-experiments) |
-| [`experiments/PAI-EI-E0-001/`](./experiments/PAI-EI-E0-001/) |    (Twin World Test) |
-| [`.env.example`](./.env.example) |    |
-
-###   ( Anthemium)
-
-|  |  |  |
-|-----------|-------------|------|
-| **NAMM** | [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) | Verification-first machine-native math discovery |
-| **EIA** (PROACTIVE AI) |   → `[`errorlogy/eia`](https://github.com/errorlogy/eia) |    (P4–P5) |
-
-   falsifiable gates,    experiment manifests     [Anthemium](https://anthemium.tech).
-
-###  ()
-
-- **P4–P5 ** —  ,      
-- ** ** —       
-- **Dual-controller** — Contact Governor  Action Governor   LLM
-- ** roadmap** —  digital-only MVP-0  bounded embodiment MVP-3
-
-: [RU ](./PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md) §5, §26–27.
-
-###   ( NAMM )
-
-```powershell
-git clone https://github.com/errorlogy/namm-experiments.git ..\namm-experiments
-cd ..\namm-experiments
-python -m pip install -e ".[dev,nd]"
-python -m pytest tests/ -v
-```
-
- : [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md).
-
----
-
-## Prerequisites / 
+## Prerequisites
 
 At documentation stage (v0.1), no additional software is required.
 
@@ -117,7 +68,7 @@ NAMM requires **Python 3.12+** — see [namm-experiments README](https://github.
 
 ---
 
-## Environment /  
+## Environment
 
 Copy `.env.example` to `.env` when implementation begins. `.env` is **not committed**.
 
@@ -131,7 +82,7 @@ Copy `.env.example` to `.env` when implementation begins. `.env` is **not commit
 
 ---
 
-## Security / 
+## Security
 
 - Store secrets only in `.env` or external vault (HashiCorp Vault / KMS)
 - Do not commit API keys, passwords, certificates, or DB dumps
@@ -139,19 +90,36 @@ Copy `.env.example` to `.env` when implementation begins. `.env` is **not commit
 
 ---
 
-## Author / 
+## Author
 
 **Roman Kuznetsov**
 
 - Site: [anthemium.tech](https://anthemium.tech)
 - X: [@AGIminister](https://x.com/AGIminister)
+- Repository: [github.com/errorlogy/eia](https://github.com/errorlogy/eia)
 
 ---
 
-## License / 
+## License
 
-License not specified. Add `LICENSE` before public release if needed.
+This work is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE).
 
-## Contributing / 
+**Attribution requirement:** If you use, adapt, or build upon this research, you must cite the **Endogenous Initiative Architecture (EIA)** research program and link to this repository. If you use the NAMM integration path, also cite [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments).
+
+For academic and software citation, see [`CITATION.cff`](./CITATION.cff).
+
+```bibtex
+@software{kuznetsov2026eia,
+  author = {Kuznetsov, Roman},
+  title = {Endogenous Initiative Architecture (EIA)},
+  year = {2026},
+  url = {https://github.com/errorlogy/eia},
+  note = {Research program on proactive AI with endogenous initiative}
+}
+```
+
+---
+
+## Contributing
 
 Early-stage repository. Coordinate architecture changes with specification version (currently v0.1).

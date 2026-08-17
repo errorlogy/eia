@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this research, please cite it as below."
+title: "Endogenous Initiative Architecture (EIA)"
+version: 0.1
+date-released: 2026-08-17
+type: software
+license: CC-BY-4.0
+repository-code: "https://github.com/errorlogy/eia"
+url: "https://github.com/errorlogy/eia"
+abstract: >-
+  Research platform for AI systems with endogenous initiative (P4–P5 proactivity) —
+  the ability to form internal reasons, questions, and bounded actions without a
+  current human request, based on memory, sensory context, uncertainty, and a value model.
+keywords:
+  - endogenous initiative
+  - proactive AI
+  - cognitive architecture
+  - causal trace
+  - P4 proactivity
+  - P5 proactivity
+authors:
+  - family-names: Kuznetsov
+    given-names: Roman
+    affiliation: Anthemium
+    orcid: ""
+    website: "https://anthemium.tech"
+    social:
+      - type: x
+        value: AGIminister
+preferred-citation:
+  type: software
+  title: "Endogenous Initiative Architecture (EIA)"
+  authors:
+    - family-names: Kuznetsov
+      given-names: Roman
+  year: 2026
+  url: "https://github.com/errorlogy/eia"
+  notes: "Research program on proactive AI with endogenous initiative"
+references:
+  - type: software
+    title: "NAMM Experiments"
+    authors:
+      - family-names: Kuznetsov
+        given-names: Roman
+    year: 2026
+    url: "https://github.com/errorlogy/namm-experiments"
+    notes: "Verification-first machine-native math discovery (NAMM integration substrate)"

@@ -2,14 +2,12 @@
 ## Implementation & Development Plan v0.1
 
 **Program name (primary):** **Endogenous Initiative Architecture (EIA)**  
-*RU subtitle:*     
 **Benchmark:** **PAI-EI** (Proactive AI — Endogenous Initiative)  
 **Status:** planning document — August 17, 2026  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech) · [X @AGIminister](https://x.com/AGIminister)
 
 **Related documents:**
-- [Architecture specification (EN)](../PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md)
-- [Architecture specification (RU)](../PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md)
+- [Architecture specification](../PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md)
 - [NAMM integration](./NAMM_INTEGRATION.md)
 - [NAMM × EIA integration (NAMM repo)](https://github.com/errorlogy/namm-experiments/blob/main/docs/proactive-ai/INTEGRATION.md)
 
@@ -31,11 +29,11 @@ This plan operationalizes the PROACTIVE AI research program under its primary sc
 
 ### 1.1 Candidate program names
 
-| # | Name | Acronym | EN tagline | RU subtitle |
-|---|------|---------|------------|-------------|
-| **A** | **Endogenous Initiative Architecture** | **EIA** | Event-sourced cognitive agency with causally traceable initiative |    |
-| B | Proactive Autonomous Initiative | PAI | Strong proactivity via autonomous internal goal genesis |    |
-| C | Cognitive Endogeneity Framework | CEF | Measuring and engineering locally endogenous causes in agents |    |
+| # | Name | Acronym | Tagline |
+|---|------|---------|---------|
+| **A** | **Endogenous Initiative Architecture** | **EIA** | Event-sourced cognitive agency with causally traceable initiative |
+| B | Proactive Autonomous Initiative | PAI | Strong proactivity via autonomous internal goal genesis |
+| C | Cognitive Endogeneity Framework | CEF | Measuring and engineering locally endogenous causes in agents |
 
 **Supporting terms (keep in docs, not as primary brand):**
 - **EOI** — Endogenous Origin Index (metric)
@@ -105,7 +103,7 @@ NAMM capabilities are **consumed by** EIA, not merged into it:
 
 | Artifact | `errorlogy/eia` | `errorlogy/namm-experiments` |
 |----------|-----------------|------------------------------|
-| Architecture spec (EN/RU) | ✅ canonical | Mirror + `docs/proactive-ai/INTEGRATION.md` only |
+| Architecture spec | ✅ canonical | Mirror + `docs/proactive-ai/INTEGRATION.md` only |
 | `src/eia/` or `src/proactive_ai/` | ✅ | — |
 | Drive engine, Contact Governor, simulator | ✅ | — |
 | PAI-EI benchmark scenarios & metrics | ✅ | Cross-reference in synergy doc |
@@ -192,7 +190,7 @@ Each phase maps to spec §27. Duration estimates assume 1–2 FTE researchers + 
 
 **Critical path:** R0 → R1 → R2 → R3 → R4 (MVP-0 complete) → R5 before any real sensors (R6).
 
-**RU note:**     (R6)   P4  digital-only (R4 / MVP-0) —  CV  privacy    .
+**Critical constraint:** Do not proceed to camera/sensors (R6) before demonstrating P4 in digital-only (R4 / MVP-0) — otherwise CV and privacy concerns may mask failure of the motivation mechanism.
 
 ---
 

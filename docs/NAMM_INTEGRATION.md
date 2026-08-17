@@ -123,5 +123,4 @@ Priority experiments (NAMM queue): 003 (P1), 007 (first signal), 002/005/008 (P2
 
 - NAMM repository: https://github.com/errorlogy/namm-experiments
 - NAMM Protocol v2: https://github.com/errorlogy/namm-experiments/blob/main/docs/PROTOCOL_V2.md
-- PROACTIVE AI architecture (EN): [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](../PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md)
-- PROACTIVE AI architecture (RU): [`PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md`](../PROACTIVE_AI_Endogenous_Initiative_Architecture_RU_v0.1.md)
+- PROACTIVE AI architecture: [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](../PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md)
