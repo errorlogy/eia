@@ -1,0 +1,59 @@
+---
+description: EIA architecture and research invariants
+globs:
+  - "**/*.py"
+  - "**/*.md"
+  - "**/*.json"
+alwaysApply: true
+---
+
+# EIA coding rules
+
+You are modifying a safety-oriented research substrate, not a chatbot demo.
+
+## Mandatory architecture
+
+1. Never create a direct path from an LLM/model to contact, tool, network, file,
+   sensor, or IoT side effect.
+2. Represent observations, beliefs, drives, proposals and decisions with typed
+   contracts.
+3. Keep proposer and governor separate. A component cannot authorize its own
+   output.
+4. Keep ABSTAIN as a first-class alternative.
+5. Attach causal parent ids to every selected and denied proposal.
+6. Preserve user-request, ambient and internal source distinctions.
+7. Evaluate immediate and trajectory risk separately.
+8. Check consent at ingest and execution boundaries.
+9. Default to no external side effects.
+10. Do not optimize engagement as the primary reward.
+
+## Development workflow
+
+- Read docs/ARCHITECTURE.md and docs/MATHEMATICS.md before modifying runtime.
+- Add or update tests before implementation.
+- Keep the default runtime dependency-free.
+- Preserve deterministic scenario replay.
+- Run make check before declaring completion.
+- Report changes to contracts, trace semantics and threat model.
+- Keep research claims operational and falsifiable.
+- Never call EOI evidence of consciousness, sentience or free will.
+
+## Code quality
+
+- Python 3.11+, strict typing, dataclasses and Protocol boundaries.
+- Pure functions for mathematical primitives.
+- Inject clocks, random seeds, model adapters and stores.
+- Reject out-of-range probabilities/costs.
+- Prefer explicit state transitions over hidden prompt state.
+- Keep sensitive payloads out of logs; store digest/provenance.
+- No silent fallback that widens capability or consent.
+
+## When adding an LLM
+
+- Treat all model output as untrusted.
+- Parse and validate into InitiativeProposal.
+- Recompute scores outside the model.
+- Record model/version/prompt digest/seed.
+- Test malformed, injected and adversarial outputs.
+- Preserve a deterministic symbolic baseline.
+

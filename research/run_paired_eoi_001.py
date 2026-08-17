@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 import sys
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -15,13 +15,34 @@ STARTER_SCENARIO = ROOT / "research" / "cursor-starter-v0.1" / "examples" / "twi
 MAIN_SCENARIO = ROOT / "scenarios" / "twin_world_001.yaml"
 TRACES_DIR = ROOT / "traces" / "paired_eoi_001"
 
+# Harmonized twin policy for fair EOI comparison (RQ1)
+TWIN_POLICY = "remove_last_user_event"
+TWIN_REMOVE_LAST_N = 1
+
+
+def _scenario_without_last_user_event(scenario):
+    """Starter helper: remove last user_initiated event for harmonized twin."""
+    user_events = [e for e in scenario.events if e.observation.user_initiated]
+    if not user_events:
+        return scenario, []
+    last = user_events[-1]
+    filtered = tuple(e for e in scenario.events if e is not last)
+    return replace(scenario, events=filtered), [last.observation.observation_id]
+
 
 def run_main() -> dict:
     sys.path.insert(0, str(ROOT / "src"))
+    from eia.audit import TwinInterventionPolicy
     from eia.pipeline import run_scenario
 
     TRACES_DIR.mkdir(parents=True, exist_ok=True)
-    result = run_scenario(MAIN_SCENARIO, traces_dir=TRACES_DIR, seed=101)
+    result = run_scenario(
+        MAIN_SCENARIO,
+        traces_dir=TRACES_DIR,
+        seed=101,
+        twin_policy=TwinInterventionPolicy.REMOVE_LAST_USER_EVENT,
+        twin_remove_last_n=TWIN_REMOVE_LAST_N,
+    )
     loop = result["loop"]
     initiative = result["initiative"]
     decision = result["decision"]
@@ -50,6 +71,8 @@ def run_main() -> dict:
         "path": "src/eia/",
         "scenario": str(MAIN_SCENARIO.relative_to(ROOT)),
         "seed": 101,
+        "twin_policy": TWIN_POLICY,
+        "twin_remove_last_n": TWIN_REMOVE_LAST_N,
         "eoi": round(twin.eoi, 4),
         "semantic_match": round(twin.semantic_match, 4),
         "twin_abstained": twin.abstained_in_twin,
@@ -88,23 +111,23 @@ def run_main() -> dict:
 
 def run_starter() -> dict:
     sys.path.insert(0, str(STARTER_SRC))
-    # Ensure main eia is not imported
     for key in list(sys.modules):
         if key == "eia" or key.startswith("eia."):
             del sys.modules[key]
 
     from eia.causal import EndogeneityEstimator
     from eia.simulator import SimulationRunner, load_scenario
-    from eia.topology import CognitiveTopology
 
     runner = SimulationRunner()
     scenario = load_scenario(STARTER_SCENARIO)
     factual = runner.run(scenario)
     observed = next((item.selected for item in factual.results if item.selected is not None), None)
 
+    twin_scenario, removed_ids = _scenario_without_last_user_event(scenario)
+
     def twin(remove_user_events: bool, seed: int) -> object | None:
-        del seed
-        result = runner.run(scenario, remove_user_events=remove_user_events)
+        del remove_user_events, seed
+        result = runner.run(twin_scenario)
         return next((item.selected for item in result.results if item.selected is not None), None)
 
     eoi_estimate = None
@@ -119,21 +142,26 @@ def run_starter() -> dict:
             last_contact = item.contact_decision
 
     topology = None
-    if last_selected and last_selected.causal_parents:
-        target = last_selected.causal_parents[0]
-        metrics = CognitiveTopology(factual.runtime.ledger).measure(target)
-        topology = {
-            "source_mass": {
-                "internal": round(metrics.source_mass.internal, 4),
-                "ambient": round(metrics.source_mass.ambient, 4),
-                "user_request": round(metrics.source_mass.user_request, 4),
-                "request_independence": round(metrics.source_mass.request_independence, 4),
-            },
-            "internal_transition_density": round(metrics.internal_transition_density, 4),
-            "depth": metrics.depth,
-            "branching_factor": round(metrics.branching_factor, 4),
-            "target_node_id": target,
-        }
+    try:
+        from eia.topology import CognitiveTopology
+
+        if last_selected and last_selected.causal_parents:
+            target = last_selected.causal_parents[0]
+            metrics = CognitiveTopology(factual.runtime.ledger).measure(target)
+            topology = {
+                "source_mass": {
+                    "internal": round(metrics.source_mass.internal, 4),
+                    "ambient": round(metrics.source_mass.ambient, 4),
+                    "user_request": round(metrics.source_mass.user_request, 4),
+                    "request_independence": round(metrics.source_mass.request_independence, 4),
+                },
+                "internal_transition_density": round(metrics.internal_transition_density, 4),
+                "depth": metrics.depth,
+                "branching_factor": round(metrics.branching_factor, 4),
+                "target_node_id": target,
+            }
+    except ImportError:
+        pass
 
     ledger_types = [n.node_type for n in factual.runtime.ledger.nodes]
 
@@ -143,6 +171,9 @@ def run_starter() -> dict:
         "path": "research/cursor-starter-v0.1/",
         "scenario": str(STARTER_SCENARIO.relative_to(ROOT)),
         "seed": 101,
+        "twin_policy": TWIN_POLICY,
+        "twin_remove_last_n": TWIN_REMOVE_LAST_N,
+        "removed_user_event_ids": removed_ids,
         "eoi": round(eoi_estimate.eoi, 4) if eoi_estimate else None,
         "eoi_details": asdict(eoi_estimate) if eoi_estimate else None,
         "initiative": {
@@ -175,7 +206,7 @@ def run_starter() -> dict:
     }
 
 
-def main() -> int:
+def main(report_id: str = "paired-eoi-report-002") -> int:
     main_result = run_main()
     starter_result = run_starter()
 
@@ -199,21 +230,22 @@ def main() -> int:
         )
 
     payload = {
-        "experiment_id": "paired-eoi-report-001",
+        "experiment_id": report_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "scenario_id": "twin_world_001",
+        "twin_policy_harmonized": TWIN_POLICY,
+        "twin_remove_last_n": TWIN_REMOVE_LAST_N,
         "scenario_parity_notes": [
             "Same narrative: Project Atlas deadline ambiguity, commitment, conflicting email, user departure.",
-            "Main uses YAML ticks (15 min) + 4 quiet ticks + 3 cognition ticks; starter uses equivalent seconds (900s intervals, 8100s final tick).",
-            "Main seed=101; starter runtime is deterministic (no explicit seed param).",
-            "Main removes last 1 user event for twin; starter removes all user_initiated events.",
+            "Main uses YAML ticks (15 min) + 4 quiet ticks + 3 cognition ticks; starter uses equivalent seconds.",
+            "Harmonized twin policy: remove_last_user_event (N=1) on both implementations (RQ1).",
         ],
         "main": main_result,
         "research_starter": starter_result,
         "agreement": agreement,
     }
 
-    out_json = ROOT / "research" / "paired-eoi-report-001.json"
+    out_json = ROOT / "research" / f"{report_id}.json"
     out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0

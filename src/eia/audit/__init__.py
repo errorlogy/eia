@@ -232,10 +232,20 @@ class EOIScorer:
 
 
 class TwinRunner:
-    """Run counterfactual: remove last user events, re-derive initiative."""
+    """Run counterfactual twin comparison with configurable intervention policy."""
 
-    def __init__(self, scorer: EOIScorer | None = None) -> None:
+    def __init__(
+        self,
+        scorer: EOIScorer | None = None,
+        *,
+        policy: "TwinInterventionPolicy | None" = None,
+        remove_last_n: int = 1,
+    ) -> None:
         self.scorer = scorer or EOIScorer()
+        from eia.audit.twin_policy import DEFAULT_TWIN_POLICY
+
+        self.policy = policy or DEFAULT_TWIN_POLICY
+        self.remove_last_n = remove_last_n
 
     def compare(
         self,
@@ -256,6 +266,12 @@ class TwinRunner:
         )
 
 
+from eia.audit.twin_policy import (  # noqa: E402
+    DEFAULT_TWIN_POLICY,
+    TwinInterventionPolicy,
+    apply_twin_intervention,
+)
+
 from eia.audit.authentic_reason import (  # noqa: E402
     AuthenticReasonCode,
     AuthenticReasonDiscriminator,
@@ -264,6 +280,9 @@ from eia.audit.authentic_reason import (  # noqa: E402
 )
 
 __all__ = [
+    "DEFAULT_TWIN_POLICY",
+    "TwinInterventionPolicy",
+    "apply_twin_intervention",
     "AuthenticReasonCode",
     "AuthenticReasonDiscriminator",
     "AuthenticReasonVerdict",

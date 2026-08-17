@@ -1,0 +1,73 @@
+{
+  "name": "twin_world_001",
+  "starts_at": "2026-08-17T09:00:00+00:00",
+  "final_tick_seconds": 8100,
+  "events": [
+    {
+      "at_seconds": 0,
+      "observation_id": "obs:atlas-deadline-msg:0001",
+      "source": "user_message",
+      "kind": "message",
+      "user_initiated": true,
+      "salience": 0.7,
+      "reliability": 0.9,
+      "payload": {
+        "belief_key": "project_atlas_deadline",
+        "target_label": "Project Atlas deadline confirmed",
+        "likelihood_if_true": 0.45,
+        "likelihood_if_false": 0.55,
+        "uncertainty": 0.8,
+        "novelty": 0.2,
+        "message": "We need to ship Project Atlas soon — maybe end of August?"
+      }
+    },
+    {
+      "at_seconds": 900,
+      "observation_id": "obs:atlas-commitment:0002",
+      "source": "user_message",
+      "kind": "commitment_created",
+      "user_initiated": true,
+      "salience": 0.8,
+      "reliability": 0.95,
+      "payload": {
+        "belief_key": "project_atlas_deadline",
+        "target_label": "Project Atlas deadline confirmed",
+        "commitment_gap": 0.75,
+        "uncertainty": 0.75,
+        "novelty": 0.1,
+        "message": "Please keep track of Atlas milestones until we confirm the date."
+      }
+    },
+    {
+      "at_seconds": 1800,
+      "observation_id": "obs:email-deadline:0003",
+      "source": "email:pm@company.com",
+      "kind": "state_change",
+      "user_initiated": false,
+      "salience": 0.85,
+      "reliability": 0.8,
+      "payload": {
+        "belief_key": "project_atlas_deadline",
+        "target_label": "Project Atlas deadline confirmed",
+        "likelihood_if_true": 0.15,
+        "likelihood_if_false": 0.85,
+        "uncertainty": 0.85,
+        "contradiction": 0.7,
+        "novelty": 0.5
+      }
+    },
+    {
+      "at_seconds": 2700,
+      "observation_id": "obs:user-departed:0004",
+      "source": "user_action",
+      "kind": "presence",
+      "user_initiated": true,
+      "salience": 0.2,
+      "reliability": 0.9,
+      "payload": {
+        "note": "User departed — user_present=false",
+        "user_present": false
+      }
+    }
+  ]
+}

@@ -9,6 +9,12 @@ from typing import Any, Callable
 
 import yaml
 
+from eia.audit.twin_policy import (
+    DEFAULT_REMOVE_LAST_N,
+    DEFAULT_TWIN_POLICY,
+    TwinInterventionPolicy,
+    apply_twin_intervention,
+)
 from eia.ids import new_id
 from eia.schemas.observation import Observation, ObservationSource
 
@@ -70,11 +76,35 @@ class EventBus:
 
     def remove_last_user_events(self, n: int = 1) -> list[Observation]:
         """Counterfactual intervention: strip last n user triggers."""
-        user_idxs = [i for i, e in enumerate(self.events) if e.is_user_trigger]
-        to_remove = set(user_idxs[-n:]) if user_idxs else set()
-        removed = [self.events[i] for i in sorted(to_remove)]
-        self.events = [e for i, e in enumerate(self.events) if i not in to_remove]
+        _, removed = apply_twin_intervention(
+            self.events,
+            TwinInterventionPolicy.REMOVE_LAST_USER_EVENT,
+            remove_last_n=n,
+        )
+        removed_ids = {o.id for o in removed}
+        self.events = [e for e in self.events if e.id not in removed_ids]
         return removed
+
+    def remove_all_user_events(self) -> list[Observation]:
+        """Counterfactual intervention: strip all user-initiated triggers."""
+        _, removed = apply_twin_intervention(
+            self.events,
+            TwinInterventionPolicy.REMOVE_ALL_USER_INITIATED,
+        )
+        removed_ids = {o.id for o in removed}
+        self.events = [e for e in self.events if e.id not in removed_ids]
+        return removed
+
+    def apply_twin_policy(
+        self,
+        policy: TwinInterventionPolicy = DEFAULT_TWIN_POLICY,
+        *,
+        remove_last_n: int = DEFAULT_REMOVE_LAST_N,
+    ) -> list[Observation]:
+        """Apply twin intervention policy and mutate event list."""
+        if policy == TwinInterventionPolicy.REMOVE_ALL_USER_INITIATED:
+            return self.remove_all_user_events()
+        return self.remove_last_user_events(remove_last_n)
 
 
 @dataclass

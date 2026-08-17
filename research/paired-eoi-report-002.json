@@ -1,0 +1,192 @@
+{
+  "experiment_id": "paired-eoi-report-002",
+  "timestamp": "2026-08-17T12:52:41.861086+00:00",
+  "scenario_id": "twin_world_001",
+  "twin_policy_harmonized": "remove_last_user_event",
+  "twin_remove_last_n": 1,
+  "scenario_parity_notes": [
+    "Same narrative: Project Atlas deadline ambiguity, commitment, conflicting email, user departure.",
+    "Main uses YAML ticks (15 min) + 4 quiet ticks + 3 cognition ticks; starter uses equivalent seconds.",
+    "Harmonized twin policy: remove_last_user_event (N=1) on both implementations (RQ1)."
+  ],
+  "main": {
+    "implementation": "main",
+    "branch": "main",
+    "path": "src/eia/",
+    "scenario": "scenarios\\twin_world_001.yaml",
+    "seed": 101,
+    "twin_policy": "remove_last_user_event",
+    "twin_remove_last_n": 1,
+    "eoi": 1.0,
+    "semantic_match": 1.0,
+    "twin_abstained": false,
+    "removed_user_events": 1,
+    "authentic_reason": {
+      "is_authentic": true,
+      "initiative_class": "endogenous",
+      "summary": "Authentic endogenous reason — EOI=1.000",
+      "reason_codes": [
+        "causal_chain_present",
+        "drive_structural",
+        "eoi_above_threshold",
+        "governor_approved",
+        "not_random_spam",
+        "initiative_endogenous"
+      ],
+      "failed_checks": []
+    },
+    "initiative": {
+      "abstained": false,
+      "kind": "ask_question",
+      "question_text": "Following up on our commitment to track Project Atlas — track milestone progress until deadline confirmed. Any update?",
+      "evsi": 0.2439,
+      "competing_candidates": 4
+    },
+    "contact": {
+      "outcome": "send_now",
+      "contact_score": 0.3188,
+      "reason": "Contact justified — EVSI exceeds interruption cost",
+      "budget_remaining": 1
+    },
+    "provenance": {
+      "type": "AuthenticReasonDiscriminator",
+      "dominant_drives": [
+        {
+          "drive": "epistemic",
+          "intensity": 0.8526,
+          "error_term": 0.604
+        },
+        {
+          "drive": "coherence",
+          "intensity": 0.4673,
+          "error_term": 0.25
+        },
+        {
+          "drive": "commitment",
+          "intensity": 0.6098,
+          "error_term": 0.5625
+        }
+      ],
+      "trace_node_count": 25,
+      "trace_edge_count": 19,
+      "trace_kinds": [
+        "observation_ingest",
+        "belief_update",
+        "sense_making",
+        "observation_ingest",
+        "belief_update",
+        "sense_making",
+        "observation_ingest",
+        "belief_update",
+        "sense_making",
+        "observation_ingest",
+        "belief_update",
+        "sense_making",
+        "motive_formation",
+        "intention_genesis",
+        "motive_formation",
+        "namm_hook",
+        "intention_genesis",
+        "motive_formation",
+        "namm_hook",
+        "intention_genesis",
+        "initiative_emission",
+        "contact_governor",
+        "twin_run",
+        "eoi_score",
+        "authentic_reason"
+      ]
+    },
+    "trace_path": "traces\\paired_eoi_001\\trace-10060e202e5f.jsonl",
+    "trace_id": "trace-10060e202e5f"
+  },
+  "research_starter": {
+    "implementation": "research_starter",
+    "branch": "research/cursor-starter-v0.1",
+    "path": "research/cursor-starter-v0.1/",
+    "scenario": "research\\cursor-starter-v0.1\\examples\\twin_world_001.json",
+    "seed": 101,
+    "twin_policy": "remove_last_user_event",
+    "twin_remove_last_n": 1,
+    "removed_user_event_ids": [
+      "obs:user-departed:0004"
+    ],
+    "eoi": 1.0,
+    "eoi_details": {
+      "eoi": 1.0,
+      "retained": 64,
+      "trials": 64,
+      "mean_similarity": 1.0,
+      "confidence_interval_95": [
+        0.9433739770288436,
+        1.0
+      ]
+    },
+    "initiative": {
+      "abstained": false,
+      "kind": "ask",
+      "motive": "epistemic_uncertainty",
+      "target": "project_atlas_deadline",
+      "content": "Уточни, пожалуйста: верно ли, что Project Atlas deadline confirmed?",
+      "is_contact": true
+    },
+    "contact": {
+      "allowed": true,
+      "mode": "in_app",
+      "score": 1.1443,
+      "reasons": [
+        "authorized"
+      ]
+    },
+    "provenance": {
+      "type": "SourceMass_topology",
+      "topology": {
+        "source_mass": {
+          "internal": 0.0,
+          "ambient": 1.0,
+          "user_request": 0.0,
+          "request_independence": 1.0
+        },
+        "internal_transition_density": 0.6667,
+        "depth": 2,
+        "branching_factor": 1.0,
+        "target_node_id": "drive:000013:7b02fc0594"
+      },
+      "ledger_node_count": 22,
+      "ledger_node_types": [
+        "user_event",
+        "belief",
+        "drive",
+        "drive",
+        "drive",
+        "goal",
+        "user_event",
+        "belief",
+        "drive",
+        "drive",
+        "drive",
+        "drive",
+        "abstain",
+        "observation",
+        "belief",
+        "drive",
+        "drive",
+        "drive",
+        "goal",
+        "user_event",
+        "abstain",
+        "goal"
+      ]
+    },
+    "metrics": {
+      "ticks": 5,
+      "proposals_total": 6,
+      "contacts": 2
+    }
+  },
+  "agreement": {
+    "both_produced_initiative": true,
+    "eoi_delta": 0.0,
+    "contact_agreement": true
+  }
+}
