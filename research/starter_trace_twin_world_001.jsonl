@@ -1,0 +1,39 @@
+{"type": "header", "trace_id": "starter-twin_world_001-101", "metadata": {"seed": 101, "scenario_path": "twin_world_001", "code_version": "cursor-starter-v0.1", "export_source": "research/export_starter_trace.py", "timestamp": "2026-08-17T13:35:21.641113+00:00"}}
+{"type": "node", "id": "obs:atlas-deadline-msg:0001", "kind": "user_event", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "09d43347633b02f00309", "parents": []}
+{"type": "node", "id": "belief:000001:d52cf9fef0", "kind": "belief", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "0dfc333b1a6cfa902a89", "parents": ["obs:atlas-deadline-msg:0001"]}
+{"type": "edge", "source_id": "obs:atlas-deadline-msg:0001", "target_id": "belief:000001:d52cf9fef0"}
+{"type": "node", "id": "drive:000002:7b02fc0594", "kind": "drive", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "9b053c3ec66f0ed1dc23", "parents": ["belief:000001:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000001:d52cf9fef0", "target_id": "drive:000002:7b02fc0594"}
+{"type": "node", "id": "drive:000003:b2f7f26289", "kind": "drive", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "e580ce13806a8dc4e41e", "parents": ["belief:000001:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000001:d52cf9fef0", "target_id": "drive:000003:b2f7f26289"}
+{"type": "node", "id": "drive:000004:e97633b27b", "kind": "drive", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "3d50def06d0a0f9b5f53", "parents": ["belief:000001:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000001:d52cf9fef0", "target_id": "drive:000004:e97633b27b"}
+{"type": "node", "id": "tick:000005:ab56e8465c", "kind": "goal", "timestamp": "2026-08-17T09:00:00+00:00", "payload_digest": "042e5b1d2b0a4ba97209", "parents": ["drive:000002:7b02fc0594"]}
+{"type": "edge", "source_id": "drive:000002:7b02fc0594", "target_id": "tick:000005:ab56e8465c"}
+{"type": "node", "id": "obs:atlas-commitment:0002", "kind": "user_event", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "e8b42a4ab05aee57581d", "parents": []}
+{"type": "node", "id": "belief:000006:d52cf9fef0", "kind": "belief", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "0e11faaa01ea1d04eb1e", "parents": ["obs:atlas-commitment:0002"]}
+{"type": "edge", "source_id": "obs:atlas-commitment:0002", "target_id": "belief:000006:d52cf9fef0"}
+{"type": "node", "id": "drive:000007:7b02fc0594", "kind": "drive", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "7b79fb4c6a2e39ceffc9", "parents": ["belief:000006:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000006:d52cf9fef0", "target_id": "drive:000007:7b02fc0594"}
+{"type": "node", "id": "drive:000008:b2f7f26289", "kind": "drive", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "ed9c4f2d8cea925a9fc9", "parents": ["belief:000006:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000006:d52cf9fef0", "target_id": "drive:000008:b2f7f26289"}
+{"type": "node", "id": "drive:000009:b19b0593bc", "kind": "drive", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "a4e826957f7c2f130e40", "parents": ["belief:000006:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000006:d52cf9fef0", "target_id": "drive:000009:b19b0593bc"}
+{"type": "node", "id": "drive:000010:e97633b27b", "kind": "drive", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "1da40b6223b526df993a", "parents": ["belief:000006:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000006:d52cf9fef0", "target_id": "drive:000010:e97633b27b"}
+{"type": "node", "id": "tick:000011:93e92f6448", "kind": "abstain", "timestamp": "2026-08-17T09:15:00+00:00", "payload_digest": "acf6b7471e171f0e393f", "parents": []}
+{"type": "node", "id": "obs:email-deadline:0003", "kind": "observation", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "5a921ee8a5653473a26c", "parents": []}
+{"type": "node", "id": "belief:000012:d52cf9fef0", "kind": "belief", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "f66cac773af5a5233962", "parents": ["obs:email-deadline:0003"]}
+{"type": "edge", "source_id": "obs:email-deadline:0003", "target_id": "belief:000012:d52cf9fef0"}
+{"type": "node", "id": "drive:000013:7b02fc0594", "kind": "drive", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "bcab48fbddc1b59cee61", "parents": ["belief:000012:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000012:d52cf9fef0", "target_id": "drive:000013:7b02fc0594"}
+{"type": "node", "id": "drive:000014:b2f7f26289", "kind": "drive", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "b5725b78a1b374b4aa8c", "parents": ["belief:000012:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000012:d52cf9fef0", "target_id": "drive:000014:b2f7f26289"}
+{"type": "node", "id": "drive:000015:e97633b27b", "kind": "drive", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "beeb675c06178ecd9ab2", "parents": ["belief:000012:d52cf9fef0"]}
+{"type": "edge", "source_id": "belief:000012:d52cf9fef0", "target_id": "drive:000015:e97633b27b"}
+{"type": "node", "id": "tick:000016:271d492e67", "kind": "goal", "timestamp": "2026-08-17T09:30:00+00:00", "payload_digest": "14444b56916c59050dc3", "parents": ["drive:000014:b2f7f26289"]}
+{"type": "edge", "source_id": "drive:000014:b2f7f26289", "target_id": "tick:000016:271d492e67"}
+{"type": "node", "id": "obs:user-departed:0004", "kind": "user_event", "timestamp": "2026-08-17T09:45:00+00:00", "payload_digest": "5e7e2afdc12c5c59f748", "parents": []}
+{"type": "node", "id": "tick:000017:bce34b5836", "kind": "abstain", "timestamp": "2026-08-17T09:45:00+00:00", "payload_digest": "70a4b2cde3a7ee5dd822", "parents": []}
+{"type": "node", "id": "tick:000018:ac3c797174", "kind": "goal", "timestamp": "2026-08-17T11:15:00+00:00", "payload_digest": "74daa182c27f29cedc8e", "parents": ["drive:000013:7b02fc0594"]}
+{"type": "edge", "source_id": "drive:000013:7b02fc0594", "target_id": "tick:000018:ac3c797174"}

@@ -27,13 +27,14 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**SourceMass vs AuthenticReason κ study** on the 5-scenario eval set using `kappa_bin_agreement()` from `src/eia/audit/source_mass_mapping.py`. Record results in `research/source-mass-kappa-report.md`.
+**Baseline EUIR comparison** on the 6-scenario eval set using `--baseline reactive_only` vs `full_eia`. Record in `research/baseline-euir-report.md`.
 
-### Completed this session (Loops 5–7)
+### Completed this session (Loops 8–11)
 
-- Loop 5 (`01b2564`): EOI threshold calibration + SourceMass mapping
-- Loop 6 (`a3f7988`): paired-eoi-report-003 on `autonomous_question`
-- Loop 7: twin_world_003 calibrated + twin_world_005–006 evals
+- Loop 8: SourceMass κ study — κ=0.0, 2/6 partition agreement
+- Loop 9: EXPERIMENTS.md + reactive/scheduled/full_eia baseline stubs
+- Loop 10: THREAT_MODEL.md + adversarial_governor harness (4 cases)
+- Loop 11: starter trace JSONL export for structural diff
 
 ### Stop if
 

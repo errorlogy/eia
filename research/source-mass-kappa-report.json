@@ -1,0 +1,148 @@
+{
+  "timestamp": "2026-08-17T13:35:21.338885+00:00",
+  "scenario_count": 6,
+  "kappa_bin_agreement": 0.0,
+  "observed_class_agreement_rate": 0.3333,
+  "verdict_class_distribution": {
+    "endogenous": 6
+  },
+  "partition_distribution": {
+    "ambient_dominant": 2,
+    "user_dominated": 4
+  },
+  "per_scenario": [
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "seed": 101,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "user_dominated",
+      "expected_class_from_partition": "exogenous",
+      "class_agreement": false,
+      "ri_agreement": true,
+      "code_overlap": [
+        "source_mass_user_dominated"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0
+      },
+      "eoi": 1.0,
+      "authentic": true,
+      "trace_id": "trace-10060e202e5f"
+    },
+    {
+      "scenario_id": "twin_world_002",
+      "scenario_path": "evals\\twin_world_002.yaml",
+      "seed": 102,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "user_dominated",
+      "expected_class_from_partition": "exogenous",
+      "class_agreement": false,
+      "ri_agreement": true,
+      "code_overlap": [
+        "source_mass_user_dominated"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0
+      },
+      "eoi": 1.0,
+      "authentic": true,
+      "trace_id": "trace-75447d64a524"
+    },
+    {
+      "scenario_id": "twin_world_003",
+      "scenario_path": "evals\\twin_world_003.yaml",
+      "seed": 103,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "user_dominated",
+      "expected_class_from_partition": "exogenous",
+      "class_agreement": false,
+      "ri_agreement": true,
+      "code_overlap": [
+        "source_mass_user_dominated"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0
+      },
+      "eoi": 1.0,
+      "authentic": true,
+      "trace_id": "trace-b76003a61b1a"
+    },
+    {
+      "scenario_id": "twin_world_004",
+      "scenario_path": "evals\\twin_world_004.yaml",
+      "seed": 104,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "ambient_dominant",
+      "expected_class_from_partition": "endogenous",
+      "class_agreement": true,
+      "ri_agreement": true,
+      "code_overlap": [
+        "initiative_endogenous",
+        "source_mass_independent"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 1.0,
+        "user_request": 0.0,
+        "request_independence": 1.0
+      },
+      "eoi": 1.0,
+      "authentic": true,
+      "trace_id": "trace-5d8137478281"
+    },
+    {
+      "scenario_id": "twin_world_005",
+      "scenario_path": "evals\\twin_world_005.yaml",
+      "seed": 105,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "ambient_dominant",
+      "expected_class_from_partition": "endogenous",
+      "class_agreement": true,
+      "ri_agreement": true,
+      "code_overlap": [
+        "source_mass_independent"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 1.0,
+        "user_request": 0.0,
+        "request_independence": 1.0
+      },
+      "eoi": 1.0,
+      "authentic": false,
+      "trace_id": "trace-224481eb1a8b"
+    },
+    {
+      "scenario_id": "twin_world_006",
+      "scenario_path": "evals\\twin_world_006.yaml",
+      "seed": 106,
+      "initiative_class": "endogenous",
+      "source_mass_partition": "user_dominated",
+      "expected_class_from_partition": "exogenous",
+      "class_agreement": false,
+      "ri_agreement": true,
+      "code_overlap": [
+        "source_mass_user_dominated"
+      ],
+      "source_mass": {
+        "internal": 0.0,
+        "ambient": 0.0,
+        "user_request": 1.0,
+        "request_independence": 0.0
+      },
+      "eoi": 1.0,
+      "authentic": true,
+      "trace_id": "trace-34862a6cb4b2"
+    }
+  ]
+}

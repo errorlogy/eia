@@ -13,6 +13,7 @@ from rich.table import Table
 from eia.audit import CausalTrace, TraceNodeKind
 from eia.audit.replay import ReplayMetadataError, re_execute_trace
 from eia.beliefs.visualize import render_field_heatmap
+from eia.experiment.baseline import BaselineCondition, load_baseline_from_config
 from eia.pipeline import run_scenario
 from eia.scheduler import PipelineStage
 from eia.schemas.contact import ContactOutcome
@@ -238,12 +239,20 @@ def pipeline(scenario_path: Path | None, traces_dir: Path) -> None:
 @main.command()
 @click.option("--scenario", "scenario_path", type=click.Path(exists=True, path_type=Path), default=None)
 @click.option("--traces-dir", type=click.Path(path_type=Path), default="traces")
-def run(scenario_path: Path | None, traces_dir: Path) -> None:
+@click.option(
+    "--baseline",
+    type=click.Choice([b.value for b in BaselineCondition], case_sensitive=False),
+    default=None,
+    help="Experiment baseline condition (default: configs/experiment.json or full_eia).",
+)
+def run(scenario_path: Path | None, traces_dir: Path, baseline: str | None) -> None:
     """Run a scenario (same as demo, minimal output)."""
     path = scenario_path or _default_scenario()
-    result = run_scenario(path, traces_dir=traces_dir)
+    condition = BaselineCondition(baseline) if baseline else load_baseline_from_config()
+    result = run_scenario(path, traces_dir=traces_dir, baseline=condition)
     console.print(json.dumps({
         "trace_id": result["loop"].trace.trace_id,
+        "baseline": condition.value,
         "eoi": result["twin_result"].eoi,
         "authentic_reason": result["authentic_verdict"].is_authentic,
         "initiative_class": result["authentic_verdict"].initiative_class,

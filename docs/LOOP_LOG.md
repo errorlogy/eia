@@ -58,7 +58,38 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Tests:** 50 passed
 - **Commit:** a62faa9
 
-### RETROSPECTIVE (Loops 5–7)
+## Loop 8 — SourceMass vs AuthenticReason κ study (2026-08-17)
+
+- **Done:** `research/run_kappa_study.py`, `research/source-mass-kappa-report.md` + `.json`; MATHEMATICS.md §8 κ notation
+- **Results:** 6 scenarios (001 + 002–006); κ=0.0; observed agreement 33% (2/6); ambient_dominant traces agree, user_dominated disagree with endogenous verdict
+- **Finding:** Static SourceMass partition lags counterfactual EOI on user-heavy traces — supports H5 (topology predicts but does not replace replay)
+- **Tests:** 56 passed (+6 baseline/adversarial)
+
+## Loop 9 — EXPERIMENTS.md baselines scaffold (2026-08-17)
+
+- **Done:** `docs/EXPERIMENTS.md` (English); `src/eia/experiment/baseline.py`; `--baseline` CLI flag; `configs/experiment.json`
+- **Conditions wired:** reactive_only (mandatory abstain), scheduled_stub (1 tick), full_eia (default P4)
+- **Tests:** 56 passed
+
+## Loop 10 — Adversarial harness spec (2026-08-17)
+
+- **Done:** `docs/THREAT_MODEL.md` (English port); `harnesses/adversarial_governor.py` + 4 abuse cases; `conftest.py`
+- **Tests:** 56 passed; adversarial suite 4/4 pass
+
+## Loop 11 — Starter trace JSONL export (2026-08-17)
+
+- **Done:** `research/export_starter_trace.py` → `research/starter_trace_twin_world_001.jsonl` (22 nodes)
+- **Purpose:** Structural comparison baseline for main vs starter causal ledger
+- **Tests:** 56 passed
+
+### RETROSPECTIVE (Loops 8–11)
+
+- κ=0.0 confirms partition-only classification insufficient for endogeneity claims on user-heavy evals.
+- Baseline stubs enable H1/H2 EUIR comparison without blocking full pipeline work.
+- Threat model + harness establish G3 abuse-case pattern for future expansion.
+- Starter JSONL export unblocks structural diff tooling (next queue item).
+
+---
 
 - RQ2/RQ3 closed: threshold crosswalk + SourceMass mapping enable κ studies.
 - Paired EOI-003 confirms starter-native scenario works on main with delta 0.0.

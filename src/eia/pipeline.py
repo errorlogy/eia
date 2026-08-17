@@ -21,6 +21,11 @@ from eia.audit import (
     TwinRunner,
 )
 from eia.audit.twin_policy import DEFAULT_TWIN_POLICY
+from eia.experiment.baseline import (
+    BaselineCondition,
+    cognition_tick_count,
+    make_reactive_stub,
+)
 from eia.version import get_code_version
 from eia.beliefs import BeliefField
 from eia.drives import DriveEngine
@@ -247,6 +252,7 @@ def run_scenario(
     seed: int | None = None,
     twin_policy: TwinInterventionPolicy = DEFAULT_TWIN_POLICY,
     twin_remove_last_n: int = 1,
+    baseline: BaselineCondition = BaselineCondition.FULL_EIA,
 ) -> dict:
     """Full end-to-end scenario run with labeled pipeline stages."""
     scenario = load_scenario(scenario_path)
@@ -284,12 +290,16 @@ def run_scenario(
         sim.advance_quiet_period(ticks=4)
 
         motivation = initiative = decision = namm_intent = None
-        for i in range(3):
-            motivation, initiative, decision, namm_intent = loop.tick_cognition(
-                tick=sim.clock.tick + i,
-                hour=sim.clock.hour,
-                finalize=(i == 2),
-            )
+        tick_count = cognition_tick_count(baseline)
+        if baseline == BaselineCondition.REACTIVE_ONLY:
+            motivation, initiative, decision, namm_intent = make_reactive_stub(loop, sim)
+        else:
+            for i in range(tick_count):
+                motivation, initiative, decision, namm_intent = loop.tick_cognition(
+                    tick=sim.clock.tick + i,
+                    hour=sim.clock.hour,
+                    finalize=(i == tick_count - 1),
+                )
 
         removed = sim.bus.apply_twin_policy(twin_policy, remove_last_n=twin_remove_last_n)
         removed_ids = [o.id for o in removed]
@@ -347,6 +357,7 @@ def run_scenario(
                 "initial_beliefs": scenario.initial_beliefs,
                 "contradictions": scenario.metadata.get("contradictions", []),
                 "scenario_id": scenario.id,
+                "baseline": baseline.value,
             },
         )
 

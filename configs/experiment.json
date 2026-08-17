@@ -1,0 +1,4 @@
+{
+  "baseline": "full_eia",
+  "description": "Default experiment condition. Override with CLI --baseline or edit baseline key."
+}

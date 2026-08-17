@@ -195,6 +195,19 @@ ITD = \frac{|\{v \in \mathrm{Anc}(I) \cup I : \tau(v) \in T_{\mathrm{internal}}\
 
 Port target: `src/eia/audit/topology.py` (Loop 2).
 
+### Cohen's κ (AuthenticReason ↔ SourceMass)
+
+Given paired labels \((c_i, p_i)\) where \(c_i\) is `initiative_class` from AuthenticReason and \(p_i = \mathrm{map}(\mathrm{partition}_i)\) from `expected_initiative_class()`:
+
+\[
+\kappa = \frac{P_o - P_e}{1 - P_e}, \quad
+P_o = \frac{1}{N}\sum_i \mathbf{1}[c_i = p_i]
+\]
+
+Implementation: `kappa_bin_agreement()` in `source_mass_mapping.py`. Study script: `research/run_kappa_study.py`.
+
+**Interpretation:** Low κ on user-heavy traces with high EOI is expected — static SourceMass counts user-request roots in the intervention window while counterfactual replay proves endogeneity (H5).
+
 ---
 
 ## 9. Endogenous Origin Index (EOI)
