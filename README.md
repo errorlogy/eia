@@ -74,7 +74,7 @@ Integration details: [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md).
 |  |  |  |
 |-----------|-------------|------|
 | **NAMM** | [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) | Verification-first machine-native math discovery |
-| **EIA** (PROACTIVE AI) |   → `errorlogy/eia` () |    (P4–P5) |
+| **EIA** (PROACTIVE AI) |   → `[`errorlogy/eia`](https://github.com/errorlogy/eia) |    (P4–P5) |
 
    falsifiable gates,    experiment manifests     [Anthemium](https://anthemium.tech).
 
