@@ -12,13 +12,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from eia.audit import CausalTrace, TraceNodeKind, TwinRunner
+from eia.audit import AuthenticReasonDiscriminator, CausalTrace, TraceNodeKind, TwinRunner
 from eia.beliefs import BeliefField
 from eia.drives import DriveEngine
 from eia.governor import ContactGovernor, GovernorState
 from eia.intention import IntentionGenesis
 from eia.namm import NammAdapter, NammHook
 from eia.scheduler import LoopScheduler, PipelineStage
+from eia.schemas.agent_state import AgentState
 from eia.schemas.belief import BeliefKind
 from eia.schemas.observation import Observation
 from eia.sense_making import ComprehensionResult, SenseMakingEngine
@@ -47,6 +48,7 @@ class CognitiveLoop:
         self.scheduler = LoopScheduler.from_config()
         self.trace = CausalTrace()
         self.twin_runner = TwinRunner()
+        self.authentic_reason = AuthenticReasonDiscriminator()
         self.seed = seed
         self._motivation_count = 0
         self._snapshot_field: BeliefField | None = None
@@ -289,6 +291,28 @@ def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict
         },
     )
 
+    agent_state = AgentState.from_cognitive_loop(
+        field=loop.field,
+        drive_state=loop.drives.state,
+        governor=loop.governor,
+        trace_id=loop.trace.trace_id,
+        tick=sim.clock.tick,
+    )
+
+    auth_verdict = loop.authentic_reason.evaluate(
+        trace=loop.trace,
+        motivation=motivation,
+        initiative=initiative,
+        decision=decision,
+        eoi=twin_result.eoi,
+        governor_state=loop.governor.state,
+    )
+    loop.trace.add_node(
+        TraceNodeKind.AUTHENTIC_REASON,
+        auth_verdict.model_dump(mode="json"),
+        parent_kind=TraceNodeKind.CONTACT_GOVERNOR,
+    )
+
     trace_path = traces_dir / f"{loop.trace.trace_id}.jsonl"
     loop.trace.export_jsonl(trace_path)
 
@@ -301,6 +325,8 @@ def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict
         "decision": decision,
         "namm_intent": namm_intent,
         "twin_result": twin_result,
+        "authentic_verdict": auth_verdict,
+        "agent_state": agent_state,
         "trace_path": trace_path,
         "stage_log": loop.stage_log,
     }

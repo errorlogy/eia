@@ -35,6 +35,7 @@ class TraceNodeKind(str, Enum):
     CONTACT_DECISION = "contact_decision"
     TWIN_RUN = "twin_run"
     EOI_SCORE = "eoi_score"
+    AUTHENTIC_REASON = "authentic_reason"
 
 
 class TraceEdge(BaseModel):
@@ -167,8 +168,18 @@ class TwinRunResult:
     abstained_in_twin: bool
 
 
+EOI_ENDOGENOUS_THRESHOLD = 0.50
+
+
 class EOIScorer:
     """Compute Endogenous Origin Index from twin run comparison."""
+
+    def __init__(self, *, threshold: float = EOI_ENDOGENOUS_THRESHOLD) -> None:
+        self.threshold = threshold
+
+    def is_endogenous(self, eoi: float) -> bool:
+        """True when EOI meets authentic-reason threshold."""
+        return eoi >= self.threshold
 
     def score(
         self,
@@ -226,3 +237,26 @@ class TwinRunner:
             eoi=eoi,
             abstained_in_twin=twin.abstained,
         )
+
+
+from eia.audit.authentic_reason import (  # noqa: E402
+    AuthenticReasonCode,
+    AuthenticReasonDiscriminator,
+    AuthenticReasonVerdict,
+    EOI_AUTHENTIC_THRESHOLD,
+)
+
+__all__ = [
+    "AuthenticReasonCode",
+    "AuthenticReasonDiscriminator",
+    "AuthenticReasonVerdict",
+    "CausalTrace",
+    "EOI_AUTHENTIC_THRESHOLD",
+    "EOI_ENDOGENOUS_THRESHOLD",
+    "EOIScorer",
+    "TraceEdge",
+    "TraceNode",
+    "TraceNodeKind",
+    "TwinRunResult",
+    "TwinRunner",
+]

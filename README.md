@@ -16,6 +16,8 @@ Research platform for AI systems with **endogenous initiative** (P4–P5 proacti
 |---|---|
 | [`PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md`](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) | Full architecture specification |
 | [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) | Implementation & development plan (R0–R11, MVP-0–3, repo strategy) |
+| [`docs/AGENT_STATE.md`](./docs/AGENT_STATE.md) | Typed agent state `X_t` — fuzzy set → formal schema |
+| [`docs/RING_ARCHITECTURE.md`](./docs/RING_ARCHITECTURE.md) | Ring 1-2-3: Emission ↔ Dynamics ↔ Constitution |
 | [`docs/NAMM_INTEGRATION.md`](./docs/NAMM_INTEGRATION.md) | Integration with [NAMM experiments](https://github.com/errorlogy/namm-experiments) |
 | [`experiments/PAI-EI-E0-001/`](./experiments/PAI-EI-E0-001/) | First experiment scaffold (Twin World Test) |
 | [`.env.example`](./.env.example) | Environment variable template for future implementation |
@@ -35,8 +37,25 @@ Both programs share falsifiable gates, causal traces, and experiment manifests u
 - **Causal trace** — every contact traced from observation to action
 - **Dual-controller** — Contact Governor and Action Governor independent of LLM
 - **Phased roadmap** — digital-only MVP-0 → bounded embodiment MVP-3
+- **Typed agent state** — fuzzy inner state formalized as `X_t`; see [`docs/AGENT_STATE.md`](./docs/AGENT_STATE.md)
+- **Ring architecture** — Constitution (Ring 3) → Dynamics (Ring 2) → Emission (Ring 1); see [`docs/RING_ARCHITECTURE.md`](./docs/RING_ARCHITECTURE.md)
 
-See [architecture specification](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) §5, §26–27.
+```mermaid
+flowchart TB
+    subgraph R3["Ring 3 — Constitution"]
+        ONTO[Ontology & invariants]
+    end
+    subgraph R2["Ring 2 — Dynamics"]
+        BF[BeliefField + DriveEngine]
+    end
+    subgraph R1["Ring 1 — Emission"]
+        EM[Initiative + Governor]
+    end
+    R3 --> R2 --> R1
+    EM -->|authentic_reason| AUD[Audit / EOI]
+```
+
+See [architecture specification](./PROACTIVE_AI_Endogenous_Initiative_Architecture_EN_v0.1.md) §5, §7, §26–27.
 
 ### Quick start (MVP-0)
 

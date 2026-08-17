@@ -66,6 +66,7 @@ def demo(scenario_path: Path | None, traces_dir: Path) -> None:
     initiative = result["initiative"]
     decision = result["decision"]
     twin = result["twin_result"]
+    auth = result["authentic_verdict"]
     namm = result["namm_intent"]
 
     console.print("\n[bold yellow]BeliefField state before initiative:[/bold yellow]")
@@ -134,6 +135,19 @@ def demo(scenario_path: Path | None, traces_dir: Path) -> None:
             f"[bold]Twin abstained:[/bold] {twin.abstained_in_twin}",
             title="Counterfactual Twin Run",
             border_style="blue",
+        )
+    )
+
+    auth_color = "green" if auth.is_authentic else "yellow"
+    codes = ", ".join(c.value for c in auth.reason_codes[:6])
+    console.print(
+        Panel(
+            f"[bold]Authentic:[/bold] [{auth_color}]{auth.is_authentic}[/{auth_color}]\n"
+            f"[bold]Class:[/bold] {auth.initiative_class}\n"
+            f"[bold]Summary:[/bold] {auth.summary}\n"
+            f"[bold]Codes:[/bold] {codes}",
+            title="Authentic Reason Discriminator",
+            border_style=auth_color,
         )
     )
 
@@ -207,10 +221,12 @@ def pipeline(scenario_path: Path | None, traces_dir: Path) -> None:
     console.print(render_field_heatmap(loop.field))
 
     twin = result["twin_result"]
+    auth = result["authentic_verdict"]
     console.print(
         Panel(
             f"[bold]EOI:[/bold] {twin.eoi:.3f} · "
             f"[bold]Contact:[/bold] {result['decision'].outcome.value}\n"
+            f"[bold]Authentic reason:[/bold] {auth.is_authentic} ({auth.initiative_class})\n"
             f"[dim]Trace:[/dim] {result['trace_path']}",
             title="Outcome",
             border_style="blue",
@@ -228,6 +244,8 @@ def run(scenario_path: Path | None, traces_dir: Path) -> None:
     console.print(json.dumps({
         "trace_id": result["loop"].trace.trace_id,
         "eoi": result["twin_result"].eoi,
+        "authentic_reason": result["authentic_verdict"].is_authentic,
+        "initiative_class": result["authentic_verdict"].initiative_class,
         "initiative_abstained": result["initiative"].abstained,
         "contact_outcome": result["decision"].outcome.value,
         "trace_path": str(result["trace_path"]),
@@ -258,6 +276,14 @@ def replay(trace_path: Path) -> None:
         eoi = eoi_nodes[-1].payload.get("eoi", 0)
         console.print(f"[bold green]EOI from trace:[/bold green] {eoi:.3f}")
 
+    auth_nodes = [n for n in trace.nodes if n.kind == TraceNodeKind.AUTHENTIC_REASON]
+    if auth_nodes:
+        p = auth_nodes[-1].payload
+        console.print(
+            f"[bold green]Authentic reason:[/bold green] {p.get('is_authentic')} "
+            f"({p.get('initiative_class')})"
+        )
+
 
 def _summarize_node(node) -> str:
     p = node.payload
@@ -287,6 +313,12 @@ def _summarize_node(node) -> str:
         return prefix + f"ref={p.get('namm_experiment_ref')} {p.get('artifact', '')[:40]}"
     if node.kind == TraceNodeKind.EOI_SCORE:
         return f"eoi={p.get('eoi', 0):.3f}"
+    if node.kind == TraceNodeKind.AUTHENTIC_REASON:
+        return (
+            f"authentic={p.get('is_authentic')} "
+            f"class={p.get('initiative_class')} "
+            f"{p.get('summary', '')[:40]}"
+        )
     return prefix + str(list(p.keys())[:3])
 
 

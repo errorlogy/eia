@@ -107,7 +107,7 @@ class SenseMakingEngine:
         gradients = self.field.gradient_snapshot()
         epistemic = gradients["epistemic"]
         coherence = gradients["coherence"]
-        ep_met = epistemic >= self.EPistemic_THRESHOLD
+        ep_met = epistemic >= self.EPISTEMIC_THRESHOLD
         co_met = coherence >= self.COHERENCE_THRESHOLD
 
         namm_ref = None

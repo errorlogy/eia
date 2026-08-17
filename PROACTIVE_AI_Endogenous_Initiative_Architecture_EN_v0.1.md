@@ -7,6 +7,8 @@
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech) · [X @AGIminister](https://x.com/AGIminister)  
 **Subject:** An AI system capable, without a current human request, of independently forming internal reasons, questions, contact proposals, and bounded actions based on memory, sensory context, uncertainty, unfinished intentions, and a stable value model.
 
+> **Implementation pointers (v0.1+):** Typed inner state `X_t` and authentic-reason discriminator are documented in [`docs/AGENT_STATE.md`](./docs/AGENT_STATE.md). Ring 1-2-3 architecture (Emission / Dynamics / Constitution) is in [`docs/RING_ARCHITECTURE.md`](./docs/RING_ARCHITECTURE.md).
+
 ---
 
 ## 1. Main thesis
