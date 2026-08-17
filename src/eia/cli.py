@@ -11,6 +11,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from eia.audit import CausalTrace, TraceNodeKind
+from eia.audit.replay import ReplayMetadataError, re_execute_trace
 from eia.beliefs.visualize import render_field_heatmap
 from eia.pipeline import run_scenario
 from eia.scheduler import PipelineStage
@@ -254,8 +255,46 @@ def run(scenario_path: Path | None, traces_dir: Path) -> None:
 
 @main.command()
 @click.option("--trace", "trace_path", required=True, type=click.Path(exists=True, path_type=Path))
-def replay(trace_path: Path) -> None:
+@click.option(
+    "--re-execute",
+    "re_execute",
+    is_flag=True,
+    default=False,
+    help="Re-run simulator from trace metadata and compare traces.",
+)
+def replay(trace_path: Path, re_execute: bool) -> None:
     """Deterministic replay of a causal trace JSONL."""
+    if re_execute:
+        try:
+            comparison = re_execute_trace(trace_path)
+        except ReplayMetadataError as exc:
+            console.print(f"[bold red]Cannot re-execute:[/bold red] {exc}")
+            raise SystemExit(1) from exc
+
+        color = "green" if comparison.matched else "red"
+        console.print(
+            Panel(
+                f"[bold]Result:[/bold] [{color}]{comparison.summary}[/{color}]\n"
+                f"[bold]Fingerprint (original):[/bold] {comparison.original_fingerprint}\n"
+                f"[bold]Fingerprint (replay):[/bold] {comparison.replay_fingerprint}\n"
+                f"[bold]EOI:[/bold] {comparison.eoi_original} → {comparison.eoi_replay} "
+                f"({'match' if comparison.eoi_match else 'mismatch'})\n"
+                f"[bold]Authentic reason:[/bold] "
+                f"{comparison.auth_original} → {comparison.auth_replay} "
+                f"({'match' if comparison.auth_match else 'mismatch'})",
+                title="Replay Re-Execute",
+                border_style=color,
+            )
+        )
+        if comparison.key_node_diffs:
+            console.print(
+                "[yellow]Key node diffs:[/yellow] "
+                + ", ".join(comparison.key_node_diffs)
+            )
+        if comparison.replay_trace_path:
+            console.print(f"[dim]Replay trace:[/dim] {comparison.replay_trace_path}")
+        raise SystemExit(0 if comparison.matched else 2)
+
     trace = CausalTrace.load_jsonl(trace_path)
 
     table = Table(title=f"Causal Trace Replay: {trace.trace_id}")

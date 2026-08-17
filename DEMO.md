@@ -68,5 +68,20 @@ intent — future hook for sandboxed math search with certificate gates.
 pip install -e ".[dev]"
 eia demo
 eia replay --trace traces/<id>.jsonl
+eia replay --trace traces/<id>.jsonl --re-execute
 pytest tests/ -v
 ```
+
+### Replay re-execute
+
+Re-run the simulator and pipeline from a saved trace and verify determinism:
+
+```powershell
+# Generate a replayable trace (metadata: seed, scenario, code version)
+eia run --scenario scenarios/twin_world_001.yaml
+
+# Re-execute and compare fingerprint, EOI, authentic reason verdict
+eia replay --trace traces/<trace_id>.jsonl --re-execute
+```
+
+Exit code `0` = match, `2` = mismatch. Legacy traces without metadata print a helpful error.

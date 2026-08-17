@@ -12,10 +12,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from eia.audit import AuthenticReasonDiscriminator, CausalTrace, TraceNodeKind, TwinRunner
+from eia.audit import AuthenticReasonDiscriminator, CausalTrace, TraceMetadata, TraceNodeKind, TwinRunner
+from eia.version import get_code_version
 from eia.beliefs import BeliefField
 from eia.drives import DriveEngine
 from eia.governor import ContactGovernor, GovernorState
+from eia.ids import new_trace_id, seeded_context
 from eia.intention import IntentionGenesis
 from eia.namm import NammAdapter, NammHook
 from eia.scheduler import LoopScheduler, PipelineStage
@@ -46,7 +48,7 @@ class CognitiveLoop:
         self.governor = ContactGovernor()
         self.namm = NammAdapter(epistemic_threshold=0.50)
         self.scheduler = LoopScheduler.from_config()
-        self.trace = CausalTrace()
+        self.trace = CausalTrace(seed=seed)
         self.twin_runner = TwinRunner()
         self.authentic_reason = AuthenticReasonDiscriminator()
         self.seed = seed
@@ -230,91 +232,110 @@ class CognitiveLoop:
         return motivation, initiative, decision
 
 
-def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict:
+def run_scenario(
+    scenario_path: Path,
+    *,
+    traces_dir: Path | None = None,
+    seed: int | None = None,
+) -> dict:
     """Full end-to-end scenario run with labeled pipeline stages."""
     scenario = load_scenario(scenario_path)
-    sim = Simulator(scenario, seed=scenario.seed)
-    loop = CognitiveLoop(seed=scenario.seed)
+    run_seed = seed if seed is not None else scenario.seed
     traces_dir = traces_dir or Path("traces")
 
-    for spec in scenario.initial_beliefs:
-        loop.field.upsert_belief(
-            spec["id"],
-            kind=BeliefKind(spec.get("kind", "categorical")),
-            subject=spec["subject"],
-            claim=spec["claim"],
-            distribution=spec.get("distribution"),
-            uncertainty=spec.get("uncertainty", 0.5),
-            metadata=spec.get("metadata", {}),
+    with seeded_context(run_seed):
+        sim = Simulator(scenario, seed=run_seed)
+        loop = CognitiveLoop(seed=run_seed)
+
+        for spec in scenario.initial_beliefs:
+            loop.field.upsert_belief(
+                spec["id"],
+                kind=BeliefKind(spec.get("kind", "categorical")),
+                subject=spec["subject"],
+                claim=spec["claim"],
+                distribution=spec.get("distribution"),
+                uncertainty=spec.get("uncertainty", 0.5),
+                metadata=spec.get("metadata", {}),
+            )
+
+        for contra in scenario.metadata.get("contradictions", []):
+            loop.field.register_contradiction(contra[0], contra[1], contra[2])
+
+        max_tick = max((e.tick for e in scenario.events), default=10)
+        sim.run_until(max_tick)
+
+        for obs in sim.bus.events:
+            loop.apply_observation(obs)
+
+        sim.advance_quiet_period(ticks=4)
+
+        motivation = initiative = decision = namm_intent = None
+        for i in range(3):
+            motivation, initiative, decision, namm_intent = loop.tick_cognition(
+                tick=sim.clock.tick + i,
+                hour=sim.clock.hour,
+                finalize=(i == 2),
+            )
+
+        removed = sim.bus.remove_last_user_events(1)
+        removed_ids = [o.id for o in removed]
+
+        orig_initiative = initiative
+        _, twin_initiative, _ = loop.run_twin(removed_ids, sim)
+        twin_result = loop.twin_runner.compare(orig_initiative, twin_initiative, removed_ids)
+
+        loop.trace.add_node(
+            TraceNodeKind.TWIN_RUN,
+            {
+                "removed_user_event_ids": removed_ids,
+                "original_initiative_id": orig_initiative.id,
+                "twin_initiative_id": twin_initiative.id,
+            },
+        )
+        loop.trace.add_node(
+            TraceNodeKind.EOI_SCORE,
+            {
+                "eoi": twin_result.eoi,
+                "semantic_match": twin_result.semantic_match,
+                "abstained_in_twin": twin_result.abstained_in_twin,
+            },
         )
 
-    for contra in scenario.metadata.get("contradictions", []):
-        loop.field.register_contradiction(contra[0], contra[1], contra[2])
-
-    max_tick = max((e.tick for e in scenario.events), default=10)
-    sim.run_until(max_tick)
-
-    for obs in sim.bus.events:
-        loop.apply_observation(obs)
-
-    sim.advance_quiet_period(ticks=4)
-
-    motivation = initiative = decision = namm_intent = None
-    for i in range(3):
-        motivation, initiative, decision, namm_intent = loop.tick_cognition(
-            tick=sim.clock.tick + i,
-            hour=sim.clock.hour,
-            finalize=(i == 2),
+        agent_state = AgentState.from_cognitive_loop(
+            field=loop.field,
+            drive_state=loop.drives.state,
+            governor=loop.governor,
+            trace_id=loop.trace.trace_id,
+            tick=sim.clock.tick,
         )
 
-    removed = sim.bus.remove_last_user_events(1)
-    removed_ids = [o.id for o in removed]
+        auth_verdict = loop.authentic_reason.evaluate(
+            trace=loop.trace,
+            motivation=motivation,
+            initiative=initiative,
+            decision=decision,
+            eoi=twin_result.eoi,
+            governor_state=loop.governor.state,
+        )
+        loop.trace.add_node(
+            TraceNodeKind.AUTHENTIC_REASON,
+            auth_verdict.model_dump(mode="json"),
+            parent_kind=TraceNodeKind.CONTACT_GOVERNOR,
+        )
 
-    orig_initiative = initiative
-    _, twin_initiative, _ = loop.run_twin(removed_ids, sim)
-    twin_result = loop.twin_runner.compare(orig_initiative, twin_initiative, removed_ids)
+        loop.trace.metadata = TraceMetadata(
+            seed=run_seed,
+            scenario_path=str(scenario_path.resolve()),
+            code_version=get_code_version(),
+            initial_state={
+                "initial_beliefs": scenario.initial_beliefs,
+                "contradictions": scenario.metadata.get("contradictions", []),
+                "scenario_id": scenario.id,
+            },
+        )
 
-    loop.trace.add_node(
-        TraceNodeKind.TWIN_RUN,
-        {
-            "removed_user_event_ids": removed_ids,
-            "original_initiative_id": orig_initiative.id,
-            "twin_initiative_id": twin_initiative.id,
-        },
-    )
-    loop.trace.add_node(
-        TraceNodeKind.EOI_SCORE,
-        {
-            "eoi": twin_result.eoi,
-            "semantic_match": twin_result.semantic_match,
-            "abstained_in_twin": twin_result.abstained_in_twin,
-        },
-    )
-
-    agent_state = AgentState.from_cognitive_loop(
-        field=loop.field,
-        drive_state=loop.drives.state,
-        governor=loop.governor,
-        trace_id=loop.trace.trace_id,
-        tick=sim.clock.tick,
-    )
-
-    auth_verdict = loop.authentic_reason.evaluate(
-        trace=loop.trace,
-        motivation=motivation,
-        initiative=initiative,
-        decision=decision,
-        eoi=twin_result.eoi,
-        governor_state=loop.governor.state,
-    )
-    loop.trace.add_node(
-        TraceNodeKind.AUTHENTIC_REASON,
-        auth_verdict.model_dump(mode="json"),
-        parent_kind=TraceNodeKind.CONTACT_GOVERNOR,
-    )
-
-    trace_path = traces_dir / f"{loop.trace.trace_id}.jsonl"
-    loop.trace.export_jsonl(trace_path)
+        trace_path = traces_dir / f"{loop.trace.trace_id}.jsonl"
+        loop.trace.export_jsonl(trace_path)
 
     return {
         "scenario": scenario,

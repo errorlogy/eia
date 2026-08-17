@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import re
-import uuid
 from datetime import datetime, timezone
 from enum import Enum
 
 from pydantic import BaseModel, Field
+
+from eia.ids import new_id
 
 from eia.audit import CausalTrace, TraceNodeKind
 from eia.governor import GovernorState
@@ -165,7 +166,7 @@ class AuthenticReasonDiscriminator:
 
         if initiative.abstained:
             return AuthenticReasonVerdict(
-                id=f"auth-{uuid.uuid4().hex[:8]}",
+                id=new_id("auth"),
                 timestamp=datetime.now(timezone.utc),
                 is_authentic=False,
                 initiative_class="stochastic",
@@ -232,7 +233,7 @@ class AuthenticReasonDiscriminator:
         )
 
         return AuthenticReasonVerdict(
-            id=f"auth-{uuid.uuid4().hex[:8]}",
+            id=new_id("auth"),
             timestamp=datetime.now(timezone.utc),
             is_authentic=is_authentic,
             initiative_class=initiative_class,

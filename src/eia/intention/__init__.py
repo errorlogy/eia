@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import uuid
 from datetime import datetime, timezone
 
 from eia.beliefs import BeliefField
+from eia.ids import new_id
 from eia.schemas.initiative import Initiative, InitiativeCandidate, InitiativeKind
 from eia.schemas.motivation import DriveKind, Motivation
 
@@ -40,7 +40,7 @@ class IntentionGenesis:
                 if belief:
                     candidates.append(
                         InitiativeCandidate(
-                            id=f"cand-ep-{uuid.uuid4().hex[:8]}",
+                            id=new_id("cand-ep"),
                             kind=InitiativeKind.ASK_QUESTION,
                             target_belief_id=bid,
                             question_text=(
@@ -58,7 +58,7 @@ class IntentionGenesis:
                 a_id, b_id, topic = field.contradictions[0]
                 candidates.append(
                     InitiativeCandidate(
-                        id=f"cand-co-{uuid.uuid4().hex[:8]}",
+                        id=new_id("cand-co"),
                         kind=InitiativeKind.ASK_QUESTION,
                         target_belief_id=a_id,
                         question_text=(
@@ -79,7 +79,7 @@ class IntentionGenesis:
                     if belief and belief.metadata.get("status") == "open":
                         candidates.append(
                             InitiativeCandidate(
-                                id=f"cand-cm-{uuid.uuid4().hex[:8]}",
+                                id=new_id("cand-cm"),
                                 kind=InitiativeKind.ASK_QUESTION,
                                 target_belief_id=bid,
                                 question_text=(
@@ -96,7 +96,7 @@ class IntentionGenesis:
 
         candidates.append(
             InitiativeCandidate(
-                id=f"cand-abstain-{uuid.uuid4().hex[:8]}",
+                id=new_id("cand-abstain"),
                 kind=InitiativeKind.ABSTAIN,
                 expected_info_gain=0.0,
                 interrupt_cost=0.0,
@@ -107,7 +107,7 @@ class IntentionGenesis:
 
         candidates.append(
             InitiativeCandidate(
-                id=f"cand-observe-{uuid.uuid4().hex[:8]}",
+                id=new_id("cand-observe"),
                 kind=InitiativeKind.OBSERVE,
                 expected_info_gain=0.05,
                 interrupt_cost=0.0,
@@ -142,7 +142,7 @@ class IntentionGenesis:
         if not non_abstain:
             if observe and max(s.intensity for s in motivation.signals) >= self.abstain_threshold * 0.5:
                 return Initiative(
-                    id=f"int-{uuid.uuid4().hex[:8]}",
+                    id=new_id("int"),
                     timestamp=datetime.now(timezone.utc),
                     candidate=observe,
                     abstained=False,
@@ -152,7 +152,7 @@ class IntentionGenesis:
                 )
             abstain = next(c for c in candidates if c.kind == InitiativeKind.ABSTAIN)
             return Initiative(
-                id=f"int-{uuid.uuid4().hex[:8]}",
+                id=new_id("int"),
                 timestamp=datetime.now(timezone.utc),
                 candidate=abstain,
                 abstained=True,
@@ -166,7 +166,7 @@ class IntentionGenesis:
         if max_signal < self.abstain_threshold or best.expected_info_gain < self.min_evsi:
             abstain = next(c for c in candidates if c.kind == InitiativeKind.ABSTAIN)
             return Initiative(
-                id=f"int-{uuid.uuid4().hex[:8]}",
+                id=new_id("int"),
                 timestamp=datetime.now(timezone.utc),
                 candidate=abstain,
                 abstained=True,
@@ -176,7 +176,7 @@ class IntentionGenesis:
             )
 
         return Initiative(
-            id=f"int-{uuid.uuid4().hex[:8]}",
+            id=new_id("int"),
             timestamp=datetime.now(timezone.utc),
             candidate=best,
             abstained=False,

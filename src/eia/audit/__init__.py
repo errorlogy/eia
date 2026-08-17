@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -11,6 +10,8 @@ from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field
+
+from eia.ids import new_id, new_trace_id
 
 from eia.schemas.contact import ContactDecision
 from eia.schemas.initiative import Initiative
@@ -38,6 +39,15 @@ class TraceNodeKind(str, Enum):
     AUTHENTIC_REASON = "authentic_reason"
 
 
+class TraceMetadata(BaseModel):
+    """Replay parameters stored in trace header for deterministic re-execution."""
+
+    seed: int
+    scenario_path: str
+    code_version: str = ""
+    initial_state: dict[str, Any] = Field(default_factory=dict)
+
+
 class TraceEdge(BaseModel):
     parent_id: str
     child_id: str
@@ -54,11 +64,12 @@ class TraceNode(BaseModel):
 class CausalTrace:
     """Append-only JSONL causal DAG — first-class artifact, not logs."""
 
-    def __init__(self, trace_id: str | None = None) -> None:
-        self.trace_id = trace_id or f"trace-{uuid.uuid4().hex[:12]}"
+    def __init__(self, trace_id: str | None = None, *, seed: int | None = None) -> None:
+        self.trace_id = trace_id or new_trace_id(seed)
         self.nodes: list[TraceNode] = []
         self.edges: list[TraceEdge] = []
         self._last_ids: dict[TraceNodeKind, str] = {}
+        self.metadata: TraceMetadata | None = None
 
     def add_node(
         self,
@@ -129,8 +140,11 @@ class CausalTrace:
 
     def export_jsonl(self, path: Path) -> Path:
         path.parent.mkdir(parents=True, exist_ok=True)
+        header: dict[str, Any] = {"trace_id": self.trace_id, "type": "header"}
+        if self.metadata is not None:
+            header["metadata"] = self.metadata.model_dump(mode="json")
         with path.open("w", encoding="utf-8") as f:
-            f.write(json.dumps({"trace_id": self.trace_id, "type": "header"}) + "\n")
+            f.write(json.dumps(header) + "\n")
             for edge in self.edges:
                 f.write(json.dumps({"type": "edge", **edge.model_dump()}) + "\n")
             for node in self.nodes:
@@ -147,6 +161,9 @@ class CausalTrace:
                 rec = json.loads(line)
                 if rec.get("type") == "header":
                     trace.trace_id = rec["trace_id"]
+                    meta = rec.get("metadata")
+                    if meta:
+                        trace.metadata = TraceMetadata(**meta)
                 elif rec.get("type") == "edge":
                     trace.edges.append(TraceEdge(**{k: v for k, v in rec.items() if k != "type"}))
                 elif rec.get("type") == "node":
@@ -255,6 +272,7 @@ __all__ = [
     "EOI_ENDOGENOUS_THRESHOLD",
     "EOIScorer",
     "TraceEdge",
+    "TraceMetadata",
     "TraceNode",
     "TraceNodeKind",
     "TwinRunResult",

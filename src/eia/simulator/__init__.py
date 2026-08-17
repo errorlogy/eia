@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -10,6 +9,7 @@ from typing import Any, Callable
 
 import yaml
 
+from eia.ids import new_id
 from eia.schemas.observation import Observation, ObservationSource
 
 
@@ -134,7 +134,7 @@ class Simulator:
 
     def _make_observation(self, ev: ScenarioEvent) -> Observation:
         return Observation(
-            id=f"obs-{uuid.uuid4().hex[:8]}",
+            id=new_id("obs"),
             timestamp=self.clock.now,
             source=ObservationSource(ev.source),
             topic=ev.topic,

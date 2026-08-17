@@ -7,12 +7,12 @@ NAMM-aligned: uses graph topology metrics, not embedding similarity.
 
 from __future__ import annotations
 
-import uuid
 from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
 from eia.beliefs import BeliefField
+from eia.ids import new_id
 from eia.schemas.belief import BeliefKind, BeliefUpdate
 from eia.schemas.observation import Observation
 
@@ -124,7 +124,7 @@ class SenseMakingEngine:
         summary_parts.append(f"field_entropy={epistemic:.3f}")
 
         return ComprehensionResult(
-            id=f"comp-{uuid.uuid4().hex[:8]}",
+            id=new_id("comp"),
             timestamp=datetime.now(timezone.utc),
             observation_ids=[obs.id],
             belief_update_ids=[u.id for u in new_updates],
@@ -144,7 +144,7 @@ class SenseMakingEngine:
         ep = gradients["epistemic"]
         co = gradients["coherence"]
         return ComprehensionResult(
-            id=f"comp-{uuid.uuid4().hex[:8]}",
+            id=new_id("comp"),
             timestamp=datetime.now(timezone.utc),
             belief_update_ids=[u.id for u in self.field.updates[-5:]],
             field_entropy=ep,

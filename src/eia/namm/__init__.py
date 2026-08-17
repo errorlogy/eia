@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import json
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import yaml
+
+from eia.ids import new_id
 
 from eia.scheduler import PipelineStage
 from eia.schemas.motivation import DriveKind, Motivation
@@ -89,7 +90,7 @@ class NammAdapter:
 
             if fired_hook:
                 hook = NammHook(
-                    hook_id=f"namm-hook-{uuid.uuid4().hex[:8]}",
+                    hook_id=new_id("namm-hook"),
                     pipeline_stage=PipelineStage.SENSE_MAKING.value,
                     namm_experiment_ref=exp["id"],
                     domain=exp.get("domain", ""),
@@ -99,7 +100,7 @@ class NammAdapter:
                         comprehension.field_entropy,
                         comprehension.inconsistency_energy,
                     ),
-                    certificate_placeholder=f"cert-pending-{uuid.uuid4().hex[:12]}",
+                    certificate_placeholder=new_id("cert-pending"),
                 )
                 fired.append(hook)
                 self.hooks.append(hook)
@@ -107,14 +108,14 @@ class NammAdapter:
 
         if comprehension.namm_topology_ref and not fired:
             hook = NammHook(
-                hook_id=f"namm-hook-{uuid.uuid4().hex[:8]}",
+                hook_id=new_id("namm-hook"),
                 pipeline_stage=PipelineStage.SENSE_MAKING.value,
                 namm_experiment_ref=comprehension.namm_topology_ref,
                 domain="meta_evaluation" if "004" in comprehension.namm_topology_ref else "tda_frame",
                 artifact="topology comprehension threshold",
                 trigger="comprehension_namm_ref",
                 intensity=comprehension.field_entropy,
-                certificate_placeholder=f"cert-pending-{uuid.uuid4().hex[:12]}",
+                certificate_placeholder=new_id("cert-pending"),
             )
             fired.append(hook)
             self.hooks.append(hook)
@@ -152,12 +153,12 @@ class NammAdapter:
                 break
 
         intent = InternalExperimentIntent(
-            intent_id=f"namm-intent-{uuid.uuid4().hex[:8]}",
+            intent_id=new_id("namm-intent"),
             timestamp=datetime.now(timezone.utc).isoformat(),
             drive=DriveKind.EPISTEMIC.value,
             intensity=epistemic.intensity,
             target_belief_ids=epistemic.target_belief_ids,
-            certificate_placeholder=f"cert-pending-{uuid.uuid4().hex[:12]}",
+            certificate_placeholder=new_id("cert-pending"),
             status="logged",
             namm_experiment_ref=exp_ref,
             pipeline_stage=PipelineStage.MOTIVE_FORMATION.value,
@@ -168,7 +169,7 @@ class NammAdapter:
 
         if coherence and coherence.intensity >= self.coherence_threshold:
             hook = NammHook(
-                hook_id=f"namm-hook-{uuid.uuid4().hex[:8]}",
+                hook_id=new_id("namm-hook"),
                 pipeline_stage=PipelineStage.MOTIVE_FORMATION.value,
                 namm_experiment_ref="NAMM-2026-004",
                 domain="meta_evaluation",
@@ -187,14 +188,14 @@ class NammAdapter:
         for exp in self._stage_experiments("intention_genesis"):
             if exp.get("trigger") == "competing_candidates_ge_3" and candidate_count >= 3:
                 hook = NammHook(
-                    hook_id=f"namm-hook-{uuid.uuid4().hex[:8]}",
+                    hook_id=new_id("namm-hook"),
                     pipeline_stage=PipelineStage.INTENTION_GENESIS.value,
                     namm_experiment_ref=exp["id"],
                     domain=exp.get("domain", ""),
                     artifact=exp.get("artifact", ""),
                     trigger=exp["trigger"],
                     intensity=max_evsi,
-                    certificate_placeholder=f"cert-pending-{uuid.uuid4().hex[:12]}",
+                    certificate_placeholder=new_id("cert-pending"),
                 )
                 self.hooks.append(hook)
                 self._persist_hook(hook)

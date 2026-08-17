@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+
+from eia.ids import new_id
 
 from eia.schemas.contact import ContactDecision, ContactOutcome
 from eia.schemas.initiative import Initiative, InitiativeKind
@@ -85,7 +86,7 @@ class ContactGovernor:
 
         if initiative.abstained:
             return ContactDecision(
-                id=f"gov-{uuid.uuid4().hex[:8]}",
+                id=new_id("gov"),
                 timestamp=datetime.now(timezone.utc),
                 initiative_id=initiative.id,
                 outcome=ContactOutcome.ABSTAIN,
@@ -98,7 +99,7 @@ class ContactGovernor:
 
         if self.state.contacts_today >= self.config.daily_budget:
             return ContactDecision(
-                id=f"gov-{uuid.uuid4().hex[:8]}",
+                id=new_id("gov"),
                 timestamp=datetime.now(timezone.utc),
                 initiative_id=initiative.id,
                 outcome=ContactOutcome.DENY,
@@ -111,7 +112,7 @@ class ContactGovernor:
 
         if cooldown:
             return ContactDecision(
-                id=f"gov-{uuid.uuid4().hex[:8]}",
+                id=new_id("gov"),
                 timestamp=datetime.now(timezone.utc),
                 initiative_id=initiative.id,
                 outcome=ContactOutcome.DEFER,
@@ -125,7 +126,7 @@ class ContactGovernor:
 
         if self._in_quiet_hours() and score < 0.7:
             return ContactDecision(
-                id=f"gov-{uuid.uuid4().hex[:8]}",
+                id=new_id("gov"),
                 timestamp=datetime.now(timezone.utc),
                 initiative_id=initiative.id,
                 outcome=ContactOutcome.DEFER,
@@ -147,7 +148,7 @@ class ContactGovernor:
                     f"{self.config.min_contact_score} — REJECTED"
                 )
             return ContactDecision(
-                id=f"gov-{uuid.uuid4().hex[:8]}",
+                id=new_id("gov"),
                 timestamp=datetime.now(timezone.utc),
                 initiative_id=initiative.id,
                 outcome=outcome,
@@ -162,7 +163,7 @@ class ContactGovernor:
         self.state.last_contact_tick = self.state.current_tick
 
         return ContactDecision(
-            id=f"gov-{uuid.uuid4().hex[:8]}",
+            id=new_id("gov"),
             timestamp=datetime.now(timezone.utc),
             initiative_id=initiative.id,
             outcome=ContactOutcome.SEND_NOW,
