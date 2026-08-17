@@ -38,7 +38,7 @@ class ComprehensionResult(BaseModel):
 class SenseMakingEngine:
     """Apply observations to BeliefField and emit comprehension artifact."""
 
-    EPistemic_THRESHOLD = 0.45
+    EPISTEMIC_THRESHOLD = 0.45
     COHERENCE_THRESHOLD = 0.20
 
     def __init__(self, field: BeliefField) -> None:
