@@ -42,8 +42,24 @@ OBSERVE → PLAN → IMPLEMENT → TEST → COMMIT → PUSH → RESEARCH NOTE �
 - Commit SHA
 - Blockers for next iteration
 
+## Meta-loop nesting
+
+Loop C (this document) runs inside the larger **A → C → B** cycle:
+
+| Loop | Doc | Role |
+|------|-----|------|
+| A — PLAN | [`LOOP_PLAN.md`](LOOP_PLAN.md) | 3–5 prioritized tasks each session |
+| B — REVIEW | [`LOOP_LOG.md`](LOOP_LOG.md), [`PLAN_DELTA.md`](PLAN_DELTA.md) | Retrospective + plan amendments |
+| C — EXECUTE | This file | OBSERVE → … → PUSH |
+
+See [`META_LOOP.md`](META_LOOP.md) for full architecture and handoff via [`NEXT_AGENT_PROMPT.md`](NEXT_AGENT_PROMPT.md).
+
 ## Related docs
 
+- [`META_LOOP.md`](META_LOOP.md) — PLAN / REVIEW / EXECUTE nesting
+- [`LOOP_PLAN.md`](LOOP_PLAN.md) — current task queue
 - [`LOOP_LOG.md`](LOOP_LOG.md) — iteration journal
+- [`PLAN_DELTA.md`](PLAN_DELTA.md) — IMPLEMENTATION_PLAN changelog
+- [`MATHEMATICS.md`](MATHEMATICS.md) — formal model (math track)
 - [`RESEARCH_BRANCHES.md`](RESEARCH_BRANCHES.md) — comparative branches
 - [`research/paired-eoi-report-001.md`](../research/paired-eoi-report-001.md) — baseline paired EOI
