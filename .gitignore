@@ -1,0 +1,132 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets/
+.secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.eggs/
+*.egg-info/
+*.egg
+dist/
+build/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+*.cover
+.hypothesis/
+*.log
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.npm/
+.yarn/
+.parcel-cache/
+.next/
+.nuxt/
+out/
+.nuxt
+.turbo/
+
+# Docker
+docker-compose.override.yml
+
+# Databases and local data
+*.db
+*.sqlite
+*.sqlite3
+postgres-data/
+pgdata/
+redis-data/
+data/
+*.dump
+*.sql.gz
+
+# ML / experiments
+mlruns/
+wandb/
+.checkpoints/
+models/
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Build artifacts
+*.o
+*.a
+*.lib
+*.dll
+*.exe
+target/
+cmake-build-*/
+
+# Logs and temp
+logs/
+*.log
+tmp/
+temp/
+.cache/
+
+# Terraform / infra (if added later)
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# ROS 2 (if added later)
+install/
+log/
+build/
+
+# Eval reports with sensitive data (keep templates in repo)
+evals/reports/*.private.*
+harnesses/**/output/

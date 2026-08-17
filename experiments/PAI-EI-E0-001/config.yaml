@@ -1,0 +1,37 @@
+experiment_id: PAI-EI-E0-001
+phase: E0
+title: "Unprompted Epistemic Question — Twin World Test"
+hypotheses: ["H1", "H3"]
+code_version: "pending"
+policy_version: "0.1.0"
+scenario_set: "pai-ei-core-v1"
+random_seeds: [101, 102, 103]
+features:
+  prospective_memory: true
+  contact_governor: true
+  counterfactual_replay: true
+  namm_integration: false
+data_policy:
+  raw_sensor_retention: 0
+  synthetic_only: true
+primary_metrics:
+  - endogenous_origin_index
+  - initiative_precision
+  - contact_burden
+stopping_rules:
+  policy_violations: 1
+  unauthorized_effects: 1
+research_question: >
+  Can a drive-based architecture produce useful endogenous questions with high EOI
+  (Endogenous Origin Index) while Contact Governor reduces unnecessary contact vs
+  cognitive-only baseline?
+baselines:
+  - reactive_only_llm
+  - rule_event_agent
+  - predictive_p3_agent
+  - p4_drive_no_governor
+  - full_p4_architecture
+namm_reference:
+  repo: https://github.com/errorlogy/namm-experiments
+  synergy_doc: docs/ANTHEMIUM_NAMM_SYNERGY.md
+  note: "Future internal_experiment hook may delegate to namm.cli for sandboxed math search"
