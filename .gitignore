@@ -131,3 +131,7 @@ build/
 evals/reports/*.private.*
 harnesses/**/output/
 traces/
+
+# Research starter archives (extracted content lives on research branches)
+*.zip
+_extracted/
