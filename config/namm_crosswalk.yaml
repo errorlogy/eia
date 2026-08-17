@@ -1,0 +1,149 @@
+# EIA pipeline stage → NAMM experiment hooks (MVP-0)
+# See docs/NAMM_ARTIFACT_CROSSWALK.md for rationale.
+
+version: "0.1"
+author: Roman Kuznetsov
+
+stages:
+  observation_ingest:
+    namm_experiments: []
+    namm_domains: []
+    note: "Event backbone only — no NAMM gate at ingest"
+
+  sense_making:
+    namm_experiments:
+      - id: NAMM-2026-006
+        trigger: coherence_energy_above
+        threshold: 0.25
+        domain: tda_frame
+        artifact: "persistent homology on belief-graph geodesic"
+      - id: NAMM-2026-004
+        trigger: epistemic_and_coherence_above
+        epistemic_threshold: 0.45
+        coherence_threshold: 0.20
+        domain: meta_evaluation
+        artifact: "meta-evaluator fixed point E ≈ F(E)"
+    namm_docs:
+      - docs/AI_THINKING_TOPOLOGY.md
+      - docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md
+
+  motive_formation:
+    namm_experiments:
+      - id: NAMM-2026-013
+        trigger: epistemic_above
+        threshold: 0.50
+        domain: meta_evaluation
+        artifact: "cognitive antigravity — escape median embedding gravity"
+        hypothesis: H-CA-001
+      - id: NAMM-2026-003
+        trigger: epistemic_above
+        threshold: 0.55
+        domain: program_ast
+        artifact: "program AST synthesis — internal epistemic sandbox"
+    namm_metrics:
+      - K_A
+      - K_H
+      - distance_from_median
+
+  intention_genesis:
+    namm_experiments:
+      - id: NAMM-2026-007
+        trigger: competence_proxy_above
+        threshold: 0.40
+        domain: raw_tensor
+        artifact: "raw tensor invariants — machine-native vocabulary"
+      - id: NAMM-2026-004
+        trigger: competing_candidates_ge_3
+        domain: meta_evaluation
+        artifact: "fixed-point arbitration among evaluator candidates"
+
+  initiative_emission:
+    namm_experiments:
+      - id: NAMM-2026-001
+        trigger: always_on_calibration
+        domain: finite_graphs
+        artifact: "null-result calibration discipline"
+
+  contact_governor:
+    namm_experiments: []
+    namm_protocol: Protocol_v2_attack_checklist
+    note: "Falsifiability gates before external contact — no certificate, no cite"
+
+loop_scheduler:
+  # EIA runtime loops L-A…L-O (spec §13) with NAMM Hz-band analogies
+  # Hz bands from NAMM docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md — scaffolding only
+  loops:
+    L-A:
+      hz_range: [20, 1000]
+      eia_frequency: "20-1000 Hz, hardware/event"
+      namm_band_analogy: gamma
+      stage: observation_ingest
+    L-B:
+      hz_range: [1, 100]
+      eia_frequency: "1-100 Hz"
+      namm_band_analogy: beta
+      stage: observation_ingest
+    L-C:
+      hz_range: [1, 30]
+      eia_frequency: "1-30 Hz or event-driven"
+      namm_band_analogy: beta
+      stage: observation_ingest
+    L-D:
+      hz_range: [0.2, 10]
+      eia_frequency: "0.2-10 Hz"
+      namm_band_analogy: theta
+      stage: sense_making
+      namm_experiment: NAMM-2026-006
+    L-E:
+      hz_range: [0.1, 5]
+      eia_frequency: event-driven
+      namm_band_analogy: theta
+      stage: sense_making
+    L-F:
+      hz_range: [0.0005, 0.1]
+      eia_frequency: "10 sec - 30 min"
+      namm_band_analogy: alpha
+      stage: motive_formation
+      namm_experiment: NAMM-2026-013
+    L-G:
+      hz_range: [0.0001, 0.05]
+      eia_frequency: "on threshold/idle"
+      namm_band_analogy: high-gamma
+      stage: intention_genesis
+      namm_experiment: NAMM-2026-004
+    L-H:
+      hz_range: [0.00005, 0.02]
+      eia_frequency: on candidate selection
+      namm_band_analogy: high-gamma
+      stage: intention_genesis
+    L-I:
+      hz_range: [0.00001, 0.01]
+      eia_frequency: contact proposal
+      namm_band_analogy: alpha
+      stage: contact_governor
+    L-J:
+      hz_range: [0.00001, 0.01]
+      eia_frequency: on turn/event
+      stage: initiative_emission
+    L-K:
+      hz_range: [0.000005, 0.005]
+      eia_frequency: on approved ticket
+      stage: initiative_emission
+    L-L:
+      hz_range: [0.000001, 0.001]
+      eia_frequency: after episode
+      namm_experiment: NAMM-2026-014
+      namm_band_analogy: theta-gamma_nesting
+    L-M:
+      hz_range: [0.0000001, 0.0001]
+      eia_frequency: hours/days
+      stage: sense_making
+    L-N:
+      hz_range: [0.00000001, 0.00001]
+      eia_frequency: days/week
+      stage: motive_formation
+    L-O:
+      hz_range: [0, 0]
+      eia_frequency: continuous + release gate
+      namm_protocol: Protocol_v2
+      stage: contact_governor

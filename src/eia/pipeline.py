@@ -1,91 +1,125 @@
-"""EIA cognitive loop orchestrator."""
+"""EIA five-stage cognitive pipeline orchestrator.
+
+Pipeline:
+  ObservationIngest → SenseMaking → MotiveFormation → IntentionGenesis
+  → InitiativeEmission → ContactGovernor
+"""
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 from eia.audit import CausalTrace, TraceNodeKind, TwinRunner
 from eia.beliefs import BeliefField
 from eia.drives import DriveEngine
 from eia.governor import ContactGovernor, GovernorState
 from eia.intention import IntentionGenesis
-from eia.namm import NammAdapter
+from eia.namm import NammAdapter, NammHook
+from eia.scheduler import LoopScheduler, PipelineStage
 from eia.schemas.belief import BeliefKind
 from eia.schemas.observation import Observation
+from eia.sense_making import ComprehensionResult, SenseMakingEngine
 from eia.simulator import Simulator, load_scenario
 
 
+@dataclass
+class PipelineStageResult:
+    """One labeled stage output for trace and demo."""
+
+    stage: PipelineStage
+    summary: str
+    payload: dict[str, Any] = field(default_factory=dict)
+
+
 class CognitiveLoop:
-    """End-to-end pipeline: observations → beliefs → drives → initiative → governor."""
+    """End-to-end five-stage pipeline with NAMM artifact hooks."""
 
     def __init__(self, *, seed: int = 42) -> None:
         self.field = BeliefField()
+        self.sense_making = SenseMakingEngine(self.field)
         self.drives = DriveEngine()
         self.intention = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12)
         self.governor = ContactGovernor()
         self.namm = NammAdapter(epistemic_threshold=0.50)
+        self.scheduler = LoopScheduler.from_config()
         self.trace = CausalTrace()
         self.twin_runner = TwinRunner()
         self.seed = seed
         self._motivation_count = 0
         self._snapshot_field: BeliefField | None = None
-        self._snapshot_drives = None
+        self._last_comprehension: ComprehensionResult | None = None
+        self.stage_log: list[PipelineStageResult] = []
 
-    def apply_observation(self, obs: Observation) -> None:
-        self.trace.record_observation(obs)
-        payload = obs.payload
+    def _record_stage(
+        self,
+        stage: PipelineStage,
+        summary: str,
+        payload: dict[str, Any],
+        *,
+        trace_kind: TraceNodeKind,
+        parent_kind: TraceNodeKind | None = None,
+    ) -> None:
+        schedule = self.scheduler.stage_schedule(stage)
+        full_payload = {
+            "pipeline_stage": stage.value,
+            "stage_summary": summary,
+            "loop_schedule": schedule,
+            **payload,
+        }
+        self.stage_log.append(
+            PipelineStageResult(stage=stage, summary=summary, payload=full_payload)
+        )
+        self.trace.add_node(
+            trace_kind,
+            full_payload,
+            parent_kind=parent_kind,
+        )
 
-        if obs.topic == "project_atlas_deadline":
-            self.field.upsert_belief(
-                "belief-deadline",
-                kind=BeliefKind.CATEGORICAL,
-                subject="Project Atlas",
-                claim="deadline date",
-                distribution=payload.get("distribution", {"Aug 30": 0.4, "Sep 15": 0.35, "unknown": 0.25}),
-                uncertainty=0.85,
-                source_observation_id=obs.id,
-            )
-        elif obs.topic == "conflicting_deadline_report":
-            self.field.upsert_belief(
-                "belief-deadline-alt",
-                kind=BeliefKind.CATEGORICAL,
-                subject="Project Atlas",
-                claim="alternate deadline from email",
-                distribution=payload.get("distribution", {"Aug 30": 0.1, "Sep 15": 0.8, "unknown": 0.1}),
-                uncertainty=0.7,
-                source_observation_id=obs.id,
-            )
-            self.field.register_contradiction("belief-deadline", "belief-deadline-alt", "Project Atlas deadline")
-        elif obs.topic == "commitment_created":
-            self.field.upsert_belief(
-                "belief-commit-atlas",
-                kind=BeliefKind.COMMITMENT,
-                subject="Project Atlas",
-                claim="track milestone progress until deadline confirmed",
-                uncertainty=payload.get("urgency", 0.6),
-                metadata={"status": "open", "urgency": payload.get("urgency", 0.7)},
-                source_observation_id=obs.id,
-            )
-        elif obs.topic == "user_departed":
-            self.field.upsert_belief(
-                "belief-user-absent",
-                kind=BeliefKind.CATEGORICAL,
-                subject="user presence",
-                claim="user left without clarifying deadline",
-                distribution={"absent": 0.95, "present": 0.05},
-                uncertainty=0.1,
-                source_observation_id=obs.id,
-            )
+    def apply_observation(self, obs: Observation) -> ComprehensionResult | None:
+        """Stage 1–2: ObservationIngest → SenseMaking."""
+        self._record_stage(
+            PipelineStage.OBSERVATION_INGEST,
+            f"Ingested observation topic={obs.topic}",
+            obs.model_dump(mode="json"),
+            trace_kind=TraceNodeKind.OBSERVATION_INGEST,
+        )
 
-        if self.field.updates:
-            last = self.field.updates[-1]
-            self.trace.record_belief_update(last.model_dump(mode="json"))
+        comprehension = self.sense_making.ingest_observation(obs)
+        if comprehension is None:
+            return None
+
+        for upd_id in comprehension.belief_update_ids:
+            upd = next((u for u in self.field.updates if u.id == upd_id), None)
+            if upd:
+                self.trace.add_node(
+                    TraceNodeKind.BELIEF_UPDATE,
+                    upd.model_dump(mode="json"),
+                    parent_kind=TraceNodeKind.OBSERVATION_INGEST,
+                )
+
+        namm_hooks = self.namm.on_sense_making(comprehension)
+        self._record_stage(
+            PipelineStage.SENSE_MAKING,
+            comprehension.comprehension_summary,
+            {
+                **comprehension.model_dump(mode="json"),
+                "namm_hooks": [h.namm_experiment_ref for h in namm_hooks],
+            },
+            trace_kind=TraceNodeKind.SENSE_MAKING,
+            parent_kind=TraceNodeKind.OBSERVATION_INGEST,
+        )
+        self._last_comprehension = comprehension
+        return comprehension
 
     def tick_cognition(self, *, tick: int, hour: int, finalize: bool = True) -> tuple:
-        """One cognitive cycle after observations."""
+        """Stages 3–6: MotiveFormation → IntentionGenesis → InitiativeEmission → Governor."""
         self.governor.state.current_tick = tick
         self.governor.state.hour = hour
+
+        comprehension = self._last_comprehension or self.sense_making.snapshot()
 
         novelty = {}
         if tick > 2:
@@ -101,19 +135,71 @@ class CognitiveLoop:
             motivation_id=f"mot-{self._motivation_count}",
         )
 
-        namm_intent = self.namm.maybe_propose_internal_experiment(motivation)
+        self._record_stage(
+            PipelineStage.MOTIVE_FORMATION,
+            f"Dominant drive={motivation.dominant_drive.value}",
+            motivation.model_dump(mode="json"),
+            trace_kind=TraceNodeKind.MOTIVE_FORMATION,
+            parent_kind=TraceNodeKind.SENSE_MAKING,
+        )
+
+        namm_intent = self.namm.maybe_propose_internal_experiment(
+            motivation, comprehension=comprehension
+        )
+        if namm_intent:
+            self.trace.add_node(
+                TraceNodeKind.NAMM_HOOK,
+                {
+                    "kind": "internal_experiment",
+                    "intent_id": namm_intent.intent_id,
+                    "namm_experiment_ref": namm_intent.namm_experiment_ref,
+                    "artifact": namm_intent.artifact,
+                    "pipeline_stage": PipelineStage.MOTIVE_FORMATION.value,
+                    "intensity": namm_intent.intensity,
+                },
+                parent_kind=TraceNodeKind.MOTIVE_FORMATION,
+            )
+
+        candidates = self.intention.generate_candidates(motivation, self.field)
+        namm_ig_hook = self.namm.on_intention_genesis(
+            len(candidates),
+            max((c.expected_info_gain for c in candidates), default=0.0),
+        )
         initiative = self.intention.best_or_abstain(motivation, self.field)
 
+        self._record_stage(
+            PipelineStage.INTENTION_GENESIS,
+            f"Candidates={len(candidates)} abstained={initiative.abstained}",
+            {
+                **initiative.model_dump(mode="json"),
+                "competing_count": len(candidates),
+                "namm_hook": namm_ig_hook.namm_experiment_ref if namm_ig_hook else None,
+            },
+            trace_kind=TraceNodeKind.INTENTION_GENESIS,
+            parent_kind=TraceNodeKind.MOTIVE_FORMATION,
+        )
+
         if finalize:
-            self.trace.record_motivation(motivation)
-            self.trace.record_initiative(initiative)
+            self._record_stage(
+                PipelineStage.INITIATIVE_EMISSION,
+                f"Emitted initiative kind={initiative.candidate.kind.value}",
+                initiative.model_dump(mode="json"),
+                trace_kind=TraceNodeKind.INITIATIVE_EMISSION,
+                parent_kind=TraceNodeKind.INTENTION_GENESIS,
+            )
+
             decision = self.governor.evaluate(initiative)
-            self.trace.record_contact_decision(decision)
+            self._record_stage(
+                PipelineStage.CONTACT_GOVERNOR,
+                f"Outcome={decision.outcome.value} score={decision.contact_score:.3f}",
+                decision.model_dump(mode="json"),
+                trace_kind=TraceNodeKind.CONTACT_GOVERNOR,
+                parent_kind=TraceNodeKind.INITIATIVE_EMISSION,
+            )
         else:
             decision = None
 
         self._snapshot_field = BeliefField.model_validate(self.field.model_dump())
-        self._snapshot_drives = motivation
 
         return motivation, initiative, decision, namm_intent
 
@@ -124,7 +210,6 @@ class CognitiveLoop:
 
         twin_field = BeliefField.model_validate(self._snapshot_field.model_dump())
         twin_drives = DriveEngine()
-        # Preserve accumulated drive levels — endogeneity lives in internal state
         twin_drives.state.epistemic = self.drives.state.epistemic
         twin_drives.state.coherence = self.drives.state.coherence
         twin_drives.state.commitment = self.drives.state.commitment
@@ -144,7 +229,7 @@ class CognitiveLoop:
 
 
 def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict:
-    """Full end-to-end scenario run."""
+    """Full end-to-end scenario run with labeled pipeline stages."""
     scenario = load_scenario(scenario_path)
     sim = Simulator(scenario, seed=scenario.seed)
     loop = CognitiveLoop(seed=scenario.seed)
@@ -172,7 +257,6 @@ def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict
 
     sim.advance_quiet_period(ticks=4)
 
-    # Accumulate drive dynamics, then finalize once (single governor decision)
     motivation = initiative = decision = namm_intent = None
     for i in range(3):
         motivation, initiative, decision, namm_intent = loop.tick_cognition(
@@ -218,4 +302,5 @@ def run_scenario(scenario_path: Path, *, traces_dir: Path | None = None) -> dict
         "namm_intent": namm_intent,
         "twin_result": twin_result,
         "trace_path": trace_path,
+        "stage_log": loop.stage_log,
     }

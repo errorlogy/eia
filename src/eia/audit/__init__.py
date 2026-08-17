@@ -19,6 +19,15 @@ from eia.schemas.observation import Observation
 
 
 class TraceNodeKind(str, Enum):
+    # Five-stage pipeline (primary labels in causal trace)
+    OBSERVATION_INGEST = "observation_ingest"
+    SENSE_MAKING = "sense_making"
+    MOTIVE_FORMATION = "motive_formation"
+    INTENTION_GENESIS = "intention_genesis"
+    INITIATIVE_EMISSION = "initiative_emission"
+    CONTACT_GOVERNOR = "contact_governor"
+    NAMM_HOOK = "namm_hook"
+    # Legacy aliases (backward compatible replay)
     OBSERVATION = "observation"
     BELIEF_UPDATE = "belief_update"
     MOTIVATION = "motivation"
@@ -78,37 +87,43 @@ class CausalTrace:
         return node_id
 
     def record_observation(self, obs: Observation) -> str:
-        return self.add_node(
-            TraceNodeKind.OBSERVATION,
-            obs.model_dump(mode="json"),
-        )
+        payload = obs.model_dump(mode="json")
+        payload["pipeline_stage"] = "observation_ingest"
+        return self.add_node(TraceNodeKind.OBSERVATION_INGEST, payload)
 
     def record_belief_update(self, update: dict[str, Any]) -> str:
+        update = {**update, "pipeline_stage": "sense_making"}
         return self.add_node(
             TraceNodeKind.BELIEF_UPDATE,
             update,
-            parent_kind=TraceNodeKind.OBSERVATION,
+            parent_kind=TraceNodeKind.OBSERVATION_INGEST,
         )
 
     def record_motivation(self, mot: Motivation) -> str:
+        payload = mot.model_dump(mode="json")
+        payload["pipeline_stage"] = "motive_formation"
         return self.add_node(
-            TraceNodeKind.MOTIVATION,
-            mot.model_dump(mode="json"),
-            parent_kind=TraceNodeKind.BELIEF_UPDATE,
+            TraceNodeKind.MOTIVE_FORMATION,
+            payload,
+            parent_kind=TraceNodeKind.SENSE_MAKING,
         )
 
     def record_initiative(self, init: Initiative) -> str:
+        payload = init.model_dump(mode="json")
+        payload["pipeline_stage"] = "intention_genesis"
         return self.add_node(
-            TraceNodeKind.INITIATIVE,
-            init.model_dump(mode="json"),
-            parent_kind=TraceNodeKind.MOTIVATION,
+            TraceNodeKind.INTENTION_GENESIS,
+            payload,
+            parent_kind=TraceNodeKind.MOTIVE_FORMATION,
         )
 
     def record_contact_decision(self, decision: ContactDecision) -> str:
+        payload = decision.model_dump(mode="json")
+        payload["pipeline_stage"] = "contact_governor"
         return self.add_node(
-            TraceNodeKind.CONTACT_DECISION,
-            decision.model_dump(mode="json"),
-            parent_kind=TraceNodeKind.INITIATIVE,
+            TraceNodeKind.CONTACT_GOVERNOR,
+            payload,
+            parent_kind=TraceNodeKind.INITIATIVE_EMISSION,
         )
 
     def export_jsonl(self, path: Path) -> Path:
