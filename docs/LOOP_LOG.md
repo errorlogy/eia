@@ -64,23 +64,27 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Results:** 6 scenarios (001 + 002–006); κ=0.0; observed agreement 33% (2/6); ambient_dominant traces agree, user_dominated disagree with endogenous verdict
 - **Finding:** Static SourceMass partition lags counterfactual EOI on user-heavy traces — supports H5 (topology predicts but does not replace replay)
 - **Tests:** 56 passed (+6 baseline/adversarial)
+- **Commit:** 2a3f45e
 
 ## Loop 9 — EXPERIMENTS.md baselines scaffold (2026-08-17)
 
 - **Done:** `docs/EXPERIMENTS.md` (English); `src/eia/experiment/baseline.py`; `--baseline` CLI flag; `configs/experiment.json`
 - **Conditions wired:** reactive_only (mandatory abstain), scheduled_stub (1 tick), full_eia (default P4)
 - **Tests:** 56 passed
+- **Commit:** 2a3f45e
 
 ## Loop 10 — Adversarial harness spec (2026-08-17)
 
 - **Done:** `docs/THREAT_MODEL.md` (English port); `harnesses/adversarial_governor.py` + 4 abuse cases; `conftest.py`
 - **Tests:** 56 passed; adversarial suite 4/4 pass
+- **Commit:** 2a3f45e
 
 ## Loop 11 — Starter trace JSONL export (2026-08-17)
 
 - **Done:** `research/export_starter_trace.py` → `research/starter_trace_twin_world_001.jsonl` (22 nodes)
 - **Purpose:** Structural comparison baseline for main vs starter causal ledger
 - **Tests:** 56 passed
+- **Commit:** 2a3f45e
 
 ### RETROSPECTIVE (Loops 8–11)
 

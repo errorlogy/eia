@@ -33,10 +33,10 @@
 | **5** | RQ2 + RQ3 calibration/mapping | **DONE** | `01b2564` |
 | **6** | RQ4 paired EOI-003 | **DONE** | `a3f7988` |
 | **7** | twin_world_003 cal + 2 evals | **DONE** | `a62faa9` |
-| **8** | SourceMass κ study | **DONE** | (this session) |
-| **9** | EXPERIMENTS.md baselines | **DONE** | (this session) |
-| **10** | Threat model + adversarial harness | **DONE** | (this session) |
-| **11** | Starter trace JSONL export | **DONE** | (this session) |
+| **8** | SourceMass κ study | **DONE** | `2a3f45e` |
+| **9** | EXPERIMENTS.md baselines | **DONE** | `2a3f45e` |
+| **10** | Threat model + adversarial harness | **DONE** | `2a3f45e` |
+| **11** | Starter trace JSONL export | **DONE** | `2a3f45e` |
 
 ---
 
