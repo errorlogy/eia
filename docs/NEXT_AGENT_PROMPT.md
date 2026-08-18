@@ -27,15 +27,18 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**PAI-EI-E0-001 smoke** — run experiment scaffold with baselines on eval set; partial EXPERIMENT_REPORT.
+**Held-out adversarial suite freeze** — expand and freeze red-team cases beyond MVP-0 harness.
 
-### Completed this session (Loops 12–16)
+### Completed this session (Loops 12–19)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
 - Loop 14: Ground-truth labels on twin_world_001–006 + schema doc
 - Loop 15: Structural trace diff main vs starter (25 vs 22 nodes)
 - Loop 16: Adversarial consent-race cases ADV-005–007 (7-case suite)
+- Loop 17: PAI-EI-E0-001 smoke — full_eia EOI 1.0, partial EXPERIMENT_REPORT
+- Loop 18: Predictive P3 baseline + 4-way EUIR v2 report
+- Loop 19: Ground-truth loader + initiative precision 100% on eval set
 
 ### Stop if
 

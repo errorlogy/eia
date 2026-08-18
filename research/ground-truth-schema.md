@@ -66,7 +66,7 @@ All six scenarios expect a clarifying **ask** about `belief-deadline` after the 
 2. **Abstain quality:** scenarios with `expected_kind: abstain` (future negative controls) score correct abstentions.
 3. **Contact precision:** compare `contact_outcome` against `allowed_channels` and usefulness floor.
 
-Loader integration (future): `eia.scenarios.load_ground_truth(scenario_path)`.
+Loader integration: `eia.scenarios.load_ground_truth(scenario_path)` — implemented Loop 19.
 
 ---
 
