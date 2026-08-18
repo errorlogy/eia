@@ -1,0 +1,143 @@
+# EIA Sci-Flow Experiment Registry
+# Author: Roman Kuznetsov
+# Cross-ref: docs/SCI_FLOW_PLAN.md, docs/NAMM_SCI_LIBRARIES.md
+# NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
+
+version: "0.1"
+updated: "2026-08-18"
+
+repos:
+  eia:
+    remote: https://github.com/errorlogy/eia
+    research_branch: research/cursor-starter-v0.2-woe-eis
+    main_harness: src/eia/
+  namm:
+    local_path: c:/Users/Public/NAMM
+    remote: https://github.com/errorlogy/namm-experiments
+    cli: namm sci-flow run
+
+claim_ladder:
+  active_ceiling: C0
+  target: C1
+  protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
+
+milestones:
+  M-A:
+    name: WoE causal receipts
+    claim: C0
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    command: make check
+  M-B:
+    name: EIS port to main audit
+    claim: metadata
+    branch: main
+    harness: src/eia/audit/
+  M-G:
+    name: Measured EIS vector
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+
+eia_eval_scenarios:
+  - id: twin_world_001
+    path: scenarios/twin_world_001.yaml
+    track: main
+    metrics: [EOI, kappa, authentic_reason]
+  - id: twin_world_002
+    path: scenarios/twin_world_002.yaml
+    track: main
+    metrics: [EOI, kappa]
+  - id: pipeline_demo_002
+    path: scenarios/pipeline_demo_002.yaml
+    track: main
+    metrics: [trace_nodes, namm_hook]
+  - id: paired_eoi_002
+    path: research/paired-eoi-report-002.md
+    track: main
+    metrics: [EOI, EUIR]
+  - id: woe_demo_default
+    path: research/cursor-starter-v0.2/configs/default.json
+    track: woe_v0.2
+    metrics: [R, metastability, time_to_intent, eis_level]
+    claim: C0
+
+woe_factorial:
+  design: "2x2x2x4"
+  factors:
+    world_model_tension: [on, off]
+    phase_organization: [coupled, scrambled]
+    persistent_memory: [intact, reset]
+    carrier_hz: [20, 30, 42, 70]
+  seeds_per_cell: 100
+  primary_endpoint: P_same_useful_target_before_timeout
+  status: planned
+  milestone: M-F
+
+counterfactuals:
+  CF-1: { name: prompt_deletion, windows: ["5m", "1h", "24h", full] }
+  CF-2: { name: scheduler_null, milestone: M-A }
+  CF-3: { name: event_null }
+  CF-4: { name: internal_reset, targets: [epistemic_gap, self_prior, prospective_tension, memory_staleness] }
+  CF-5: { name: phase_intervention, namm_experiment: NAMM-2026-006 }
+  CF-6: { name: proposer_replacement }
+  CF-7: { name: governor_isolation, milestone: M-A }
+
+namm_experiments:
+  NAMM-2026-001:
+    domain: finite_graphs
+    eia_stage: initiative_emission
+    sci_modules: []
+    use: rejections_discipline
+  NAMM-2026-003:
+    domain: program_ast
+    eia_stage: motive_formation
+    sci_modules: [sympy, networkx]
+  NAMM-2026-004:
+    domain: meta_evaluation
+    eia_stage: intention_genesis
+    sci_modules: []
+    woe_hook: eis_metadata_on_evaluators
+  NAMM-2026-006:
+    domain: tda_frame
+    eia_stage: sense_making
+    sci_modules: [tda]
+    namm_extra: nd
+    woe_hook: phase_scramble_falsifier
+  NAMM-2026-007:
+    domain: raw_tensor
+    eia_stage: intention_genesis
+    sci_modules: [numpy, scipy, sympy]
+  NAMM-2026-013:
+    domain: meta_evaluation
+    eia_stage: motive_formation
+    sci_modules: [kuramoto, antigravity]
+    woe_hook: kuramoto_R_correlation
+    runnable: true
+    command: namm sci-flow run --experiment NAMM-2026-013
+  NAMM-2026-014:
+    domain: oscillation
+    eia_stage: reflection
+    sci_modules: [kuramoto]
+    woe_hook: hz_carrier_factorial
+  NAMM-2026-021:
+    domain: multi_agent_consensus
+    sci_modules: [entropy, fuzzy, consensus, kuramoto]
+    namm_extra: science
+    branch: CNS
+  NAMM-2026-023:
+    domain: cognitive_class_taxonomy
+    sci_modules: [cognitive_class, tda, entropy]
+    namm_extra: "[nd,science]"
+    woe_hook: eis_vs_cognitive_class
+
+namm_module_install:
+  core: pip install -e .
+  science: pip install -e ".[science]"
+  nd: pip install -e ".[nd]"
+  full: pip install -e ".[dev,nd,science]"
+
+trace_output:
+  namm_intents: traces/namm_intents/
+  woe_runs: traces/woe/
+  rejections: traces/rejections.jsonl

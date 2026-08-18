@@ -1,0 +1,113 @@
+# EIA Sci Flow Plan
+
+**Updated:** 2026-08-18  
+**Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
+**Active claim ceiling:** C0 (v0.2 demo) → target C1–C3 on research branch
+
+---
+
+## Milestone queue
+
+| ID | Milestone | Claim | Priority | Track | Status |
+|----|-----------|-------|----------|-------|--------|
+| **M-A** | WoE causal receipts wired to trace DAG | C0→C1 | P0 | WoE v0.2 | **NEXT** |
+| **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | planned |
+| **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | planned |
+| **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | planned |
+| **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
+| **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
+| **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | planned |
+
+---
+
+## M-A: WoE Milestone A — causal receipts
+
+**Goal:** Connect `EmergentIntent` / WoE events to typed causal parent IDs compatible with main `CausalTrace` semantics.
+
+**Deliverables:**
+- `research/cursor-starter-v0.2/src/eia/emergence.py` — receipt schema with `why_now`, `eis_vector`, parent event IDs
+- Trace node types documented for NAMM crosswalk (P9 in analysis doc)
+- Unit tests: receipt survives governor denial (CF-7)
+
+**Falsifier:** Intent emitted without any internal-state parent in trace → fail M-A.
+
+**NAMM hook:** NAMM-2026-001 rejections discipline — log denied WoE proposals.
+
+---
+
+## M-B: EIS port to main audit types
+
+**Goal:** Selective port of `EndogenousSpectrumLevel`, `EndogeneityVector` into `src/eia/audit/eis.py` without merging monolithic runtime.
+
+**Deliverables:**
+- Pydantic types mirroring v0.2 `endogenous.py`
+- `AuthenticReasonVerdict` optional fields: `eis_level`, `eos_score`
+- Tests on twin_world scenarios: EIS classification vs AuthenticReason
+
+**Dependency:** M-A receipt schema stable.
+
+**NAMM hook:** NAMM-2026-004 meta-evaluator — EIS level as audit metadata on evaluator competition.
+
+---
+
+## NAMM library integration points
+
+Cross-repo workflow: **EIA research branch** (`errorlogy/eia`) ↔ **NAMM** (`errorlogy/namm-experiments`).
+
+| EIA / WoE need | NAMM module | Package | Experiment IDs |
+|----------------|-------------|---------|----------------|
+| Kuramoto / phase coherence | `namm.metrics.consensus_non_optimality` (kuramoto) | scipy | 013, 021–022 |
+| Belief-graph topology / β₁ | `namm.domains.tda.homology` | gudhi `[nd]` | 006 |
+| Lightweight TDA proxy | ripser | ripser `[science]` | 023 CCT |
+| Spectral / tensor features | `raw_tensor` domain | numpy, scipy, sympy | 007 |
+| Graph invariants / open problems | `finite_graphs`, `networkx` | networkx | 001, 005 |
+| Symbolic equivalence | `symbolic_algebra` | sympy | 003 |
+| Entropy / mutual information | `namm.metrics.entropy` | dit `[science]` | 021 CNS |
+| Fuzzy socio-political contours | `namm.metrics.fuzzy` | scikit-fuzzy `[science]` | 021–022 |
+| Catastrophe / bifurcation | `namm.metrics.catastrophe` | numpy/scipy | MCG branch |
+| Cognitive class separation | `namm.metrics.cognitive_class` | gudhi, numpy | 023–025 |
+| Cognitive antigravity | antigravity adapter | — | 013 (runnable) |
+
+**Install (NAMM repo):**
+```bash
+pip install -e ".[science,nd]"
+```
+
+**EIA config:** [`research/sci_flow/config.yaml`](../research/sci_flow/config.yaml)
+
+---
+
+## Cross-repo workflow
+
+```
+┌─────────────────────┐         ┌──────────────────────┐
+│  errorlogy/eia      │         │  errorlogy/namm-     │
+│  research/cursor-   │  traces │  experiments         │
+│  starter-v0.2-woe-  │────────▶│  namm sci-flow run   │
+│  eis                │  certs  │  experiments/013…    │
+└─────────┬───────────┘         └──────────┬───────────┘
+          │                                │
+          ▼                                ▼
+   SCI_FLOW_LOG.md                  certificate.json
+   traces/namm_intents/             rejections.jsonl
+```
+
+1. Design experiment in EIA (S2) → select NAMM modules from registry
+2. Run WoE harness on research branch (S3)
+3. Run matching NAMM experiment for structural verification (S3)
+4. Correlate WoE R/metastability with NAMM kuramoto metrics (S4)
+5. Update both repos' logs; **do not merge** research runtime to main
+
+---
+
+## Current sci-flow priority (#1)
+
+**M-A + M-G prep:** Implement WoE causal receipts and remove hard-coded EIS vector in demo path — unblocks C1 counterfactual suite.
+
+---
+
+## Document history
+
+| Date | Change |
+|------|--------|
+| 2026-08-18 | Initial plan: M-A–G, NAMM integration map, cross-repo workflow |

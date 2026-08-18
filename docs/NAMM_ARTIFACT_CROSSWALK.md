@@ -6,7 +6,7 @@
 
 Maps the EIA cognitive pipeline (`observation → comprehension → motive → intention → initiative`) to NAMM verification artifacts, experiments, and Hz-band analogies from the `hypothesis/cognitive-antigravity` branch.
 
-**Related:** [`NAMM_INTEGRATION.md`](./NAMM_INTEGRATION.md) · NAMM [`docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md) · [`docs/AI_THINKING_TOPOLOGY.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/AI_THINKING_TOPOLOGY.md) · [`docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md)
+**Related:** [`NAMM_INTEGRATION.md`](./NAMM_INTEGRATION.md) · [`NAMM_SCI_LIBRARIES.md`](./NAMM_SCI_LIBRARIES.md) · [`SCI_FLOW_PLAN.md`](./SCI_FLOW_PLAN.md) · NAMM [`docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md) · [`docs/AI_THINKING_TOPOLOGY.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/AI_THINKING_TOPOLOGY.md) · [`docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md) · NAMM [`docs/SCI_FLOW.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/SCI_FLOW.md)
 
 ---
 
@@ -118,9 +118,27 @@ Run demo: `eia pipeline --scenario scenarios/pipeline_demo_002.yaml`
 
 ---
 
+## 8. WoE v0.2 / EIS research branch hooks
+
+Research track: [`research/cursor-starter-v0.2/`](../research/cursor-starter-v0.2/) on branch `research/cursor-starter-v0.2-woe-eis`. Sci-flow registry: [`research/sci_flow/config.yaml`](../research/sci_flow/config.yaml).
+
+| WoE / EIS construct | NAMM experiment | Module | Notes |
+|---------------------|-----------------|--------|-------|
+| Kuramoto order parameter R | NAMM-2026-013, 014 | `kuramoto` (consensus_non_optimality) | Correlate with `coherence.py` R |
+| Phase scramble (CF-5) | NAMM-2026-006 | `tda` (gudhi/ripser) | Topological falsifier for metastability claim |
+| Denied WoE intents (CF-7) | NAMM-2026-001 | rejections.jsonl | Collider bias guard |
+| EIS metadata on proposals | NAMM-2026-004 | meta_evaluation | Future `audit/eis.py` port (M-B) |
+| Hz carrier factorial | NAMM-2026-014 | oscillation covariates | 20/30/42/70 Hz cells (M-F) |
+| Cognitive class vs EIS | NAMM-2026-023 | cognitive_class + tda | CCT separation proxy |
+
+Full library catalog: [`NAMM_SCI_LIBRARIES.md`](./NAMM_SCI_LIBRARIES.md).
+
+---
+
 ## 7. Document history
 
 | Version | Date | Changes |
 |---------|------|---------|
 | 0.1 | 2026-08-17 | Initial crosswalk; Hz loop mapping; experiment hooks 001–007, 013–014 |
 | 0.2 | 2026-08-17 | Added 008–010 stub status; NAMM-013 runnable + AuthenticReason cert wire; Loops 12–23 findings |
+| 0.3 | 2026-08-18 | WoE v0.2 research branch; NAMM_SCI_LIBRARIES catalog; sci-flow cross-ref (kuramoto↔coherence, tda↔CF-5); experiments 021–029 |
