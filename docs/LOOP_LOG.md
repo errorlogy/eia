@@ -184,22 +184,26 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Docs:** `docs/DEVELOPMENT_LOOP.md` CI section
 - **Gate:** main 25 vs starter 22 nodes on twin_world_001; `EIA_CI_TRACE_DIFF=0` to skip
 - **Tests:** 71 passed (+1 NAMM cert test)
+- **Commit:** `7609c3c`
 
 ## Loop 25 — README + repo polish for public research (2026-08-17)
 
 - **Done:** README — CI badge, G2 status, research reports table, re-execute in quick start
 - **Done:** `docs/RESEARCH_INDEX.md` — full research artifact catalog
+- **Commit:** `7609c3c`
 
 ## Loop 26 — MVP-1 planning delta (2026-08-17)
 
 - **Done:** `docs/MVP1_SHADOW_PLAN.md` — shadow mode skeleton, sensors deferred checklist, consent UI stub spec
 - **Done:** `docs/PLAN_DELTA.md` + `docs/LOOP_PLAN.md` iteration 6
+- **Commit:** `7609c3c`
 
 ## Loop 27 — NAMM crosswalk update (2026-08-17)
 
 - **Done:** `docs/NAMM_ARTIFACT_CROSSWALK.md` — 008–010 stub status, 013 runnable, Loops 12–23 findings
 - **Done:** `AuthenticReasonCode.NAMM_SANDBOX_VERIFIED`; pipeline passes verified sandbox certs to discriminator
 - **Done:** `NammAdapter.get_or_run_sandbox()` + `verified_sandbox_certificates()`
+- **Commit:** `7609c3c`
 
 ### RETROSPECTIVE (Loops 24–27)
 

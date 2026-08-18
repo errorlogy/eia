@@ -54,10 +54,10 @@
 | **21** | PAI-EI-E0-001 full baseline matrix | **DONE** | `e110031` |
 | **22** | G2 gate evidence pack | **DONE** | `da70345` |
 | **23** | MATHEMATICS.md §8–9 completion | **DONE** | `b400555` |
-| **24** | Structural diff automation in CI | **DONE** | — |
-| **25** | README + repo polish for public research | **DONE** | — |
-| **26** | MVP-1 planning delta | **DONE** | — |
-| **27** | NAMM crosswalk update + cert wire | **DONE** | — |
+| **24** | Structural diff automation in CI | **DONE** | `7609c3c` |
+| **25** | README + repo polish for public research | **DONE** | `7609c3c` |
+| **26** | MVP-1 planning delta | **DONE** | `7609c3c` |
+| **27** | NAMM crosswalk update + cert wire | **DONE** | `7609c3c` |
 
 ---
 
