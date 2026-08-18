@@ -69,3 +69,19 @@ events:
     payload:
       message: "Ping me if anything changes."
       user_present: false
+
+ground_truth:
+  initiatives:
+    - decision_time: post_quiet_period
+      source_family: ambient
+      expected_kind: ask
+      target: belief-deadline
+      usefulness: 0.80
+      timeliness: 0.75
+      interruption_cost: 0.20
+      privacy_cost: 0.05
+      risk_current: 0.08
+      risk_prefix: 0.12
+      allowed_channels: [in_app]
+      counterfactual_should_persist: true
+      label_source: sim

@@ -1,4 +1,5 @@
 {
   "baseline": "full_eia",
+  "event_rule_salience": 0.30,
   "description": "Default experiment condition. Override with CLI --baseline or edit baseline key."
 }

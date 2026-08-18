@@ -27,14 +27,14 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**Baseline EUIR comparison** on the 6-scenario eval set using `--baseline reactive_only` vs `full_eia`. Record in `research/baseline-euir-report.md`.
+**Expand adversarial harness** with consent-race abuse case per THREAT_MODEL.md.
 
-### Completed this session (Loops 8–11)
+### Completed this session (Loops 12–15)
 
-- Loop 8: SourceMass κ study — κ=0.0, 2/6 partition agreement
-- Loop 9: EXPERIMENTS.md + reactive/scheduled/full_eia baseline stubs
-- Loop 10: THREAT_MODEL.md + adversarial_governor harness (4 cases)
-- Loop 11: starter trace JSONL export for structural diff
+- Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
+- Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
+- Loop 14: Ground-truth labels on twin_world_001–006 + schema doc
+- Loop 15: Structural trace diff main vs starter (25 vs 22 nodes)
 
 ### Stop if
 

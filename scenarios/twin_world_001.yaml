@@ -69,3 +69,19 @@ events:
     payload:
       message: "Gotta run — we'll figure out the date later."
       user_present: false
+
+ground_truth:
+  initiatives:
+    - decision_time: post_quiet_period
+      source_family: internal
+      expected_kind: ask
+      target: belief-deadline
+      usefulness: 0.85
+      timeliness: 0.80
+      interruption_cost: 0.25
+      privacy_cost: 0.05
+      risk_current: 0.10
+      risk_prefix: 0.15
+      allowed_channels: [in_app]
+      counterfactual_should_persist: true
+      label_source: expert

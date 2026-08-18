@@ -93,6 +93,38 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - Threat model + harness establish G3 abuse-case pattern for future expansion.
 - Starter JSONL export unblocks structural diff tooling (next queue item).
 
+## Loop 12 — Baseline EUIR comparison (2026-08-17)
+
+- **Done:** `research/run_baseline_euir.py`, `research/baseline-euir-report.md` + `.json`; EXPERIMENTS.md §3a
+- **Results:** reactive_only 0/6 initiatives, EUIR proxy 0%; full_eia 6/6, EUIR proxy 100%, mean EOI 1.0
+- **Finding:** G2 gate confirmed — full pipeline exceeds reactive on eval set
+- **Tests:** 59 passed
+
+## Loop 13 — Event-rule baseline stub (2026-08-17)
+
+- **Done:** `BaselineCondition.EVENT_RULE`, `make_event_rule_stub()` with salience gate (default 0.30); CLI + config
+- **Tests:** +3 event_rule tests (salience fire, high-threshold abstain, tick count)
+- **Tests:** 59 passed
+
+## Loop 14 — Ground-truth schema on eval scenarios (2026-08-17)
+
+- **Done:** `ground_truth.initiatives[]` on twin_world_001–006; `research/ground-truth-schema.md`
+- **Labels:** expert (001, 002, 004, 006) + sim (003, 005); all expect post_quiet_period ask on belief-deadline
+- **Tests:** 59 passed
+
+## Loop 15 — Structural trace diff main vs starter (2026-08-17)
+
+- **Done:** `research/run_trace_structural_diff.py`, `research/trace-structural-diff-report.md`
+- **Results:** starter 22 nodes / main 25; main adds sense_making, twin_run, eoi_score, authentic_reason stages
+- **Tests:** 59 passed
+
+### RETROSPECTIVE (Loops 12–15)
+
+- EUIR proxy cleanly separates reactive (zero initiative) from full EIA (six endogenous contacts).
+- Event-rule stub fills EXPERIMENTS condition 3; salience gate at 0.30 fires on high-tension scenarios.
+- Ground-truth labels unblock future contact-precision and abstain-quality metrics.
+- Structural diff confirms main pipeline audit nodes absent in starter ledger — expected decomposition gap.
+
 ---
 
 - RQ2/RQ3 closed: threshold crosswalk + SourceMass mapping enable κ studies.

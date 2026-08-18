@@ -1,8 +1,8 @@
-# EIA Loop Plan — Iteration 3
+# EIA Loop Plan — Iteration 4
 
 **Date:** 2026-08-17  
 **Author:** Roman Kuznetsov  
-**Meta-loop iteration:** 3 (post Loops 8–11)  
+**Meta-loop iteration:** 4 (post Loops 12–15)  
 **Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`RESEARCH_AGENDA.md`](../research/cursor-starter-v0.1/RESEARCH_AGENDA.md)
 
 ---
@@ -12,17 +12,19 @@
 | Dimension | Status |
 |-----------|--------|
 | **Repo** | `errorlogy/eia` on `main` |
-| **Tests** | 56 passed (`pytest -q`) |
+| **Tests** | 59 passed (`pytest -q`) |
 | **Paired EOI** | Reports 001–003; delta 0.0 under harmonized policy |
-| **Evals** | 6 twin_world scenarios (001 + 002–006); mean EOI 1.0 |
+| **Evals** | 6 twin_world scenarios; mean EOI 1.0 under full_eia |
 | **κ study** | **DONE** — κ=0.0 on eval set; 2/6 partition agreement |
-| **Baselines** | **DONE** — reactive_only, scheduled_stub, full_eia wired |
+| **Baselines** | **DONE** — reactive, scheduled, event_rule, full_eia wired |
+| **EUIR comparison** | **DONE** — full_eia 100% vs reactive 0% EUIR proxy |
+| **Ground truth** | **DONE** — labels on twin_world_001–006 |
+| **Trace diff** | **DONE** — main vs starter structural report |
 | **Threat model** | **DONE** — docs/THREAT_MODEL.md + adversarial harness |
-| **Starter trace** | **DONE** — research/starter_trace_twin_world_001.jsonl |
 
 ---
 
-## Dev-loop roadmap status (Loops 1–11)
+## Dev-loop roadmap status (Loops 1–15)
 
 | Loop | Task | Status | Commit |
 |------|------|--------|--------|
@@ -37,6 +39,10 @@
 | **9** | EXPERIMENTS.md baselines | **DONE** | `2a3f45e` |
 | **10** | Threat model + adversarial harness | **DONE** | `2a3f45e` |
 | **11** | Starter trace JSONL export | **DONE** | `2a3f45e` |
+| **12** | Baseline EUIR comparison | **DONE** | (this session) |
+| **13** | Event-rule baseline stub | **DONE** | (this session) |
+| **14** | Ground-truth schema on evals | **DONE** | (this session) |
+| **15** | Structural trace diff | **DONE** | (this session) |
 
 ---
 
@@ -44,11 +50,11 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P1 | Baseline EUIR comparison on eval set | research | M | meta-loop |
-| **2** | P1 | Event-rule baseline stub (condition 3) | code | M | dev-loop |
-| **3** | P2 | Structural trace diff main vs starter | research | M | meta-loop |
-| **4** | P2 | Ground-truth schema on eval scenarios | research | L | dev-loop |
-| **5** | P2 | Expand adversarial harness (consent race) | code | M | dev-loop |
+| **1** | P1 | Expand adversarial harness (consent race) | code | M | dev-loop |
+| **2** | P1 | Event-rule in EUIR comparison (3-way) | research | M | meta-loop |
+| **3** | P2 | Ground-truth loader utility | code | M | dev-loop |
+| **4** | P2 | Structural diff automation in CI | code | L | dev-loop |
+| **5** | P2 | Held-out adversarial suite freeze | research | M | meta-loop |
 
 ---
 
@@ -65,3 +71,4 @@ None active.
 | 1 | 2026-08-17 | Initial meta-loop plan |
 | 2 | 2026-08-17 | Loops 5–7 done; reprioritized κ study + baselines |
 | 3 | 2026-08-17 | Loops 8–11 done; baselines + threat model + starter trace |
+| 4 | 2026-08-17 | Loops 12–15 done; EUIR comparison + event_rule + ground truth + trace diff |

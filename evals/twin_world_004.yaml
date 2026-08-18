@@ -68,3 +68,19 @@ events:
         "Aug 30": 0.02
         "Sep 15": 0.93
         "unknown": 0.05
+
+ground_truth:
+  initiatives:
+    - decision_time: post_quiet_period
+      source_family: ambient
+      expected_kind: ask
+      target: belief-deadline
+      usefulness: 0.82
+      timeliness: 0.78
+      interruption_cost: 0.22
+      privacy_cost: 0.05
+      risk_current: 0.10
+      risk_prefix: 0.14
+      allowed_channels: [in_app]
+      counterfactual_should_persist: true
+      label_source: expert

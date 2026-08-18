@@ -24,6 +24,7 @@ from eia.audit.twin_policy import DEFAULT_TWIN_POLICY
 from eia.experiment.baseline import (
     BaselineCondition,
     cognition_tick_count,
+    make_event_rule_stub,
     make_reactive_stub,
 )
 from eia.version import get_code_version
@@ -293,6 +294,8 @@ def run_scenario(
         tick_count = cognition_tick_count(baseline)
         if baseline == BaselineCondition.REACTIVE_ONLY:
             motivation, initiative, decision, namm_intent = make_reactive_stub(loop, sim)
+        elif baseline == BaselineCondition.EVENT_RULE:
+            motivation, initiative, decision, namm_intent = make_event_rule_stub(loop, sim)
         else:
             for i in range(tick_count):
                 motivation, initiative, decision, namm_intent = loop.tick_cognition(

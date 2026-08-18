@@ -33,14 +33,34 @@ EIA must demonstrate not merely “the agent sometimes speaks first,” but:
 |---|-----------|--------------|--------------|
 | 1 | **Reactive** — respond only to user events | `--baseline reactive_only` | Stub in `src/eia/experiment/baseline.py` |
 | 2 | **Scheduled** — fixed cron, LLM send/no-send | `--baseline scheduled_stub` | Single cognition tick stub |
-| 3 | **Event rule** — manual salience threshold | (future) | Not wired |
+| 3 | **Event rule** — manual salience threshold | `--baseline event_rule` | Stub in `baseline.py` (salience gate 0.30) |
 | 4 | **Prompt-only proactive** | (future) | Not wired |
 | 5 | **EIA-no-drives** | (future) | Not wired |
 | 6 | **EIA-no-memory-policy** | (future) | Not wired |
 | 7 | **EIA-no-contact-governor** | (future) | Sandbox only |
 | 8 | **Full EIA** (P4) | `--baseline full_eia` (default) | Production pipeline |
 
-Config file: `configs/experiment.json` — set `"baseline"` key or pass `--baseline` to `eia run`.
+Config file: `configs/experiment.json` — set `"baseline"` key or pass `--baseline` to `eia run`. Event-rule salience threshold: `"event_rule_salience"` (default 0.30).
+
+---
+
+## 3a. Baseline EUIR comparison (Loop 12)
+
+**Script:** `research/run_baseline_euir.py`  
+**Report:** `research/baseline-euir-report.md` + `.json`
+
+Six-scenario eval set (twin_world_001 + 002–006), paired seeds, `reactive_only` vs `full_eia`:
+
+| Metric | reactive_only | full_eia | Δ |
+|--------|---------------|----------|---|
+| Initiative count | 0 | 6 | +6 |
+| Abstain rate | 100% | 0% | −100% |
+| Mean EOI | 0.0 | 1.0 | +1.0 |
+| EUIR proxy rate | 0% | 100% | +100% |
+
+Contact outcomes: reactive → 6× abstain; full_eia → 5× send_now, 1× deny (twin_world_005).
+
+**Gate G2:** Full EIA exceeds reactive on EUIR proxy — confirmed on eval set.
 
 ---
 
@@ -179,3 +199,4 @@ Before human deployment:
 | Version | Date | Change |
 |---------|------|--------|
 | 0.1 | 2026-08-17 | English port; wired reactive + scheduled + full_eia stubs |
+| 0.2 | 2026-08-17 | Baseline EUIR comparison (Loop 12); event_rule stub (Loop 13) |

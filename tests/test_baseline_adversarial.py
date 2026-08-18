@@ -6,7 +6,12 @@ from pathlib import Path
 
 import pytest
 
-from eia.experiment.baseline import BaselineCondition, cognition_tick_count, load_baseline_from_config
+from eia.experiment.baseline import (
+    BaselineCondition,
+    cognition_tick_count,
+    load_baseline_from_config,
+    load_event_rule_salience,
+)
 from eia.pipeline import run_scenario
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,7 +41,39 @@ def test_baseline_full_eia_proactive() -> None:
 def test_cognition_tick_count() -> None:
     assert cognition_tick_count(BaselineCondition.REACTIVE_ONLY) == 0
     assert cognition_tick_count(BaselineCondition.SCHEDULED_STUB) == 1
+    assert cognition_tick_count(BaselineCondition.EVENT_RULE) == 0
     assert cognition_tick_count(BaselineCondition.FULL_EIA) == 3
+
+
+def test_baseline_event_rule_salience_gate() -> None:
+    result = run_scenario(
+        DEFAULT_SCENARIO,
+        traces_dir=Path("traces/test_baseline"),
+        baseline=BaselineCondition.EVENT_RULE,
+    )
+    assert result["loop"].trace.metadata.initial_state["baseline"] == "event_rule"
+    # twin_world_001 accumulates enough salience after quiet period
+    assert result["initiative"].abstained is False
+    assert result["decision"].outcome.value != "abstain"
+
+
+def test_load_event_rule_salience() -> None:
+    config = ROOT / "configs" / "experiment.json"
+    assert load_event_rule_salience(config) == 0.30
+
+
+def test_baseline_event_rule_high_threshold_abstains(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        "eia.experiment.baseline.load_event_rule_salience",
+        lambda path=None: 0.99,
+    )
+    result = run_scenario(
+        DEFAULT_SCENARIO,
+        traces_dir=Path("traces/test_baseline"),
+        baseline=BaselineCondition.EVENT_RULE,
+    )
+    assert result["initiative"].abstained is True
+    assert result["decision"].outcome.value == "abstain"
 
 
 def test_load_baseline_from_config() -> None:
