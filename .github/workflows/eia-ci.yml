@@ -25,6 +25,16 @@ jobs:
       - name: Replay re-execute smoke
         run: pytest tests/test_replay_reexecute.py -q
 
+      - name: Seed determinism bootstrap (Loop 28)
+        env:
+          EIA_CI_SEED_BOOTSTRAP: "1"
+        run: python research/ci_seed_bootstrap.py
+
+      - name: Eval suite quality gate (Loop 29)
+        env:
+          EIA_CI_EVAL_GATE: "1"
+        run: python research/ci_eval_gate.py
+
       - name: Structural trace diff gate (optional)
         env:
           EIA_CI_TRACE_DIFF: "1"

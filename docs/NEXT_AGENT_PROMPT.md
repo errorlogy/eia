@@ -27,9 +27,9 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**Bootstrap CIs across seeds** — confidence intervals on EOI/EUIR metrics across scenario seeds.
+**Negative-control eval scenarios** — expected abstain cases for eval set expansion.
 
-### Completed this session (Loops 12–27)
+### Completed this session (Loops 12–31)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
@@ -47,6 +47,10 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 - Loop 25: README G2 badge + RESEARCH_INDEX.md
 - Loop 26: MVP1_SHADOW_PLAN.md + PLAN_DELTA iteration 6
 - Loop 27: NAMM crosswalk 008–010 + AuthenticReason NAMM cert wire
+- Loop 28: Seed determinism bootstrap — ci_seed_bootstrap.py + test_seed_determinism.py
+- Loop 29: Eval suite CI gate — ci_eval_gate.py (mean EOI ≥ 0.8, precision ≥ 0.75)
+- Loop 30: RELEASE_v0.2.md + tag v0.2.0-mvp0
+- Loop 31: INTERIM_RESEARCH_SUMMARY.md for Anthemium stakeholders
 
 ### Stop if
 

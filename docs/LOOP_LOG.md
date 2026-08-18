@@ -205,6 +205,38 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `NammAdapter.get_or_run_sandbox()` + `verified_sandbox_certificates()`
 - **Commit:** `7609c3c`
 
+## Loop 28 — Seed determinism bootstrap CI (2026-08-17)
+
+- **Done:** `tests/test_seed_determinism.py`, `research/ci_seed_bootstrap.py`; CI workflow step
+- **Seeds:** twin_world_001 with [42, 123, 999] — identical fingerprint per seed, distinct across seeds
+- **Tests:** 73 passed (+2 seed determinism tests)
+- **Commit:** (this session)
+
+## Loop 29 — Eval suite CI gate (2026-08-17)
+
+- **Done:** `research/ci_eval_gate.py` — 6 scenarios full_eia; fail if mean EOI < 0.8 or precision < 0.75
+- **Results:** mean EOI 1.0, initiative precision 100% — gate PASS
+- **Tests:** 73 passed
+- **Commit:** (this session)
+
+## Loop 30 — Release notes v0.2.0-mvp0 (2026-08-17)
+
+- **Done:** `docs/RELEASE_v0.2.md` — Loops 1–27 achievements for public readers
+- **Tag:** `v0.2.0-mvp0` suggested and created
+- **Commit:** (this session)
+
+## Loop 31 — INTERIM_RESEARCH_SUMMARY.md (2026-08-17)
+
+- **Done:** `docs/INTERIM_RESEARCH_SUMMARY.md` — executive summary EN for Anthemium; evidence links; MVP-1 next steps
+- **Commit:** (this session)
+
+### RETROSPECTIVE (Loops 28–31)
+
+- Seed bootstrap closes G0 gap — multi-seed determinism enforced in CI beyond single-scenario replay smoke.
+- Eval gate encodes G2 quality thresholds — mean EOI ≥ 0.8 and precision ≥ 0.75 on every push.
+- v0.2.0-mvp0 tag marks MVP-0 research milestone for external reviewers.
+- Interim summary consolidates G0–G3 evidence for stakeholder handoff to MVP-1 shadow.
+
 ### RETROSPECTIVE (Loops 24–27)
 
 - CI gate closes G0 reproducibility loop — replay smoke + structural diff on every push.

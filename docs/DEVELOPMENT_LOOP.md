@@ -28,9 +28,11 @@ GitHub Actions workflow [`.github/workflows/eia-ci.yml`](../.github/workflows/ei
 |------|---------|---------|
 | Full test suite | `pytest -q` | G0 gate — all unit/integration tests |
 | Replay smoke | `pytest tests/test_replay_reexecute.py -q` | Deterministic re-execute fingerprint match |
+| Seed bootstrap (Loop 28) | `python research/ci_seed_bootstrap.py` | Multi-seed determinism on twin_world_001 |
+| Eval gate (Loop 29) | `python research/ci_eval_gate.py` | Mean EOI ≥ 0.8, precision ≥ 0.75 on 6 scenarios |
 | Structural diff (optional) | `python research/ci_trace_diff_check.py` | Main 25 vs starter 22 nodes on twin_world_001 |
 
-Disable structural diff locally or in fork CI with `EIA_CI_TRACE_DIFF=0`.
+Disable gates locally or in fork CI with `EIA_CI_TRACE_DIFF=0`, `EIA_CI_SEED_BOOTSTRAP=0`, or `EIA_CI_EVAL_GATE=0`.
 
 Regenerate the human-readable diff report with `python research/run_trace_structural_diff.py`.
 

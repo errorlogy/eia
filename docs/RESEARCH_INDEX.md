@@ -65,6 +65,8 @@ Canonical index of research outputs under `research/`. Raw JSON companions sit b
 | Script | Description |
 |--------|-------------|
 | [`ci_trace_diff_check.py`](../research/ci_trace_diff_check.py) | Structural diff gate for CI |
+| [`ci_seed_bootstrap.py`](../research/ci_seed_bootstrap.py) | Multi-seed determinism gate (Loop 28) |
+| [`ci_eval_gate.py`](../research/ci_eval_gate.py) | Eval suite quality gate — EOI + precision (Loop 29) |
 | [`run_trace_structural_diff.py`](../research/run_trace_structural_diff.py) | Regenerate structural diff report |
 | [`run_evals.py`](../research/run_evals.py) | Batch eval harness |
 | [`run_baseline_euir.py`](../research/run_baseline_euir.py) | EUIR v1 runner |
