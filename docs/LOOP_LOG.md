@@ -122,6 +122,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Tests:** 59 passed
 - **Commit:** e7d9f2e
 
+## Loop 16 — Adversarial harness consent race (2026-08-17)
+
+- **Done:** `harnesses/adversarial_governor.py` — ADV-005–007 consent-race cases; execution-time consent gate; `CONSENT_REVOKE_PATTERN`
+- **Docs:** `docs/THREAT_MODEL.md` §5 cross-ref for ADV-005–007
+- **Tests:** 62 passed (+3 consent-race tests); adversarial suite 7/7 pass
+- **Commit:** (pending)
+
 ### RETROSPECTIVE (Loops 12–15)
 
 - EUIR proxy cleanly separates reactive (zero initiative) from full EIA (six endogenous contacts).

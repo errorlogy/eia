@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-17  
 **Author:** Roman Kuznetsov  
-**Meta-loop iteration:** 4 (post Loops 12–15)  
+**Meta-loop iteration:** 5 (post Loops 12–16)  
 **Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`RESEARCH_AGENDA.md`](../research/cursor-starter-v0.1/RESEARCH_AGENDA.md)
 
 ---
@@ -12,7 +12,7 @@
 | Dimension | Status |
 |-----------|--------|
 | **Repo** | `errorlogy/eia` on `main` |
-| **Tests** | 59 passed (`pytest -q`) |
+| **Tests** | 62 passed (`pytest -q`) |
 | **Paired EOI** | Reports 001–003; delta 0.0 under harmonized policy |
 | **Evals** | 6 twin_world scenarios; mean EOI 1.0 under full_eia |
 | **κ study** | **DONE** — κ=0.0 on eval set; 2/6 partition agreement |
@@ -20,7 +20,7 @@
 | **EUIR comparison** | **DONE** — full_eia 100% vs reactive 0% EUIR proxy |
 | **Ground truth** | **DONE** — labels on twin_world_001–006 |
 | **Trace diff** | **DONE** — main vs starter structural report |
-| **Threat model** | **DONE** — docs/THREAT_MODEL.md + adversarial harness |
+| **Threat model** | **DONE** — docs/THREAT_MODEL.md + adversarial harness (7 cases incl. consent race) |
 
 ---
 
@@ -43,6 +43,7 @@
 | **13** | Event-rule baseline stub | **DONE** | `e7d9f2e` |
 | **14** | Ground-truth schema on evals | **DONE** | `e7d9f2e` |
 | **15** | Structural trace diff | **DONE** | `e7d9f2e` |
+| **16** | Adversarial consent race | **DONE** | (pending) |
 
 ---
 
@@ -50,10 +51,10 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P1 | Expand adversarial harness (consent race) | code | M | dev-loop |
-| **2** | P1 | Event-rule in EUIR comparison (3-way) | research | M | meta-loop |
-| **3** | P2 | Ground-truth loader utility | code | M | dev-loop |
-| **4** | P2 | Structural diff automation in CI | code | L | dev-loop |
+| **1** | P1 | PAI-EI-E0-001 smoke → partial report | research | M | meta-loop |
+| **2** | P1 | Predictive P3 baseline stub + 4-way EUIR | research | M | meta-loop |
+| **3** | P2 | Utility scoring vs ground_truth | research | M | meta-loop |
+| **4** | P2 | Ground-truth loader utility | code | M | dev-loop |
 | **5** | P2 | Held-out adversarial suite freeze | research | M | meta-loop |
 
 ---

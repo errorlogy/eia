@@ -27,14 +27,15 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**Expand adversarial harness** with consent-race abuse case per THREAT_MODEL.md.
+**PAI-EI-E0-001 smoke** — run experiment scaffold with baselines on eval set; partial EXPERIMENT_REPORT.
 
-### Completed this session (Loops 12–15)
+### Completed this session (Loops 12–16)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
 - Loop 14: Ground-truth labels on twin_world_001–006 + schema doc
 - Loop 15: Structural trace diff main vs starter (25 vs 22 nodes)
+- Loop 16: Adversarial consent-race cases ADV-005–007 (7-case suite)
 
 ### Stop if
 
