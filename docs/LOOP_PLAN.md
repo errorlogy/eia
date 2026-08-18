@@ -44,9 +44,9 @@
 | **14** | Ground-truth schema on evals | **DONE** | `e7d9f2e` |
 | **15** | Structural trace diff | **DONE** | `e7d9f2e` |
 | **16** | Adversarial consent race | **DONE** | `59d1693` |
-| **17** | PAI-EI-E0-001 smoke report | **DONE** | (pending) |
-| **18** | Predictive P3 baseline + 4-way EUIR | **DONE** | (pending) |
-| **19** | Utility precision vs ground_truth | **DONE** | (pending) |
+| **17** | PAI-EI-E0-001 smoke report | **DONE** | `1297397` |
+| **18** | Predictive P3 baseline + 4-way EUIR | **DONE** | `50e92f2` |
+| **19** | Utility precision vs ground_truth | **DONE** | `8c2599f` |
 
 ---
 

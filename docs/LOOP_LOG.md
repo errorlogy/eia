@@ -134,21 +134,21 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `research/run_pai_ei_e0_001_smoke.py`, `research/pai-ei-e0-001-smoke.json`; `experiments/PAI-EI-E0-001/EXPERIMENT_REPORT.md` updated
 - **Results:** full_eia mean EOI 1.0, EUIR proxy 100%; event_rule 83.3% EUIR but 6× deny; reactive 0%
 - **Tests:** 62 passed
-- **Commit:** (pending)
+- **Commit:** 1297397
 
 ## Loop 18 — Predictive P3 baseline stub (2026-08-17)
 
 - **Done:** `BaselineCondition.PREDICTIVE_P3`, `make_predictive_p3_stub()`; `research/run_baseline_euir_v2.py` + report v2
 - **Results:** full_eia EUIR 100% vs predictive_p3 0% (exogenous class); P3 mean EOI 0.18, 5× send_now
 - **Tests:** 64 passed (+2 P3 tests)
-- **Commit:** (pending)
+- **Commit:** 50e92f2
 
 ## Loop 19 — Utility scoring vs ground_truth (2026-08-17)
 
 - **Done:** `src/eia/scenarios/__init__.py` loader+scorer; `research/run_utility_precision.py` + report
 - **Results:** full_eia initiative precision 100% (6/6), contact precision 100% (5/5 contacts); target ≥0.75 met
 - **Tests:** 67 passed (+3 ground-truth tests)
-- **Commit:** (pending)
+- **Commit:** 8c2599f
 
 ### RETROSPECTIVE (Loops 16–19)
 
