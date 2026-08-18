@@ -210,25 +210,25 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `tests/test_seed_determinism.py`, `research/ci_seed_bootstrap.py`; CI workflow step
 - **Seeds:** twin_world_001 with [42, 123, 999] — identical fingerprint per seed, distinct across seeds
 - **Tests:** 73 passed (+2 seed determinism tests)
-- **Commit:** (this session)
+- **Commit:** `1e6d4ff`
 
 ## Loop 29 — Eval suite CI gate (2026-08-17)
 
 - **Done:** `research/ci_eval_gate.py` — 6 scenarios full_eia; fail if mean EOI < 0.8 or precision < 0.75
 - **Results:** mean EOI 1.0, initiative precision 100% — gate PASS
 - **Tests:** 73 passed
-- **Commit:** (this session)
+- **Commit:** `1e6d4ff`
 
 ## Loop 30 — Release notes v0.2.0-mvp0 (2026-08-17)
 
 - **Done:** `docs/RELEASE_v0.2.md` — Loops 1–27 achievements for public readers
-- **Tag:** `v0.2.0-mvp0` suggested and created
-- **Commit:** (this session)
+- **Tag:** `v0.2.0-mvp0`
+- **Commit:** `1e6d4ff`
 
 ## Loop 31 — INTERIM_RESEARCH_SUMMARY.md (2026-08-17)
 
 - **Done:** `docs/INTERIM_RESEARCH_SUMMARY.md` — executive summary EN for Anthemium; evidence links; MVP-1 next steps
-- **Commit:** (this session)
+- **Commit:** `1e6d4ff`
 
 ### RETROSPECTIVE (Loops 28–31)
 

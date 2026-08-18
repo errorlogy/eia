@@ -58,10 +58,10 @@
 | **25** | README + repo polish for public research | **DONE** | `7609c3c` |
 | **26** | MVP-1 planning delta | **DONE** | `7609c3c` |
 | **27** | NAMM crosswalk update + cert wire | **DONE** | `7609c3c` |
-| **28** | Seed determinism bootstrap CI | **DONE** | (this commit) |
-| **29** | Eval suite CI gate | **DONE** | (this commit) |
-| **30** | Release notes v0.2.0-mvp0 | **DONE** | (this commit) |
-| **31** | INTERIM_RESEARCH_SUMMARY.md | **DONE** | (this commit) |
+| **28** | Seed determinism bootstrap CI | **DONE** | `1e6d4ff` |
+| **29** | Eval suite CI gate | **DONE** | `1e6d4ff` |
+| **30** | Release notes v0.2.0-mvp0 | **DONE** | `1e6d4ff` |
+| **31** | INTERIM_RESEARCH_SUMMARY.md | **DONE** | `1e6d4ff` |
 
 ---
 
