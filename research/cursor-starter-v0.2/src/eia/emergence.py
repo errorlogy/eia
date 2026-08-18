@@ -353,12 +353,11 @@ class EndogenousEmergenceSimulator:
         world_model_enabled: bool = True,
         prompt_events: tuple[PromptEvent, ...] = (),
         scramble_phases: bool = False,
+        coherence_config: CoherenceConfig | None = None,
     ) -> EmergenceRun:
         world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
-        coherence = OscillatoryCoherenceField(
-            CoherenceConfig(nominal_frequency_hz=config.nominal_frequency_hz),
-            seed=seed,
-        )
+        ccfg = coherence_config or CoherenceConfig(nominal_frequency_hz=config.nominal_frequency_hz)
+        coherence = OscillatoryCoherenceField(ccfg, seed=seed)
         window = WindowOfEmergence(config, seed=seed + 17)
         trace = WoETraceBuilder(seed=seed, world_model_enabled=world_model_enabled)
         samples: list[WindowState] = []

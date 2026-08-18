@@ -25,6 +25,8 @@ class CoherenceConfig:
     pressure_coupling_gain: float = 7.0
     noise_radians_per_sqrt_second: float = 0.025
     metastability_window: int = 160
+    delay_steps: int = 0
+    coupling_graph: tuple[tuple[float, ...], ...] | None = None
 
     def __post_init__(self) -> None:
         if self.nominal_frequency_hz <= 0.0:
@@ -37,6 +39,61 @@ class CoherenceConfig:
             raise ValueError("noise must be non-negative")
         if self.metastability_window < 2:
             raise ValueError("metastability_window must be at least two")
+        if self.delay_steps < 0:
+            raise ValueError("delay_steps must be non-negative")
+        count = len(self.frequency_offsets_hz)
+        if self.coupling_graph is not None:
+            if len(self.coupling_graph) != count:
+                raise ValueError("coupling_graph must be square with module count")
+            for row in self.coupling_graph:
+                if len(row) != count:
+                    raise ValueError("coupling_graph rows must match module count")
+                if any(weight < 0.0 for weight in row):
+                    raise ValueError("coupling weights must be non-negative")
+
+
+def all_to_all_graph(n: int) -> tuple[tuple[float, ...], ...]:
+    return tuple(tuple(0.0 if i == j else 1.0 for j in range(n)) for i in range(n))
+
+
+def sparse_typed_graph(n: int = 6) -> tuple[tuple[float, ...], ...]:
+    """Designed 6-module graph: pressure hub + memory/self/prospective + semantic/causal."""
+    weights = [[0.0] * n for _ in range(n)]
+
+    def undirected(i: int, j: int, weight: float = 1.0) -> None:
+        if i == j or i >= n or j >= n:
+            return
+        weights[i][j] = weights[j][i] = weight
+
+    for other in range(1, n):
+        undirected(0, other, 1.0)
+    if n >= 3:
+        undirected(1, 2, 1.0)
+    if n >= 4:
+        undirected(2, 3, 1.0)
+    if n >= 6:
+        undirected(4, 5, 1.2)
+        undirected(3, 4, 0.6)
+    return tuple(tuple(row) for row in weights)
+
+
+def permute_graph(
+    graph: tuple[tuple[float, ...], ...],
+    *,
+    seed: int,
+) -> tuple[tuple[float, ...], ...]:
+    n = len(graph)
+    order = list(range(n))
+    random.Random(seed).shuffle(order)
+    return tuple(tuple(graph[order[i]][order[j]] for j in range(n)) for i in range(n))
+
+
+def k_zero_config(*, nominal_frequency_hz: float = 42.0) -> CoherenceConfig:
+    return CoherenceConfig(
+        nominal_frequency_hz=nominal_frequency_hz,
+        base_coupling=0.0,
+        pressure_coupling_gain=0.0,
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +122,14 @@ class OscillatoryCoherenceField:
         ]
         self._history: deque[float] = deque(maxlen=config.metastability_window)
         self.elapsed_seconds = 0.0
+        graph = config.coupling_graph or all_to_all_graph(len(self._phases))
+        self._graph = graph
+        delay = max(0, config.delay_steps)
+        initial = tuple(self._phases)
+        self._phase_log: deque[tuple[float, ...]] = deque(
+            [initial] * (delay + 1),
+            maxlen=delay + 1,
+        )
 
     @property
     def module_count(self) -> int:
@@ -74,6 +139,31 @@ class OscillatoryCoherenceField:
     def _order(phases: tuple[float, ...]) -> tuple[float, float]:
         field = sum((cmath.exp(1j * phase) for phase in phases), start=0j) / len(phases)
         return (clamp01(abs(field)), cmath.phase(field))
+
+    def _interaction(self, index: int, phase: float, other_phases: tuple[float, ...], activations: tuple[float, ...]) -> float:
+        weights = self._graph[index]
+        weighted = 0.0
+        total = 0.0
+        for other, weight in enumerate(weights):
+            if other == index or weight <= 0.0:
+                continue
+            weighted += weight * activations[other] * math.sin(other_phases[other] - phase)
+            total += weight
+        if total <= 0.0:
+            return 0.0
+        return weighted / total
+
+    def neighborhood_orders(self, phases: tuple[float, ...]) -> tuple[float, ...]:
+        locals_: list[float] = []
+        for index, _phase in enumerate(phases):
+            members = [index]
+            for other, weight in enumerate(self._graph[index]):
+                if other != index and weight > 0.0:
+                    members.append(other)
+            cluster = tuple(phases[item] for item in members)
+            order, _ = self._order(cluster)
+            locals_.append(order)
+        return tuple(locals_)
 
     def step(
         self,
@@ -91,17 +181,16 @@ class OscillatoryCoherenceField:
         pressure = clamp01(integration_pressure)
         coupling = self.config.base_coupling + self.config.pressure_coupling_gain * pressure
         phases_before = tuple(self._phases)
-        count = self.module_count
+        if self.config.delay_steps <= 0:
+            other_phases = phases_before
+        else:
+            other_phases = self._phase_log[0]
         next_phases: list[float] = []
         for index, phase in enumerate(phases_before):
             if scramble_phases:
                 next_phases.append(self._rng.uniform(-math.pi, math.pi))
                 continue
-            interaction = sum(
-                activations[other] * math.sin(phases_before[other] - phase)
-                for other in range(count)
-                if other != index
-            ) / max(1, count - 1)
+            interaction = self._interaction(index, phase, other_phases, activations)
             frequency = self.config.nominal_frequency_hz + self.config.frequency_offsets_hz[index]
             noise = self._rng.gauss(0.0, 1.0)
             phase_velocity = 2.0 * math.pi * frequency + coupling * interaction
@@ -114,6 +203,7 @@ class OscillatoryCoherenceField:
             )
             next_phases.append(math.remainder(updated, 2.0 * math.pi))
         self._phases = next_phases
+        self._phase_log.append(tuple(next_phases))
         self.elapsed_seconds += dt_seconds
         order, collective_phase = self._order(tuple(self._phases))
         self._history.append(order)

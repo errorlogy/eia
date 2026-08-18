@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-18 — Sci-flow M-D CF-5 C2 unsupported
+
+- **Section:** WoE / CF-5 phase intervention
+- **Delta:** M-D executed; **do not raise claim ceiling to C2**. Coupling K and delays do not control intent; scramble only weakly (0.69).
+- **Rationale:** [`M-D_metrics_2026-08-18.md`](../research/sci_flow/M-D_metrics_2026-08-18.md). Next C2 path is CF-4 internal reset.
+
 ### 2026-08-18 — Sci-flow M-G measured EIS vector
 
 - **Section:** WoE EIS coding

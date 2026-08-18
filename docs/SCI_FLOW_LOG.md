@@ -177,3 +177,36 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 006 — 2026-08-18 — M-D Kuramoto CF-5 (C2 unsupported)
+
+**Session:** SCI FLOW S1→S5 (sci loop)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C1** (unchanged). C2 not claimed.
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-WOE-002: phase organization causes WoE intent |
+| S2 | Pre-registered coupled≥0.85, scramble≤0.20, K=0≤0.40, Δ≥0.50 |
+| S3 | Graph + delay in `coherence.py`; `eia.cf5`; 100 seeds × 6 conditions |
+| S4 | coupled 0.95 / scramble 0.69 / K=0 0.94; delays and sparse do not suppress |
+| S5 | M-D executed; C2 unsupported; P5 confirmed; handoff CF-4 |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| WoE tests | 46/46 |
+| coupled intent | 0.95 |
+| scramble intent | 0.69 |
+| K=0 intent | 0.94 |
+| c2_claim | false |
+| Report | `research/sci_flow/M-D_metrics_2026-08-18.md` |
+
+### Next
+
+**CF-4** internal reset (100 seeds) as C2 path. **M-E** EIS-7 remains P2.
+
+---
+

@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-18 (post M-G)  
+**Updated:** 2026-08-18 (post M-D; C2 not claimed)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`
 
@@ -13,29 +13,27 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5). **
 ### Read first (in order)
 
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
-2. `docs/SCI_FLOW_PLAN.md` — milestone queue (M-D is #1)
-3. `docs/SCI_FLOW_LOG.md` — last entry + blockers
-4. `docs/SCI_FLOW_LOOP.md`
-5. `research/sci_flow/M-C_metrics_2026-08-18.md`
-6. `research/sci_flow/M-G_metrics_2026-08-18.md`
-7. `research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md`
-8. `research/sci_flow/config.yaml`
+2. `docs/SCI_FLOW_PLAN.md` — CF-4 is #1
+3. `docs/SCI_FLOW_LOG.md`
+4. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto C2 unsupported
+5. `research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md` — CF-4
+6. `research/sci_flow/config.yaml`
 
 ### Run sci-flow
 
-**S1:** Claim C2 — internal-state causation via phase organization (CF-5 / Kuramoto).
+**S1:** Claim C2 via **CF-4 internal reset**, not via Kuramoto. M-D showed K=0 ≈ coupled (0.94 vs 0.95) and scramble only 0.69.
 
-**S2:** Pre-register delay/coupling sweep vs scramble and K=0 negative controls. Carrier 42 Hz remains a computational parameter, not a biological claim.
+**S2:** Pre-register 100-seed ablations: zero epistemic gap / self-prior / prospective / staleness, plus full world-model off. Coupled/default remains the positive control.
 
-**S3:** Implement M-D on `research/cursor-starter-v0.2`. Optional NAMM-2026-013 correlation. Do **not** merge WoE into main `src/eia/`.
+**S3:** Implement on `research/cursor-starter-v0.2`. Do **not** merge WoE into main `src/eia/`.
 
-**S4:** If scramble/K=0 does not change intent rate vs coupled, do not claim C2.
+**S4:** Claim C2 only if a named internal-state reset drops intent_rate below the pre-registered gate while default stays high. If nothing but full WM-off works, say so.
 
-**S5:** Update SCI_FLOW_LOG / PLAN; handoff M-E or M-F.
+**S5:** Update SCI_FLOW_LOG / PLAN; handoff M-E if C2 lands, else log blocker.
 
 ### Stop if
 
-- C2 would be claimed without a negative control
+- C2 would be claimed from Kuramoto/scramble alone (already falsified at n=100)
 - Tests fail after 2 fix attempts → log blocker, stop
 - Push fails → log blocker, stop
 
@@ -44,6 +42,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5). **
 - Merge research-branch runtime into `src/eia/` on main
 - Cite 5m/1h CF-1 as C1
 - Gate external contact on ECS or EIS
+- Claim C2 from seed-7 scramble (does not generalize)
 
 ### Author
 
@@ -53,9 +52,8 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**M-D:** Kuramoto coupling graph + delay sweep (C2).
+**CF-4:** Internal-state reset suite (100 seeds) for C2.
 
 ## Completed this session
 
-- **M-C** CF-1 100 seeds; full/24h C1 0.95
-- **M-G** measured EIS vector; CF-1 smoke 0.95; tests 38/38
+- **M-D** CF-5 100×6; C2 unsupported; tests 46/46

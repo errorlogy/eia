@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-18-MC"
+updated: "2026-08-18-MD"
 
 repos:
   eia:
@@ -60,7 +60,11 @@ milestones:
     claim: C2
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
-    status: next
+    status: done
+    completed: "2026-08-18"
+    c2_claim: false
+    command: python research/sci_flow/run_md.py
+    result: "coupled 0.95 / scramble 0.69 / k0 0.94"
 
 eia_eval_scenarios:
   - id: twin_world_001

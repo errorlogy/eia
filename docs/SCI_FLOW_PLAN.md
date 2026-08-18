@@ -1,8 +1,8 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-18 (M-C complete)  
+**Updated:** 2026-08-18 (M-D complete; C2 not claimed)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
-**Active claim ceiling:** **C1** (full-episode prompt deletion on WoE v0.2) → target C2–C3; M-G required before treating EIS vector components as measured
+**Active claim ceiling:** **C1** (full-episode prompt deletion). C2 via Kuramoto CF-5 unsupported.
 
 ---
 
@@ -13,7 +13,7 @@
 | **M-A** | WoE causal receipts wired to trace DAG | C0→C1 | P0 | WoE v0.2 | **DONE** |
 | **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **DONE** |
 | **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | **DONE** |
-| **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | planned |
+| **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | **DONE** (C2 unsupported) |
 | **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
@@ -116,9 +116,17 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-D: Kuramoto CF-5 (DONE, C2 unsupported)
+
+**Result:** coupled 0.95 vs scramble 0.69 vs K=0 0.94. Pre-registered C2 gates missed. Delays and sparse graph do not suppress intent.
+
+**Report:** [`research/sci_flow/M-D_metrics_2026-08-18.md`](../research/sci_flow/M-D_metrics_2026-08-18.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**M-D:** Kuramoto coupling graph + delay sweep (C2) on WoE + NAMM-2026-013.
+**CF-4:** Internal-state reset suite (100 seeds) — world-model tension already blocks intent at unit level; this is the remaining C2 path after CF-5 failed.
 
 **M-E:** EIS-7 goal novelty constructor (catalog targets remain capped below 0.75).
 
@@ -128,7 +136,9 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
-| 2026-08-18 | M-G DONE: measured EIS vector; CF-1 smoke 0.95; 38/38 tests |
+| 2026-08-18 | M-D DONE: CF-5 100 seeds; C2 unsupported (K=0 0.94, scramble 0.69) |
+| 2026-08-18 | M-G DONE: measured EIS vector; CF-1 smoke 0.95 |
+| 2026-08-18 | M-C DONE: CF-1 100 seeds; full/24h 0.95 C1 |
 | 2026-08-18 | M-B DONE: EIS types on main `audit/eis.py`; 92 pytest; WoE 29/29 |
 | 2026-08-18 | M-A DONE: WoEReceipt + CF-7 tests; 29/29 pass |
 | 2026-08-18 | Initial plan: M-A–G, NAMM integration map, cross-repo workflow |
