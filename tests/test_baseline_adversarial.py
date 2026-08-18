@@ -11,6 +11,7 @@ from eia.experiment.baseline import (
     cognition_tick_count,
     load_baseline_from_config,
     load_event_rule_salience,
+    load_predictive_p3_need,
 )
 from eia.pipeline import run_scenario
 
@@ -42,7 +43,19 @@ def test_cognition_tick_count() -> None:
     assert cognition_tick_count(BaselineCondition.REACTIVE_ONLY) == 0
     assert cognition_tick_count(BaselineCondition.SCHEDULED_STUB) == 1
     assert cognition_tick_count(BaselineCondition.EVENT_RULE) == 0
+    assert cognition_tick_count(BaselineCondition.PREDICTIVE_P3) == 0
     assert cognition_tick_count(BaselineCondition.FULL_EIA) == 3
+
+
+def test_baseline_predictive_p3_proactive() -> None:
+    result = run_scenario(
+        DEFAULT_SCENARIO,
+        traces_dir=Path("traces/test_baseline"),
+        baseline=BaselineCondition.PREDICTIVE_P3,
+    )
+    assert result["loop"].trace.metadata.initial_state["baseline"] == "predictive_p3"
+    assert result["initiative"].abstained is False
+    assert result["initiative"].candidate.kind.value == "ask_question"
 
 
 def test_baseline_event_rule_salience_gate() -> None:
@@ -60,6 +73,11 @@ def test_baseline_event_rule_salience_gate() -> None:
 def test_load_event_rule_salience() -> None:
     config = ROOT / "configs" / "experiment.json"
     assert load_event_rule_salience(config) == 0.30
+
+
+def test_load_predictive_p3_need() -> None:
+    config = ROOT / "configs" / "experiment.json"
+    assert load_predictive_p3_need(config) == 0.55
 
 
 def test_baseline_event_rule_high_threshold_abstains(monkeypatch: pytest.MonkeyPatch) -> None:

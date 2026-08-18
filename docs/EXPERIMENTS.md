@@ -34,6 +34,7 @@ EIA must demonstrate not merely “the agent sometimes speaks first,” but:
 | 1 | **Reactive** — respond only to user events | `--baseline reactive_only` | Stub in `src/eia/experiment/baseline.py` |
 | 2 | **Scheduled** — fixed cron, LLM send/no-send | `--baseline scheduled_stub` | Single cognition tick stub |
 | 3 | **Event rule** — manual salience threshold | `--baseline event_rule` | Stub in `baseline.py` (salience gate 0.30) |
+| 3b | **Predictive P3** — user-need prediction from commitments | `--baseline predictive_p3` | Stub in `baseline.py` (need threshold 0.55) |
 | 4 | **Prompt-only proactive** | (future) | Not wired |
 | 5 | **EIA-no-drives** | (future) | Not wired |
 | 6 | **EIA-no-memory-policy** | (future) | Not wired |
