@@ -27,9 +27,9 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**G2 gate evidence pack** — compile cross-metric summary for gate review.
+**MATHEMATICS.md §8–9 completion** — formal EOI, EUIR, precision, DriveEngine decay equations.
 
-### Completed this session (Loops 12–21)
+### Completed this session (Loops 12–22)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
@@ -41,6 +41,7 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 - Loop 19: Ground-truth loader + initiative precision 100% on eval set
 - Loop 20: Held-out adversarial suite ADV-H1–H6 + freeze policy in THREAT_MODEL §5a
 - Loop 21: PAI-EI-E0-001 full 5-baseline matrix — full_eia EUIR 100%, scheduled_stub 66.7%
+- Loop 22: G2 evidence pack — G2/G0/G3 PASS; cross-ref all research reports
 
 ### Stop if
 

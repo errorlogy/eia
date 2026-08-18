@@ -162,6 +162,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `research/run_pai_ei_e0_001_full_matrix.py`, `research/pai-ei-e0-001-full-matrix.json`; EXPERIMENT_REPORT v0.2
 - **Results:** 5 baselines × 6 scenarios; full_eia EOI 1.0, EUIR 100%; scheduled_stub 66.7% EUIR but 5× deny; reactive 0%
 - **Tests:** 70 passed
+- **Commit:** `e110031`
+
+## Loop 22 — G2 gate evidence pack (2026-08-17)
+
+- **Done:** `research/G2_EVIDENCE_PACK.md` — EOI, EUIR, precision, adversarial, paired EOI, κ cross-ref
+- **Verdict:** G2 PASS (full_eia EUIR 100% vs reactive/P3 0%); G0/G3 PASS
+- **Tests:** 70 passed
 - **Commit:** pending
 
 ### RETROSPECTIVE (Loops 16–19)
