@@ -54,6 +54,14 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ---
 
+### 2026-08-17 — Loops 24–27 completed (CI, research index, MVP-1 shadow, NAMM)
+
+- **Section:** §6 Integration API, §8 Platform (WS4), MVP-1 shadow
+- **Delta:** GitHub Actions CI (pytest + replay smoke + structural diff gate). README G2 badge + [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md). MVP-1 shadow mode skeleton in [`MVP1_SHADOW_PLAN.md`](MVP1_SHADOW_PLAN.md). NAMM-013 certificate wired into AuthenticReason as supplementary audit signal.
+- **Rationale:** Loops 24–27; G2 public readiness; MVP-1 shadow planning without sensor scope creep.
+
+---
+
 | Trigger | Proposed delta |
 |---------|----------------|
 | Twin policy unified | Update §7.2 pipeline diagram footnote: single `TwinInterventionPolicy` enum shared across main and paired runner |

@@ -1,11 +1,13 @@
 # Endogenous Initiative Architecture (EIA)
 
+[![EIA CI](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml/badge.svg)](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml)
+
 **Program name:** **Endogenous Initiative Architecture (EIA)**  
 **Legacy / benchmark prefix:** PROACTIVE AI · **PAI-EI** benchmark
 
 Research platform for AI systems with **endogenous initiative** (P4–P5 proactivity) — the ability to form internal reasons, questions, and bounded actions without a current human request, based on memory, sensory context, uncertainty, and a value model.
 
-**Status:** v0.1 — architecture specification (prototype in development)  
+**Status:** v0.1 — MVP-0 prototype; **G2 gate PASS** (full_eia EUIR 100% vs reactive 0% on eval set)  
 **Implementation plan:** [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md)
 
 ---
@@ -63,10 +65,21 @@ See [architecture specification](./PROACTIVE_AI_Endogenous_Initiative_Architectu
 pip install -e ".[dev]"
 eia demo
 eia replay --trace traces/<trace_id>.jsonl
-pytest tests/ -v
+eia replay --trace traces/<trace_id>.jsonl --re-execute
+pytest -q
 ```
 
 See [`DEMO.md`](./DEMO.md) for causal walkthrough of what `eia demo` produces.
+
+### Research reports
+
+| Gate / topic | Report |
+|--------------|--------|
+| **G2 evidence** | [`research/G2_EVIDENCE_PACK.md`](./research/G2_EVIDENCE_PACK.md) |
+| PAI-EI-E0-001 matrix | [`experiments/PAI-EI-E0-001/EXPERIMENT_REPORT.md`](./experiments/PAI-EI-E0-001/EXPERIMENT_REPORT.md) |
+| EUIR baselines | [`research/baseline-euir-report-v2.md`](./research/baseline-euir-report-v2.md) |
+| Structural trace diff | [`research/trace-structural-diff-report.md`](./research/trace-structural-diff-report.md) |
+| Full index | [`docs/RESEARCH_INDEX.md`](./docs/RESEARCH_INDEX.md) |
 
 ### Quick start (NAMM sibling clone)
 

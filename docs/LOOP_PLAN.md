@@ -1,9 +1,9 @@
-# EIA Loop Plan — Iteration 5
+# EIA Loop Plan — Iteration 6
 
 **Date:** 2026-08-17  
 **Author:** Roman Kuznetsov  
-**Meta-loop iteration:** 9 (post Loops 12–23)  
-**Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`RESEARCH_AGENDA.md`](../research/cursor-starter-v0.1/RESEARCH_AGENDA.md)
+**Meta-loop iteration:** 10 (post Loops 12–27)  
+**Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`MVP1_SHADOW_PLAN.md`](MVP1_SHADOW_PLAN.md)
 
 ---
 
@@ -12,7 +12,7 @@
 | Dimension | Status |
 |-----------|--------|
 | **Repo** | `errorlogy/eia` on `main` |
-| **Tests** | 70 passed (`pytest -q`) |
+| **Tests** | 71 passed (`pytest -q`) |
 | **Paired EOI** | Reports 001–003; delta 0.0 under harmonized policy |
 | **Evals** | 6 twin_world scenarios; mean EOI 1.0 under full_eia |
 | **κ study** | **DONE** — κ=0.0 on eval set; 2/6 partition agreement |
@@ -21,6 +21,9 @@
 | **Ground truth** | **DONE** — labels + loader + precision scoring |
 | **PAI-EI-E0-001** | **DONE** — full 5-baseline matrix on eval set |
 | **Threat model** | **DONE** — 7-case training + 6-case held-out freeze |
+| **CI** | **DONE** — pytest + replay smoke + structural diff gate |
+| **G2 public index** | **DONE** — README badge + RESEARCH_INDEX |
+| **MVP-1 shadow plan** | **DONE** — skeleton in MVP1_SHADOW_PLAN.md |
 
 ---
 
@@ -51,6 +54,10 @@
 | **21** | PAI-EI-E0-001 full baseline matrix | **DONE** | `e110031` |
 | **22** | G2 gate evidence pack | **DONE** | `da70345` |
 | **23** | MATHEMATICS.md §8–9 completion | **DONE** | `b400555` |
+| **24** | Structural diff automation in CI | **DONE** | — |
+| **25** | README + repo polish for public research | **DONE** | — |
+| **26** | MVP-1 planning delta | **DONE** | — |
+| **27** | NAMM crosswalk update + cert wire | **DONE** | — |
 
 ---
 
@@ -58,11 +65,11 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P2 | Structural diff automation in CI | code | L | dev-loop |
-| **2** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
-| **3** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
-| **4** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
-| **5** | P2 | Expand held-out adversarial suite (ADV-H7+) | research | M | meta-loop |
+| **1** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
+| **2** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
+| **3** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
+| **4** | P2 | Expand held-out adversarial suite (ADV-H7+) | research | M | meta-loop |
+| **5** | P2 | MVP-1 shadow `--shadow` CLI flag | code | M | dev-loop |
 
 ---
 
@@ -85,3 +92,4 @@ None active.
 | 7 | 2026-08-17 | Loop 21 done; PAI-EI-E0-001 full 5-baseline matrix |
 | 8 | 2026-08-17 | Loop 22 done; G2 evidence pack compiled |
 | 9 | 2026-08-17 | Loop 23 done; MATHEMATICS.md EOI/EUIR/precision/drives |
+| 10 | 2026-08-17 | Loops 24–27 done; CI gate, research index, MVP-1 shadow plan, NAMM cert wire |

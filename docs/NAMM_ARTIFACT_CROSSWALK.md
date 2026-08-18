@@ -64,8 +64,11 @@ EIA spec §13 defines multi-scale runtime loops. NAMM [`BRAINWAVE_OSCILLATION_HY
 | NAMM-2026-005 | `open_problem_shadow` | — (future) | Kotzig P_k counterexample shadow |
 | NAMM-2026-006 | `tda_frame` | SenseMaking | Persistent homology on belief-graph metric |
 | NAMM-2026-007 | `raw_tensor` | IntentionGenesis | Machine-native tensor invariants (F3g) |
-| NAMM-2026-013 | `meta_evaluation` | MotiveFormation | Cognitive antigravity v1 (H-CA-001) |
-| NAMM-2026-014 | oscillation covariates | Reflection (L-L) | Ω_c / band-coherence vs 013 arms |
+| NAMM-2026-008 | `rewriting` (extended) | MotiveFormation (future) | Confluence certificates — **stub**; adapter logs intent only |
+| NAMM-2026-009 | `finite_graphs` (calibration v2) | InitiativeEmission | Extended null-result discipline — **stub** |
+| NAMM-2026-010 | `open_problem_shadow` | SenseMaking (future) | Counterexample shadow search — **stub** |
+| NAMM-2026-013 | `meta_evaluation` | MotiveFormation | Cognitive antigravity v1 (H-CA-001) — **runnable** via `run_sandbox()` |
+| NAMM-2026-014 | oscillation covariates | Reflection (L-L) | Ω_c / band-coherence vs 013 arms — **stub** |
 
 ---
 
@@ -85,9 +88,24 @@ EIA BeliefField drives are **structurally orthogonal**:
 
 BeliefField module docstring and DriveEngine explicitly reference this asymmetry — machine-native structural signal (K_A analog) vs unused human embedding space (K_H analog).
 
+**Loop 3 / Loop 27:** `NammAdapter.run_sandbox("NAMM-2026-013")` is **runnable** when `NAMM_ROOT` points to a live install. Verified certificates propagate to `AuthenticReasonDiscriminator` as `namm_sandbox_verified` reason code (supplementary audit signal, not an endogeneity gate).
+
+Experiments **008–010** remain adapter stubs — hooks fire at configured thresholds but no live CLI delegation until MVP-1 shadow mode ([`MVP1_SHADOW_PLAN.md`](./MVP1_SHADOW_PLAN.md)).
+
 ---
 
-## 5. Causal trace stage labels
+## 5. EIA dev-loop findings (Loops 12–23)
+
+| Loop | Finding | NAMM relevance |
+|------|---------|----------------|
+| 12–18 | full_eia EUIR 100% vs reactive/P3 0% | Validates G2 before citing NAMM results externally |
+| 15 | Main trace +7 audit nodes vs starter | sense_making, twin_run, eoi_score, authentic_reason decomposition |
+| 8, 19 | κ=0.0 on user-heavy traces; precision 100% | SourceMass topology predicts but does not replace replay (H5) |
+| 3, 27 | NAMM-013 sandbox verified locally | Certificate wired into AuthenticReason verdict payload |
+
+---
+
+## 6. Causal trace stage labels
 
 Each pipeline stage emits a trace node with `pipeline_stage` field:
 
@@ -100,8 +118,9 @@ Run demo: `eia pipeline --scenario scenarios/pipeline_demo_002.yaml`
 
 ---
 
-## 6. Document history
+## 7. Document history
 
 | Version | Date | Changes |
 |---------|------|---------|
 | 0.1 | 2026-08-17 | Initial crosswalk; Hz loop mapping; experiment hooks 001–007, 013–014 |
+| 0.2 | 2026-08-17 | Added 008–010 stub status; NAMM-013 runnable + AuthenticReason cert wire; Loops 12–23 findings |

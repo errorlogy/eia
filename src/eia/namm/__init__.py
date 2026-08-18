@@ -228,6 +228,17 @@ class NammAdapter:
 
         return intent
 
+    def get_or_run_sandbox(self, experiment_id: str) -> SandboxCertificate:
+        """Return cached sandbox certificate or delegate to NAMM CLI."""
+        for cert in self.sandbox_runs:
+            if cert.experiment_id == experiment_id:
+                return cert
+        return self.run_sandbox(experiment_id)
+
+    def verified_sandbox_certificates(self) -> list[SandboxCertificate]:
+        """Certificates with live NAMM verification."""
+        return [c for c in self.sandbox_runs if c.status == "verified"]
+
     def run_sandbox(self, experiment_id: str) -> SandboxCertificate:
         """Delegate to NAMM CLI run-experiment when install is available."""
         artifacts_dir = self.namm_root / "experiments" / experiment_id / "artifacts"

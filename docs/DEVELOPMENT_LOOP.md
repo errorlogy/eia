@@ -20,6 +20,20 @@ OBSERVE → PLAN → IMPLEMENT → TEST → COMMIT → PUSH → RESEARCH NOTE �
 | **PUSH** | `git push origin main` after each iteration |
 | **RESEARCH NOTE** | Append entry to `docs/LOOP_LOG.md` with timestamp, metrics, blockers |
 
+## CI automation (Loop 24+)
+
+GitHub Actions workflow [`.github/workflows/eia-ci.yml`](../.github/workflows/eia-ci.yml):
+
+| Step | Command | Purpose |
+|------|---------|---------|
+| Full test suite | `pytest -q` | G0 gate — all unit/integration tests |
+| Replay smoke | `pytest tests/test_replay_reexecute.py -q` | Deterministic re-execute fingerprint match |
+| Structural diff (optional) | `python research/ci_trace_diff_check.py` | Main 25 vs starter 22 nodes on twin_world_001 |
+
+Disable structural diff locally or in fork CI with `EIA_CI_TRACE_DIFF=0`.
+
+Regenerate the human-readable diff report with `python research/run_trace_structural_diff.py`.
+
 ## Stop conditions
 
 | Condition | Action |
@@ -61,5 +75,6 @@ See [`META_LOOP.md`](META_LOOP.md) for full architecture and handoff via [`NEXT_
 - [`LOOP_LOG.md`](LOOP_LOG.md) — iteration journal
 - [`PLAN_DELTA.md`](PLAN_DELTA.md) — IMPLEMENTATION_PLAN changelog
 - [`MATHEMATICS.md`](MATHEMATICS.md) — formal model (math track)
+- [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md) — research artifact catalog
 - [`RESEARCH_BRANCHES.md`](RESEARCH_BRANCHES.md) — comparative branches
 - [`research/paired-eoi-report-001.md`](../research/paired-eoi-report-001.md) — baseline paired EOI

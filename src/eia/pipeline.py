@@ -341,6 +341,9 @@ def run_scenario(
             tick=sim.clock.tick,
         )
 
+        if namm_intent is not None:
+            loop.namm.get_or_run_sandbox(namm_intent.namm_experiment_ref)
+
         auth_verdict = loop.authentic_reason.evaluate(
             trace=loop.trace,
             motivation=motivation,
@@ -348,6 +351,7 @@ def run_scenario(
             decision=decision,
             eoi=twin_result.eoi,
             governor_state=loop.governor.state,
+            sandbox_certificates=loop.namm.verified_sandbox_certificates(),
         )
         loop.trace.add_node(
             TraceNodeKind.AUTHENTIC_REASON,

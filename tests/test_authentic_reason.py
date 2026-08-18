@@ -174,6 +174,29 @@ def test_authentic_reason_fails_governor_reject() -> None:
     assert AuthenticReasonCode.GOVERNOR_REJECTED in verdict.reason_codes
 
 
+def test_authentic_reason_namm_verified_certificate() -> None:
+    from eia.namm import SandboxCertificate
+
+    cert = SandboxCertificate(
+        experiment_id="NAMM-2026-013",
+        status="verified",
+        hypothesis_confirmed=True,
+        metrics={"d_med_lift_percent": 7440.5},
+    )
+    disc = AuthenticReasonDiscriminator()
+    verdict = disc.evaluate(
+        trace=_full_trace(),
+        motivation=_structural_motivation(),
+        initiative=_initiative(),
+        decision=_approved_decision(),
+        eoi=0.75,
+        sandbox_certificates=[cert],
+    )
+    assert AuthenticReasonCode.NAMM_SANDBOX_VERIFIED in verdict.reason_codes
+    assert len(verdict.namm_certificates) == 1
+    assert verdict.namm_certificates[0]["experiment_id"] == "NAMM-2026-013"
+
+
 def test_authentic_reason_abstained_initiative() -> None:
     init = _initiative()
     init.abstained = True

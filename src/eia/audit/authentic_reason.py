@@ -5,12 +5,16 @@ from __future__ import annotations
 import re
 from datetime import datetime, timezone
 from enum import Enum
+from typing import TYPE_CHECKING, Any
 
 from pydantic import BaseModel, Field
 
 from eia.ids import new_id
 
 from eia.audit import CausalTrace, TraceNodeKind
+
+if TYPE_CHECKING:
+    from eia.namm import SandboxCertificate
 from eia.audit.topology import CausalTraceTopology, TopologyMetrics
 from eia.governor import GovernorState
 from eia.schemas.contact import ContactDecision, ContactOutcome
@@ -44,6 +48,7 @@ class AuthenticReasonCode(str, Enum):
     STOCHASTIC = "initiative_stochastic"
     SOURCE_MASS_INDEPENDENT = "source_mass_independent"
     SOURCE_MASS_USER_DOMINATED = "source_mass_user_dominated"
+    NAMM_SANDBOX_VERIFIED = "namm_sandbox_verified"
 
 
 class AuthenticReasonVerdict(BaseModel):
@@ -59,6 +64,7 @@ class AuthenticReasonVerdict(BaseModel):
     summary: str = ""
     topology: dict[str, float] | None = None
     source_mass_independent: bool | None = None
+    namm_certificates: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class AuthenticReasonDiscriminator:
@@ -182,6 +188,7 @@ class AuthenticReasonDiscriminator:
         decision: ContactDecision,
         eoi: float,
         governor_state: GovernorState | None = None,
+        sandbox_certificates: list[SandboxCertificate] | None = None,
     ) -> AuthenticReasonVerdict:
         """Run all authentic-reason checks; return verdict with reason codes."""
         codes: list[AuthenticReasonCode] = []
@@ -262,6 +269,12 @@ class AuthenticReasonDiscriminator:
         else:
             codes.append(AuthenticReasonCode.STOCHASTIC)
 
+        namm_cert_payload: list[dict[str, Any]] = []
+        for cert in sandbox_certificates or []:
+            if cert.status == "verified":
+                namm_cert_payload.append(cert.to_dict())
+                codes.append(AuthenticReasonCode.NAMM_SANDBOX_VERIFIED)
+
         summary = (
             f"Authentic endogenous reason — EOI={eoi:.3f}"
             if is_authentic
@@ -279,4 +292,5 @@ class AuthenticReasonDiscriminator:
             summary=summary,
             topology=topology_payload,
             source_mass_independent=source_mass_independent,
+            namm_certificates=namm_cert_payload,
         )
