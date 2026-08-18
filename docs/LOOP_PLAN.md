@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-17  
 **Author:** Roman Kuznetsov  
-**Meta-loop iteration:** 6 (post Loops 12–20)  
+**Meta-loop iteration:** 7 (post Loops 12–21)  
 **Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`RESEARCH_AGENDA.md`](../research/cursor-starter-v0.1/RESEARCH_AGENDA.md)
 
 ---
@@ -19,7 +19,7 @@
 | **Baselines** | **DONE** — reactive, scheduled, event_rule, predictive_p3, full_eia |
 | **EUIR comparison** | **DONE** — v2 4-way report; full_eia 100% EUIR proxy |
 | **Ground truth** | **DONE** — labels + loader + precision scoring |
-| **PAI-EI-E0-001** | **PARTIAL** — smoke report; precision 100% on eval set |
+| **PAI-EI-E0-001** | **DONE** — full 5-baseline matrix on eval set |
 | **Threat model** | **DONE** — 7-case training + 6-case held-out freeze |
 
 ---
@@ -47,7 +47,8 @@
 | **17** | PAI-EI-E0-001 smoke report | **DONE** | `1297397` |
 | **18** | Predictive P3 baseline + 4-way EUIR | **DONE** | `50e92f2` |
 | **19** | Utility precision vs ground_truth | **DONE** | `8c2599f` |
-| **20** | Held-out adversarial suite freeze | **DONE** | pending |
+| **20** | Held-out adversarial suite freeze | **DONE** | `6eb3a17` |
+| **21** | PAI-EI-E0-001 full baseline matrix | **DONE** | pending |
 
 ---
 
@@ -55,11 +56,11 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P1 | PAI-EI-E0-001 full baseline matrix | research | M | meta-loop |
-| **2** | P2 | G2 gate evidence pack | research | M | meta-loop |
-| **3** | P2 | MATHEMATICS.md §8–9 completion | docs | M | meta-loop |
-| **4** | P2 | Structural diff automation in CI | code | L | dev-loop |
-| **5** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
+| **1** | P1 | G2 gate evidence pack | research | M | meta-loop |
+| **2** | P2 | MATHEMATICS.md §8–9 completion | docs | M | meta-loop |
+| **3** | P2 | Structural diff automation in CI | code | L | dev-loop |
+| **4** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
+| **5** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
 
 ---
 
@@ -79,3 +80,4 @@ None active.
 | 4 | 2026-08-17 | Loops 12–15 done; EUIR comparison + event_rule + ground truth + trace diff |
 | 5 | 2026-08-17 | Loops 16–19 done; consent race, smoke, P3, precision scoring |
 | 6 | 2026-08-17 | Loop 20 done; held-out adversarial freeze ADV-H1–H6 |
+| 7 | 2026-08-17 | Loop 21 done; PAI-EI-E0-001 full 5-baseline matrix |

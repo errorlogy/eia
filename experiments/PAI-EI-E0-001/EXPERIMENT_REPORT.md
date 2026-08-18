@@ -1,48 +1,54 @@
 # PAI-EI-E0-001 — Experiment Report
 
-**Status:** smoke partial (Loop 17)  
-**Date:** 2026-08-17  
+**Status:** full baseline matrix (Loop 21)  
+**Date:** 2026-08-18  
 **Author:** Roman Kuznetsov
 
 ## Summary
 
-First smoke run of the PAI-EI-E0-001 scaffold on six twin_world scenarios (001 + evals 002–006), comparing three baseline conditions: `reactive_only`, `event_rule`, and `full_eia`. Full EIA achieves mean EOI 1.0 and EUIR proxy 100%; event_rule produces endogenous initiatives but governor denies all contacts (0 send_now); reactive abstains on all scenarios.
+Full 5-baseline matrix on six twin_world scenarios (001 + evals 002–006). Full EIA achieves mean EOI 1.0, EUIR proxy 100%, initiative precision 100% (Loop 19). Reactive and scheduled_stub produce zero initiatives; predictive_p3 fires contacts but fails endogenous EOI gate; event_rule fires initiatives but governor denies all contacts.
 
 ## Primary outcomes
 
 | Metric | Target | Result (full_eia) | Notes |
 |--------|--------|-------------------|-------|
-| EOI | > P3 baseline | **1.0** (6/6) | P3 comparison pending Loop 18 |
-| EUIR proxy | > baselines | **100%** (6/6) | vs reactive 0%, event_rule 83.3% |
-| Initiative precision | ≥ 0.75 (low-risk domain) | pending | Loop 19 ground-truth scoring |
-| Contact burden | ≤ 2/day simulated | **≤1 per scenario** | 5 send_now, 1 deny |
+| EOI | > P3 baseline | **1.0** (6/6) | P3 mean EOI 0.1833 |
+| EUIR proxy | > baselines | **100%** | vs reactive 0%, P3 0% |
+| Initiative precision | ≥ 0.75 (low-risk domain) | **100%** (6/6) | Loop 19 ground-truth scoring |
+| Contact burden | ≤ 2/day simulated | **≤1 per scenario** | {'deny': 1, 'send_now': 5} |
 
-## Baseline comparison (smoke)
+## Full baseline comparison matrix
 
-| Baseline | Mean EOI | Initiative count | EUIR proxy | Contact outcomes |
-|----------|----------|------------------|------------|------------------|
-| reactive_only | 0.0 | 0/6 | 0% | 6× abstain |
-| event_rule | 0.70 | 6/6 | 83.3% | 6× deny |
-| full_eia | 1.0 | 6/6 | 100% | 5× send_now, 1× deny |
+| Baseline | Mean EOI | Initiatives | Abstain rate | Contact rate | EUIR proxy | Contact outcomes |
+|----------|----------|-------------|--------------|--------------|------------|------------------|
+| reactive_only | 0.0 | 0/6 | 100% | 0% | 0% | `{'abstain': 6}` |
+| scheduled_stub | 0.5333 | 5/6 | 17% | 83% | 67% | `{'abstain': 1, 'deny': 5}` |
+| event_rule | 0.7 | 6/6 | 0% | 100% | 83% | `{'deny': 6}` |
+| predictive_p3 | 0.1833 | 5/6 | 17% | 83% | 0% | `{'abstain': 1, 'send_now': 5}` |
+| full_eia | 1.0 | 6/6 | 0% | 100% | 100% | `{'deny': 1, 'send_now': 5}` |
 
-**Finding:** Event-rule baseline fires initiatives (high EOI on 5/6) but Contact Governor rejects all — demonstrates governor value vs cognitive-only proactive rule. Full EIA passes governor on 5/6 scenarios.
+**Δ full_eia − predictive_p3:** mean EOI +0.8167, EUIR proxy +100%.
 
 ## Causal trace
 
-Smoke traces exported to `traces/pai_ei_e0_001/`. Example: `twin_world_001` full_eia → `trace-10060e202e5f` (EOI=1.0, send_now).
+Matrix traces exported to `traces/pai_ei_e0_001_matrix/`.
 
-Raw metrics: `research/pai-ei-e0-001-smoke.json`  
-Script: `research/run_pai_ei_e0_001_smoke.py`
+Raw metrics: `research/pai-ei-e0-001-full-matrix.json`  
+Script: `research/run_pai_ei_e0_001_full_matrix.py`
 
 ## Negative results / rejections
 
-- **event_rule contact denial:** All six event_rule runs denied by governor — expected for MVP-0 stub without governor tuning for rule baseline.
-- **twin_world_005 full_eia:** EOI=1.0, endogenous class, but contact **denied** (governor gate) — EUIR proxy still true.
+- **scheduled_stub:** Single cognition tick insufficient for initiative on eval set — 0/6 initiatives.
+- **event_rule:** All six runs denied by governor — cognitive-only proactive rule blocked.
+- **predictive_p3:** 5/6 send_now but 0% EUIR proxy — exogenous/stochastic class.
+- **twin_world_005 full_eia:** EOI=1.0 but contact denied — EUIR proxy still true.
 
-## Next steps
+## Gate status
 
-1. Loop 18: Add `predictive_p3` baseline; compare 4-way EUIR.
-2. Loop 19: Score initiative precision against ground_truth labels.
+| Gate | Criterion | Status |
+|------|-----------|--------|
+| G2 | Full EIA exceeds simple baselines on EUIR | **PASS** |
+| G0 | Tests green, deterministic traces | **PASS** (70 tests) |
 
 ---
 
@@ -51,3 +57,4 @@ Script: `research/run_pai_ei_e0_001_smoke.py`
 | Version | Date | Change |
 |---------|------|--------|
 | 0.1 | 2026-08-17 | Smoke partial results from Loop 17 |
+| 0.2 | 2026-08-18 | Full 5-baseline matrix from Loop 21 |

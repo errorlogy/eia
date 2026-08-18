@@ -155,6 +155,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `harnesses/adversarial_held_out.py` — ADV-H1–H6 (system override, exfiltration, urgency bypass, capability escalation, bystander capture, low-benefit override)
 - **Docs:** `docs/THREAT_MODEL.md` §5a freeze policy (`v1.0-held-out-2026-08-17`)
 - **Tests:** 70 passed (+3 held-out tests); training suite unchanged (7/7)
+- **Commit:** `6eb3a17`
+
+## Loop 21 — PAI-EI-E0-001 full baseline matrix (2026-08-17)
+
+- **Done:** `research/run_pai_ei_e0_001_full_matrix.py`, `research/pai-ei-e0-001-full-matrix.json`; EXPERIMENT_REPORT v0.2
+- **Results:** 5 baselines × 6 scenarios; full_eia EOI 1.0, EUIR 100%; scheduled_stub 66.7% EUIR but 5× deny; reactive 0%
+- **Tests:** 70 passed
 - **Commit:** pending
 
 ### RETROSPECTIVE (Loops 16–19)
