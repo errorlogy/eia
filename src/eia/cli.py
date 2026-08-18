@@ -15,6 +15,8 @@ from eia.audit.replay import ReplayMetadataError, re_execute_trace
 from eia.beliefs.visualize import render_field_heatmap
 from eia.experiment.baseline import BaselineCondition, load_baseline_from_config
 from eia.pipeline import run_scenario
+from eia.runtime.daemon import DaemonConfig, DaemonRuntime, run_daemon_tick
+from eia.runtime.state_store import StateStore
 from eia.scheduler import PipelineStage
 from eia.schemas.contact import ContactOutcome
 
@@ -368,6 +370,130 @@ def _summarize_node(node) -> str:
             f"{p.get('summary', '')[:40]}"
         )
     return prefix + str(list(p.keys())[:3])
+
+
+@main.group()
+def daemon() -> None:
+    """Live contact daemon (MVP-0.5)."""
+
+
+@daemon.command("start")
+@click.option("--shadow/--live", default=True, help="Shadow mode (default) logs without HTTP send.")
+@click.option("--foreground", is_flag=True, default=False, help="Run scheduler in foreground.")
+def daemon_start(shadow: bool, foreground: bool) -> None:
+    """Start live-stack daemon with APScheduler ticks."""
+    if not shadow:
+        import os
+
+        if not os.environ.get("TELEGRAM_BOT_TOKEN") or not os.environ.get("TELEGRAM_CHAT_ID"):
+            console.print(
+                "[bold red]Live mode requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env[/bold red]"
+            )
+            raise SystemExit(1)
+        store = StateStore()
+        if not store.load().consent_telegram:
+            console.print(
+                "[bold red]Live mode requires consent — run:[/bold red] eia consent --enable-telegram"
+            )
+            raise SystemExit(1)
+
+    cfg = DaemonConfig.from_env_and_yaml()
+    runtime = DaemonRuntime(cfg, shadow_mode=shadow)
+    mode_label = "shadow" if shadow else "live"
+    console.print(
+        Panel(
+            f"[bold]Mode:[/bold] {mode_label}\n"
+            f"[bold]Interval:[/bold] {cfg.interval_minutes} min\n"
+            f"[bold]Workspace:[/bold] {cfg.workspace.resolve()}",
+            title="EIA Daemon",
+            border_style="cyan",
+        )
+    )
+    runtime.start()
+    console.print("[green]Daemon started.[/green] Use [bold]eia daemon status[/bold] to inspect.")
+    if foreground:
+        try:
+            import time
+
+            while True:
+                time.sleep(60)
+        except KeyboardInterrupt:
+            runtime.stop()
+            console.print("[yellow]Daemon stopped.[/yellow]")
+    else:
+        console.print("[dim]Running in background — stop with SIGTERM or delete data/eia_daemon.pid[/dim]")
+
+
+@daemon.command("status")
+def daemon_status() -> None:
+    """Show daemon PID, budget, consent, and quiet hours."""
+    info = DaemonRuntime.status()
+    table = Table(title="EIA Daemon Status")
+    table.add_column("Key")
+    table.add_column("Value")
+    for key, value in info.items():
+        table.add_row(key, str(value))
+    console.print(table)
+
+
+@main.command()
+@click.option("--enable-telegram", is_flag=True, default=False, help="Grant Telegram contact consent.")
+def consent(enable_telegram: bool) -> None:
+    """Manage live contact consent flags."""
+    store = StateStore()
+    if enable_telegram:
+        state = store.enable_telegram_consent()
+        console.print(
+            Panel(
+                "[green]Telegram consent enabled.[/green]\n"
+                "Live mode still requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID.",
+                title="Consent",
+                border_style="green",
+            )
+        )
+    else:
+        state = store.load()
+        console.print(
+            json.dumps(
+                {
+                    "consent_telegram": state.consent_telegram,
+                    "contact_budget": state.contact_budget,
+                    "contacts_today": state.contacts_today,
+                    "quiet_hours": f"{state.quiet_hours_start:02d}-{state.quiet_hours_end:02d}",
+                },
+                indent=2,
+            )
+        )
+
+
+@main.command()
+@click.option("--shadow/--live", default=True, help="Shadow mode (default).")
+@click.option("--traces-dir", type=click.Path(path_type=Path), default=None)
+def tick(shadow: bool, traces_dir: Path | None) -> None:
+    """Run a single live-stack tick (testing)."""
+    cfg = DaemonConfig.from_env_and_yaml()
+    if traces_dir:
+        cfg.traces_dir = traces_dir
+    try:
+        result = run_daemon_tick(shadow_mode=shadow, config=cfg)
+    except RuntimeError as exc:
+        console.print(f"[bold red]{exc}[/bold red]")
+        raise SystemExit(1) from exc
+
+    console.print(
+        json.dumps(
+            {
+                "trace_id": result.trace_id,
+                "trace_path": str(result.trace_path),
+                "decision_outcome": result.decision_outcome,
+                "contact_sent": result.contact_sent,
+                "shadow": result.shadow,
+                "message": result.message,
+                "observations_count": result.observations_count,
+            },
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

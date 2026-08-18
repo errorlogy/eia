@@ -1,0 +1,14 @@
+# EIA live daemon configuration (MVP-0.5)
+# Override via env: EIA_DAEMON_INTERVAL_MIN, EIA_QUIET_HOURS, EIA_WORKSPACE
+
+interval_minutes: 15
+shadow_mode: true
+workspace: .
+traces_dir: traces/live
+seed: 42
+daily_budget: 2
+quiet_hours: "22-8"
+
+telegram:
+  enabled: false
+  require_consent: true

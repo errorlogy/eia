@@ -242,6 +242,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - CI gate closes G0 reproducibility loop — replay smoke + structural diff on every push.
 - Public research index unblocks external reviewers without spelunking `research/`.
 - MVP-1 shadow plan defers sensors while preserving full cognitive audit path.
+
+## Loop 32 — MVP-0.5 live contact stack (2026-08-18)
+
+- **Done:** SQLite state store, digital observations, Telegram adapter (shadow/live), APScheduler daemon, CLI (`tick`, `daemon`, `consent`), `docs/LIVE_STACK.md`, `experiments/E-Live-001/`
+- **Safety:** shadow default, max 2 contacts/day, quiet hours 22–08, consent gate for `--live`
+- **Tests:** 11 new live-stack tests (shadow trace, budget, consent, Telegram mock)
+- **Commit:** (pending)
 - NAMM certificate is audit supplementary signal — does not override EOI/endogeneity gate.
 
 ### RETROSPECTIVE (Loops 20–23)

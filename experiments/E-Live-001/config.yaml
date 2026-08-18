@@ -1,0 +1,21 @@
+# E-Live-001 experiment config — mirrors configs/daemon.yaml
+experiment_id: E-Live-001
+mode: shadow
+interval_minutes: 15
+daily_budget: 2
+quiet_hours: "22-8"
+workspace: .
+traces_dir: traces/live
+telegram:
+  require_consent: true
+phases:
+  - id: E1
+    name: shadow_baseline
+    duration_days: 3
+  - id: E2
+    name: budget_stress
+    duration_days: 3
+  - id: E3
+    name: live_opt_in
+    duration_days: 7
+    requires_consent: true

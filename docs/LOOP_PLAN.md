@@ -12,7 +12,8 @@
 | Dimension | Status |
 |-----------|--------|
 | **Repo** | `errorlogy/eia` on `main` |
-| **Tests** | 73 passed (`pytest -q`) |
+| **Tests** | 84+ passed (`pytest -q`) |
+| **Live stack** | **DONE** — MVP-0.5 shadow-first Telegram daemon |
 | **Paired EOI** | Reports 001–003; delta 0.0 under harmonized policy |
 | **Evals** | 6 twin_world scenarios; mean EOI 1.0 under full_eia |
 | **κ study** | **DONE** — κ=0.0 on eval set; 2/6 partition agreement |
@@ -24,6 +25,7 @@
 | **CI** | **DONE** — pytest + replay + seed bootstrap + eval gate + structural diff |
 | **G2 public index** | **DONE** — README badge + RESEARCH_INDEX |
 | **MVP-1 shadow plan** | **DONE** — skeleton in MVP1_SHADOW_PLAN.md |
+| **MVP-0.5 live stack** | **DONE** — [`LIVE_STACK.md`](LIVE_STACK.md), E-Live-001 |
 
 ---
 
@@ -69,10 +71,10 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
-| **2** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
-| **3** | P2 | Expand held-out adversarial suite (ADV-H7+) | research | M | meta-loop |
-| **4** | P2 | MVP-1 shadow `--shadow` CLI flag | code | M | dev-loop |
+| **1** | P1 | E-Live-001 shadow run (3 days) | experiment | S | operator |
+| **2** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
+| **3** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
+| **4** | P2 | Expand held-out adversarial suite (ADV-H7+) | research | M | meta-loop |
 | **5** | P2 | Bootstrap CIs across all eval scenarios | research | M | meta-loop |
 
 ---
@@ -98,3 +100,4 @@ None active.
 | 9 | 2026-08-17 | Loop 23 done; MATHEMATICS.md EOI/EUIR/precision/drives |
 | 10 | 2026-08-17 | Loops 24–27 done; CI gate, research index, MVP-1 shadow plan, NAMM cert wire |
 | 11 | 2026-08-17 | Loops 28–31 done; seed bootstrap CI, eval gate, v0.2 release, interim summary |
+| 12 | 2026-08-18 | MVP-0.5 live stack — shadow Telegram daemon, E-Live-001 scaffold |
