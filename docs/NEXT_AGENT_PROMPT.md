@@ -27,9 +27,9 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**MATHEMATICS.md §8–9 completion** — formal EOI, EUIR, precision, DriveEngine decay equations.
+**Structural diff automation in CI** — wire `research/run_trace_structural_diff.py` into pytest or CI gate.
 
-### Completed this session (Loops 12–22)
+### Completed this session (Loops 12–23)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
@@ -42,6 +42,7 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 - Loop 20: Held-out adversarial suite ADV-H1–H6 + freeze policy in THREAT_MODEL §5a
 - Loop 21: PAI-EI-E0-001 full 5-baseline matrix — full_eia EUIR 100%, scheduled_stub 66.7%
 - Loop 22: G2 evidence pack — G2/G0/G3 PASS; cross-ref all research reports
+- Loop 23: MATHEMATICS.md §9 — formal EOI, EUIR proxy, precision; §3 DriveEngine params
 
 ### Stop if
 

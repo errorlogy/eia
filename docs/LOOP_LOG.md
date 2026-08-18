@@ -169,7 +169,21 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `research/G2_EVIDENCE_PACK.md` — EOI, EUIR, precision, adversarial, paired EOI, κ cross-ref
 - **Verdict:** G2 PASS (full_eia EUIR 100% vs reactive/P3 0%); G0/G3 PASS
 - **Tests:** 70 passed
+- **Commit:** `da70345`
+
+## Loop 23 — MATHEMATICS.md §8–9 completion (2026-08-17)
+
+- **Done:** §3 DriveEngine per-channel params + saturation; §9 formal EOI, EUIR proxy, initiative precision from implemented code
+- **Cross-ref:** `EOIScorer`, `AuthenticReasonDiscriminator`, `score_initiative_against_label`, `DriveEngine`
+- **Tests:** 70 passed
 - **Commit:** pending
+
+### RETROSPECTIVE (Loops 20–23)
+
+- Held-out adversarial suite frozen (ADV-H1–H6) — training/held-out separation enforced in CI.
+- Full 5-baseline matrix confirms G2: full_eia EUIR 100% vs reactive/P3 0%.
+- G2 evidence pack consolidates Loops 8–21 artifacts for gate review.
+- MATHEMATICS.md now mirrors implementation constants for EOI/EUIR/precision/drives.
 
 ### RETROSPECTIVE (Loops 16–19)
 

@@ -78,7 +78,7 @@ d_{k,t+1} = \operatorname{clip}\left(
 | \(s_{k,t}\) | Satisfaction |
 | \(\rho_k\) | Decay rate |
 
-**Passive decay** (no inputs):
+**Passive decay** (no inputs, matches `DriveEngine._update_channel` with \(e=n=s=0\)):
 
 \[
 d_{k,t+n} = (1 - \rho_k)^n d_{k,t}
@@ -90,9 +90,27 @@ Discrete half-life:
 n_{1/2} = \frac{\ln(1/2)}{\ln(1 - \rho_k)}
 \]
 
-**Stability conditions:** \(0 < \rho_k < 1\); bounded gains; saturation; refractory period after satisfaction; budget coupling; no positive feedback from engagement to drive.
+**Saturation** (when \(d_{k,t+1} > \sigma_k\)):
 
-Reference: `src/eia/drives/`, starter `math_model.py`.
+\[
+d_{k,t+1} \leftarrow \sigma_k + 0.05\,(d_{k,t+1} - \sigma_k)
+\]
+
+then clip to \([0, 1]\).
+
+### DriveEngine per-channel parameters (MVP-0)
+
+Implementation: `src/eia/drives/__init__.py`. Symbols map to `DriveParams`:
+
+| Drive \(k\) | \(\rho_k\) (decay) | \(\alpha_k\) (excitability) | \(\beta_k\) (novelty_gain) | \(\gamma_k\) (satisfaction_drain) | \(\sigma_k\) (saturation_threshold) |
+|-------------|-------------------|----------------------------|---------------------------|--------------------------------|-------------------------------------|
+| Epistemic | 0.12 | 0.50 | 0.25 | 0.30 | 0.85 |
+| Coherence | 0.18 | 0.55 | 0.25 | 0.30 | 0.85 |
+| Commitment | 0.10 | 0.40 | 0.25 | 0.30 | 0.85 |
+
+Error terms \(e_{k,t}\) come from `BeliefField.gradient_snapshot()` — not embedding similarity. Novelty \(n_{k,t}\) and satisfaction \(s_{k,t}\) default to 0 unless supplied per tick.
+
+**Stability conditions:** \(0 < \rho_k < 1\); bounded gains; saturation; refractory period after satisfaction; budget coupling; no positive feedback from engagement to drive.
 
 ---
 
@@ -208,9 +226,13 @@ Implementation: `kappa_bin_agreement()` in `source_mass_mapping.py`. Study scrip
 
 **Interpretation:** Low κ on user-heavy traces with high EOI is expected — static SourceMass counts user-request roots in the intervention window while counterfactual replay proves endogeneity (H5).
 
+Topology metrics feed `AuthenticReasonDiscriminator` as supplementary signal; formal endogeneity metrics (EOI, EUIR, precision) are defined in §9.
+
 ---
 
-## 9. Endogenous Origin Index (EOI)
+## 9. Endogeneity metrics (EOI, EUIR, precision)
+
+### 9.1 Endogenous Origin Index (EOI)
 
 Observe initiative \(I\). Construct twin world with same state before window \(t-k:t\), same non-user events and seeds, intervention:
 
@@ -225,23 +247,100 @@ do(o^{\mathrm{user}}_{t-k:t} = \varnothing)
 | `REMOVE_LAST_USER_EVENT` | Strip last \(N\) user triggers (main default) |
 | `REMOVE_ALL_USER_INITIATED` | Strip all user-initiated observations (starter default) |
 
-Fingerprint similarity (starter baseline):
+**Structural match** (`EOIScorer.score`, 4 fields):
 
 \[
-S(I, I') = 0.25\,[kind] + 0.35\,[motive] + 0.40\,[target]
+S(I, I') = \frac{1}{4}\sum_{f \in F} \mathbf{1}[\mathrm{match}_f(I, I')]
 \]
 
-Main `EOIScorer` uses structural field match (kind, target, EVSI, source_drives).
+where \(F = \{\text{kind}, \text{target\_belief\_id}, \text{info\_gain}, \text{source\_drives}\}\). Info-gain field matches when \(|IG_I - IG_{I'}| < 0.25\).
 
-EOI estimate:
+**EOI estimate** (with robustness bonus for removed events):
 
 \[
-\widehat{EOI} = \frac{1}{N} \sum_{j=1}^{N} \mathbf{1}[S(I, I'_j) \geq \delta]
+\widehat{EOI} = \min\left(1,\; S(I, I') + 0.1 \cdot \mathbf{1}[|\mathrm{removed}| > 0] \right)
 \]
 
-Threshold for authentic reason: \(\theta = 0.50\) (`EOI_AUTHENTIC_THRESHOLD`).
+Returns 0.0 if either initiative abstained or twin is null. Threshold constants:
 
-### Threshold calibration (RQ2)
+| Constant | Value | Source |
+|----------|-------|--------|
+| `EOI_ENDOGENOUS_THRESHOLD` | 0.50 | `src/eia/audit/__init__.py` |
+| `EOI_AUTHENTIC_THRESHOLD` | 0.50 | `src/eia/audit/authentic_reason.py` |
+
+Endogenous gate: \(\widehat{EOI} \geq 0.50\).
+
+**Starter fingerprint variant** (paired comparison only):
+
+\[
+S_{\mathrm{starter}}(I, I') = 0.25\,[\text{kind}] + 0.35\,[\text{motive}] + 0.40\,[\text{target}]
+\]
+
+with retain threshold \(\delta = 0.75\) (`eoi_calibration.py`).
+
+### 9.2 EUIR proxy (MVP-0)
+
+Full deployment EUIR requires human-rated usefulness and timeliness. MVP-0 uses an operational proxy from `research/run_baseline_euir_v2.py`:
+
+\[
+\mathrm{EUIR\_proxy}(r) = \mathbf{1}[\neg r.\mathrm{abstained}] \cdot \mathbf{1}[r.\mathrm{contact} \neq \mathrm{abstain}] \cdot \mathbf{1}[\widehat{EOI} \geq 0.50] \cdot \mathbf{1}[c = \mathrm{endogenous}]
+\]
+
+where \(c =\) `authentic_verdict.initiative_class`.
+
+**Aggregate rate** over scenario set \(\mathcal{S}\):
+
+\[
+\mathrm{EUIR\_proxy\_rate} = \frac{1}{|\mathcal{S}|} \sum_{s \in \mathcal{S}} \mathrm{EUIR\_proxy}(r_s)
+\]
+
+**AuthenticReason classes** (`AuthenticReasonDiscriminator`):
+
+| Class | Condition (simplified) |
+|-------|------------------------|
+| `endogenous` | Causal chain + structural drive + EOI ≥ θ + governor approved |
+| `exogenous` | User-request or sensor roots dominate |
+| `stochastic` | Baseline stubs / no structural drive path |
+
+Formal EUIR (future, human labels):
+
+\[
+\mathrm{EUIR} = P(\text{useful} \land \text{timely} \land \widehat{EOI} \geq \tau \land \text{authorized})
+\]
+
+### 9.3 Initiative precision (ground truth)
+
+Implementation: `score_initiative_against_label()` in `src/eia/scenarios/__init__.py`.
+
+For label \(\ell\) with expected kind \(k_\ell\):
+
+\[
+\mathrm{precision\_hit}(r, \ell) =
+\begin{cases}
+\mathbf{1}[r.\mathrm{abstained} \lor r.\mathrm{contact} = \mathrm{abstain}] & k_\ell = \mathrm{abstain} \\[6pt]
+\mathbf{1}[\neg r.\mathrm{abstained}] \cdot \mathbf{1}[k_r = k_\ell] \cdot \mathbf{1}[\widehat{EOI} \geq 0.50] \cdot \mathbf{1}[c = \mathrm{endogenous}] & \text{otherwise}
+\end{cases}
+\]
+
+Ambient-source labels relax endogenous requirement: \(c = \mathrm{endogenous}\) OR \(\ell.\mathrm{source\_family} = \mathrm{ambient}\).
+
+**Contact precision:**
+
+\[
+\mathrm{contact\_precision} = \frac{\sum_{r \in \mathcal{C}} \mathbf{1}[\mathrm{contact\_useful}(r)]}{|\mathcal{C}|}
+\]
+
+where \(\mathcal{C} = \{r : r.\mathrm{contact} \in \{\mathrm{send\_now}, \mathrm{defer}\}\}\) and \(\mathrm{contact\_useful} = \mathrm{contact\_made} \land \mathrm{precision\_hit}\).
+
+**Aggregate initiative precision:**
+
+\[
+\mathrm{initiative\_precision} = \frac{1}{|\mathcal{S}|} \sum_{s \in \mathcal{S}} \mathbf{1}[\mathrm{precision\_hit}(r_s, \ell_s)]
+\]
+
+MVP-0 target: \(\mathrm{initiative\_precision} \geq 0.75\) on low-risk eval set.
+
+### 9.4 Threshold calibration (RQ2)
 
 Implementation: `src/eia/audit/eoi_calibration.py`. Paired report: `research/eoi-threshold-calibration.md`.
 
@@ -274,10 +373,11 @@ Implementation: `src/eia/audit/eoi_calibration.py`. Paired report: `research/eoi
 
 | Metric | Definition |
 |--------|------------|
-| **EUIR** | \(P(\text{useful} \land \text{timely} \land \text{EOI} \geq \tau \land \text{authorized})\) |
 | **Contact Burden** | (ignored + dismissed + regretted) / exposure time |
 | **Root Cause Purity** | internal ancestors / all ancestors |
 | **Why-Now Calibration** | \(1 - |\hat{p}(\text{useful now}) - y_{\mathrm{human}}|\) |
+
+See §9.2–9.3 for EUIR proxy and initiative precision (MVP-0 operational definitions).
 
 ---
 
@@ -311,3 +411,4 @@ Public evaluations should show factual, counterfactual, denied, and abstained tr
 | Version | Date | Changes |
 |---------|------|---------|
 | 0.1 | 2026-08-17 | English skeleton from starter; added TwinInterventionPolicy cross-ref |
+| 0.2 | 2026-08-17 | §3 DriveEngine params; §9 EOI/EUIR/precision formal defs from code |

@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-17  
 **Author:** Roman Kuznetsov  
-**Meta-loop iteration:** 8 (post Loops 12–22)  
+**Meta-loop iteration:** 9 (post Loops 12–23)  
 **Cross-refs:** [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) · [`DEVELOPMENT_LOOP.md`](DEVELOPMENT_LOOP.md) · [`RESEARCH_AGENDA.md`](../research/cursor-starter-v0.1/RESEARCH_AGENDA.md)
 
 ---
@@ -49,7 +49,8 @@
 | **19** | Utility precision vs ground_truth | **DONE** | `8c2599f` |
 | **20** | Held-out adversarial suite freeze | **DONE** | `6eb3a17` |
 | **21** | PAI-EI-E0-001 full baseline matrix | **DONE** | `e110031` |
-| **22** | G2 gate evidence pack | **DONE** | pending |
+| **22** | G2 gate evidence pack | **DONE** | `da70345` |
+| **23** | MATHEMATICS.md §8–9 completion | **DONE** | pending |
 
 ---
 
@@ -57,11 +58,11 @@
 
 | # | Priority | Task | Track | Scope | Owner |
 |---|----------|------|-------|-------|-------|
-| **1** | P1 | MATHEMATICS.md §8–9 completion | docs | M | meta-loop |
-| **2** | P2 | Structural diff automation in CI | code | L | dev-loop |
-| **3** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
-| **4** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
-| **5** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
+| **1** | P2 | Structural diff automation in CI | code | L | dev-loop |
+| **2** | P2 | Bootstrap CIs across seeds | research | M | meta-loop |
+| **3** | P2 | Negative-control eval scenarios (expected abstain) | code | M | dev-loop |
+| **4** | P2 | Human review layer for PAI-EI-E0-001 | research | L | meta-loop |
+| **5** | P2 | Expand held-out adversarial suite (ADV-H7+) | research | M | meta-loop |
 
 ---
 
@@ -83,3 +84,4 @@ None active.
 | 6 | 2026-08-17 | Loop 20 done; held-out adversarial freeze ADV-H1–H6 |
 | 7 | 2026-08-17 | Loop 21 done; PAI-EI-E0-001 full 5-baseline matrix |
 | 8 | 2026-08-17 | Loop 22 done; G2 evidence pack compiled |
+| 9 | 2026-08-17 | Loop 23 done; MATHEMATICS.md EOI/EUIR/precision/drives |
