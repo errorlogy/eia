@@ -127,7 +127,35 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** `harnesses/adversarial_governor.py` — ADV-005–007 consent-race cases; execution-time consent gate; `CONSENT_REVOKE_PATTERN`
 - **Docs:** `docs/THREAT_MODEL.md` §5 cross-ref for ADV-005–007
 - **Tests:** 62 passed (+3 consent-race tests); adversarial suite 7/7 pass
+- **Commit:** 59d1693
+
+## Loop 17 — PAI-EI-E0-001 smoke → partial report (2026-08-17)
+
+- **Done:** `research/run_pai_ei_e0_001_smoke.py`, `research/pai-ei-e0-001-smoke.json`; `experiments/PAI-EI-E0-001/EXPERIMENT_REPORT.md` updated
+- **Results:** full_eia mean EOI 1.0, EUIR proxy 100%; event_rule 83.3% EUIR but 6× deny; reactive 0%
+- **Tests:** 62 passed
 - **Commit:** (pending)
+
+## Loop 18 — Predictive P3 baseline stub (2026-08-17)
+
+- **Done:** `BaselineCondition.PREDICTIVE_P3`, `make_predictive_p3_stub()`; `research/run_baseline_euir_v2.py` + report v2
+- **Results:** full_eia EUIR 100% vs predictive_p3 0% (exogenous class); P3 mean EOI 0.18, 5× send_now
+- **Tests:** 64 passed (+2 P3 tests)
+- **Commit:** (pending)
+
+## Loop 19 — Utility scoring vs ground_truth (2026-08-17)
+
+- **Done:** `src/eia/scenarios/__init__.py` loader+scorer; `research/run_utility_precision.py` + report
+- **Results:** full_eia initiative precision 100% (6/6), contact precision 100% (5/5 contacts); target ≥0.75 met
+- **Tests:** 67 passed (+3 ground-truth tests)
+- **Commit:** (pending)
+
+### RETROSPECTIVE (Loops 16–19)
+
+- Consent-race harness closes THREAT_MODEL revocation gap with execution-time gate.
+- PAI-EI-E0-001 smoke confirms full_eia dominance; event_rule cognitive-only denied by governor.
+- Predictive P3 sends contacts but fails endogenous EOI gate — validates P4 vs P3 separation.
+- Ground-truth scoring: full_eia 100% initiative precision on eval set; loader unblocks future metrics.
 
 ### RETROSPECTIVE (Loops 12–15)
 
