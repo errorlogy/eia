@@ -176,7 +176,7 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Done:** §3 DriveEngine per-channel params + saturation; §9 formal EOI, EUIR proxy, initiative precision from implemented code
 - **Cross-ref:** `EOIScorer`, `AuthenticReasonDiscriminator`, `score_initiative_against_label`, `DriveEngine`
 - **Tests:** 70 passed
-- **Commit:** pending
+- **Commit:** `b400555`
 
 ### RETROSPECTIVE (Loops 20–23)
 

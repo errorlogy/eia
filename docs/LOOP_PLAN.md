@@ -50,7 +50,7 @@
 | **20** | Held-out adversarial suite freeze | **DONE** | `6eb3a17` |
 | **21** | PAI-EI-E0-001 full baseline matrix | **DONE** | `e110031` |
 | **22** | G2 gate evidence pack | **DONE** | `da70345` |
-| **23** | MATHEMATICS.md §8–9 completion | **DONE** | pending |
+| **23** | MATHEMATICS.md §8–9 completion | **DONE** | `b400555` |
 
 ---
 
