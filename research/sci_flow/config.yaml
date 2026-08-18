@@ -36,6 +36,13 @@ milestones:
     claim: metadata
     branch: main
     harness: src/eia/audit/
+    status: done
+    completed: "2026-08-18"
+  M-C:
+    name: CF-1 prompt deletion suite
+    claim: C1
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
     status: next
   M-G:
     name: Measured EIS vector

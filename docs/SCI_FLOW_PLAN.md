@@ -1,6 +1,6 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-18 (M-A complete)  
+**Updated:** 2026-08-18 (M-B complete)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** C0 (v0.2 demo) → target C1–C3 on research branch
 
@@ -11,7 +11,7 @@
 | ID | Milestone | Claim | Priority | Track | Status |
 |----|-----------|-------|----------|-------|--------|
 | **M-A** | WoE causal receipts wired to trace DAG | C0→C1 | P0 | WoE v0.2 | **DONE** |
-| **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **NEXT** |
+| **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **DONE** |
 | **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | planned |
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | planned |
 | **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
@@ -102,9 +102,9 @@ pip install -e ".[science,nd]"
 
 ## Current sci-flow priority (#1)
 
-**M-B:** Port EIS taxonomy types to main `src/eia/audit/eis.py` — selective, no runtime merge.
+**M-C:** CF-1 prompt deletion suite (100 seeds) on `research/cursor-starter-v0.2-woe-eis`.
 
-**M-G prep:** Remove hard-coded EIS vector in demo path (blocks full C1 claims).
+**M-G prep:** Remove hard-coded EIS vector in WoE demo path (blocks full C1 claims).
 
 ---
 
@@ -112,5 +112,6 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-18 | M-B DONE: EIS types on main `audit/eis.py`; 92 pytest; WoE 29/29 |
 | 2026-08-18 | M-A DONE: WoEReceipt + CF-7 tests; 29/29 pass |
 | 2026-08-18 | Initial plan: M-A–G, NAMM integration map, cross-repo workflow |

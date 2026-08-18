@@ -79,3 +79,40 @@ Journal for sci-flow loops S1–S5. Append-only.
 **M-B:** EIS port to main audit types (`src/eia/audit/eis.py`)
 
 ---
+
+## Entry 003 — 2026-08-18 — M-B EIS audit port
+
+**Session:** SCI FLOW S1→S5  
+**Branch:** `main`  
+**Claim level:** metadata (not C1)
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-EIS-001: main audit carries EIS-0…8 + EOS without WoE runtime |
+| S2 | Pre-registered cascade parity, bounds, abstain, twin_world agreement |
+| S3 | `src/eia/audit/eis.py`; verdict fields `eis_level` / `eos_score` / `endogeneity` |
+| S4 | Main pytest **92 passed**; WoE unittest **29/29** |
+| S5 | M-B DONE; handoff to M-C (CF-1 prompt deletion) |
+
+### Metrics
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Main tests | 92 passed | +7 EIS tests |
+| WoE tests | 29/29 | no runtime merge |
+| Mapping | P = EOI | SourceMass not mixed (κ finding) |
+| Report | `research/sci_flow/M-B_metrics_2026-08-18.md` | |
+
+### Blockers
+
+- P2: hard-coded EIS vector in WoE demo → M-G
+- C1 still blocked until CF-1 suite (M-C)
+
+### Next
+
+**M-C:** CF-1 prompt deletion suite (100 seeds) on `research/cursor-starter-v0.2-woe-eis`
+
+---
+

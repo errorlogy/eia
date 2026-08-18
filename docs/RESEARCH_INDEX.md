@@ -89,6 +89,17 @@ See [`RESEARCH_BRANCHES.md`](RESEARCH_BRANCHES.md) for branch policy.
 
 ---
 
+## Sci-flow (EIS / WoE)
+
+| Artifact | Description |
+|----------|-------------|
+| [`sci_flow/config.yaml`](../research/sci_flow/config.yaml) | Experiment registry S1–S5 |
+| [`sci_flow/M-A_metrics_2026-08-18.md`](../research/sci_flow/M-A_metrics_2026-08-18.md) | WoE causal receipts (research branch) |
+| [`sci_flow/M-B_metrics_2026-08-18.md`](../research/sci_flow/M-B_metrics_2026-08-18.md) | EIS types on main audit |
+| [`EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md`](../research/EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md) | v0.2 package analysis |
+
+---
+
 ## Related experiment docs
 
 | Path | Description |
