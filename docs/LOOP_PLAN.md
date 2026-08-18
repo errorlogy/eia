@@ -39,10 +39,10 @@
 | **9** | EXPERIMENTS.md baselines | **DONE** | `2a3f45e` |
 | **10** | Threat model + adversarial harness | **DONE** | `2a3f45e` |
 | **11** | Starter trace JSONL export | **DONE** | `2a3f45e` |
-| **12** | Baseline EUIR comparison | **DONE** | (this session) |
-| **13** | Event-rule baseline stub | **DONE** | (this session) |
-| **14** | Ground-truth schema on evals | **DONE** | (this session) |
-| **15** | Structural trace diff | **DONE** | (this session) |
+| **12** | Baseline EUIR comparison | **DONE** | `e7d9f2e` |
+| **13** | Event-rule baseline stub | **DONE** | `e7d9f2e` |
+| **14** | Ground-truth schema on evals | **DONE** | `e7d9f2e` |
+| **15** | Structural trace diff | **DONE** | `e7d9f2e` |
 
 ---
 
