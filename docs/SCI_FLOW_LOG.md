@@ -41,3 +41,41 @@ Journal for sci-flow loops S1–S5. Append-only.
 **M-A:** WoE causal receipts (S3 on research branch)
 
 ---
+
+## Entry 002 — 2026-08-18 — M-A WoE causal receipts
+
+**Session:** SCI FLOW S1→S5 (autonomous)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** C0 → C1 prep (receipts + CF-7; full CF-1 suite pending M-C)
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Hypothesis H-WOE-001: WoE intent events require typed `WoEReceipt` with causal parent IDs |
+| S2 | Pre-registered CF-7 governor isolation + receipt schema tests |
+| S3 | Implemented `woe_receipt.py`, `WoETraceBuilder` in emergence.py; 3 new tests |
+| S4 | 29/29 unittest pass; woe-demo emits 5-node trace + receipt (seed=7) |
+| S5 | M-A marked DONE; handoff to M-B |
+
+### Metrics
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| WoE tests | 29/29 pass | +3 receipt/CF-7 |
+| Trace nodes per intent | 5 | world_model → intent DAG |
+| Receipt parents | 3 | window, phase, target tension |
+| CF-7 denial | pass | receipt preserved under quiet_hours |
+| time_to_intent | 2.696 s | stable 20–70 Hz |
+| Metrics report | `research/sci_flow/M-A_metrics_2026-08-18.md` | |
+
+### Blockers
+
+- P2: hard-coded EIS vector in emergence path → M-G
+- P9: WoE node types need NAMM crosswalk update
+
+### Next
+
+**M-B:** EIS port to main audit types (`src/eia/audit/eis.py`)
+
+---

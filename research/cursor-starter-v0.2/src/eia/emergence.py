@@ -7,6 +7,7 @@ import math
 import random
 from dataclasses import asdict, dataclass
 
+from .causal import CausalLedger
 from .coherence import CoherenceConfig, OscillatoryCoherenceField
 from .endogenous import (
     EmergentIntent,
@@ -17,6 +18,13 @@ from .endogenous import (
     IntentKind,
 )
 from .math_model import clamp01
+from .woe_receipt import (
+    WoENodeType,
+    WoEReceipt,
+    build_receipt,
+    receipt_dict,
+    sim_timestamp,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,6 +77,8 @@ class EmergenceRun:
     no_prompt_events: bool
     no_scheduler_events: bool
     no_rule_trigger_events: bool
+    receipt: WoEReceipt | None = None
+    ledger: CausalLedger | None = None
 
     @property
     def peak_potential(self) -> float:
@@ -196,6 +206,107 @@ def default_targets(*, enabled: bool = True) -> tuple[EpistemicTarget, ...]:
     )
 
 
+class WoETraceBuilder:
+    """Append-only causal ledger for a single WoE simulation run."""
+
+    def __init__(self, *, seed: int, world_model_enabled: bool) -> None:
+        self.seed = seed
+        self.ledger = CausalLedger()
+        self._sequence = 0
+        self.world_model_node = self._add(
+            WoENodeType.WORLD_MODEL,
+            elapsed_seconds=0.0,
+            parents=(),
+            payload={"enabled": world_model_enabled, "seed": seed},
+        )
+
+    def _node_id(self, prefix: str) -> str:
+        self._sequence += 1
+        material = f"{prefix}|{self.seed}|{self._sequence}"
+        digest = hashlib.sha256(material.encode()).hexdigest()[:12]
+        return f"woe:{prefix}:{digest}"
+
+    def _add(
+        self,
+        node_type: WoENodeType,
+        *,
+        elapsed_seconds: float,
+        parents: tuple[str, ...],
+        payload: object,
+    ) -> str:
+        node_id = self._node_id(node_type.value)
+        self.ledger.add(
+            node_id=node_id,
+            node_type=node_type.value,
+            timestamp=sim_timestamp(elapsed_seconds),
+            parents=parents,
+            payload=payload,
+        )
+        return node_id
+
+    def record_activation(
+        self,
+        *,
+        target: EpistemicTarget,
+        state: WindowState,
+        coherence_order: float,
+        coherence_metastability: float,
+        intent: EmergentIntent,
+    ) -> WoEReceipt:
+        target_node = self._add(
+            WoENodeType.TARGET_TENSION,
+            elapsed_seconds=state.elapsed_seconds,
+            parents=(self.world_model_node,),
+            payload={
+                "target_id": target.target_id,
+                "epistemic_gap": target.epistemic_gap,
+                "staleness": target.staleness,
+                "self_prior_mismatch": target.self_prior_mismatch,
+                "prospective_tension": target.prospective_tension,
+            },
+        )
+        phase_node = self._add(
+            WoENodeType.PHASE_SAMPLE,
+            elapsed_seconds=state.elapsed_seconds,
+            parents=(target_node,),
+            payload={
+                "order_parameter": coherence_order,
+                "metastability": coherence_metastability,
+            },
+        )
+        window_node = self._add(
+            WoENodeType.WINDOW_STATE,
+            elapsed_seconds=state.elapsed_seconds,
+            parents=(phase_node, target_node),
+            payload={
+                "emergent_potential": state.emergent_potential,
+                "integrated_hazard": state.integrated_hazard,
+                "hazard": state.hazard,
+                "epistemic_pressure": state.epistemic_pressure,
+                "goal_separation": state.goal_separation,
+            },
+        )
+        intent_node = self._add(
+            WoENodeType.EMERGENT_INTENT,
+            elapsed_seconds=state.elapsed_seconds,
+            parents=(window_node, phase_node, target_node),
+            payload={
+                "intent_id": intent.intent_id,
+                "target_id": intent.target_id,
+                "kind": intent.kind.value,
+                "spectrum_level": intent.spectrum_level.name,
+            },
+        )
+        parent_ids = (window_node, phase_node, target_node)
+        return build_receipt(
+            ledger=self.ledger,
+            intent_node_id=intent_node,
+            parent_ids=parent_ids,
+            intent=intent,
+            seed=self.seed,
+        )
+
+
 class EndogenousEmergenceSimulator:
     """Continuous shadow-mode simulator with no prompt, cron or rule events."""
 
@@ -213,8 +324,10 @@ class EndogenousEmergenceSimulator:
             seed=seed,
         )
         window = WindowOfEmergence(config, seed=seed + 17)
+        trace = WoETraceBuilder(seed=seed, world_model_enabled=world_model_enabled)
         samples: list[WindowState] = []
         intent: EmergentIntent | None = None
+        receipt: WoEReceipt | None = None
         steps = int(config.duration_seconds / config.dt_seconds)
         last_state: WindowState | None = None
         for step in range(1, steps + 1):
@@ -291,6 +404,13 @@ class EndogenousEmergenceSimulator:
                         "metastable_phase_coordination",
                     ),
                 )
+                receipt = trace.record_activation(
+                    target=top,
+                    state=state,
+                    coherence_order=coherence_sample.order_parameter,
+                    coherence_metastability=coherence_sample.metastability,
+                    intent=intent,
+                )
                 if step % config.sample_every_steps != 0:
                     samples.append(state)
                 break
@@ -304,6 +424,8 @@ class EndogenousEmergenceSimulator:
             no_prompt_events=True,
             no_scheduler_events=True,
             no_rule_trigger_events=True,
+            receipt=receipt,
+            ledger=trace.ledger,
         )
 
 
@@ -314,10 +436,15 @@ def compact_run_dict(run: EmergenceRun) -> dict[str, object]:
         intent = asdict(run.intent)
         intent["spectrum_level"] = run.intent.spectrum_level.name
         intent["spectrum_level_value"] = int(run.intent.spectrum_level)
+    receipt: dict[str, object] | None = None
+    if run.receipt is not None:
+        receipt = receipt_dict(run.receipt)
     return {
         "nominal_frequency_hz": run.config.nominal_frequency_hz,
         "interpretation": "computational carrier parameter, not a biological claim",
         "intent": intent,
+        "receipt": receipt,
+        "trace_nodes": len(run.ledger.nodes) if run.ledger is not None else 0,
         "peak_potential": run.peak_potential,
         "peak_coherence": run.peak_coherence,
         "last_window_state": asdict(last) if last else None,

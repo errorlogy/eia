@@ -17,7 +17,7 @@ repos:
     cli: namm sci-flow run
 
 claim_ladder:
-  active_ceiling: C0
+  active_ceiling: C1
   target: C1
   protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
 
@@ -28,11 +28,15 @@ milestones:
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
     command: make check
+    status: done
+    completed: "2026-08-18"
+    tests: 29
   M-B:
     name: EIS port to main audit
     claim: metadata
     branch: main
     harness: src/eia/audit/
+    status: next
   M-G:
     name: Measured EIS vector
     claim: C2
