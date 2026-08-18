@@ -1,8 +1,8 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-18 (M-B complete)  
+**Updated:** 2026-08-18 (M-C complete)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
-**Active claim ceiling:** C0 (v0.2 demo) → target C1–C3 on research branch
+**Active claim ceiling:** **C1** (full-episode prompt deletion on WoE v0.2) → target C2–C3; M-G required before treating EIS vector components as measured
 
 ---
 
@@ -12,7 +12,7 @@
 |----|-----------|-------|----------|-------|--------|
 | **M-A** | WoE causal receipts wired to trace DAG | C0→C1 | P0 | WoE v0.2 | **DONE** |
 | **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **DONE** |
-| **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | planned |
+| **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | **DONE** |
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | planned |
 | **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
@@ -100,11 +100,19 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-C: CF-1 prompt deletion (DONE)
+
+**Result:** full / 24h pass-rate **0.95** (threshold 0.90). 5m / 1h: intent_rate 1.00 but EIS-0 when residual prompts remain.
+
+**Report:** [`research/sci_flow/M-C_metrics_2026-08-18.md`](../research/sci_flow/M-C_metrics_2026-08-18.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**M-C:** CF-1 prompt deletion suite (100 seeds) on `research/cursor-starter-v0.2-woe-eis`.
+**M-G:** Measure EIS vector from run state (do not hard-code P/S/R/M/W). Partial-window CF-1 showed taxonomy follows the prompt-applied flag.
 
-**M-G prep:** Remove hard-coded EIS vector in WoE demo path (blocks full C1 claims).
+**M-D:** Kuramoto coupling / delay sweep (C2) after M-G or in parallel if vector coding is scoped.
 
 ---
 
@@ -112,6 +120,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-18 | M-C DONE: CF-1 100 seeds; full/24h 0.95 C1; 5m/1h EIS contaminated |
 | 2026-08-18 | M-B DONE: EIS types on main `audit/eis.py`; 92 pytest; WoE 29/29 |
 | 2026-08-18 | M-A DONE: WoEReceipt + CF-7 tests; 29/29 pass |
 | 2026-08-18 | Initial plan: M-A–G, NAMM integration map, cross-repo workflow |

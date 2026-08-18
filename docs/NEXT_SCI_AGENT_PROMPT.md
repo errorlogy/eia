@@ -1,8 +1,8 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-18 (post M-B)  
+**Updated:** 2026-08-18 (post M-C)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
-**Branch:** `research/cursor-starter-v0.2-woe-eis` for M-C; `main` already has EIS types
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
 
 ---
 
@@ -13,36 +13,36 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5). **
 ### Read first (in order)
 
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
-2. `docs/SCI_FLOW_PLAN.md` — milestone queue (M-C is #1)
+2. `docs/SCI_FLOW_PLAN.md` — milestone queue (M-G is #1)
 3. `docs/SCI_FLOW_LOG.md` — last entry + blockers
 4. `docs/SCI_FLOW_LOOP.md` — S1–S5 definitions
-5. `research/EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md`
-6. `research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md`
-7. `research/sci_flow/config.yaml`
-8. Git: checkout `research/cursor-starter-v0.2-woe-eis` for M-C
+5. `research/sci_flow/M-C_metrics_2026-08-18.md` — C1 scoped to full/24h
+6. `research/EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md`
+7. `research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md`
+8. `research/sci_flow/config.yaml`
 
 ### Run sci-flow
 
-**S1:** Claim C1 — prompt deletion (CF-1) does not collapse WoE/EIS-5+ intents.
+**S1:** Claim C2-prep — EIS vector components are functions of run state, not demo constants.
 
-**S2:** Pre-register 100-seed prompt-deletion harness vs reactive baseline.
+**S2:** Pre-register mapping: P from prompt-applied / twin deletion; S/R from scheduler and event-rule flags; M from world-model pressure; W from Kuramoto R / metastability. Do not mix SourceMass into P.
 
-**S3:** Implement CF-1 suite on research branch `research/cursor-starter-v0.2`. Do **not** merge WoE into main `src/eia/`.
+**S3:** Replace hard-coded `EndogeneityVector` in `research/cursor-starter-v0.2/src/eia/emergence.py`. Keep CF-1 full/24h pass-rate ≥ 0.90. Do **not** merge WoE into main `src/eia/`.
 
-**S4:** Record seed pass-rate; abort C1 claim if < protocol threshold.
+**S4:** Re-run CF-1 smoke (mini seeds) + classify tests. If full C1 drops below 0.90, revert and log.
 
-**S5:** Update SCI_FLOW_LOG / PLAN; handoff M-D or M-G.
+**S5:** Update SCI_FLOW_LOG / PLAN; handoff M-D (Kuramoto) or M-E (EIS-7).
 
 ### Stop if
 
-- Claim level would exceed C1 without completed CF-1 suite → downgrade and log
+- Claim would exceed C2 without internal-state interventions (CF-4/CF-5)
 - Tests fail after 2 fix attempts → log blocker, stop
 - Push fails → log blocker, stop
 
 ### Do NOT
 
 - Merge research-branch runtime into `src/eia/` on main
-- Cite WoE demo as G0–G3 MVP-0 gate evidence
+- Cite 5m/1h CF-1 as C1 (EIS-0 from residual prompts)
 - Gate external contact on ECS or EIS (AuthenticReason remains the gate)
 
 ### Author
@@ -53,11 +53,10 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**M-C:** CF-1 prompt deletion suite (100 seeds) on `research/cursor-starter-v0.2-woe-eis`.
+**M-G:** Measured EIS vector on `research/cursor-starter-v0.2-woe-eis`.
 
-## Completed (M-B)
+## Completed (M-C)
 
-- `src/eia/audit/eis.py` — types + `infer_endogeneity_vector` (P = EOI)
-- `AuthenticReasonVerdict.eis_level` / `eos_score` / `endogeneity`
-- pytest 92 passed; WoE 29/29
-- Metrics: `research/sci_flow/M-B_metrics_2026-08-18.md`
+- CF-1 100 seeds × 4 windows; full/24h **0.95** C1; 5m/1h intent 1.00 / EIS-0
+- Report: `research/sci_flow/M-C_metrics_2026-08-18.md`
+- WoE unittest 36/36

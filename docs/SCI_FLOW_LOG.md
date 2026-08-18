@@ -116,3 +116,42 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 004 — 2026-08-18 — M-C CF-1 prompt deletion
+
+**Session:** SCI FLOW S1→S5 (autonomous, “sci loop”)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C1** (full / 24h deletion only)
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-CF1-001: prompt deletion does not collapse WoE EIS-5+ intents; threshold 0.90 |
+| S2 | Compressed 24h→6s; windows 5m/1h/24h/full; reactive baseline = prompts remain |
+| S3 | `PromptEvent` in emergence.py; `eia.cf1`; 100 seeds × 4 windows |
+| S4 | full/24h **0.95** pass; 5m/1h intent 1.00 but EIS-0 (P flag); fail seeds 5,35,39,86,87 |
+| S5 | M-C DONE; ceiling C1 scoped; handoff M-G |
+
+### Metrics
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| WoE tests | 36/36 pass | +CF-1 |
+| full c1_pass_rate | 0.95 | ≥ 0.90 pre-register |
+| 24h c1_pass_rate | 0.95 | same five silent seeds |
+| 5m / 1h c1_pass_rate | 0.00 | residual prompts → P=0.25 → EIS-0 |
+| 5m / 1h intent_rate | 1.00 | dynamics persist |
+| reactive full | 0.00 | negative control |
+| Report | `research/sci_flow/M-C_metrics_2026-08-18.md` | raw `cf1_results.json` |
+
+### Blockers
+
+- P2 / **M-G:** hard-coded EIS vector (except P-from-prompt-applied and world_model_grounding=pressure)
+- Partial windows are not C1 evidence on EIS level
+
+### Next
+
+**M-G:** measured EIS vector on WoE path
+
+---
+

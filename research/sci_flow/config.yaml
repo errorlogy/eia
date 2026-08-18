@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-18"
+updated: "2026-08-18-MC"
 
 repos:
   eia:
@@ -18,7 +18,7 @@ repos:
 
 claim_ladder:
   active_ceiling: C1
-  target: C1
+  target: C2
   protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
 
 milestones:
@@ -43,12 +43,17 @@ milestones:
     claim: C1
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
-    status: next
+    status: done
+    completed: "2026-08-18"
+    command: python research/sci_flow/run_cf1.py
+    primary_endpoint: full_window_c1_pass_rate
+    result: 0.95
   M-G:
     name: Measured EIS vector
     claim: C2
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
+    status: next
 
 eia_eval_scenarios:
   - id: twin_world_001

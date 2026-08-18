@@ -307,8 +307,43 @@ class WoETraceBuilder:
         )
 
 
+@dataclass(frozen=True, slots=True)
+class PromptEvent:
+    """Synthetic user-prompt event on a compressed 24h episode."""
+
+    elapsed_seconds: float
+    target_id: str
+    surprise_boost: float
+
+
+def apply_prompt_events(
+    world: EndogenousWorldModelField,
+    events: tuple[PromptEvent, ...],
+    *,
+    elapsed_seconds: float,
+    dt_seconds: float,
+) -> int:
+    """Apply surprise boosts whose timestamps fall in (prev, elapsed], including t=0."""
+    applied = 0
+    by_id = {target.target_id: target for target in world.targets}
+    prev = elapsed_seconds - dt_seconds
+    for event in events:
+        if prev <= 0.0:
+            hit = 0.0 <= event.elapsed_seconds <= elapsed_seconds
+        else:
+            hit = prev < event.elapsed_seconds <= elapsed_seconds
+        if not hit:
+            continue
+        target = by_id.get(event.target_id)
+        if target is None:
+            continue
+        target.surprise = clamp01(target.surprise + event.surprise_boost)
+        applied += 1
+    return applied
+
+
 class EndogenousEmergenceSimulator:
-    """Continuous shadow-mode simulator with no prompt, cron or rule events."""
+    """Continuous shadow-mode simulator with optional CF-1 prompt events."""
 
     def run(
         self,
@@ -316,6 +351,7 @@ class EndogenousEmergenceSimulator:
         *,
         seed: int = 7,
         world_model_enabled: bool = True,
+        prompt_events: tuple[PromptEvent, ...] = (),
         scramble_phases: bool = False,
     ) -> EmergenceRun:
         world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
@@ -330,7 +366,15 @@ class EndogenousEmergenceSimulator:
         receipt: WoEReceipt | None = None
         steps = int(config.duration_seconds / config.dt_seconds)
         last_state: WindowState | None = None
+        prompts_applied = 0
         for step in range(1, steps + 1):
+            elapsed = step * config.dt_seconds
+            prompts_applied += apply_prompt_events(
+                world,
+                prompt_events,
+                elapsed_seconds=elapsed,
+                dt_seconds=config.dt_seconds,
+            )
             world.advance(config.dt_seconds)
             ranked = world.ranked()
             top, second = ranked[0], ranked[1]
@@ -368,8 +412,9 @@ class EndogenousEmergenceSimulator:
             if step % config.sample_every_steps == 0:
                 samples.append(state)
             if activated:
+                prompt_independence = 1.0 if prompts_applied == 0 else 0.25
                 vector = EndogeneityVector(
-                    prompt_independence=1.0,
+                    prompt_independence=prompt_independence,
                     scheduler_independence=1.0,
                     event_rule_independence=1.0,
                     persistent_state_dependence=0.95,
@@ -421,7 +466,7 @@ class EndogenousEmergenceSimulator:
             intent=intent,
             samples=tuple(samples),
             activation_threshold=window.activation_threshold,
-            no_prompt_events=True,
+            no_prompt_events=prompts_applied == 0 and len(prompt_events) == 0,
             no_scheduler_events=True,
             no_rule_trigger_events=True,
             receipt=receipt,

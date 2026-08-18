@@ -14,6 +14,14 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-18 — Sci-flow M-C C1 (full deletion)
+
+- **Section:** Claim ladder / WoE protocol CF-1
+- **Delta:** Active ceiling raised to **C1** for WoE v0.2 **full-episode** (and 24h) prompt deletion only. 5m/1h windows remain C0 on EIS taxonomy.
+- **Rationale:** 95/100 seeds EIS-6 after full deletion vs reactive 0; residual prompts force P=0.25 → EIS-0 while intent still fires. [`M-C_metrics_2026-08-18.md`](../research/sci_flow/M-C_metrics_2026-08-18.md).
+
+---
+
 ### 2026-08-17 — Loop 1 RQ1 completed (dev-loop)
 
 - **Section:** §7 PAI-EI benchmark, §4 R4
