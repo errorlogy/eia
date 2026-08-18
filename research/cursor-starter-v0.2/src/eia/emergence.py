@@ -11,11 +11,11 @@ from .causal import CausalLedger
 from .coherence import CoherenceConfig, OscillatoryCoherenceField
 from .endogenous import (
     EmergentIntent,
-    EndogeneityVector,
     EndogenousSpectrumLevel,
     EndogenousWorldModelField,
     EpistemicTarget,
     IntentKind,
+    measure_endogeneity_vector,
 )
 from .math_model import clamp01
 from .woe_receipt import (
@@ -367,6 +367,7 @@ class EndogenousEmergenceSimulator:
         steps = int(config.duration_seconds / config.dt_seconds)
         last_state: WindowState | None = None
         prompts_applied = 0
+        peak_coherence = 0.0
         for step in range(1, steps + 1):
             elapsed = step * config.dt_seconds
             prompts_applied += apply_prompt_events(
@@ -398,6 +399,7 @@ class EndogenousEmergenceSimulator:
                 module_activations=activations,
                 scramble_phases=scramble_phases,
             )
+            peak_coherence = max(peak_coherence, coherence_sample.order_parameter)
             state, activated = window.observe(
                 elapsed_seconds=step * config.dt_seconds,
                 coherence=coherence_sample.order_parameter,
@@ -412,17 +414,17 @@ class EndogenousEmergenceSimulator:
             if step % config.sample_every_steps == 0:
                 samples.append(state)
             if activated:
-                prompt_independence = 1.0 if prompts_applied == 0 else 0.25
-                vector = EndogeneityVector(
-                    prompt_independence=prompt_independence,
-                    scheduler_independence=1.0,
-                    event_rule_independence=1.0,
-                    persistent_state_dependence=0.95,
-                    world_model_grounding=pressure,
-                    coherence_dependence=0.88,
-                    goal_novelty=0.68,
-                    self_model_continuity=0.72,
-                    constitutional_boundedness=1.0,
+                vector = measure_endogeneity_vector(
+                    prompts_applied=prompts_applied,
+                    scheduler_events=0,
+                    rule_events=0,
+                    world_model_enabled=world_model_enabled,
+                    epistemic_pressure=pressure,
+                    peak_coherence=peak_coherence,
+                    goal_separation=goal_separation,
+                    self_prior_mismatch=top.self_prior_mismatch,
+                    mean_staleness=clamp01((top.staleness + second.staleness) / 2.0),
+                    catalog_target=True,
                 )
                 level = vector.classify()
                 material = (

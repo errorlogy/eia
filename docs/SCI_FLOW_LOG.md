@@ -155,3 +155,25 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 005 — 2026-08-18 — M-G measured EIS vector
+
+**Session:** SCI FLOW S1→S5 (chained after M-C)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** C1 preserved (measurement layer; not C2)
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-EIS-002: measured vector must not drop CF-1 full below 0.90 |
+| S2 | P from prompts; W from peak R; M from pressure; catalog novelty capped |
+| S3 | `measure_endogeneity_vector`; emergence.py no longer uses 0.88/0.68 constants |
+| S4 | 38/38 tests; CF-1 seeds 1–20 full **0.95** |
+| S5 | M-G DONE; handoff M-D |
+
+### Next
+
+**M-D:** Kuramoto coupling / delay sweep
+
+---
+

@@ -16,7 +16,7 @@
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | planned |
 | **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
-| **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | planned |
+| **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
 
 ---
 
@@ -108,11 +108,19 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-G: measured EIS vector (DONE)
+
+**Result:** WoE path uses `measure_endogeneity_vector`. CF-1 smoke (20 seeds, full) still **0.95**. Catalog novelty capped below EIS-7.
+
+**Report:** [`research/sci_flow/M-G_metrics_2026-08-18.md`](../research/sci_flow/M-G_metrics_2026-08-18.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**M-G:** Measure EIS vector from run state (do not hard-code P/S/R/M/W). Partial-window CF-1 showed taxonomy follows the prompt-applied flag.
+**M-D:** Kuramoto coupling graph + delay sweep (C2) on WoE + NAMM-2026-013.
 
-**M-D:** Kuramoto coupling / delay sweep (C2) after M-G or in parallel if vector coding is scoped.
+**M-E:** EIS-7 goal novelty constructor (catalog targets remain capped below 0.75).
 
 ---
 
@@ -120,7 +128,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
-| 2026-08-18 | M-C DONE: CF-1 100 seeds; full/24h 0.95 C1; 5m/1h EIS contaminated |
+| 2026-08-18 | M-G DONE: measured EIS vector; CF-1 smoke 0.95; 38/38 tests |
 | 2026-08-18 | M-B DONE: EIS types on main `audit/eis.py`; 92 pytest; WoE 29/29 |
 | 2026-08-18 | M-A DONE: WoEReceipt + CF-7 tests; 29/29 pass |
 | 2026-08-18 | Initial plan: M-A–G, NAMM integration map, cross-repo workflow |

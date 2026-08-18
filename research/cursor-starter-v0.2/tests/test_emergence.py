@@ -24,6 +24,11 @@ class EmergenceTests(unittest.TestCase):
             EndogenousSpectrumLevel.EIS_6_COHERENCE_EMERGENT,
         )
         self.assertEqual(run.intent.boundary, "proposal_only")
+        self.assertNotEqual(run.intent.endogeneity.coherence_dependence, 0.88)
+        self.assertEqual(
+            run.intent.endogeneity.prompt_independence,
+            1.0,
+        )
 
     def test_zero_world_model_tension_is_negative_control(self) -> None:
         run = self.simulator.run(self.config, seed=7, world_model_enabled=False)

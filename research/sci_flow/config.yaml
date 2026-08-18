@@ -53,6 +53,13 @@ milestones:
     claim: C2
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-18"
+  M-D:
+    name: Kuramoto coupling delay sweep
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
     status: next
 
 eia_eval_scenarios:

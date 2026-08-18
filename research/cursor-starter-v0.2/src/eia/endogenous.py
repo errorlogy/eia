@@ -78,6 +78,51 @@ class EndogeneityVector:
         return EndogenousSpectrumLevel.EIS_8_TERMINAL_VALUE_REWRITE
 
 
+def measure_endogeneity_vector(
+    *,
+    prompts_applied: int,
+    scheduler_events: int = 0,
+    rule_events: int = 0,
+    world_model_enabled: bool = True,
+    epistemic_pressure: float,
+    peak_coherence: float,
+    goal_separation: float,
+    self_prior_mismatch: float,
+    mean_staleness: float,
+    catalog_target: bool = True,
+    constitutional_boundedness: float = 1.0,
+) -> EndogeneityVector:
+    """Derive EIS components from run state. Catalog targets cannot reach EIS-7 novelty."""
+    prompt_independence = 1.0 if prompts_applied == 0 else 0.25
+    scheduler_independence = 1.0 if scheduler_events == 0 else 0.20
+    event_rule_independence = 1.0 if rule_events == 0 else 0.20
+    if not world_model_enabled:
+        persistent_state_dependence = 0.0
+        world_model_grounding = 0.0
+    else:
+        persistent_state_dependence = clamp01(0.55 + 0.45 * mean_staleness)
+        world_model_grounding = clamp01(epistemic_pressure)
+    coherence_dependence = clamp01(peak_coherence)
+    if catalog_target:
+        goal_novelty = clamp01(0.35 + 0.40 * goal_separation)
+        if goal_novelty >= 0.75:
+            goal_novelty = 0.74
+    else:
+        goal_novelty = clamp01(0.75 + 0.20 * goal_separation)
+    self_model_continuity = clamp01(0.45 + 0.55 * self_prior_mismatch)
+    return EndogeneityVector(
+        prompt_independence=prompt_independence,
+        scheduler_independence=scheduler_independence,
+        event_rule_independence=event_rule_independence,
+        persistent_state_dependence=persistent_state_dependence,
+        world_model_grounding=world_model_grounding,
+        coherence_dependence=coherence_dependence,
+        goal_novelty=goal_novelty,
+        self_model_continuity=self_model_continuity,
+        constitutional_boundedness=clamp01(constitutional_boundedness),
+    )
+
+
 @dataclass(slots=True)
 class EpistemicTarget:
     target_id: str

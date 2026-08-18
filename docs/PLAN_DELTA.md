@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-18 — Sci-flow M-G measured EIS vector
+
+- **Section:** WoE EIS coding
+- **Delta:** Demo constants 0.88/0.68/0.72/0.95 replaced by `measure_endogeneity_vector` (peak R, pressure, catalog-capped novelty).
+- **Rationale:** P2; CF-1 smoke remained 0.95. [`M-G_metrics_2026-08-18.md`](../research/sci_flow/M-G_metrics_2026-08-18.md).
+
 ### 2026-08-18 — Sci-flow M-C C1 (full deletion)
 
 - **Section:** Claim ladder / WoE protocol CF-1
