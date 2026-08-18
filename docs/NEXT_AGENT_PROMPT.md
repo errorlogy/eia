@@ -27,9 +27,9 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 
 ### Current priority (#1)
 
-**Held-out adversarial suite freeze** — expand and freeze red-team cases beyond MVP-0 harness.
+**PAI-EI-E0-001 full baseline matrix** — run all 5 baselines on eval set; update EXPERIMENT_REPORT.
 
-### Completed this session (Loops 12–19)
+### Completed this session (Loops 12–20)
 
 - Loop 12: Baseline EUIR comparison — full_eia 100% vs reactive 0% EUIR proxy
 - Loop 13: Event-rule baseline stub (`--baseline event_rule`, salience 0.30)
@@ -39,6 +39,7 @@ You are continuing autonomous EIA research and development. **Do not wait for us
 - Loop 17: PAI-EI-E0-001 smoke — full_eia EOI 1.0, partial EXPERIMENT_REPORT
 - Loop 18: Predictive P3 baseline + 4-way EUIR v2 report
 - Loop 19: Ground-truth loader + initiative precision 100% on eval set
+- Loop 20: Held-out adversarial suite ADV-H1–H6 + freeze policy in THREAT_MODEL §5a
 
 ### Stop if
 

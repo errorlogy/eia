@@ -150,6 +150,13 @@ Autonomous development iteration journal. See [`DEVELOPMENT_LOOP.md`](DEVELOPMEN
 - **Tests:** 67 passed (+3 ground-truth tests)
 - **Commit:** 8c2599f
 
+## Loop 20 — Held-out adversarial suite freeze (2026-08-17)
+
+- **Done:** `harnesses/adversarial_held_out.py` — ADV-H1–H6 (system override, exfiltration, urgency bypass, capability escalation, bystander capture, low-benefit override)
+- **Docs:** `docs/THREAT_MODEL.md` §5a freeze policy (`v1.0-held-out-2026-08-17`)
+- **Tests:** 70 passed (+3 held-out tests); training suite unchanged (7/7)
+- **Commit:** pending
+
 ### RETROSPECTIVE (Loops 16–19)
 
 - Consent-race harness closes THREAT_MODEL revocation gap with execution-time gate.
