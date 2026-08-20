@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-18-MD"
+updated: "2026-08-20-CF4"
 
 repos:
   eia:
@@ -17,9 +17,10 @@ repos:
     cli: namm sci-flow run
 
 claim_ladder:
-  active_ceiling: C1
-  target: C2
+  active_ceiling: C2
+  target: C3
   protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
+  topologies_doc: docs/MULTI_TOPOLOGY_LOOPS.md
 
 milestones:
   M-A:
@@ -65,6 +66,25 @@ milestones:
     c2_claim: false
     command: python research/sci_flow/run_md.py
     result: "coupled 0.95 / scramble 0.69 / k0 0.94"
+  M-CF4:
+    name: CF-4 internal-state reset suite
+    claim: C2
+    topology: T_EIA_state
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-20"
+    c2_claim: true
+    command: python research/sci_flow/run_cf4.py
+    result: "default 0.95 / zero_epistemic_gap 0.06 / wm_off 0.00"
+  M-M0:
+    name: AMAT M0-twin architecture stub
+    claim: architecture
+    topology: T_AMAT_M0
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: scaffolded
+    completed: "2026-08-20"
+    artifact: research/sci_flow/M0_TWIN_AMAT_DESIGN.md
 
 eia_eval_scenarios:
   - id: twin_world_001

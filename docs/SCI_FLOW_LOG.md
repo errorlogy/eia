@@ -210,3 +210,45 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 007 — 2026-08-20 — Multi-topology loops + M-CF4 (C2 claimed)
+
+**Session:** Multi-topology decide + execute L_EIA_CF4  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** (CF-4 named factor). Kuramoto still not a cause.
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| Decide | Registered T_EIA_state, T_AMAT_M0, T_LIVE_gate, T_NAMM_cert in MULTI_TOPOLOGY_LOOPS.md |
+| S1 | H-WOE-003: named internal-state factors cause WoE intent |
+| S2 | Pre-registered default≥0.85, named factor≤0.40, wm_off≤0.05 |
+| S3 | `InternalReset` + `eia.cf4`; 100×6; amat_m0 stub scaffold |
+| S4 | default 0.95 / zero_epistemic_gap **0.06** / wm_off 0.00 |
+| S5 | C2 claimed; handoff T_AMAT_M0 / M-E |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| WoE tests | 53/53 |
+| default intent | 0.95 |
+| zero_epistemic_gap | 0.06 |
+| zero_self_prior | 0.91 |
+| zero_staleness | 0.74 |
+| zero_prospective | 0.74 |
+| wm_off | 0.00 |
+| c2_claim | true |
+| Report | `research/sci_flow/M-CF4_metrics_2026-08-20.md` |
+
+### Blockers
+
+- Live TG: governor score ~−0.03 < 0.18 — diagnose via T_LIVE_gate; no unlabeled threshold cut
+- M0-twin still stub (architecture only)
+
+### Next
+
+**T_AMAT_M0** expand harness; optional **T_NAMM_cert**; **M-E** EIS-7.
+
+---
+

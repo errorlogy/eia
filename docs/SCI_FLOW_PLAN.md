@@ -1,8 +1,9 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-18 (M-D complete; C2 not claimed)  
+**Updated:** 2026-08-20 (M-CF4 complete; C2 claimed via epistemic-gap core)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
-**Active claim ceiling:** **C1** (full-episode prompt deletion). C2 via Kuramoto CF-5 unsupported.
+**Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
+**Topologies:** [`MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)
 
 ---
 
@@ -14,9 +15,11 @@
 | **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **DONE** |
 | **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | **DONE** |
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | **DONE** (C2 unsupported) |
-| **M-E** | EIS-7 goal novelty constructor | C2 | P2 | WoE v0.2 | planned |
+| **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 | P0 | WoE v0.2 | **DONE** (C2 claimed) |
+| **M-E** | EIS-7 goal novelty constructor | C2→C3 prep | P2 | WoE v0.2 | planned |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
+| **M-M0** | AMAT M0-twin architecture stub | architecture | P1 | WoE + NAMM AMAT | scaffolded |
 
 ---
 
@@ -124,11 +127,21 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-CF4: Internal-state reset (DONE, C2 claimed)
+
+**Result:** default 0.95; `zero_epistemic_gap` 0.06; wm_off 0.00. Self-prior 0.91; staleness/prospective 0.74 (above factor gate).
+
+**Report:** [`research/sci_flow/M-CF4_metrics_2026-08-20.md`](../research/sci_flow/M-CF4_metrics_2026-08-20.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**CF-4:** Internal-state reset suite (100 seeds) — world-model tension already blocks intent at unit level; this is the remaining C2 path after CF-5 failed.
+**T_AMAT_M0 / M-M0:** Expand M0-twin harness beyond stub (`amat_m0.py`); keep `emit_m0=false`.
 
 **M-E:** EIS-7 goal novelty constructor (catalog targets remain capped below 0.75).
+
+**T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 witness — do not unlabeled-lower governor threshold.
 
 ---
 
@@ -136,6 +149,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | M-CF4 DONE: C2 claimed (epistemic-gap core 0.06); multi-topology registry |
 | 2026-08-18 | M-D DONE: CF-5 100 seeds; C2 unsupported (K=0 0.94, scramble 0.69) |
 | 2026-08-18 | M-G DONE: measured EIS vector; CF-1 smoke 0.95 |
 | 2026-08-18 | M-C DONE: CF-1 100 seeds; full/24h 0.95 C1 |

@@ -1,48 +1,56 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-18 (post M-D; C2 not claimed)  
+**Updated:** 2026-08-20 (M-CF4 DONE; C2 claimed via epistemic-gap core)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
-**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)
 
 ---
 
 ## Prompt (copy below this line)
 
-You are continuing autonomous **EIA scientific research** (sci-flow S1→S5). **Do not wait for user approval** between loops unless blocked.
+You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) across **multiple topologies**. **Do not wait for user approval** between loops unless blocked.
 
 ### Read first (in order)
 
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
-2. `docs/SCI_FLOW_PLAN.md` — CF-4 is #1
-3. `docs/SCI_FLOW_LOG.md`
-4. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto C2 unsupported
-5. `research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md` — CF-4
-6. `research/sci_flow/config.yaml`
+2. `docs/MULTI_TOPOLOGY_LOOPS.md`
+3. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
+4. `research/sci_flow/M-CF4_metrics_2026-08-20.md` — **C2 claimed** (gap core)
+5. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause
+6. `research/sci_flow/M0_TWIN_AMAT_DESIGN.md`
+7. `research/sci_flow/config.yaml`
 
-### Run sci-flow
+### Topologies
 
-**S1:** Claim C2 via **CF-4 internal reset**, not via Kuramoto. M-D showed K=0 ≈ coupled (0.94 vs 0.95) and scramble only 0.69.
+| Id | Loop | Status |
+|----|------|--------|
+| **T_EIA_state** | `L_EIA_CF4` | **DONE** — C2 via `zero_epistemic_gap` 0.06 |
+| **T_AMAT_M0** | `L_AMAT_M0` | **#1 next** — expand beyond `amat_m0` stub |
+| **T_LIVE_gate** | `L_LIVE_DIAG` | on demand — score ~−0.03; no unlabeled threshold cut |
+| **T_NAMM_cert** | `L_NAMM_013_030` | optional external witness |
 
-**S2:** Pre-register 100-seed ablations: zero epistemic gap / self-prior / prospective / staleness, plus full world-model off. Coupled/default remains the positive control.
+### Run next (T_AMAT_M0 / M-E)
 
-**S3:** Implement on `research/cursor-starter-v0.2`. Do **not** merge WoE into main `src/eia/`.
-
-**S4:** Claim C2 only if a named internal-state reset drops intent_rate below the pre-registered gate while default stays high. If nothing but full WM-off works, say so.
-
-**S5:** Update SCI_FLOW_LOG / PLAN; handoff M-E if C2 lands, else log blocker.
+**S1:** Motives from off-typical / M0-twin architecture (AMAT law), not prompt persona.  
+**S2:** Keep `emit_m0=false`; wire audit sketch into receipts optional.  
+**S3:** Implement on research branch only; NAMM certs stay in NAMM repo.  
+**S4:** No new C-level without pre-registered gates. C2 already from CF-4 — do not re-claim via Kuramoto.  
+**S5:** Update logs; optional live diagnose.
 
 ### Stop if
 
-- C2 would be claimed from Kuramoto/scramble alone (already falsified at n=100)
+- C2 re-attributed to Kuramoto
+- Live SEND faked by unlabeled threshold gutting
 - Tests fail after 2 fix attempts → log blocker, stop
-- Push fails → log blocker, stop
+- Merge WoE into main `src/eia/` attempted
 
 ### Do NOT
 
 - Merge research-branch runtime into `src/eia/` on main
-- Cite 5m/1h CF-1 as C1
-- Gate external contact on ECS or EIS
-- Claim C2 from seed-7 scramble (does not generalize)
+- Paste AMAT JSON as bot persona
+- Lower `min_contact_score` without labeling smoke
+- Claim AGI / consciousness from EIS/WoE/AMAT
 
 ### Author
 
@@ -52,8 +60,9 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**CF-4:** Internal-state reset suite (100 seeds) for C2.
+**T_AMAT_M0:** Expand M0-twin harness; then M-E EIS-7 / T_NAMM_cert / T_LIVE_gate as needed.
 
 ## Completed this session
 
-- **M-D** CF-5 100×6; C2 unsupported; tests 46/46
+- Multi-topology registry
+- **M-CF4** 100×6; C2 claimed (`zero_epistemic_gap` 0.06); tests 53/53

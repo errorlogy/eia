@@ -167,6 +167,35 @@ class WindowOfEmergence:
         return (state, self.integrated_hazard >= self.activation_threshold)
 
 
+@dataclass(frozen=True, slots=True)
+class InternalReset:
+    """CF-4 factor clamps applied after each world-model advance.
+
+    Named factors match RESEARCH_PROTOCOL CF-4. Epistemic-gap ablation zeros the
+    ignorance/surprise core (components not covered by the other three named resets).
+    """
+
+    zero_epistemic_gap: bool = False
+    zero_self_prior: bool = False
+    zero_prospective: bool = False
+    zero_staleness: bool = False
+
+
+def apply_internal_reset(world: EndogenousWorldModelField, reset: InternalReset) -> None:
+    """Clamp selected internal-state factors without removing the world-model object."""
+    for target in world.targets:
+        if reset.zero_epistemic_gap:
+            target.ignorance = 0.0
+            target.surprise = 0.0
+        if reset.zero_self_prior:
+            target.self_prior_mismatch = 0.0
+        if reset.zero_prospective:
+            target.prospective_tension = 0.0
+        if reset.zero_staleness:
+            target.staleness = 0.0
+            target.volatility_rate = 0.0
+
+
 def default_targets(*, enabled: bool = True) -> tuple[EpistemicTarget, ...]:
     scale = 1.0 if enabled else 0.0
     return (
@@ -354,8 +383,19 @@ class EndogenousEmergenceSimulator:
         prompt_events: tuple[PromptEvent, ...] = (),
         scramble_phases: bool = False,
         coherence_config: CoherenceConfig | None = None,
+        internal_reset: InternalReset | None = None,
     ) -> EmergenceRun:
         world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
+        reset = internal_reset or InternalReset()
+        if any(
+            (
+                reset.zero_epistemic_gap,
+                reset.zero_self_prior,
+                reset.zero_prospective,
+                reset.zero_staleness,
+            )
+        ):
+            apply_internal_reset(world, reset)
         ccfg = coherence_config or CoherenceConfig(nominal_frequency_hz=config.nominal_frequency_hz)
         coherence = OscillatoryCoherenceField(ccfg, seed=seed)
         window = WindowOfEmergence(config, seed=seed + 17)
@@ -376,6 +416,7 @@ class EndogenousEmergenceSimulator:
                 dt_seconds=config.dt_seconds,
             )
             world.advance(config.dt_seconds)
+            apply_internal_reset(world, reset)
             ranked = world.ranked()
             top, second = ranked[0], ranked[1]
             pressure = top.epistemic_gap
