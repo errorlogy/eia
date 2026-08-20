@@ -59,7 +59,7 @@ Unitless WoE Δ gate (`DEFAULT_DELTA_GATE=1.0`) is a **proxy** for future NAMM e
 |------|-----------------------------|
 | ATT-R | Architecture stronger (closed motive path + M0-twin) — **not ATT-scored** |
 | ATT-E | Motive-side support only; C2 remains CF-4 scoped |
-| ATT-G | Scaffold only (`goal_genesis`) |
+| ATT-G | Explore proxy holds (`goal_genesis` + M-E metrics) — not C3 |
 
 ## Next
 

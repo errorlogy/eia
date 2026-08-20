@@ -365,3 +365,44 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 011 — 2026-08-20 — M-E / ATT-G goal genesis
+
+**Session:** Expand `eia.goal_genesis`; pre-register falsifiers; WoE optional wire; metrics  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-ME-ATTG: \(g^{*} \notin G_t\) with genealogy; catalog selection novelty-capped |
+| S2 | Falsifiers: wording≠genesis; genealogy required; zero tension rejects |
+| S3 | Expanded `goal_genesis`; `enable_goal_genesis` on WoE simulator |
+| S4 | n=50: compose evidence 1.0; wording/catalog/zero-tension evidence 0; emit_m0=0 |
+| S5 | Metrics + plan/log/NEXT → priority ATT-P |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| WoE tests | 85 OK |
+| Compose att_g_evidence_rate | 1.0 |
+| Catalog evidence | 0.0 (capped) |
+| Wording evidence | 0.0 (rejected) |
+| Zero-tension evidence | 0.0 (rejected) |
+| WoE wire att_g_evidence_rate | 0.94 |
+| emit_m0_rate_with_genesis | 0.0 |
+| c3_claim / agi_star_claim | false / false |
+| Report | `research/sci_flow/M-E_metrics_2026-08-20.md` |
+
+### Blockers
+
+- Official ATT-G / C3 numeric gates still TBD (explore proxy only)
+- ATT-P / ATT-N unscored
+
+### Next
+
+**ATT-P** persistence pre-reg; optional T_LIVE / T_NAMM; M-N only after \(B\).
+
+---
+

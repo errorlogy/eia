@@ -18,6 +18,12 @@ from .endogenous import (
     IntentKind,
     measure_endogeneity_vector,
 )
+from .goal_genesis import (
+    CATALOG_GOAL_IDS,
+    GenesisPath,
+    GoalGenesisRecord,
+    compose_from_world_state,
+)
 from .math_model import clamp01
 from .woe_receipt import (
     WoENodeType,
@@ -81,6 +87,7 @@ class EmergenceRun:
     receipt: WoEReceipt | None = None
     ledger: CausalLedger | None = None
     m0_sketch: M0Sketch | None = None
+    goal_genesis: GoalGenesisRecord | None = None
 
     @property
     def peak_potential(self) -> float:
@@ -387,6 +394,7 @@ class EndogenousEmergenceSimulator:
         coherence_config: CoherenceConfig | None = None,
         internal_reset: InternalReset | None = None,
         m0_twin_mode: M0TwinMode | None = None,
+        enable_goal_genesis: bool = False,
     ) -> EmergenceRun:
         world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
         reset = internal_reset or InternalReset()
@@ -407,6 +415,7 @@ class EndogenousEmergenceSimulator:
         intent: EmergentIntent | None = None
         receipt: WoEReceipt | None = None
         m0_sketch: M0Sketch | None = None
+        goal_genesis_rec: GoalGenesisRecord | None = None
         prev_m0: M0Sketch | None = None
         steps = int(config.duration_seconds / config.dt_seconds)
         last_state: WindowState | None = None
@@ -521,6 +530,30 @@ class EndogenousEmergenceSimulator:
                             m0_sketch.selected.target_id == m0_sketch.m0.target_id
                         )
                     # AUDIT_ONLY: keep default top selection; sketch attached only.
+                if enable_goal_genesis and world_model_enabled:
+                    goal_genesis_rec = compose_from_world_state(
+                        seed=seed,
+                        catalog_snapshot=tuple(CATALOG_GOAL_IDS),
+                        epistemic_pressure=pressure,
+                        goal_separation=goal_separation,
+                        top_target_id=chosen_target.target_id,
+                        top_target_label=chosen_target.label,
+                        self_prior_mismatch=chosen_target.self_prior_mismatch,
+                        prospective_tension=chosen_target.prospective_tension,
+                        peak_coherence=peak_coherence,
+                        prompts_applied=prompts_applied,
+                    )
+                    if goal_genesis_rec.path == GenesisPath.GENESIS:
+                        catalog_target = False
+                        reason = (
+                            "ATT-G goal genesis: composed g* ∉ G_t from world-model "
+                            f"tension (goal_id={goal_genesis_rec.goal_id})"
+                        )
+                        causal_factors = (
+                            *causal_factors,
+                            "goal_genesis",
+                            "genealogy_S_dW_M_g_Pi",
+                        )
                 vector = measure_endogeneity_vector(
                     prompts_applied=prompts_applied,
                     scheduler_events=0,
@@ -539,12 +572,21 @@ class EndogenousEmergenceSimulator:
                 material = (
                     f"{chosen_target.target_id}|{motive_kind.value}|"
                     f"{state.elapsed_seconds:.6f}|{seed}|"
-                    f"{twin_mode.value if twin_mode else 'legacy'}"
+                    f"{twin_mode.value if twin_mode else 'legacy'}|"
+                    f"{'gg' if enable_goal_genesis else 'nog'}"
                 )
+                intent_target_id = chosen_target.target_id
+                intent_target_label = chosen_target.label
+                if (
+                    goal_genesis_rec is not None
+                    and goal_genesis_rec.path == GenesisPath.GENESIS
+                ):
+                    intent_target_id = goal_genesis_rec.goal_id
+                    intent_target_label = goal_genesis_rec.label
                 intent = EmergentIntent(
                     intent_id="intent:" + hashlib.sha256(material.encode()).hexdigest()[:16],
-                    target_id=chosen_target.target_id,
-                    target_label=chosen_target.label,
+                    target_id=intent_target_id,
+                    target_label=intent_target_label,
                     kind=motive_kind,
                     emerged_at_seconds=state.elapsed_seconds,
                     reason=reason,
@@ -575,6 +617,7 @@ class EndogenousEmergenceSimulator:
             receipt=receipt,
             ledger=trace.ledger,
             m0_sketch=m0_sketch,
+            goal_genesis=goal_genesis_rec,
         )
 
 
@@ -591,12 +634,16 @@ def compact_run_dict(run: EmergenceRun) -> dict[str, object]:
     m0_audit: dict[str, object] | None = None
     if run.m0_sketch is not None:
         m0_audit = run.m0_sketch.as_audit_dict()
+    genesis_audit: dict[str, object] | None = None
+    if run.goal_genesis is not None:
+        genesis_audit = run.goal_genesis.as_dict()
     return {
         "nominal_frequency_hz": run.config.nominal_frequency_hz,
         "interpretation": "computational carrier parameter, not a biological claim",
         "intent": intent,
         "receipt": receipt,
         "m0_sketch": m0_audit,
+        "goal_genesis": genesis_audit,
         "trace_nodes": len(run.ledger.nodes) if run.ledger is not None else 0,
         "peak_potential": run.peak_potential,
         "peak_coherence": run.peak_coherence,
@@ -607,4 +654,5 @@ def compact_run_dict(run: EmergenceRun) -> dict[str, object]:
             "scheduler_events": not run.no_scheduler_events,
             "rule_trigger_events": not run.no_rule_trigger_events,
         },
+        "agi_star_claim": False,
     }

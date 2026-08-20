@@ -1,6 +1,6 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-20 (AGI\* phase-transition + ATT drafted; M-CF4 = scoped \(E_{\mathrm{endo}}\); M-N scaffolded)  
+**Updated:** 2026-08-20 (M-E / ATT-G executed; C2 unchanged; AGI\* not claimed)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
 **AGI\* target (research, not claimed):** \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) with order parameters \(E,N_H,P,R,D\) and \(\tau_{AGI}\) — see [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md).  
@@ -34,10 +34,10 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 | **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 / \(E_{\mathrm{endo}}\) partial | P0 | WoE v0.2 | **DONE** (C2 claimed) |
 | **M-N** | \(C_{\mathrm{non\text{-}emb}(H)}\) / \(N_H\) measurement design + stubs | research metadata | P2 | WoE v0.2 | **scaffolded** |
 | **M-ATT** | AGI Transition Test draft (ATT-E…ATT-D) + order-parameter stubs | research metadata | P1 | WoE v0.2 | **drafted** |
-| **M-E** | EIS-7 goal novelty constructor (ATT-G) | C2→C3 prep | P2 | WoE v0.2 | planned |
+| **M-E** | EIS-7 goal novelty constructor (ATT-G) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
-| **M-M0** | AMAT M0-twin architecture stub | architecture | P1 | WoE + NAMM AMAT | scaffolded |
+| **M-M0** | AMAT M0-twin architecture harness | architecture | P1 | WoE + NAMM AMAT | **DONE** |
 
 ---
 
@@ -179,11 +179,17 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-E: ATT-G goal genesis (DONE, explore proxy)
+
+**Result:** Selection vs genesis distinguished; \(g^{*} \notin G_t\) with genealogy \(S\rightarrow\Delta W\rightarrow M\rightarrow g^{*}\rightarrow\Pi^{*}\); falsifiers hold (wording / catalog / zero-tension). WoE optional wire; `emit_m0=false` preserved. **No C3 / AGI\* raise.**
+
+**Report:** [`M-E_metrics_2026-08-20.md`](../research/sci_flow/M-E_metrics_2026-08-20.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**M-E / ATT-G:** EIS-7 / non-catalog goal novelty constructor (`eia.goal_genesis` scaffolded); genealogy co-required.
-
-**ATT-P (later):** Pre-register multi-tick persistence metric.
+**ATT-P:** Pre-register multi-tick persistence metric (\(P_G\) / motive continuity).
 
 **M-N / ATT-N (later):** Pre-register encoding budget \(B\) before any non-embeddability execute batch.
 
@@ -195,6 +201,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | M-E / ATT-G DONE (explore proxy); falsifiers hold; no C3/AGI\*; priority → ATT-P |
 | 2026-08-20 | AGI\* phase-transition theory + ATT drafted; M-ATT; claim ladder unchanged (C2); \(\tau_{AGI}\) horizon only |
 | 2026-08-20 | AGI\* criterion adopted; M-N non-embeddability scaffold; C-ladder framed under \(E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) |
 | 2026-08-20 | M-CF4 DONE: C2 claimed (epistemic-gap core 0.06); multi-topology registry |

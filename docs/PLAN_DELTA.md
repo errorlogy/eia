@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-20 — M-E / ATT-G goal genesis
+
+- **Section:** Sci-flow M-E / ATT-G
+- **Delta:** Expand `eia.goal_genesis`: selection vs genesis (\(g^{*} \notin G_t\)); genealogy S→ΔW→M→g*→Π*; falsifiers (wording, catalog cap, zero tension); optional WoE wire; n=50 metrics. No C3 / AGI\*. Priority → ATT-P. Preserve `emit_m0=false`.
+- **Rationale:** [`M-E_metrics_2026-08-20.md`](../research/sci_flow/M-E_metrics_2026-08-20.md).
+
 ### 2026-08-20 — T_AMAT_M0 M0-twin harness
 
 - **Section:** Sci-flow T_AMAT_M0 / ATT-R motive path

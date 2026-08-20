@@ -118,8 +118,8 @@ Do **not** gut science gates to force SEND.
 1. **DONE:** `L_EIA_CF4` (T_EIA_state) — C2 claimed 2026-08-20 (\(E_{\mathrm{endo}}\) / ATT-E partial)
 2. **DONE (docs):** AGI\* phase-transition + ATT draft (M-ATT) — horizon only
 3. **DONE:** `L_AMAT_M0` M0-twin harness expand (ATT-R / motive-side \(E\) architecture)
-4. **Execute next:** M-E / ATT-G goal genesis (non-catalog novelty + genealogy)
-5. **Then:** ATT-P persistence pre-registration
+4. **DONE:** M-E / ATT-G goal genesis (explore proxy; no C3)
+5. **Execute next:** ATT-P persistence pre-registration
 6. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
 7. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
 8. **Later:** M-N / ATT-N execute — only after encoding budget pre-registration
@@ -141,6 +141,7 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | M-E / ATT-G DONE (explore proxy); priority → ATT-P |
 | 2026-08-20 | T_AMAT_M0 harness DONE; priority → M-E / ATT-G |
 | 2026-08-20 | Phase-transition + ATT linked; \(\tau_{AGI}\) horizon; priority: M0 then ATT-G/P |
 | 2026-08-20 | AGI\* criterion linked; C2 framed as \(E_{\mathrm{endo}}\) partial; M-N deferred |

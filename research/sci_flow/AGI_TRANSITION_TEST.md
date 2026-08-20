@@ -53,7 +53,7 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | Hold catalog targets as negative control (novelty capped &lt; 0.75). Require non-catalog genesis with reconstructible parents |
 | **Suggested first proxy** | Fraction of episodes with `goal_novelty ≥ 0.75` **and** `catalog_target=false` **and** EIS ≥ 7 taxonomy eligibility |
 | **Threshold** | **TBD** (suggested explore: pass-rate ≥ 0.50 over ≥ 50 seeds — **not pre-registered**) |
-| **Status** | **Not executed** — M-E planned; catalog path intentionally blocks EIS-7 |
+| **Status** | **Explore proxy holds (2026-08-20)** — M-E executed; **not** C3 / not AGI\* |
 | **Falsifier** | Only selection from fixed catalog / designer \(\mathcal{G}\); or “novelty” without genealogy |
 
 ---
@@ -147,7 +147,7 @@ Until then:
 | ATT | Maps to | Empirical status | Raises C-ladder? | Raises AGI\*? |
 |-----|---------|------------------|------------------|---------------|
 | ATT-E | CF-4 / EOI / `e_endo_partial` | Partial (C2) | Already C2 | **No** |
-| ATT-G | M-E EIS-7 | Pending | Maybe C2→C3 prep | **No** |
+| ATT-G | M-E EIS-7 | Explore proxy (no C3) | No | **No** |
 | ATT-C | CausalTrace / WoE receipts | Scaffolded (M-A) | No alone | **No** |
 | ATT-P | LoopScheduler persistence | Untested as ATT | Maybe C3 timing | **No** |
 | ATT-R | Closed cognitive loop / M0 | Arch stronger (M0-twin) | No alone | **No** |
@@ -159,7 +159,7 @@ Until then:
 ## Suggested execute priority (after this draft)
 
 1. **DONE:** T_AMAT_M0 M0-twin harness (motive-side \(E\) / ATT-R architecture).
-2. **ATT-G / M-E:** non-catalog novelty path with genealogy (ATT-C) co-required.
+2. **DONE:** ATT-G / M-E non-catalog novelty path with genealogy (ATT-C) co-required — explore proxy only.
 3. **ATT-P:** pre-register \(k\)-tick persistence metric on research branch.
 4. **ATT-N:** only after encoding budget \(B\) pre-registration.
 5. **ATT-D:** after ATT-E is stable in a second domain.
@@ -170,5 +170,6 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | M-E / ATT-G explore proxy executed; matrix updated; priority → ATT-P |
 | 2026-08-20 | M0-twin harness → ATT-R architecture stronger; priority → ATT-G |
 | 2026-08-20 | Initial ATT draft: 7 tests, TBD thresholds, harness map, evidence matrix |
