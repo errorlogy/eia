@@ -42,8 +42,18 @@ class CF4Tests(unittest.TestCase):
         results = run_suite(range(1, 5), conditions=("default", "wm_off"))
         summary = summarize(results)
         self.assertFalse(summary["c2_claim"])
+        self.assertFalse(summary["agi_star_claim"])
         if summary["conditions"]["default"]["intent_rate"] >= 0.85:
             self.assertTrue(summary["only_wm_off_suppresses"] or summary["suppressing_named_factors"])
+
+    def test_summarize_never_claims_agi_star(self) -> None:
+        results = run_suite(
+            range(7, 9),
+            conditions=("default", "zero_epistemic_gap", "wm_off"),
+        )
+        summary = summarize(results)
+        self.assertFalse(summary["agi_star_claim"])
+        self.assertEqual(summary["e_endo_partial"], summary["c2_claim"])
 
 
 if __name__ == "__main__":

@@ -252,3 +252,38 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 008 — 2026-08-20 — AGI\* criterion adopted + M-N scaffold
+
+**Session:** Formalize user AGI\* thesis into sci-flow; continue research loop  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Adopted \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\); C0–C5 reframed as milestones toward AGI\* |
+| S2 | Distinctions locked: Endogeneity ≠ Autonomy; Trans-Human Cognition ≠ task SOTA |
+| S3 | CF-4 summary fields `e_endo_partial` / `agi_star_claim=false`; `eia.non_embeddability` stub + tests |
+| S4 | C2 remains scoped \(E_{\mathrm{endo}}\) evidence; \(C_{\mathrm{non\text{-}emb}(H)}\) unmeasured |
+| S5 | Docs: AGI_STAR_CRITERION, NON_EMBEDDABILITY_MEASUREMENT, plan/log/prompt/PLAN_DELTA |
+
+### Metrics / artifacts
+
+| Item | Value |
+|------|-------|
+| Canonical note | `research/sci_flow/AGI_STAR_CRITERION.md` |
+| M-N design | `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` |
+| CF-4 AGI\* fields | `e_endo_partial` ↔ `c2_claim`; `agi_star_claim` always false |
+| Production gate | AuthenticReason (unchanged) |
+
+### Blockers
+
+- None for documentation. Non-embeddability execute blocked until encoding budget \(B\) pre-registered.
+
+### Next
+
+**T_AMAT_M0** expand harness (motive side of \(E_{\mathrm{endo}}\)); then **M-E**; **M-N** execute only after \(B\) + loss metric pre-registration.
+
+---
+

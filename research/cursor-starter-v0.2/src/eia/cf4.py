@@ -1,4 +1,9 @@
-"""CF-4 internal-state reset suite (C2 path after CF-5 Kuramoto unsupported)."""
+"""CF-4 internal-state reset suite (C2 path after CF-5 Kuramoto unsupported).
+
+AGI* mapping (research only): population C2 under named internal reset is scoped
+evidence for E_endo (endogenous cognitive causality), not AGI* and not
+C_non-emb(H). See research/sci_flow/AGI_STAR_CRITERION.md.
+"""
 
 from __future__ import annotations
 
@@ -156,4 +161,7 @@ def summarize(results: list[CF4SeedResult]) -> dict[str, object]:
         "suppressing_named_factors": suppressing,
         "only_wm_off_suppresses": only_global,
         "c2_claim": c2,
+        # Scoped E_endo evidence under AGI* framing; never implies AGI*.
+        "e_endo_partial": c2,
+        "agi_star_claim": False,
     }

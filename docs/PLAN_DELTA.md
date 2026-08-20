@@ -14,6 +14,18 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-20 — AGI\* criterion + M-N scaffold
+
+- **Section:** Sci-flow claim ladder / AGI\* research target
+- **Delta:** Adopt formal criterion \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\). C0–C5 reframed as empirical milestones toward AGI\* (not AGI\*). C2/CF-4 = scoped \(E_{\mathrm{endo}}\) only. Scaffold M-N non-embeddability proxies + `eia.non_embeddability` stubs (`claim_allowed=false`). AuthenticReason remains production gate.
+- **Rationale:** User thesis integration; [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md).
+
+### 2026-08-20 — Sci-flow M-CF4 C2 claimed
+
+- **Section:** WoE / CF-4 internal-state causation
+- **Delta:** Active ceiling raised to **C2** via named factor `zero_epistemic_gap` (intent_rate 0.06). Kuramoto CF-5 remains unsupported as a cause.
+- **Rationale:** [`M-CF4_metrics_2026-08-20.md`](../research/sci_flow/M-CF4_metrics_2026-08-20.md).
+
 ### 2026-08-18 — Sci-flow M-D CF-5 C2 unsupported
 
 - **Section:** WoE / CF-5 phase intervention

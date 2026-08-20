@@ -53,4 +53,5 @@ Self-prior ablation is nearly inert (0.91). Staleness / prospective each drop ~0
 - **C2 claimed** for CF-4 / H-WOE-003 under pre-registered gates.
 - Active ceiling moves **C1 → C2** (internal-state causation via epistemic-gap core).
 - Does **not** revive Kuramoto-as-cause (M-D still stands).
+- **AGI\* mapping:** C2 is scoped evidence for \(E_{\mathrm{endo}}\) only. Summarizer sets `e_endo_partial=true` when `c2_claim`, and **always** `agi_star_claim=false`. \(C_{\mathrm{non\text{-}emb}(H)}\) is unmeasured — see [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md).
 - Next: T_AMAT_M0 harness beyond stub; optional T_NAMM_cert; T_LIVE_gate diagnose without unlabeled threshold gutting.

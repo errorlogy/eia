@@ -1,9 +1,25 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-20 (M-CF4 complete; C2 claimed via epistemic-gap core)  
+**Updated:** 2026-08-20 (AGI\* criterion adopted; M-CF4 = scoped \(E_{\mathrm{endo}}\); M-N scaffolded)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
+**AGI\* target (research, not claimed):** \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) — see [`research/sci_flow/AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md).  
+**Production gate:** AuthenticReason. EIS/ECS/WoE/AGI\* measurement = research-only.  
 **Topologies:** [`MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)
+
+---
+
+## Claim ladder ↔ AGI\* (do not overclaim)
+
+C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
+
+| Ladder | Role vs AGI\* |
+|--------|----------------|
+| C1–C2 | Progressive evidence for \(E_{\mathrm{endo}}\) (request-independence → internal-state causation) |
+| C3–C5 | Timing / usefulness / transfer of endogenous-like behavior; may remain Homo-embeddable |
+| \(C_{\mathrm{non\text{-}emb}(H)}\) | Separate conjunct — unmeasured; scaffold only ([`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md)) |
+
+**Endogeneity ≠ autonomy. Trans-human cognition ≠ superhuman task scores.**
 
 ---
 
@@ -15,7 +31,8 @@
 | **M-B** | EIS port to main audit types (`audit/eis.py`) | metadata | P1 | main | **DONE** |
 | **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | **DONE** |
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | **DONE** (C2 unsupported) |
-| **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 | P0 | WoE v0.2 | **DONE** (C2 claimed) |
+| **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 / \(E_{\mathrm{endo}}\) partial | P0 | WoE v0.2 | **DONE** (C2 claimed) |
+| **M-N** | \(C_{\mathrm{non\text{-}emb}(H)}\) measurement design + stubs | research metadata | P2 | WoE v0.2 | **scaffolded** |
 | **M-E** | EIS-7 goal novelty constructor | C2→C3 prep | P2 | WoE v0.2 | planned |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
@@ -131,15 +148,27 @@ pip install -e ".[science,nd]"
 
 **Result:** default 0.95; `zero_epistemic_gap` 0.06; wm_off 0.00. Self-prior 0.91; staleness/prospective 0.74 (above factor gate).
 
+**AGI\*:** scoped \(E_{\mathrm{endo}}\) evidence only (`e_endo_partial`); `agi_star_claim` always false.
+
 **Report:** [`research/sci_flow/M-CF4_metrics_2026-08-20.md`](../research/sci_flow/M-CF4_metrics_2026-08-20.md)
+
+---
+
+## M-N: Non-embeddability scaffold (scaffolded)
+
+**Result:** Design note + typed stubs (`eia.non_embeddability`); no thresholds, no C-level raise, no AGI\* claim.
+
+**Docs:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md)
 
 ---
 
 ## Current sci-flow priority (#1)
 
-**T_AMAT_M0 / M-M0:** Expand M0-twin harness beyond stub (`amat_m0.py`); keep `emit_m0=false`.
+**T_AMAT_M0 / M-M0:** Expand M0-twin harness beyond stub (`amat_m0.py`); keep `emit_m0=false` — strengthens motive-side \(E_{\mathrm{endo}}\).
 
 **M-E:** EIS-7 goal novelty constructor (catalog targets remain capped below 0.75).
+
+**M-N (later):** Pre-register encoding budget \(B\) before any non-embeddability execute batch.
 
 **T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 witness — do not unlabeled-lower governor threshold.
 
@@ -149,6 +178,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | AGI\* criterion adopted; M-N non-embeddability scaffold; C-ladder framed under \(E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) |
 | 2026-08-20 | M-CF4 DONE: C2 claimed (epistemic-gap core 0.06); multi-topology registry |
 | 2026-08-18 | M-D DONE: CF-5 100 seeds; C2 unsupported (K=0 0.94, scramble 0.69) |
 | 2026-08-18 | M-G DONE: measured EIS vector; CF-1 smoke 0.95 |

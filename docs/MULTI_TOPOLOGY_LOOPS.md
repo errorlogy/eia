@@ -14,10 +14,11 @@ This registry names **bounded loops in different topologies**. Sci-flow S1–S5 
 | Ceiling | Status | Rule |
 |---------|--------|------|
 | **C1** | Claimed (M-C) | Full / 24h prompt deletion pass-rate ≥ 0.90 |
-| **C2** | **Claimed (M-CF4)** | Named internal reset: default ≥0.85 and factor ≤0.40 and wm_off ≤0.05. Kuramoto CF-5 alone is **not** C2. |
+| **C2** | **Claimed (M-CF4)** | Named internal reset: default ≥0.85 and factor ≤0.40 and wm_off ≤0.05. Kuramoto CF-5 alone is **not** C2. Scoped \(E_{\mathrm{endo}}\) only. |
+| **AGI\*** | **Not claimed** | Requires \(E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\). See [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md). |
 | Kuramoto → intent | Unsupported | M-D: K=0 ≈ coupled; scramble Δ too small |
 
-Do **not** claim C2 without gates in this file / CF harness. Do **not** claim Kuramoto causes intent. Do **not** merge WoE research runtime into main `src/eia/`.
+Do **not** claim C2 without gates in this file / CF harness. Do **not** claim Kuramoto causes intent. Do **not** claim AGI\* from C-ladder alone. Do **not** merge WoE research runtime into main `src/eia/`.
 
 ---
 
@@ -113,10 +114,11 @@ Do **not** gut science gates to force SEND.
 
 ## Execution priority (this registry)
 
-1. **DONE:** `L_EIA_CF4` (T_EIA_state) — C2 claimed 2026-08-20
+1. **DONE:** `L_EIA_CF4` (T_EIA_state) — C2 claimed 2026-08-20 (\(E_{\mathrm{endo}}\) partial under AGI\*)
 2. **Execute next:** `L_AMAT_M0` expand harness beyond stub
 3. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
 4. **Optional:** `L_NAMM_013_030` structural witness
+5. **Later:** M-N \(C_{\mathrm{non\text{-}emb}(H)}\) execute — only after encoding budget pre-registration
 
 ## Cursor `/loop` sentinels (PowerShell)
 
@@ -135,5 +137,6 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | AGI\* criterion linked; C2 framed as \(E_{\mathrm{endo}}\) partial; M-N deferred |
 | 2026-08-20 | CF-4 executed; C2 claimed (gap core 0.06); M0 stub |
 | 2026-08-20 | Initial multi-topology registry; CF-4 gates; AMAT/live/NAMM loops |
