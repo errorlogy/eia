@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-20 — AGI\* phase-transition theory + ATT
+
+- **Section:** Sci-flow research horizon / ATT protocol
+- **Delta:** Expand compact AGI\* into operationalizable phase-transition construction with order parameters \(E,N_H,P,R,D\) and \(\tau_{AGI}\). Draft ATT-E…ATT-D mapped to CF-4/EOI, M-E, CausalTrace/WoE receipts, LoopScheduler, closed loop/M0, M-N/NAMM AMAT, cross-domain. Epistemic tags required. C0–C5 unchanged as empirical milestones; AGI\* not claimed. Light stubs `eia.agi_transition`.
+- **Rationale:** User phase-transition theory; [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md).
+
 ### 2026-08-20 — AGI\* criterion + M-N scaffold
 
 - **Section:** Sci-flow claim ladder / AGI\* research target

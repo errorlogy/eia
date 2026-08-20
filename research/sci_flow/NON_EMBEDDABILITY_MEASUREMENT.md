@@ -2,11 +2,14 @@
 
 **Status:** Research design only (2026-08-20) — no claim, no production gate  
 **Parent criterion:** [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
+**Phase-transition theory:** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) (§7–9, order parameter \(N_H\))  
+**ATT cell:** ATT-N in [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)
+
 \[
 AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}
 \]
 
-This note scaffolds **how** to eventually measure cognitive non-embeddability relative to Homo-agent \(H\). It does **not** implement a scoring pipeline that could raise the sci-flow claim ceiling.
+This note scaffolds **how** to eventually measure cognitive non-embeddability relative to Homo-agent \(H\) (\(N_H\) / \(C_{\mathrm{non\text{-}emb}(H)}\)). It does **not** implement a scoring pipeline that could raise the sci-flow claim ceiling.
 
 ---
 

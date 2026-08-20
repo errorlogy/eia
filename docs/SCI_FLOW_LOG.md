@@ -287,3 +287,41 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 009 — 2026-08-20 — AGI\* phase-transition theory + ATT draft
+
+**Session:** Formalize expanded order-parameter theory; draft falsifiable ATT; map harnesses  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **AGI\* / \(\tau_{AGI}\) not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Adopted phase-transition construction: \(\mathcal{A}_t\), \(E,N_H,P,R,D\), \(\tau_{AGI}\), regimes \(AI_0\to AI_1\to PS\to AGI^{*}\) |
+| S2 | Epistemic tags locked; opacity≠non-embeddability; Kuramoto \(R\) ≠ ATT-R; C-ladder = milestones only |
+| S3 | Docs + ATT-E…ATT-D; stubs `eia.agi_transition` + tests; thresholds TBD |
+| S4 | Evidence matrix: ATT-E partial (CF-4); ATT-C scaffolded; others pending |
+| S5 | Plan/log/prompt/PLAN_DELTA/MULTI_TOPOLOGY updated; M-ATT drafted |
+
+### Metrics / artifacts
+
+| Item | Value |
+|------|-------|
+| Theory | `research/sci_flow/AGI_PHASE_TRANSITION.md` |
+| ATT | `research/sci_flow/AGI_TRANSITION_TEST.md` |
+| Compact | `research/sci_flow/AGI_STAR_CRITERION.md` (updated pointers) |
+| Stubs | `eia.agi_transition` — `agi_star_claim` forced false |
+| Production gate | AuthenticReason (unchanged) |
+
+### Blockers
+
+- Continuous \(E\) index and all \(\theta_\bullet\) unregistered
+- ATT-N blocked until encoding budget \(B\)
+- M0-twin still stub for ATT-R strengthening
+
+### Next
+
+**T_AMAT_M0** expand harness (ATT-R / motive-side \(E\)); **M-E / ATT-G**; pre-register **ATT-P** persistence; **ATT-N** only after \(B\).
+
+---
+

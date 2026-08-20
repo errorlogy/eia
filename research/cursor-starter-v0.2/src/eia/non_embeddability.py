@@ -1,7 +1,8 @@
 """Research stubs for C_non-emb(H) measurement (AGI* conjunct).
 
 Not a production gate. Does not raise C-levels or claim AGI*.
-See research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md and AGI_STAR_CRITERION.md.
+See research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md, AGI_STAR_CRITERION.md,
+AGI_PHASE_TRANSITION.md (N_H), and AGI_TRANSITION_TEST.md (ATT-N).
 """
 
 from __future__ import annotations
