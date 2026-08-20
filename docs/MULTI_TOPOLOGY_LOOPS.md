@@ -74,10 +74,11 @@ T_NAMM_cert ── external structural witness (013 / 030); do not merge into EI
 | **Trigger** | After CF-4 result logged; or in parallel design work |
 | **Act** | Design + minimal harness: compute \(M_0\) sketch, keep `emit_M0=false`, prefer chimera / fiber-preserving aggregation; \(K_A \ll K_H\) search |
 | **Verify** | Structural gates (d*, β₁, D_eff, R*) logged; motive ≠ cron Q-list |
-| **Stop** | One design doc + stub harness shipped; live phase claims require NAMM certs |
+| **Stop** | Design + expanded harness + metrics; live phase claims require NAMM certs |
 | **Claim ceiling** | Architecture / OPERATIONAL only — not C2, not AGI |
+| **Status (2026-08-20)** | **DONE (harness).** `amat_m0` modes off/on/audit_only; falsifiers hold; `emit_m0=false` |
 
-Artifact: `research/sci_flow/M0_TWIN_AMAT_DESIGN.md`
+Artifact: `research/sci_flow/M0_TWIN_AMAT_DESIGN.md` · metrics `M0_TWIN_METRICS_2026-08-20.md`
 
 ---
 
@@ -116,11 +117,12 @@ Do **not** gut science gates to force SEND.
 
 1. **DONE:** `L_EIA_CF4` (T_EIA_state) — C2 claimed 2026-08-20 (\(E_{\mathrm{endo}}\) / ATT-E partial)
 2. **DONE (docs):** AGI\* phase-transition + ATT draft (M-ATT) — horizon only
-3. **Execute next:** `L_AMAT_M0` expand harness beyond stub (feeds ATT-R / motive-side \(E\))
-4. **Then:** M-E / ATT-G goal genesis; ATT-P persistence pre-registration
-5. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
-6. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
-7. **Later:** M-N / ATT-N execute — only after encoding budget pre-registration
+3. **DONE:** `L_AMAT_M0` M0-twin harness expand (ATT-R / motive-side \(E\) architecture)
+4. **Execute next:** M-E / ATT-G goal genesis (non-catalog novelty + genealogy)
+5. **Then:** ATT-P persistence pre-registration
+6. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
+7. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
+8. **Later:** M-N / ATT-N execute — only after encoding budget pre-registration
 
 ## Cursor `/loop` sentinels (PowerShell)
 
@@ -139,6 +141,7 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | T_AMAT_M0 harness DONE; priority → M-E / ATT-G |
 | 2026-08-20 | Phase-transition + ATT linked; \(\tau_{AGI}\) horizon; priority: M0 then ATT-G/P |
 | 2026-08-20 | AGI\* criterion linked; C2 framed as \(E_{\mathrm{endo}}\) partial; M-N deferred |
 | 2026-08-20 | CF-4 executed; C2 claimed (gap core 0.06); M0 stub |

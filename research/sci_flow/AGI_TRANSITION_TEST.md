@@ -95,7 +95,7 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | Log at least one full cycle where post-action world update causally feeds *new* endogenous goal (not cron Q-list) |
 | **Suggested first proxy** | Trace contains world_update child that is parent of a later novel motive; `emit_m0=false` |
 | **Threshold** | **TBD** |
-| **Status** | **Architecture partial** — loop exists; M0-twin still stub |
+| **Status** | **Architecture stronger** — M0-twin harness shipped (`emit_m0=false`); not ATT-scored |
 | **Falsifier** | Open-loop respond-once; or recurrence driven only by external schedule / prompt spam |
 | **Ban** | Do not use Kuramoto order parameter as ATT-R |
 
@@ -150,7 +150,7 @@ Until then:
 | ATT-G | M-E EIS-7 | Pending | Maybe C2→C3 prep | **No** |
 | ATT-C | CausalTrace / WoE receipts | Scaffolded (M-A) | No alone | **No** |
 | ATT-P | LoopScheduler persistence | Untested as ATT | Maybe C3 timing | **No** |
-| ATT-R | Closed cognitive loop / M0 | Partial arch | No alone | **No** |
+| ATT-R | Closed cognitive loop / M0 | Arch stronger (M0-twin) | No alone | **No** |
 | ATT-N | M-N / NAMM AMAT | Unmeasured | No | **No** |
 | ATT-D | Cross-domain scenarios | Unmeasured | C5 if gated | **No** |
 
@@ -158,7 +158,7 @@ Until then:
 
 ## Suggested execute priority (after this draft)
 
-1. **Strengthen \(E\):** expand T_AMAT_M0 motives feeding ATT-R / ATT-E (keep `emit_m0=false`).
+1. **DONE:** T_AMAT_M0 M0-twin harness (motive-side \(E\) / ATT-R architecture).
 2. **ATT-G / M-E:** non-catalog novelty path with genealogy (ATT-C) co-required.
 3. **ATT-P:** pre-register \(k\)-tick persistence metric on research branch.
 4. **ATT-N:** only after encoding budget \(B\) pre-registration.
@@ -170,4 +170,5 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-20 | M0-twin harness → ATT-R architecture stronger; priority → ATT-G |
 | 2026-08-20 | Initial ATT draft: 7 tests, TBD thresholds, harness map, evidence matrix |

@@ -317,11 +317,51 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 - Continuous \(E\) index and all \(\theta_\bullet\) unregistered
 - ATT-N blocked until encoding budget \(B\)
-- M0-twin still stub for ATT-R strengthening
+- M0-twin still stub for ATT-R strengthening (resolved in Entry 010)
 
 ### Next
 
 **T_AMAT_M0** expand harness (ATT-R / motive-side \(E\)); **M-E / ATT-G**; pre-register **ATT-P** persistence; **ATT-N** only after \(B\).
+
+---
+
+## Entry 010 — 2026-08-20 — T_AMAT_M0 M0-twin harness + ATT-G scaffold
+
+**Session:** Expand M0-twin beyond stub; pre-register falsifiers; scaffold ATT-G  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **AGI\* not claimed.** Architecture only for M0.
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-AMAT-M0: off-typical twin motives ≠ median M0 without emitting M0 |
+| S2 | Falsifiers: OFF→collapse to M0; ON→differs when intent forms; gate miss⇒abstain |
+| S3 | Expanded `eia.amat_m0`; wired `m0_twin_mode` into WoE simulator; `eia.goal_genesis` stub |
+| S4 | n=40: OFF collapse 1.0 / differs 0.0; ON intent 0.925 / differs 1.0; emit_m0=0 |
+| S5 | Metrics + MULTI_TOPOLOGY / NEXT prompt → priority M-E / ATT-G |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| WoE tests | 76+ (incl. amat_m0 + goal_genesis) |
+| OFF collapse_to_m0_rate | 1.0 |
+| OFF differs_from_m0_rate | 0.0 |
+| ON emit_m0_rate | 0.0 |
+| ON intent_rate | 0.925 |
+| ON intent differs_from_m0 | 1.0 |
+| c2_claim / agi_star_claim | false / false |
+| Report | `research/sci_flow/M0_TWIN_METRICS_2026-08-20.md` |
+
+### Blockers
+
+- Embedding-space \(d(h(y), B_*)\) not wired (unitless proxy gate only)
+- ATT-G / ATT-P / ATT-N still unscored
+
+### Next
+
+**M-E / ATT-G** non-catalog novelty batch; **ATT-P** persistence pre-reg; optional T_LIVE / T_NAMM.
 
 ---
 

@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-20-CF4"
+updated: "2026-08-20-M0"
 
 repos:
   eia:
@@ -78,13 +78,23 @@ milestones:
     command: python research/sci_flow/run_cf4.py
     result: "default 0.95 / zero_epistemic_gap 0.06 / wm_off 0.00"
   M-M0:
-    name: AMAT M0-twin architecture stub
+    name: AMAT M0-twin anti-median harness
     claim: architecture
     topology: T_AMAT_M0
     branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-20"
+    command: python research/sci_flow/run_m0_twin.py
+    result: "OFF collapse 1.0 / ON differs 1.0 / emit_m0=0"
+    artifact: research/sci_flow/M0_TWIN_METRICS_2026-08-20.md
+  M-E:
+    name: ATT-G non-catalog goal genesis
+    claim: C3_prep
+    att: ATT-G
+    branch: research/cursor-starter-v0.2-woe-eis
     status: scaffolded
     completed: "2026-08-20"
-    artifact: research/sci_flow/M0_TWIN_AMAT_DESIGN.md
+    artifact: research/cursor-starter-v0.2/src/eia/goal_genesis.py
 
 eia_eval_scenarios:
   - id: twin_world_001

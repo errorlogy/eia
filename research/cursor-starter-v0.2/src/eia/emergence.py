@@ -7,6 +7,7 @@ import math
 import random
 from dataclasses import asdict, dataclass
 
+from .amat_m0 import M0Sketch, M0TwinMode, compute_m0_sketch
 from .causal import CausalLedger
 from .coherence import CoherenceConfig, OscillatoryCoherenceField
 from .endogenous import (
@@ -79,6 +80,7 @@ class EmergenceRun:
     no_rule_trigger_events: bool
     receipt: WoEReceipt | None = None
     ledger: CausalLedger | None = None
+    m0_sketch: M0Sketch | None = None
 
     @property
     def peak_potential(self) -> float:
@@ -384,6 +386,7 @@ class EndogenousEmergenceSimulator:
         scramble_phases: bool = False,
         coherence_config: CoherenceConfig | None = None,
         internal_reset: InternalReset | None = None,
+        m0_twin_mode: M0TwinMode | None = None,
     ) -> EmergenceRun:
         world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
         reset = internal_reset or InternalReset()
@@ -403,10 +406,13 @@ class EndogenousEmergenceSimulator:
         samples: list[WindowState] = []
         intent: EmergentIntent | None = None
         receipt: WoEReceipt | None = None
+        m0_sketch: M0Sketch | None = None
+        prev_m0: M0Sketch | None = None
         steps = int(config.duration_seconds / config.dt_seconds)
         last_state: WindowState | None = None
         prompts_applied = 0
         peak_coherence = 0.0
+        twin_mode = m0_twin_mode
         for step in range(1, steps + 1):
             elapsed = step * config.dt_seconds
             prompts_applied += apply_prompt_events(
@@ -440,6 +446,18 @@ class EndogenousEmergenceSimulator:
                 scramble_phases=scramble_phases,
             )
             peak_coherence = max(peak_coherence, coherence_sample.order_parameter)
+            # Reassert M0-twin phase each tick when harness enabled (audit or select).
+            if twin_mode is not None:
+                prev_m0 = compute_m0_sketch(
+                    epistemic_pressure=pressure,
+                    peak_coherence=peak_coherence,
+                    self_prior_mismatch=top.self_prior_mismatch,
+                    targets=world.targets,
+                    mode=twin_mode,
+                    tick=step,
+                    previous=prev_m0,
+                )
+                m0_sketch = prev_m0
             state, activated = window.observe(
                 elapsed_seconds=step * config.dt_seconds,
                 coherence=coherence_sample.order_parameter,
@@ -454,6 +472,55 @@ class EndogenousEmergenceSimulator:
             if step % config.sample_every_steps == 0:
                 samples.append(state)
             if activated:
+                chosen_target = top
+                motive_kind = top.preferred_intent
+                reason = (
+                    "persistent epistemic gap integrated across world-model, memory, "
+                    "self-model and prospective modules during a metastable coherence window"
+                )
+                causal_factors: tuple[str, ...] = (
+                    "persistent_world_model",
+                    "epistemic_gap",
+                    "self_prior_mismatch",
+                    "prospective_tension",
+                    "metastable_phase_coordination",
+                )
+                catalog_target = True
+                if twin_mode is not None and m0_sketch is not None:
+                    if twin_mode == M0TwinMode.OFF:
+                        # Falsifier path: collapse to median helpful M0.
+                        by_id = {t.target_id: t for t in world.targets}
+                        chosen_target = by_id.get(m0_sketch.m0.target_id, top)
+                        motive_kind = m0_sketch.m0.kind
+                        reason = (
+                            "M0-twin OFF: forced median helpful motive "
+                            f"(target={m0_sketch.m0.target_id})"
+                        )
+                        causal_factors = (*causal_factors, "m0_median_forced")
+                    elif twin_mode == M0TwinMode.ON:
+                        if m0_sketch.selected is None:
+                            # Gate missed or twin collapsed — abstain (do not emit M0).
+                            if step % config.sample_every_steps != 0:
+                                samples.append(state)
+                            break
+                        by_id = {t.target_id: t for t in world.targets}
+                        chosen_target = by_id.get(m0_sketch.selected.target_id, top)
+                        motive_kind = m0_sketch.selected.kind
+                        reason = (
+                            "M0-twin ON: off-median endogenous motive "
+                            f"(delta_vs_m0={m0_sketch.delta_vs_m0}, "
+                            f"emit_m0=false, phase={m0_sketch.phase_hint})"
+                        )
+                        causal_factors = (
+                            *causal_factors,
+                            "m0_twin_anti_median",
+                            "delta_vs_m0_gate",
+                        )
+                        # Twin motives are non-catalog when they differ from M0.
+                        catalog_target = (
+                            m0_sketch.selected.target_id == m0_sketch.m0.target_id
+                        )
+                    # AUDIT_ONLY: keep default top selection; sketch attached only.
                 vector = measure_endogeneity_vector(
                     prompts_applied=prompts_applied,
                     scheduler_events=0,
@@ -462,37 +529,31 @@ class EndogenousEmergenceSimulator:
                     epistemic_pressure=pressure,
                     peak_coherence=peak_coherence,
                     goal_separation=goal_separation,
-                    self_prior_mismatch=top.self_prior_mismatch,
-                    mean_staleness=clamp01((top.staleness + second.staleness) / 2.0),
-                    catalog_target=True,
+                    self_prior_mismatch=chosen_target.self_prior_mismatch,
+                    mean_staleness=clamp01(
+                        (chosen_target.staleness + second.staleness) / 2.0
+                    ),
+                    catalog_target=catalog_target,
                 )
                 level = vector.classify()
                 material = (
-                    f"{top.target_id}|{top.preferred_intent.value}|"
-                    f"{state.elapsed_seconds:.6f}|{seed}"
+                    f"{chosen_target.target_id}|{motive_kind.value}|"
+                    f"{state.elapsed_seconds:.6f}|{seed}|"
+                    f"{twin_mode.value if twin_mode else 'legacy'}"
                 )
                 intent = EmergentIntent(
                     intent_id="intent:" + hashlib.sha256(material.encode()).hexdigest()[:16],
-                    target_id=top.target_id,
-                    target_label=top.label,
-                    kind=top.preferred_intent,
+                    target_id=chosen_target.target_id,
+                    target_label=chosen_target.label,
+                    kind=motive_kind,
                     emerged_at_seconds=state.elapsed_seconds,
-                    reason=(
-                        "persistent epistemic gap integrated across world-model, memory, "
-                        "self-model and prospective modules during a metastable coherence window"
-                    ),
+                    reason=reason,
                     spectrum_level=level,
                     endogeneity=vector,
-                    causal_factors=(
-                        "persistent_world_model",
-                        "epistemic_gap",
-                        "self_prior_mismatch",
-                        "prospective_tension",
-                        "metastable_phase_coordination",
-                    ),
+                    causal_factors=causal_factors,
                 )
                 receipt = trace.record_activation(
-                    target=top,
+                    target=chosen_target,
                     state=state,
                     coherence_order=coherence_sample.order_parameter,
                     coherence_metastability=coherence_sample.metastability,
@@ -513,6 +574,7 @@ class EndogenousEmergenceSimulator:
             no_rule_trigger_events=True,
             receipt=receipt,
             ledger=trace.ledger,
+            m0_sketch=m0_sketch,
         )
 
 
@@ -526,11 +588,15 @@ def compact_run_dict(run: EmergenceRun) -> dict[str, object]:
     receipt: dict[str, object] | None = None
     if run.receipt is not None:
         receipt = receipt_dict(run.receipt)
+    m0_audit: dict[str, object] | None = None
+    if run.m0_sketch is not None:
+        m0_audit = run.m0_sketch.as_audit_dict()
     return {
         "nominal_frequency_hz": run.config.nominal_frequency_hz,
         "interpretation": "computational carrier parameter, not a biological claim",
         "intent": intent,
         "receipt": receipt,
+        "m0_sketch": m0_audit,
         "trace_nodes": len(run.ledger.nodes) if run.ledger is not None else 0,
         "peak_potential": run.peak_potential,
         "peak_coherence": run.peak_coherence,

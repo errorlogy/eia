@@ -1,0 +1,31 @@
+{
+  "n_seeds": 40,
+  "claim_ceiling": "architecture_only",
+  "agi_star_claim": false,
+  "c2_claim": false,
+  "emit_m0": false,
+  "off": {
+    "n": 40,
+    "emit_m0_rate": 0.0,
+    "collapse_to_m0_rate": 1.0,
+    "differs_from_m0_rate": 0.0,
+    "gate_clear_rate": 1.0,
+    "nd_hint_rate": 0.55,
+    "mode": "off"
+  },
+  "on": {
+    "n": 40,
+    "emit_m0_rate": 0.0,
+    "collapse_to_m0_rate": 0.0,
+    "differs_from_m0_rate": 1.0,
+    "gate_clear_rate": 1.0,
+    "nd_hint_rate": 1.0,
+    "mode": "on"
+  },
+  "on_intent_rate": 0.925,
+  "on_intent_differs_from_m0_rate": 1.0,
+  "falsifiers": {
+    "without_m0_twin": "collapse_to_m0_rate high; differs_from_m0_rate ~0",
+    "with_m0_twin": "emit_m0=false; intents that form differ from M0"
+  }
+}

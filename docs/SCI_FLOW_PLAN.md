@@ -171,11 +171,17 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-M0: AMAT M0-twin harness (DONE, architecture)
+
+**Result:** Modes `off` / `on` / `audit_only`; falsifiers hold (OFF collapse 1.0; ON differs 1.0 among intents); `emit_m0=false`. Unitless Δ proxy — not NAMM embedding cert.
+
+**Report:** [`M0_TWIN_METRICS_2026-08-20.md`](../research/sci_flow/M0_TWIN_METRICS_2026-08-20.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**T_AMAT_M0 / M-M0:** Expand M0-twin harness beyond stub (`amat_m0.py`); keep `emit_m0=false` — strengthens motive-side \(E_{\mathrm{endo}}\) / ATT-R.
-
-**M-E / ATT-G:** EIS-7 goal novelty constructor (catalog targets remain capped below 0.75).
+**M-E / ATT-G:** EIS-7 / non-catalog goal novelty constructor (`eia.goal_genesis` scaffolded); genealogy co-required.
 
 **ATT-P (later):** Pre-register multi-tick persistence metric.
 

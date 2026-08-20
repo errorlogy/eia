@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-20 — T_AMAT_M0 M0-twin harness
+
+- **Section:** Sci-flow T_AMAT_M0 / ATT-R motive path
+- **Delta:** Expand `amat_m0` beyond stub: OFF/ON/AUDIT modes, falsifiers (OFF→median collapse; ON→off-M0 intents; emit_m0=false), WoE wire, metrics. Scaffold `goal_genesis` for ATT-G. Priority → M-E / ATT-G. No C-level / AGI\* raise.
+- **Rationale:** [`M0_TWIN_METRICS_2026-08-20.md`](../research/sci_flow/M0_TWIN_METRICS_2026-08-20.md).
+
 ### 2026-08-20 — AGI\* phase-transition theory + ATT
 
 - **Section:** Sci-flow research horizon / ATT protocol

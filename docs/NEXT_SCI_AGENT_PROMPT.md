@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-20 (AGI\* phase-transition + ATT drafted; M-CF4 = scoped \(E_{\mathrm{endo}}\); M-N scaffolded)  
+**Updated:** 2026-08-20 (T_AMAT_M0 harness DONE; next = M-E / ATT-G)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
@@ -21,9 +21,9 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 5. `docs/MULTI_TOPOLOGY_LOOPS.md`
 6. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
 7. `research/sci_flow/M-CF4_metrics_2026-08-20.md` — **C2 claimed** (gap core) = scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
-8. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design (no claim)
-9. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
-10. `research/sci_flow/M0_TWIN_AMAT_DESIGN.md`
+8. `research/sci_flow/M0_TWIN_METRICS_2026-08-20.md` — T_AMAT_M0 harness falsifiers (architecture only)
+9. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design (no claim)
+10. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
 11. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
@@ -40,17 +40,17 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 | Id | Loop | Status |
 |----|------|--------|
 | **T_EIA_state** | `L_EIA_CF4` | **DONE** — C2 via `zero_epistemic_gap` 0.06 (\(E_{\mathrm{endo}}\) / ATT-E partial) |
-| **T_AMAT_M0** | `L_AMAT_M0` | **#1 next** — expand beyond `amat_m0` stub (ATT-R / motive-side \(E\)) |
+| **T_AMAT_M0** | `L_AMAT_M0` | **DONE** — M0-twin harness; OFF collapse / ON differs; `emit_m0=false` |
 | **T_LIVE_gate** | `L_LIVE_DIAG` | on demand — score ~−0.03; no unlabeled threshold cut |
 | **T_NAMM_cert** | `L_NAMM_013_030` | optional external witness (ATT-N soft only) |
 
-### Run next (T_AMAT_M0 / M-E)
+### Run next (M-E / ATT-G)
 
-**S1:** Motives from off-typical / M0-twin architecture (AMAT law), not prompt persona — strengthens \(E_{\mathrm{endo}}\) and ATT-R.  
-**S2:** Keep `emit_m0=false`; wire audit sketch into receipts optional.  
-**S3:** Implement on research branch only; NAMM certs stay in NAMM repo.  
-**S4:** No new C-level without pre-registered gates. C2 already from CF-4 — do not re-claim via Kuramoto. Never claim AGI\*.  
-**S5:** Update logs; optional live diagnose; if touching ATT cells, update evidence matrix only (no fake thresholds).
+**S1:** Non-catalog goal genesis with reconstructible parents (ATT-G + ATT-C). Catalog path stays novelty-capped &lt; 0.75.  
+**S2:** Pre-register explore gates (suggested: novelty≥0.75 ∧ catalog=false over ≥50 seeds — **not adopted until metrics report**).  
+**S3:** Expand `eia.goal_genesis` + wire optional WoE non-catalog path on research branch only.  
+**S4:** No new C-level without pre-registered gates. Never claim AGI\*. Do not re-claim C2 via Kuramoto or M0 alone.  
+**S5:** Update logs; then ATT-P persistence pre-reg; T_LIVE / T_NAMM as needed.
 
 ### Stop if
 
@@ -77,7 +77,7 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**T_AMAT_M0:** Expand M0-twin harness; then M-E / ATT-G; ATT-P persistence pre-reg; T_NAMM_cert / T_LIVE_gate as needed.  
+**M-E / ATT-G:** Non-catalog goal novelty constructor + genealogy; then ATT-P persistence pre-reg.  
 **M-N / ATT-N:** Execute only after encoding budget \(B\) is pre-registered.
 
 ## Completed this session
@@ -87,3 +87,4 @@ Roman Kuznetsov — research@anthemium.tech
 - **AGI\*** compact criterion + **phase-transition** expansion + **ATT** draft
 - **M-N** non-embeddability design + `eia.non_embeddability` stub
 - **M-ATT** `eia.agi_transition` order-parameter stubs (`agi_star_claim=false`)
+- **T_AMAT_M0** M0-twin harness expand + falsifiers + `eia.goal_genesis` scaffold
