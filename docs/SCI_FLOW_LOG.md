@@ -532,3 +532,58 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 015 — 2026-08-21 — M-D2 / ATT-D cross-domain generality
+
+**Session:** Pre-register ≥2 disjoint domains; CF-4-class \(E_{\mathrm{endo}}\) + P/R explore; falsifiers; metrics  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No C5. No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MD2-ATTD: \(E_{\mathrm{endo}}\) pattern across `woe_catalog` + `twin_ops` |
+| S2 | Falsifiers: single-domain-only; schedule/prompt-only transfer |
+| S3 | `eia.cross_domain` + simulator `targets=` override (research branch; `emit_m0=false`) |
+| S4 | n=20/domain: both e_endo_pattern true (default 0.95); hold evidence 1.0; falsifiers 0 |
+| S5 | Metrics + plan/log/NEXT → priority live closed-loop / ATT board |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| ATT-D unit tests | 9 OK (+ ATT stubs green) |
+| Domains | woe_catalog + twin_ops (disjoint) |
+| woe_catalog default / wm_off / e_pattern | 0.95 / 0.0 / true |
+| twin_ops default / wm_off / e_pattern | 0.95 / 0.0 / true |
+| Cross-domain hold att_d_evidence_rate | 1.0 (\(d\_proxy=1.0\)) |
+| Single-domain-only evidence | 0.0 |
+| Schedule/prompt-transfer evidence | 0.0 |
+| emit_m0_rate_with_genesis | 0.0 |
+| c5_claim / c3_claim / agi_star_claim | false / false / false |
+| Report | `research/sci_flow/M-D2_metrics_2026-08-21.md` |
+
+### ATT board (partial; no \(\tau_{AGI}\))
+
+| ATT | Status | Claim raise? |
+|-----|--------|--------------|
+| ATT-E | Partial (C2) | C2 only |
+| ATT-G | Explore proxy | No C3 |
+| ATT-C | Scaffolded | No alone |
+| ATT-P | Explore proxy | No C3 |
+| ATT-R | Explore proxy | No C3 |
+| ATT-N | Explore under \(B\) | No strong \(N_H\) |
+| ATT-D | Explore proxy | No C5 |
+| AGI\* / \(\tau_{AGI}\) | **Not claimed** | — |
+
+### Blockers
+
+- Official ATT-D / C5 numeric gates still TBD (explore proxy only)
+- Live closed-loop under ATT-R falsifiers not yet instrumented
+
+### Next
+
+**Live closed-loop** WoE / T_LIVE under ATT-R falsifiers; optional ATT board deepen / T_NAMM soft witness.
+
+---
+

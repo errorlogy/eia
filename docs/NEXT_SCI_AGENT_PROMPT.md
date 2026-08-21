@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-21 (M-N / ATT-N DONE explore proxy under \(B\); next = ATT-D or live closed-loop)  
+**Updated:** 2026-08-21 (M-D2 / ATT-D DONE explore proxy; next = live closed-loop under ATT-R falsifiers **or** ATT board synthesis)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
@@ -26,9 +26,10 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 10. `research/sci_flow/M-P_metrics_2026-08-21.md` — ATT-P explore proxy (no C3)
 11. `research/sci_flow/M-R_metrics_2026-08-21.md` — ATT-R explore proxy (no C3; not Kuramoto)
 12. `research/sci_flow/M-N_metrics_2026-08-21.md` — ATT-N explore proxy under \(B\) (no strong \(N_H\))
-13. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design
-14. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
-15. `research/sci_flow/config.yaml`
+13. `research/sci_flow/M-D2_metrics_2026-08-21.md` — ATT-D explore proxy (no C5)
+14. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design
+15. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
+16. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
 
@@ -38,6 +39,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - **M-P / ATT-P** ⇒ explore proxy for temporal \(P_G\); **not C3**, not AGI\*; corrigibility ≠ persistence.
 - **M-R / ATT-R** ⇒ explore proxy for closed goal-formation recurrence; **not C3**, not AGI\*; Kuramoto \(R\) ≠ ATT-R.
 - **M-N / ATT-N** ⇒ explore proxy for \(D_H\) under pre-registered \(B\); **not** strong \(N_H\), not AGI\*; opacity ≠ non-embeddability.
+- **M-D2 / ATT-D** ⇒ explore proxy for cross-domain \(E_{\mathrm{endo}}\); **not C5**, not AGI\*; single-domain / schedule-prompt transfer falsified.
 - \(AGI^{*}\) / \(\tau_{AGI}\) requires sustained \(E,N_H,P,R,D\) — **research horizon, not claimed**.
 - Endogeneity ≠ Autonomy; opacity ≠ non-embeddability; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
 - **AuthenticReason** = production gate; EIS/ECS/WoE/AGI\* = research-only.
@@ -51,15 +53,15 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 | **T_LIVE_gate** | `L_LIVE_DIAG` | on demand — score ~−0.03; no unlabeled threshold cut |
 | **T_NAMM_cert** | `L_NAMM_013_030` | optional external witness (ATT-N soft only) |
 
-### Run next (ATT-D **or** live closed-loop)
+### Run next (live closed-loop **or** ATT board)
 
-**Preferred #1 — ATT-D:** Re-run ATT-E-class internal-factor suppression in a second domain (explore only). Keep `claim_allowed=False` / no C5 raise without gates.
+**Preferred #1 — Live closed-loop:** Instrument real WoE / T_LIVE traces under the same ATT-R falsifiers (research branch; `emit_m0=false`). Keep `claim_allowed=False` / no C3 raise.
 
-**Alt A — Live closed-loop:** Instrument real WoE / T_LIVE traces under the same ATT-R falsifiers (research branch; `emit_m0=false`).
+**Alt A — ATT board synthesis:** Summarize ATT-E…ATT-D partial matrix; still no \(\tau_{AGI}\) / AGI\*.
 
 **Alt B — T_NAMM_cert:** optional soft structural witness only (not strong \(N_H\)).
 
-**S4:** No new C-level without pre-registered gates. Never claim AGI\*. Do not re-claim C2 via Kuramoto or M0 alone. Do not raise C3 from ATT-G/ATT-P/ATT-R explore alone. Do not claim strong \(N_H\) from ATT-N explore alone.  
+**S4:** No new C-level without pre-registered gates. Never claim AGI\*. Do not re-claim C2 via Kuramoto or M0 alone. Do not raise C3 from ATT-G/ATT-P/ATT-R explore alone. Do not claim strong \(N_H\) from ATT-N explore alone. Do not raise C5 from ATT-D explore alone.  
 **S5:** Update logs; then T_LIVE / T_NAMM as needed.
 
 ### Stop if
@@ -67,6 +69,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - C2 re-attributed to Kuramoto
 - AGI\* / consciousness / \(\tau_{AGI}\) claimed from C2, EIS, WoE, AMAT, ATT partials, or Telegram
 - Strong \(N_H\) claimed from opacity or ATT-N explore alone
+- C5 claimed from ATT-D explore alone
 - Live SEND faked by unlabeled threshold gutting
 - Tests fail after 2 fix attempts → log blocker, stop
 - Merge WoE into main `src/eia/` attempted
@@ -80,6 +83,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - Treat non-embeddability stubs / ATT-N explore as positive strong \(C_{\mathrm{non\text{-}emb}(H)}\)
 - Treat Kuramoto \(R\) as Endogenous Cognitive Recurrence (\(R\) in ATT)
 - Raise C3 solely from ATT-G, ATT-P, or ATT-R explore proxy
+- Raise C5 solely from ATT-D explore proxy
 
 ### Author
 
@@ -89,8 +93,8 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**ATT-D:** Cross-domain ATT-E-class explore (second domain).  
-**Alt:** live closed-loop ATT-R instrumentation **or** T_NAMM soft witness.
+**Live closed-loop:** Instrument WoE / T_LIVE under ATT-R falsifiers (`emit_m0=false`).  
+**Alt:** ATT board synthesis (partial matrix; no \(\tau_{AGI}\)) **or** T_NAMM soft witness.
 
 ## Completed this session
 
@@ -103,3 +107,4 @@ Roman Kuznetsov — research@anthemium.tech
 - **M-E / ATT-G** goal genesis + genealogy + falsifiers (n=50); `claim_allowed=False`
 - **M-P / ATT-P** multi-tick \(P_G\) explore proxy + falsifiers (k∈{10,50,200}); `claim_allowed=False`
 - **M-R / ATT-R** closed goal-formation loop scoring + falsifiers (incl. Kuramoto ban); `claim_allowed=False`
+- **M-D2 / ATT-D** cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops) + falsifiers; `claim_allowed=False` / no C5

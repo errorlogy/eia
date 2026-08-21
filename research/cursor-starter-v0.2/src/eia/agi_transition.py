@@ -27,7 +27,10 @@ SUGGESTED_PROXY_NOTES: dict[OrderParameterId, str] = {
     ),
     "P": "LoopScheduler multi-tick persistence without re-prompting",
     "R": "Closed observe→motive→action→world-update goal-formation loop (not Kuramoto R)",
-    "D": "Cross-domain transfer of E and N_H; C5 affinity",
+    "D": (
+        "ATT-D cross-domain E_endo (CF-4-class) on ≥2 disjoint ontologies; "
+        "P/R explore where applicable; claim_allowed=False / no C5"
+    ),
 }
 
 
@@ -197,6 +200,32 @@ def snapshot_with_n_h_explore(
             "scoped E + ATT-P/ATT-R/ATT-N explore proxies only; D unmeasured; "
             "N_H explore is D_H under pre-registered B with ΔP(A|z)>0 — "
             "not strong N_H; opacity ≠ non-embeddability; "
+            "agi_star_claim forced false"
+        ),
+    )
+
+
+def snapshot_with_d_explore(
+    *,
+    e_endo_partial: bool,
+    p_explore_proxy: float | None,
+    r_explore_proxy: float | None,
+    n_h_explore_proxy: float | None,
+    d_explore_proxy: float | None,
+) -> PhaseTransitionSnapshot:
+    """Attach ATT-D explore proxy without authorizing AGI* or C5 raises."""
+    return PhaseTransitionSnapshot(
+        e_score=1.0 if e_endo_partial else 0.0,
+        n_h_score=n_h_explore_proxy,
+        p_score=p_explore_proxy,
+        r_score=r_explore_proxy,
+        d_score=d_explore_proxy,
+        e_endo_partial=e_endo_partial,
+        agi_star_claim=False,
+        rationale=(
+            "scoped E + ATT-P/ATT-R/ATT-N/ATT-D explore proxies; "
+            "D explore is cross-domain E_endo on ≥2 disjoint ontologies — "
+            "not C5; schedule/prompt-only transfer falsified; "
             "agi_star_claim forced false"
         ),
     )

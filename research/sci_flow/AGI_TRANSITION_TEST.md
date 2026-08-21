@@ -124,8 +124,8 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | Re-run ATT-E (and later ATT-N) on ≥2 substantially distinct domains without retuning to a single toy |
 | **Suggested first proxy** | Same CF-4-class internal-factor suppression in ≥2 domains (explore: WoE sim vs twin_world family) |
 | **Threshold** | **TBD** |
-| **Status** | **Not claimed** — C5 open |
-| **Falsifier** | Endogenous / non-embeddable behavior confined to one narrow game |
+| **Status (2026-08-21)** | **Explore proxy holds** — M-D2; **not** C5 / not AGI\* |
+| **Falsifier** | Endogenous / non-embeddable behavior confined to one narrow game; schedule/prompt-only transfer |
 
 ---
 
@@ -152,7 +152,7 @@ Until then:
 | ATT-P | LoopScheduler / multi-tick sim | Explore proxy (M-P; no C3) | No | **No** |
 | ATT-R | Closed cognitive loop / M0 | Explore proxy (M-R; no C3) | No alone | **No** |
 | ATT-N | M-N / NAMM AMAT | Explore proxy (M-N; no strong \(N_H\)) | No | **No** |
-| ATT-D | Cross-domain scenarios | Unmeasured | C5 if gated | **No** |
+| ATT-D | Cross-domain scenarios | Explore proxy (M-D2; no C5) | No | **No** |
 
 ---
 
@@ -163,8 +163,8 @@ Until then:
 3. **DONE:** ATT-P / M-P \(k\)-tick persistence explore proxy (corrigibility separate).
 4. **DONE:** ATT-R / M-R closed goal-formation loop scoring (not Kuramoto \(R\)) — explore proxy only.
 5. **DONE:** ATT-N / M-N encoding budget \(B\) + \(D_H\) explore proxy (opacity falsified; not strong \(N_H\)).
-6. **ATT-D:** after ATT-E is stable in a second domain.
-7. **Optional:** live closed-loop WoE / T_LIVE instrumentation under same ATT-R falsifiers.
+6. **DONE:** ATT-D / M-D2 cross-domain \(E_{\mathrm{endo}}\) explore (woe_catalog + twin_ops) — explore proxy only; not C5.
+7. **Next:** live closed-loop WoE / T_LIVE instrumentation under same ATT-R falsifiers **or** ATT board synthesis.
 
 ---
 
@@ -172,6 +172,7 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-D2 / ATT-D explore proxy executed (woe_catalog + twin_ops); priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N explore proxy executed under pre-registered \(B\); priority → ATT-D or live closed-loop |
 | 2026-08-21 | M-R / ATT-R explore proxy executed; Kuramoto ban enforced; priority → ATT-N budget \(B\) or live closed-loop / ATT-D |
 | 2026-08-21 | M-P / ATT-P explore proxy executed; matrix updated; priority → ATT-R scoring |

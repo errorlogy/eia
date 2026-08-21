@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — M-D2 / ATT-D cross-domain \(E_{\mathrm{endo}}\)
+
+- **Section:** Sci-flow M-D2 / ATT-D
+- **Delta:** Add `eia.cross_domain`: pre-register disjoint `woe_catalog` + `twin_ops`; CF-4-class E pattern + P/R explore per domain; falsifiers (single-domain-only, schedule/prompt transfer); metrics. No C5 / AGI\*. Priority → live closed-loop under ATT-R falsifiers. Preserve `emit_m0=false`.
+- **Rationale:** [`M-D2_metrics_2026-08-21.md`](../research/sci_flow/M-D2_metrics_2026-08-21.md).
+
 ### 2026-08-21 — M-N / ATT-N encoding budget \(B\) + \(D_H\) explore
 
 - **Section:** Sci-flow M-N / ATT-N

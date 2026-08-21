@@ -7,6 +7,7 @@ import unittest
 from eia.agi_transition import (
     default_order_parameter_specs,
     snapshot_from_partial_e,
+    snapshot_with_d_explore,
     snapshot_with_n_h_explore,
     snapshot_with_p_explore,
     snapshot_with_r_explore,
@@ -66,6 +67,19 @@ class TestAgiTransitionStubs(unittest.TestCase):
         self.assertFalse(snap.agi_star_claim)
         self.assertIn("not strong N_H", snap.rationale)
         self.assertIn("opacity", snap.rationale)
+
+    def test_d_explore_snapshot_never_claims(self) -> None:
+        snap = snapshot_with_d_explore(
+            e_endo_partial=True,
+            p_explore_proxy=1.0,
+            r_explore_proxy=1.0,
+            n_h_explore_proxy=1.0,
+            d_explore_proxy=1.0,
+        )
+        self.assertEqual(snap.d_score, 1.0)
+        self.assertFalse(snap.agi_star_claim)
+        self.assertIn("not C5", snap.rationale)
+        self.assertIn("cross-domain", snap.rationale)
 
     def test_conjunction_still_requires_both(self) -> None:
         self.assertFalse(

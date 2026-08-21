@@ -395,8 +395,15 @@ class EndogenousEmergenceSimulator:
         internal_reset: InternalReset | None = None,
         m0_twin_mode: M0TwinMode | None = None,
         enable_goal_genesis: bool = False,
+        targets: tuple[EpistemicTarget, ...] | None = None,
     ) -> EmergenceRun:
-        world = EndogenousWorldModelField(default_targets(enabled=world_model_enabled))
+        # Optional targets override enables ATT-D second-domain ontologies.
+        field_targets = (
+            targets
+            if targets is not None
+            else default_targets(enabled=world_model_enabled)
+        )
+        world = EndogenousWorldModelField(field_targets)
         reset = internal_reset or InternalReset()
         if any(
             (

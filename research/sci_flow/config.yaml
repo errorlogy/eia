@@ -126,6 +126,17 @@ milestones:
     result: "causal 1.0 / opacity 0 / no_causal 0 / unbounded 0 / length 0 / faithful 0"
     artifact: research/sci_flow/M-N_metrics_2026-08-21.md
     note: "explore proxy only; n_h_claim=false; B pre-registered"
+  M-D2:
+    name: ATT-D cross-domain E_endo (woe_catalog + twin_ops)
+    claim: architecture_explore
+    att: ATT-D
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_cross_domain.py
+    result: "hold 1.0 / single 0 / schedule_prompt 0; domains 0.95/0.95"
+    artifact: research/sci_flow/M-D2_metrics_2026-08-21.md
+    note: "explore proxy only; c5_claim=false; emit_m0=false"
 
 eia_eval_scenarios:
   - id: twin_world_001

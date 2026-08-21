@@ -1,6 +1,6 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-21 (M-N / ATT-N explore proxy under \(B\); C2 unchanged; AGI\* / strong \(N_H\) not claimed)  
+**Updated:** 2026-08-21 (M-D2 / ATT-D explore proxy; C2 unchanged; AGI\* / C5 / strong \(N_H\) not claimed)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
 **AGI\* target (research, not claimed):** \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) with order parameters \(E,N_H,P,R,D\) and \(\tau_{AGI}\) — see [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md).  
@@ -33,6 +33,7 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | **DONE** (C2 unsupported) |
 | **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 / \(E_{\mathrm{endo}}\) partial | P0 | WoE v0.2 | **DONE** (C2 claimed) |
 | **M-N** | \(C_{\mathrm{non\text{-}emb}(H)}\) / \(N_H\) budget \(B\) + ATT-N explore proxy | research / explore (no strong \(N_H\)) | P2 | WoE v0.2 | **DONE** (explore proxy) |
+| **M-D2** | Cross-domain \(E_{\mathrm{endo}}\) (ATT-D) woe_catalog + twin_ops | research / explore (no C5) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-ATT** | AGI Transition Test draft (ATT-E…ATT-D) + order-parameter stubs | research metadata | P1 | WoE v0.2 | **drafted** |
 | **M-E** | EIS-7 goal novelty constructor (ATT-G) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-P** | Multi-tick \(P_G\) persistence (ATT-P) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
@@ -207,11 +208,19 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-D2: ATT-D cross-domain generality (DONE, explore proxy)
+
+**Result:** CF-4-class \(E_{\mathrm{endo}}\) pattern on disjoint `woe_catalog` + `twin_ops` (default 0.95 / 0.95; wm_off 0; gap core suppresses); P/R explore true both domains; single-domain-only and schedule/prompt-transfer falsifiers at 0 evidence; `emit_m0=false`. **No C5 / AGI\* raise.** C2 remains scoped to original CF-4 default domain only.
+
+**Report:** [`M-D2_metrics_2026-08-21.md`](../research/sci_flow/M-D2_metrics_2026-08-21.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**ATT-D:** Re-run ATT-E-class internal-factor suppression in a second domain (explore only).
+**Live closed-loop:** Instrument real WoE / T_LIVE under ATT-R falsifiers (`emit_m0=false`).
 
-**Alt:** live closed-loop WoE / T_LIVE instrumentation under ATT-R falsifiers.
+**Alt:** ATT board synthesis (partial matrix; no \(\tau_{AGI}\)) **or** T_NAMM soft witness.
 
 **T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 soft witness — do not unlabeled-lower governor threshold.
 
@@ -221,6 +230,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-D2 / ATT-D DONE (explore proxy; woe_catalog + twin_ops); no C5/AGI\*; priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N DONE (explore proxy under \(B\)); opacity falsified; no strong \(N_H\)/C3/AGI\*; priority → ATT-D / live loop |
 | 2026-08-21 | M-R / ATT-R DONE (explore proxy); Kuramoto ban; no C3/AGI\*; priority → ATT-N \(B\) / live loop / ATT-D |
 | 2026-08-21 | M-P / ATT-P DONE (explore proxy); falsifiers hold; no C3/AGI\*; priority → ATT-R scoring |

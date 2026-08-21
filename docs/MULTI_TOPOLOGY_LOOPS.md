@@ -122,9 +122,10 @@ Do **not** gut science gates to force SEND.
 5. **DONE:** ATT-P / M-P persistence explore proxy (no C3)
 6. **DONE:** ATT-R scoring (closed loop; not Kuramoto)
 7. **DONE:** M-N / ATT-N under pre-registered \(B\) (explore; not strong \(N_H\))
-8. **Execute next:** ATT-D second-domain ATT-E explore **or** live closed-loop
-9. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
-10. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
+8. **DONE:** ATT-D / M-D2 cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops; not C5)
+9. **Execute next:** live closed-loop under ATT-R falsifiers **or** ATT board synthesis
+10. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
+11. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
 
 ## Cursor `/loop` sentinels (PowerShell)
 
@@ -143,6 +144,7 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-D2 / ATT-D DONE (explore; no C5); priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N DONE (explore under \(B\)); priority → ATT-D / live loop |
 | 2026-08-21 | M-P / ATT-P DONE (explore proxy); priority → ATT-R scoring |
 | 2026-08-20 | M-E / ATT-G DONE (explore proxy); priority → ATT-P |
