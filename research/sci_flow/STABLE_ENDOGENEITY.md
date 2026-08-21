@@ -225,6 +225,8 @@ Epistemic ? autotelic ? homeostatic ? metacognitive co-activation.
 
 ## 14. Toy ablation (`endogeneity_stack_sim.py`)
 
+Metrics: [`M-SE_metrics_2026-08-21.md`](M-SE_metrics_2026-08-21.md).
+
 | Mode | mastered | unlocked | noisy_trap_fraction | goal_entropy | max_goal_share |
 |------|----------|----------|---------------------|--------------|----------------|
 | prediction_error | 0.0 | 5.0 | 0.994 | 0.014 | 0.994 |

@@ -707,8 +707,7 @@ Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
 ## Entry 019 — 2026-08-21 — M-SE stable endogeneity framework
 
 **Session:** STABLE_ENDOGENEITY.md; cross-links; endogeneity_stack_sim.py ablation; pytest conftest for research tree  
-**Branch:** 
-esearch/cursor-starter-v0.2-woe-eis  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Claim level:** **C2** unchanged. **No AGI* claim.**
 
 ### Actions
@@ -717,9 +716,9 @@ esearch/cursor-starter-v0.2-woe-eis
 |------|---------|
 | S1 | Four internal loops, drive field, $\mathfrak{E}$, metastability; transition = stable endogenous causal recurrence (conjecture) |
 | S2 | Cross-link CAUSAL_ENDOGENEITY, ATT cells, stack sim |
-| S3 | config M-SE; AGI* primary {\mathrm{endo}}$ in star criterion |
+| S3 | M-SE_metrics_2026-08-21.md; endogeneity_stack_results.csv; config M-SE |
 | S4 | pytest 14+4 pass (agi_transition, live_att_r, shadow_multitick) |
-| S5 | commit + push |
+| S5 | metrics CSV/PNG + log fix |
 
 ### Sim summary (10 seeds)
 
