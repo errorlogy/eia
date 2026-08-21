@@ -7,6 +7,7 @@ import unittest
 from eia.agi_transition import (
     default_order_parameter_specs,
     snapshot_from_partial_e,
+    snapshot_with_p_explore,
     tau_agi_claim_allowed,
 )
 from eia.non_embeddability import agi_star_conjunction_allowed
@@ -38,6 +39,11 @@ class TestAgiTransitionStubs(unittest.TestCase):
         self.assertTrue(snap.e_endo_partial)
         self.assertFalse(snap.agi_star_claim)
         self.assertIsNone(snap.n_h_score)
+
+    def test_p_explore_snapshot_never_claims(self) -> None:
+        snap = snapshot_with_p_explore(e_endo_partial=True, p_explore_proxy=1.0)
+        self.assertEqual(snap.p_score, 1.0)
+        self.assertFalse(snap.agi_star_claim)
 
     def test_conjunction_still_requires_both(self) -> None:
         self.assertFalse(

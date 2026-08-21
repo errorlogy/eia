@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — M-P / ATT-P temporal goal persistence
+
+- **Section:** Sci-flow M-P / ATT-P
+- **Delta:** Add `eia.goal_persistence`: multi-tick \(P_G\) proxy for \(k\in\{10,50,200\}\); falsifiers (context-end, re-prompt dependence, incorrigibility≠persistence); corrigibility separate; metrics. No C3 / AGI\*. Priority → ATT-R scoring. Preserve `emit_m0=false` and M-E invariants.
+- **Rationale:** [`M-P_metrics_2026-08-21.md`](../research/sci_flow/M-P_metrics_2026-08-21.md).
+
 ### 2026-08-20 — M-E / ATT-G goal genesis
 
 - **Section:** Sci-flow M-E / ATT-G

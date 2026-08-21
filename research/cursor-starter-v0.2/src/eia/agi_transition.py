@@ -128,3 +128,24 @@ def snapshot_from_partial_e(*, e_endo_partial: bool) -> PhaseTransitionSnapshot:
         agi_star_claim=False,
         rationale="scoped E only; N_H/P/R/D unmeasured; agi_star_claim forced false",
     )
+
+
+def snapshot_with_p_explore(
+    *,
+    e_endo_partial: bool,
+    p_explore_proxy: float | None,
+) -> PhaseTransitionSnapshot:
+    """Attach ATT-P explore proxy without authorizing AGI* or C-ladder raises."""
+    return PhaseTransitionSnapshot(
+        e_score=1.0 if e_endo_partial else 0.0,
+        n_h_score=None,
+        p_score=p_explore_proxy,
+        r_score=None,
+        d_score=None,
+        e_endo_partial=e_endo_partial,
+        agi_star_claim=False,
+        rationale=(
+            "scoped E + ATT-P explore P proxy only; N_H/R/D unmeasured; "
+            "agi_star_claim forced false"
+        ),
+    )

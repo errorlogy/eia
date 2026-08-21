@@ -119,10 +119,11 @@ Do **not** gut science gates to force SEND.
 2. **DONE (docs):** AGI\* phase-transition + ATT draft (M-ATT) — horizon only
 3. **DONE:** `L_AMAT_M0` M0-twin harness expand (ATT-R / motive-side \(E\) architecture)
 4. **DONE:** M-E / ATT-G goal genesis (explore proxy; no C3)
-5. **Execute next:** ATT-P persistence pre-registration
-6. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
-7. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
-8. **Later:** M-N / ATT-N execute — only after encoding budget pre-registration
+5. **DONE:** ATT-P / M-P persistence explore proxy (no C3)
+6. **Execute next:** ATT-R scoring (closed loop; not Kuramoto)
+7. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
+8. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
+9. **Later:** M-N / ATT-N execute — only after encoding budget pre-registration
 
 ## Cursor `/loop` sentinels (PowerShell)
 
@@ -141,6 +142,7 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-P / ATT-P DONE (explore proxy); priority → ATT-R scoring |
 | 2026-08-20 | M-E / ATT-G DONE (explore proxy); priority → ATT-P |
 | 2026-08-20 | T_AMAT_M0 harness DONE; priority → M-E / ATT-G |
 | 2026-08-20 | Phase-transition + ATT linked; \(\tau_{AGI}\) horizon; priority: M0 then ATT-G/P |

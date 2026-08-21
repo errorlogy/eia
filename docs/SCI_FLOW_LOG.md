@@ -406,3 +406,44 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 012 — 2026-08-21 — M-P / ATT-P temporal goal persistence
+
+**Session:** Multi-tick \(P_G\) harness; pre-register falsifiers; metrics; no live daemon required  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MP-ATTP: \(G^{*}\) continuity over \(k\in\{10,50,200\}\); corrigibility separate |
+| S2 | Falsifiers: context-end vanish; re-prompt dependence; incorrigibility≠persistence |
+| S3 | `eia.goal_persistence` multi-episode simulator (research branch only) |
+| S4 | n=20/arm: endogenous evidence 1.0; ephemeral/reprompt/incorrigible evidence 0; emit_m0=0 |
+| S5 | Metrics + plan/log/NEXT → priority ATT-R scoring |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Persistence unit tests | 8 OK (plus M-E/M0/ATT stubs still green) |
+| Endogenous att_p_evidence_rate (k=50) | 1.0 |
+| Ephemeral evidence | 0.0 |
+| Re-prompt evidence | 0.0 |
+| Incorrigible evidence | 0.0 |
+| Corrigible_rate | 1.0 |
+| emit_m0_rate_with_genesis | 0.0 |
+| c3_claim / agi_star_claim | false / false |
+| Report | `research/sci_flow/M-P_metrics_2026-08-21.md` |
+
+### Blockers
+
+- Official ATT-P / C3 numeric gates still TBD (explore proxy only)
+- ATT-R not yet ATT-scored; ATT-N unscored
+
+### Next
+
+**ATT-R scoring** (closed goal-formation loop; not Kuramoto); optional T_LIVE / T_NAMM; M-N only after \(B\).
+
+---
+

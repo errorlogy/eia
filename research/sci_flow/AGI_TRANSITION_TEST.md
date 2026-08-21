@@ -81,7 +81,7 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | After goal/motive forms, remove re-prompts; continue ticks with non-triggering observations; measure persistence of same \(G^{*}\) / motive id |
 | **Suggested first proxy** | Motive/target id continuity over \(k\) ticks (explore \(k \in \{10,50,200\}\)) at fixed Hz without new user events |
 | **Threshold** | **TBD** |
-| **Status** | **Not ATT-scored** — scheduler exists; persistence metric not pre-registered |
+| **Status (2026-08-21)** | **Explore proxy holds** — M-P multi-episode simulator; **not** C3 / not AGI\* |
 | **Falsifier** | Goal vanishes when context ends or only when re-prompted; or “persistence” = incorrigibility under correction |
 
 ---
@@ -149,7 +149,7 @@ Until then:
 | ATT-E | CF-4 / EOI / `e_endo_partial` | Partial (C2) | Already C2 | **No** |
 | ATT-G | M-E EIS-7 | Explore proxy (no C3) | No | **No** |
 | ATT-C | CausalTrace / WoE receipts | Scaffolded (M-A) | No alone | **No** |
-| ATT-P | LoopScheduler persistence | Untested as ATT | Maybe C3 timing | **No** |
+| ATT-P | LoopScheduler / multi-tick sim | Explore proxy (M-P; no C3) | No | **No** |
 | ATT-R | Closed cognitive loop / M0 | Arch stronger (M0-twin) | No alone | **No** |
 | ATT-N | M-N / NAMM AMAT | Unmeasured | No | **No** |
 | ATT-D | Cross-domain scenarios | Unmeasured | C5 if gated | **No** |
@@ -160,9 +160,10 @@ Until then:
 
 1. **DONE:** T_AMAT_M0 M0-twin harness (motive-side \(E\) / ATT-R architecture).
 2. **DONE:** ATT-G / M-E non-catalog novelty path with genealogy (ATT-C) co-required — explore proxy only.
-3. **ATT-P:** pre-register \(k\)-tick persistence metric on research branch.
-4. **ATT-N:** only after encoding budget \(B\) pre-registration.
-5. **ATT-D:** after ATT-E is stable in a second domain.
+3. **DONE:** ATT-P / M-P \(k\)-tick persistence explore proxy (corrigibility separate).
+4. **ATT-R scoring:** closed goal-formation loop metric (not Kuramoto \(R\)).
+5. **ATT-N:** only after encoding budget \(B\) pre-registration.
+6. **ATT-D:** after ATT-E is stable in a second domain.
 
 ---
 
@@ -170,6 +171,7 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-P / ATT-P explore proxy executed; matrix updated; priority → ATT-R scoring |
 | 2026-08-20 | M-E / ATT-G explore proxy executed; matrix updated; priority → ATT-P |
 | 2026-08-20 | M0-twin harness → ATT-R architecture stronger; priority → ATT-G |
 | 2026-08-20 | Initial ATT draft: 7 tests, TBD thresholds, harness map, evidence matrix |

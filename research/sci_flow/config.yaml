@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-20-M0"
+updated: "2026-08-21-MP"
 
 repos:
   eia:
@@ -92,9 +92,19 @@ milestones:
     claim: C3_prep
     att: ATT-G
     branch: research/cursor-starter-v0.2-woe-eis
-    status: scaffolded
+    status: done
     completed: "2026-08-20"
-    artifact: research/cursor-starter-v0.2/src/eia/goal_genesis.py
+    artifact: research/sci_flow/M-E_metrics_2026-08-20.md
+  M-P:
+    name: ATT-P multi-tick goal persistence
+    claim: C3_prep
+    att: ATT-P
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_goal_persistence.py
+    result: "endogenous 1.0 / ephemeral 0 / reprompt 0 / corrigible 1.0"
+    artifact: research/sci_flow/M-P_metrics_2026-08-21.md
 
 eia_eval_scenarios:
   - id: twin_world_001
