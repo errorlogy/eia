@@ -2,6 +2,7 @@
 
 **Status:** Pre-registration draft (2026-08-20) — **no AGI\* claim**  
 **Parent theory:** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md)  
+**Stable endogeneity (M-SE):** [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md) (multi-loop / drive field; toy sim only)  
 **Compact criterion:** [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Author:** Roman Kuznetsov — research@anthemium.tech
@@ -19,7 +20,7 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 ## Global rules
 
 1. **C0–C5 remain empirical milestones.** Passing ATT cells does **not** auto-raise the C-ladder unless a separate pre-registered C-gate exists.
-1b. **\(E_{\mathrm{endo}}\) is the primary ATT order parameter** for transition detection (internal-state-driven goal formation / research / cognitive dynamics); **\(N_H\)** is secondary but **necessary** for full \(AGI^{*}\) at \(	au_{AGI}\) — conjunction unchanged.
+1b. **\($E_{\mathrm{endo}}\) is the primary ATT order parameter** for transition detection (internal-state-driven goal formation / research / cognitive dynamics); **\($N_H\)** is secondary but **necessary** for full \($AGI^{*}\) at \($\tau_{AGI}\) — conjunction unchanged.
 2. **\(AGI^{*}\) / \(\tau_{AGI}\) is a research horizon**, not a claimable ceiling from any single ATT.
 3. **AuthenticReason** stays the production gate.
 4. Do **not** treat Kuramoto sync as evidence for \(E\) (M-D falsified necessity).

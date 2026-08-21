@@ -82,8 +82,17 @@ Numeric \(\theta_E\) remains **TBD** (same as ATT-E). C2 via CF-4 remains **part
 
 ---
 
+
+
+---
+
+## Stable endogeneity (M-SE)
+
+Multi-loop drive-field framing, feature vector $\mathfrak{E}$, metastability, and toy ablation: [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md). Harness: [`endogeneity_stack_sim.py`](../../endogeneity_stack_sim.py) (not ATT evidence).
+
 ## Document history
 
 | Date | Change |
 |------|--------|
 | 2026-08-21 | Initial causal endogeneity criterion + falsifiers; ATT-E cross-link |
+| 2026-08-21 | Link M-SE stable endogeneity + stack sim |

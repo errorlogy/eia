@@ -15,7 +15,7 @@ This registry names **bounded loops in different topologies**. Sci-flow S1–S5 
 |---------|--------|------|
 | **C1** | Claimed (M-C) | Full / 24h prompt deletion pass-rate ≥ 0.90 |
 | **C2** | **Claimed (M-CF4)** | Named internal reset: default ≥0.85 and factor ≤0.40 and wm_off ≤0.05. Kuramoto CF-5 alone is **not** C2. Scoped \(E_{\mathrm{endo}}\) only. |
-| **AGI\*** / \(\tau_{AGI}\) | **Not claimed** | Requires sustained \(E,N_H,P,R,D\) (compactly \(E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\)). See [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), ATT [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md). |
+| **AGI\*** / \(\tau_{AGI}\) | **Not claimed** | Requires sustained \(E,N_H,P,R,D\) (compactly \(E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\)). See [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`STABLE_ENDOGENEITY.md`](../research/sci_flow/STABLE_ENDOGENEITY.md), ATT [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md). Primary metric: $E_{\mathrm{endo}}$ ([`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)). |
 | Kuramoto → intent | Unsupported | M-D: K=0 ≈ coupled; scramble Δ too small |
 
 Do **not** claim C2 without gates in this file / CF harness. Do **not** claim Kuramoto causes intent. Do **not** claim AGI\* from C-ladder or ATT partials alone. Do **not** merge WoE research runtime into main `src/eia/`.

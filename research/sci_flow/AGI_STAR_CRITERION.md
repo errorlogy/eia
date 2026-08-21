@@ -7,6 +7,7 @@
 
 **Expanded theory (order parameters, regimes, \(\tau_{AGI}\)):** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md)  
 **Falsifiable protocol:** [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)  
+**Primary transition metric:** $E_{\mathrm{endo}}$ (endogenous cognitive causality) — lead order parameter for transition detection; $N_H$ necessary for full $AGI^{*}$ conjunction.  
 **Causal endogeneity bar:** [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md)  
 **Non-embeddability scaffold:** [`NON_EMBEDDABILITY_MEASUREMENT.md`](NON_EMBEDDABILITY_MEASUREMENT.md)
 

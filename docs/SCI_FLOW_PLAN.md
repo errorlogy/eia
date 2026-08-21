@@ -42,6 +42,7 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
 | **M-M0** | AMAT M0-twin architecture harness | architecture | P1 | WoE + NAMM AMAT | **DONE** |
+| **M-SE** | Stable endogeneity theory (multi-loop, drive field, $\mathfrak{E}$) + toy stack sim | research / theory (`claim_allowed=False`) | P1 | docs + `endogeneity_stack_sim.py` | **DONE** |
 
 ---
 

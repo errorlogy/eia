@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — M-SE stable endogeneity framework
+
+- **Section:** Sci-flow theory / ATT-E primary $E_{\mathrm{endo}}$
+- **Delta:** Add [`STABLE_ENDOGENEITY.md`](../research/sci_flow/STABLE_ENDOGENEITY.md): four internal loops, drive field, $\mathfrak{E}$, metastability; stable endogenous causal recurrence (conjecture). Cross-link CAUSAL_ENDOGENEITY, ATT cells, `endogeneity_stack_sim.py`. No C / AGI* raise.
+- **Rationale:** User framework + toy ablation for stable intrinsic drives.
+
 ### 2026-08-21 — Primary \(E_{\mathrm{endo}}\) metric + ATT-E lead suite
 
 - **Section:** Sci-flow order-parameter priority / ATT battery

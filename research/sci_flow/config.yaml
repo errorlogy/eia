@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-21-MN"
+updated: "2026-08-21-MSE"
 
 repos:
   eia:
@@ -138,6 +138,17 @@ milestones:
     result: "causal 1.0 / opacity 0 / no_causal 0 / unbounded 0 / length 0 / faithful 0"
     artifact: research/sci_flow/M-N_metrics_2026-08-21.md
     note: "explore proxy only; n_h_claim=false; B pre-registered"
+  M-SE:
+    name: Stable endogeneity theory + stack sim ablation
+    claim: theory_only
+    att: ATT-E
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python endogeneity_stack_sim.py
+    artifact: research/sci_flow/STABLE_ENDOGENEITY.md
+    note: "toy sim only; E_endo primary in phase-transition docs; no C raise"
+
   M-D2:
     name: ATT-D cross-domain E_endo (woe_catalog + twin_ops)
     claim: architecture_explore

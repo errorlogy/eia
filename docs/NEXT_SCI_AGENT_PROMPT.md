@@ -17,7 +17,8 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
 2. `research/sci_flow/AGI_PHASE_TRANSITION.md` — order parameters \(E,N_H,P,R,D\), \(\tau_{AGI}\), regimes
 3. `research/sci_flow/CAUSAL_ENDOGENEITY.md` — causal \(E_{\mathrm{endo}}\) bar (declaration/simulation ≠ endogeneity)
-4. `research/sci_flow/AGI_TRANSITION_TEST.md` — ATT-E…ATT-D harness map (thresholds TBD)
+4. `research/sci_flow/STABLE_ENDOGENEITY.md` — M-SE multi-loop / drive field; toy `endogeneity_stack_sim.py`
+5. `research/sci_flow/AGI_TRANSITION_TEST.md` — ATT-E…ATT-D harness map (thresholds TBD)
 5. `research/sci_flow/AGI_STAR_CRITERION.md` — compact \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\)
 6. `docs/MULTI_TOPOLOGY_LOOPS.md`
 7. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
@@ -115,4 +116,5 @@ ATT board already synthesized (partial matrix; no \(\tau_{AGI}\)).
 - **M-R / ATT-R** closed goal-formation loop scoring + falsifiers (incl. Kuramoto ban); `claim_allowed=False`
 - **M-D2 / ATT-D** cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops) + falsifiers; `claim_allowed=False` / no C5
 - **M-R-LIVE** shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; ATT board synthesis; `claim_allowed=False`
+- **M-SE** stable endogeneity framework + stack sim (`STABLE_ENDOGENEITY.md`)
 - **Causal endogeneity** criterion + ATT-E falsifiers + `e_endo_label_admissible` stub (`CAUSAL_ENDOGENEITY.md`)

@@ -32,7 +32,7 @@ Every claim below carries a tag. Do not promote tags upward without pre-register
 
 Central order parameters (compact form preserved):
 
-OPERATIONAL — **Primary transition metric:** \(E_{\mathrm{endo}}\) (endogenous cognitive causality) is the **primary** order parameter for detecting AGI transition — goal formation, research, and cognitive dynamics driven by persistent internal states rather than external triggers alone. **\(N_H\)** remains **secondary but necessary** for the full \(AGI^{*}\) conjunction (representational non-embeddability); see [CAUSAL_ENDOGENEITY.md](CAUSAL_ENDOGENEITY.md) and [AGI_STAR_CRITERION.md](AGI_STAR_CRITERION.md). **Lead ATT suite:** ATT-E; ATT-R / M-R-LIVE is related recurrence evidence, not a substitute.
+OPERATIONAL — **Primary transition metric:** \(E_{\mathrm{endo}}\) (endogenous cognitive causality) is the **primary** order parameter for detecting AGI transition — goal formation, research, and cognitive dynamics driven by persistent internal states rather than external triggers alone. **\(N_H\)** remains **secondary but necessary** for the full \(AGI^{*}\) conjunction (representational non-embeddability); see [CAUSAL_ENDOGENEITY.md](CAUSAL_ENDOGENEITY.md), [STABLE_ENDOGENEITY.md](STABLE_ENDOGENEITY.md), and [AGI_STAR_CRITERION.md](AGI_STAR_CRITERION.md). **Lead ATT suite:** ATT-E; ATT-R / M-R-LIVE is related recurrence evidence, not a substitute.
 
 
 \[
