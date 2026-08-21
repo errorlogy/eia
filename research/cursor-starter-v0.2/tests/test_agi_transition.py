@@ -8,6 +8,7 @@ from eia.agi_transition import (
     default_order_parameter_specs,
     snapshot_from_partial_e,
     snapshot_with_p_explore,
+    snapshot_with_r_explore,
     tau_agi_claim_allowed,
 )
 from eia.non_embeddability import agi_star_conjunction_allowed
@@ -44,6 +45,14 @@ class TestAgiTransitionStubs(unittest.TestCase):
         snap = snapshot_with_p_explore(e_endo_partial=True, p_explore_proxy=1.0)
         self.assertEqual(snap.p_score, 1.0)
         self.assertFalse(snap.agi_star_claim)
+
+    def test_r_explore_snapshot_never_claims(self) -> None:
+        snap = snapshot_with_r_explore(
+            e_endo_partial=True, p_explore_proxy=1.0, r_explore_proxy=1.0
+        )
+        self.assertEqual(snap.r_score, 1.0)
+        self.assertFalse(snap.agi_star_claim)
+        self.assertIn("not Kuramoto", snap.rationale)
 
     def test_conjunction_still_requires_both(self) -> None:
         self.assertFalse(

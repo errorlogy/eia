@@ -149,3 +149,26 @@ def snapshot_with_p_explore(
             "agi_star_claim forced false"
         ),
     )
+
+
+def snapshot_with_r_explore(
+    *,
+    e_endo_partial: bool,
+    p_explore_proxy: float | None,
+    r_explore_proxy: float | None,
+) -> PhaseTransitionSnapshot:
+    """Attach ATT-R explore proxy (not Kuramoto R) without AGI*/C-ladder raises."""
+    return PhaseTransitionSnapshot(
+        e_score=1.0 if e_endo_partial else 0.0,
+        n_h_score=None,
+        p_score=p_explore_proxy,
+        r_score=r_explore_proxy,
+        d_score=None,
+        e_endo_partial=e_endo_partial,
+        agi_star_claim=False,
+        rationale=(
+            "scoped E + ATT-P/ATT-R explore proxies only; N_H/D unmeasured; "
+            "R is endogenous cognitive recurrence not Kuramoto; "
+            "agi_star_claim forced false"
+        ),
+    )

@@ -95,8 +95,8 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | Log at least one full cycle where post-action world update causally feeds *new* endogenous goal (not cron Q-list) |
 | **Suggested first proxy** | Trace contains world_update child that is parent of a later novel motive; `emit_m0=false` |
 | **Threshold** | **TBD** |
-| **Status** | **Architecture stronger** — M0-twin harness shipped (`emit_m0=false`); not ATT-scored |
-| **Falsifier** | Open-loop respond-once; or recurrence driven only by external schedule / prompt spam |
+| **Status (2026-08-21)** | **Explore proxy holds** — M-R typed-trace harness; **not** C3 / not AGI\* |
+| **Falsifier** | Open-loop respond-once; no world update; no novel motive after action; recurrence driven only by external schedule / prompt spam; Kuramoto sync alone |
 | **Ban** | Do not use Kuramoto order parameter as ATT-R |
 
 ---
@@ -150,7 +150,7 @@ Until then:
 | ATT-G | M-E EIS-7 | Explore proxy (no C3) | No | **No** |
 | ATT-C | CausalTrace / WoE receipts | Scaffolded (M-A) | No alone | **No** |
 | ATT-P | LoopScheduler / multi-tick sim | Explore proxy (M-P; no C3) | No | **No** |
-| ATT-R | Closed cognitive loop / M0 | Arch stronger (M0-twin) | No alone | **No** |
+| ATT-R | Closed cognitive loop / M0 | Explore proxy (M-R; no C3) | No alone | **No** |
 | ATT-N | M-N / NAMM AMAT | Unmeasured | No | **No** |
 | ATT-D | Cross-domain scenarios | Unmeasured | C5 if gated | **No** |
 
@@ -161,9 +161,10 @@ Until then:
 1. **DONE:** T_AMAT_M0 M0-twin harness (motive-side \(E\) / ATT-R architecture).
 2. **DONE:** ATT-G / M-E non-catalog novelty path with genealogy (ATT-C) co-required — explore proxy only.
 3. **DONE:** ATT-P / M-P \(k\)-tick persistence explore proxy (corrigibility separate).
-4. **ATT-R scoring:** closed goal-formation loop metric (not Kuramoto \(R\)).
+4. **DONE:** ATT-R / M-R closed goal-formation loop scoring (not Kuramoto \(R\)) — explore proxy only.
 5. **ATT-N:** only after encoding budget \(B\) pre-registration.
 6. **ATT-D:** after ATT-E is stable in a second domain.
+7. **Optional:** live closed-loop WoE / T_LIVE instrumentation under same ATT-R falsifiers.
 
 ---
 
@@ -171,6 +172,7 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-R / ATT-R explore proxy executed; Kuramoto ban enforced; priority → ATT-N budget \(B\) or live closed-loop / ATT-D |
 | 2026-08-21 | M-P / ATT-P explore proxy executed; matrix updated; priority → ATT-R scoring |
 | 2026-08-20 | M-E / ATT-G explore proxy executed; matrix updated; priority → ATT-P |
 | 2026-08-20 | M0-twin harness → ATT-R architecture stronger; priority → ATT-G |

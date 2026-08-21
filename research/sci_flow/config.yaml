@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-21-MP"
+updated: "2026-08-21-MR"
 
 repos:
   eia:
@@ -105,6 +105,16 @@ milestones:
     command: python research/sci_flow/run_goal_persistence.py
     result: "endogenous 1.0 / ephemeral 0 / reprompt 0 / corrigible 1.0"
     artifact: research/sci_flow/M-P_metrics_2026-08-21.md
+  M-R:
+    name: ATT-R closed goal-formation recurrence
+    claim: C3_prep
+    att: ATT-R
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_goal_recurrence.py
+    result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
+    artifact: research/sci_flow/M-R_metrics_2026-08-21.md
 
 eia_eval_scenarios:
   - id: twin_world_001

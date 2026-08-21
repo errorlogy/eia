@@ -351,8 +351,8 @@ simultaneous geometry change:
 | \(E\) | **Partial** — C2 via CF-4 `zero_epistemic_gap` | `eia.cf4`, `e_endo_partial`; EOI / twin |
 | Goal genesis | **Not shown** (catalog novelty capped) | M-E planned; EIS-7 blocked on catalog |
 | Genealogy | **Scaffolded** (receipts) | M-A `WoEReceipt`; main `CausalTrace` |
-| \(P\) | **Weak / untested as ATT** | LoopScheduler Hz; multi-tick not pre-registered for \(P_G\) |
-| \(R\) (recurrence) | **Partial architecture** | Pipeline + WoE loop; M0-twin stub |
+| \(P\) | **Explore proxy (M-P)** — not C3 | `goal_persistence`; multi-tick \(P_G\) |
+| \(R\) (recurrence) | **Explore proxy (M-R)** — not Kuramoto; not C3 | `goal_recurrence`; M0-twin architecture |
 | \(N_H\) | **Unmeasured** | M-N design + stubs; NAMM AMAT / \(K_A\ll K_H\) |
 | \(D\) | **Unmeasured** | C5 not claimed; multi-topology ≠ generality |
 

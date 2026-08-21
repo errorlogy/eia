@@ -447,3 +447,45 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 013 — 2026-08-21 — M-R / ATT-R endogenous cognitive recurrence
+
+**Session:** Closed goal-formation loop scoring; pre-register falsifiers (incl. Kuramoto ban); metrics  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MR-ATTR: \(W\to M\to G\to\Pi\to A\to X'\to W'\to G'\) with \(W'\) parent of novel \(G'\) |
+| S2 | Falsifiers: open-loop; no \(W'\); no novel after action; schedule spam; Kuramoto alone |
+| S3 | `eia.goal_recurrence` typed-trace simulator (research branch only; `emit_m0=false`) |
+| S4 | n=20/arm: closed-loop evidence 1.0; all falsifiers evidence 0; emit_m0=0 |
+| S5 | Metrics + plan/log/NEXT → priority ATT-N \(B\) / live loop / ATT-D |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Recurrence unit tests | 10 OK (+ ATT stubs / M-P still green) |
+| Closed-loop att_r_evidence_rate | 1.0 |
+| Open-loop evidence | 0.0 |
+| No world-update evidence | 0.0 |
+| No novel-motive evidence | 0.0 |
+| External-schedule evidence | 0.0 |
+| Kuramoto-only evidence | 0.0 (kuramoto_alone_rate 1.0) |
+| emit_m0_rate_with_genesis | 0.0 |
+| c3_claim / agi_star_claim | false / false |
+| Report | `research/sci_flow/M-R_metrics_2026-08-21.md` |
+
+### Blockers
+
+- Official ATT-R / C3 numeric gates still TBD (explore proxy only)
+- ATT-N unscored until encoding budget \(B\) pre-registered
+
+### Next
+
+**ATT-N** pre-register \(B\); optional live closed-loop / ATT-D; T_LIVE / T_NAMM as needed.
+
+---
+
