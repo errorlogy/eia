@@ -35,3 +35,6 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 python_version = "3.11"
 strict = true
 packages = ["eia"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
