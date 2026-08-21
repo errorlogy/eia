@@ -7,6 +7,7 @@
 
 **Expanded theory (order parameters, regimes, \(\tau_{AGI}\)):** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md)  
 **Falsifiable protocol:** [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)  
+**Causal endogeneity bar:** [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md)  
 **Non-embeddability scaffold:** [`NON_EMBEDDABILITY_MEASUREMENT.md`](NON_EMBEDDABILITY_MEASUREMENT.md)
 
 ---
@@ -30,6 +31,8 @@ Where:
 - \(E_{\mathrm{endo}}\) = endogenous cognitive causality (order parameter \(E\) in the expanded theory)
 - \(C_{\mathrm{non\text{-}emb}(H)}\) = cognitive non-embeddability relative to Homo-agent \(H\) (order parameter \(N_H\))
 
+**Primary metric (phase transition):** \(E_{\mathrm{endo}}\) — internal-state-driven goal formation, investigation, and cognitive dynamics (not external-trigger-only). **\(N_H\)** is secondary but **required** for full \(AGI^{*}\). **Lead ATT suite:** ATT-E — causal bar in [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md).
+
 Supporting order parameters (not substitutes for the conjunction): \(P\) (persistence), \(R\) (endogenous recurrence / goal-formation closure), \(D\) (cross-domain applicability). Transition time \(\tau_{AGI}\) requires sustained thresholds over \(\Delta T\) — see phase-transition note.
 
 ### Dense scientific formula
@@ -49,7 +52,9 @@ Full math, epistemic tags (`DEFINITION` / `OPERATIONAL` / `CONJECTURE` / `PHILOS
 | Distinction | Meaning |
 |-------------|---------|
 | **Endogeneity ≠ Autonomy** | \(E_{\mathrm{endo}}\) is about *causal origin* of cognitive processes (internal-state dynamics), not about unconstrained action, tool use, or lack of governors. |
+| **Description / simulation / declaration ≠ \(E_{\mathrm{endo}}\)** | Self-ascription, roleplay, or “I am autonomous” text without \(do(Z)\) trajectory change under non-triggering \(X\) does **not** establish endogeneity. See [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md). |
 | **Opacity ≠ non-embeddability** | Unreadable activations without causal \(\Delta P(A\mid z)>0\) and bounded-\(\phi\) loss do **not** establish \(C_{\mathrm{non\text{-}emb}(H)}\). |
+| **Opacity ≠ causation** | Opaque internals without measurable \(\Delta P(G\mid do(Z))\) do **not** establish \(E_{\mathrm{endo}}\). |
 | **Trans-Human Cognition ≠ superhuman task performance** | \(C_{\mathrm{non\text{-}emb}(H)}\) / \(N_H\) is about *representational non-embeddability*, not higher scores on human benchmarks, latency, or capability ladders that remain fully human-interpretable. |
 | **Corrigibility ≠ persistence** | Goal persistence without re-prompting (\(P\)) is separate from resistance to correction. |
 
@@ -99,4 +104,5 @@ ATT map: [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md) (ATT-E ↔ CF-4; ATT
 - Do **not** equate C2, EIS-6/7, WoE intent, Kuramoto \(R\), or Telegram contact with \(AGI^{*}\).
 - Do **not** treat autonomy, tool use, or benchmark SOTA as \(C_{\mathrm{non\text{-}emb}(H)}\).
 - Do **not** treat opacity as non-embeddability.
+- Do **not** treat self-description, simulation, or declaration of agency as \(E_{\mathrm{endo}}\).
 - AuthenticReason remains the **production** gate; AGI\* criteria are **research classification** only.

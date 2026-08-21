@@ -19,28 +19,32 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 ## Global rules
 
 1. **C0–C5 remain empirical milestones.** Passing ATT cells does **not** auto-raise the C-ladder unless a separate pre-registered C-gate exists.
+1b. **\(E_{\mathrm{endo}}\) is the primary ATT order parameter** for transition detection (internal-state-driven goal formation / research / cognitive dynamics); **\(N_H\)** is secondary but **necessary** for full \(AGI^{*}\) at \(	au_{AGI}\) — conjunction unchanged.
 2. **\(AGI^{*}\) / \(\tau_{AGI}\) is a research horizon**, not a claimable ceiling from any single ATT.
 3. **AuthenticReason** stays the production gate.
 4. Do **not** treat Kuramoto sync as evidence for \(E\) (M-D falsified necessity).
 5. Do **not** treat TG smoke / lowered `min_contact_score` as science evidence.
-6. Opacity ≠ \(N_H\); Endogeneity ≠ Autonomy; Trans-Anthropic ≠ task SOTA.
+6. Opacity ≠ \(N_H\); Endogeneity ≠ Autonomy; Trans-Anthropic ≠ task SOTA; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\) ([`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md)).
 7. All \(\theta_E, \theta_N, \theta_P, \theta_R, \theta_D, \varepsilon, \Delta T\) = **TBD**. First operational proxies listed below are **suggested**, not adopted gates.
 
 ---
 
 ## ATT battery (7 tests)
 
-### ATT-E — Endogenous Cognitive Causality (\(E\))
+### ATT-E — Endogenous Cognitive Causality (\(E\)) **(lead suite)**
+
+**Causal bar (required):** [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) — description / simulation / declaration of agency ≠ \(E_{\mathrm{endo}}\). Pass only via causal demonstration that new trajectories arise from persistent internal dynamics without a matching external initiating signal (\(do(Z)\) under non-triggering \(X\)).
 
 | Field | Content |
 |-------|---------|
-| **Theory** | \(E = C_{\mathrm{int}}/(C_{\mathrm{int}}+C_{\mathrm{ext}})\) via \(do(Z)\) interventions |
-| **Harness** | CF-4 (`eia.cf4`, `run_cf4.py`); twin interventions / EOI; CF-4 summary `e_endo_partial` |
-| **Procedure** | Compare \(P(\text{intent} / G_{t+1})\) under named internal resets vs default vs external-prompt controls |
-| **Suggested first proxy** | CF-4: `default` intent_rate ≥ 0.85 **and** ≥1 named factor ≤ 0.40 **and** `wm_off` ≤ 0.05 → scoped \(E\) support (`e_endo_partial`) |
+| **Theory** | \(E = C_{\mathrm{int}}/(C_{\mathrm{int}}+C_{\mathrm{ext}})\) via \(do(Z)\) interventions; causal endogeneity bar above |
+| **Harness** | CF-4 (`eia.cf4`, `run_cf4.py`); twin interventions / EOI; CF-4 summary `e_endo_partial`; stub `e_endo_label_admissible` |
+| **Procedure** | Compare \(P(\text{intent} / G_{t+1})\) under named internal resets vs default vs external-prompt controls; reject declaration-only / narrative-only labels before scoring \(E\) |
+| **Suggested first proxy** | CF-4: `default` intent_rate ≥ 0.85 **and** ≥1 named factor ≤ 0.40 **and** `wm_off` ≤ 0.05 → scoped \(E\) support (`e_endo_partial`); continuous \(E\) still TBD |
 | **Threshold** | **TBD** for continuous \(E \in [0,1]\); until then report discrete CF-4 / EOI outcomes only |
 | **Status (2026-08-20)** | **Partial pass (scoped):** C2 via `zero_epistemic_gap` 0.06; `agi_star_claim=false` |
-| **Falsifier** | No named internal factor changes goal/intent distribution relative to external controls |
+| **Falsifier** | No named internal factor changes goal/intent distribution relative to external controls; **or** verbal self-ascription without trajectory change; **or** prompt-induced agency narrative; **or** trajectory changes only when matching external signal present; **or** no \(do(Z)\) effect under non-triggering \(X\) |
+| **Note** | M-R-LIVE covers ATT-R closed-loop shadow evidence — related but **not** a substitute for these ATT-E declaration falsifiers |
 
 ---
 
@@ -95,9 +99,10 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 | **Procedure** | Log at least one full cycle where post-action world update causally feeds *new* endogenous goal (not cron Q-list) |
 | **Suggested first proxy** | Trace contains world_update child that is parent of a later novel motive; `emit_m0=false` |
 | **Threshold** | **TBD** |
-| **Status (2026-08-21)** | **Explore proxy holds** — M-R typed-trace harness; **not** C3 / not AGI\* |
+| **Status (2026-08-21)** | **Explore proxy holds** — M-R typed-trace + **M-R-LIVE** shadow multitick on main `CognitiveLoop`; **not** C3 / not AGI\* |
 | **Falsifier** | Open-loop respond-once; no world update; no novel motive after action; recurrence driven only by external schedule / prompt spam; Kuramoto sync alone |
 | **Ban** | Do not use Kuramoto order parameter as ATT-R |
+| **Live gap** | True `run_daemon_tick` still recreates loop per tick (no cross-tick \(W'\to G'\)); M-R-LIVE documents closest shadow closed-loop |
 
 ---
 
@@ -150,7 +155,7 @@ Until then:
 | ATT-G | M-E EIS-7 | Explore proxy (no C3) | No | **No** |
 | ATT-C | CausalTrace / WoE receipts | Scaffolded (M-A) | No alone | **No** |
 | ATT-P | LoopScheduler / multi-tick sim | Explore proxy (M-P; no C3) | No | **No** |
-| ATT-R | Closed cognitive loop / M0 | Explore proxy (M-R; no C3) | No alone | **No** |
+| ATT-R | Closed cognitive loop / M0 | Explore proxy (M-R + M-R-LIVE; no C3) | No alone | **No** |
 | ATT-N | M-N / NAMM AMAT | Explore proxy (M-N; no strong \(N_H\)) | No | **No** |
 | ATT-D | Cross-domain scenarios | Explore proxy (M-D2; no C5) | No | **No** |
 
@@ -164,7 +169,8 @@ Until then:
 4. **DONE:** ATT-R / M-R closed goal-formation loop scoring (not Kuramoto \(R\)) — explore proxy only.
 5. **DONE:** ATT-N / M-N encoding budget \(B\) + \(D_H\) explore proxy (opacity falsified; not strong \(N_H\)).
 6. **DONE:** ATT-D / M-D2 cross-domain \(E_{\mathrm{endo}}\) explore (woe_catalog + twin_ops) — explore proxy only; not C5.
-7. **Next:** live closed-loop WoE / T_LIVE instrumentation under same ATT-R falsifiers **or** ATT board synthesis.
+7. **DONE:** M-R-LIVE shadow multi-tick under ATT-R falsifiers (main CognitiveLoop; gap vs daemon documented) — explore proxy only; ATT board synthesized.
+8. **Next:** optional true-daemon cross-tick \(W'\to G'\) carryover (shadow-first) **or** T_NAMM soft witness.
 
 ---
 
@@ -172,6 +178,8 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | ATT-E requires causal endogeneity bar; declaration/narrative/external-only falsifiers; link `CAUSAL_ENDOGENEITY.md` |
+| 2026-08-21 | M-R-LIVE shadow multitick under ATT-R falsifiers; ATT board synthesis; priority → daemon carryover / T_NAMM |
 | 2026-08-21 | M-D2 / ATT-D explore proxy executed (woe_catalog + twin_ops); priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N explore proxy executed under pre-registered \(B\); priority → ATT-D or live closed-loop |
 | 2026-08-21 | M-R / ATT-R explore proxy executed; Kuramoto ban enforced; priority → ATT-N budget \(B\) or live closed-loop / ATT-D |

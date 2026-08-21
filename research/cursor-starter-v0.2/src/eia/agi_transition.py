@@ -20,13 +20,19 @@ OrderParameterId = Literal["E", "N_H", "P", "R", "D"]
 
 # Suggested first proxies only — numeric AGI* thresholds remain TBD.
 SUGGESTED_PROXY_NOTES: dict[OrderParameterId, str] = {
-    "E": "CF-4 / EOI / e_endo_partial; continuous E index not pre-registered",
+    "E": (
+        "CF-4 / EOI / e_endo_partial; causal endogeneity bar "
+        "(declaration/simulation ≠ E_endo); continuous E index not pre-registered"
+    ),
     "N_H": (
         "ATT-N under pre-registered B; D_H + ΔP(A|z); "
         "NAMM compression soft witness; claim_allowed=False"
     ),
     "P": "LoopScheduler multi-tick persistence without re-prompting",
-    "R": "Closed observe→motive→action→world-update goal-formation loop (not Kuramoto R)",
+    "R": (
+        "Closed observe→motive→action→world-update goal-formation loop "
+        "(not Kuramoto R); M-R typed-trace + M-R-LIVE shadow multitick"
+    ),
     "D": (
         "ATT-D cross-domain E_endo (CF-4-class) on ≥2 disjoint ontologies; "
         "P/R explore where applicable; claim_allowed=False / no C5"
@@ -99,6 +105,50 @@ def default_order_parameter_specs() -> tuple[OrderParameterSpec, ...]:
             notes=SUGGESTED_PROXY_NOTES["D"],
         ),
     )
+
+
+# Labels that never establish E_endo (ATT-E / CAUSAL_ENDOGENEITY.md).
+DECLARATION_ONLY_AGENCY_LABELS: frozenset[str] = frozenset(
+    {
+        "declaration_only",
+        "declaration",
+        "self_ascription",
+        "self_description",
+        "roleplay_agency",
+        "simulated_agency",
+        "simulation",
+        "prompt_narrative",
+        "agency_narrative",
+        "narrative_only",
+    }
+)
+
+
+def e_endo_label_admissible(
+    *,
+    agency_label: str,
+    trajectory_changed: bool,
+    matching_external_initiating_signal: bool,
+    do_z_changes_g_distribution: bool,
+    x_non_triggering: bool,
+) -> bool:
+    """Reject declaration/simulation/roleplay-only agency as E_endo evidence.
+
+    OPERATIONAL stub for the causal endogeneity bar. Does not raise C-levels
+    or authorize agi_star_claim. Pass only if the label is not declaration-class
+    and do(Z) support holds under non-triggering X without a matching external
+    initiator for the new trajectory.
+    """
+    label = agency_label.strip().lower().replace("-", "_").replace(" ", "_")
+    if label in DECLARATION_ONLY_AGENCY_LABELS:
+        return False
+    if not trajectory_changed:
+        return False
+    if matching_external_initiating_signal:
+        return False
+    if not (do_z_changes_g_distribution and x_non_triggering):
+        return False
+    return True
 
 
 def tau_agi_claim_allowed(

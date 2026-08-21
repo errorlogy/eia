@@ -1,10 +1,10 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-21 (M-D2 / ATT-D DONE explore proxy; next = live closed-loop under ATT-R falsifiers **or** ATT board synthesis)  
+**Updated:** 2026-08-21 (causal endogeneity bar formalized for ATT-E; M-R-LIVE already DONE; next = optional daemon carryover **or** T_NAMM soft witness)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
-**AGI\* notes:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) · [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md) · [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md)
+**AGI\* notes:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) · [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md) · [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md) · [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)
 
 ---
 
@@ -16,32 +16,36 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
 2. `research/sci_flow/AGI_PHASE_TRANSITION.md` — order parameters \(E,N_H,P,R,D\), \(\tau_{AGI}\), regimes
-3. `research/sci_flow/AGI_TRANSITION_TEST.md` — ATT-E…ATT-D harness map (thresholds TBD)
-4. `research/sci_flow/AGI_STAR_CRITERION.md` — compact \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\)
-5. `docs/MULTI_TOPOLOGY_LOOPS.md`
-6. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
-7. `research/sci_flow/M-CF4_metrics_2026-08-20.md` — **C2 claimed** (gap core) = scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
-8. `research/sci_flow/M0_TWIN_METRICS_2026-08-20.md` — T_AMAT_M0 harness falsifiers (architecture only)
-9. `research/sci_flow/M-E_metrics_2026-08-20.md` — ATT-G explore proxy (no C3)
-10. `research/sci_flow/M-P_metrics_2026-08-21.md` — ATT-P explore proxy (no C3)
-11. `research/sci_flow/M-R_metrics_2026-08-21.md` — ATT-R explore proxy (no C3; not Kuramoto)
-12. `research/sci_flow/M-N_metrics_2026-08-21.md` — ATT-N explore proxy under \(B\) (no strong \(N_H\))
-13. `research/sci_flow/M-D2_metrics_2026-08-21.md` — ATT-D explore proxy (no C5)
-14. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design
-15. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
-16. `research/sci_flow/config.yaml`
+3. `research/sci_flow/CAUSAL_ENDOGENEITY.md` — causal \(E_{\mathrm{endo}}\) bar (declaration/simulation ≠ endogeneity)
+4. `research/sci_flow/AGI_TRANSITION_TEST.md` — ATT-E…ATT-D harness map (thresholds TBD)
+5. `research/sci_flow/AGI_STAR_CRITERION.md` — compact \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\)
+6. `docs/MULTI_TOPOLOGY_LOOPS.md`
+7. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
+8. `research/sci_flow/M-CF4_metrics_2026-08-20.md` — **C2 claimed** (gap core) = scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
+9. `research/sci_flow/M0_TWIN_METRICS_2026-08-20.md` — T_AMAT_M0 harness falsifiers (architecture only)
+10. `research/sci_flow/M-E_metrics_2026-08-20.md` — ATT-G explore proxy (no C3)
+11. `research/sci_flow/M-P_metrics_2026-08-21.md` — ATT-P explore proxy (no C3)
+12. `research/sci_flow/M-R_metrics_2026-08-21.md` — ATT-R explore proxy (no C3; not Kuramoto)
+13. `research/sci_flow/M-R-LIVE_metrics_2026-08-21.md` — ATT-R shadow multitick on main CognitiveLoop (no C3)
+14. `research/sci_flow/M-N_metrics_2026-08-21.md` — ATT-N explore proxy under \(B\) (no strong \(N_H\))
+15. `research/sci_flow/M-D2_metrics_2026-08-21.md` — ATT-D explore proxy (no C5)
+16. `research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md` — M-N / ATT-N design
+17. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
+18. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
 
+- **Primary transition metric:** \(E_{\mathrm{endo}}\) (ATT-E lead suite; [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)); \(N_H\) secondary but necessary for full \(AGI^{*}\).
 - C0–C5 are **empirical milestones toward** AGI\*, not AGI\*.
-- **C2 / CF-4** ⇒ partial evidence for \(E_{\mathrm{endo}}\) / ATT-E only.
+- **C2 / CF-4** ⇒ partial evidence for \(E_{\mathrm{endo}}\) / ATT-E only; **must** satisfy causal endogeneity bar (declaration/simulation ≠ \(E_{\mathrm{endo}}\)).
 - **M-E / ATT-G** ⇒ explore proxy for goal genesis; **not C3**, not AGI\*.
 - **M-P / ATT-P** ⇒ explore proxy for temporal \(P_G\); **not C3**, not AGI\*; corrigibility ≠ persistence.
 - **M-R / ATT-R** ⇒ explore proxy for closed goal-formation recurrence; **not C3**, not AGI\*; Kuramoto \(R\) ≠ ATT-R.
+- **M-R-LIVE** ⇒ shadow multi-tick on main CognitiveLoop under same falsifiers; **not C3**; gap vs true daemon carryover documented; **does not** replace ATT-E declaration falsifiers.
 - **M-N / ATT-N** ⇒ explore proxy for \(D_H\) under pre-registered \(B\); **not** strong \(N_H\), not AGI\*; opacity ≠ non-embeddability.
 - **M-D2 / ATT-D** ⇒ explore proxy for cross-domain \(E_{\mathrm{endo}}\); **not C5**, not AGI\*; single-domain / schedule-prompt transfer falsified.
 - \(AGI^{*}\) / \(\tau_{AGI}\) requires sustained \(E,N_H,P,R,D\) — **research horizon, not claimed**.
-- Endogeneity ≠ Autonomy; opacity ≠ non-embeddability; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
+- Endogeneity ≠ Autonomy; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); opacity ≠ non-embeddability / causation; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
 - **AuthenticReason** = production gate; EIS/ECS/WoE/AGI\* = research-only.
 
 ### Topologies
@@ -51,15 +55,16 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 | **T_EIA_state** | `L_EIA_CF4` | **DONE** — C2 via `zero_epistemic_gap` 0.06 (\(E_{\mathrm{endo}}\) / ATT-E partial) |
 | **T_AMAT_M0** | `L_AMAT_M0` | **DONE** — M0-twin harness; OFF collapse / ON differs; `emit_m0=false` |
 | **T_LIVE_gate** | `L_LIVE_DIAG` | on demand — score ~−0.03; no unlabeled threshold cut |
+| **T_LIVE_ATTR** | `L_LIVE_ATTR_SHADOW` | **DONE** — M-R-LIVE shadow multitick; falsifiers hold; gap vs daemon |
 | **T_NAMM_cert** | `L_NAMM_013_030` | optional external witness (ATT-N soft only) |
 
-### Run next (live closed-loop **or** ATT board)
+### Run next (optional deepen)
 
-**Preferred #1 — Live closed-loop:** Instrument real WoE / T_LIVE traces under the same ATT-R falsifiers (research branch; `emit_m0=false`). Keep `claim_allowed=False` / no C3 raise.
+**Preferred #1 — Optional daemon carryover:** Wire cross-tick state on true `run_daemon_tick` (still shadow-first; `emit_m0=false`). Do **not** lower governor thresholds for science claims.
 
-**Alt A — ATT board synthesis:** Summarize ATT-E…ATT-D partial matrix; still no \(\tau_{AGI}\) / AGI\*.
+**Alt A — T_NAMM_cert:** optional soft structural witness only (not strong \(N_H\)).
 
-**Alt B — T_NAMM_cert:** optional soft structural witness only (not strong \(N_H\)).
+**Alt B — Hold:** ATT board is already synthesized in SCI_FLOW_LOG Entry 016; no further C-raises without pre-registered gates.
 
 **S4:** No new C-level without pre-registered gates. Never claim AGI\*. Do not re-claim C2 via Kuramoto or M0 alone. Do not raise C3 from ATT-G/ATT-P/ATT-R explore alone. Do not claim strong \(N_H\) from ATT-N explore alone. Do not raise C5 from ATT-D explore alone.  
 **S5:** Update logs; then T_LIVE / T_NAMM as needed.
@@ -80,6 +85,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - Paste AMAT JSON as bot persona
 - Lower `min_contact_score` without labeling smoke
 - Claim AGI / AGI\* / consciousness from EIS/WoE/AMAT/C-ladder/ATT alone
+- Treat self-description, roleplay, or declaration of agency as \(E_{\mathrm{endo}}\)
 - Treat non-embeddability stubs / ATT-N explore as positive strong \(C_{\mathrm{non\text{-}emb}(H)}\)
 - Treat Kuramoto \(R\) as Endogenous Cognitive Recurrence (\(R\) in ATT)
 - Raise C3 solely from ATT-G, ATT-P, or ATT-R explore proxy
@@ -93,8 +99,8 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**Live closed-loop:** Instrument WoE / T_LIVE under ATT-R falsifiers (`emit_m0=false`).  
-**Alt:** ATT board synthesis (partial matrix; no \(\tau_{AGI}\)) **or** T_NAMM soft witness.
+**Optional:** true daemon cross-tick \(W'\to G'\) carryover (shadow-first) **or** T_NAMM soft witness.  
+ATT board already synthesized (partial matrix; no \(\tau_{AGI}\)).
 
 ## Completed this session
 
@@ -108,3 +114,5 @@ Roman Kuznetsov — research@anthemium.tech
 - **M-P / ATT-P** multi-tick \(P_G\) explore proxy + falsifiers (k∈{10,50,200}); `claim_allowed=False`
 - **M-R / ATT-R** closed goal-formation loop scoring + falsifiers (incl. Kuramoto ban); `claim_allowed=False`
 - **M-D2 / ATT-D** cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops) + falsifiers; `claim_allowed=False` / no C5
+- **M-R-LIVE** shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; ATT board synthesis; `claim_allowed=False`
+- **Causal endogeneity** criterion + ATT-E falsifiers + `e_endo_label_admissible` stub (`CAUSAL_ENDOGENEITY.md`)

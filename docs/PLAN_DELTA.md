@@ -14,6 +14,24 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — Primary \(E_{\mathrm{endo}}\) metric + ATT-E lead suite
+
+- **Section:** Sci-flow order-parameter priority / ATT battery
+- **Delta:** Document that \(E_{\mathrm{endo}}\) is the **primary** phase-transition metric (internal-state-driven goal formation / research / cognitive dynamics); \(N_H\) secondary but necessary for full \(AGI^{*}\); **ATT-E** is the lead suite; cross-link [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md). ATT-R shadow runner `run_shadow_att_r.py` emits rates JSON only.
+- **Rationale:** Align theory, ATT protocol, agent handoff, and log with strengthened causal endogeneity criterion.
+
+### 2026-08-21 — Causal endogeneity criterion (ATT-E bar)
+
+- **Section:** Sci-flow ATT-E / \(E_{\mathrm{endo}}\)
+- **Delta:** Add [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md): description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); require \(do(Z)\) trajectory change under non-triggering \(X\). Wire into phase-transition §2.1, AGI\* distinctions, ATT-E falsifiers (F-DECL/F-NARR/F-EXT/F-NODO). Cheap stub `e_endo_label_admissible`. Do not duplicate M-R-LIVE harness. No C / AGI\* raise.
+- **Rationale:** User strengthened causal endogeneity criterion; opacity≠causation parallel.
+
+### 2026-08-21 — M-R-LIVE / ATT-R shadow closed-loop
+
+- **Section:** Sci-flow M-R-LIVE / T_LIVE_ATTR
+- **Delta:** Add main `shadow_multitick` (CognitiveLoop multi-tick, shadow-only, default governor thresholds) + research `live_att_r` scoring under ATT-R falsifiers; metrics; ATT board synthesis. Gap vs true daemon per-tick loop reset documented. No C3 / AGI\*. Priority → optional daemon carryover or T_NAMM. Preserve `emit_m0=false`.
+- **Rationale:** [`M-R-LIVE_metrics_2026-08-21.md`](../research/sci_flow/M-R-LIVE_metrics_2026-08-21.md).
+
 ### 2026-08-21 — M-D2 / ATT-D cross-domain \(E_{\mathrm{endo}}\)
 
 - **Section:** Sci-flow M-D2 / ATT-D

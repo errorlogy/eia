@@ -100,6 +100,20 @@ Do **not** gut science gates to force SEND.
 
 ---
 
+## T_LIVE_ATTR — shadow ATT-R closed-loop
+
+| Field | Value |
+|-------|-------|
+| **Loop id** | `L_LIVE_ATTR_SHADOW` |
+| **Hypothesis** | H-MRLIVE-ATTR: ATT-R falsifiers hold on main `CognitiveLoop` multi-tick shadow path |
+| **Harness** | `src/eia/runtime/shadow_multitick.py` + research `live_att_r` scoring |
+| **Verify** | Closed evidence 1.0; open / no-\(W'\) / no-novel / schedule / Kuramoto-alone at 0; `emit_m0=false` |
+| **Gap** | True `run_daemon_tick` recreates loop per tick — no cross-tick \(W'\to G'\) yet |
+| **Claim ceiling** | ATT-R explore only — not C3 / not AGI\* |
+| **Status (2026-08-21)** | **DONE (explore proxy)** — see `M-R-LIVE_metrics_2026-08-21.md` |
+
+---
+
 ## T_NAMM_cert — external topology witness
 
 | Field | Value |
@@ -123,9 +137,10 @@ Do **not** gut science gates to force SEND.
 6. **DONE:** ATT-R scoring (closed loop; not Kuramoto)
 7. **DONE:** M-N / ATT-N under pre-registered \(B\) (explore; not strong \(N_H\))
 8. **DONE:** ATT-D / M-D2 cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops; not C5)
-9. **Execute next:** live closed-loop under ATT-R falsifiers **or** ATT board synthesis
-10. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
-11. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
+9. **DONE:** `L_LIVE_ATTR_SHADOW` / M-R-LIVE shadow multitick under ATT-R falsifiers (gap vs daemon documented)
+10. **Execute next:** optional true-daemon cross-tick \(W'\to G'\) (shadow-first) **or** T_NAMM soft witness
+11. **Diagnose on demand:** `L_LIVE_DIAG` (do not lower threshold unless labeled smoke)
+12. **Optional:** `L_NAMM_013_030` structural witness (ATT-N soft witness only)
 
 ## Cursor `/loop` sentinels (PowerShell)
 
@@ -144,6 +159,7 @@ If arming watchers, use unique sentinels — do not duplicate:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-R-LIVE / L_LIVE_ATTR_SHADOW DONE (shadow multitick ATT-R); priority → daemon carryover / T_NAMM |
 | 2026-08-21 | M-D2 / ATT-D DONE (explore; no C5); priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N DONE (explore under \(B\)); priority → ATT-D / live loop |
 | 2026-08-21 | M-P / ATT-P DONE (explore proxy); priority → ATT-R scoring |

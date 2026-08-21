@@ -1,0 +1,29 @@
+{
+  "n_seeds": 20,
+  "claim_ceiling": "architecture_att_r_live_shadow_explore",
+  "agi_star_claim": false,
+  "c3_claim": false,
+  "att": "ATT-R",
+  "milestone": "M-R-LIVE",
+  "mode": "shadow_multitick",
+  "live_telegram": false,
+  "snapshot": {
+    "closed_loop_att_r_evidence_rate": 1.0,
+    "open_loop_att_r_evidence_rate": 0.0,
+    "no_world_update_att_r_evidence_rate": 0.0,
+    "no_novel_motive_att_r_evidence_rate": 0.0,
+    "external_schedule_att_r_evidence_rate": 0.0,
+    "kuramoto_only_att_r_evidence_rate": 0.0,
+    "kuramoto_alone_rate": 1.0,
+    "emit_m0_rate": 0.0
+  },
+  "falsifier_suite_evidence": {
+    "closed_loop": true,
+    "open_loop_once": false,
+    "no_world_update": false,
+    "no_novel_motive": false,
+    "external_schedule": false,
+    "kuramoto_only": false
+  },
+  "gap_vs_live_daemon": "Daemon recreates CognitiveLoop per tick without cross-tick W'\u2192G' carryover; this harness keeps one loop + post-action world update."
+}

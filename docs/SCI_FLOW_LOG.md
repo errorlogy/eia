@@ -587,3 +587,120 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 016 — 2026-08-21 — M-R-LIVE / ATT-R shadow closed-loop
+
+**Session:** Shadow multi-tick on main `CognitiveLoop` under ATT-R falsifiers; `emit_m0=false`; no TG; no threshold gutting  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MRLIVE-ATTR: closed \(W\to\ldots\to W'\to G'\) on main observation→motive→action→state path |
+| S2 | Same falsifiers as M-R (open / no-\(W'\) / no-novel / schedule / Kuramoto-alone) |
+| S3 | `src/eia/runtime/shadow_multitick.py` + research `live_att_r` scoring (no WoE merge) |
+| S4 | n=20/arm: closed evidence 1.0; all falsifiers 0; emit_m0 0; att_g smoke 0.9 |
+| S5 | Metrics + ATT board synthesis; priority → optional daemon carryover / T_NAMM |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Main shadow multitick tests | 4 OK |
+| Research live_att_r + ATT stubs | 23 OK (with WoE PYTHONPATH) |
+| Closed-loop att_r_evidence_rate | 1.0 |
+| Open / no-\(W'\) / no-novel / schedule / Kuramoto evidence | 0.0 / 0.0 / 0.0 / 0.0 / 0.0 |
+| kuramoto_alone_rate | 1.0 |
+| emit_m0_rate / att_g_smoke | 0.0 / 0.9 |
+| live_telegram / thresholds_lowered | false / false |
+| Report | `research/sci_flow/M-R-LIVE_metrics_2026-08-21.md` |
+
+### Gap vs true live
+
+Daemon still recreates `CognitiveLoop` per tick without cross-tick \(W'\to G'\) carryover. M-R-LIVE keeps one loop + post-action world update — closest shadow closed-loop without merging WoE.
+
+### ATT board (synthesis; no \(\tau_{AGI}\))
+
+| ATT | Status | Claim raise? |
+|-----|--------|--------------|
+| ATT-E | Partial (C2 via CF-4) | C2 only |
+| ATT-G | Explore proxy (M-E) | No C3 |
+| ATT-C | Scaffolded (M-A) | No alone |
+| ATT-P | Explore proxy (M-P) | No C3 |
+| ATT-R | Explore proxy (M-R + **M-R-LIVE** shadow) | No C3 |
+| ATT-N | Explore under \(B\) (M-N) | No strong \(N_H\) |
+| ATT-D | Explore proxy (M-D2) | No C5 |
+| AGI\* / \(\tau_{AGI}\) | **Not claimed** | — |
+
+### Blockers
+
+- Official ATT-R / C3 numeric gates still TBD
+- True live daemon cross-tick state carryover not yet wired
+
+### Next
+
+Optional daemon carryover (shadow-first) **or** T_NAMM soft witness; no new C-level without pre-registered gates.
+
+---
+
+## Entry 017 — 2026-08-21 — Causal endogeneity criterion (ATT-E bar)
+
+**Session:** Formalize strengthened causal \(E_{\mathrm{endo}}\) bar; tighten ATT-E falsifiers; cheap declaration-only stub  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-CE-001: description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); require \(do(Z)\) under non-triggering \(X\) |
+| S2 | Pre-register falsifiers F-DECL / F-NARR / F-EXT / F-NODO |
+| S3 | `CAUSAL_ENDOGENEITY.md`; §2.1 in phase-transition; ATT-E causal bar; `e_endo_label_admissible` stub |
+| S4 | Unit stub rejects declaration-only labels; no new large harness (M-R-LIVE already covers ATT-R shadow) |
+| S5 | PLAN_DELTA + NEXT prompt; priority unchanged (daemon carryover / T_NAMM) |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| New theory note | `research/sci_flow/CAUSAL_ENDOGENEITY.md` |
+| ATT-E falsifiers added | F-DECL, F-NARR, F-EXT, F-NODO |
+| Stub | `eia.agi_transition.e_endo_label_admissible` |
+| Duplication avoided | M-R-LIVE / shadow multitick left as ATT-R evidence only |
+
+### Blockers
+
+- Continuous \(E\) / \(\theta_E\) still TBD
+- Stub does not re-score CF-4; C2 remains scoped partial
+
+### Next
+
+Optional daemon carryover (shadow-first) **or** T_NAMM soft witness; enforce declaration-only rejection in any future ATT-E scoring paths.
+
+---
+
+## Entry 018 — 2026-08-21 — Primary E_endo metric + shadow ATT-R runner
+
+**Session:** Lock primary \(E_{\mathrm{endo}}\) / ATT-E lead thesis in docs; run shadow ATT-R batch  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Primary metric: \(E_{\mathrm{endo}}\); \(N_H\) secondary-but-necessary; ATT-E lead suite |
+| S3 | `run_shadow_att_r.py` → `shadow_att_r_results.json` (rates only, `emit_m0=false`) |
+| S5 | Cross-links to `CAUSAL_ENDOGENEITY.md` in phase-transition, AGI\*, ATT, handoff |
+
+### Metrics (shadow ATT-R, n=20)
+
+See `research/sci_flow/shadow_att_r_results.json` — closed_loop att_r_evidence_rate=1.0; open_loop and falsifier arms 0.0; emit_m0_rate=0.0.
+
+### Next
+
+Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
+
+---
+

@@ -1,6 +1,6 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-21 (M-D2 / ATT-D explore proxy; C2 unchanged; AGI\* / C5 / strong \(N_H\) not claimed)  
+**Updated:** 2026-08-21 (M-R-LIVE shadow closed-loop under ATT-R; C2 unchanged; AGI\* / C3 not claimed)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
 **AGI\* target (research, not claimed):** \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) with order parameters \(E,N_H,P,R,D\) and \(\tau_{AGI}\) — see [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md).  
@@ -38,6 +38,7 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 | **M-E** | EIS-7 goal novelty constructor (ATT-G) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-P** | Multi-tick \(P_G\) persistence (ATT-P) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-R** | Closed goal-formation recurrence (ATT-R) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
+| **M-R-LIVE** | Shadow multi-tick closed-loop under ATT-R falsifiers | C2→C3 prep (no C3 raise) | P0 | main runtime + WoE score | **DONE** (explore proxy) |
 | **M-F** | Factorial 2×2×2×4 Hz carrier (100 seeds/cell) | C3 | P1 | WoE + NAMM | planned |
 | **M-G** | Eval harness: measured EIS vector (not hard-coded) | C2 | P0 | WoE v0.2 | **DONE** |
 | **M-M0** | AMAT M0-twin architecture harness | architecture | P1 | WoE + NAMM AMAT | **DONE** |
@@ -216,13 +217,19 @@ pip install -e ".[science,nd]"
 
 ---
 
+## M-R-LIVE: ATT-R shadow closed-loop (DONE, explore proxy)
+
+**Result:** Main `CognitiveLoop` multi-tick shadow path under ATT-R falsifiers; closed evidence 1.0; open / no-\(W'\) / no-novel / schedule / Kuramoto-alone at 0; `emit_m0=false`; no TG; default governor thresholds. Gap: true daemon still per-tick loop reset. **No C3 / AGI\* raise.**
+
+**Report:** [`M-R-LIVE_metrics_2026-08-21.md`](../research/sci_flow/M-R-LIVE_metrics_2026-08-21.md)
+
+---
+
 ## Current sci-flow priority (#1)
 
-**Live closed-loop:** Instrument real WoE / T_LIVE under ATT-R falsifiers (`emit_m0=false`).
+**ATT board deepen / optional daemon carryover:** true `run_daemon_tick` cross-tick \(W'\to G'\) (still shadow-first) **or** T_NAMM soft witness. No new C-level without pre-registered gates.
 
-**Alt:** ATT board synthesis (partial matrix; no \(\tau_{AGI}\)) **or** T_NAMM soft witness.
-
-**T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 soft witness — do not unlabeled-lower governor threshold.
+**T_LIVE_gate:** diagnose contact score only — do not unlabeled-lower governor threshold for science claims.
 
 ---
 
@@ -230,6 +237,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-R-LIVE DONE (shadow multitick under ATT-R falsifiers); gap vs daemon documented; ATT board synthesis; no C3/AGI\* |
 | 2026-08-21 | M-D2 / ATT-D DONE (explore proxy; woe_catalog + twin_ops); no C5/AGI\*; priority → live closed-loop / ATT board |
 | 2026-08-21 | M-N / ATT-N DONE (explore proxy under \(B\)); opacity falsified; no strong \(N_H\)/C3/AGI\*; priority → ATT-D / live loop |
 | 2026-08-21 | M-R / ATT-R DONE (explore proxy); Kuramoto ban; no C3/AGI\*; priority → ATT-N \(B\) / live loop / ATT-D |

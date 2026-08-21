@@ -6,6 +6,7 @@ import unittest
 
 from eia.agi_transition import (
     default_order_parameter_specs,
+    e_endo_label_admissible,
     snapshot_from_partial_e,
     snapshot_with_d_explore,
     snapshot_with_n_h_explore,
@@ -84,6 +85,56 @@ class TestAgiTransitionStubs(unittest.TestCase):
     def test_conjunction_still_requires_both(self) -> None:
         self.assertFalse(
             agi_star_conjunction_allowed(e_endo_supported=True, c_non_emb_supported=False)
+        )
+
+    def test_declaration_only_agency_rejected(self) -> None:
+        """Causal endogeneity bar: declaration/simulation ≠ E_endo."""
+        for label in (
+            "declaration_only",
+            "self_ascription",
+            "roleplay_agency",
+            "simulated_agency",
+            "prompt_narrative",
+        ):
+            with self.subTest(label=label):
+                self.assertFalse(
+                    e_endo_label_admissible(
+                        agency_label=label,
+                        trajectory_changed=True,
+                        matching_external_initiating_signal=False,
+                        do_z_changes_g_distribution=True,
+                        x_non_triggering=True,
+                    )
+                )
+        # Verbal ascription without trajectory change → fail
+        self.assertFalse(
+            e_endo_label_admissible(
+                agency_label="causal_internal",
+                trajectory_changed=False,
+                matching_external_initiating_signal=False,
+                do_z_changes_g_distribution=True,
+                x_non_triggering=True,
+            )
+        )
+        # Trajectory only with matching external initiator → fail
+        self.assertFalse(
+            e_endo_label_admissible(
+                agency_label="causal_internal",
+                trajectory_changed=True,
+                matching_external_initiating_signal=True,
+                do_z_changes_g_distribution=True,
+                x_non_triggering=False,
+            )
+        )
+        # Pass only with non-declaration label + do(Z) under non-triggering X
+        self.assertTrue(
+            e_endo_label_admissible(
+                agency_label="causal_internal",
+                trajectory_changed=True,
+                matching_external_initiating_signal=False,
+                do_z_changes_g_distribution=True,
+                x_non_triggering=True,
+            )
         )
 
 

@@ -115,6 +115,18 @@ milestones:
     command: python research/sci_flow/run_goal_recurrence.py
     result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
     artifact: research/sci_flow/M-R_metrics_2026-08-21.md
+  M-R-LIVE:
+    name: ATT-R shadow multi-tick closed-loop on main CognitiveLoop
+    claim: C3_prep
+    att: ATT-R
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_live_att_r.py
+    result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
+    artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
+    note: "shadow-first; emit_m0=false; gap vs daemon per-tick loop reset; no C3"
   M-N:
     name: ATT-N non-embeddability under encoding budget B
     claim: architecture_explore
