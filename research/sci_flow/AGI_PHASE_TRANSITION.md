@@ -138,6 +138,12 @@ not reducible to \(\text{external instruction} \rightarrow \text{objective}\).
 
 Implications (not optional):
 
+### 2.2 Stable endogenous causal recurrence (M-SE)
+
+CONJECTURE — [STABLE_ENDOGENEITY.md](STABLE_ENDOGENEITY.md): **AGI-transition ≈ stable endogenous causal recurrence** (bounded non-zero drives, \(\mathfrak{E}\) stability vector, closed goal-formation loop under \(X^{\mathrm{trigger}}=0\)). Not endogeneity alone; **\(E_{\mathrm{endo}}\) / ATT-E remains primary**.
+
+
+
 - Self-description / roleplay / “I am autonomous” ≠ \(E_{\mathrm{endo}}\)
 - Simulation of agency ≠ \(E_{\mathrm{endo}}\)
 - Declaration of agency ≠ \(E_{\mathrm{endo}}\)
