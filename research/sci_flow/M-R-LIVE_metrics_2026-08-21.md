@@ -52,7 +52,8 @@ Numeric C3 / ATT-R adoption thresholds remain **TBD**.
 | Main multitick | `src/eia/runtime/shadow_multitick.py` |
 | Research scorer | `research/cursor-starter-v0.2/src/eia/live_att_r.py` |
 | Tests | `tests/test_shadow_multitick.py`, `tests/test_live_att_r.py` |
-| Batch | `python research/sci_flow/run_live_att_r.py` → `live_att_r_results.json` |
+| Batch (live scorer) | `python research/sci_flow/run_live_att_r.py` → `live_att_r_results.json` |
+| Shadow runner | `python research/sci_flow/run_shadow_att_r.py` → `shadow_att_r_results.json` |
 | ATT map | `AGI_TRANSITION_TEST.md` ATT-R |
 
 ## Batch snapshot

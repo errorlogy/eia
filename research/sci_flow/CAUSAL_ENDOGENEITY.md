@@ -9,6 +9,17 @@
 
 ---
 
+## Role in AGI transition measurement
+
+`DEFINITION` / `OPERATIONAL` — Among ATT order parameters, **\(E_{\mathrm{endo}}\) is the primary metric** for detecting movement toward an AGI transition: goal formation, investigation, and other cognitive dynamics whose **causal origin** is persistent internal state \((S,W,M,G)\), not an external prompt, event, or reward schedule.
+
+- **Primary:** sustained causal endogeneity (ATT-E bar below) — without it, \(P\), \(R\), and genesis/genealogy are supporting structure only.
+- **Secondary but necessary for full \(AGI^{*}\):** trans-anthropic non-embeddability \(N_H\) (ATT-N).
+
+This priority does **not** lower the bar on \(N_H\) for \(\tau_{AGI}\); it states which parameter is first-class for transition detection.
+
+---
+
 ## Canonical statement
 
 `OPERATIONAL` / `CONJECTURE`
