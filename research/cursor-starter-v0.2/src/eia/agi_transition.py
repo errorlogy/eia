@@ -21,7 +21,10 @@ OrderParameterId = Literal["E", "N_H", "P", "R", "D"]
 # Suggested first proxies only — numeric AGI* thresholds remain TBD.
 SUGGESTED_PROXY_NOTES: dict[OrderParameterId, str] = {
     "E": "CF-4 / EOI / e_endo_partial; continuous E index not pre-registered",
-    "N_H": "NON_EMBEDDABILITY_MEASUREMENT + NAMM K_A<<K_H / AMAT; claim_allowed=False",
+    "N_H": (
+        "ATT-N under pre-registered B; D_H + ΔP(A|z); "
+        "NAMM compression soft witness; claim_allowed=False"
+    ),
     "P": "LoopScheduler multi-tick persistence without re-prompting",
     "R": "Closed observe→motive→action→world-update goal-formation loop (not Kuramoto R)",
     "D": "Cross-domain transfer of E and N_H; C5 affinity",
@@ -169,6 +172,31 @@ def snapshot_with_r_explore(
         rationale=(
             "scoped E + ATT-P/ATT-R explore proxies only; N_H/D unmeasured; "
             "R is endogenous cognitive recurrence not Kuramoto; "
+            "agi_star_claim forced false"
+        ),
+    )
+
+
+def snapshot_with_n_h_explore(
+    *,
+    e_endo_partial: bool,
+    p_explore_proxy: float | None,
+    r_explore_proxy: float | None,
+    n_h_explore_proxy: float | None,
+) -> PhaseTransitionSnapshot:
+    """Attach ATT-N explore proxy without authorizing AGI* or strong N_H claims."""
+    return PhaseTransitionSnapshot(
+        e_score=1.0 if e_endo_partial else 0.0,
+        n_h_score=n_h_explore_proxy,
+        p_score=p_explore_proxy,
+        r_score=r_explore_proxy,
+        d_score=None,
+        e_endo_partial=e_endo_partial,
+        agi_star_claim=False,
+        rationale=(
+            "scoped E + ATT-P/ATT-R/ATT-N explore proxies only; D unmeasured; "
+            "N_H explore is D_H under pre-registered B with ΔP(A|z)>0 — "
+            "not strong N_H; opacity ≠ non-embeddability; "
             "agi_star_claim forced false"
         ),
     )

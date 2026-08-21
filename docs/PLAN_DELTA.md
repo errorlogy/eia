@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — M-N / ATT-N encoding budget \(B\) + \(D_H\) explore
+
+- **Section:** Sci-flow M-N / ATT-N
+- **Delta:** Pre-register `EXPLORE_ENCODING_BUDGET_B`; expand `eia.non_embeddability` with \(D_H\) / twin-abstraction / certificate-loss proxy requiring \(\Delta P(A\mid z)>0\); falsifiers (opacity, no-causal, unbounded \(\phi\), length-only, faithful \(\phi\)); metrics. No strong \(N_H\) / C3 / AGI\*. Priority → ATT-D or live closed-loop. Preserve `emit_m0=false`.
+- **Rationale:** [`M-N_metrics_2026-08-21.md`](../research/sci_flow/M-N_metrics_2026-08-21.md).
+
 ### 2026-08-21 — M-P / ATT-P temporal goal persistence
 
 - **Section:** Sci-flow M-P / ATT-P

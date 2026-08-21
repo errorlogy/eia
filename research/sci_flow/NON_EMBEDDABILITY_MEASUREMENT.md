@@ -1,9 +1,10 @@
 # Measurement Scaffold — \(C_{\mathrm{non\text{-}emb}(H)}\)
 
-**Status:** Research design only (2026-08-20) — no claim, no production gate  
+**Status:** Research design + ATT-N explore proxy under pre-registered \(B\) (2026-08-21) — **no strong \(N_H\) claim**, no production gate  
 **Parent criterion:** [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
 **Phase-transition theory:** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) (§7–9, order parameter \(N_H\))  
-**ATT cell:** ATT-N in [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)
+**ATT cell:** ATT-N in [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)  
+**Metrics:** [`M-N_metrics_2026-08-21.md`](M-N_metrics_2026-08-21.md)
 
 \[
 AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}
@@ -65,12 +66,12 @@ Non-embeddability without endogenous causality is **out of scope for AGI\***. An
 
 ## Pre-registration checklist (before any M-N execute)
 
-- [ ] Human encoding budget \(B\) (tokens / diagram nodes / feature dim)
-- [ ] Loss / disagreement metric \(D\) and thresholds
-- [ ] Exclusion: mere opacity, encryption, or random high-dim noise
-- [ ] Negative control: human-authored plans that are hard only because of length
-- [ ] Claim ceiling: architecture / OPERATIONAL / research — **never AGI\*** from P1–P4 alone
-- [ ] AuthenticReason unchanged as production gate
+- [x] Human encoding budget \(B\) (tokens / diagram nodes / feature dim / \(\phi\) ops / attention / wall-clock) — see `EXPLORE_ENCODING_BUDGET_B`
+- [x] Loss / disagreement metric \(D\) explore floors (`explore_dh_loss_floor`, `explore_delta_p_floor`) — **not** adopted \(\theta_N\)
+- [x] Exclusion: mere opacity, encryption, or random high-dim noise
+- [x] Negative control: human-authored plans that are hard only because of length
+- [x] Claim ceiling: architecture / OPERATIONAL / research — **never AGI\*** from P1–P4 alone
+- [x] AuthenticReason unchanged as production gate
 
 ---
 
@@ -78,19 +79,21 @@ Non-embeddability without endogenous causality is **out of scope for AGI\***. An
 
 | ID | Milestone | Claim | Priority | Status |
 |----|-----------|-------|----------|--------|
-| **M-N** | Design + optional light stubs for \(C_{\mathrm{non\text{-}emb}(H)}\) proxies | research metadata | P2 | **scaffolded (this doc + types stub)** |
+| **M-N** | Design + encoding budget \(B\) + ATT-N explore proxy (certificate / twin-abstraction loss) | research metadata / explore | P2 | **DONE explore proxy (2026-08-21)** — not strong \(N_H\) |
 
-Execute only after C2 \(E_{\mathrm{endo}}\) evidence is stable and a concrete encoding budget \(B\) is chosen.
+Execute thresholds for strong \(N_H\) remain **TBD**. Keep `claim_allowed=False` / `n_h_claim=false`.
 
 ---
 
-## Light code stub
+## Light code stub + explore harness
 
-Optional typed placeholders live under the WoE research package:
+WoE research package:
 
-- `research/cursor-starter-v0.2/src/eia/non_embeddability.py`
+- `research/cursor-starter-v0.2/src/eia/non_embeddability.py` — stubs + ATT-N arms under \(B\)
+- `research/sci_flow/run_non_embeddability.py` → `non_embeddability_results.json`
+- Metrics: [`M-N_metrics_2026-08-21.md`](M-N_metrics_2026-08-21.md)
 
-Stub exports schemas and `claim_allowed=False` helpers. No numeric threshold may raise C-level or AGI\*.
+Stub/harness exports keep `claim_allowed=False`. No numeric threshold may raise C-level or AGI\*.
 
 ---
 
@@ -99,4 +102,6 @@ Stub exports schemas and `claim_allowed=False` helpers. No numeric threshold may
 - C2 / CF-4 cited as AGI\* → reject (only scoped \(E_{\mathrm{endo}}\))
 - Benchmark SOTA cited as \(C_{\mathrm{non\text{-}emb}(H)}\) → reject
 - Unmeasured P1–P4 treated as positive → reject
+- Opacity-only high loss treated as \(N_H\) → reject
+- ATT-N explore proxy treated as strong \(N_H\) → reject
 - Production AuthenticReason overridden by EIS/ECS/AGI\* labels → reject

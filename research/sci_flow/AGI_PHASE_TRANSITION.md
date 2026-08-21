@@ -353,7 +353,7 @@ simultaneous geometry change:
 | Genealogy | **Scaffolded** (receipts) | M-A `WoEReceipt`; main `CausalTrace` |
 | \(P\) | **Explore proxy (M-P)** — not C3 | `goal_persistence`; multi-tick \(P_G\) |
 | \(R\) (recurrence) | **Explore proxy (M-R)** — not Kuramoto; not C3 | `goal_recurrence`; M0-twin architecture |
-| \(N_H\) | **Unmeasured** | M-N design + stubs; NAMM AMAT / \(K_A\ll K_H\) |
+| \(N_H\) | **Explore proxy (M-N)** — not strong \(N_H\) | ATT-N under pre-registered \(B\); opacity ≠ \(N_H\) |
 | \(D\) | **Unmeasured** | C5 not claimed; multi-topology ≠ generality |
 
 Kuramoto CF-5: **does not** support \(E\) as necessary cause (M-D).
@@ -377,4 +377,5 @@ Kuramoto CF-5: **does not** support \(E\) as necessary cause (M-D).
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-N / ATT-N explore proxy under pre-registered \(B\); \(N_H\) map → explore (not strong) |
 | 2026-08-20 | Initial formalization from user phase-transition theory; epistemic tags; EIA evidence map |

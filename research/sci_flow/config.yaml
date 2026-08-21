@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-21-MR"
+updated: "2026-08-21-MN"
 
 repos:
   eia:
@@ -115,6 +115,17 @@ milestones:
     command: python research/sci_flow/run_goal_recurrence.py
     result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
     artifact: research/sci_flow/M-R_metrics_2026-08-21.md
+  M-N:
+    name: ATT-N non-embeddability under encoding budget B
+    claim: architecture_explore
+    att: ATT-N
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_non_embeddability.py
+    result: "causal 1.0 / opacity 0 / no_causal 0 / unbounded 0 / length 0 / faithful 0"
+    artifact: research/sci_flow/M-N_metrics_2026-08-21.md
+    note: "explore proxy only; n_h_claim=false; B pre-registered"
 
 eia_eval_scenarios:
   - id: twin_world_001

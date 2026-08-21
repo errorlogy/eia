@@ -489,3 +489,46 @@ Journal for sci-flow loops S1–S5. Append-only.
 
 ---
 
+## Entry 014 — 2026-08-21 — M-N / ATT-N cognitive non-embeddability under \(B\)
+
+**Session:** Pre-register encoding budget \(B\); \(D_H\) + \(\Delta P(A\mid z)\) explore proxy; opacity falsifiers; metrics  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No strong \(N_H\). No C3. AGI\* not claimed.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MN-ATTN: \(D_H(z)\) under fixed \(B\) with \(\Delta P(A\mid z)>0\) |
+| S2 | Falsifiers: opacity-only; no causal; unbounded \(\phi\); length-only; faithful \(\phi\le B\) |
+| S3 | `eia.non_embeddability` ATT-N arms + `EXPLORE_ENCODING_BUDGET_B` (research branch; `emit_m0=false`) |
+| S4 | n=20/arm: causal-loss evidence 1.0; all falsifiers evidence 0; emit_m0=0 |
+| S5 | Metrics + plan/log/NEXT → priority ATT-D / live loop |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| ATT-N unit tests | 14 OK (+ ATT stubs / M-R still green) |
+| Encoding budget \(B\) | 256 tok / 32 nodes / 64 feat / 100 \(\phi\) ops / 8 attn / 30s |
+| Causal-loss att_n_evidence_rate | 1.0 (mean \(D_H\) ≈ 0.62; compression asymmetry ≈ 5.0) |
+| Opacity-only evidence | 0.0 |
+| No-causal evidence | 0.0 |
+| Unbounded-\(\phi\) evidence | 0.0 |
+| Length-only evidence | 0.0 |
+| Faithful-under-\(B\) evidence | 0.0 |
+| emit_m0_rate_with_genesis | 0.0 |
+| n_h_claim / c3_claim / agi_star_claim | false / false / false |
+| Report | `research/sci_flow/M-N_metrics_2026-08-21.md` |
+
+### Blockers
+
+- Official ATT-N / strong \(N_H\) / \(\varepsilon\) numeric gates still TBD (explore proxy only)
+- ATT-D unscored; live closed-loop optional
+
+### Next
+
+**ATT-D** second-domain ATT-E explore; optional live closed-loop / T_NAMM soft witness.
+
+---
+

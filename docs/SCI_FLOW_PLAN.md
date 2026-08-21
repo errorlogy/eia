@@ -1,6 +1,6 @@
 # EIA Sci Flow Plan
 
-**Updated:** 2026-08-21 (M-R / ATT-R executed; C2 unchanged; AGI\* not claimed)  
+**Updated:** 2026-08-21 (M-N / ATT-N explore proxy under \(B\); C2 unchanged; AGI\* / strong \(N_H\) not claimed)  
 **Author:** Roman Kuznetsov — [anthemium.tech](https://anthemium.tech)  
 **Active claim ceiling:** **C2** (CF-4 named internal reset). Kuramoto CF-5 remains unsupported as a cause.  
 **AGI\* target (research, not claimed):** \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) with order parameters \(E,N_H,P,R,D\) and \(\tau_{AGI}\) — see [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md), [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md).  
@@ -17,9 +17,9 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 |--------|----------------|
 | C1–C2 | Progressive evidence for \(E_{\mathrm{endo}}\) (request-independence → internal-state causation) |
 | C3–C5 | Timing / usefulness / transfer of endogenous-like behavior; may remain Homo-embeddable |
-| \(C_{\mathrm{non\text{-}emb}(H)}\) | Separate conjunct — unmeasured; scaffold only ([`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md)) |
+| \(C_{\mathrm{non\text{-}emb}(H)}\) | Separate conjunct — ATT-N explore proxy only; **not** strong \(N_H\) ([`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md), [`M-N_metrics_2026-08-21.md`](../research/sci_flow/M-N_metrics_2026-08-21.md)) |
 
-**Endogeneity ≠ autonomy. Trans-human cognition ≠ superhuman task scores.**
+**Endogeneity ≠ autonomy. Trans-human cognition ≠ superhuman task scores. Opacity ≠ non-embeddability.**
 
 ---
 
@@ -32,7 +32,7 @@ C0–C5 are **empirical milestones toward** AGI\*, not AGI\* itself.
 | **M-C** | CF-1 prompt deletion suite (100 seeds) | C1 | P0 | cross-harness | **DONE** |
 | **M-D** | Kuramoto coupling graph + delay sweep | C2 | P1 | WoE + NAMM kuramoto | **DONE** (C2 unsupported) |
 | **M-CF4** | CF-4 internal-state reset suite (100 seeds) | C2 / \(E_{\mathrm{endo}}\) partial | P0 | WoE v0.2 | **DONE** (C2 claimed) |
-| **M-N** | \(C_{\mathrm{non\text{-}emb}(H)}\) / \(N_H\) measurement design + stubs | research metadata | P2 | WoE v0.2 | **scaffolded** |
+| **M-N** | \(C_{\mathrm{non\text{-}emb}(H)}\) / \(N_H\) budget \(B\) + ATT-N explore proxy | research / explore (no strong \(N_H\)) | P2 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-ATT** | AGI Transition Test draft (ATT-E…ATT-D) + order-parameter stubs | research metadata | P1 | WoE v0.2 | **drafted** |
 | **M-E** | EIS-7 goal novelty constructor (ATT-G) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
 | **M-P** | Multi-tick \(P_G\) persistence (ATT-P) | C2→C3 prep (no C3 raise) | P0 | WoE v0.2 | **DONE** (explore proxy) |
@@ -157,9 +157,11 @@ pip install -e ".[science,nd]"
 
 ---
 
-## M-N: Non-embeddability scaffold (scaffolded)
+## M-N: Non-embeddability / ATT-N (DONE, explore proxy)
 
-**Result:** Design note + typed stubs (`eia.non_embeddability`); no thresholds, no C-level raise, no AGI\* claim.
+**Result:** Pre-registered encoding budget \(B\) (256 tokens / 32 diagram nodes / 64 features / 100 \(\phi\) ops / 8 attention slots / 30s). \(D_H\) twin-abstraction / explanation-loss proxy with \(\Delta P(A\mid z)\) gate; causal-loss evidence 1.0; opacity / no-causal / unbounded-\(\phi\) / length-only / faithful-\(\phi\) falsifiers at 0. **No strong \(N_H\) / C3 / AGI\* raise.**
+
+**Report:** [`M-N_metrics_2026-08-21.md`](../research/sci_flow/M-N_metrics_2026-08-21.md)
 
 **Docs:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md), [`NON_EMBEDDABILITY_MEASUREMENT.md`](../research/sci_flow/NON_EMBEDDABILITY_MEASUREMENT.md)
 
@@ -207,11 +209,11 @@ pip install -e ".[science,nd]"
 
 ## Current sci-flow priority (#1)
 
-**ATT-N:** Pre-register encoding budget \(B\) before any non-embeddability execute batch.
+**ATT-D:** Re-run ATT-E-class internal-factor suppression in a second domain (explore only).
 
-**Alt:** live closed-loop WoE / T_LIVE instrumentation under ATT-R falsifiers, **or** ATT-D second-domain ATT-E explore.
+**Alt:** live closed-loop WoE / T_LIVE instrumentation under ATT-R falsifiers.
 
-**T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 witness — do not unlabeled-lower governor threshold.
+**T_LIVE_gate / T_NAMM_cert:** diagnose contact score; optional NAMM 013/030 soft witness — do not unlabeled-lower governor threshold.
 
 ---
 
@@ -219,6 +221,7 @@ pip install -e ".[science,nd]"
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-N / ATT-N DONE (explore proxy under \(B\)); opacity falsified; no strong \(N_H\)/C3/AGI\*; priority → ATT-D / live loop |
 | 2026-08-21 | M-R / ATT-R DONE (explore proxy); Kuramoto ban; no C3/AGI\*; priority → ATT-N \(B\) / live loop / ATT-D |
 | 2026-08-21 | M-P / ATT-P DONE (explore proxy); falsifiers hold; no C3/AGI\*; priority → ATT-R scoring |
 | 2026-08-20 | M-E / ATT-G DONE (explore proxy); falsifiers hold; no C3/AGI\*; priority → ATT-P |

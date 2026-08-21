@@ -7,6 +7,7 @@ import unittest
 from eia.agi_transition import (
     default_order_parameter_specs,
     snapshot_from_partial_e,
+    snapshot_with_n_h_explore,
     snapshot_with_p_explore,
     snapshot_with_r_explore,
     tau_agi_claim_allowed,
@@ -53,6 +54,18 @@ class TestAgiTransitionStubs(unittest.TestCase):
         self.assertEqual(snap.r_score, 1.0)
         self.assertFalse(snap.agi_star_claim)
         self.assertIn("not Kuramoto", snap.rationale)
+
+    def test_n_h_explore_snapshot_never_claims(self) -> None:
+        snap = snapshot_with_n_h_explore(
+            e_endo_partial=True,
+            p_explore_proxy=1.0,
+            r_explore_proxy=1.0,
+            n_h_explore_proxy=1.0,
+        )
+        self.assertEqual(snap.n_h_score, 1.0)
+        self.assertFalse(snap.agi_star_claim)
+        self.assertIn("not strong N_H", snap.rationale)
+        self.assertIn("opacity", snap.rationale)
 
     def test_conjunction_still_requires_both(self) -> None:
         self.assertFalse(
