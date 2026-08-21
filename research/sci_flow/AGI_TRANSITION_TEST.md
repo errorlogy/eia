@@ -20,13 +20,13 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 ## Global rules
 
 1. **C0–C5 remain empirical milestones.** Passing ATT cells does **not** auto-raise the C-ladder unless a separate pre-registered C-gate exists.
-1b. **\($E_{\mathrm{endo}}\) is the primary ATT order parameter** for transition detection (internal-state-driven goal formation / research / cognitive dynamics); **\($N_H\)** is secondary but **necessary** for full \($AGI^{*}\) at \($\tau_{AGI}\) — conjunction unchanged.
+1b. **\(E_{\mathrm{endo}}\) is the primary ATT order parameter** for transition detection (internal-state-driven goal formation / research / cognitive dynamics); **\(N_H\)** is secondary but **necessary** for full \(AGI^{*}\) at \(\tau_{AGI}\) — conjunction unchanged.
 2. **\(AGI^{*}\) / \(\tau_{AGI}\) is a research horizon**, not a claimable ceiling from any single ATT.
 3. **AuthenticReason** stays the production gate.
 4. Do **not** treat Kuramoto sync as evidence for \(E\) (M-D falsified necessity).
 5. Do **not** treat TG smoke / lowered `min_contact_score` as science evidence.
 6. Opacity ≠ \(N_H\); Endogeneity ≠ Autonomy; Trans-Anthropic ≠ task SOTA; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\) ([`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md)).
-7. All \(\theta_E, \theta_N, \theta_P, \theta_R, \theta_D, \varepsilon, \Delta T\) = **TBD**. First operational proxies listed below are **suggested**, not adopted gates.
+8. All \(\theta_E, \theta_N, \theta_P, \theta_R, \theta_D, \varepsilon, \Delta T\) = **TBD**. First operational proxies listed below are **suggested**, not adopted gates.
 
 ---
 
@@ -38,7 +38,7 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 
 | Field | Content |
 |-------|---------|
-| **Theory** | \(E = C_{\mathrm{int}}/(C_{\mathrm{int}}+C_{\mathrm{ext}})\) via \(do(Z)\) interventions; causal endogeneity bar above |
+| **Theory** | \(E = C_{\mathrm{int}}/(C_{\mathrm{int}}+C_{\mathrm{ext}})\) via \(do(Z)\); stable recurrence [STABLE_ENDOGENEITY.md](STABLE_ENDOGENEITY.md); causal bar above |
 | **Harness** | CF-4 (`eia.cf4`, `run_cf4.py`); twin interventions / EOI; CF-4 summary `e_endo_partial`; stub `e_endo_label_admissible` |
 | **Procedure** | Compare \(P(\text{intent} / G_{t+1})\) under named internal resets vs default vs external-prompt controls; reject declaration-only / narrative-only labels before scoring \(E\) |
 | **Suggested first proxy** | CF-4: `default` intent_rate ≥ 0.85 **and** ≥1 named factor ≤ 0.40 **and** `wm_off` ≤ 0.05 → scoped \(E\) support (`e_endo_partial`); continuous \(E\) still TBD |
@@ -179,6 +179,7 @@ Until then:
 
 | Date | Change |
 |------|--------|
+| 2026-08-21 | M-SE stable endogeneity framing; ATT-E primary preserved |
 | 2026-08-21 | ATT-E requires causal endogeneity bar; declaration/narrative/external-only falsifiers; link `CAUSAL_ENDOGENEITY.md` |
 | 2026-08-21 | M-R-LIVE shadow multitick under ATT-R falsifiers; ATT board synthesis; priority → daemon carryover / T_NAMM |
 | 2026-08-21 | M-D2 / ATT-D explore proxy executed (woe_catalog + twin_ops); priority → live closed-loop / ATT board |
