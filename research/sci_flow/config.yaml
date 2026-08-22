@@ -22,6 +22,26 @@ claim_ladder:
   protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
   topologies_doc: docs/MULTI_TOPOLOGY_LOOPS.md
 
+
+model_roles:
+  enabled: false
+  tier: 0
+  world_imagination:
+    provider: null
+    offline_only: true
+    max_calls_per_episode: 0
+  goal_genesis:
+    provider: null
+    trigger: drive_birth
+    min_epistemic_pressure: 0.35
+    fallback: code
+  action_planner:
+    gated_by: [governor, authentic_reason]
+    shadow_only: true
+  att_evidence:
+    llm_allowed: false
+    auditor: python_only
+
 milestones:
   M-A:
     name: WoE causal receipts
@@ -138,6 +158,23 @@ milestones:
     result: "causal 1.0 / opacity 0 / no_causal 0 / unbounded 0 / length 0 / faithful 0"
     artifact: research/sci_flow/M-N_metrics_2026-08-21.md
     note: "explore proxy only; n_h_claim=false; B pre-registered"
+  M-CLI:
+    name: M-CLI model role adapter (Tier 0 stub)
+    claim: scaffold
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-22"
+    command: make check-sci-tier0
+    note: "Phase 0-1; att_evidence.llm_allowed=false; no behavior change when disabled"
+  M-O:
+    name: Oscillatory endogeneity substrate (adjunct)
+    claim: theory_only
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: planned
+    artifact: research/sci_flow/OSCILLATORY_ENDOGENEITY.md
+    note: "O_t / Psi(O_t) explore; Kuramoto one model not E proof; parallel to M-CLI"
+
   M-SE:
     name: Stable endogeneity theory + stack sim ablation
     claim: theory_only

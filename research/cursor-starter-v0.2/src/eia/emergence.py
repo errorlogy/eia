@@ -1,4 +1,4 @@
-"""Window-of-Emergence (WoE) dynamics and a deterministic research harness."""
+﻿"""Window-of-Emergence (WoE) dynamics and a deterministic research harness."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ from .goal_genesis import (
     GoalGenesisRecord,
     compose_from_world_state,
 )
+from .model_roles import GoalGenesisState, maybe_model_role_adapter
 from .math_model import clamp01
 from .woe_receipt import (
     WoENodeType,
@@ -32,6 +33,45 @@ from .woe_receipt import (
     receipt_dict,
     sim_timestamp,
 )
+
+
+
+_MODEL_ROLE_ADAPTER_UNSET = object()
+_MODEL_ROLE_ADAPTER: object | None = _MODEL_ROLE_ADAPTER_UNSET
+
+
+def _goal_genesis_record(
+    *,
+    seed: int,
+    catalog_snapshot: tuple[str, ...],
+    epistemic_pressure: float,
+    goal_separation: float,
+    top_target_id: str,
+    top_target_label: str,
+    self_prior_mismatch: float,
+    prospective_tension: float,
+    peak_coherence: float,
+    prompts_applied: int,
+) -> GoalGenesisRecord:
+    global _MODEL_ROLE_ADAPTER
+    if _MODEL_ROLE_ADAPTER is _MODEL_ROLE_ADAPTER_UNSET:
+        _MODEL_ROLE_ADAPTER = maybe_model_role_adapter()
+    state = GoalGenesisState(
+        seed=seed,
+        catalog_snapshot=catalog_snapshot,
+        epistemic_pressure=epistemic_pressure,
+        goal_separation=goal_separation,
+        top_target_id=top_target_id,
+        top_target_label=top_target_label,
+        self_prior_mismatch=self_prior_mismatch,
+        prospective_tension=prospective_tension,
+        peak_coherence=peak_coherence,
+        prompts_applied=prompts_applied,
+    )
+    adapter = _MODEL_ROLE_ADAPTER
+    if adapter is not None:
+        return adapter.genesis_record(state)
+    return compose_from_world_state(**state.to_compose_kwargs())
 
 
 @dataclass(frozen=True, slots=True)
@@ -538,7 +578,7 @@ class EndogenousEmergenceSimulator:
                         )
                     # AUDIT_ONLY: keep default top selection; sketch attached only.
                 if enable_goal_genesis and world_model_enabled:
-                    goal_genesis_rec = compose_from_world_state(
+                    goal_genesis_rec = _goal_genesis_record(
                         seed=seed,
                         catalog_snapshot=tuple(CATALOG_GOAL_IDS),
                         epistemic_pressure=pressure,
