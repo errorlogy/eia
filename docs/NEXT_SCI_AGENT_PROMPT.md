@@ -1,8 +1,9 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-21 (causal endogeneity bar formalized for ATT-E; M-R-LIVE already DONE; next = optional daemon carryover **or** T_NAMM soft witness)  
+**Updated:** 2026-08-21 (M-CLI implementation plan added; next = Phase 0 Tier 0 lock + ModelRoleAdapter stub)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Implementation plan:** [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md)  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
 **AGI\* notes:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) · [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md) · [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md) · [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)
 
@@ -15,7 +16,8 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 ### Read first (in order)
 
 1. `docs/NEXT_SCI_AGENT_PROMPT.md` (this file)
-2. `research/sci_flow/AGI_PHASE_TRANSITION.md` — order parameters \(E,N_H,P,R,D\), \(\tau_{AGI}\), regimes
+2. `docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md` — M-CLI Phases 0–6 roadmap
+3. `research/sci_flow/AGI_PHASE_TRANSITION.md` — order parameters \(E,N_H,P,R,D\), \(\tau_{AGI}\), regimes
 3. `research/sci_flow/CAUSAL_ENDOGENEITY.md` — causal \(E_{\mathrm{endo}}\) bar (declaration/simulation ≠ endogeneity)
 4. `research/sci_flow/STABLE_ENDOGENEITY.md` — M-SE multi-loop / drive field; toy `endogeneity_stack_sim.py`
 5. `research/sci_flow/AGI_TRANSITION_TEST.md` — ATT-E…ATT-D harness map (thresholds TBD)

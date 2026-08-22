@@ -730,3 +730,25 @@ Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
 
 ---
 
+## Entry 020 — 2026-08-21 — Endogeneity implementation plan (M-CLI roadmap)
+
+**Session:** `docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md` — Phases 0–6 (Tier 0 lock → ModelRoleAdapter → daemon carryover → theory TZ → Tier 1 CLI → M-CLI metrics → Telegram witness last)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Theory vs implementation annex split; model tier 0–3 strategy |
+| S2 | Prerequisites (pip, numpy/matplotlib, optional Telegram/NAMM/CLI) |
+| S3 | Anti-patterns + verification checklist wired to existing harness |
+| S4 | Phase dependency graph; M-CLI marked NOT STARTED |
+| S5 | Cross-links to STABLE_ENDOGENEITY, CAUSAL_ENDOGENEITY, ATT docs |
+
+### Next
+
+**Phase 0:** Tier 0 regression lock + **Phase 1:** `ModelRoleAdapter` stub (see implementation plan).
+
+---
+

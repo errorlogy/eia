@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-21 — Endogeneity implementation plan (M-CLI roadmap)
+
+- **Section:** Sci-flow implementation / M-CLI
+- **Delta:** Add [`ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md): Phases 0–6 (Tier 0 regression lock, ModelRoleAdapter, daemon carryover, THEORY_TZ consolidated, Tier 1 CLI genesis explore, M-CLI metrics, Telegram witness last). Theory vs annex split; anti-patterns; verification checklist.
+- **Rationale:** User request for actionable install/configure/develop roadmap; CLI models as instruments not \(E_{\mathrm{endo}}\) source.
+
 ### 2026-08-21 — M-SE stable endogeneity framework
 
 - **Section:** Sci-flow theory / ATT-E primary $E_{\mathrm{endo}}$
