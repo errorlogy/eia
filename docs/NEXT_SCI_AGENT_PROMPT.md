@@ -2,7 +2,24 @@
 
 **Updated:** 2026-08-22 (M-O oscillatory adjunct documented; next = Phase 0 Tier 0 lock + ModelRoleAdapter stub; optional M-O harness)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
-**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+
+### Cursor skills (load before autonomous loops)
+
+| Skill | Path | Use |
+|-------|------|-----|
+| **eia-sci-flow** | `.cursor/skills/eia-sci-flow/SKILL.md` | Branch, read order, C2 ceiling, tier 0, stop rules |
+| **sci-loop** | `.cursor/skills/sci-loop/SKILL.md` | Bounded `/loop` cadence + tier-0 verify each tick |
+| **loop** | Cursor built-in (`/loop`) | Timer / recurring agent wake |
+| **loop-library** | `~/.agents/skills/loop-library/` | Audit or design bounded loops |
+| **babysit** | Cursor built-in | PR merge-ready (CI + comments) |
+| **split-to-prs** | Cursor built-in | Split large sci diffs into reviewable PRs |
+
+**Tier 0 lock:** `make check-sci-tier0` (or `python scripts/check_sci_tier0.py`) after substantive changes.
+
+**Example loop prompt:** `/loop 30m Follow sci-loop and eia-sci-flow; one milestone tick; make check-sci-tier0; update SCI_FLOW_LOG if needed.`
+
+Rule: `.cursor/rules/eia-sci-flow.mdc` (applies under `docs/`, `research/sci_flow/`, `research/cursor-starter-v0.2/`).  
 **Implementation plan:** [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md)  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
 **AGI\* notes:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) · [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md) · [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md) · [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)

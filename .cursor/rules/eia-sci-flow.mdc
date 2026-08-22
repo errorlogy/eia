@@ -1,0 +1,24 @@
+---
+description: EIA sci-flow autonomous research — branch, tier 0, claim ceiling C2
+globs:
+  - "docs/**"
+  - "research/sci_flow/**"
+  - "research/cursor-starter-v0.2/**"
+  - "scripts/check_sci_tier0.py"
+  - "endogeneity_stack_sim.py"
+alwaysApply: false
+---
+
+# EIA sci-flow
+
+For autonomous ATT / M-CLI / endogeneity work on this repo, follow the **eia-sci-flow** skill:
+
+`.cursor/skills/eia-sci-flow/SKILL.md`
+
+Recurring ticks: **sci-loop** skill + Cursor `/loop`.
+
+- Branch: `research/cursor-starter-v0.2-woe-eis`
+- Tier 0 default; verify with `make check-sci-tier0`
+- Claim ceiling **C2**; **no AGI***; **no WoE → main merge**
+
+Coding invariants for `research/cursor-starter-v0.2/`: also read `research/cursor-starter-v0.2/.cursor/rules/eia.mdc`.
