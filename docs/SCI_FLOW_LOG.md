@@ -752,3 +752,59 @@ Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
 
 ---
 
+## Entry 021 — 2026-08-22 — M-CLI Phase 0–1 (Tier 0 lock + ModelRoleAdapter)
+
+**Session:** `model_roles.py`, `make check-sci-tier0`, emergence hook via `_goal_genesis_record`  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `ModelRoleAdapter` Tier 0 stub; default `compose_from_world_state` |
+| S2 | `model_roles` in config.yaml; `att_evidence.llm_allowed: false` |
+| S3 | `scripts/check_sci_tier0.py` + Makefile target; sim + shadow/live ATT-R + pytest |
+| S4 | `test_model_roles.py` 4 passed; Tier 0 check exit 0 |
+| S5 | emergence.py wired through adapter when config enabled |
+
+### Next
+
+**Phase 2** daemon carryover **or** **M-O** harness stub.
+
+---
+
+## Entry 022 — 2026-08-22 — M-O oscillatory endogeneity substrate (adjunct)
+
+**Session:** OSCILLATORY_ENDOGENEITY.md; Phase M-O in implementation plan; config M-O planned; STABLE_ENDOGENEITY cross-link  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-MO-001: O_t oscillatory field as optional S_t extension feeding Phi_t and B_t — conjecture only |
+| S2 | Pre-register falsifiers F-SYNC, F-PHASE-ONLY, F-KURAMOTO-AS-E; do(O) alongside do(Z) |
+| S3 | Theory doc + config milestone M-O (planned); Phase M-O parallel track in ENDOGENEITY_IMPLEMENTATION_PLAN |
+| S4 | Explicit Kuramoto-as-E ban aligned with M-D (coupled 0.95 / K=0 0.94 / scramble 0.69) |
+| S5 | PLAN_DELTA + NEXT prompt; parallel to ATT-G (M-E) genesis research |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| New theory note | `research/sci_flow/OSCILLATORY_ENDOGENEITY.md` |
+| Harness | **Not started** (oscillatory_state.py / cf5 extend TBD) |
+| M-D reference | Kuramoto not necessary cause of intent |
+| ATT-R Kuramoto arm | 0.0 evidence (existing) |
+
+### Blockers
+
+- M-O harness and falsifier unit tests not yet implemented
+- Genesis linkage under do(O) not yet measured
+
+### Next
+
+**Phase 0–1 M-CLI** (Tier 0 lock + ModelRoleAdapter) **or** optional M-O stub harness; no C-level raise from oscillation alone.
+

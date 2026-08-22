@@ -14,6 +14,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ## Entries
 
+### 2026-08-22 — M-O oscillatory endogeneity substrate (adjunct)
+
+- **Section:** Sci-flow M-O / optional O_t substrate
+- **Delta:** Add [`OSCILLATORY_ENDOGENEITY.md`](../research/sci_flow/OSCILLATORY_ENDOGENEITY.md): O_t as state/Phi_t source (conjecture); Kuramoto one coupling model only; falsifiers F-SYNC, F-PHASE-ONLY, F-KURAMOTO-AS-E; do(O) protocol parallel to do(Z). Phase M-O in [`ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md). **Not** primary E_endo path; M-D ban preserved.
+- **Rationale:** User-approved explore adjunct (Russian agreement); parallel to ATT-G genesis research.
+
 ### 2026-08-21 — Endogeneity implementation plan (M-CLI roadmap)
 
 - **Section:** Sci-flow implementation / M-CLI

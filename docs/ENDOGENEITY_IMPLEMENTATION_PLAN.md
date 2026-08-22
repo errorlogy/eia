@@ -54,6 +54,7 @@
 | M-D2 / ATT-D | Explore | Cross-domain woe_catalog + twin_ops 0.95 |
 | M-SE | DONE | `STABLE_ENDOGENEITY.md` + `endogeneity_stack_sim.py` ablation |
 | M-CLI | **NOT STARTED** | This plan |
+| M-O | **PLANNED** | [OSCILLATORY_ENDOGENEITY.md](../research/sci_flow/OSCILLATORY_ENDOGENEITY.md) — optional \(O_t\) substrate |
 
 **Toy ablation summary (10 seeds):** raw prediction-error → ~99% noisy-TV trap; learning-progress / stable_stack → ~7.5 mastered goals, trap ~0.9–1.7%, bounded drives.
 
@@ -204,6 +205,28 @@ model_roles:
 
 ---
 
+
+
+### Phase M-O (parallel track) — Oscillatory substrate harness
+
+**Goal:** Explore optional \(O_t\) oscillatory field as **one implementation annex among many**, feeding \(\Phi_t\) and birth gate \(B_t\) — **not** primary \(E_{\mathrm{endo}}\) claim path.
+
+| Item | Detail |
+|------|--------|
+| **Status** | Planned (adjunct to ATT-E; parallel to ATT-G / M-E) |
+| **Deliverables** | oscillatory_state.py stub **or** minimal extend of WoE cf5/Kuramoto path so \(O_t\) feeds drive features; pre-registered do(O) arms |
+| **Falsifier tests** | F-SYNC, F-PHASE-ONLY, F-KURAMOTO-AS-E (reuse M-D ban); genesis linkage required |
+| **Theory doc** | [OSCILLATORY_ENDOGENEITY.md](../research/sci_flow/OSCILLATORY_ENDOGENEITY.md) |
+| **ATT linkage** | Explore only; c2_claim: false; no ATT-R from Kuramoto alone |
+| **Done when** | Harness runs with falsifier arms; metrics report stub; no C-level raise |
+| **User** | — |
+| **Agent** | Stub + falsifier unit tests; wire minimal \(\Psi(O_t)\) into drive path |
+
+**Explicit:** Kuramoto sync alone \(
+eq\) \(E_{\mathrm{endo}}\) (M-D: coupled 0.95, K=0 0.94, scramble 0.69). Oscillation as state / \(\Phi_t\) source is **not** sufficient proof without \(do(O)\) + genesis linkage.
+
+---
+
 ### Phase 3 — Consolidated theory TZ
 
 **Goal:** Single reviewer-facing theory document.
@@ -333,6 +356,8 @@ flowchart LR
 
   P0 --> P1
   P0 --> P2
+  PMO[Phase M-O oscillatory]
+  P0 -.-> PMO
   P1 --> P4
   P2 --> P6
   P4 --> P5

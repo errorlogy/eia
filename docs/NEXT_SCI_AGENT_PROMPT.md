@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-21 (M-CLI implementation plan added; next = Phase 0 Tier 0 lock + ModelRoleAdapter stub)  
+**Updated:** 2026-08-22 (M-O oscillatory adjunct documented; next = Phase 0 Tier 0 lock + ModelRoleAdapter stub; optional M-O harness)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Implementation plan:** [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md)  
@@ -46,6 +46,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - **M-R / ATT-R** ⇒ explore proxy for closed goal-formation recurrence; **not C3**, not AGI\*; Kuramoto \(R\) ≠ ATT-R.
 - **M-R-LIVE** ⇒ shadow multi-tick on main CognitiveLoop under same falsifiers; **not C3**; gap vs true daemon carryover documented; **does not** replace ATT-E declaration falsifiers.
 - **M-N / ATT-N** ⇒ explore proxy for \(D_H\) under pre-registered \(B\); **not** strong \(N_H\), not AGI\*; opacity ≠ non-embeddability.
+- **M-O / O_t substrate** → explore adjunct only; oscillation as state/Phi_t source ≠ E_endo; F-SYNC / F-PHASE-ONLY / F-KURAMOTO-AS-E; parallel to ATT-G (M-E).
 - **M-D2 / ATT-D** ⇒ explore proxy for cross-domain \(E_{\mathrm{endo}}\); **not C5**, not AGI\*; single-domain / schedule-prompt transfer falsified.
 - \(AGI^{*}\) / \(\tau_{AGI}\) requires sustained \(E,N_H,P,R,D\) — **research horizon, not claimed**.
 - Endogeneity ≠ Autonomy; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); opacity ≠ non-embeddability / causation; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
@@ -116,7 +117,9 @@ ATT board already synthesized (partial matrix; no \(\tau_{AGI}\)).
 - **M-E / ATT-G** goal genesis + genealogy + falsifiers (n=50); `claim_allowed=False`
 - **M-P / ATT-P** multi-tick \(P_G\) explore proxy + falsifiers (k∈{10,50,200}); `claim_allowed=False`
 - **M-R / ATT-R** closed goal-formation loop scoring + falsifiers (incl. Kuramoto ban); `claim_allowed=False`
+- **M-O / O_t substrate** → explore adjunct only; oscillation as state/Phi_t source ≠ E_endo; F-SYNC / F-PHASE-ONLY / F-KURAMOTO-AS-E; parallel to ATT-G (M-E).
 - **M-D2 / ATT-D** cross-domain \(E_{\mathrm{endo}}\) (woe_catalog + twin_ops) + falsifiers; `claim_allowed=False` / no C5
 - **M-R-LIVE** shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; ATT board synthesis; `claim_allowed=False`
 - **M-SE** stable endogeneity framework + stack sim (`STABLE_ENDOGENEITY.md`)
 - **Causal endogeneity** criterion + ATT-E falsifiers + `e_endo_label_admissible` stub (`CAUSAL_ENDOGENEITY.md`)
+- **M-O** oscillatory endogeneity substrate doc (adjunct; Kuramoto not E_endo)

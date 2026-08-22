@@ -268,4 +268,5 @@ Metrics: [`M-SE_metrics_2026-08-21.md`](M-SE_metrics_2026-08-21.md).
 
 | Date | Change |
 |------|--------|
+| 2026-08-22 | Pointer to M-O oscillatory adjunct (optional substrate) |
 | 2026-08-21 | M-SE: stable endogeneity stack, \(\mathfrak{E}\), toy sim summary |
