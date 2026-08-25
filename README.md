@@ -2,6 +2,8 @@
 
 [![EIA CI](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml/badge.svg)](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml)
 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 **Program name:** **Endogenous Initiative Architecture (EIA)**  
 **Legacy / benchmark prefix:** PROACTIVE AI · **PAI-EI** benchmark
 
