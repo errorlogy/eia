@@ -1,4 +1,7 @@
-"""Live daemon runtime — scheduled pipeline ticks with contact adapter."""
+"""Live daemon runtime — scheduled pipeline ticks with contact adapter.
+
+Note: run_daemon_tick builds a fresh CognitiveLoop each tick; cross-tick W_prime->G_prime closure lives in shadow_multitick. Phase 2 belief carryover via StateStore is planned (EIA_DAEMON_BELIEF_CARRYOVER).
+"""
 
 from __future__ import annotations
 

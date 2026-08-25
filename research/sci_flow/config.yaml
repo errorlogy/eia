@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-21-MSE"
+updated: "2026-08-25-MO-stub"
 
 repos:
   eia:
@@ -171,9 +171,11 @@ milestones:
     name: Oscillatory endogeneity substrate (adjunct)
     claim: theory_only
     branch: research/cursor-starter-v0.2-woe-eis
-    status: planned
+    harness: research/cursor-starter-v0.2
+    status: in_progress
     artifact: research/sci_flow/OSCILLATORY_ENDOGENEITY.md
-    note: "O_t / Psi(O_t) explore; Kuramoto one model not E proof; parallel to M-CLI"
+    command: python -m pytest tests/test_oscillatory_mo.py -q
+    note: "O_t / Psi(O_t) stub in oscillatory_state.py; F-SYNC/F-PHASE-ONLY unit tests; not E proof"
 
   M-SE:
     name: Stable endogeneity theory + stack sim ablation

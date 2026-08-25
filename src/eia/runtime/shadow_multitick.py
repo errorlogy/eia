@@ -24,11 +24,36 @@ from datetime import datetime, timezone
 from enum import StrEnum
 from typing import Any
 
+from eia.beliefs import BeliefField
+
 from eia.governor import ContactGovernor, GovernorConfig
 from eia.ids import new_id, seeded_context
 from eia.pipeline import CognitiveLoop
 from eia.schemas.belief import BeliefKind
 from eia.schemas.observation import Observation, ObservationSource
+
+
+
+@dataclass
+class ShadowSessionCarryover:
+    """Belief snapshot between shadow episodes (Phase 2 minimal stub)."""
+
+    beliefs_json: str | None = None
+    last_motive_id: str | None = None
+
+    @classmethod
+    def from_field(cls, field: BeliefField, *, last_motive_id: str | None) -> "ShadowSessionCarryover":
+        return cls(beliefs_json=field.model_dump_json(), last_motive_id=last_motive_id)
+
+    def apply_to(self, loop: CognitiveLoop) -> None:
+        if not self.beliefs_json:
+            return
+        import json
+
+        try:
+            loop.field = BeliefField.model_validate(json.loads(self.beliefs_json))
+        except (json.JSONDecodeError, ValueError):
+            return
 
 
 class ShadowArm(StrEnum):
@@ -256,11 +281,16 @@ def _open_loop_once_episode(*, seed: int) -> ShadowEpisodeResult:
         )
 
 
-def _multitick_cognitive_episode(*, arm: ShadowArm, seed: int) -> ShadowEpisodeResult:
+def _multitick_cognitive_episode(
+    *, arm: ShadowArm, seed: int, carryover: ShadowSessionCarryover | None = None
+) -> ShadowEpisodeResult:
     with seeded_context(seed):
         loop = CognitiveLoop(seed=seed)
         loop.governor = ContactGovernor(GovernorConfig())  # no science threshold cut
-        _seed_world(loop)
+        if carryover is not None:
+            carryover.apply_to(loop)
+        else:
+            _seed_world(loop)
 
         events: list[AttREvent] = [
             AttREvent("n0", "W", "world_model", (), 0),

@@ -53,8 +53,8 @@
 | M-N / ATT-N | Explore | Budget \(B\) pre-registered; opacity falsifiers 0.0 |
 | M-D2 / ATT-D | Explore | Cross-domain woe_catalog + twin_ops 0.95 |
 | M-SE | DONE | `STABLE_ENDOGENEITY.md` + `endogeneity_stack_sim.py` ablation |
-| M-CLI | **NOT STARTED** | This plan |
-| M-O | **PLANNED** | [OSCILLATORY_ENDOGENEITY.md](../research/sci_flow/OSCILLATORY_ENDOGENEITY.md) — optional \(O_t\) substrate |
+| M-CLI | **DONE** | `model_roles.py`, `make check-sci-tier0` |
+| M-O | **IN PROGRESS** | [OSCILLATORY_ENDOGENEITY.md](../research/sci_flow/OSCILLATORY_ENDOGENEITY.md) — optional \(O_t\) substrate |
 
 **Toy ablation summary (10 seeds):** raw prediction-error → ~99% noisy-TV trap; learning-progress / stable_stack → ~7.5 mastered goals, trap ~0.9–1.7%, bounded drives.
 

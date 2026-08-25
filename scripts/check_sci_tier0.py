@@ -20,7 +20,7 @@ def main() -> int:
     _run([py, "endogeneity_stack_sim.py"])
     _run([py, "research/sci_flow/run_shadow_att_r.py"])
     _run([py, "research/sci_flow/run_live_att_r.py"])
-    _run([py, "-m", "pytest", "tests/test_shadow_multitick.py", "-q"])
+    _run([py, "-m", "pytest", "tests/test_shadow_multitick.py", "tests/test_oscillatory_mo.py", "-q"])
     research = REPO / "research" / "cursor-starter-v0.2"
     _run(
         [
@@ -29,6 +29,7 @@ def main() -> int:
             "pytest",
             "tests/test_agi_transition.py",
             "tests/test_live_att_r.py",
+            "tests/test_model_roles.py",
             "-q",
         ],
         cwd=research,

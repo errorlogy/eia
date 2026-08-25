@@ -808,3 +808,30 @@ Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
 
 **Phase 0–1 M-CLI** (Tier 0 lock + ModelRoleAdapter) **or** optional M-O stub harness; no C-level raise from oscillation alone.
 
+---
+
+## Entry 023 - 2026-08-25 - Repo gaps closure (infra, CI, M-O stub, theory TZ)
+
+**Session:** pyproject `[sim]`, CONTRIBUTING, `eia-sci-tier0.yml`, THEORY_TZ, M-O harness stub, docs index  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `[project.optional-dependencies] sim`; CONTRIBUTING branch/sci-flow/tier0 policy |
+| S2 | `docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md` M-CLI done; RESEARCH_INDEX ATT reports |
+| S3 | `.github/workflows/eia-sci-tier0.yml`; check_sci_tier0 + oscillatory/model_roles tests |
+| S4 | `oscillatory_state.py` + `tests/test_oscillatory_mo.py` (F-SYNC, F-PHASE-ONLY) |
+| S5 | `THEORY_TZ_STABLE_ENDOGENEITY.md`; M-O config `in_progress`; shadow carryover stub |
+
+### Deferred
+
+- Full daemon BeliefField persistence (StateStore JSON) — documented gap in `daemon.py`
+- LICENSE cherry-pick to `main` if conflicts arise
+
+### Next
+
+Phase 2 daemon carryover implementation or M-O do(O) harness; no C-level raise.
+

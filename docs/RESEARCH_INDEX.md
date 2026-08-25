@@ -1,7 +1,7 @@
 # Research Artifacts Index
 
 **Author:** Roman Kuznetsov  
-**Updated:** 2026-08-17
+**Updated:** 2026-08-25
 
 Canonical index of research outputs under `research/`. Raw JSON companions sit beside each markdown report unless noted.
 
@@ -94,6 +94,18 @@ See [`RESEARCH_BRANCHES.md`](RESEARCH_BRANCHES.md) for branch policy.
 | Artifact | Description |
 |----------|-------------|
 | [`sci_flow/config.yaml`](../research/sci_flow/config.yaml) | Experiment registry S1–S5 |
+| [`ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md) | M-CLI roadmap; theory vs annex split |
+| [`SCI_FLOW_LOG.md`](SCI_FLOW_LOG.md) | Sci-flow experiment journal |
+| [`M-C_metrics_2026-08-18.md`](../research/sci_flow/M-C_metrics_2026-08-18.md) | CF-1 prompt deletion (C1 full window) |
+| [`M-R_metrics_2026-08-21.md`](../research/sci_flow/M-R_metrics_2026-08-21.md) | ATT-R closed-loop recurrence |
+| [`M-R-LIVE_metrics_2026-08-21.md`](../research/sci_flow/M-R-LIVE_metrics_2026-08-21.md) | ATT-R on main CognitiveLoop (shadow) |
+| [`M-SE_metrics_2026-08-21.md`](../research/sci_flow/M-SE_metrics_2026-08-21.md) | Stable endogeneity theory + toy sim |
+| [`M-E_metrics_2026-08-20.md`](../research/sci_flow/M-E_metrics_2026-08-20.md) | ATT-G goal genesis explore |
+| [`M-P_metrics_2026-08-21.md`](../research/sci_flow/M-P_metrics_2026-08-21.md) | ATT-P persistence explore |
+| [`M-N_metrics_2026-08-21.md`](../research/sci_flow/M-N_metrics_2026-08-21.md) | ATT-N non-embeddability explore |
+| [`M-D2_metrics_2026-08-21.md`](../research/sci_flow/M-D2_metrics_2026-08-21.md) | ATT-D cross-domain explore |
+| [`THEORY_TZ_STABLE_ENDOGENEITY.md`](../research/sci_flow/THEORY_TZ_STABLE_ENDOGENEITY.md) | Consolidated theory TZ (M-SE) |
+
 | [`sci_flow/M-A_metrics_2026-08-18.md`](../research/sci_flow/M-A_metrics_2026-08-18.md) | WoE causal receipts (research branch) |
 | [`sci_flow/M-B_metrics_2026-08-18.md`](../research/sci_flow/M-B_metrics_2026-08-18.md) | EIS types on main audit |
 | [`EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md`](../research/EIA_ENDOGENOUS_SPECTRUM_WOE_ANALYSIS.md) | v0.2 package analysis |

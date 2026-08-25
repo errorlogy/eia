@@ -1,3 +1,10 @@
+
+### 2026-08-25 - Repo gaps closure (infra + M-O stub)
+
+- **Section:** Process / sci-flow / M-O
+- **Delta:** Tier 0 CI workflow on research branch; CONTRIBUTING; consolidated theory TZ; M-O harness stub (`oscillatory_state.py`) with falsifier unit tests; M-CLI marked done in implementation plan.
+- **Rationale:** Gaps analysis priority fixes; claim ceiling remains **C2**; oscillation adjunct does not raise claims.
+
 # IMPLEMENTATION_PLAN — Change Log (PLAN_DELTA)
 
 Incremental revisions to [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md). Full plan rewrites are avoided; Loop B appends entries here when assumptions or priorities shift.
