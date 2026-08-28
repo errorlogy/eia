@@ -1,4 +1,10 @@
 
+### 2026-08-28 — OMEGA_t wave metric + MIT/MIOC bridge
+
+- **Section:** Sci-flow M-O / OMEGA_t supporting order parameter
+- **Delta:** Add [`OMEGA_WAVE_METRIC.md`](../research/sci_flow/OMEGA_WAVE_METRIC.md) (OMEGA_t definition, MIT analog hierarchy, MIOC Omega_G mapping, falsifiers F-OMEGA-DECOR/F-OMEGA-EXT, do(Omega) protocol, AGI horizon C2 ceiling). Add [`MIOC_EIA_BRIDGE.md`](../research/sci_flow/MIOC_EIA_BRIDGE.md) (FieldCard↔AttREvent crosswalk; D:\MIOC external). Extend `oscillatory_state.py` with `OmegaWaveState`, `omega_metric()`; `tests/test_omega_wave.py`. Loop playbook [`SCI_LOOP_OMEGA_RESEARCH.md`](SCI_LOOP_OMEGA_RESEARCH.md). Config M-O `omega_metric` in_progress.
+- **Rationale:** Connect Hz/MIT analog wave research + MIOC operational Omega_G with EIA sci-flow; endogeneity as key AGI/ASI substrate hypothesis without C-level raise or physical field overclaim.
+
 ### 2026-08-25 - Repo gaps closure (infra + M-O stub)
 
 - **Section:** Process / sci-flow / M-O

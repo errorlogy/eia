@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-25-MO-stub"
+updated: "2026-08-28-OMEGA-metric"
 
 repos:
   eia:
@@ -174,8 +174,16 @@ milestones:
     harness: research/cursor-starter-v0.2
     status: in_progress
     artifact: research/sci_flow/OSCILLATORY_ENDOGENEITY.md
-    command: python -m pytest tests/test_oscillatory_mo.py -q
-    note: "O_t / Psi(O_t) stub in oscillatory_state.py; F-SYNC/F-PHASE-ONLY unit tests; not E proof"
+    command: python -m pytest tests/test_oscillatory_mo.py tests/test_omega_wave.py -q
+    note: "O_t / Psi(O_t) + OMEGA_t metric; F-SYNC/F-PHASE-ONLY/F-OMEGA-DECOR; not E proof"
+    omega_metric:
+      status: in_progress
+      artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
+      bridge: research/sci_flow/MIOC_EIA_BRIDGE.md
+      implementation: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+      falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT, F-SYNC, F-PHASE-ONLY]
+      carriers_hz: [20, 30, 42, 70]
+      loop_playbook: docs/SCI_LOOP_OMEGA_RESEARCH.md
 
   M-SE:
     name: Stable endogeneity theory + stack sim ablation

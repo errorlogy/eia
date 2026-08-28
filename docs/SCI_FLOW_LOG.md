@@ -835,3 +835,39 @@ Optional daemon carryover (shadow-first) **or** T_NAMM soft witness.
 
 Phase 2 daemon carryover implementation or M-O do(O) harness; no C-level raise.
 
+---
+
+## Entry 024 — 2026-08-28 — OMEGA_t metric + MIT/MIOC bridge
+
+**Session:** OMEGA_WAVE_METRIC.md; MIOC_EIA_BRIDGE.md; OmegaWaveState + omega_metric(); loop playbook  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | H-OMEGA-001: OMEGA_t as supporting order parameter; endogeneity key substrate hypothesis (research horizon) |
+| S2 | Bridge MIT analog wave (alpha/beta→gamma) to tau_action<<tau_goal<<tau_meta; WoE carriers 20/30/42/70 |
+| S3 | Bridge MIOC Omega_G channels to EIA O_t / AttREvent; v44 no_omega_control cross-ref (external) |
+| S4 | `OmegaWaveState`, `omega_metric()`, F-OMEGA-DECOR/F-OMEGA-EXT; `tests/test_omega_wave.py` |
+| S5 | `SCI_LOOP_OMEGA_RESEARCH.md`; config M-O omega_metric in_progress; NEXT prompt + PLAN_DELTA |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| OMEGA_t implementation | `oscillatory_state.py` — bounded scalar, MIOC channel summary |
+| Falsifier tests | F-OMEGA-DECOR unit test pass |
+| MIOC reference | D:\MIOC (read-only; not copied) |
+| MIT reference | Picower analog computation theory (not proof) |
+
+### Blockers
+
+- do(Omega) harness not yet wired to shadow ATT-R
+- Genesis linkage under do(Omega) not yet measured
+
+### Next
+
+**/loop 45m** OMEGA research ticks per `SCI_LOOP_OMEGA_RESEARCH.md`; do(Omega) shadow arm or daemon carryover.
+

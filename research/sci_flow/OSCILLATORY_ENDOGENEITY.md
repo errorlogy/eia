@@ -2,8 +2,10 @@
 
 **Status:** `CONJECTURE` / **explore adjunct** to ATT-E (2026-08-22) — **not** a replacement for primary E_endo  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-O (planned)  
+**Milestone:** M-O (in_progress) — see also **OMEGA_t** metric  
 **Claim ceiling:** **C2** scoped partial only. **No AGI* claim.**
+
+> **OMEGA wave metric:** Multi-band analog order parameter OMEGA_t, MIT/MIOC bridges, falsifiers F-OMEGA-DECOR/F-OMEGA-EXT — [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md). MIOC crosswalk — [`MIOC_EIA_BRIDGE.md`](MIOC_EIA_BRIDGE.md).
 
 ---
 
@@ -157,6 +159,8 @@ Implementation roadmap: [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](../../docs/E
 | [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md) | ATT-E / G / R falsifier map |
 | [`M-D_metrics_2026-08-18.md`](M-D_metrics_2026-08-18.md) | Kuramoto not necessary cause |
 | [`config.yaml`](config.yaml) | M-O registry, CF-5, NAMM-2026-013/014 |
+| [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md) | OMEGA_t scalar; MIT analog wave bridge; do(Omega) |
+| [`MIOC_EIA_BRIDGE.md`](MIOC_EIA_BRIDGE.md) | MIOC FieldCard ↔ EIA AttREvent / O_t |
 
 ---
 
@@ -165,3 +169,4 @@ Implementation roadmap: [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](../../docs/E
 | Date | Change |
 |------|--------|
 | 2026-08-22 | M-O conjecture: O_t adjunct substrate; falsifiers; do(O) protocol; Kuramoto one model only |
+| 2026-08-28 | Pointer to OMEGA_WAVE_METRIC.md + MIOC_EIA_BRIDGE.md |
