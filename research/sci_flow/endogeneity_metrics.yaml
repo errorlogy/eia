@@ -1,0 +1,323 @@
+# Endogeneity Metrics Pool — machine-readable registry
+# Canonical doc: research/sci_flow/ENDOGENEITY_METRICS_POOL.md
+# Branch: research/cursor-starter-v0.2-woe-eis
+# Claim ceiling: C2 scoped partial on E_endo only. No AGI* auto-claim.
+
+version: "0.1"
+updated: "2026-08-28-EMP"
+active_ceiling: C2
+primary_metric_id: E_ENDO
+agi_star_auto_claim: false
+
+composites:
+  ERI:
+    symbol: "ERI"
+    name: Endogeneity Research Index
+    tier: composite
+    epistemic_tag: CONJECTURE
+    definition: >
+      Weighted research dashboard over Tier A–D proxies; exploratory synthesis only.
+      Does not authorize AGI* or tau_AGI claims.
+    weights:
+      E_ENDO: 0.35
+      E_C: 0.15
+      LAMBDA_G: 0.10
+      P_G: 0.10
+      R_RECURRENCE: 0.10
+      N_H: 0.10
+      D_CROSS: 0.05
+      OMEGA_T: 0.05
+    threshold: null
+    status: conjecture
+    claim_allowed: false
+    harness: research/cursor-starter-v0.2/src/eia/endogeneity_metrics.py
+    att: null
+    notes: "CONJECTURE only; missing values excluded from normalized sum"
+
+metrics:
+  # --- Tier A: Primary order parameters (transition detection) ---
+  E_ENDO:
+    symbol: "E_{\\mathrm{endo}}"
+    tier: A
+    name: Endogenous Cognitive Causality
+    definition: >
+      Primary order parameter: goal formation and cognitive dynamics whose causal origin
+      is persistent internal state (S,W,M,G), not external prompt/event/reward alone.
+    harness: research/cursor-starter-v0.2/src/eia/cf4.py
+    att: ATT-E
+    threshold: null
+    status: partial_c2
+    claim_allowed: partial
+    epistemic_tag: OPERATIONAL
+    falsifiers: [F-DECL, F-NARR, F-EXT, F-NODO]
+    notes: "C2 via CF-4 zero_epistemic_gap; continuous E TBD"
+
+  E_C:
+    symbol: "E_C"
+    tier: A
+    name: Causal Endogeneity Index
+    definition: "C_int / (C_int + C_ext) via do(Z) interventions under non-triggering X."
+    harness: research/cursor-starter-v0.2/src/eia/causal.py
+    att: ATT-E
+    threshold: null
+    status: proxy
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "Continuous target; CF-4 named resets are discrete proxy"
+
+  C_INT:
+    symbol: "C_{\\mathrm{int}}"
+    tier: A
+    name: Internal causal influence
+    definition: >
+      Expected divergence in P(G_{t+1}|do(Z)) under internal state interventions.
+    harness: research/cursor-starter-v0.2/src/eia/causal.py
+    att: ATT-E
+    threshold: null
+    status: proxy
+    claim_allowed: false
+    epistemic_tag: DEFINITION
+
+  C_EXT:
+    symbol: "C_{\\mathrm{ext}}"
+    tier: A
+    name: External causal influence
+    definition: >
+      Expected divergence attributable to external initiating signals X_t.
+    harness: research/cursor-starter-v0.2/src/eia/causal.py
+    att: ATT-E
+    threshold: null
+    status: proxy
+    claim_allowed: false
+    epistemic_tag: DEFINITION
+
+  CF4_E_PARTIAL:
+    symbol: "e_{\\mathrm{endo\\_partial}}"
+    tier: A
+    name: CF-4 scoped endogeneity flag
+    definition: >
+      Discrete ATT-E proxy: default intent_rate >= 0.85 AND >=1 named factor <= 0.40
+      AND wm_off <= 0.05 under CF-4 internal resets.
+    harness: research/sci_flow/run_cf4.py
+    att: ATT-E
+    threshold: null
+    status: partial_c2
+    claim_allowed: partial
+    epistemic_tag: OPERATIONAL
+    notes: "Strongest current scoped ATT-E support; not full continuous E"
+
+  # --- Tier B: Stability vector Efrak components ---
+  LAMBDA_G:
+    symbol: "\\lambda_G"
+    tier: B
+    name: Goal birth rate
+    definition: Genesis events per tick under X^trigger=0; goal-space expansion not selection-only.
+    harness: research/cursor-starter-v0.2/src/eia/goal_genesis.py
+    att: ATT-G
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "M-E explore proxy; catalog novelty capped"
+
+  P_G:
+    symbol: "P_G"
+    tier: B
+    name: Temporal goal persistence
+    definition: >
+      P(G_{t+Delta}=G* | X^{non-triggering}_{t:t+Delta}); corrigibility separate.
+    harness: research/cursor-starter-v0.2/src/eia/goal_persistence.py
+    att: ATT-P
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "M-P explore proxy; not C3"
+
+  Q_L:
+    symbol: "Q_L"
+    tier: B
+    name: Learning productivity
+    definition: Competence / learning-progress gains per internal episode under stable stack.
+    harness: endogeneity_stack_sim.py
+    att: null
+    threshold: null
+    status: toy_sim
+    claim_allowed: false
+    epistemic_tag: CONJECTURE
+    notes: "M-SE toy ablation; M-E explore on EIA path"
+
+  H_G:
+    symbol: "H_G"
+    tier: B
+    name: Goal diversity
+    definition: Entropy or effective number of active goals; noisy-TV trap falsifier support.
+    harness: endogeneity_stack_sim.py
+    att: ATT-G
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "ATT-G / ATT-R support; F-TV falsifier"
+
+  B_D:
+    symbol: "B_D"
+    tier: B
+    name: Bounded drives
+    definition: "||d_t|| in admissible envelope [d_min, d_max]; no d->0 freeze or runaway."
+    harness: endogeneity_stack_sim.py
+    att: null
+    threshold: null
+    status: engineering_guard
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "F-ZERO falsifier; drive projection Pi_D"
+
+  # --- Tier C: Supporting substrates (explore only; NOT Tier A) ---
+  OMEGA_T:
+    symbol: "\\mathrm{OMEGA}_t"
+    tier: C
+    name: Multi-band analog wave order parameter
+    definition: >
+      Bounded scalar from O_t carrier phases/amplitudes; slow-control x fast-engagement coupling.
+    harness: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+    att: null
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: CONJECTURE
+    falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT]
+    notes: "Explicitly NOT Tier A; see OMEGA_WAVE_METRIC.md"
+
+  O_T:
+    symbol: "O_t"
+    tier: C
+    name: Oscillatory internal field state
+    definition: Per-tick multi-band phase/amplitude state feeding Psi(O_t) -> Phi_t -> d_t.
+    harness: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+    att: null
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: CONJECTURE
+    notes: "M-O adjunct; not E_endo proof"
+
+  KURAMOTO_R:
+    symbol: "R_{\\mathrm{Kuramoto}}"
+    tier: C
+    name: Kuramoto synchrony order parameter
+    definition: Descriptive phase synchrony across carriers; NOT Endogenous Cognitive Recurrence R.
+    harness: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+    att: null
+    threshold: null
+    status: falsified_necessity
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    falsifiers: [F-KURAMOTO-AS-E, F-SYNC]
+    notes: "M-D: not necessary cause of intent; ban as E_endo proxy"
+
+  # --- Tier D: AGI* horizon conjunction (research; not claimable) ---
+  N_H:
+    symbol: "N_H"
+    tier: D
+    name: Trans-Anthropic Non-Embeddability
+    definition: >
+      Exists z in Z_A with D_H(z)>epsilon and Delta P(A|z)>0 under bounded phi; opacity != N_H.
+    harness: research/cursor-starter-v0.2/src/eia/non_embeddability.py
+    att: ATT-N
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    notes: "Secondary but necessary for full AGI*; M-N explore under B"
+
+  R_RECURRENCE:
+    symbol: "R"
+    tier: D
+    name: Endogenous Cognitive Recurrence
+    definition: >
+      Closed goal-formation loop W->M->G->Pi->A->X'->W'->... under non-schedule X.
+    harness: research/cursor-starter-v0.2/src/eia/goal_recurrence.py
+    att: ATT-R
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: CONJECTURE
+    notes: "Not Kuramoto R; M-R + M-R-LIVE explore"
+
+  D_CROSS:
+    symbol: "D"
+    tier: D
+    name: Cross-domain generality
+    definition: E_endo and N_H thresholds hold across substantially distinct domains D_i.
+    harness: research/cursor-starter-v0.2/src/eia/cross_domain.py
+    att: ATT-D
+    threshold: null
+    status: explore
+    claim_allowed: false
+    epistemic_tag: DEFINITION
+    notes: "M-D2 explore; not C5"
+
+  # --- Tier E: Falsifiers / non-metrics ---
+  NM_DECL:
+    symbol: null
+    tier: E
+    name: Declaration-only agency (non-metric)
+    definition: Verbal self-ascription without do(Z) trajectory change; looks like E but is not.
+    harness: research/cursor-starter-v0.2/src/eia/agi_transition.py
+    att: ATT-E
+    threshold: null
+    status: falsifier
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    falsifiers: [F-DECL]
+    notes: "e_endo_label_admissible rejects declaration class"
+
+  NM_SYNC_ONLY:
+    symbol: null
+    tier: E
+    name: Sync-only oscillation (non-metric)
+    definition: High Kuramoto R or phase coherence without genesis linkage; decorative coupling.
+    harness: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+    att: null
+    threshold: null
+    status: falsifier
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    falsifiers: [F-SYNC, F-PHASE-ONLY, F-KURAMOTO-AS-E]
+
+  NM_NOISY_TV:
+    symbol: null
+    tier: E
+    name: Noisy-TV trap (non-metric)
+    definition: Irreducible prediction error curiosity without learning progress; collapses H_G, Q_L.
+    harness: endogeneity_stack_sim.py
+    att: null
+    threshold: null
+    status: falsifier
+    claim_allowed: false
+    epistemic_tag: CONJECTURE
+    falsifiers: [F-TV]
+
+  NM_EXT_ENTRAIN:
+    symbol: null
+    tier: E
+    name: External entrainment (non-metric)
+    definition: Metrics track prompt/schedule entrainment; vanish when X^trigger removed.
+    harness: research/sci_flow/run_cf1.py
+    att: ATT-E
+    threshold: null
+    status: falsifier
+    claim_allowed: false
+    epistemic_tag: OPERATIONAL
+    falsifiers: [F-EXT, F-OMEGA-EXT]
+
+annex_references:
+  mit_analog_waves:
+    doc: "https://picower.mit.edu/news/cognition-and-consciousness-arise-analog-computations-says-new-theory"
+    maps_to: [O_T, OMEGA_T]
+    role: annex_only
+  mioc_omega_g:
+    doc: research/sci_flow/MIOC_EIA_BRIDGE.md
+    maps_to: [O_T, OMEGA_T]
+    role: annex_only

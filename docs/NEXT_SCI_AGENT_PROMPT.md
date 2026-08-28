@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-28 (OMEGA_t metric + MIT/MIOC bridge; M-O omega_metric in_progress; loop playbook)  
+**Updated:** 2026-08-28 (M-EMP Endogeneity Metrics Pool; OMEGA_t in_progress; loop playbook)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`
 
@@ -54,7 +54,8 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 17. `research/sci_flow/M-D_metrics_2026-08-18.md` — Kuramoto still not a cause (not ATT-R)
 18. `research/sci_flow/OMEGA_WAVE_METRIC.md` — OMEGA_t multi-band analog metric; MIT/MIOC bridges
 19. `research/sci_flow/MIOC_EIA_BRIDGE.md` — FieldCard ↔ AttREvent crosswalk (D:\MIOC external)
-20. `research/sci_flow/config.yaml`
+20. `research/sci_flow/ENDOGENEITY_METRICS_POOL.md` — Tier A–E metric registry; ERI conjecture; YAML pool
+21. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
 
@@ -70,7 +71,8 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - **M-D2 / ATT-D** ⇒ explore proxy for cross-domain \(E_{\mathrm{endo}}\); **not C5**, not AGI\*; single-domain / schedule-prompt transfer falsified.
 - \(AGI^{*}\) / \(\tau_{AGI}\) requires sustained \(E,N_H,P,R,D\) — **research horizon, not claimed**.
 - Endogeneity ≠ Autonomy; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); opacity ≠ non-embeddability / causation; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
-- **OMEGA_t** → supporting order parameter (not replacement for E_endo); F-OMEGA-DECOR / F-OMEGA-EXT; MIT analog wave + MIOC Omega_G crosswalk; see `OMEGA_WAVE_METRIC.md`.
+- **OMEGA_t** → supporting order parameter (Tier C in metrics pool; not Tier A); F-OMEGA-DECOR / F-OMEGA-EXT; MIT analog wave + MIOC Omega_G crosswalk; see `OMEGA_WAVE_METRIC.md`.
+- **M-EMP / metrics pool** → `ENDOGENEITY_METRICS_POOL.md` + `endogeneity_metrics.yaml`; use `tier_a_metrics()` for harness; ERI is CONJECTURE only.
 - **AuthenticReason** = production gate; EIS/ECS/WoE/AGI\* = research-only.
 
 ### Topologies
@@ -124,9 +126,9 @@ Roman Kuznetsov — research@anthemium.tech
 
 ## Current priority (#1)
 
-**OMEGA/endogeneity loop:** `/loop 45m` per [`SCI_LOOP_OMEGA_RESEARCH.md`](SCI_LOOP_OMEGA_RESEARCH.md) — one M-O/OMEGA evidence tick; tier-0 verify.  
-**Alt:** true daemon cross-tick \(W'\to G'\) carryover (shadow-first) **or** T_NAMM soft witness.  
-ATT board already synthesized (partial matrix; no \(\tau_{AGI}\)).
+**Metrics pool loops:** Use [`ENDOGENEITY_METRICS_POOL.md`](../research/sci_flow/ENDOGENEITY_METRICS_POOL.md) — one Tier A/B metric tick per `/loop 45m`; tier-0 verify.  
+**Alt:** OMEGA do(Omega) shadow arm; true daemon cross-tick \(W'\to G'\) carryover; T_NAMM soft witness.  
+ATT board + pool synthesized (partial matrix; no \(\tau_{AGI}\)).
 
 ## Completed this session
 
@@ -146,3 +148,4 @@ ATT board already synthesized (partial matrix; no \(\tau_{AGI}\)).
 - **Causal endogeneity** criterion + ATT-E falsifiers + `e_endo_label_admissible` stub (`CAUSAL_ENDOGENEITY.md`)
 - **M-O** oscillatory endogeneity substrate doc (adjunct; Kuramoto not E_endo)
 - **OMEGA_t** metric + MIT/MIOC bridge (`OMEGA_WAVE_METRIC.md`, `MIOC_EIA_BRIDGE.md`, `oscillatory_state.py`)
+- **M-EMP** Endogeneity Metrics Pool — Tier A–E registry, YAML, `endogeneity_metrics.py`, ERI conjecture

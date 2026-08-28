@@ -1,4 +1,10 @@
 
+### 2026-08-28 — Endogeneity Metrics Pool (M-EMP)
+
+- **Section:** Sci-flow metric registry / ATT crosswalk
+- **Delta:** Add [`ENDOGENEITY_METRICS_POOL.md`](../research/sci_flow/ENDOGENEITY_METRICS_POOL.md) (Tier A–E: E_endo primary, Efrak stability vector, OMEGA_t Tier C explore, AGI* horizon Tier D, falsifier Tier E). Machine-readable [`endogeneity_metrics.yaml`](../research/sci_flow/endogeneity_metrics.yaml); loader `eia.endogeneity_metrics` (`get_metric`, `tier_a_metrics`, `compute_eri` CONJECTURE). Cross-links in ATT, OMEGA, THEORY_TZ. Config M-EMP done.
+- **Rationale:** Unified pool for AGI transition research loops; prevents OMEGA/sync promotion to Tier A; C2 ceiling preserved.
+
 ### 2026-08-28 — OMEGA_t wave metric + MIT/MIOC bridge
 
 - **Section:** Sci-flow M-O / OMEGA_t supporting order parameter

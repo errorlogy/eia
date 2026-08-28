@@ -871,3 +871,35 @@ Phase 2 daemon carryover implementation or M-O do(O) harness; no C-level raise.
 
 **/loop 45m** OMEGA research ticks per `SCI_LOOP_OMEGA_RESEARCH.md`; do(Omega) shadow arm or daemon carryover.
 
+---
+
+## Entry 025 — 2026-08-28 — Endogeneity Metrics Pool (M-EMP)
+
+**Session:** ENDOGENEITY_METRICS_POOL.md; endogeneity_metrics.yaml; eia.endogeneity_metrics loader; cross-links  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Tier A–E registry: E_endo PRIMARY; Efrak Tier B; OMEGA_t Tier C (not Tier A); AGI* horizon Tier D; falsifier Tier E |
+| S2 | YAML + `endogeneity_metrics.py` (`get_metric`, `tier_a_metrics`, `compute_eri` CONJECTURE) |
+| S3 | `tests/test_endogeneity_metrics_pool.py`; cross-links ATT / OMEGA / THEORY_TZ |
+| S4 | config M-EMP done; `agi_star_auto_claim=false` enforced |
+| S5 | PLAN_DELTA + NEXT_SCI_AGENT_PROMPT updated |
+
+### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Pool entries | 19 metrics + ERI composite |
+| Primary | `E_ENDO` / ATT-E (partial C2) |
+| Tier C ban | OMEGA_t, Kuramoto R not Tier A |
+| ERI | CONJECTURE dashboard only |
+
+### Next
+
+Use pool in `/loop` ticks: one Tier A/B metric per iteration; tier-0 verify; optional do(Omega) or daemon carryover.
+
+

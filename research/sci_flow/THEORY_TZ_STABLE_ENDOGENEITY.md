@@ -25,6 +25,7 @@ This note merges the **invariant theory skeleton** from [`STABLE_ENDOGENEITY.md`
 - [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) — \(E_{\mathrm{endo}}\) causal bar and falsifiers
 - [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) — order parameters \(E, P, R, N_H, D\), regime table (explore only)
 - [`OSCILLATORY_ENDOGENEITY.md`](OSCILLATORY_ENDOGENEITY.md) — M-O adjunct \(O_t\) (conjecture)
+- [`ENDOGENEITY_METRICS_POOL.md`](ENDOGENEITY_METRICS_POOL.md) — Tier A–E registry; \(\mathfrak{E}\) → Tier B; ERI composite (conjecture)
 
 ---
 
@@ -116,6 +117,7 @@ From [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) — **thresholds TBD**
 | M-R-LIVE | `src/eia/runtime/shadow_multitick.py` |
 | Tier 0 lock | `scripts/check_sci_tier0.py` |
 | Registry | `research/sci_flow/config.yaml` |
+| M-EMP pool | `research/sci_flow/endogeneity_metrics.yaml` + `eia.endogeneity_metrics` |
 
 ---
 

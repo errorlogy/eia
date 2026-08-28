@@ -15,6 +15,8 @@ Turn the phase-transition construction into a **5–7 test experimental program*
 
 **Epistemic tags:** protocol steps are `OPERATIONAL` proposals; pass/fail gates with numeric thresholds remain `TBD` until explicitly pre-registered in a metrics report. Theory-level statements stay `CONJECTURE` / `DEFINITION` in the parent note.
 
+**Metrics pool:** [`ENDOGENEITY_METRICS_POOL.md`](ENDOGENEITY_METRICS_POOL.md) — Tier A–E registry mapping each ATT cell to harness paths, `claim_allowed` flags, and ERI composite (`endogeneity_metrics.yaml` + `eia.endogeneity_metrics`).
+
 ---
 
 ## Global rules
