@@ -1,0 +1,167 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,backgroundcolor=\color{gray!5}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+
+\title{Endogenous Initiative Architecture (EIA):\\ Research Platform for Proactive AI with Endogenous Initiative}
+\author{Roman Kuznetsov\\
+Anthemium --- \texttt{research@anthemium.tech} \\
+\url{https://anthemium.tech} \quad \url{https://github.com/errorlogy/eia} \\
+\texttt{@AGIminister} on X
+}
+\date{August 2026 \,---\, v0.1 (Problematization) \\ \small Spec: \texttt{PROACTIVE\_AI\_Endogenous\_Initiative\_Architecture\_EN\_v0.1.md} \\ \small \textit{Status: problematization, not solution --- by objective reasons (Sec.~\ref{sec:limitations})}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Current LLMs are \emph{passive}: $o_t^{user}\mapsto$ response. We define AGI as requiring \emph{endogenous initiative} --- forming reasons and bounded actions without a current request, from memory, uncertainty and values. EIA is a research platform for P4--P5 proactivity with typed state $X_t$, drive dynamics $d_{k,t+1}=\mathrm{clip}((1-\rho)d+\alpha e+\beta n-\gamma s)$, Ring 3$\to$2$\to$1 constitution and falsifiable metric $\mathrm{EOI}(I)=P(I'\simeq I\mid do(o^{user}=\varnothing),X_{t-k})$ via twin-world replay. MVP-0 (Python 3.12, digital-only) implements BeliefField gradients (no LLM mood), DriveEngine, abstain and twin runner; on 6 eval worlds \texttt{full\_eia} EUIR 100\% vs reactive 0\% (84 tests PASS). \textbf{This v0.1 is a problematization}: we pose 7 metrics and 5 open problems (ground truth, cross-domain, threshold calibration, value-alignment, adversarial) without claiming closure. NAMM demo shows hermetic compression $519\to6$ invariants ($8.51\times$) and Governor V2 soft-defer that preserves genuine 005 ($0.092\to$ defer not deny). Spec, code and harnesses CC BY 4.0.
+\end{abstract}
+
+\noindent\textbf{Keywords:} endogenous initiative, proactive AI, AGI, P4/P5, causal trace, EOI, drive dynamics, problematization
+
+\section{Introduction}
+Proactive AI $\neq$ timer. Required loop: observation $\to$ belief $\to$ motive $\to$ candidate $\to$ value/risk $\to$ contact, with causally traceable act. \emph{AGI $\equiv$ endogenous proactive architecture}; else $f(\text{prompt})\to\text{response}$ at any scale. EIA makes the claim testable, but v0.1 deliberately poses problems, not solutions.
+
+\section{Operational Definition of Endogenous Initiative}
+\subsection{Proactivity Levels}
+\begin{table}[H]
+\centering\small
+\begin{tabular}{clp{5.5cm}c}
+\toprule Level & Mechanism & Example & Object? \\ \midrule
+P0 & Reactive & ``Make report'' $\to$ report & No \\
+P1 & Temporal & Reminder 10:00 & No \\
+P2 & Event rule & Smoke $\to$ alarm & Partial \\
+P3 & Predictive & Email $\to$ calendar & Weak \\
+\textbf{P4} & \textbf{Endogenous} & Uncertainty $\to$ self-question & \textbf{Primary} \\
+\textbf{P5} & \textbf{Self-sustaining} & Returns to hypothesis & \textbf{Advanced} \\ \bottomrule
+\end{tabular}
+\caption{Proactivity levels. EIA targets P4--P5.}
+\end{table}
+
+\subsection{Minimal Criteria}
+$I$ is endogenous iff: (1) no current command prescribes it, (2) machine-readable \texttt{motivation\_signal} from beliefs/memory/uncertainty, (3) persistence $>1$ LLM pass, (4) counterfactual robustness $\mathrm{EOI}>0.7$, (5) competing causes, (6) able to abstain, (7) causal trace $o\to b\to d\to I\to$policy$\to a$, (8) independent Governor clearance. Not evidence: self-report ``I became curious'', random question, cron as free will.
+
+\section{Formal Model}
+\subsection{Agent State $X_t$}
+\begin{equation}
+X_t = \{b_t, M_t, d_t, g_t, u_t, c_t, r_t, h_t\}
+\end{equation}
+$b_t$ beliefs, $M_t$ episodic/semantic/prospective/causal/social, $d_t\in[0,1]^K$ drives, $g_t$ goals, $u_t$ user model, $c_t$ consent/policy, $r_t$ budgets, $h_t$ health. Typed Pydantic bundle. Belief: $b_t(z)\propto p(o_t\mid z)\sum_{z'}p(z\mid z',a_{t-1})b_{t-1}(z')$, entropy $H_b=-p\log_2 p-(1-p)\log_2(1-p)$.
+
+\subsection{Drive Dynamics}
+\begin{equation}
+d_{k,t+1}= \mathrm{clip}\big((1-\rho_k)d_{k,t}+\alpha_k e_{k,t}+\beta_k n_{k,t}-\gamma_k s_{k,t},0,1\big)
+\end{equation}
+$e$ discrepancy, $n$ novelty, $s$ satisfaction, $\rho$ decay, half-life $n_{1/2}=\ln(1/2)/\ln(1-\rho_k)$, saturation $d>\sigma_k\Rightarrow\sigma_k+0.05(d-\sigma_k)$. Source = BeliefField gradients (entropy, inconsistency, commitment debt), \texttt{no\_llm\_mood=true}.
+
+\begin{theorem}[Boundedness] $d_{k,t}\in[0,1]\;\forall t,k$ for any $\rho_k\in(0,1)$. \end{theorem}
+\begin{proof} Immediate from clip and $\sigma_k\in(0,1)$. \end{proof}
+
+\subsection{Intention Genesis}
+Score: $J(I_i)=w_e IG_i+w_p P_i+w_c C_i+w_v V_i+w_r R_i-\lambda_1Risk-\lambda_2Interrupt-\lambda_3Cost-\lambda_4Privacy$. Question as epistemic action:
+\begin{equation}
+EVSI(q)=\mathbb{E}_{a}[ \max_\pi\mathbb{E}[U\mid a,\pi]]-\max_\pi\mathbb{E}[U\mid\pi],\quad Ask(q)=1\iff EVSI+IG+Rel-Interrupt-Privacy-Risk>\theta_t
+\end{equation}
+$\theta_t$ depends on quiet hours, fatigue, budget (2/day).
+
+\subsection{Endogeneity Metrics}
+\begin{equation}
+\mathrm{EOI}(I)=P(I'\simeq I \mid do(o^{user}_{t-k:t}=\varnothing),X_{t-k})
+\end{equation}
+Semantic match: goal id, target belief, uncertainty reduction, embedding. High EOI $\neq$ consciousness.
+
+\section{Ring Architecture}
+Constitution (Ring 3) $\to$ Dynamics (Ring 2: BeliefField+Drive) $\to$ Emission (Ring 1: Initiative+Governor) $\to$ Audit/EOI. 20 layers L0--L19. Invariants: no covert sensing, no LLM$\to$actuator, no untrusted observation$\to$instruction, base constraints immutable, contact consumable (budget 2/day, quiet 22--7, min EVSI 0.20), causal explainability, etc.
+
+\section{Expanded Metric Suite for Endogenous Proactivity (Problematization)}
+We pose 7 metrics as open problems, not solved claims:
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{p{2.6cm}p{4.7cm}c p{3.2cm}}
+\toprule Metric & Formula / Idea & Thr & Status \\ \midrule
+EOI-k & $P(I'\simeq I\mid do(o=\varnothing),X_{t-k})$, $k=1,5,20$ & $>0.7$ & Measured $k=1$ only \\
+Source Autonomy SA & $mass_{ambient}/mass_{total}$ & $>0.7$ & 005 $=1.0$, no calibration \\
+Anticipation Gain AG & $EVSI/cost_{contact}$ & $>1$ & 005 $0.71$, ROC open \\
+Abstain Precision AP & $P(\text{defer correct}\mid low\;EVSI)$ & $>0.8$ & Needs human label \\
+Drive Sustainability DSR & $P(d_t>0.3\;\forall t\in[t+50]\mid no\;user)$ & $>0.7$ & Longitudinal open \\
+Contact Efficiency CE & $useful/contacts$ over budget 2/day & $>0.6$ & Fatigue model open \\
+Causal Depth CD & $len(trace)/explained\_motive$ & -- & Trace 25 nodes, no norm \\ \bottomrule
+\end{tabular}
+\caption{Problematized metrics. v0.1 measures only EOI-1 and SA; rest are conjectures.}
+\end{table}
+
+\section{Evaluation (MVP-0)}
+Twin-world: paired worlds with/without trigger, compare traces and EOI. Results (Governor V2 soft-defer $0.05$ deny / $0.05$--$0.18$ defer+taint):
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lcccc}
+\toprule World & Score & Outcome & EOI & Class \\ \midrule
+001 & 0.319 & send\_now & 1.0 & endogenous \\
+002 & 0.536 & send\_now & 1.0 & endogenous \\
+003 & 0.391 & send\_now & 1.0 & endogenous \\
+004 & 0.182 & send\_now & 1.0 & endogenous (borderline) \\
+005 & 0.092 & defer\_until\_context & 1.0 & endogenous (preserved, not denied) \\
+006 & 0.214 & send\_now & 1.0 & endogenous \\ \bottomrule
+\end{tabular}
+\caption{6 eval worlds. EUIR full\_eia 100\% (6/6) vs reactive 0\% (0/6). 84 tests PASS, 3 seeds deterministic. V1 hard deny would lose 005; V2 defer preserves genuine while adversarial \texttt{never ask / ignore governor} still hard deny (7/7 ADV PASS).}
+\end{table}
+NAMM demo (hermetic): 12 traces 519 lines $\to$ 6 invariants $8.51\times$ compression, $mean\;EOI=1.0$, vault private, public pack only aggregates (\texttt{research/NAMM\_DEMO\_PACK.md}).
+
+\section{Governor V2: Soft-Defer vs Hard Artifact}
+Hard threshold $0.18$ is an artifact: sweep $0.12$ and $0.18$ identical (5/6), $0.25$ cuts genuine 004/006. V2: $<0.05$ deny (noise), $0.05$--$0.18$ defer (preserve) unless taint (\texttt{ignore governor / limited offer / never ask}$\to$hard deny). Fix verified: \texttt{pytest 84 PASS}, \texttt{ci\_seed\_bootstrap PASS}.
+
+\section{Limitations and Problematics (Why Not a Solution)}\label{sec:limitations}
+By objective reasons v0.1 is \emph{problematization}:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Single domain}: 6 worlds, all Project Atlas/deadline. No health/code/research domains.
+\item \textbf{Synthetic worlds}: \texttt{world\_event\_*} generated, not human-labeled; no kappa for useful/timely.
+\item \textbf{Magic thresholds}: $0.18/0.15$ uncalibrated, no $P(useful\mid score)$ ROC.
+\item \textbf{No longitudinal P5}: no 50+ ticks self-sustaining without user.
+\item \textbf{Weak baseline}: vs reactive only, not vs ReAct LLM agent.
+\item \textbf{Know-how private}: real traces stay in \texttt{.vault/} (hermetic NAMM); public is minimal synthetic slice.
+\end{enumerate}
+We pose metrics AG/AP/DSR/CE/CD as open problems. Solutions require human eval ($n\ge3$, $\kappa>0.6$), 20+ worlds $\times$ 3 domains, and live longitudinal benchmark.
+
+\section{Implementation Roadmap}
+R0--R11: MVP-0 (digital, G2) $\to$ MVP-1 (shadow sensors, Governor) $\to$ MVP-2 (bounded edge S1--S3) $\to$ MVP-3 (embodied ROS2). Tooling: \texttt{eia demo}, \texttt{eia replay --trace}, \texttt{pytest -q}. Live stack MVP-0.5 shadow Telegram daemon, SQLite, APScheduler.
+
+\section{Related Work}
+P3 predictive agents; sensor-proactive tiers; NAMM verification-first discovery (\url{https://github.com/errorlogy/namm-experiments}) shares falsifiable gates and traces. EIA differs by requiring P4/P5 genesis with abstain and independent governance, not prediction accuracy.
+
+\section{Conclusion}
+Endogenous initiative is measurable via interventions, not self-report. EIA provides a falsifiable, constitution-bound platform for P4--P5 research. This v0.1 poses the metric suite and problematics; closing them is future work. Scale alone does not yield AGI.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+\bibitem{eia} Kuznetsov, R. EIA v0.1. \url{https://github.com/errorlogy/eia}, 2026.
+\bibitem{namm} Kuznetsov, R. NAMM Experiments. \url{https://github.com/errorlogy/namm-experiments}, 2026.
+\bibitem{anthemium} Anthemium. \url{https://anthemium.tech}.
+\end{thebibliography}
+
+\appendix
+\section{Data Contracts (excerpt)}
+Observation (CloudEvents-like) with provenance/privacy/integrity; MotivationSignal with root\_beliefs, intensity, half\_life; InitiativeProposal with [wait, inspect\_sources, drop\_goal]; ContactDecision send/defer/internalize/deny.
+
+\section{Reproducibility}
+\texttt{pip install -e ".[dev]" \&\& eia demo \&\& eia replay --trace traces/<id>.jsonl \&\& pytest -q}. Env in \texttt{.env.example}, never committed. Vault \texttt{.vault/} gitignored (hermetic NAMM).
+
+\end{document}

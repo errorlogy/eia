@@ -1175,3 +1175,65 @@ Multi-seed EOI-k batch; continuous `E_C` under `do(Z)` from intervention cube. N
 ### Next
 
 Multi-seed EOI-k batch; continuous `E_C` under `do(Z)`. No C-level raise.
+
+---
+
+## Entry 033 — 2026-09-01 — I01 arXiv toolkit + problematization draft
+
+**Session:** Port generic arXiv toolkit from AI_NATIVE_GOV; unpack v0.1 problematization bundle  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Scoped I01 as problematization packaging only (no paper rewrite) |
+| S2 | `scripts/arxiv_toolkit/` — compile, clean/package, fetch literature, figures |
+| S3 | Unpacked `arxiv/main.tex` + `references.bib` + `main.pdf` from draft bundle |
+| S4 | `make arxiv-compile` / `make arxiv-package`; deps in `requirements.txt` |
+| S5 | Config `I01` → `in_progress`; crosswalk `docs/CURSOR_TASKS.md` I01 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper dir | `arxiv/` |
+| Toolkit | `scripts/arxiv_toolkit/README.md` |
+| Tier-0 | `make check-sci-tier0` unaffected |
+| `claim_allowed` | **false** (problematization draft) |
+
+### Next
+
+I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
+
+---
+
+## Entry 033 — 2026-09-01 — I01 arXiv toolkit + problematization draft
+
+**Session:** Port generic arXiv toolkit from AI_NATIVE_GOV; unpack v0.1 problematization bundle  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Scoped I01 as problematization packaging only (no paper rewrite) |
+| S2 | `scripts/arxiv_toolkit/` — compile, clean/package, fetch literature, figures |
+| S3 | Unpacked `arxiv/main.tex` + `references.bib` + `main.pdf` from draft bundle |
+| S4 | `make arxiv-compile` / `make arxiv-package`; deps in `requirements.txt` |
+| S5 | Config `I01` → `in_progress`; crosswalk `docs/CURSOR_TASKS.md` I01 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper dir | `arxiv/` |
+| Toolkit | `scripts/arxiv_toolkit/README.md` |
+| Tier-0 | `make check-sci-tier0` unaffected |
+| `claim_allowed` | **false** (problematization draft) |
+
+### Next
+
+I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
