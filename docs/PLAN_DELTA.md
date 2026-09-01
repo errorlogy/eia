@@ -185,6 +185,12 @@ Each entry: **date** · **section** · **delta** · **rationale**
 
 ---
 
+### 2026-09-01 — M-3D-01 sci-flow 3D evidence cube + D01 EOI-k
+
+- **Section:** Sci-flow research / ATT-E
+- **Delta:** Added [`SCI_FLOW_3D_CUBE.md`](../research/sci_flow/SCI_FLOW_3D_CUBE.md) — 9-cell matrix (D1 Causal, D2 Dynamic, D3 Boundary × L1/L2/L3). Intervention registry `intervention_cube.py` (`do(Z)`, `do(O)`, `do(X)`). D01 EOI-k harness (`eoi_k_harness.py`, `run_eoi_k.py`) — k=1,5,20 twin sweep on main scenarios; `claim_allowed=false`; links `E_ENDO` / ATT-E.
+- **Rationale:** Hermes **D01**; cube scaffolds partial matrix tracking without C-level raise or AGI\* claim.
+
 | Trigger | Proposed delta |
 |---------|----------------|
 | Twin policy unified | Update §7.2 pipeline diagram footnote: single `TwinInterventionPolicy` enum shared across main and paired runner |

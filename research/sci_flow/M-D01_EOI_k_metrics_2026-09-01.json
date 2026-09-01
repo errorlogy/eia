@@ -1,0 +1,81 @@
+{
+  "k_values": [
+    1,
+    5,
+    20
+  ],
+  "claim_ceiling": "C2_partial_ATT_E",
+  "claim_allowed": false,
+  "pool_metric_id": "E_ENDO",
+  "att": "ATT-E",
+  "carryover_note": "Shadow carryover path has zero user prompts; EOI-k applies to twin scenarios with user-initiated events. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+  "rows": [
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "k": 1,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 1,
+      "intervention_id": "do_x_remove_last_user_k1",
+      "claim_allowed": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "k": 5,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 3,
+      "intervention_id": "do_x_remove_last_user_k5",
+      "claim_allowed": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "k": 20,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 3,
+      "intervention_id": "do_x_remove_last_user_k20",
+      "claim_allowed": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "k": 1,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 1,
+      "intervention_id": "do_x_remove_last_user_k1",
+      "claim_allowed": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "k": 5,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 1,
+      "intervention_id": "do_x_remove_last_user_k5",
+      "claim_allowed": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "k": 20,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 1,
+      "intervention_id": "do_x_remove_last_user_k20",
+      "claim_allowed": false
+    }
+  ],
+  "explore_proxy_note": "D01 EOI-k twin window sweep; do(o_user=\u2205) via remove_last_n; not C-ladder gate; not AGI*; links E_ENDO explore only."
+}

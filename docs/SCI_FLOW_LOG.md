@@ -1079,3 +1079,35 @@ Use proof protocol as the ledger boundary for future Tier A/B metrics ticks; nex
 ### Next
 
 Hermes **D01** / pool Tier A tick **or** E04 EOI drift stub; no C-level raise.
+
+---
+
+## Entry 030 — 2026-09-01 — M-3D-01 3D evidence cube + D01 EOI-k (D1×L2)
+
+**Session:** Sci-flow v3 3D cube scaffold; intervention registry; D01 EOI-k k-sweep harness  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Defined 3×3 cube: D1 Causal / D2 Dynamic / D3 Boundary × L1 Invariants / L2 Dynamics / L3 Witness |
+| S2 | `intervention_cube.py` — `do(Z)` CF-4 resets, `do(O)` phase/OMEGA, `do(X)` twin EOI-k |
+| S3 | `eoi_k_harness.py` + `run_eoi_k.py`; k=1,5,20 on `twin_world_001`, `autonomous_question` |
+| S4 | `claim_allowed=false`; cube maps existing Phase 2 / DSR / M-EMP / OMEGA / ATT cells |
+| S5 | `SCI_FLOW_3D_CUBE.md`; config `M-3D-01`; cross-links NEXT_SCI_AGENT_PROMPT / PLAN_DELTA |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Cube doc | `research/sci_flow/SCI_FLOW_3D_CUBE.md` |
+| D01 runner | `python research/sci_flow/run_eoi_k.py` |
+| pytest | `tests/test_eoi_k.py`, `research/cursor-starter-v0.2/tests/test_intervention_cube.py` |
+| Pool link | `E_ENDO` Tier A explore; ATT-E |
+| `claim_allowed` | **false** |
+
+### Next
+
+Multi-seed EOI-k batch; E04 EOI drift on carryover; continuous `E_C` under `do(Z)` from cube registry. No C-level raise.

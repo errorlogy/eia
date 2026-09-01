@@ -56,8 +56,9 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 18. `research/sci_flow/OMEGA_WAVE_METRIC.md` — OMEGA_t multi-band analog metric; MIT/MIOC bridges
 19. `research/sci_flow/MIOC_EIA_BRIDGE.md` — FieldCard ↔ AttREvent crosswalk (D:\MIOC external)
 20. `research/sci_flow/ENDOGENEITY_METRICS_POOL.md` — Tier A–E metric registry; ERI conjecture; YAML pool
-21. `docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md` — Hermes 75 tasks ↔ sci-flow / main vs research routing
-22. `research/sci_flow/config.yaml`
+21. `research/sci_flow/SCI_FLOW_3D_CUBE.md` — 3D evidence cube (D1/D2/D3 × L1/L2/L3); M-3D-01; D01 in D1×L2
+22. `docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md` — Hermes 75 tasks ↔ sci-flow / main vs research routing
+23. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
 
@@ -130,6 +131,7 @@ Roman Kuznetsov — research@anthemium.tech
 ## Current priority (#1)
 
 **Metrics pool loops:** Use [`ENDOGENEITY_METRICS_POOL.md`](../research/sci_flow/ENDOGENEITY_METRICS_POOL.md) — one Tier A/B metric tick per `/loop 45m`; tier-0 verify.  
+**3D cube:** [`SCI_FLOW_3D_CUBE.md`](../research/sci_flow/SCI_FLOW_3D_CUBE.md) — track cell status; **D01** EOI-k in **D1×L2** (`run_eoi_k.py`).  
 **Hermes P0 overlap:** [`CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](CURSOR_TASKS_SCI_FLOW_CROSSWALK.md) — **B05** (no-LLM-mood / M-CLI Tier 0), **D01** (EOI-k / ATT-E), **D05** (DSR / M-SE), Phase 2 carryover via **E04**.  
 **Alt:** OMEGA do(Omega) shadow arm; true daemon cross-tick \(W'\to G'\) carryover; T_NAMM soft witness.  
 ATT board + pool synthesized (partial matrix; no \(\tau_{AGI}\)).

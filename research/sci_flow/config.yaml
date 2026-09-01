@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-01-MCLI-P2-DSR"
+updated: "2026-09-01-M-3D-01"
 
 repos:
   eia:
@@ -188,6 +188,22 @@ milestones:
     result: "dsr_min=0.822 / persistence=1.0 / d05_pass=true / e04_pass=true"
     artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
     note: "Tier B B_D on main CognitiveLoop carryover; not production daemon; no C raise"
+  M-3D-01:
+    name: Sci-flow 3D evidence cube + D01 EOI-k (D1×L2)
+    claim: registry
+    att: ATT-E
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: in_progress
+    started: "2026-09-01"
+    command: python research/sci_flow/run_eoi_k.py
+    artifact: research/sci_flow/SCI_FLOW_3D_CUBE.md
+    implementation:
+      - research/cursor-starter-v0.2/src/eia/intervention_cube.py
+      - research/sci_flow/eoi_k_harness.py
+    tests:
+      - tests/test_eoi_k.py
+      - research/cursor-starter-v0.2/tests/test_intervention_cube.py
+    note: "9-cell matrix; intervention registry; EOI-k k=1,5,20 started; claim_allowed=false; no C raise"
   M-O:
     name: Oscillatory endogeneity substrate (adjunct)
     claim: theory_only
