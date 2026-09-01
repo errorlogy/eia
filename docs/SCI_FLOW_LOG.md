@@ -1111,3 +1111,35 @@ Hermes **D01** / pool Tier A tick **or** E04 EOI drift stub; no C-level raise.
 ### Next
 
 Multi-seed EOI-k batch; E04 EOI drift on carryover; continuous `E_C` under `do(Z)` from cube registry. No C-level raise.
+
+---
+
+## Entry 031 — 2026-09-01 — D01×L2 deepen + M-3D-EXPRESS 9-cell smoke
+
+**Session:** Counterfactual EOI-k replay; `eoi_k_steered` gradient; shadow carryover witness; express 3D pass  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Identified MVP-0 twin snapshot triviality (EOI=1.0 flat); designed counterfactual replay |
+| S2 | `eoi_k_harness.py` — counterfactual replay + `run_carryover_witness`; `scenarios/eoi_k_steered.yaml` |
+| S3 | `run_3d_express.py` — 9-cell smoke (D1–D3 × L1–L3); `tests/test_eoi_k.py` extended |
+| S4 | `claim_allowed=false`; pool `E_ENDO` / ATT-E; carryover orthogonal to twin EOI-k |
+| S5 | `M-D01_*` + `M-3D-EXPRESS_*` artifacts; `SCI_FLOW_3D_CUBE.md` status refresh; config M-3D-01 done + M-3D-EXPRESS |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| D01 runner | `python research/sci_flow/run_eoi_k.py` |
+| Express runner | `python research/sci_flow/run_3d_express.py` |
+| Gradient scenario | `eoi_k_steered` — k=1 EOI≈1.0 → k≥5 EOI≈0.35 (commitment→epistemic flip) |
+| Carryover | shadow_multitick session witness (no user prompts) |
+| `claim_allowed` | **false** |
+
+### Next
+
+Multi-seed EOI-k batch; continuous `E_C` under `do(Z)` from intervention cube. No C-level raise.

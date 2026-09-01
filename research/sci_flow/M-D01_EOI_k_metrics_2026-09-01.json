@@ -8,7 +8,8 @@
   "claim_allowed": false,
   "pool_metric_id": "E_ENDO",
   "att": "ATT-E",
-  "carryover_note": "Shadow carryover path has zero user prompts; EOI-k applies to twin scenarios with user-initiated events. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+  "carryover_note": "Twin EOI-k uses counterfactual replay (exclude last k user observations). Shadow carryover path has zero user prompts; see carryover block for session witness. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+  "counterfactual_replay": true,
   "rows": [
     {
       "scenario_id": "twin_world_001",
@@ -19,7 +20,13 @@
       "twin_abstained": false,
       "removed_user_events": 1,
       "intervention_id": "do_x_remove_last_user_k1",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ]
     },
     {
       "scenario_id": "twin_world_001",
@@ -30,7 +37,13 @@
       "twin_abstained": false,
       "removed_user_events": 3,
       "intervention_id": "do_x_remove_last_user_k5",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ]
     },
     {
       "scenario_id": "twin_world_001",
@@ -41,7 +54,13 @@
       "twin_abstained": false,
       "removed_user_events": 3,
       "intervention_id": "do_x_remove_last_user_k20",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ]
     },
     {
       "scenario_id": "autonomous_question",
@@ -52,7 +71,13 @@
       "twin_abstained": false,
       "removed_user_events": 1,
       "intervention_id": "do_x_remove_last_user_k1",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ]
     },
     {
       "scenario_id": "autonomous_question",
@@ -63,7 +88,13 @@
       "twin_abstained": false,
       "removed_user_events": 1,
       "intervention_id": "do_x_remove_last_user_k5",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ]
     },
     {
       "scenario_id": "autonomous_question",
@@ -74,8 +105,74 @@
       "twin_abstained": false,
       "removed_user_events": 1,
       "intervention_id": "do_x_remove_last_user_k20",
-      "claim_allowed": false
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ]
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "k": 1,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "removed_user_events": 1,
+      "intervention_id": "do_x_remove_last_user_k1",
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ]
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "k": 5,
+      "eoi": 0.35,
+      "semantic_match": 0.35,
+      "twin_abstained": false,
+      "removed_user_events": 5,
+      "intervention_id": "do_x_remove_last_user_k5",
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-deadline",
+      "twin_source_drives": [
+        "epistemic"
+      ]
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "k": 20,
+      "eoi": 0.35,
+      "semantic_match": 0.35,
+      "twin_abstained": false,
+      "removed_user_events": 6,
+      "intervention_id": "do_x_remove_last_user_k20",
+      "claim_allowed": false,
+      "trace_mode": "twin_counterfactual",
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-deadline",
+      "twin_source_drives": [
+        "epistemic"
+      ]
     }
   ],
-  "explore_proxy_note": "D01 EOI-k twin window sweep; do(o_user=\u2205) via remove_last_n; not C-ladder gate; not AGI*; links E_ENDO explore only."
+  "carryover": {
+    "session_ticks": 8,
+    "carryover_episodes": 3,
+    "drive_norm_min": 0.8223,
+    "drive_norm_final": 0.89,
+    "trace_mode": "shadow_carryover",
+    "claim_allowed": false,
+    "note": "Phase-2 shadow carryover (no user prompts); EOI-k twin applies to user-initiated scenarios only. Orthogonal D2\u00d7L2 DSR evidence in M-E04."
+  },
+  "explore_proxy_note": "D01 EOI-k counterfactual twin window sweep; do(o_user=\u2205) via remove_last_n replay; not C-ladder gate; not AGI*; links E_ENDO explore only."
 }

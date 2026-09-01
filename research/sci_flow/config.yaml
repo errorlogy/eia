@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-01-M-3D-01"
+updated: "2026-09-01-M-3D-EXPRESS"
 
 repos:
   eia:
@@ -193,17 +193,27 @@ milestones:
     claim: registry
     att: ATT-E
     branch: research/cursor-starter-v0.2-woe-eis
-    status: in_progress
-    started: "2026-09-01"
+    status: done
+    completed: "2026-09-01"
     command: python research/sci_flow/run_eoi_k.py
     artifact: research/sci_flow/SCI_FLOW_3D_CUBE.md
     implementation:
       - research/cursor-starter-v0.2/src/eia/intervention_cube.py
       - research/sci_flow/eoi_k_harness.py
+      - scenarios/eoi_k_steered.yaml
     tests:
       - tests/test_eoi_k.py
       - research/cursor-starter-v0.2/tests/test_intervention_cube.py
-    note: "9-cell matrix; intervention registry; EOI-k k=1,5,20 started; claim_allowed=false; no C raise"
+    note: "Counterfactual EOI-k k=1,5,20 + shadow carryover witness; eoi_k_steered gradient; claim_allowed=false"
+  M-3D-EXPRESS:
+    name: 9-cell 3D express smoke pass (D×L matrix)
+    claim: registry
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-01"
+    command: python research/sci_flow/run_3d_express.py
+    artifact: research/sci_flow/M-3D-EXPRESS_2026-09-01.md
+    note: "<60s smoke; updates SCI_FLOW_3D_CUBE.md cell statuses; claim_allowed=false"
   M-O:
     name: Oscillatory endogeneity substrate (adjunct)
     claim: theory_only
