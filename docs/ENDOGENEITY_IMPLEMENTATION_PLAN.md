@@ -377,6 +377,7 @@ Phases 0–2 are **science-critical**. Phases 4–6 are **optional explore / wit
 | [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md) | ATT battery |
 | [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) | Compact criterion |
 | [`NEXT_SCI_AGENT_PROMPT.md`](NEXT_SCI_AGENT_PROMPT.md) | Agent handoff |
+| [`CURSOR_TASKS.md`](CURSOR_TASKS.md) · [`CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](CURSOR_TASKS_SCI_FLOW_CROSSWALK.md) | Hermes 75-task backlog + sci-flow routing |
 | [`config.yaml`](../research/sci_flow/config.yaml) | Milestone registry |
 | [`MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md) | Topology + witness ceilings |
 | [`LIVE_STACK.md`](LIVE_STACK.md) | Telegram / daemon install |
@@ -387,4 +388,5 @@ Phases 0–2 are **science-critical**. Phases 4–6 are **optional explore / wit
 
 | Date | Change |
 |------|--------|
+| 2026-09-01 | Hermes CURSOR_TASKS backlog crosswalk; P0 alignment B05/D01/D05 with M-CLI + M-SE |
 | 2026-08-21 | Initial M-CLI roadmap (Phases 0–6) |

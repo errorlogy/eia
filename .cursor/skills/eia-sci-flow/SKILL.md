@@ -34,6 +34,7 @@ Continue **EIA scientific research** across multiple topologies. Do not wait for
 9. `docs/SCI_FLOW_PLAN.md` / `docs/SCI_FLOW_LOG.md`
 10. Metrics files listed in `NEXT_SCI_AGENT_PROMPT.md` (M-CF4 through M-D2)
 11. `research/sci_flow/config.yaml`
+12. **Main-stack backlog (not sci-flow merge):** [`docs/CURSOR_TASKS.md`](../../docs/CURSOR_TASKS.md) · [`docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](../../docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md) — use for Governor/Drive/EOI/G2 on `main`; sci-flow P0 picks **B05**, **D01**, **D05** per crosswalk
 
 Also read `research/cursor-starter-v0.2/AGENTS.md` and `.cursor/rules/eia.mdc` under that tree for coding invariants.
 
@@ -63,7 +64,7 @@ Individual checks (see `docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md` §7):
 | **S4** | No new C-level without pre-registered gates; never claim AGI* |
 | **S5** | Update `SCI_FLOW_LOG.md`; run tier-0 lock; optional T_LIVE / T_NAMM |
 
-**Current priority:** optional daemon cross-tick \(W'\to G'\) carryover (shadow-first) **or** T_NAMM soft witness.
+**Current priority:** optional daemon cross-tick \(W'\to G'\) carryover (shadow-first) **or** T_NAMM soft witness **or** Hermes P0 overlap (**B05**, **D01**, **D05**) per [`docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](../../docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md).
 
 ## Stop immediately if
 

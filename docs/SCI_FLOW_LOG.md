@@ -902,4 +902,35 @@ Phase 2 daemon carryover implementation or M-O do(O) harness; no C-level raise.
 
 Use pool in `/loop` ticks: one Tier A/B metric per iteration; tier-0 verify; optional do(Omega) or daemon carryover.
 
+---
+
+## Entry 026 — 2026-09-01 — Hermes CURSOR_TASKS backlog integration
+
+**Session:** Import Hermes 75-task problematization; docs relocation; sci-flow crosswalk; agent prompt + skill pointers  
+**Branch:** `research/cursor-starter-v0.2-woe-eis` (docs apply to both branches)  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Relocated `CURSOR_TASKS.md` + `cursor_tasks.json` to `docs/`; fixed stale `research/` path |
+| S2 | Authored `docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md` — branch routing, P0 alignment, overlap table |
+| S3 | Updated `NEXT_SCI_AGENT_PROMPT.md`, `ENDOGENEITY_IMPLEMENTATION_PLAN.md` §9, `eia-sci-flow` skill |
+| S4 | Key bridges: **B05** ↔ M-CLI Tier 0; **D01** ↔ ATT-E; **D05** ↔ M-SE/DSR; **G05** ↔ HERMES_EIA_BRIDGE (open) |
+| S5 | P0 sci-flow picks: B05, D01, D05, B01, A04 alongside Phase 2 carryover |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Hermes tasks | 75 (16 P0 / 35 P1 / 24 P2) |
+| Crosswalk doc | `docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md` |
+| Main vs research split | A–F,H,I → main; D/E overlaps + G → cross-branch |
+| G05 gap | `docs/HERMES_EIA_BRIDGE.md` not yet written |
+
+### Next
+
+Pick Hermes **B05** or **D01** on main **or** continue Phase 2 daemon carryover / metrics pool tick on research; no C-level raise.
+
 

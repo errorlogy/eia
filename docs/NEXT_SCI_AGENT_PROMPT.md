@@ -1,6 +1,6 @@
 # Next Sci Agent Prompt — EIA Sci-Flow Handoff
 
-**Updated:** 2026-08-28 (M-EMP Endogeneity Metrics Pool; OMEGA_t in_progress; loop playbook)  
+**Updated:** 2026-09-01 (Hermes CURSOR_TASKS backlog integrated; M-EMP Endogeneity Metrics Pool; OMEGA_t in_progress; loop playbook)  
 **Use with:** Cursor `/loop` or new agent session on `errorlogy/eia`  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`
 
@@ -22,6 +22,7 @@
 
 Rule: `.cursor/rules/eia-sci-flow.mdc` (applies under `docs/`, `research/sci_flow/`, `research/cursor-starter-v0.2/`).  
 **Implementation plan:** [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md)  
+**Hermes CURSOR_TASKS backlog:** [`docs/CURSOR_TASKS.md`](CURSOR_TASKS.md) · [`docs/cursor_tasks.json`](cursor_tasks.json) · sci-flow crosswalk [`docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](CURSOR_TASKS_SCI_FLOW_CROSSWALK.md)  
 **Registry:** [`docs/MULTI_TOPOLOGY_LOOPS.md`](MULTI_TOPOLOGY_LOOPS.md)  
 **AGI\* notes:** [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md) · [`AGI_PHASE_TRANSITION.md`](../research/sci_flow/AGI_PHASE_TRANSITION.md) · [`AGI_TRANSITION_TEST.md`](../research/sci_flow/AGI_TRANSITION_TEST.md) · [`CAUSAL_ENDOGENEITY.md`](../research/sci_flow/CAUSAL_ENDOGENEITY.md)
 
@@ -55,7 +56,8 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 18. `research/sci_flow/OMEGA_WAVE_METRIC.md` — OMEGA_t multi-band analog metric; MIT/MIOC bridges
 19. `research/sci_flow/MIOC_EIA_BRIDGE.md` — FieldCard ↔ AttREvent crosswalk (D:\MIOC external)
 20. `research/sci_flow/ENDOGENEITY_METRICS_POOL.md` — Tier A–E metric registry; ERI conjecture; YAML pool
-21. `research/sci_flow/config.yaml`
+21. `docs/CURSOR_TASKS_SCI_FLOW_CROSSWALK.md` — Hermes 75 tasks ↔ sci-flow / main vs research routing
+22. `research/sci_flow/config.yaml`
 
 ### AGI\* / ATT framing (do not overclaim)
 
@@ -73,6 +75,7 @@ You are continuing autonomous **EIA scientific research** (sci-flow S1→S5) acr
 - Endogeneity ≠ Autonomy; description/simulation/declaration ≠ \(E_{\mathrm{endo}}\); opacity ≠ non-embeddability / causation; Trans-Human Cognition ≠ task SOTA; corrigibility ≠ persistence.
 - **OMEGA_t** → supporting order parameter (Tier C in metrics pool; not Tier A); F-OMEGA-DECOR / F-OMEGA-EXT; MIT analog wave + MIOC Omega_G crosswalk; see `OMEGA_WAVE_METRIC.md`.
 - **M-EMP / metrics pool** → `ENDOGENEITY_METRICS_POOL.md` + `endogeneity_metrics.yaml`; use `tier_a_metrics()` for harness; ERI is CONJECTURE only.
+- **Hermes CURSOR_TASKS** → 75 open problems on `main` (production stack) vs `research/cursor-starter-v0.2-woe-eis` (ATT/M-CLI); see crosswalk; P0 sci-flow picks: **B05**, **D01**, **D05**, **B01**, **A04**.
 - **AuthenticReason** = production gate; EIS/ECS/WoE/AGI\* = research-only.
 
 ### Topologies
@@ -127,6 +130,7 @@ Roman Kuznetsov — research@anthemium.tech
 ## Current priority (#1)
 
 **Metrics pool loops:** Use [`ENDOGENEITY_METRICS_POOL.md`](../research/sci_flow/ENDOGENEITY_METRICS_POOL.md) — one Tier A/B metric tick per `/loop 45m`; tier-0 verify.  
+**Hermes P0 overlap:** [`CURSOR_TASKS_SCI_FLOW_CROSSWALK.md`](CURSOR_TASKS_SCI_FLOW_CROSSWALK.md) — **B05** (no-LLM-mood / M-CLI Tier 0), **D01** (EOI-k / ATT-E), **D05** (DSR / M-SE), Phase 2 carryover via **E04**.  
 **Alt:** OMEGA do(Omega) shadow arm; true daemon cross-tick \(W'\to G'\) carryover; T_NAMM soft witness.  
 ATT board + pool synthesized (partial matrix; no \(\tau_{AGI}\)).
 
