@@ -195,13 +195,15 @@ model_roles:
 
 | Item | Detail |
 |------|--------|
-| **Deliverables** | `StateStore` or equivalent; shadow daemon path reuses single `CognitiveLoop` |
-| **Files** | `src/eia/runtime/daemon.py`, `shadow_multitick.py`, optional `state_store.py` |
-| **Gap today** | Production daemon creates fresh `CognitiveLoop` every tick |
+| **Status** | **PARTIAL (shadow session)** — 2026-09-01 |
+| **Deliverables** | `ShadowSessionCarryover` (beliefs + drives); `run_shadow_carryover_tick`; carryover smoke in `run_live_att_r.py` |
+| **Files** | `src/eia/runtime/shadow_multitick.py`, `daemon.py` (gap documented) |
+| **Gap today** | Production `run_daemon_tick` still creates fresh `CognitiveLoop` each tick; StateStore BeliefField JSON deferred |
 | **ATT linkage** | ATT-R live path; M-R-LIVE metrics update |
 | **Done when** | Multi-tick shadow shows \(G_{t+1}\) from carryover without re-prompt; falsifiers still 0.0 |
+| **Shadow done** | `run_shadow_carryover_tick` + pytest; live daemon hydration **not** done this tick |
 | **User** | — |
-| **Agent** | Implement carryover; extend `run_live_att_r.py` |
+| **Agent** | Live StateStore carryover in follow-up tick |
 
 ---
 
@@ -388,5 +390,6 @@ Phases 0–2 are **science-critical**. Phases 4–6 are **optional explore / wit
 
 | Date | Change |
 |------|--------|
+| 2026-09-01 | Phase 2 partial — shadow `ShadowSessionCarryover` + `run_shadow_carryover_tick`; live daemon gap documented |
 | 2026-09-01 | Hermes CURSOR_TASKS backlog crosswalk; P0 alignment B05/D01/D05 with M-CLI + M-SE |
 | 2026-08-21 | Initial M-CLI roadmap (Phases 0–6) |

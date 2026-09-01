@@ -49,7 +49,10 @@ def _load_woe_submodule(name: str) -> Any:
 def main() -> int:
     # Main runtime (editable install) — shadow multi-tick CognitiveLoop path
     from eia.runtime.shadow_multitick import (  # noqa: WPS433
+        ShadowArm,
         run_shadow_batch,
+        run_shadow_carryover_tick,
+        run_shadow_episode,
         run_shadow_falsifier_suite,
     )
 
@@ -70,6 +73,27 @@ def main() -> int:
         name: ep.as_dict() for name, ep in run_shadow_falsifier_suite(seed=0).items()
     }
     scored = live_att_r.score_shadow_suite(suite_raw)
+
+    carryover_ep = run_shadow_episode(ShadowArm.CLOSED_LOOP, seed=0)
+    carryover_smoke: dict[str, Any] | None = None
+    if carryover_ep.carryover is not None:
+        carryover_tick = run_shadow_carryover_tick(carryover_ep.carryover, seed=0)
+        carryover_smoke = {
+            "used_carryover": carryover_tick.used_carryover,
+            "g_prime_from_carryover": any(
+                e.kind == "G_prime" and e.novel for e in carryover_tick.events
+            ),
+            "no_user_prompt": not any(
+                "user" in e.label.lower() or e.kind == "X" and "prompt" in e.label.lower()
+                for e in carryover_tick.events
+            ),
+            "ticks_run": carryover_tick.ticks_run,
+            "session_tick_after": (
+                carryover_tick.carryover.session_tick if carryover_tick.carryover else None
+            ),
+            "emit_m0": False,
+            "claim_allowed": False,
+        }
 
     # Preserve M0 / M-E invariants on research simulator
     sim = emergence_mod.EndogenousEmergenceSimulator()
@@ -115,6 +139,7 @@ def main() -> int:
             "kuramoto_sync_alone_is_not_att_r": True,
         },
         "gap_vs_live_daemon": raw["gap_vs_live_daemon"],
+        "phase_2_carryover_smoke": carryover_smoke,
         "batch": batch,
         "falsifier_suite": {
             name: {
@@ -157,7 +182,8 @@ def main() -> int:
             "Shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; "
             ">=1 closed W→M→G→Π→A→X'→W'→G' with emit_m0=false; Kuramoto alone "
             "never counts; smoke threshold overrides are not evidence; "
-            "not C-ladder gate. Gap: true live daemon still per-tick loop reset."
+            "not C-ladder gate. Phase 2 shadow carryover closes session gap; "
+            "production daemon still per-tick loop reset until StateStore hydration."
         ),
     }
     out = Path(__file__).resolve().parent / "live_att_r_results.json"

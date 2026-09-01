@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-28-EMP"
+updated: "2026-09-01-MCLI-P2-shadow"
 
 repos:
   eia:
@@ -146,7 +146,7 @@ milestones:
     command: python research/sci_flow/run_live_att_r.py
     result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
     artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
-    note: "shadow-first; emit_m0=false; gap vs daemon per-tick loop reset; no C3"
+    note: "shadow-first; emit_m0=false; Phase 2 shadow carryover partial; live daemon loop reset gap remains; no C3"
   M-N:
     name: ATT-N non-embeddability under encoding budget B
     claim: architecture_explore
@@ -167,6 +167,15 @@ milestones:
     completed: "2026-08-22"
     command: make check-sci-tier0
     note: "Phase 0-1; att_evidence.llm_allowed=false; no behavior change when disabled"
+  M-CLI-P2:
+    name: M-CLI Phase 2 shadow daemon carryover (beliefs + drives)
+    claim: scaffold
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: src/eia/runtime/shadow_multitick.py
+    status: partial
+    completed: "2026-09-01"
+    command: pytest tests/test_shadow_multitick.py -q
+    note: "ShadowSessionCarryover + run_shadow_carryover_tick; live daemon StateStore hydration deferred; emit_m0=false"
   M-O:
     name: Oscillatory endogeneity substrate (adjunct)
     claim: theory_only

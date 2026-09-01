@@ -25,5 +25,5 @@
     "external_schedule": false,
     "kuramoto_only": false
   },
-  "gap_vs_live_daemon": "Daemon recreates CognitiveLoop per tick without cross-tick W'\u2192G' carryover; this harness keeps one loop + post-action world update."
+  "gap_vs_live_daemon": "Shadow multitick + ShadowSessionCarryover close W'\u2192G' within/between session ticks; production run_daemon_tick still resets CognitiveLoop per APScheduler interval (BeliefField JSON in StateStore deferred)."
 }

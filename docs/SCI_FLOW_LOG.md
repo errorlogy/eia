@@ -933,4 +933,41 @@ Use pool in `/loop` ticks: one Tier A/B metric per iteration; tier-0 verify; opt
 
 Pick Hermes **B05** or **D01** on main **or** continue Phase 2 daemon carryover / metrics pool tick on research; no C-level raise.
 
+---
+
+## Entry 027 — 2026-09-01 — M-CLI Phase 2 shadow daemon carryover (partial)
+
+**Session:** Phase 2 sci-flow tick — `ShadowSessionCarryover` beliefs+drives; cross-session `run_shadow_carryover_tick`; ATT-R smoke in `run_live_att_r.py`  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read ENDOGENEITY_IMPLEMENTATION_PLAN Phase 2; CURSOR_TASKS_TRIAGE E04/D05 alignment |
+| S2 | Extended `ShadowSessionCarryover` with drive levels; `run_shadow_carryover_tick` (ambient obs only) |
+| S3 | `run_live_att_r.py` `phase_2_carryover_smoke`; pytest carryover tests; tier-0 verify |
+| S4 | `daemon.py` gap documented — live `run_daemon_tick` still fresh loop per interval |
+| S5 | SCI_FLOW_LOG Entry 027; config `M-CLI-P2` partial; ENDOGENEITY plan Phase 2 status |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Shadow carryover | `g_prime_from_carryover=true` (seed 0 smoke) |
+| Falsifier arms | unchanged — closed_loop 1.0 / falsifiers 0.0 |
+| emit_m0 | false everywhere |
+| claim_allowed | false everywhere |
+| Live daemon gap | StateStore BeliefField JSON hydration **deferred** |
+
+### Deferred
+
+- Persist beliefs/drives in `StateStore` and hydrate `run_daemon_tick` (production APScheduler path)
+- E04 longitudinal 50-tick DSR harness on carryover session
+
+### Next
+
+Live daemon StateStore carryover **or** Hermes **D01** / metrics pool tick; no C-level raise.
+
 

@@ -4,7 +4,9 @@ from eia.runtime.daemon import DaemonConfig, DaemonTickResult, run_daemon_tick
 from eia.runtime.shadow_multitick import (
     ShadowArm,
     ShadowEpisodeResult,
+    ShadowSessionCarryover,
     run_shadow_batch,
+    run_shadow_carryover_tick,
     run_shadow_episode,
     run_shadow_falsifier_suite,
 )
@@ -15,9 +17,11 @@ __all__ = [
     "DaemonTickResult",
     "ShadowArm",
     "ShadowEpisodeResult",
+    "ShadowSessionCarryover",
     "StateStore",
     "run_daemon_tick",
     "run_shadow_batch",
+    "run_shadow_carryover_tick",
     "run_shadow_episode",
     "run_shadow_falsifier_suite",
 ]

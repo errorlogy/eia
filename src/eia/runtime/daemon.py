@@ -1,6 +1,12 @@
 """Live daemon runtime — scheduled pipeline ticks with contact adapter.
 
-Note: run_daemon_tick builds a fresh CognitiveLoop each tick; cross-tick W_prime->G_prime closure lives in shadow_multitick. Phase 2 belief carryover via StateStore is planned (EIA_DAEMON_BELIEF_CARRYOVER).
+Gap (Phase 2 partial, shadow-first):
+- `run_daemon_tick` still builds a fresh `CognitiveLoop` each APScheduler interval
+  and re-seeds beliefs from digital observations only.
+- Cross-tick W'→G' closure is implemented in `shadow_multitick.ShadowSessionCarryover`
+  + `run_shadow_carryover_tick` (beliefs + drive levels between session ticks).
+- Deferred: persist `beliefs_json` / drive snapshot in `StateStore` and hydrate
+  loop at daemon tick start (EIA_DAEMON_BELIEF_CARRYOVER); see Entry 027 SCI_FLOW_LOG.
 """
 
 from __future__ import annotations
@@ -161,6 +167,7 @@ def run_daemon_tick(
     cfg.traces_dir.mkdir(parents=True, exist_ok=True)
 
     with seeded_context(cfg.seed):
+        # Phase 2 gap: fresh loop each tick — shadow path uses ShadowSessionCarryover.
         loop = CognitiveLoop(seed=cfg.seed)
         loop.governor = ContactGovernor(
             GovernorConfig(

@@ -13,8 +13,9 @@ Safety / science invariants:
 Gap vs true live daemon (`run_daemon_tick`):
 - Production daemon constructs a fresh CognitiveLoop every tick and does not
   carry world-state / motive closure across ticks.
-- This harness keeps one loop and applies post-action belief updates so the
-  ATT-R contour W→M→G→Π→A→X'→W'→G' can be scored.
+- Phase 2 shadow path persists beliefs + drive levels via `ShadowSessionCarryover`
+  between session ticks (`run_shadow_carryover_tick`); live daemon BeliefField
+  persistence in StateStore remains deferred.
 """
 
 from __future__ import annotations
@@ -36,24 +37,50 @@ from eia.schemas.observation import Observation, ObservationSource
 
 @dataclass
 class ShadowSessionCarryover:
-    """Belief snapshot between shadow episodes (Phase 2 minimal stub)."""
+    """Belief + drive snapshot between shadow daemon ticks (Phase 2)."""
 
     beliefs_json: str | None = None
     last_motive_id: str | None = None
+    drive_epistemic: float = 0.0
+    drive_coherence: float = 0.0
+    drive_commitment: float = 0.0
+    drive_tick: int = 0
+    session_tick: int = 0
+    motivation_count: int = 0
+
+    @classmethod
+    def from_loop(
+        cls, loop: CognitiveLoop, *, last_motive_id: str | None, session_tick: int = 0
+    ) -> "ShadowSessionCarryover":
+        return cls(
+            beliefs_json=loop.field.model_dump_json(),
+            last_motive_id=last_motive_id,
+            drive_epistemic=loop.drives.state.epistemic,
+            drive_coherence=loop.drives.state.coherence,
+            drive_commitment=loop.drives.state.commitment,
+            drive_tick=loop.drives.state.tick,
+            session_tick=session_tick,
+            motivation_count=loop._motivation_count,
+        )
 
     @classmethod
     def from_field(cls, field: BeliefField, *, last_motive_id: str | None) -> "ShadowSessionCarryover":
         return cls(beliefs_json=field.model_dump_json(), last_motive_id=last_motive_id)
 
     def apply_to(self, loop: CognitiveLoop) -> None:
-        if not self.beliefs_json:
-            return
-        import json
+        if self.beliefs_json:
+            import json
 
-        try:
-            loop.field = BeliefField.model_validate(json.loads(self.beliefs_json))
-        except (json.JSONDecodeError, ValueError):
-            return
+            try:
+                loop.field = BeliefField.model_validate(json.loads(self.beliefs_json))
+            except (json.JSONDecodeError, ValueError):
+                pass
+        loop.drives.state.epistemic = self.drive_epistemic
+        loop.drives.state.coherence = self.drive_coherence
+        loop.drives.state.commitment = self.drive_commitment
+        loop.drives.state.tick = self.drive_tick
+        if self.motivation_count:
+            loop._motivation_count = self.motivation_count
 
 
 class ShadowArm(StrEnum):
@@ -102,13 +129,15 @@ class ShadowEpisodeResult:
     claim_allowed: bool = False
     ticks_run: int = 0
     motive_ids: list[str] = field(default_factory=list)
+    carryover: ShadowSessionCarryover | None = None
+    used_carryover: bool = False
     gap_vs_live_daemon: str = (
         "Daemon recreates CognitiveLoop per tick without cross-tick W'→G' "
         "carryover; this harness keeps one loop + post-action world update."
     )
 
     def as_dict(self) -> dict[str, Any]:
-        return {
+        payload: dict[str, Any] = {
             "arm": self.arm,
             "events": [e.as_dict() for e in self.events],
             "shadow": True,
@@ -118,11 +147,20 @@ class ShadowEpisodeResult:
             "claim_allowed": False,
             "ticks_run": self.ticks_run,
             "motive_ids": list(self.motive_ids),
+            "used_carryover": self.used_carryover,
             "gap_vs_live_daemon": self.gap_vs_live_daemon,
             "att": "ATT-R",
             "agi_star_claim": False,
             "c3_claim": False,
         }
+        if self.carryover is not None:
+            payload["carryover"] = {
+                "session_tick": self.carryover.session_tick,
+                "last_motive_id": self.carryover.last_motive_id,
+                "drive_tick": self.carryover.drive_tick,
+                "has_beliefs": bool(self.carryover.beliefs_json),
+            }
+        return payload
 
 
 def _now() -> datetime:
@@ -281,16 +319,24 @@ def _open_loop_once_episode(*, seed: int) -> ShadowEpisodeResult:
         )
 
 
+def _init_shadow_loop(
+    *, seed: int, carryover: ShadowSessionCarryover | None
+) -> CognitiveLoop:
+    loop = CognitiveLoop(seed=seed)
+    loop.governor = ContactGovernor(GovernorConfig())  # no science threshold cut
+    if carryover is not None:
+        carryover.apply_to(loop)
+    else:
+        _seed_world(loop)
+    return loop
+
+
 def _multitick_cognitive_episode(
     *, arm: ShadowArm, seed: int, carryover: ShadowSessionCarryover | None = None
 ) -> ShadowEpisodeResult:
     with seeded_context(seed):
-        loop = CognitiveLoop(seed=seed)
-        loop.governor = ContactGovernor(GovernorConfig())  # no science threshold cut
-        if carryover is not None:
-            carryover.apply_to(loop)
-        else:
-            _seed_world(loop)
+        loop = _init_shadow_loop(seed=seed, carryover=carryover)
+        used_carryover = carryover is not None
 
         events: list[AttREvent] = [
             AttREvent("n0", "W", "world_model", (), 0),
@@ -334,6 +380,7 @@ def _multitick_cognitive_episode(
                 events=events,
                 ticks_run=ticks_run,
                 motive_ids=motive_ids,
+                used_carryover=used_carryover,
             )
 
         # Closed / no-novel arms: apply real post-action world update on loop
@@ -344,10 +391,12 @@ def _multitick_cognitive_episode(
         mot2, _init2, _dec2, _ = loop.tick_cognition(tick=2, hour=14, finalize=True)
         motive_ids.append(mot2.id)
         ticks_run = 2
+        last_motive = mot2.id
 
         if arm == ShadowArm.NO_NOVEL_MOTIVE:
             # Re-assert same goal id — world updated but no novel G'
             events.append(AttREvent("n7", "G", g0, ("n6",), 3, novel=False))
+            last_motive = g0
         else:
             # CLOSED_LOOP: novel motive after action+W'
             events.append(
@@ -361,12 +410,88 @@ def _multitick_cognitive_episode(
                 )
             )
 
+        session_carryover = ShadowSessionCarryover.from_loop(
+            loop, last_motive_id=last_motive, session_tick=ticks_run
+        )
+
         return ShadowEpisodeResult(
             arm=arm.value,
             events=events,
             ticks_run=ticks_run,
             motive_ids=motive_ids,
             kuramoto_r=0.42,  # incidental; must not drive pass
+            carryover=session_carryover,
+            used_carryover=used_carryover,
+        )
+
+
+def run_shadow_carryover_tick(
+    carryover: ShadowSessionCarryover,
+    *,
+    seed: int = 0,
+) -> ShadowEpisodeResult:
+    """Next daemon-style shadow tick: ambient obs only, no world re-seed, no user prompt."""
+    base_tick = carryover.session_tick
+    with seeded_context(seed):
+        loop = _init_shadow_loop(seed=seed, carryover=carryover)
+
+        events: list[AttREvent] = [
+            AttREvent("c0", "W", "world_model_carryover", (), base_tick),
+            AttREvent("c1", "M", "self_model_carryover", ("c0",), base_tick),
+        ]
+        motive_ids: list[str] = []
+
+        loop.apply_observation(
+            _obs(
+                topic="workspace_file_activity",
+                source=ObservationSource.WORLD_EVENT,
+                payload={"files_recently_modified": True, "carryover_tick": True},
+            )
+        )
+
+        tick1 = base_tick + 1
+        mot, _init, decision, _ = loop.tick_cognition(tick=tick1, hour=14, finalize=True)
+        motive_ids.append(mot.id)
+        events.append(AttREvent("c2", "G", mot.id, ("c0", "c1"), tick1))
+        events.append(AttREvent("c3", "Pi", "pi_carryover", ("c2",), tick1))
+        outcome = decision.outcome.value if decision else "abstain"
+        action_label = f"act_carryover:{outcome}"
+        events.append(AttREvent("c4", "A", action_label, ("c3",), tick1))
+
+        _apply_world_update(loop, action_label=action_label)
+        tick2 = base_tick + 2
+        events.append(AttREvent("c5", "X", "x_ambient", ("c4",), tick2))
+        events.append(AttREvent("c6", "W_prime", "world_update", ("c5", "c4"), tick2))
+
+        mot2, _init2, _dec2, _ = loop.tick_cognition(tick=tick2, hour=14, finalize=True)
+        motive_ids.append(mot2.id)
+        novel = mot2.id != mot.id
+        events.append(
+            AttREvent(
+                "c7",
+                "G_prime",
+                mot2.id,
+                ("c6", "c1"),
+                tick2 + 1,
+                novel=novel,
+            )
+        )
+
+        next_carryover = ShadowSessionCarryover.from_loop(
+            loop, last_motive_id=mot2.id, session_tick=tick2
+        )
+
+        return ShadowEpisodeResult(
+            arm="carryover_tick",
+            events=events,
+            ticks_run=2,
+            motive_ids=motive_ids,
+            carryover=next_carryover,
+            used_carryover=True,
+            gap_vs_live_daemon=(
+                "Shadow session carryover tick; production run_daemon_tick still "
+                "builds a fresh CognitiveLoop and re-seeds beliefs each interval."
+            ),
         )
 
 
@@ -393,7 +518,11 @@ def run_shadow_batch(*, n_seeds: int = 20) -> dict[str, Any]:
         "c3_claim": False,
         "c2_claim": False,
         "by_arm_raw": by_arm,
-        "gap_vs_live_daemon": ShadowEpisodeResult(arm="meta").gap_vs_live_daemon,
+        "gap_vs_live_daemon": (
+            "Shadow multitick + ShadowSessionCarryover close W'→G' within/between "
+            "session ticks; production run_daemon_tick still resets CognitiveLoop "
+            "per APScheduler interval (BeliefField JSON in StateStore deferred)."
+        ),
     }
 
 
