@@ -43,7 +43,8 @@ def main() -> int:
         "explore_proxy_note": (
             "E04 longitudinal 50-tick session on Phase 2 shadow carryover; "
             "DSR = sustained ||d_t|| above D05 floor with bounded B_D envelope; "
-            "not C-ladder gate; live daemon loop reset gap remains."
+            "not C-ladder gate; live daemon hydrates from StateStore when "
+            "EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
         ),
     }
 

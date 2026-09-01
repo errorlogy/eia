@@ -1040,5 +1040,42 @@ Live daemon carryover **or** Hermes **D01** / pool Tier A tick; no C-level raise
 
 ### Next
 
-Use proof protocol as the ledger boundary for future Tier A/B metrics ticks; next deepen D01/ATT-E continuous `E_C` or daemon StateStore carryover. No C-level raise.
+Use proof protocol as the ledger boundary for future Tier A/B metrics ticks; next deepen D01/ATT-E continuous `E_C` or EOI drift stub for E04 part 2. No C-level raise.
 
+---
+
+## Entry 029 — 2026-09-01 — Live daemon StateStore belief carryover (Phase 2)
+
+**Session:** Persist beliefs + drive levels between `run_daemon_tick` intervals via `StateStore`; opt-in `EIA_DAEMON_BELIEF_CARRYOVER=1`  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read Entry 027–028; `ShadowSessionCarryover` pattern; `state_store.py` schema |
+| S2 | `DaemonCarryoverState` table + load/save; hydrate `CognitiveLoop` in `run_daemon_tick` |
+| S3 | `tests/test_daemon_carryover.py`; tier-0 lock includes new suite |
+| S4 | `daemon.py` module doc + trace metadata (`used_carryover`, `session_tick`) |
+| S5 | SCI_FLOW_LOG Entry 029; config `M-CLI-P2` done; ENDOGENEITY plan Phase 2 status |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Env gate | `EIA_DAEMON_BELIEF_CARRYOVER=1` (default off) |
+| Persistence | `beliefs_json` + drive channels in `daemon_carryover` SQLite row |
+| pytest | `tests/test_daemon_carryover.py` — 5 passed |
+| emit_m0 / claim_allowed | false / false (unchanged) |
+| Default daemon | legacy per-tick re-seed when env unset |
+
+### Deferred
+
+- EOI drift arm of E04 (DSR only so far)
+- Multi-seed DSR batch in `run_dsr_carryover.py`
+- Enable carryover by default in production daemon config
+
+### Next
+
+Hermes **D01** / pool Tier A tick **or** E04 EOI drift stub; no C-level raise.

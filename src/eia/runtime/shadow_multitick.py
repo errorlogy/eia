@@ -495,8 +495,8 @@ def run_shadow_carryover_tick(
             carryover=next_carryover,
             used_carryover=True,
             gap_vs_live_daemon=(
-                "Shadow session carryover tick; production run_daemon_tick still "
-                "builds a fresh CognitiveLoop and re-seeds beliefs each interval."
+                "Shadow session carryover tick; live daemon hydrates from StateStore "
+                "when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
             ),
         )
 
@@ -592,8 +592,8 @@ def run_dsr_longitudinal_session(
         "pool_metric": "B_D",
         "drive_samples": samples,
         "gap_vs_live_daemon": (
-            "DSR measured on shadow carryover path; production run_daemon_tick "
-            "still resets CognitiveLoop per APScheduler interval."
+            "DSR measured on shadow carryover path; live daemon hydrates from "
+            "StateStore when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
         ),
     }
 
@@ -623,8 +623,8 @@ def run_shadow_batch(*, n_seeds: int = 20) -> dict[str, Any]:
         "by_arm_raw": by_arm,
         "gap_vs_live_daemon": (
             "Shadow multitick + ShadowSessionCarryover close W'→G' within/between "
-            "session ticks; production run_daemon_tick still resets CognitiveLoop "
-            "per APScheduler interval (BeliefField JSON in StateStore deferred)."
+            "session ticks; live daemon hydrates from StateStore when "
+            "EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
         ),
     }
 

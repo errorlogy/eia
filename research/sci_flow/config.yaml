@@ -168,14 +168,14 @@ milestones:
     command: make check-sci-tier0
     note: "Phase 0-1; att_evidence.llm_allowed=false; no behavior change when disabled"
   M-CLI-P2:
-    name: M-CLI Phase 2 shadow daemon carryover (beliefs + drives)
+    name: M-CLI Phase 2 daemon carryover (beliefs + drives)
     claim: scaffold
     branch: research/cursor-starter-v0.2-woe-eis
-    harness: src/eia/runtime/shadow_multitick.py
-    status: partial
+    harness: src/eia/runtime/daemon.py
+    status: done
     completed: "2026-09-01"
-    command: pytest tests/test_shadow_multitick.py -q
-    note: "ShadowSessionCarryover + run_shadow_carryover_tick; live daemon StateStore hydration deferred; emit_m0=false"
+    command: pytest tests/test_shadow_multitick.py tests/test_daemon_carryover.py -q
+    note: "ShadowSessionCarryover + live StateStore hydration (EIA_DAEMON_BELIEF_CARRYOVER=1); off by default; emit_m0=false"
   M-E04-D05:
     name: E04/D05 longitudinal DSR on shadow carryover (50 ticks)
     claim: architecture_explore

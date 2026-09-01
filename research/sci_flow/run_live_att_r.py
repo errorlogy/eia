@@ -182,8 +182,8 @@ def main() -> int:
             "Shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; "
             ">=1 closed W→M→G→Π→A→X'→W'→G' with emit_m0=false; Kuramoto alone "
             "never counts; smoke threshold overrides are not evidence; "
-            "not C-ladder gate. Phase 2 shadow carryover closes session gap; "
-            "production daemon still per-tick loop reset until StateStore hydration."
+            "not C-ladder gate. Phase 2 carryover: shadow session + live StateStore "
+            "when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
         ),
     }
     out = Path(__file__).resolve().parent / "live_att_r_results.json"

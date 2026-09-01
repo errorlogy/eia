@@ -195,15 +195,16 @@ model_roles:
 
 | Item | Detail |
 |------|--------|
-| **Status** | **PARTIAL (shadow session)** — 2026-09-01 |
-| **Deliverables** | `ShadowSessionCarryover` (beliefs + drives); `run_shadow_carryover_tick`; carryover smoke in `run_live_att_r.py` |
-| **Files** | `src/eia/runtime/shadow_multitick.py`, `daemon.py` (gap documented) |
-| **Gap today** | Production `run_daemon_tick` still creates fresh `CognitiveLoop` each tick; StateStore BeliefField JSON deferred |
+| **Status** | **DONE (shadow + live opt-in)** — 2026-09-01 |
+| **Deliverables** | `ShadowSessionCarryover` (beliefs + drives); `run_shadow_carryover_tick`; carryover smoke in `run_live_att_r.py`; live `StateStore` hydration via `EIA_DAEMON_BELIEF_CARRYOVER=1` |
+| **Files** | `src/eia/runtime/shadow_multitick.py`, `daemon.py`, `state_store.py`, `tests/test_daemon_carryover.py` |
+| **Gap today** | Carryover **off by default**; enable with `EIA_DAEMON_BELIEF_CARRYOVER=1` on APScheduler path |
 | **ATT linkage** | ATT-R live path; M-R-LIVE metrics update |
-| **Done when** | Multi-tick shadow shows \(G_{t+1}\) from carryover without re-prompt; falsifiers still 0.0 |
-| **Shadow done** | `run_shadow_carryover_tick` + pytest; live daemon hydration **not** done this tick |
+| **Done when** | Multi-tick shadow shows \(G_{t+1}\) from carryover without re-prompt; falsifiers still 0.0; live daemon hydrates from StateStore when enabled |
+| **Shadow done** | `run_shadow_carryover_tick` + pytest; E04/D05 50-tick DSR harness |
+| **Live done** | `DaemonCarryoverState` in SQLite; `run_daemon_tick` hydrates/persists when env set |
 | **User** | — |
-| **Agent** | Live StateStore carryover in follow-up tick |
+| **Agent** | — |
 
 ---
 
@@ -390,6 +391,6 @@ Phases 0–2 are **science-critical**. Phases 4–6 are **optional explore / wit
 
 | Date | Change |
 |------|--------|
-| 2026-09-01 | Phase 2 partial — shadow `ShadowSessionCarryover` + `run_shadow_carryover_tick`; live daemon gap documented |
+| 2026-09-01 | Phase 2 done — shadow `ShadowSessionCarryover` + live `StateStore` hydration (`EIA_DAEMON_BELIEF_CARRYOVER=1`) |
 | 2026-09-01 | Hermes CURSOR_TASKS backlog crosswalk; P0 alignment B05/D01/D05 with M-CLI + M-SE |
 | 2026-08-21 | Initial M-CLI roadmap (Phases 0–6) |

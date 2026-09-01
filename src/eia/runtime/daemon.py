@@ -1,12 +1,10 @@
 """Live daemon runtime — scheduled pipeline ticks with contact adapter.
 
-Gap (Phase 2 partial, shadow-first):
-- `run_daemon_tick` still builds a fresh `CognitiveLoop` each APScheduler interval
-  and re-seeds beliefs from digital observations only.
-- Cross-tick W'→G' closure is implemented in `shadow_multitick.ShadowSessionCarryover`
-  + `run_shadow_carryover_tick` (beliefs + drive levels between session ticks).
-- Deferred: persist `beliefs_json` / drive snapshot in `StateStore` and hydrate
-  loop at daemon tick start (EIA_DAEMON_BELIEF_CARRYOVER); see Entry 027 SCI_FLOW_LOG.
+Phase 2 carryover (opt-in):
+- Set ``EIA_DAEMON_BELIEF_CARRYOVER=1`` to persist beliefs + drive levels in
+  ``StateStore`` between APScheduler ticks instead of re-seeding each interval.
+- Shadow path uses ``ShadowSessionCarryover`` in-process; live path mirrors the
+  same snapshot via ``DaemonCarryoverState`` in SQLite.
 """
 
 from __future__ import annotations
@@ -26,7 +24,8 @@ from eia.governor import ContactGovernor, GovernorConfig
 from eia.ids import new_trace_id, seeded_context
 from eia.observations.digital import collect_digital_observations
 from eia.pipeline import CognitiveLoop
-from eia.runtime.state_store import StateStore
+from eia.runtime.state_store import DaemonCarryoverState, StateStore
+from eia.runtime.shadow_multitick import ShadowSessionCarryover
 from eia.schemas.belief import BeliefKind
 from eia.schemas.contact import ContactOutcome
 from eia.schemas.initiative import InitiativeKind
@@ -99,6 +98,45 @@ def _parse_quiet_hours(spec: str) -> tuple[int, int]:
     return 22, 8
 
 
+def belief_carryover_enabled() -> bool:
+    """True when ``EIA_DAEMON_BELIEF_CARRYOVER`` is set to a truthy value."""
+    return os.environ.get("EIA_DAEMON_BELIEF_CARRYOVER", "0").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+
+
+def _shadow_carryover_from_store(state: DaemonCarryoverState) -> ShadowSessionCarryover | None:
+    if not state.has_beliefs:
+        return None
+    return ShadowSessionCarryover(
+        beliefs_json=state.beliefs_json,
+        last_motive_id=state.last_motive_id,
+        drive_epistemic=state.drive_epistemic,
+        drive_coherence=state.drive_coherence,
+        drive_commitment=state.drive_commitment,
+        drive_tick=state.drive_tick,
+        session_tick=state.session_tick,
+        motivation_count=state.motivation_count,
+    )
+
+
+def _store_carryover_from_shadow(
+    carryover: ShadowSessionCarryover,
+) -> DaemonCarryoverState:
+    return DaemonCarryoverState(
+        beliefs_json=carryover.beliefs_json,
+        last_motive_id=carryover.last_motive_id,
+        drive_epistemic=carryover.drive_epistemic,
+        drive_coherence=carryover.drive_coherence,
+        drive_commitment=carryover.drive_commitment,
+        drive_tick=carryover.drive_tick,
+        session_tick=carryover.session_tick,
+        motivation_count=carryover.motivation_count,
+    )
+
+
 @dataclass
 class DaemonTickResult:
     """Result of one daemon cognition + contact tick."""
@@ -111,6 +149,9 @@ class DaemonTickResult:
     message: str | None = None
     telegram_result: TelegramSendResult | None = None
     observations_count: int = 0
+    belief_carryover_enabled: bool = False
+    used_carryover: bool = False
+    session_tick: int = 0
 
 
 def _seed_beliefs_from_observations(loop: CognitiveLoop, observations: list) -> None:
@@ -165,9 +206,15 @@ def run_daemon_tick(
 
     observations = collect_digital_observations(cfg.workspace, now=now)
     cfg.traces_dir.mkdir(parents=True, exist_ok=True)
+    carryover_on = belief_carryover_enabled()
+    prior_carryover = (
+        _shadow_carryover_from_store(store.load_daemon_carryover())
+        if carryover_on
+        else None
+    )
+    used_carryover = prior_carryover is not None
 
     with seeded_context(cfg.seed):
-        # Phase 2 gap: fresh loop each tick — shadow path uses ShadowSessionCarryover.
         loop = CognitiveLoop(seed=cfg.seed)
         loop.governor = ContactGovernor(
             GovernorConfig(
@@ -179,7 +226,10 @@ def run_daemon_tick(
         loop.governor.state.hour = now.hour
         loop.governor.state.current_tick = int(now.timestamp()) // 60
 
-        _seed_beliefs_from_observations(loop, observations)
+        if prior_carryover is not None:
+            prior_carryover.apply_to(loop)
+        else:
+            _seed_beliefs_from_observations(loop, observations)
         for obs in observations:
             loop.apply_observation(obs)
 
@@ -188,6 +238,18 @@ def run_daemon_tick(
             hour=now.hour,
             finalize=True,
         )
+
+        if carryover_on:
+            prev_session_tick = prior_carryover.session_tick if prior_carryover else 0
+            next_carryover = ShadowSessionCarryover.from_loop(
+                loop,
+                last_motive_id=motivation.id if motivation else None,
+                session_tick=prev_session_tick + 1,
+            )
+            store.save_daemon_carryover(_store_carryover_from_shadow(next_carryover))
+            session_tick = next_carryover.session_tick
+        else:
+            session_tick = 0
 
         trace_id = loop.trace.trace_id
         message: str | None = None
@@ -224,6 +286,9 @@ def run_daemon_tick(
                 "observations_count": len(observations),
                 "consent_telegram": contact_state.consent_telegram,
                 "contacts_today": contact_state.contacts_today,
+                "belief_carryover_enabled": carryover_on,
+                "used_carryover": used_carryover,
+                "session_tick": session_tick,
             },
         )
         loop.trace.add_node(
@@ -244,6 +309,9 @@ def run_daemon_tick(
         message=message,
         telegram_result=telegram_result,
         observations_count=len(observations),
+        belief_carryover_enabled=carryover_on,
+        used_carryover=used_carryover,
+        session_tick=session_tick,
     )
 
 

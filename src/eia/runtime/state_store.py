@@ -1,4 +1,4 @@
-"""SQLite state store for live contact budget, consent, and quiet hours."""
+"""SQLite state store for live contact budget, consent, quiet hours, and daemon carryover."""
 
 from __future__ import annotations
 
@@ -22,7 +22,38 @@ CREATE TABLE IF NOT EXISTS contact_state (
     last_reset_date TEXT
 );
 INSERT OR IGNORE INTO contact_state (id) VALUES (1);
+
+CREATE TABLE IF NOT EXISTS daemon_carryover (
+    id INTEGER PRIMARY KEY CHECK (id = 1),
+    beliefs_json TEXT,
+    last_motive_id TEXT,
+    drive_epistemic REAL NOT NULL DEFAULT 0,
+    drive_coherence REAL NOT NULL DEFAULT 0,
+    drive_commitment REAL NOT NULL DEFAULT 0,
+    drive_tick INTEGER NOT NULL DEFAULT 0,
+    session_tick INTEGER NOT NULL DEFAULT 0,
+    motivation_count INTEGER NOT NULL DEFAULT 0
+);
+INSERT OR IGNORE INTO daemon_carryover (id) VALUES (1);
 """
+
+
+@dataclass
+class DaemonCarryoverState:
+    """Belief + drive snapshot persisted between live daemon ticks (Phase 2)."""
+
+    beliefs_json: str | None = None
+    last_motive_id: str | None = None
+    drive_epistemic: float = 0.0
+    drive_coherence: float = 0.0
+    drive_commitment: float = 0.0
+    drive_tick: int = 0
+    session_tick: int = 0
+    motivation_count: int = 0
+
+    @property
+    def has_beliefs(self) -> bool:
+        return bool(self.beliefs_json)
 
 
 @dataclass
@@ -136,3 +167,50 @@ class StateStore:
         state.quiet_hours_end = end
         self.save(state)
         return state
+
+    def load_daemon_carryover(self) -> DaemonCarryoverState:
+        with self._connect() as conn:
+            row = conn.execute("SELECT * FROM daemon_carryover WHERE id = 1").fetchone()
+        if row is None:
+            return DaemonCarryoverState()
+        return DaemonCarryoverState(
+            beliefs_json=row["beliefs_json"],
+            last_motive_id=row["last_motive_id"],
+            drive_epistemic=row["drive_epistemic"],
+            drive_coherence=row["drive_coherence"],
+            drive_commitment=row["drive_commitment"],
+            drive_tick=row["drive_tick"],
+            session_tick=row["session_tick"],
+            motivation_count=row["motivation_count"],
+        )
+
+    def save_daemon_carryover(self, carryover: DaemonCarryoverState) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE daemon_carryover SET
+                    beliefs_json = ?,
+                    last_motive_id = ?,
+                    drive_epistemic = ?,
+                    drive_coherence = ?,
+                    drive_commitment = ?,
+                    drive_tick = ?,
+                    session_tick = ?,
+                    motivation_count = ?
+                WHERE id = 1
+                """,
+                (
+                    carryover.beliefs_json,
+                    carryover.last_motive_id,
+                    carryover.drive_epistemic,
+                    carryover.drive_coherence,
+                    carryover.drive_commitment,
+                    carryover.drive_tick,
+                    carryover.session_tick,
+                    carryover.motivation_count,
+                ),
+            )
+            conn.commit()
+
+    def clear_daemon_carryover(self) -> None:
+        self.save_daemon_carryover(DaemonCarryoverState())
