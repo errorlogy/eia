@@ -172,6 +172,7 @@ Crosswalk fields (future): add `sci_flow_ref`, `branch`, `pool_tier` to JSON in 
 
 | Doc | Role |
 |-----|------|
+| [`CURSOR_TASKS_TRIAGE.md`](CURSOR_TASKS_TRIAGE.md) | NOW / MAIN / DEFER / NO / DONE verdict matrix (RU) |
 | [`NEXT_SCI_AGENT_PROMPT.md`](NEXT_SCI_AGENT_PROMPT.md) | Sci agent handoff + Hermes backlog link |
 | [`ENDOGENEITY_IMPLEMENTATION_PLAN.md`](ENDOGENEITY_IMPLEMENTATION_PLAN.md) | M-CLI Phases 0–6 |
 | [`SCI_FLOW_LOG.md`](SCI_FLOW_LOG.md) | Entry 026 — integration log |
