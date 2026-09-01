@@ -165,13 +165,13 @@ metrics:
     tier: B
     name: Bounded drives
     definition: "||d_t|| in admissible envelope [d_min, d_max]; no d->0 freeze or runaway."
-    harness: endogeneity_stack_sim.py
+    harness: "src/eia/runtime/shadow_multitick.py (run_dsr_longitudinal_session); endogeneity_stack_sim.py"
     att: null
-    threshold: null
-    status: engineering_guard
+    threshold: "d>0.3 persistence (D05 explore)"
+    status: shadow_carryover
     claim_allowed: false
     epistemic_tag: OPERATIONAL
-    notes: "F-ZERO falsifier; drive projection Pi_D"
+    notes: "F-ZERO falsifier; drive projection Pi_D; E04 50-tick shadow session 2026-09-01 pass"
 
   # --- Tier C: Supporting substrates (explore only; NOT Tier A) ---
   OMEGA_T:

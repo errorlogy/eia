@@ -15,8 +15,8 @@
 
 | # | ID | Задача | Почему сейчас | M-CLI / milestone |
 |---|-----|--------|---------------|-------------------|
-| 1 | **E04** | Longitudinal 50 ticks (DSR + EOI drift) | **Phase 2** — закрывает gap M-R-LIVE vs true daemon carryover | Phase 2 · ATT-R |
-| 2 | **D05** | DSR — 50 ticks, `d>0.3` persistence | Ядро **M-SE** / Tier B `B_D`; доказательство устойчивости drives | M-SE · `endogeneity_stack_sim.py` |
+| 1 | **E04** | Longitudinal 50 ticks (DSR + EOI drift) | **Phase 2** — DSR **done** shadow; EOI drift open | M-E04-D05 · ATT-R |
+| 2 | **D05** | DSR — 50 ticks, `d>0.3` persistence | **PASS** shadow carryover (seed 0); live daemon open | M-SE · `run_dsr_carryover.py` |
 | 3 | *(sci)* | **Phase 2 daemon carryover** (`W'→G'` cross-tick) | Priority #1 в NEXT_SCI_AGENT_PROMPT; shadow-first, `emit_m0=false` | Phase 2 (нет Hermes ID) |
 | 4 | **D01** | EOI-k (k=1,5,20) twin sweep | ATT-E / pool Tier A `E_ENDO`; интерпретация под `do(o=∅)` | M-CF4 · ATT-E |
 | 5 | **B01** | Drive ablation 3×2 | Cross-check `loop_max_123` vs M-SE stack sim ablation | M-SE |
@@ -26,7 +26,7 @@
 | 9 | **E05** | Multi-seed determinism (5 seeds) | Регрессия ATT runners перед Phase 2 merge | Phase 0 |
 | 10 | **F01** | NAMM hermetic harness (optional) | T_NAMM_cert — **soft** ATT-N witness only; не strong \(N_H\) | T_NAMM_cert |
 
-**Следующий конкретный шаг:** Phase 2 carryover (**E04** + **D05**) **или** один pool tick Tier A (**D01** / `E_ENDO`).
+**Следующий конкретный шаг:** live daemon StateStore carryover **или** pool tick Tier A (**D01** / `E_ENDO`); E04 EOI drift deferred.
 
 ---
 
@@ -172,7 +172,7 @@
 | D02 | MAIN | SA metric P0 | main |
 | D03 | MAIN | AG explore P1 | main |
 | D04 | MAIN | AP human labels P0 | main |
-| D05 | NOW | DSR / M-SE B_D; Phase 2 pairs | research |
+| D05 | DONE-shadow | DSR / M-SE B_D; shadow carryover pass | research |
 | D06 | MAIN | CE metric P1 | main |
 | D07 | MAIN | CD norm P1 | main |
 | D08 | NOW | κ study; M-B legacy formalize | research + main |
@@ -181,7 +181,7 @@
 | E01 | MAIN | 20 worlds G2 P0 | main |
 | E02 | MAIN | ADV held-out P0 | main |
 | E03 | MAIN | ReAct baseline P1 | main |
-| E04 | NOW | **Phase 2 priority #1** | research |
+| E04 | DONE-partial | DSR done shadow; EOI drift open | research |
 | E05 | NOW | Determinism before carryover | research |
 | E06 | DEFER | Cross-domain post G2 | main |
 | E07 | MAIN | Human eval protocol | main |

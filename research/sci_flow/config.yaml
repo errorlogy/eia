@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-01-MCLI-P2-shadow"
+updated: "2026-09-01-MCLI-P2-DSR"
 
 repos:
   eia:
@@ -176,6 +176,18 @@ milestones:
     completed: "2026-09-01"
     command: pytest tests/test_shadow_multitick.py -q
     note: "ShadowSessionCarryover + run_shadow_carryover_tick; live daemon StateStore hydration deferred; emit_m0=false"
+  M-E04-D05:
+    name: E04/D05 longitudinal DSR on shadow carryover (50 ticks)
+    claim: architecture_explore
+    att: M-SE
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-01"
+    command: python research/sci_flow/run_dsr_carryover.py
+    result: "dsr_min=0.822 / persistence=1.0 / d05_pass=true / e04_pass=true"
+    artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
+    note: "Tier B B_D on main CognitiveLoop carryover; not production daemon; no C raise"
   M-O:
     name: Oscillatory endogeneity substrate (adjunct)
     claim: theory_only

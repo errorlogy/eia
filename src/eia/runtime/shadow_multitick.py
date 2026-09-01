@@ -20,10 +20,16 @@ Gap vs true live daemon (`run_daemon_tick`):
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import StrEnum
 from typing import Any
+
+# D05 / E04 longitudinal DSR harness (shadow carryover path)
+DSR_TARGET_COGNITIVE_TICKS = 50
+D05_DRIVE_NORM_FLOOR = 0.3
+DRIVE_NORM_CEILING = math.sqrt(3.0)  # three channels clipped to [0, 1]
 
 from eia.beliefs import BeliefField
 
@@ -493,6 +499,103 @@ def run_shadow_carryover_tick(
                 "builds a fresh CognitiveLoop and re-seeds beliefs each interval."
             ),
         )
+
+
+def drive_norm(carryover: ShadowSessionCarryover) -> float:
+    """L2 norm of the three-channel drive vector (M-SE Tier B ``B_D`` proxy)."""
+    return math.sqrt(
+        carryover.drive_epistemic ** 2
+        + carryover.drive_coherence ** 2
+        + carryover.drive_commitment ** 2
+    )
+
+
+def _drive_sample(carryover: ShadowSessionCarryover) -> dict[str, Any]:
+    norm = drive_norm(carryover)
+    return {
+        "cognitive_tick": carryover.session_tick,
+        "drive_norm": norm,
+        "drive_epistemic": carryover.drive_epistemic,
+        "drive_coherence": carryover.drive_coherence,
+        "drive_commitment": carryover.drive_commitment,
+        "drive_tick": carryover.drive_tick,
+    }
+
+
+def run_dsr_longitudinal_session(
+    *,
+    target_cognitive_ticks: int = DSR_TARGET_COGNITIVE_TICKS,
+    seed: int = 0,
+) -> dict[str, Any]:
+    """E04/D05: 50-tick no-user shadow carryover session with DSR (``B_D``) metrics.
+
+    Bootstraps via ``CLOSED_LOOP``, then chains ``run_shadow_carryover_tick`` until
+    ``session_tick >= target_cognitive_ticks``. Samples drive norm at each episode
+    boundary (every two cognition ticks on the carryover path).
+    """
+    bootstrap = run_shadow_episode(ShadowArm.CLOSED_LOOP, seed=seed)
+    if bootstrap.carryover is None:
+        raise RuntimeError("closed_loop bootstrap did not export carryover")
+
+    samples: list[dict[str, Any]] = [_drive_sample(bootstrap.carryover)]
+    carryover = bootstrap.carryover
+    carryover_episodes = 0
+
+    while carryover.session_tick < target_cognitive_ticks:
+        carryover_episodes += 1
+        ep = run_shadow_carryover_tick(carryover, seed=seed + carryover_episodes)
+        if ep.carryover is None:
+            break
+        samples.append(_drive_sample(ep.carryover))
+        carryover = ep.carryover
+
+    norms = [s["drive_norm"] for s in samples]
+    n = len(norms)
+    persistence_fraction = (
+        sum(1 for v in norms if v > D05_DRIVE_NORM_FLOOR) / n if n else 0.0
+    )
+    dsr_min = min(norms) if norms else 0.0
+    dsr_max = max(norms) if norms else 0.0
+    dsr_mean = sum(norms) / n if n else 0.0
+    bounded = all(0.0 <= v <= DRIVE_NORM_CEILING for v in norms)
+    d05_pass = (
+        carryover.session_tick >= target_cognitive_ticks
+        and persistence_fraction >= 1.0
+        and dsr_min > D05_DRIVE_NORM_FLOOR
+        and bounded
+    )
+
+    return {
+        "att": "M-SE",
+        "milestone": "M-E04-D05",
+        "hermes_tasks": ["E04", "D05"],
+        "target_cognitive_ticks": target_cognitive_ticks,
+        "cognitive_ticks_reached": carryover.session_tick,
+        "carryover_episodes": carryover_episodes,
+        "n_drive_samples": n,
+        "dsr_min": dsr_min,
+        "dsr_max": dsr_max,
+        "dsr_mean": dsr_mean,
+        "persistence_fraction": persistence_fraction,
+        "d05_drive_norm_floor": D05_DRIVE_NORM_FLOOR,
+        "b_d_bounded": bounded,
+        "d05_pass": d05_pass,
+        "e04_pass": carryover.session_tick >= target_cognitive_ticks,
+        "emit_m0": False,
+        "claim_allowed": False,
+        "agi_star_claim": False,
+        "c2_claim": False,
+        "c3_claim": False,
+        "shadow": True,
+        "live_telegram": False,
+        "user_prompt_ticks": 0,
+        "pool_metric": "B_D",
+        "drive_samples": samples,
+        "gap_vs_live_daemon": (
+            "DSR measured on shadow carryover path; production run_daemon_tick "
+            "still resets CognitiveLoop per APScheduler interval."
+        ),
+    }
 
 
 def run_shadow_falsifier_suite(*, seed: int = 0) -> dict[str, ShadowEpisodeResult]:

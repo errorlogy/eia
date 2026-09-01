@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from eia.runtime.shadow_multitick import (
+    D05_DRIVE_NORM_FLOOR,
+    DSR_TARGET_COGNITIVE_TICKS,
     ShadowArm,
+    run_dsr_longitudinal_session,
     run_shadow_carryover_tick,
     run_shadow_episode,
     run_shadow_falsifier_suite,
@@ -64,3 +67,20 @@ def test_carryover_tick_produces_g_prime_without_reseed() -> None:
     assert not any(e.label == "user_prompt" for e in ep2.events)
     assert ep2.carryover is not None
     assert ep2.carryover.session_tick > ep1.carryover.session_tick
+
+
+def test_dsr_longitudinal_50_tick_carryover_session() -> None:
+    """E04/D05: drives stay bounded and above D05 floor over 50 cognitive ticks."""
+    result = run_dsr_longitudinal_session(
+        target_cognitive_ticks=DSR_TARGET_COGNITIVE_TICKS,
+        seed=0,
+    )
+    assert result["e04_pass"] is True
+    assert result["cognitive_ticks_reached"] >= DSR_TARGET_COGNITIVE_TICKS
+    assert result["dsr_min"] > D05_DRIVE_NORM_FLOOR
+    assert result["persistence_fraction"] >= 1.0
+    assert result["b_d_bounded"] is True
+    assert result["d05_pass"] is True
+    assert result["emit_m0"] is False
+    assert result["claim_allowed"] is False
+    assert result["user_prompt_ticks"] == 0

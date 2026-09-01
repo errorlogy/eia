@@ -964,10 +964,81 @@ Pick Hermes **B05** or **D01** on main **or** continue Phase 2 daemon carryover 
 ### Deferred
 
 - Persist beliefs/drives in `StateStore` and hydrate `run_daemon_tick` (production APScheduler path)
-- E04 longitudinal 50-tick DSR harness on carryover session
+- E04 longitudinal 50-tick DSR harness on carryover session → **done** Entry 028 (`run_dsr_carryover.py`)
 
 ### Next
 
-Live daemon StateStore carryover **or** Hermes **D01** / metrics pool tick; no C-level raise.
+Live daemon StateStore carryover **or** Hermes **D01** / metrics pool Tier A tick; no C-level raise.
 
+---
+
+## Entry 028 — 2026-09-01 — E04/D05 50-tick DSR harness on shadow carryover
+
+**Session:** Longitudinal DSR (`B_D`) on Phase 2 shadow carryover — 50 cognitive ticks, no user prompt  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read D05/E04 targets; M-SE `B_D` pool mapping; Phase 2 carryover API |
+| S2 | `run_dsr_longitudinal_session` + `drive_norm` in `shadow_multitick.py` |
+| S3 | `run_dsr_carryover.py`; pytest DSR test; tier-0 verify |
+| S4 | Metrics `M-E04_DSR_metrics_2026-09-01.md` + JSON; pool/config/triage updates |
+| S5 | SCI_FLOW_LOG Entry 028 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Cognitive ticks | 50 (24 carryover episodes after CLOSED_LOOP bootstrap) |
+| `dsr_min` / `dsr_mean` / `dsr_max` | 0.822 / 0.903 / 0.912 |
+| `persistence_fraction` | 1.0 (all samples > D05 floor 0.3) |
+| `b_d_bounded` | true |
+| **D05 pass** | **true** |
+| **E04 pass** | **true** |
+| emit_m0 / claim_allowed | false / false |
+
+### Deferred
+
+- Live daemon StateStore BeliefField hydration (`run_daemon_tick`)
+- EOI drift arm of E04 (DSR only this tick)
+- Multi-seed DSR batch / production daemon path
+
+### Next
+
+Live daemon carryover **or** Hermes **D01** / pool Tier A tick; no C-level raise.
+
+---
+
+## Entry 028 — 2026-09-01 — EIA proof protocol v0.1
+
+**Session:** Versioned sci-flow proof protocol for EIA evidence; ATT-E causal-bar classifier; negative controls  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Defined `sci-flow-eia-proof-v0.1` as a conservative proof-record protocol over metrics-pool evidence |
+| S2 | Acceptance rule requires Tier-A/CF4-class metric, trajectory change, `do(Z)` effect, non-triggering `X`, no matching external initiator |
+| S3 | Added `eia.evidence_proofs`, `run_eia_proof_protocol.py`, and `tests/test_eia_proof_protocol.py` |
+| S4 | Negative controls reject declaration-only, external initiator, and OMEGA/Kuramoto sync-only evidence |
+| S5 | Added `EIA_PROOF_PROTOCOL.md`; cross-linked causal criterion and metrics pool |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Protocol version | `sci-flow-eia-proof-v0.1` |
+| Unit tests | `tests/test_eia_proof_protocol.py` — 5 passed |
+| Smoke runner | `python research/sci_flow/run_eia_proof_protocol.py` |
+| Positive output | `e_endo_support=partial`, `claim_ceiling=C2` |
+| Hard safety outputs | `c_ladder_raise_allowed=false`, `agi_star_claim=false` |
+
+### Next
+
+Use proof protocol as the ledger boundary for future Tier A/B metrics ticks; next deepen D01/ATT-E continuous `E_C` or daemon StateStore carryover. No C-level raise.
 

@@ -5,6 +5,7 @@
 **Milestone:** M-EMP (Endogeneity Metrics Pool)  
 **Machine-readable:** [`endogeneity_metrics.yaml`](endogeneity_metrics.yaml)  
 **Harness loader:** `research/cursor-starter-v0.2/src/eia/endogeneity_metrics.py`  
+**Proof protocol:** [`EIA_PROOF_PROTOCOL.md`](EIA_PROOF_PROTOCOL.md) / `research/cursor-starter-v0.2/src/eia/evidence_proofs.py`  
 **Claim ceiling:** **C2** scoped partial on \(E_{\mathrm{endo}}\) only
 
 ---
@@ -68,7 +69,7 @@ From [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md) §4. Map to ATT cells and 
 | `P_G` | \(P_G\) | Temporal persistence under non-triggering \(X\) | `eia.goal_persistence`, M-P | ATT-P | TBD | explore | false |
 | `Q_L` | \(Q_L\) | Learning productivity per internal episode | `endogeneity_stack_sim.py` | — | TBD | toy_sim | false |
 | `H_G` | \(H_G\) | Goal diversity (entropy; noisy-TV guard) | stack sim / ATT-G | ATT-G | TBD | explore | false |
-| `B_D` | \(B_D\) | Bounded drive norm \(\|d_t\|\in[d_{\min},d_{\max}]\) | stack sim / governors | — | TBD | engineering_guard | false |
+| `B_D` | \(B_D\) | Bounded drive norm \(\|d_t\|\in[d_{\min},d_{\max}]\) | `shadow_multitick.run_dsr_longitudinal_session`, stack sim | — | >0.3 persistence (D05 explore) | shadow_carryover | false |
 
 ---
 

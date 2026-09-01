@@ -1,0 +1,242 @@
+{
+  "att": "M-SE",
+  "milestone": "M-E04-D05",
+  "hermes_tasks": [
+    "E04",
+    "D05"
+  ],
+  "target_cognitive_ticks": 50,
+  "cognitive_ticks_reached": 50,
+  "carryover_episodes": 24,
+  "n_drive_samples": 25,
+  "dsr_min": 0.8222601449289515,
+  "dsr_max": 0.9120663353014986,
+  "dsr_mean": 0.9028541490735559,
+  "persistence_fraction": 1.0,
+  "d05_drive_norm_floor": 0.3,
+  "b_d_bounded": true,
+  "d05_pass": true,
+  "e04_pass": true,
+  "emit_m0": false,
+  "claim_allowed": false,
+  "agi_star_claim": false,
+  "c2_claim": false,
+  "c3_claim": false,
+  "shadow": true,
+  "live_telegram": false,
+  "user_prompt_ticks": 0,
+  "pool_metric": "B_D",
+  "drive_samples": [
+    {
+      "cognitive_tick": 2,
+      "drive_norm": 0.8222601449289515,
+      "drive_epistemic": 0.8222601449289515,
+      "drive_coherence": 0.0,
+      "drive_commitment": 0.0,
+      "drive_tick": 2
+    },
+    {
+      "cognitive_tick": 4,
+      "drive_norm": 0.8734073574473776,
+      "drive_epistemic": 0.8686537929711763,
+      "drive_coherence": 0.09100000000000001,
+      "drive_commitment": 0.0,
+      "drive_tick": 4
+    },
+    {
+      "cognitive_tick": 6,
+      "drive_norm": 0.8819732257138431,
+      "drive_epistemic": 0.8687436110737861,
+      "drive_coherence": 0.15218840000000003,
+      "drive_commitment": 0.0,
+      "drive_tick": 6
+    },
+    {
+      "cognitive_tick": 8,
+      "drive_norm": 0.8899959691652093,
+      "drive_epistemic": 0.8687437849616327,
+      "drive_coherence": 0.19333148016,
+      "drive_commitment": 0.0,
+      "drive_tick": 8
+    },
+    {
+      "cognitive_tick": 10,
+      "drive_norm": 0.896412313100634,
+      "drive_epistemic": 0.8687437852982796,
+      "drive_coherence": 0.22099608725958403,
+      "drive_commitment": 0.0,
+      "drive_tick": 10
+    },
+    {
+      "cognitive_tick": 12,
+      "drive_norm": 0.9011785924224117,
+      "drive_epistemic": 0.8687437852989313,
+      "drive_coherence": 0.2395977690733443,
+      "drive_commitment": 0.0,
+      "drive_tick": 12
+    },
+    {
+      "cognitive_tick": 14,
+      "drive_norm": 0.9045844171531763,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.25210553992491674,
+      "drive_commitment": 0.0,
+      "drive_tick": 14
+    },
+    {
+      "cognitive_tick": 16,
+      "drive_norm": 0.9069642927551047,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.26051576504551405,
+      "drive_commitment": 0.0,
+      "drive_tick": 16
+    },
+    {
+      "cognitive_tick": 18,
+      "drive_norm": 0.908604787291996,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2661708004166037,
+      "drive_commitment": 0.0,
+      "drive_tick": 18
+    },
+    {
+      "cognitive_tick": 20,
+      "drive_norm": 0.909725957725375,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.26997324620012436,
+      "drive_commitment": 0.0,
+      "drive_tick": 20
+    },
+    {
+      "cognitive_tick": 22,
+      "drive_norm": 0.9104879852321874,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2725300107449637,
+      "drive_commitment": 0.0,
+      "drive_tick": 22
+    },
+    {
+      "cognitive_tick": 24,
+      "drive_norm": 0.911004048729234,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.27424917922491365,
+      "drive_commitment": 0.0,
+      "drive_tick": 24
+    },
+    {
+      "cognitive_tick": 26,
+      "drive_norm": 0.9113527089450425,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.275405148110832,
+      "drive_commitment": 0.0,
+      "drive_tick": 26
+    },
+    {
+      "cognitive_tick": 28,
+      "drive_norm": 0.9115878972927853,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2761824215897235,
+      "drive_commitment": 0.0,
+      "drive_tick": 28
+    },
+    {
+      "cognitive_tick": 30,
+      "drive_norm": 0.9117463763999161,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2767050602769301,
+      "drive_commitment": 0.0,
+      "drive_tick": 30
+    },
+    {
+      "cognitive_tick": 32,
+      "drive_norm": 0.9118530906936321,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2770564825302078,
+      "drive_commitment": 0.0,
+      "drive_tick": 32
+    },
+    {
+      "cognitive_tick": 34,
+      "drive_norm": 0.9119249145076088,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.27729277885331177,
+      "drive_commitment": 0.0,
+      "drive_tick": 34
+    },
+    {
+      "cognitive_tick": 36,
+      "drive_norm": 0.9119732400843102,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2774516645009669,
+      "drive_commitment": 0.0,
+      "drive_tick": 36
+    },
+    {
+      "cognitive_tick": 38,
+      "drive_norm": 0.9120057483258948,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.27755849921045017,
+      "drive_commitment": 0.0,
+      "drive_tick": 38
+    },
+    {
+      "cognitive_tick": 40,
+      "drive_norm": 0.9120276132524993,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2776303348691067,
+      "drive_commitment": 0.0,
+      "drive_tick": 40
+    },
+    {
+      "cognitive_tick": 42,
+      "drive_norm": 0.91204231811571,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2776786371659874,
+      "drive_commitment": 0.0,
+      "drive_tick": 42
+    },
+    {
+      "cognitive_tick": 44,
+      "drive_norm": 0.912052206970744,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.27771111563040995,
+      "drive_commitment": 0.0,
+      "drive_tick": 44
+    },
+    {
+      "cognitive_tick": 46,
+      "drive_norm": 0.9120588568268725,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2777329541498877,
+      "drive_commitment": 0.0,
+      "drive_tick": 46
+    },
+    {
+      "cognitive_tick": 48,
+      "drive_norm": 0.9120633284568807,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.2777476383703845,
+      "drive_commitment": 0.0,
+      "drive_tick": 48
+    },
+    {
+      "cognitive_tick": 50,
+      "drive_norm": 0.9120663353014986,
+      "drive_epistemic": 0.8687437852989326,
+      "drive_coherence": 0.27775751204024657,
+      "drive_commitment": 0.0,
+      "drive_tick": 50
+    }
+  ],
+  "gap_vs_live_daemon": "DSR measured on shadow carryover path; production run_daemon_tick still resets CognitiveLoop per APScheduler interval.",
+  "claim_ceiling": "architecture_m_se_dsr_explore",
+  "pre_registered": {
+    "target_cognitive_ticks": 50,
+    "d05_drive_norm_floor": 0.3,
+    "no_user_prompt": true,
+    "emit_m0": false,
+    "governor_thresholds_lowered": false,
+    "shadow_first": true
+  },
+  "explore_proxy_note": "E04 longitudinal 50-tick session on Phase 2 shadow carryover; DSR = sustained ||d_t|| above D05 floor with bounded B_D envelope; not C-ladder gate; live daemon loop reset gap remains."
+}
