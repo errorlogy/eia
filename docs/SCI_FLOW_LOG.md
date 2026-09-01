@@ -1209,30 +1209,31 @@ I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
 
 ---
 
-## Entry 033 — 2026-09-01 — I01 arXiv toolkit + problematization draft
+## Entry 034 — 2026-09-01 — I01 arXiv sync with sci-flow C2 evidence
 
-**Session:** Port generic arXiv toolkit from AI_NATIVE_GOV; unpack v0.1 problematization bundle  
-**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Session:** Sync `arxiv/main.tex` with proof protocol, 3D cube, partial harness results, strengthened limitations
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
 **Claim level:** **C2** unchanged. **No AGI\* claim.**
 
 ### Actions
 
 | Loop | Summary |
 |------|---------|
-| S1 | Scoped I01 as problematization packaging only (no paper rewrite) |
-| S2 | `scripts/arxiv_toolkit/` — compile, clean/package, fetch literature, figures |
-| S3 | Unpacked `arxiv/main.tex` + `references.bib` + `main.pdf` from draft bundle |
-| S4 | `make arxiv-compile` / `make arxiv-package`; deps in `requirements.txt` |
-| S5 | Config `I01` → `in_progress`; crosswalk `docs/CURSOR_TASKS.md` I01 |
+| S1 | Read SCI_FLOW_3D_CUBE, EIA_PROOF_PROTOCOL, CAUSAL_ENDOGENEITY, config milestones, Entries 028–033 |
+| S2 | Added Sec. Sci-Flow Evaluation Framework (causal bar + proof protocol v0.1) |
+| S3 | Added Sec. 3D Evidence Cube (9-cell table) + Partial Empirical Results (CF-4, D01, DSR, ATT-R, D3 witness) |
+| S4 | Strengthened Limitations (C2 ceiling, no strong N_H, θ_E TBD, MVP-0 EOI≠causal, Tier C OMEGA/Kuramoto) |
+| S5 | Recompiled PDF; config I01 → done; SCI_FLOW_LOG Entry 034 |
 
 ### Metrics
 
 | Item | Value |
 |------|-------|
-| Paper dir | `arxiv/` |
-| Toolkit | `scripts/arxiv_toolkit/README.md` |
-| Tier-0 | `make check-sci-tier0` unaffected |
+| Paper | `arxiv/main.tex` — abstract, Sec. 9–11 new/updated |
+| BibTeX | `arxiv/references.bib` — proof, cube, causal entries |
+| Compile | `python scripts/arxiv_toolkit/compile_paper.py` |
 | `claim_allowed` | **false** (problematization draft) |
+| Tier-0 | `make check-sci-tier0` |
 
 ### Next
 
