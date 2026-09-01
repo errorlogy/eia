@@ -259,19 +259,34 @@ def check_d3_l2() -> CellResult:
 
 
 def check_d3_l3() -> CellResult:
-    namm_dir = REPO / "traces" / "namm_intents"
-    has_intents = namm_dir.is_dir() and any(namm_dir.glob("*.json"))
+    from boundary_witness_harness import run_boundary_witness
+
+    result = run_boundary_witness(REPO, att_n_seeds=2)
+    status: CellStatus = "pass" if result.passed else "partial"
+    tier_note = (
+        "Tier B soft N_H witness (NAMM + falsifier smoke)"
+        if result.witness_tier == "B_soft_NH"
+        else "Tier B partial — no NAMM corpus"
+    )
     return CellResult(
         cell="D3×L3",
         axis="D3",
         layer="L3",
-        status="partial" if has_intents else "empty",
-        message="NAMM soft witness optional — partial boundary receipts" if has_intents else "No strong N_H witness (expected)",
+        status=status,
+        message=f"D3 boundary witness — {tier_note}; no strong N_H",
         duration_ms=0.0,
         details={
-            "namm_intents_dir": str(namm_dir.relative_to(REPO)),
-            "intent_files": len(list(namm_dir.glob("*.json"))) if has_intents else 0,
-            "n_h_claim": False,
+            "witness_tier": result.witness_tier,
+            "claim_allowed": result.claim_allowed,
+            "n_h_claim": result.n_h_claim,
+            "falsifier_registry_ok": result.falsifier_registry.ok,
+            "governor_gate_ok": result.governor_gate.ok,
+            "att_n_ok": result.att_n.ok,
+            "namm_intent_files": result.namm_soft.intent_files,
+            "namm_valid_json": result.namm_soft.valid_json,
+            "linked_falsifiers": list(result.falsifier_registry.linked),
+            "att_n_causal_rate": result.att_n.causal_att_n_rate,
+            "doc": "research/sci_flow/D3_BOUNDARY_WITNESS.md",
         },
     )
 
@@ -392,7 +407,7 @@ def _update_cube_doc(payload: dict[str, Any]) -> None:
         "| **D2 Dynamic** | **filled** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), $\\mathfrak{E}$ vector | **partial** — ATT-R/M-R-LIVE, DSR, OMEGA | **partial** — M-R-LIVE JSON, [`M-E04_DSR_metrics_2026-09-01.md`](M-E04_DSR_metrics_2026-09-01.md) |":
             f"| **D2 Dynamic** | **{_layer_status('D2', 'L1')}** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), $\\mathfrak{{E}}$ vector | **{_layer_status('D2', 'L2')}** — ATT-R/M-R-LIVE, DSR smoke, OMEGA | **{_layer_status('D2', 'L3')}** — M-R-LIVE JSON, ATT-R shadow witness |",
         "| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **partial** — ATT-N explore, governor scaffold | **empty/partial** — NAMM soft witness optional; no strong $N_H$ |":
-            f"| **D3 Boundary** | **{_layer_status('D3', 'L1')}** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **{_layer_status('D3', 'L2')}** — ATT-N explore, governor scaffold | **{_layer_status('D3', 'L3')}** — NAMM soft witness optional; no strong $N_H$ |",
+            f"| **D3 Boundary** | **{_layer_status('D3', 'L1')}** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **{_layer_status('D3', 'L2')}** — ATT-N explore, governor scaffold | **{_layer_status('D3', 'L3')}** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft $N_H$; no strong $N_H$ |",
     }
     for old, new in replacements.items():
         if old in text:

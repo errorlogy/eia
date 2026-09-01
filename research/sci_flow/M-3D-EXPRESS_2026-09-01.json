@@ -4,7 +4,7 @@
   "claim_ceiling": "C2",
   "claim_allowed": false,
   "agi_star_claim": false,
-  "total_duration_ms": 1451.8,
+  "total_duration_ms": 1810.0,
   "under_60s": true,
   "cells": [
     {
@@ -13,7 +13,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Causal bar definitions present",
-      "duration_ms": 0.7,
+      "duration_ms": 0.5,
       "details": {
         "doc": "research\\sci_flow\\CAUSAL_ENDOGENEITY.md",
         "falsifiers": [
@@ -28,7 +28,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "D01 EOI-k counterfactual sweep (eoi_k_steered gradient)",
-      "duration_ms": 1081.4,
+      "duration_ms": 905.2,
       "details": {
         "k1_eoi": 1.0,
         "k5_eoi": 0.35,
@@ -43,7 +43,7 @@
       "layer": "L3",
       "status": "pass",
       "message": "ATT-E proof-protocol witness stub (shadow receipt)",
-      "duration_ms": 114.4,
+      "duration_ms": 104.0,
       "details": {
         "protocol_version": "sci-flow-eia-proof-v0.1",
         "e_endo_support": "none",
@@ -56,7 +56,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Stable endogeneity invariants documented",
-      "duration_ms": 0.4,
+      "duration_ms": 0.8,
       "details": {
         "doc": "research\\sci_flow\\STABLE_ENDOGENEITY.md"
       }
@@ -67,7 +67,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "DSR smoke on shadow carryover (6 ticks)",
-      "duration_ms": 180.3,
+      "duration_ms": 175.3,
       "details": {
         "dsr_min": 0.8222601449289515,
         "cognitive_ticks": 6,
@@ -80,7 +80,7 @@
       "layer": "L3",
       "status": "pass",
       "message": "ATT-R shadow closed-loop witness (G' novel)",
-      "duration_ms": 39.6,
+      "duration_ms": 39.4,
       "details": {
         "arm": "closed_loop",
         "ticks_run": 2,
@@ -93,7 +93,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Falsifier/intervention registry (13 entries)",
-      "duration_ms": 3.3,
+      "duration_ms": 2.5,
       "details": {
         "registry_count": 13,
         "criterion_doc": true
@@ -105,7 +105,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "Governor scaffold + ATT-N smoke (n=2)",
-      "duration_ms": 23.0,
+      "duration_ms": 23.6,
       "details": {
         "governor_min_contact": 0.18,
         "att_n_causal_rate": null,
@@ -116,13 +116,26 @@
       "cell": "D3\u00d7L3",
       "axis": "D3",
       "layer": "L3",
-      "status": "partial",
-      "message": "NAMM soft witness optional \u2014 partial boundary receipts",
-      "duration_ms": 8.5,
+      "status": "pass",
+      "message": "D3 boundary witness \u2014 Tier B soft N_H witness (NAMM + falsifier smoke); no strong N_H",
+      "duration_ms": 558.7,
       "details": {
-        "namm_intents_dir": "traces\\namm_intents",
-        "intent_files": 852,
-        "n_h_claim": false
+        "witness_tier": "B_soft_NH",
+        "claim_allowed": false,
+        "n_h_claim": false,
+        "falsifier_registry_ok": true,
+        "governor_gate_ok": true,
+        "att_n_ok": true,
+        "namm_intent_files": 852,
+        "namm_valid_json": 634,
+        "linked_falsifiers": [
+          "F-DECL",
+          "F-EXT",
+          "F-NARR",
+          "F-NODO"
+        ],
+        "att_n_causal_rate": 1.0,
+        "doc": "research/sci_flow/D3_BOUNDARY_WITNESS.md"
       }
     }
   ],
@@ -135,6 +148,6 @@
     "D2\u00d7L3": "pass",
     "D3\u00d7L1": "pass",
     "D3\u00d7L2": "pass",
-    "D3\u00d7L3": "partial"
+    "D3\u00d7L3": "pass"
   }
 }

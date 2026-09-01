@@ -1143,3 +1143,35 @@ Multi-seed EOI-k batch; E04 EOI drift on carryover; continuous `E_C` under `do(Z
 ### Next
 
 Multi-seed EOI-k batch; continuous `E_C` under `do(Z)` from intervention cube. No C-level raise.
+
+---
+
+## Entry 032 — 2026-09-01 — D3×L3 boundary witness (N_H soft + falsifier smoke)
+
+**Session:** Close D3×L3 gap — boundary witness harness; express 9/9 pass  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI* claim. No strong N_H.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Scoped D3×L3 witness at C2: Tier B soft \(N_H\) only; `claim_allowed=false` |
+| S2 | `boundary_witness_harness.py` — falsifier registry, governor gate, ATT-N, NAMM corpus |
+| S3 | `run_boundary_witness.py`; `D3_BOUNDARY_WITNESS.md`; express D3×L3 cell → pass |
+| S4 | `tests/test_boundary_witness.py`; tier annotation `B_soft_NH` / `B_partial` |
+| S5 | `SCI_FLOW_3D_CUBE.md` D3×L3 filled; M-3D-EXPRESS 9/9 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `python research/sci_flow/run_boundary_witness.py` |
+| Express | `python research/sci_flow/run_3d_express.py` — 9/9 pass |
+| Falsifiers linked | F-DECL, F-NARR, F-EXT, F-NODO |
+| `claim_allowed` | **false** |
+| `n_h_claim` | **false** |
+
+### Next
+
+Multi-seed EOI-k batch; continuous `E_C` under `do(Z)`. No C-level raise.

@@ -2,7 +2,7 @@
 
 **Status:** `OPERATIONAL` scaffold (2026-09-01) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-3D-01 + M-3D-EXPRESS  
+**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS  
 **Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py`  
 **Claim ceiling:** **C2** — scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
 
@@ -36,7 +36,7 @@
 |---|-------------------|-----------------|----------------|
 | **D1 Causal** | **filled** — [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) bar, F-DECL/F-EXT | **filled** — CF-4, EOI, **D01 deepened** (counterfactual + carryover) | **filled** — [`EIA_PROOF_PROTOCOL.md`](EIA_PROOF_PROTOCOL.md), ATT-E witness stub |
 | **D2 Dynamic** | **filled** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), \(\mathfrak{E}\) vector | **filled** — ATT-R/M-R-LIVE, DSR smoke, OMEGA | **filled** — M-R-LIVE JSON, ATT-R shadow witness |
-| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **partial** — ATT-N explore, governor scaffold | **empty/partial** — NAMM soft witness optional; no strong \(N_H\) |
+| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **partial** — ATT-N explore, governor scaffold | **filled** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft \(N_H\); no strong \(N_H\) |
 
 Legend: **filled** = theory + falsifiers documented; **partial** = harness exists, thresholds TBD or explore-only; **empty** = not instrumented.
 
@@ -55,6 +55,7 @@ Legend: **filled** = theory + falsifiers documented; **partial** = harness exist
 | M-R / M-R-LIVE | D2×L2, D2×L3 | ATT-R recurrence |
 | M-O / [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md) | D2×L2 | Tier C explore |
 | M-N / ATT-N | D3×L2 | Explore under budget \(B\) |
+| D3 boundary witness (`boundary_witness_harness.py`) | **D3×L3** | Tier B soft \(N_H\); falsifier + governor + NAMM corpus |
 | M-EMP pool | cross-axis | Registry YAML |
 
 ---
@@ -98,7 +99,7 @@ API: `get_intervention(id)`, `list_by_axis("D1"|"D2"|"D3")`, `eoi_k_intervention
 
 ## Next (M-3D-01+)
 
-Multi-seed batch; E04 EOI drift on carryover. Fill D3×L3 with optional T_NAMM soft witness (not strong \(N_H\)).
+Multi-seed batch; E04 EOI drift on carryover. D3×L3 filled via boundary witness harness (Tier B soft \(N_H\); not strong \(N_H\)).
 3. Continuous `E_C` under registered `do(Z)` from intervention cube.
 4. **M-3D-EXPRESS** — `python research/sci_flow/run_3d_express.py` (<60s 9-cell smoke).
 
