@@ -1,0 +1,831 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<key id="segments" for="node" attr.name="segments" attr.type="string"/>
+<key id="trunks" for="node" attr.name="trunks" attr.type="int"/>
+<key id="servers" for="node" attr.name="servers" attr.type="int"/>
+<key id="x" for="node" attr.name="x" attr.type="double"/>
+<key id="y" for="node" attr.name="y" attr.type="double"/>
+<key id="type" for="node" attr.name="type" attr.type="string"/>
+<key id="name" for="node" attr.name="name" attr.type="string"/>
+<key id="objectID" for="node" attr.name="objectID" attr.type="string"/>
+<graph edgedefault="directed"><node id="0">
+  <data key="objectID">PSAP120@kingcounty.gov</data>
+  <data key="name">SEATTLE PD</data>
+  <data key="type">PSAP</data>
+  <data key="y">47.604309311762556</data>
+  <data key="x">-122.32903357244062</data>
+  <data key="servers">6</data>
+  <data key="trunks">16</data>
+</node>
+<node id="1">
+  <data key="objectID">EMS104@kingcounty.gov</data>
+  <data key="name">Seattle FD - Belltown</data>
+  <data key="type">EMS</data>
+  <data key="y">47.61620068714826</data>
+  <data key="x">-122.34445404482534</data>
+  <data key="servers">6</data>
+  <data key="trunks">7</data>
+</node>
+<node id="2">
+  <data key="objectID">EMS108@kingcounty.gov</data>
+  <data key="name">Seattle FD - Fishermen's Terminal</data>
+  <data key="type">EMS</data>
+  <data key="y">47.65547128460053</data>
+  <data key="x">-122.37883698225457</data>
+  <data key="servers">5</data>
+  <data key="trunks">6</data>
+</node>
+<node id="3">
+  <data key="objectID">EMS109@kingcounty.gov</data>
+  <data key="name">Seattle FD - Waterfront</data>
+  <data key="type">EMS</data>
+  <data key="y">47.60366073914148</data>
+  <data key="x">-122.33884208900331</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="4">
+  <data key="objectID">EMS114@kingcounty.gov</data>
+  <data key="name">Seattle FD - Central District</data>
+  <data key="type">EMS</data>
+  <data key="y">47.59905641348768</data>
+  <data key="x">-122.29782883133255</data>
+  <data key="servers">6</data>
+  <data key="trunks">7</data>
+</node>
+<node id="5">
+  <data key="objectID">EMS119@kingcounty.gov</data>
+  <data key="name">Seattle FD - Queen Anne</data>
+  <data key="type">EMS</data>
+  <data key="y">47.63114585051642</data>
+  <data key="x">-122.35496684482473</data>
+  <data key="servers">11</data>
+  <data key="trunks">13</data>
+</node>
+<node id="6">
+  <data key="objectID">EMS124@kingcounty.gov</data>
+  <data key="name">Seattle FD - Fremont</data>
+  <data key="type">EMS</data>
+  <data key="y">47.653729504074605</data>
+  <data key="x">-122.34899118900147</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="7">
+  <data key="objectID">EMS126@kingcounty.gov</data>
+  <data key="name">Seattle FD - International District</data>
+  <data key="type">EMS</data>
+  <data key="y">47.6012149800377</data>
+  <data key="x">-122.32855273133242</data>
+  <data key="servers">6</data>
+  <data key="trunks">7</data>
+</node>
+<node id="8">
+  <data key="objectID">EMS128@kingcounty.gov</data>
+  <data key="name">Seattle FD - Highland Park</data>
+  <data key="type">EMS</data>
+  <data key="y">47.533923263733286</data>
+  <data key="x">-122.35468073133501</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="9">
+  <data key="objectID">EMS169@kingcounty.gov</data>
+  <data key="name">Seattle FD - Beacon Hill</data>
+  <data key="type">EMS</data>
+  <data key="y">47.571870954923924</data>
+  <data key="x">-122.30856118715617</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="10">
+  <data key="objectID">EMS170@kingcounty.gov</data>
+  <data key="name">Seattle FD - SoDo</data>
+  <data key="type">EMS</data>
+  <data key="y">47.574695213032925</data>
+  <data key="x">-122.32857813133347</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="11">
+  <data key="objectID">EMS172@kingcounty.gov</data>
+  <data key="name">Tukwila FD - Greenlake</data>
+  <data key="type">EMS</data>
+  <data key="y">47.67914955945619</data>
+  <data key="x">-122.32325913132942</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="12">
+  <data key="objectID">EMS215@kingcounty.gov</data>
+  <data key="name">Seattle FD - University District</data>
+  <data key="type">EMS</data>
+  <data key="y">47.66535560017801</data>
+  <data key="x">-122.31667077365904</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="13">
+  <data key="objectID">EMS216@kingcounty.gov</data>
+  <data key="name">Seattle FD - Ballard</data>
+  <data key="type">EMS</data>
+  <data key="y">47.66841542130135</data>
+  <data key="x">-122.37734600249429</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="14">
+  <data key="objectID">EMS217@kingcounty.gov</data>
+  <data key="name">Seattle FD - Interbay</data>
+  <data key="type">EMS</data>
+  <data key="y">47.64516257954138</data>
+  <data key="x">-122.3758587601661</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="15">
+  <data key="objectID">EMS218@kingcounty.gov</data>
+  <data key="name">Seattle FD - Greenwood</data>
+  <data key="type">EMS</data>
+  <data key="y">47.68208718681924</data>
+  <data key="x">-122.35498346016459</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="16">
+  <data key="objectID">EMS219@kingcounty.gov</data>
+  <data key="name">Seattle FD - Montlake</data>
+  <data key="type">EMS</data>
+  <data key="y">47.64297968534215</data>
+  <data key="x">-122.32092570249523</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="17">
+  <data key="objectID">EMS222@kingcounty.gov</data>
+  <data key="name">Seattle FD - Bitter Lake</data>
+  <data key="type">EMS</data>
+  <data key="y">47.72306052354767</data>
+  <data key="x">-122.35387116016324</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="18">
+  <data key="objectID">EMS238@kingcounty.gov</data>
+  <data key="name">Seattle FD - Capitol Hill</data>
+  <data key="type">EMS</data>
+  <data key="y">47.61561882978266</data>
+  <data key="x">-122.31520844482523</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="19">
+  <data key="objectID">EMS239@kingcounty.gov</data>
+  <data key="name">Seattle FD - South Park</data>
+  <data key="type">EMS</data>
+  <data key="y">47.52664989428058</data>
+  <data key="x">-122.32242473133529</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="20">
+  <data key="objectID">EMS240@kingcounty.gov</data>
+  <data key="name">Seattle FD - Georgetown</data>
+  <data key="type">EMS</data>
+  <data key="y">47.539634471187014</data>
+  <data key="x">-122.3199401024993</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="21">
+  <data key="objectID">EMS241@kingcounty.gov</data>
+  <data key="name">Seattle FD - Rainier Valley</data>
+  <data key="type">EMS</data>
+  <data key="y">47.54848048095449</data>
+  <data key="x">-122.27627455092716</data>
+  <data key="servers">5</data>
+  <data key="trunks">6</data>
+</node>
+<node id="22">
+  <data key="objectID">EMS243@kingcounty.gov</data>
+  <data key="name">Seattle FD - Admiral District</data>
+  <data key="type">EMS</data>
+  <data key="y">47.584419164293905</data>
+  <data key="x">-122.38879880249753</data>
+  <data key="servers">14</data>
+  <data key="trunks">17</data>
+</node>
+<node id="23">
+  <data key="objectID">EMS244@kingcounty.gov</data>
+  <data key="name">Seattle FD - Mount Baker</data>
+  <data key="type">EMS</data>
+  <data key="y">47.57560998474958</data>
+  <data key="x">-122.29482067366241</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="24">
+  <data key="objectID">EMS245@kingcounty.gov</data>
+  <data key="name">Seattle FD - Northgate</data>
+  <data key="type">EMS</data>
+  <data key="y">47.70536721099918</data>
+  <data key="x">-122.34091080249283</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="25">
+  <data key="objectID">EMS246@kingcounty.gov</data>
+  <data key="name">Seattle FD - West Seattle</data>
+  <data key="type">EMS</data>
+  <data key="y">47.560795490890584</data>
+  <data key="x">-122.37975380249847</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="26">
+  <data key="objectID">EMS247@kingcounty.gov</data>
+  <data key="name">Seattle FD - Rainier Beach</data>
+  <data key="type">EMS</data>
+  <data key="y">47.515886271185025</data>
+  <data key="x">-122.26868560250021</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="27">
+  <data key="objectID">EMS249@kingcounty.gov</data>
+  <data key="name">Seattle FD - Madison Park</data>
+  <data key="type">EMS</data>
+  <data key="y">47.62600193296369</data>
+  <data key="x">-122.29119961414085</data>
+  <data key="servers">11</data>
+  <data key="trunks">13</data>
+</node>
+<node id="28">
+  <data key="objectID">EMS250@kingcounty.gov</data>
+  <data key="name">Seattle FD - Crown Hill</data>
+  <data key="type">EMS</data>
+  <data key="y">47.693318192767975</data>
+  <data key="x">-122.37703981413819</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="29">
+  <data key="objectID">EMS256@kingcounty.gov</data>
+  <data key="name">Seattle FD - Harbor Island</data>
+  <data key="type">EMS</data>
+  <data key="y">47.57100445572997</data>
+  <data key="x">-122.36164768530743</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="30">
+  <data key="objectID">EMS258@kingcounty.gov</data>
+  <data key="name">Seattle FD - High Point</data>
+  <data key="type">EMS</data>
+  <data key="y">47.533525783855225</data>
+  <data key="x">-122.37627706017052</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="31">
+  <data key="objectID">EMS262@kingcounty.gov</data>
+  <data key="name">Seattle FD - Laurelhurst</data>
+  <data key="type">EMS</data>
+  <data key="y">47.66863807147154</data>
+  <data key="x">-122.28446260064581</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="32">
+  <data key="objectID">EMS277@kingcounty.gov</data>
+  <data key="name">Seattle FD - Lake City</data>
+  <data key="type">EMS</data>
+  <data key="y">47.721269148199355</data>
+  <data key="x">-122.29726824482114</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="33">
+  <data key="objectID">EMS281@kingcounty.gov</data>
+  <data key="name">Seattle FD - Wedgwood</data>
+  <data key="type">EMS</data>
+  <data key="y">47.69671831339416</data>
+  <data key="x">-122.29088648530255</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="34">
+  <data key="objectID">EMS282@kingcounty.gov</data>
+  <data key="name">Seattle FD - Magnolia</data>
+  <data key="type">EMS</data>
+  <data key="y">47.640131129055426</data>
+  <data key="x">-122.40062108900186</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="35">
+  <data key="objectID">Law104@kingcounty.gov</data>
+  <data key="name">Seattle PD - North Precinct</data>
+  <data key="type">LAW</data>
+  <data key="y">47.70290245181223</data>
+  <data key="x">-122.33454218929678</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="36">
+  <data key="objectID">Law108@kingcounty.gov</data>
+  <data key="name">Seattle PD - West Precinct</data>
+  <data key="type">LAW</data>
+  <data key="y">47.61615143092955</data>
+  <data key="x">-122.33703384492664</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="37">
+  <data key="objectID">Law109@kingcounty.gov</data>
+  <data key="name">Seattle PD - East Precinct</data>
+  <data key="type">LAW</data>
+  <data key="y">47.615172448270286</data>
+  <data key="x">-122.31711730383483</data>
+  <data key="servers">3</data>
+  <data key="trunks">3</data>
+</node>
+<node id="38">
+  <data key="objectID">Law114@kingcounty.gov</data>
+  <data key="name">Seattle PD - South Precinct</data>
+  <data key="type">LAW</data>
+  <data key="y">47.5386625579816</data>
+  <data key="x">-122.29339501456532</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="39">
+  <data key="objectID">Law119@kingcounty.gov</data>
+  <data key="name">Seattle PD - Southwest Precinct</data>
+  <data key="type">LAW</data>
+  <data key="y">47.53601093999662</data>
+  <data key="x">-122.3619473720436</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="40">
+  <data key="objectID">FIRE104@kingcounty.gov</data>
+  <data key="name">Seattle FD - Belltown</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.61620068714826</data>
+  <data key="x">-122.34445404482534</data>
+  <data key="servers">7</data>
+  <data key="trunks">8</data>
+</node>
+<node id="41">
+  <data key="objectID">FIRE108@kingcounty.gov</data>
+  <data key="name">Seattle FD - Fishermen's Terminal</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.65547128460053</data>
+  <data key="x">-122.37883698225457</data>
+  <data key="servers">11</data>
+  <data key="trunks">13</data>
+</node>
+<node id="42">
+  <data key="objectID">FIRE109@kingcounty.gov</data>
+  <data key="name">Seattle FD - Waterfront</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.60366073914148</data>
+  <data key="x">-122.33884208900331</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="43">
+  <data key="objectID">FIRE114@kingcounty.gov</data>
+  <data key="name">Seattle FD - Central District</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.59905641348768</data>
+  <data key="x">-122.29782883133255</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="44">
+  <data key="objectID">FIRE119@kingcounty.gov</data>
+  <data key="name">Seattle FD - Queen Anne</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.63114585051642</data>
+  <data key="x">-122.35496684482473</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="45">
+  <data key="objectID">FIRE124@kingcounty.gov</data>
+  <data key="name">Seattle FD - Fremont</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.653729504074605</data>
+  <data key="x">-122.34899118900147</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="46">
+  <data key="objectID">FIRE126@kingcounty.gov</data>
+  <data key="name">Seattle FD - International District</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.6012149800377</data>
+  <data key="x">-122.32855273133242</data>
+  <data key="servers">7</data>
+  <data key="trunks">8</data>
+</node>
+<node id="47">
+  <data key="objectID">FIRE128@kingcounty.gov</data>
+  <data key="name">Seattle FD - Highland Park</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.533923263733286</data>
+  <data key="x">-122.35468073133501</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="48">
+  <data key="objectID">FIRE169@kingcounty.gov</data>
+  <data key="name">Seattle FD - Beacon Hill</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.571870954923924</data>
+  <data key="x">-122.30856118715617</data>
+  <data key="servers">5</data>
+  <data key="trunks">6</data>
+</node>
+<node id="49">
+  <data key="objectID">FIRE170@kingcounty.gov</data>
+  <data key="name">Seattle FD - SoDo</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.574695213032925</data>
+  <data key="x">-122.32857813133347</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="50">
+  <data key="objectID">FIRE172@kingcounty.gov</data>
+  <data key="name">Tukwila FD - Greenlake</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.67914955945619</data>
+  <data key="x">-122.32325913132942</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="51">
+  <data key="objectID">FIRE215@kingcounty.gov</data>
+  <data key="name">Seattle FD - University District</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.66535560017801</data>
+  <data key="x">-122.31667077365904</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="52">
+  <data key="objectID">FIRE216@kingcounty.gov</data>
+  <data key="name">Seattle FD - Ballard</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.66841542130135</data>
+  <data key="x">-122.37734600249429</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="53">
+  <data key="objectID">FIRE217@kingcounty.gov</data>
+  <data key="name">Seattle FD - Interbay</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.64516257954138</data>
+  <data key="x">-122.3758587601661</data>
+  <data key="servers">6</data>
+  <data key="trunks">7</data>
+</node>
+<node id="54">
+  <data key="objectID">FIRE218@kingcounty.gov</data>
+  <data key="name">Seattle FD - Greenwood</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.68208718681924</data>
+  <data key="x">-122.35498346016459</data>
+  <data key="servers">11</data>
+  <data key="trunks">13</data>
+</node>
+<node id="55">
+  <data key="objectID">FIRE219@kingcounty.gov</data>
+  <data key="name">Seattle FD - Montlake</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.64297968534215</data>
+  <data key="x">-122.32092570249523</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="56">
+  <data key="objectID">FIRE222@kingcounty.gov</data>
+  <data key="name">Seattle FD - Bitter Lake</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.72306052354767</data>
+  <data key="x">-122.35387116016324</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="57">
+  <data key="objectID">FIRE238@kingcounty.gov</data>
+  <data key="name">Seattle FD - Capitol Hill</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.61561882978266</data>
+  <data key="x">-122.31520844482523</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="58">
+  <data key="objectID">FIRE239@kingcounty.gov</data>
+  <data key="name">Seattle FD - South Park</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.52664989428058</data>
+  <data key="x">-122.32242473133529</data>
+  <data key="servers">9</data>
+  <data key="trunks">11</data>
+</node>
+<node id="59">
+  <data key="objectID">FIRE240@kingcounty.gov</data>
+  <data key="name">Seattle FD - Georgetown</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.539634471187014</data>
+  <data key="x">-122.3199401024993</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="60">
+  <data key="objectID">FIRE241@kingcounty.gov</data>
+  <data key="name">Seattle FD - Rainier Valley</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.54848048095449</data>
+  <data key="x">-122.27627455092716</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="61">
+  <data key="objectID">FIRE243@kingcounty.gov</data>
+  <data key="name">Seattle FD - Admiral District</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.584419164293905</data>
+  <data key="x">-122.38879880249753</data>
+  <data key="servers">5</data>
+  <data key="trunks">6</data>
+</node>
+<node id="62">
+  <data key="objectID">FIRE244@kingcounty.gov</data>
+  <data key="name">Seattle FD - Mount Baker</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.57560998474958</data>
+  <data key="x">-122.29482067366241</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="63">
+  <data key="objectID">FIRE245@kingcounty.gov</data>
+  <data key="name">Seattle FD - Northgate</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.70536721099918</data>
+  <data key="x">-122.34091080249283</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="64">
+  <data key="objectID">FIRE246@kingcounty.gov</data>
+  <data key="name">Seattle FD - West Seattle</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.560795490890584</data>
+  <data key="x">-122.37975380249847</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="65">
+  <data key="objectID">FIRE247@kingcounty.gov</data>
+  <data key="name">Seattle FD - Rainier Beach</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.515886271185025</data>
+  <data key="x">-122.26868560250021</data>
+  <data key="servers">15</data>
+  <data key="trunks">18</data>
+</node>
+<node id="66">
+  <data key="objectID">FIRE249@kingcounty.gov</data>
+  <data key="name">Seattle FD - Madison Park</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.62600193296369</data>
+  <data key="x">-122.29119961414085</data>
+  <data key="servers">4</data>
+  <data key="trunks">5</data>
+</node>
+<node id="67">
+  <data key="objectID">FIRE250@kingcounty.gov</data>
+  <data key="name">Seattle FD - Crown Hill</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.693318192767975</data>
+  <data key="x">-122.37703981413819</data>
+  <data key="servers">10</data>
+  <data key="trunks">12</data>
+</node>
+<node id="68">
+  <data key="objectID">FIRE256@kingcounty.gov</data>
+  <data key="name">Seattle FD - Harbor Island</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.57100445572997</data>
+  <data key="x">-122.36164768530743</data>
+  <data key="servers">12</data>
+  <data key="trunks">15</data>
+</node>
+<node id="69">
+  <data key="objectID">FIRE258@kingcounty.gov</data>
+  <data key="name">Seattle FD - High Point</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.533525783855225</data>
+  <data key="x">-122.37627706017052</data>
+  <data key="servers">13</data>
+  <data key="trunks">16</data>
+</node>
+<node id="70">
+  <data key="objectID">FIRE262@kingcounty.gov</data>
+  <data key="name">Seattle FD - Laurelhurst</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.66863807147154</data>
+  <data key="x">-122.28446260064581</data>
+  <data key="servers">7</data>
+  <data key="trunks">8</data>
+</node>
+<node id="71">
+  <data key="objectID">FIRE277@kingcounty.gov</data>
+  <data key="name">Seattle FD - Lake City</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.721269148199355</data>
+  <data key="x">-122.29726824482114</data>
+  <data key="servers">6</data>
+  <data key="trunks">7</data>
+</node>
+<node id="72">
+  <data key="objectID">FIRE281@kingcounty.gov</data>
+  <data key="name">Seattle FD - Wedgwood</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.69671831339416</data>
+  <data key="x">-122.29088648530255</data>
+  <data key="servers">5</data>
+  <data key="trunks">6</data>
+</node>
+<node id="73">
+  <data key="objectID">FIRE282@kingcounty.gov</data>
+  <data key="name">Seattle FD - Magnolia</data>
+  <data key="type">FIRE</data>
+  <data key="y">47.640131129055426</data>
+  <data key="x">-122.40062108900186</data>
+  <data key="servers">8</data>
+  <data key="trunks">10</data>
+</node>
+<node id="74">
+  <data key="objectID">PSAP120@kingcounty.gov_CR</data>
+  <data key="name">SEATTLE PD Caller region</data>
+  <data key="type">CALR</data>
+  <data key="segments">[(-122.40326150882478, 47.59789698297564), (-122.37990573296226, 47.62125275883817)], [(-122.47332883641236, 47.55118543125059), (-122.44997306054984, 47.574541207113114)], [(-122.47332883641236, 47.574541207113114), (-122.44997306054984, 47.59789698297564)], [(-122.47332883641236, 47.59789698297564), (-122.44997306054984, 47.62125275883817)], [(-122.47332883641236, 47.62125275883817), (-122.44997306054984, 47.644608534700694)], [(-122.47332883641236, 47.644608534700694), (-122.44997306054984, 47.66796431056322)], [(-122.47332883641236, 47.66796431056322), (-122.44997306054984, 47.69132008642575)], [(-122.47332883641236, 47.69132008642575), (-122.44997306054984, 47.714675862288274)], [(-122.44997306054984, 47.52782965538806), (-122.42661728468731, 47.55118543125059)], [(-122.44997306054984, 47.55118543125059), (-122.42661728468731, 47.574541207113114)], [(-122.44997306054984, 47.574541207113114), (-122.42661728468731, 47.59789698297564)], [(-122.44997306054984, 47.59789698297564), (-122.42661728468731, 47.62125275883817)], [(-122.44997306054984, 47.62125275883817), (-122.42661728468731, 47.644608534700694)], [(-122.44997306054984, 47.644608534700694), (-122.42661728468731, 47.66796431056322)], [(-122.44997306054984, 47.66796431056322), (-122.42661728468731, 47.69132008642575)], [(-122.44997306054984, 47.69132008642575), (-122.42661728468731, 47.714675862288274)], [(-122.44997306054984, 47.714675862288274), (-122.42661728468731, 47.7380316381508)], [(-122.42661728468731, 47.48111810366301), (-122.40326150882478, 47.504473879525534)], [(-122.42661728468731, 47.504473879525534), (-122.40326150882478, 47.52782965538806)], [(-122.42661728468731, 47.52782965538806), (-122.40326150882478, 47.55118543125059)], [(-122.42661728468731, 47.55118543125059), (-122.40326150882478, 47.574541207113114)], [(-122.42661728468731, 47.574541207113114), (-122.40326150882478, 47.59789698297564)], [(-122.42661728468731, 47.59789698297564), (-122.40326150882478, 47.62125275883817)], [(-122.42661728468731, 47.62125275883817), (-122.40326150882478, 47.644608534700694)], [(-122.42661728468731, 47.644608534700694), (-122.40326150882478, 47.66796431056322)], [(-122.42661728468731, 47.66796431056322), (-122.40326150882478, 47.69132008642575)], [(-122.42661728468731, 47.69132008642575), (-122.40326150882478, 47.714675862288274)], [(-122.42661728468731, 47.714675862288274), (-122.40326150882478, 47.7380316381508)], [(-122.40326150882478, 47.48111810366301), (-122.37990573296226, 47.504473879525534)], [(-122.40326150882478, 47.504473879525534), (-122.37990573296226, 47.52782965538806)], [(-122.40326150882478, 47.52782965538806), (-122.37990573296226, 47.55118543125059)], [(-122.40326150882478, 47.55118543125059), (-122.37990573296226, 47.574541207113114)], [(-122.40326150882478, 47.574541207113114), (-122.37990573296226, 47.59789698297564)], [(-122.40326150882478, 47.62125275883817), (-122.37990573296226, 47.644608534700694)], [(-122.40326150882478, 47.644608534700694), (-122.37990573296226, 47.66796431056322)], [(-122.40326150882478, 47.66796431056322), (-122.37990573296226, 47.69132008642575)], [(-122.40326150882478, 47.69132008642575), (-122.37990573296226, 47.714675862288274)], [(-122.40326150882478, 47.714675862288274), (-122.37990573296226, 47.7380316381508)], [(-122.37990573296226, 47.504473879525534), (-122.35654995709973, 47.52782965538806)], [(-122.37990573296226, 47.52782965538806), (-122.35654995709973, 47.55118543125059)], [(-122.37990573296226, 47.55118543125059), (-122.35654995709973, 47.574541207113114)], [(-122.37990573296226, 47.574541207113114), (-122.35654995709973, 47.59789698297564)], [(-122.37990573296226, 47.59789698297564), (-122.35654995709973, 47.62125275883817)], [(-122.37990573296226, 47.62125275883817), (-122.35654995709973, 47.644608534700694)], [(-122.37990573296226, 47.644608534700694), (-122.35654995709973, 47.66796431056322)], [(-122.37990573296226, 47.66796431056322), (-122.35654995709973, 47.69132008642575)], [(-122.37990573296226, 47.69132008642575), (-122.35654995709973, 47.714675862288274)], [(-122.37990573296226, 47.714675862288274), (-122.35654995709973, 47.7380316381508)], [(-122.35654995709973, 47.52782965538806), (-122.3331941812372, 47.55118543125059)], [(-122.35654995709973, 47.55118543125059), (-122.3331941812372, 47.574541207113114)], [(-122.35654995709973, 47.574541207113114), (-122.3331941812372, 47.59789698297564)], [(-122.35654995709973, 47.59789698297564), (-122.3331941812372, 47.62125275883817)], [(-122.35654995709973, 47.62125275883817), (-122.3331941812372, 47.644608534700694)], [(-122.35654995709973, 47.644608534700694), (-122.3331941812372, 47.66796431056322)], [(-122.35654995709973, 47.66796431056322), (-122.3331941812372, 47.69132008642575)], [(-122.35654995709973, 47.69132008642575), (-122.3331941812372, 47.714675862288274)], [(-122.35654995709973, 47.714675862288274), (-122.3331941812372, 47.7380316381508)], [(-122.3331941812372, 47.52782965538806), (-122.30983840537468, 47.55118543125059)], [(-122.3331941812372, 47.55118543125059), (-122.30983840537468, 47.574541207113114)], [(-122.3331941812372, 47.574541207113114), (-122.30983840537468, 47.59789698297564)], [(-122.3331941812372, 47.59789698297564), (-122.30983840537468, 47.62125275883817)], [(-122.3331941812372, 47.62125275883817), (-122.30983840537468, 47.644608534700694)], [(-122.3331941812372, 47.644608534700694), (-122.30983840537468, 47.66796431056322)], [(-122.3331941812372, 47.66796431056322), (-122.30983840537468, 47.69132008642575)], [(-122.3331941812372, 47.69132008642575), (-122.30983840537468, 47.714675862288274)], [(-122.3331941812372, 47.714675862288274), (-122.30983840537468, 47.7380316381508)], [(-122.30983840537468, 47.52782965538806), (-122.28648262951215, 47.55118543125059)], [(-122.30983840537468, 47.55118543125059), (-122.28648262951215, 47.574541207113114)], [(-122.30983840537468, 47.574541207113114), (-122.28648262951215, 47.59789698297564)], [(-122.30983840537468, 47.59789698297564), (-122.28648262951215, 47.62125275883817)], [(-122.30983840537468, 47.62125275883817), (-122.28648262951215, 47.644608534700694)], [(-122.30983840537468, 47.66796431056322), (-122.28648262951215, 47.69132008642575)], [(-122.30983840537468, 47.69132008642575), (-122.28648262951215, 47.714675862288274)], [(-122.30983840537468, 47.714675862288274), (-122.28648262951215, 47.7380316381508)], [(-122.28648262951215, 47.504473879525534), (-122.26312685364962, 47.52782965538806)], [(-122.28648262951215, 47.52782965538806), (-122.26312685364962, 47.55118543125059)], [(-122.28648262951215, 47.55118543125059), (-122.26312685364962, 47.574541207113114)], [(-122.28648262951215, 47.644608534700694), (-122.26312685364962, 47.66796431056322)], [(-122.28648262951215, 47.66796431056322), (-122.26312685364962, 47.69132008642575)], [(-122.28648262951215, 47.69132008642575), (-122.26312685364962, 47.714675862288274)], [(-122.26312685364962, 47.504473879525534), (-122.2397710777871, 47.52782965538806)]</data>
+</node>
+<edge source="0" target="1"/>
+<edge source="0" target="2"/>
+<edge source="0" target="3"/>
+<edge source="0" target="4"/>
+<edge source="0" target="5"/>
+<edge source="0" target="6"/>
+<edge source="0" target="7"/>
+<edge source="0" target="8"/>
+<edge source="0" target="9"/>
+<edge source="0" target="10"/>
+<edge source="0" target="11"/>
+<edge source="0" target="12"/>
+<edge source="0" target="13"/>
+<edge source="0" target="14"/>
+<edge source="0" target="15"/>
+<edge source="0" target="16"/>
+<edge source="0" target="17"/>
+<edge source="0" target="18"/>
+<edge source="0" target="19"/>
+<edge source="0" target="20"/>
+<edge source="0" target="21"/>
+<edge source="0" target="22"/>
+<edge source="0" target="23"/>
+<edge source="0" target="24"/>
+<edge source="0" target="25"/>
+<edge source="0" target="26"/>
+<edge source="0" target="27"/>
+<edge source="0" target="28"/>
+<edge source="0" target="29"/>
+<edge source="0" target="30"/>
+<edge source="0" target="31"/>
+<edge source="0" target="32"/>
+<edge source="0" target="33"/>
+<edge source="0" target="34"/>
+<edge source="0" target="35"/>
+<edge source="0" target="36"/>
+<edge source="0" target="37"/>
+<edge source="0" target="38"/>
+<edge source="0" target="39"/>
+<edge source="0" target="40"/>
+<edge source="0" target="41"/>
+<edge source="0" target="42"/>
+<edge source="0" target="43"/>
+<edge source="0" target="44"/>
+<edge source="0" target="45"/>
+<edge source="0" target="46"/>
+<edge source="0" target="47"/>
+<edge source="0" target="48"/>
+<edge source="0" target="49"/>
+<edge source="0" target="50"/>
+<edge source="0" target="51"/>
+<edge source="0" target="52"/>
+<edge source="0" target="53"/>
+<edge source="0" target="54"/>
+<edge source="0" target="55"/>
+<edge source="0" target="56"/>
+<edge source="0" target="57"/>
+<edge source="0" target="58"/>
+<edge source="0" target="59"/>
+<edge source="0" target="60"/>
+<edge source="0" target="61"/>
+<edge source="0" target="62"/>
+<edge source="0" target="63"/>
+<edge source="0" target="64"/>
+<edge source="0" target="65"/>
+<edge source="0" target="66"/>
+<edge source="0" target="67"/>
+<edge source="0" target="68"/>
+<edge source="0" target="69"/>
+<edge source="0" target="70"/>
+<edge source="0" target="71"/>
+<edge source="0" target="72"/>
+<edge source="0" target="73"/>
+<edge source="0" target="74"/>
+<edge source="1" target="0"/>
+<edge source="2" target="0"/>
+<edge source="3" target="0"/>
+<edge source="4" target="0"/>
+<edge source="5" target="0"/>
+<edge source="6" target="0"/>
+<edge source="7" target="0"/>
+<edge source="8" target="0"/>
+<edge source="9" target="0"/>
+<edge source="10" target="0"/>
+<edge source="11" target="0"/>
+<edge source="12" target="0"/>
+<edge source="13" target="0"/>
+<edge source="14" target="0"/>
+<edge source="15" target="0"/>
+<edge source="16" target="0"/>
+<edge source="17" target="0"/>
+<edge source="18" target="0"/>
+<edge source="19" target="0"/>
+<edge source="20" target="0"/>
+<edge source="21" target="0"/>
+<edge source="22" target="0"/>
+<edge source="23" target="0"/>
+<edge source="24" target="0"/>
+<edge source="25" target="0"/>
+<edge source="26" target="0"/>
+<edge source="27" target="0"/>
+<edge source="28" target="0"/>
+<edge source="29" target="0"/>
+<edge source="30" target="0"/>
+<edge source="31" target="0"/>
+<edge source="32" target="0"/>
+<edge source="33" target="0"/>
+<edge source="34" target="0"/>
+<edge source="35" target="0"/>
+<edge source="36" target="0"/>
+<edge source="37" target="0"/>
+<edge source="38" target="0"/>
+<edge source="39" target="0"/>
+<edge source="40" target="0"/>
+<edge source="41" target="0"/>
+<edge source="42" target="0"/>
+<edge source="43" target="0"/>
+<edge source="44" target="0"/>
+<edge source="45" target="0"/>
+<edge source="46" target="0"/>
+<edge source="47" target="0"/>
+<edge source="48" target="0"/>
+<edge source="49" target="0"/>
+<edge source="50" target="0"/>
+<edge source="51" target="0"/>
+<edge source="52" target="0"/>
+<edge source="53" target="0"/>
+<edge source="54" target="0"/>
+<edge source="55" target="0"/>
+<edge source="56" target="0"/>
+<edge source="57" target="0"/>
+<edge source="58" target="0"/>
+<edge source="59" target="0"/>
+<edge source="60" target="0"/>
+<edge source="61" target="0"/>
+<edge source="62" target="0"/>
+<edge source="63" target="0"/>
+<edge source="64" target="0"/>
+<edge source="65" target="0"/>
+<edge source="66" target="0"/>
+<edge source="67" target="0"/>
+<edge source="68" target="0"/>
+<edge source="69" target="0"/>
+<edge source="70" target="0"/>
+<edge source="71" target="0"/>
+<edge source="72" target="0"/>
+<edge source="73" target="0"/>
+<edge source="74" target="0"/>
+</graph></graphml>

@@ -1,0 +1,74 @@
+/**
+ * @file BGTypes.h
+ *
+ * @brief Used to define uniform data type sizes based for all operating systems. Also used to test the speed of
+ * simulation based on the data types.
+ *
+ * @ingroup Simulator/Utils
+ *
+ *
+ * This type is used to measure the difference between
+ * IEEE Standard 754 single and double-precision floating
+ * point values.
+ *
+ * Single-precision (float) calculations are fast, but only
+ * 23 bits are available to store the decimal.
+ *
+ * Double-precision (double) calculations are an order of magnitude
+ * slower, but 52 bits are available to store the decimal.
+ *
+ * We'd like to avoid doubles, if the simulation output doesn't suffer.
+ *
+ *
+ * For floats, uncomment the following two lines and comment DOUBLEPRECISION and
+ * the other #define BGFLOAT; vice-versa for doubles.
+ */
+
+#pragma once
+
+#define SINGLEPRECISION
+#define BGFLOAT float
+// #define DOUBLEPRECISION
+// #define BGFLOAT double
+
+using PBGFLOAT = BGFLOAT *;
+
+// TIMEFLOAT is used by the GPU code and needs to be a double
+#define TIMEFLOAT double
+
+// Platform Specific (are the typdef's redundant?)
+#ifdef __linux__
+using uint32_t = unsigned int;
+using int32_t = signed int;
+
+#elif defined __APPLE__
+using uint32_t = unsigned int;
+using int32_t = signed int;
+
+#elif defined _WIN32 || defined _WIN64
+using uint32_t = unsigned __int32;   // included in inttypes.h, which is not
+                                     // available in WIN32
+using int32_t = signed __int32;
+using uint64_t = unsigned long long int;
+
+#else
+   #error "unknown platform"
+#endif   // Platform Specific
+
+// AMP
+#ifdef USE_AMP
+   #define GPU_COMPAT_BOOL uint32_t
+#else
+   #define GPU_COMPAT_BOOL bool
+#endif   // AMP
+
+// The type for using array indexes (issue #142).
+#define BGSIZE uint32_t
+//#define BGSIZE uint64_t
+
+
+#ifdef __CUDACC__
+   #define CUDA_CALLABLE __device__ __host__
+#else
+   #define CUDA_CALLABLE
+#endif

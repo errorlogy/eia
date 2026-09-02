@@ -1,0 +1,201 @@
+# Neuraxon Game of Life Simulation Entities (Nxon 2.0 compliant)
+# Based on the Paper "Neuraxon: A New Neural Growth & Computation Blueprint" by David Vivancos https://vivancos.com/  & Dr. Jose Sanchez  https://josesanchezgarcia.com/ for Qubic Science https://qubic.org/
+# https://www.researchgate.net/publication/397331336_Neuraxon
+# Play the Lite Version of the Game of Life at https://huggingface.co/spaces/DavidVivancos/NeuraxonLife
+import time
+from dataclasses import dataclass, field
+from typing import Optional, Tuple, List, Dict
+
+# Type Checking import to avoid circular dependency
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from neuraxon.network import NeuraxonNetwork
+
+# ============================================================================
+# VERSION CONSTANTS (NEW v3.1)
+# ============================================================================
+VERSION = "3.2"
+NUM_INPUT_NEURONS = 9   # Movement, Terrain, TerrainType, Hunger, Sight, Smell, DayNight, Temperature, Proprioception
+NUM_OUTPUT_NEURONS = 6  # MoveX, MoveY, Social, MateIntent, GiveFood, Resting
+
+# ============================================================================
+# PROPRIOCEPTRON (NEW v3.0)
+# ============================================================================
+# BIOINSPIRED: Proprioception is the sense of body position and movement.
+# Real organisms use proprioceptive feedback to avoid obstacles and adjust
+# movement strategies. This tracks collision history to prevent "stuck" behavior.
+
+@dataclass 
+class Proprioceptron:
+    """
+    Tracks sensory feedback about the NxEr's own body state and collisions.
+    BIOINSPIRED: Mimics proprioceptive neurons that detect body position,
+    movement, and contact with obstacles.
+    """
+    rock_hit_history: List[int] = field(default_factory=list)  # Recent headings that hit rocks
+    consecutive_blocked: int = 0  # How many consecutive moves were blocked
+    last_successful_heading: int = 0  # Last heading that resulted in movement
+    total_rock_hits: int = 0  # Lifetime rock collision count
+    forced_turn_count: int = 0  # How many times we forced a direction change
+    successful_move_streak: int = 0  # Consecutive successful moves (NEW v3.1)
+    last_move_result: int = 0  # -1=blocked, 0=neutral, 1=success (NEW v3.1)
+    
+    def record_rock_hit(self, heading: int, memory_size: int = 5):
+        """Record a rock collision at the given heading."""
+        self.rock_hit_history.append(heading)
+        if len(self.rock_hit_history) > memory_size:
+            self.rock_hit_history.pop(0)
+        self.consecutive_blocked += 1
+        self.total_rock_hits += 1
+        self.successful_move_streak = 0  # Reset streak on block
+        self.last_move_result = -1
+    
+    def record_successful_move(self, heading: int):
+        """Record a successful movement."""
+        self.consecutive_blocked = 0
+        self.last_successful_heading = heading
+        self.successful_move_streak += 1
+        self.last_move_result = 1
+    
+    def should_force_turn(self, current_heading: int, threshold: int = 3) -> bool:
+        """
+        Determine if we should force a direction change based on collision history.
+        BIOINSPIRED: After repeated collisions in the same direction, organisms
+        learn to try different approaches (spatial learning, path integration).
+        """
+        if self.consecutive_blocked >= threshold:
+            return True
+        # Check if current heading is frequently blocked
+        recent_hits_at_heading = sum(1 for h in self.rock_hit_history if h == current_heading)
+        return recent_hits_at_heading >= threshold
+    
+    def get_proprioception_signal(self, clear_threshold: int = 5) -> int:
+        """
+        Get trinary proprioception signal for brain input (NEW v3.1).
+        BIOINSPIRED: Provides body awareness of movement success/failure.
+        
+        Returns:
+            -1: Repeatedly blocked (obstacle ahead)
+             0: Normal (mixed history)
+             1: Clear path (consistent successful movement)
+        """
+        if self.consecutive_blocked >= 2:
+            return -1
+        if self.successful_move_streak >= clear_threshold:
+            return 1
+        return 0
+    
+    def get_suggested_heading(self, current_heading: int, num_directions: int = 8) -> int:
+        """
+        Suggest a new heading based on collision history.
+        BIOINSPIRED: Avoid recently blocked directions, prefer successful ones.
+        """
+        # Count hits per direction
+        hit_counts = {}
+        for h in self.rock_hit_history:
+            hit_counts[h] = hit_counts.get(h, 0) + 1
+        
+        # Find least-blocked direction
+        candidates = []
+        for h in range(num_directions):
+            if h != current_heading:
+                candidates.append((hit_counts.get(h, 0), h))
+        
+        candidates.sort(key=lambda x: x[0])
+        
+        # Prefer directions near the last successful one if available
+        if candidates:
+            # Add some randomness to avoid deterministic loops
+            import random
+            if random.random() < 0.3 and len(candidates) > 1:
+                return random.choice(candidates[:3])[1]
+            return candidates[0][1]
+        
+        # Fallback: opposite direction
+        return (current_heading + 4) % num_directions
+
+@dataclass
+class NxErStats:
+    """A dataclass to store performance statistics for a single NxEr agent."""
+    food_found: float = 0.0
+    food_taken: float = 0.0
+    explored: int = 0
+    time_lived_s: float = 0.0
+    mates_performed: int = 0
+    energy_efficiency: float = 0.0
+    temporal_sync_score: float = 0.0
+    fitness_score: float = 0.0
+
+@dataclass
+class NxEr:
+    """
+    Represents a single agent (a "Neuraxon-enabled life form" or NxEr) in the simulation.
+    """
+    id: int
+    name: str
+    color: Tuple[int, int, int]
+    pos: Tuple[int, int]
+    can_land: bool
+    can_sea: bool
+    net: 'NeuraxonNetwork'
+    food: float
+    is_male: bool
+    alive: bool = True
+    born_ts: float = field(default_factory=time.time)
+    died_ts: Optional[float] = None
+    # UPDATED v3.1: 9 inputs, 6 outputs
+    last_inputs: Tuple[float, ...] = (0, 0, 0, 0, 0, 0, 0, 0, 0) 
+    last_outputs: Tuple[int, ...] = (0, 0, 0, 0, 0, 0)
+    ticks_per_action: int = 1
+    tick_accum: int = 0
+    harvesting: Optional[int] = None
+    mating_with: Optional[int] = None
+    mating_end_tick: Optional[int] = None
+    stats: NxErStats = None
+    visited: set = None
+    dopamine_boost_ticks: int = 0
+    _last_O4: int = 0
+    mating_intent_until_tick: int = 0
+    parents: Tuple[Optional[str], Optional[str]] = (None, None)  # Parent names
+    ancestors: List[str] = field(default_factory=list)  # Full lineage (ancestor names)
+    rounds_survived: int = 0  # How many rounds this NxEr has survived
+    clan_id: Optional[int] = None  # Clan Heritage ID
+    mate_cooldown_until_tick: int = 0
+    last_move_tick: int = 0
+    last_pos: Tuple[int, int] = (0, 0)
+    
+    # --- NEW PARAMETERS in V2.0---
+    vision_range: int = 5     # Random 2 to 15
+    smell_radius: int = 3     # Random 2 to 5
+    heading: int = 0          # 0=NW, 1=N, 2=NE, 3=E, 4=SE, 5=S, 6=SW, 7=W
+    
+    # --- NEW v3.0: Circadian & Temperature ---
+    body_temperature: float = 37.0  # Current body temperature
+    circadian_phase: float = 0.0    # Current position in day/night cycle [0, 1)
+    is_resting: bool = False        # Whether NxEr is in rest/sleep mode
+    last_activity_tick: int = 0     # For activity-based temperature
+    
+    # --- Proprioceptron (UPDATED v3.1) ---
+    proprioceptron: Proprioceptron = field(default_factory=Proprioceptron)
+    brain_movement_weight: float = 0.5  # How much brain outputs influence movement vs instinct
+    _consecutive_successful_moves: int = 0  # Track for proprioception input (NEW v3.1)
+
+    # v3.2: Inherited metabolic preferences
+    temperature_tolerance_cold: float = 35.5  # Individual cold threshold
+    temperature_tolerance_hot: float = 38.5   # Individual hot threshold
+    resting_metabolism_multiplier: float = 0.3  # Individual resting efficiency
+
+    # --- Neuraxon v2.0 per-NxEr state ---
+    receptor_activations: Dict = field(default_factory=dict)   # Last receptor activation snapshot
+    astrocyte_activity: float = 0.0    # Global astrocyte-like state
+
+@dataclass
+class Food:
+    """Represents a source of food in the world."""
+    id: int
+    anchor: Tuple[int, int] # The original spawn location, used for respawning nearby.
+    pos: Tuple[int, int] # The current location.
+    alive: bool = True
+    respawn_at_tick: Optional[int] = None # The simulation tick at which this food will respawn.
+    remaining: int = 25 # How much food is left at this source.
+    progress: Dict[int, int] = field(default_factory=dict) # Tracks harvesting progress by different NxErs.

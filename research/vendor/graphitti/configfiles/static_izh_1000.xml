@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<BGSimParams>
+    <SimInfoParams name="SimInfoParams">
+        <graphmlFile name="graphmlFile">../configfiles/graphs/static_izh_1000.graphml</graphmlFile>
+        <SimParams name="SimParams">
+            <epochDuration name="epochDuration">1</epochDuration>
+            <numEpochs name="numEpochs">1</numEpochs>
+        </SimParams>
+        <SimConfig name="SimConfig">
+            <maxFiringRate name="maxFiringRate">1000</maxFiringRate>
+            <maxEdgesPerVertex name="maxEdgesPerVertex">1000</maxEdgesPerVertex>
+        </SimConfig>
+        <RNGConfig name="RNGConfig">
+            <InitRNGSeed name="InitRNGSeed">1</InitRNGSeed>
+            <NoiseRNGSeed class="Norm" name="NoiseRNGSeed">777</NoiseRNGSeed>
+        </RNGConfig>
+        <OutputParams name="OutputParams">
+            <resultFileName name="resultFileName">Output/Results/static_izh_historyDump.h5</resultFileName>
+        </OutputParams>
+    </SimInfoParams>
+    <ModelParams>
+        <VerticesParams class="AllIZHNeurons" name="VerticesParams">
+            <Iinject name="Iinject">
+                <min name="min">13.5e-09</min>
+                <max name="max">13.5e-09</max>
+            </Iinject>
+            <Inoise name="Inoise">
+                <min name="min">0.5e-06</min>
+                <max name="max">0.7329e-06</max>
+            </Inoise>
+            <Vthresh name="Vthresh">
+                <min name="min">30.0e-03</min>
+                <max name="max">30.0e-03</max>
+            </Vthresh>
+            <Vresting name="Vresting">
+                <min name="min">0.0</min>
+                <max name="max">0.0</max>
+            </Vresting>
+
+            <Vreset name="Vreset">
+                <min name="min">-0.065</min>
+                <max name="max">-0.065</max>
+            </Vreset>
+            <Vinit name="Vinit">
+                <min name="min">-0.065</min>
+                <max name="max">-0.065</max>
+            </Vinit>
+            <starter_vthresh name="starter_vthresh">
+                <min name="min">13.565e-3</min>
+                <max name="max">13.655e-3</max>
+            </starter_vthresh>
+            <starter_vreset name="starter_vreset">
+                <min name="min">13.0e-3</min>
+                <max name="max">13.0e-3</max>
+            </starter_vreset>
+            <!-- Izhikevich neuron parameters -->
+            <Aconst name="Aconst">
+                <minExc name="minExc">0.02</minExc>
+                <maxExc name="maxExc">0.02</maxExc>
+                <minInh name="minInh">0.02</minInh>
+                <maxInh name="maxInh">0.1</maxInh>
+            </Aconst>
+            <Bconst name="Bconst">
+                <minExc name="minExc">0.2</minExc>
+                <maxExc name="maxExc">0.2</maxExc>
+                <minInh name="minInh">0.2</minInh>
+                <maxInh name="maxInh">0.25</maxInh>
+            </Bconst>
+            <Cconst name="Cconst">
+                <minExc name="minExc">-65</minExc>
+                <maxExc name="maxExc">-50</maxExc>
+                <minInh name="minInh">-65</minInh>
+                <maxInh name="maxInh">-65</maxInh>
+            </Cconst>
+            <Dconst name="Dconst">
+                <minExc name="minExc">2</minExc>
+                <maxExc name="maxExc">8</maxExc>
+                <minInh name="minInh">2</minInh>
+                <maxInh name="maxInh">2</maxInh>
+            </Dconst>
+        </VerticesParams>
+
+        <EdgesParams class="AllSpikingSynapses" name="EdgesParams">
+        </EdgesParams>
+
+        <ConnectionsParams class="ConnStatic" name="ConnectionsParams">
+            <StaticConnectionsParams name="StaticConnectionsParams">
+                <nConnsPerNeuron name="nConnsPerNeuron">999</nConnsPerNeuron>
+                <threshConnsRadius name="threshConnsRadius">50</threshConnsRadius>
+                <pRewiring name="pRewiring">0</pRewiring>
+            </StaticConnectionsParams>
+            <StaticConnectionsWeight name="StaticConnectionsWeight">
+                <minExc name="minExc">0</minExc>
+                <maxExc name="maxExc">0.5e-7</maxExc>
+                <minInh name="minInh">-0.5e-7</minInh>
+                <maxInh name="maxInh">0</maxInh>
+            </StaticConnectionsWeight>
+        </ConnectionsParams>
+
+        <LayoutParams class="LayoutNeuro" name="LayoutParams">
+        </LayoutParams>
+    </ModelParams>
+</BGSimParams>

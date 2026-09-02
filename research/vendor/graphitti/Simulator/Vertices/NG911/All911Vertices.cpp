@@ -1,0 +1,643 @@
+/**
+ * @file All911Vertices.cpp
+ * 
+ * @ingroup Simulator/Vertices/NG911
+ *
+ * @brief Specialization of the AllVertices class for the NG911 network
+ */
+
+#include "All911Vertices.h"
+#include "All911Edges.h"
+#include "Connections911.h"
+#include "GraphManager.h"
+#include "Layout911.h"
+#include "ParameterManager.h"
+#include <cmath>
+
+// Allocate memory for all class properties
+void All911Vertices::setupVertices()
+{
+   AllVertices::setupVertices();
+
+   // Resize and fill vectors with 0
+   vertexType_.assign(size_, 0);
+   beginTimeHistory_.resize(size_);
+   answerTimeHistory_.resize(size_);
+   endTimeHistory_.resize(size_);
+   wasAbandonedHistory_.resize(size_);
+   queueLengthHistory_.resize(size_);
+   utilizationHistory_.resize(size_);
+   numServers_.assign(size_, 0);
+   busyServers_.assign(size_, 0);
+   numTrunks_.assign(size_, 0);
+   vertexQueues_.resize(size_);
+   servingCall_.resize(size_);
+   answerTime_.resize(size_);
+   serverCountdown_.resize(size_);
+   vertexIdToNoiseIndex_.assign(size_, -1);
+
+   // Resize and fill data structures for recording
+   droppedCalls_.assign(size_, 0);
+   receivedCalls_.assign(size_, 0);
+
+   // Register call properties with InputManager
+   inputManager_.registerProperty("vertex_id", &Call::vertexId);
+   inputManager_.registerProperty("time", &Call::time);
+   inputManager_.registerProperty("duration", &Call::duration);
+   inputManager_.registerProperty("x", &Call::x);
+   inputManager_.registerProperty("y", &Call::y);
+   inputManager_.registerProperty("patience", &Call::patience);
+   inputManager_.registerProperty("on_site_time", &Call::onSiteTime);
+   inputManager_.registerProperty("type", &Call::type);
+}
+
+
+// Creates all the Vertices and assigns initial data for them.
+void All911Vertices::createAllVertices(Layout &layout)
+{
+   // Read Input Events using the InputManager
+   inputManager_.readInputs();
+   LOG4CPLUS_DEBUG(vertexLogger_,
+                   "Total number of events: " << inputManager_.getTotalNumberOfEvents());
+
+   Simulator &simulator = Simulator::getInstance();
+   // For metrics whose entries are recorded for each time step such as queue length history
+   uint64_t stepsPerEpoch = simulator.getEpochDuration() / simulator.getDeltaT();
+   // For metrics whose entries are recorded for each call such as begin time history
+   int maxEventsPerEpoch = static_cast<int>(Simulator::getInstance().getEpochDuration()
+                                            * Simulator::getInstance().getMaxFiringRate());
+   LOG4CPLUS_DEBUG(vertexLogger_, "Steps per epoch: " << stepsPerEpoch);
+   LOG4CPLUS_DEBUG(vertexLogger_, "Max events per epoch: " << maxEventsPerEpoch);
+
+   // Loop over all vertices and set the number of servers and trunks.
+   // We get the information needed from the GraphManager.
+   GraphManager<NG911VertexProperties>::VertexIterator vi, vi_end;
+   GraphManager<NG911VertexProperties> &gm = GraphManager<NG911VertexProperties>::getInstance();
+   // Variable to map caller region IDs to 0 to n-1 where n is the number of caller regions.
+   // This allows caller regions to exist anywhere in the graph file
+   numberOfVerticesNeedingDeviceNoise_ = 0;
+   for (boost::tie(vi, vi_end) = gm.vertices(); vi != vi_end; ++vi) {
+      assert(*vi < size_);
+
+      if (gm[*vi].type == "CALR") {
+         vertexType_[*vi] = 3;
+         vertexIdToNoiseIndex_[*vi] = numberOfVerticesNeedingDeviceNoise_;
+         numberOfVerticesNeedingDeviceNoise_++;
+      } else {
+         if (gm[*vi].type == "PSAP") {
+            vertexType_[*vi] = 4;
+         } else if (gm[*vi].type == "EMS") {
+            vertexType_[*vi] = 5;
+         } else if (gm[*vi].type == "FIRE") {
+            vertexType_[*vi] = 6;
+         } else if (gm[*vi].type == "LAW") {
+            vertexType_[*vi] = 7;
+         }
+         numServers_[*vi] = gm[*vi].servers;
+         numTrunks_[*vi] = gm[*vi].trunks;
+         // We should not have more servers than trunks
+         assert(numServers_[*vi] <= numTrunks_[*vi]);
+         if (maxNumberOfServers_ < numServers_[*vi]) {
+            maxNumberOfServers_ = numServers_[*vi];
+         }
+      }
+   }
+
+   LOG4CPLUS_DEBUG(vertexLogger_, "Number of vertices needing device noise: "
+                                     << numberOfVerticesNeedingDeviceNoise_);
+   LOG4CPLUS_DEBUG(vertexLogger_, "Max number of servers: " << maxNumberOfServers_);
+
+   // Loop over the vertices again to appropriate resize data members such that
+   // each data member used the same size for all of it's vertices. This is to
+   // help with mirroring the implementation on the GPU where we need a consistent
+   // size for all vertices.
+   for (int vertexId = 0; vertexId < size_; vertexId++) {
+      // Initialize the data structures for system metrics
+      beginTimeHistory_[vertexId].resize(maxEventsPerEpoch);
+      answerTimeHistory_[vertexId].resize(maxEventsPerEpoch);
+      endTimeHistory_[vertexId].resize(maxEventsPerEpoch);
+      wasAbandonedHistory_[vertexId].resize(maxEventsPerEpoch);
+      queueLengthHistory_[vertexId].resize(stepsPerEpoch);
+      utilizationHistory_[vertexId].resize(stepsPerEpoch);
+      vertexQueues_[vertexId].resize(stepsPerEpoch);
+      // Initialize the data structures for agent availability
+      servingCall_[vertexId].resize(maxNumberOfServers_);
+      answerTime_[vertexId].resize(maxNumberOfServers_);
+      serverCountdown_[vertexId].assign(maxNumberOfServers_, 0);
+   }
+}
+
+
+// Load member variables from configuration file.
+void All911Vertices::loadParameters()
+{
+   ParameterManager::getInstance().getBGFloatByXpath("//RedialP/text()", redialP_);
+   ParameterManager::getInstance().getBGFloatByXpath("//AvgDrivingSpeed/text()", avgDrivingSpeed_);
+}
+
+
+// Prints out all parameters of the vertices to logging file.
+void All911Vertices::printParameters() const
+{
+}
+
+
+string All911Vertices::toString(int index) const
+{
+   return nullptr;   // Change this
+}
+
+
+// Loads all inputs scheduled to occur in the upcoming epoch.
+void All911Vertices::loadEpochInputsToVertices(uint64_t currentStep, uint64_t endStep)
+{
+   LOG4CPLUS_DEBUG(fileLogger_, "Calling All911Vertices::loadEpochInputsToVertices");
+   Simulator &simulator = Simulator::getInstance();
+   Layout &layout = simulator.getModel().getLayout();
+
+   // Load all the calls into the Caller Regions queue by getting the input events
+   // from the InputManager.
+   for (int idx = 0; idx < simulator.getTotalVertices(); ++idx) {
+      if (layout.vertexTypeMap_[idx] == vertexType::CALR) {
+         // If this is a Caller Region get all calls scheduled for the current epoch,
+         // loading them into the aproppriate index of the vertexQueues_ vector
+         inputManager_.getEvents(idx, currentStep, endStep, vertexQueues_[idx]);
+      }
+   }
+}
+
+void All911Vertices::registerHistoryVariables()
+{
+   Recorder &recorder = Simulator::getInstance().getModel().getRecorder();
+
+   // Registering the following variables to be recorded
+   recorder.registerVariable("numTrunks", numTrunks_, Recorder::UpdatedType::CONSTANT);
+   recorder.registerVariable("numServers", numServers_, Recorder::UpdatedType::CONSTANT);
+   recorder.registerVariable("droppedCalls", droppedCalls_, Recorder::UpdatedType::CONSTANT);
+   recorder.registerVariable("receivedCalls", receivedCalls_, Recorder::UpdatedType::CONSTANT);
+
+   for (int i = 0; i < beginTimeHistory_.size(); i++) {
+      string varName = "BeginTimeHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, beginTimeHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+
+   for (int i = 0; i < answerTimeHistory_.size(); i++) {
+      string varName = "AnswerTimeHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, answerTimeHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+
+   for (int i = 0; i < endTimeHistory_.size(); i++) {
+      string varName = "EndTimeHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, endTimeHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+
+   for (int i = 0; i < wasAbandonedHistory_.size(); i++) {
+      string varName = "WasAbandonedHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, wasAbandonedHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+
+   for (int i = 0; i < queueLengthHistory_.size(); i++) {
+      string varName = "QueueLengthHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, queueLengthHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+
+   for (int i = 0; i < utilizationHistory_.size(); i++) {
+      string varName = "UtilizationHistory_" + std::to_string(i);
+      recorder.registerVariable(varName, utilizationHistory_[i], Recorder::UpdatedType::DYNAMIC);
+   }
+}
+
+// Accessor for the waiting queue of a vertex
+CircularBuffer<Call> &All911Vertices::getQueue(int vIdx)
+{
+   return vertexQueues_[vIdx];
+}
+
+// Accessor for the droppedCalls counter of a vertex
+int &All911Vertices::droppedCalls(int vIdx)
+{
+   return droppedCalls_[vIdx];
+}
+
+// Accessor for the receivedCalls counter of a vertex
+int &All911Vertices::receivedCalls(int vIdx)
+{
+   return receivedCalls_[vIdx];
+}
+
+// Accessor for the number of busy servers in a given vertex
+int All911Vertices::busyServers(int vIdx) const
+{
+   return busyServers_[vIdx];
+}
+
+#if !defined(USE_GPU)
+
+// Take calls from the edges and transfer them to the vertex if it's queue is not full
+void All911Vertices::integrateVertexInputs(AllEdges &edges, EdgeIndexMap &edgeIndexMap)
+{
+   Simulator &simulator = Simulator::getInstance();
+   All911Edges &all911Edges = dynamic_cast<All911Edges &>(edges);
+
+   for (int vertex = 0; vertex < simulator.getTotalVertices(); ++vertex) {
+      int start = edgeIndexMap.incomingEdgeBegin_[vertex];
+      int count = edgeIndexMap.incomingEdgeCount_[vertex];
+
+      if (simulator.getModel().getLayout().vertexTypeMap_[vertex] == vertexType::CALR) {
+         continue;   // TODO911: Caller Regions will have different behaviour
+      }
+
+      // Loop over all the edges and pull the data in
+      for (int edge = start; edge < start + count; ++edge) {
+         int edgeIdx = edgeIndexMap.incomingEdgeIndexMap_[edge];
+
+         if (!all911Edges.inUse_[edgeIdx] || all911Edges.isAvailable_[edgeIdx]) {
+            continue;   // Edge isn't in use and doesn't have a call
+         }
+
+         int dst = all911Edges.destVertexIndex_[edgeIdx];
+         // The destination vertex should be the one pulling the information
+         assert(dst == vertex);
+
+         CircularBuffer<Call> &dstQueue = getQueue(dst);
+         // Compute the size of the destination queue
+         // Allows us to use larger capacity queues but treat them like they are smaller
+         // to simplify the mirroring on the GPU.
+         uint64_t dstQueueSize;
+         uint64_t queueFrontIndex = dstQueue.getFrontIndex();
+         uint64_t queueEndIndex = dstQueue.getEndIndex();
+         if (queueFrontIndex >= queueEndIndex) {
+            dstQueueSize = queueFrontIndex - queueEndIndex;
+         } else {
+            // Internal CircularBuffer buffer size is capacity + 1
+            dstQueueSize = numTrunks_[dst] + 1 + queueFrontIndex - queueEndIndex;
+         }
+
+         // Compute the capacity of the destination queue
+         int dstQueueCapacity = numTrunks_[dst];
+         // dstQueueSize can't be negative but we need to be able to compare it to a possible negative waiting queue
+         // so cast the size to an int for comparison
+         if ((int)dstQueueSize >= (dstQueueCapacity - busyServers(dst))) {
+            // Call is dropped because there is no space in the waiting queue
+            if (!all911Edges.isRedial_[edgeIdx]) {
+               // Only count the dropped call if it's not a redial
+               droppedCalls(dst)++;
+               // Record that we received a call
+               receivedCalls(dst)++;
+               LOG4CPLUS_DEBUG(vertexLogger_, "Call dropped: " << droppedCalls(dst) << ", time: "
+                                                               << all911Edges.call_[edgeIdx].time
+                                                               << ", vertex: " << dst
+                                                               << ", queue size: " << dstQueueSize);
+            }
+         } else {
+            // Transfer call to destination
+            assert(((queueFrontIndex + 1) % numTrunks_[dst] + 1) != queueEndIndex);
+            vector<Call> &queueBuffer = dstQueue.getBuffer();
+            queueBuffer[queueFrontIndex] = all911Edges.call_[edgeIdx];
+            uint64_t newFrontIndex = (queueFrontIndex + 1) % (numTrunks_[dst] + 1);
+            dstQueue.setFrontIndex(newFrontIndex);
+            // Record that we received a call
+            receivedCalls(dst)++;
+            all911Edges.isAvailable_[edgeIdx] = true;
+            all911Edges.isRedial_[edgeIdx] = false;
+         }
+      }
+   }
+}
+
+// Update internal state of the indexed vertex (called by every simulation step).
+void All911Vertices::advanceVertices(AllEdges &edges, const EdgeIndexMap &edgeIndexMap)
+{
+   Simulator &simulator = Simulator::getInstance();
+   Layout &layout = simulator.getModel().getLayout();
+
+   All911Edges &edges911 = dynamic_cast<All911Edges &>(edges);
+
+   // Advance vertices
+   for (int vertex = 0; vertex < simulator.getTotalVertices(); ++vertex) {
+      if (layout.vertexTypeMap_[vertex] == vertexType::CALR) {
+         advanceCALR(vertex, edges911, edgeIndexMap);
+      } else if (layout.vertexTypeMap_[vertex] == vertexType::PSAP) {
+         advancePSAP(vertex, edges911, edgeIndexMap);
+      } else if (layout.vertexTypeMap_[vertex] == vertexType::EMS
+                 || layout.vertexTypeMap_[vertex] == vertexType::FIRE
+                 || layout.vertexTypeMap_[vertex] == vertexType::LAW) {
+         advanceRESP(vertex, edges911, edgeIndexMap);
+      }
+   }
+}
+
+
+// Advance a CALR vertex. Send calls to the appropriate PSAP
+void All911Vertices::advanceCALR(BGSIZE vertexIdx, All911Edges &edges911,
+                                 const EdgeIndexMap &edgeIndexMap)
+{
+   // // There is only one outgoing edge from CALR to a PSAP
+   BGSIZE edgeIdx = edgeIndexMap.outgoingEdgeIndexMap_[edgeIndexMap.outgoingEdgeBegin_[vertexIdx]];
+
+   unsigned char makeAvailable = (1 - edges911.isAvailable_[edgeIdx])
+                                 * (1 - edges911.isRedial_[edgeIdx])
+                                 * (unsigned char)(initRNG.randDblExc() >= redialP_);
+
+   edges911.isAvailable_[edgeIdx] |= makeAvailable;
+   edges911.isRedial_[edgeIdx] |= (1 - edges911.isAvailable_[edgeIdx]) * (1 - makeAvailable);
+
+   // We can use CircularBuffer methods because we don't need the caller region queue
+   // to behave like it only has a capacity of numTrunks_ like we do for other vertices.
+   //
+   // peek at the next call in the queue
+   optional<Call> nextCall = vertexQueues_[vertexIdx].peek();
+   if (edges911.isAvailable_[edgeIdx] && nextCall && nextCall->time <= g_simulationStep) {
+      // Calls that start at the same time are process in the order they appear.
+      // The call starts at the current time step so we need to pop it and process it
+      vertexQueues_[vertexIdx].get();   // pop from the queue
+
+      // Place new call in the edge going to the PSAP
+      assert(edges911.isAvailable_[edgeIdx]);
+      edges911.call_[edgeIdx] = nextCall.value();
+      edges911.isAvailable_[edgeIdx] = false;
+      LOG4CPLUS_DEBUG(vertexLogger_, "Calling PSAP at time: " << nextCall->time);
+   }
+}
+
+
+// Advance a PSAP vertex. Controls the redirection and handling of calls.
+void All911Vertices::advancePSAP(BGSIZE vertexIdx, All911Edges &edges911,
+                                 const EdgeIndexMap &edgeIndexMap)
+{
+   int numberOfServers = numServers_[vertexIdx];
+   // Loop over all servers and free the ones finishing serving calls
+   int numberOfAvailableServers = 0;
+   vector<unsigned char>
+      availableServers;   // Use vector but treat like array to better mirror on GPU
+   availableServers.reserve(numberOfServers);
+   // Initialize to no servers having been assigned a call yet
+   for (BGSIZE serverIndex = 0; serverIndex < numberOfServers; serverIndex++) {
+      availableServers[serverIndex] = false;
+   }
+   for (size_t server = 0; server < numberOfServers; ++server) {
+      int countdown = serverCountdown_[vertexIdx][server];
+      // Check if countdown was already 0
+      int countdownWasZero = countdown == 0;
+
+      // Decrement if it was not already 0
+      countdown -= (1 - countdownWasZero);
+      serverCountdown_[vertexIdx][server] = countdown;
+
+      // Set the available server if it was already available or became available
+      availableServers[server] = (unsigned char)(countdown == 0);
+      numberOfAvailableServers += (countdown == 0);
+
+      // If it became zero, the unit responds to the new incident
+      if ((!countdownWasZero) & (countdown == 0)) {
+         // Server becomes free to take calls
+         // TODO: What about wrap-up time?
+         Call &endingCall = servingCall_[vertexIdx][server];
+
+         //Store call metrics
+         wasAbandonedHistory_[vertexIdx].insertEvent(false);
+         beginTimeHistory_[vertexIdx].insertEvent(endingCall.time);
+         answerTimeHistory_[vertexIdx].insertEvent(answerTime_[vertexIdx][server]);
+         endTimeHistory_[vertexIdx].insertEvent(g_simulationStep);
+         LOG4CPLUS_DEBUG(vertexLogger_,
+                         "Finishing call, begin time: "
+                            << endingCall.time << ", end time: " << g_simulationStep
+                            << ", waited: " << answerTime_[vertexIdx][server] - endingCall.time);
+
+         // Dispatch the Responder closest to the emergency location.
+         BGSIZE respEdge = getEdgeToClosestResponder(endingCall, vertexIdx);
+         BGSIZE responder = edges911.destVertexIndex_[respEdge];
+         LOG4CPLUS_DEBUG(vertexLogger_, "Dispatching Responder: " << responder);
+
+         // Place the call in the edge going to the responder
+         // Call becomes a dispatch order at this time
+         endingCall.time = g_simulationStep;
+         edges911.call_[respEdge] = endingCall;
+         edges911.isAvailable_[respEdge] = false;
+      }
+   }
+
+   // Need the initial number of servers for utilization metric as well as a number of servers that can change
+   // during the while loop iterations
+   int currentlyAvailableServers = numberOfAvailableServers;
+   // Assign calls to servers until either no servers are available or
+   // there are no more calls in the waiting queue
+   while (currentlyAvailableServers > 0 && !vertexQueues_[vertexIdx].isEmpty()) {
+      // TODO: calls with duration of zero are being added but because countdown will be zero
+      //       they don't show up in the logs
+      //
+      // Internal CircularBuffer buffer size is capacity + 1
+      vector<Call> queueBuffer = vertexQueues_[vertexIdx].getBuffer();
+      uint64_t queueEnd = vertexQueues_[vertexIdx].getEndIndex();
+      Call call = queueBuffer[queueEnd];
+      uint64_t newEndIndex = (queueEnd + 1) % (numTrunks_[vertexIdx] + 1);
+      vertexQueues_[vertexIdx].setEndIndex(newEndIndex);
+
+      if (call.patience < (g_simulationStep - call.time)) {
+         // If the patience time is less than the waiting time, the call is abandoned
+         wasAbandonedHistory_[vertexIdx].insertEvent(true);
+         beginTimeHistory_[vertexIdx].insertEvent(call.time);
+         // Answer time and end time get zero as sentinel for non-valid values
+         answerTimeHistory_[vertexIdx].insertEvent(0);
+         endTimeHistory_[vertexIdx].insertEvent(0);
+         LOG4CPLUS_DEBUG(vertexLogger_, "Call was abandoned, Patience: "
+                                           << call.patience
+                                           << " Ring Time: " << g_simulationStep - call.time);
+      } else {
+         // The available server starts serving the call
+         int availServer;
+         for (BGSIZE serverIndex = 0; serverIndex < numberOfServers; serverIndex++) {
+            if (availableServers[serverIndex] == true) {
+               // If server is available, have that server serve the call
+               availServer = serverIndex;
+               availableServers[serverIndex] = false;
+               currentlyAvailableServers--;
+               break;
+            }
+         }
+         servingCall_[vertexIdx][availServer] = call;
+         answerTime_[vertexIdx][availServer] = g_simulationStep;
+         serverCountdown_[vertexIdx][availServer] = call.duration;
+         LOG4CPLUS_DEBUG(vertexLogger_, "Serving Call starting at time: "
+                                           << call.time << ", sim-step: " << g_simulationStep);
+      }
+   }
+
+   // Update number of busy servers. This is used to check if there is space in the queue
+   busyServers_[vertexIdx] = numberOfServers - numberOfAvailableServers;
+
+   // Update queueLength and utilization histories
+   uint64_t queueSize;
+   uint64_t queueFront = vertexQueues_[vertexIdx].getFrontIndex();
+   uint64_t queueEnd = vertexQueues_[vertexIdx].getEndIndex();
+   if (queueFront >= queueEnd) {
+      queueSize = queueFront - queueEnd;
+   } else {
+      // Internal CircularBuffer buffer size is capacity + 1
+      queueSize = numTrunks_[vertexIdx] + 1 + queueFront - queueEnd;
+   }
+   queueLengthHistory_[vertexIdx].insertEvent(queueSize);
+   utilizationHistory_[vertexIdx].insertEvent(static_cast<float>(busyServers_[vertexIdx])
+                                              / numberOfServers);
+}
+
+
+// Advance a RESP vertex. Receives call from PSAP and responds to the emergency events
+void All911Vertices::advanceRESP(BGSIZE vertexIdx, All911Edges &edges911,
+                                 const EdgeIndexMap &edgeIndexMap)
+{
+   Layout &layout = Simulator::getInstance().getModel().getLayout();
+   Layout911 &layout911 = dynamic_cast<Layout911 &>(layout);
+
+   // Free the units finishing up with emergency responses
+   int numberOfAvailableUnits = 0;
+   vector<unsigned char>
+      availableUnits;   // Use vector but treat like array to better mirror on GPU
+   availableUnits.reserve(numServers_[vertexIdx]);
+   for (BGSIZE unitIndex = 0; unitIndex < numServers_[vertexIdx]; unitIndex++) {
+      availableUnits[unitIndex] = false;
+   }
+   for (size_t unit = 0; unit < numServers_[vertexIdx]; ++unit) {
+      int countdown = serverCountdown_[vertexIdx][unit];
+      // Check if countdown was already 0
+      int countdownWasZero = countdown == 0;
+
+      // Decrement if it was not already 0
+      countdown -= (1 - countdownWasZero);
+      serverCountdown_[vertexIdx][unit] = countdown;
+
+      // Set the available unit if it was already available or became available
+      availableUnits[unit] = (unsigned char)(countdown == 0);
+      numberOfAvailableUnits += (countdown == 0);
+
+      // If it became zero, the unit responds to the new incident
+      if ((!countdownWasZero) & (countdown == 0)) {
+         // Unit becomes available to responde to new incidents
+         Call &endingIncident = servingCall_[vertexIdx][unit];
+
+         //Store incident response metrics
+         wasAbandonedHistory_[vertexIdx].insertEvent(false);
+         beginTimeHistory_[vertexIdx].insertEvent(endingIncident.time);
+         answerTimeHistory_[vertexIdx].insertEvent(answerTime_[vertexIdx][unit]);
+         endTimeHistory_[vertexIdx].insertEvent(g_simulationStep);
+         LOG4CPLUS_DEBUG(vertexLogger_,
+                         "Finishing response, begin time: "
+                            << endingIncident.time << ", end time: " << g_simulationStep
+                            << ", waited: " << answerTime_[vertexIdx][unit] - endingIncident.time);
+      }
+   }
+
+
+   // Assign reponse dispatches until no units are available or there are no more
+   // incidents in the waiting queue
+   for (size_t unit = 0; unit < numberOfAvailableUnits && !vertexQueues_[vertexIdx].isEmpty();
+        ++unit) {
+      // Internal CircularBuffer buffer size is capacity + 1
+      vector<Call> queueBuffer = vertexQueues_[vertexIdx].getBuffer();
+      uint64_t queueEnd = vertexQueues_[vertexIdx].getEndIndex();
+      Call incident = queueBuffer[queueEnd];
+      uint64_t newEndIndex = (queueEnd + 1) % (numTrunks_[vertexIdx] + 1);
+      vertexQueues_[vertexIdx].setEndIndex(newEndIndex);
+
+      // The available unit starts serving the call
+      int availUnit = -1;
+      for (BGSIZE unitIndex = 0; unitIndex < numServers_[vertexIdx]; unitIndex++) {
+         // Add 0 if unit is not available or 1 + unitIndex if it's available and a unit has not already been found
+         availUnit += (availableUnits[unitIndex] == true && availUnit == -1) * (unitIndex + 1);
+         // Flip value only if the unit is available and a unit has not been found
+         availableUnits[unitIndex]
+            = (unsigned char)(availableUnits[unitIndex]
+                              == true - (availableUnits[unitIndex] == true && availUnit == -1));
+      }
+      servingCall_[vertexIdx][availUnit] = incident;
+      answerTime_[vertexIdx][availUnit] = g_simulationStep;
+
+      // We need to calculate the distance in miles but the x and y coordinates
+      // represent, respectively, degrees of longitude and latitude.
+      // One degree of latitude is aproximately 69 miles regardles of the location. However,
+      // a degree of longitude varies, being 69.172 miles at the equator and gradually shrinking
+      // to zero at the poles.
+      // One degree of longitude can be converted to miles using the following formula:
+      //    1 degree of longitude = cos(latitude) * 69.172
+      double lngDegreeLength = cos(layout911.yloc_[vertexIdx] * (pi / 180)) * 69.172;
+      double latDegreeLength = 69.0;
+      double deltaLng = incident.x - layout911.xloc_[vertexIdx];
+      double deltaLat = incident.y - layout911.yloc_[vertexIdx];
+      double dist2incident
+         = sqrt(pow(deltaLng * lngDegreeLength, 2) + pow(deltaLat * latDegreeLength, 2));
+
+      // Calculate the driving time to the incident in seconds
+      double driveTime = (dist2incident / avgDrivingSpeed_) * 3600;
+      serverCountdown_[vertexIdx][availUnit] = driveTime + incident.onSiteTime;
+
+      serverCountdown_[vertexIdx][availUnit] = incident.duration;
+      LOG4CPLUS_DEBUG(vertexLogger_, "Response, driving time: " << driveTime << ", On-site time: "
+                                                                << incident.onSiteTime);
+   }
+
+   // Update number of busy servers. This is used to check if there is space in the queue
+   busyServers_[vertexIdx] = numServers_[vertexIdx] - numberOfAvailableUnits;
+
+   // Update queueLength and utilization histories
+   uint64_t queueSize;
+   uint64_t queueFront = vertexQueues_[vertexIdx].getFrontIndex();
+   uint64_t queueEnd = vertexQueues_[vertexIdx].getEndIndex();
+   if (queueFront >= queueEnd) {
+      queueSize = queueFront - queueEnd;
+   } else {
+      // Internal CircularBuffer buffer size is capacity + 1
+      queueSize = numTrunks_[vertexIdx] + 1 + queueFront - queueEnd;
+   }
+   queueLengthHistory_[vertexIdx].insertEvent(queueSize);
+   utilizationHistory_[vertexIdx].insertEvent(static_cast<float>(busyServers_[vertexIdx])
+                                              / numServers_[vertexIdx]);
+}
+
+
+/// Finds the outgoing edge from the given vertex to the Responder closest to
+/// the emergency call location
+BGSIZE All911Vertices::getEdgeToClosestResponder(const Call &call, BGSIZE vertexIdx)
+{
+   Connections &connections = Simulator::getInstance().getModel().getConnections();
+   All911Edges &edges911 = dynamic_cast<All911Edges &>(connections.getEdges());
+   EdgeIndexMap &edgeIndexMap = connections.getEdgeIndexMap();
+
+   vertexType requiredType;
+   if (call.type == "Law")
+      requiredType = vertexType::LAW;
+   else if (call.type == "EMS")
+      requiredType = vertexType::EMS;
+   else if (call.type == "Fire")
+      requiredType = vertexType::FIRE;
+
+   // loop over the outgoing edges looking for the responder with the shortest
+   // Euclidean distance to the call's location.
+   BGSIZE startOutEdg = edgeIndexMap.outgoingEdgeBegin_[vertexIdx];
+   BGSIZE outEdgCount = edgeIndexMap.outgoingEdgeCount_[vertexIdx];
+   Layout911 &layout911
+      = dynamic_cast<Layout911 &>(Simulator::getInstance().getModel().getLayout());
+
+   BGSIZE resp, respEdge;
+   double minDistance = numeric_limits<double>::max();
+   for (BGSIZE eIdxMap = startOutEdg; eIdxMap < startOutEdg + outEdgCount; ++eIdxMap) {
+      BGSIZE outEdg = edgeIndexMap.outgoingEdgeIndexMap_[eIdxMap];
+      assert(edges911.inUse_[outEdg]);   // Edge must be in use
+
+      BGSIZE dstVertex = edges911.destVertexIndex_[outEdg];
+      if (layout911.vertexTypeMap_[dstVertex] == requiredType) {
+         double distance = layout911.getDistance(dstVertex, call.x, call.y);
+
+         if (distance < minDistance) {
+            minDistance = distance;
+            resp = dstVertex;
+            respEdge = outEdg;
+         }
+      }
+   }
+
+   // We must have found the closest responder of the right type
+   assert(minDistance < numeric_limits<double>::max());
+   assert(layout911.vertexTypeMap_[resp] == requiredType);
+   return respEdge;
+}
+#endif

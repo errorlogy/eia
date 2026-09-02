@@ -1,0 +1,2366 @@
+"""
+MultiNeuraxon 2.0 - Neuraxon v2.0 Multi-Sphere By David Vivancos & Jose Sanchez (2026) for Qubic Science
+Hybridized with Aigarth Intelligent Tissue
+
+Based on: https://www.researchgate.net/publication/400868863_Neuraxon_V20_A_New_Neural_Growth_Computation_Blueprint
+Neuraxon v2.0 features:
+  (i)    Receptor subtypes with nonlinear activation curves (tonic/phasic)
+  (ii)   Multi-band oscillator bank with cross-frequency coupling (PAC)
+  (iii)  Nonlinear dendritic branch integration
+  (iv)   Temporal STDP traces with differential dopamine gating
+  (v)    Associative neighbour plasticity
+  (vi)   Watts-Strogatz small-world topology
+  (vii)  Full neuromodulator system with activity-driven release & crosstalk
+  (viii) Energy tracking
+  (ix)   Aigarth hybridisation with evolutionary mutation and selection
+  (x)    ChronoPlastic synaptic time warping (learned omega_t)
+  (xi)   DSN-style dynamic decay (alpha_t via causal conv)
+  (xii)  CTSN complemented trinary state (s_tilde = s + h)
+  (xiii) AGMP astrocyte-gated plasticity (eligibility x modulator x astrocyte)
+  (xiv)  Homeostatic plasticity (synaptic scaling + intrinsic plasticity)
+  (xv)   Multi-Scale Temporal Homeostasis (MSTH) - 4 regulatory loops
+  (xvi)  Pattern storage & recall application layer
+
+Algorithm 1 pipeline per step: Time Warping -> Dynamic Decay -> CTSN -> AGMP
+"""
+
+import json
+import random
+import math
+import copy
+from typing import List, Dict, Tuple, Optional, Any
+from dataclasses import dataclass, field, asdict
+from enum import Enum
+import random
+
+# =============================================================================
+# NETWORK PARAMETERS
+# =============================================================================
+
+@dataclass
+class NetworkParameters:
+    """Default network parameters with biologically plausible ranges."""
+    network_name: str = "Neuraxon v2.0 Net"
+
+    # --- Network Architecture ---
+    num_input_neurons: int = 5
+    num_hidden_neurons: int = 20
+    num_output_neurons: int = 5
+    num_dendritic_branches: int = 3
+    dendritic_spike_threshold: float = 0.4
+    dendritic_supralinear_gamma: float = 1.3
+
+    # Watts-Strogatz small-world parameters
+    ws_k: int = 6
+    ws_beta: float = 0.3
+
+    # --- Neuron Parameters ---
+    membrane_time_constant: float = 20.0
+    firing_threshold_excitatory: float = 0.4
+    firing_threshold_inhibitory: float = -0.4
+    adaptation_tau: float = 100.0
+    autoreceptor_tau: float = 200.0
+    spontaneous_firing_rate: float = 0.02
+    neuron_health_decay: float = 0.001
+
+    # Homeostatic plasticity (Eq 1)
+    target_firing_rate: float = 0.2
+    homeostatic_rate: float = 0.0005
+    firing_rate_alpha: float = 0.01
+    threshold_mod_k: float = 0.3
+
+    # --- MSTH: Multi-Scale Temporal Homeostasis (Section 5) ---
+    msth_ultrafast_tau: float = 5.0
+    msth_ultrafast_ceiling: float = 2.0
+    msth_fast_tau: float = 2000.0
+    msth_fast_gain: float = 0.1
+    msth_medium_tau: float = 300000.0
+    msth_medium_gain: float = 0.001
+    msth_slow_tau: float = 3600000.0
+    msth_slow_gain: float = 0.0001
+
+    # --- DSN Dynamic Decay ---
+    dsn_kernel_size: int = 4
+    dsn_enabled: bool = True
+    dsn_bias: float = 0.0
+    # Optional: provide explicit causal-conv kernel weights (length = dsn_kernel_size).
+    # If None/empty, a default triangular kernel is created in __post_init__.
+    dsn_kernel_weights: Optional[List[float]] = None
+    # --- DSN Learning (optional) ---
+    dsn_learn_enabled: bool = False
+    dsn_learn_lr: float = 0.01
+    # Target alpha is computed as sigmoid(dsn_target_bias - dsn_target_sensitivity * |ΔX|)
+    dsn_target_sensitivity: float = 4.0
+    dsn_target_bias: float = 2.0
+    # Safety clip for learned kernels (applied before re-normalisation)
+    dsn_kernel_clip: float = 5.0
+
+    # --- CTSN Complement ---
+    ctsn_rho: float = 0.9
+    ctsn_enabled: bool = True
+    # Learnable filter proxy: phi_h(X(t)) ~ tanh(gain * X(t) + bias)
+    ctsn_phi_gain: float = 0.5
+    ctsn_phi_bias: float = 0.0
+    # --- CTSN Learning (optional) ---
+    ctsn_learn_enabled: bool = False
+    ctsn_learn_lr: float = 0.005
+    ctsn_phi_gain_clip: float = 5.0
+    ctsn_phi_bias_clip: float = 5.0
+
+    # --- Synapse Parameters ---
+    tau_fast: float = 5.0
+    tau_slow: float = 50.0
+    tau_meta: float = 1000.0
+    tau_stdp: float = 20.0
+    w_fast_init_min: float = -0.8
+    w_fast_init_max: float = 0.8
+    w_slow_init_min: float = -0.4
+    w_slow_init_max: float = 0.4
+    w_meta_init_min: float = -0.3
+    w_meta_init_max: float = 0.3
+
+    # --- ChronoPlasticity (Eqs 5-7) ---
+    chrono_alpha_f: float = 0.95
+    chrono_alpha_s: float = 0.99
+    chrono_lambda_f: float = 0.15
+    chrono_lambda_s: float = 0.08
+    chrono_enabled: bool = True
+
+    # --- Chrono Stability (recommended) ---
+    # Prevent omega_t saturating at 0/1 and keep traces bounded.
+    chrono_trace_clip: float = 10.0
+    chrono_gate_norm: float = 10.0
+    chrono_raw_clip: float = 8.0
+    chrono_omega_min: float = 0.05
+    chrono_omega_max: float = 0.95
+    chrono_omega_smoothing: float = 0.2
+
+    # --- AGMP (Eqs 8-10) ---
+    agmp_lambda_e: float = 0.95
+    agmp_lambda_a: float = 0.999
+    agmp_eta: float = 0.005
+    agmp_enabled: bool = True
+
+    # --- Plasticity ---
+    learning_rate: float = 0.01
+    stdp_window: float = 20.0
+    associative_alpha: float = 0.005
+    synapse_integrity_threshold: float = 0.1
+    synapse_formation_prob: float = 0.05
+    synapse_death_prob: float = 0.01
+    neuron_death_threshold: float = 0.1
+
+    # --- Neuromodulator Baselines ---
+    dopamine_baseline: float = 0.15
+    serotonin_baseline: float = 0.15
+    acetylcholine_baseline: float = 0.15
+    norepinephrine_baseline: float = 0.15
+    tau_tonic: float = 5000.0
+    tau_phasic: float = 200.0
+    neuromod_release_rate: float = 0.02
+    # --- Receptor activation shaping (avoid saturation) ---
+    # Concentration is clipped to [0, receptor_concentration_cap] before receptor nonlinearities.
+    receptor_concentration_cap: float = 1.0
+    # Logistic slope for tonic vs phasic receptors (lower values = less saturation).
+    receptor_slope_tonic: float = 4.0
+    receptor_slope_phasic: float = 3.0
+
+
+    # --- Oscillator Bank ---
+    oscillator_coupling: float = 0.1
+
+    # --- Aigarth ---
+    aigarth_pop_size: int = 10
+    aigarth_itu_size: int = 12
+    aigarth_tick_cap: int = 20
+    aigarth_mutation_wf_prob: float = 0.3
+    aigarth_mutation_ws_prob: float = 0.1
+    aigarth_mutation_wm_prob: float = 0.05
+
+    # --- Simulation ---
+    dt: float = 1.0
+    simulation_steps: int = 100
+
+    def __post_init__(self):
+        # Ensure DSN kernel weights exist and match dsn_kernel_size.
+        k = max(int(self.dsn_kernel_size), 1)
+        if not self.dsn_kernel_weights:
+            # Default triangular / recency-weighted causal kernel.
+            w = [(i + 1.0) for i in range(k)]
+        else:
+            w = list(self.dsn_kernel_weights)[:k]
+            if len(w) < k:
+                w = w + [w[-1]] * (k - len(w))
+        s = float(sum(abs(x) for x in w)) if w else 1.0
+        if s <= 0:
+            s = 1.0
+        # Normalise (keep sign if user provided signed weights).
+        self.dsn_kernel_weights = [float(x) / s for x in w]
+
+
+# =============================================================================
+# ENUMS
+# =============================================================================
+
+class NeuronType(Enum):
+    INPUT = "input"
+    HIDDEN = "hidden"
+    OUTPUT = "output"
+
+class SynapseType(Enum):
+    IONOTROPIC_FAST = "ionotropic_fast"
+    IONOTROPIC_SLOW = "ionotropic_slow"
+    METABOTROPIC = "metabotropic"
+    SILENT = "silent"
+
+class TrinaryState(Enum):
+    INHIBITORY = -1
+    NEUTRAL = 0
+    EXCITATORY = 1
+
+
+# =============================================================================
+# RECEPTOR SUBTYPE  (Algorithm 2)
+# =============================================================================
+
+class ReceptorSubtype:
+    """Nonlinear receptor activation with Hill-like sigmoid."""
+
+    def __init__(self, name: str, parent_modulator: str,
+                 threshold: float, gain: float, is_tonic: bool, slope: float = 0.0):
+        self.name = name
+        self.parent_modulator = parent_modulator
+        self.threshold = threshold
+        self.gain = gain
+        self.is_tonic = is_tonic
+        self.slope = float(slope)
+        self.activation = 0.0
+
+    def compute_activation(self, concentration: float) -> float:
+        k = self.slope if self.slope > 0.0 else (20.0 if self.is_tonic else 10.0)
+        exponent = -k * (concentration - self.threshold)
+        exponent = max(-50.0, min(50.0, exponent))
+        self.activation = self.gain / (1.0 + math.exp(exponent))
+        return self.activation
+
+    def to_dict(self) -> dict:
+        return {
+            'name': self.name, 'parent_modulator': self.parent_modulator,
+            'threshold': self.threshold, 'gain': self.gain, 'slope': self.slope,
+            'is_tonic': self.is_tonic, 'activation': self.activation,
+        }
+
+
+# =============================================================================
+# OSCILLATOR BANK  (Algorithm 2)
+# =============================================================================
+
+class OscillatorBank:
+    """Multi-band oscillator (infraslow-gamma) with PAC."""
+
+    DEFAULT_BANDS = {
+        'infraslow': 0.05, 'slow': 0.5, 'theta': 6.0,
+        'alpha': 10.0, 'gamma': 40.0,
+    }
+
+    def __init__(self, coupling: float = 0.15, bands: Optional[Dict[str, float]] = None):
+        self.coupling = coupling
+        self.bands: Dict[str, Dict[str, float]] = {}
+        for name, freq in (bands or self.DEFAULT_BANDS).items():
+            self.bands[name] = {
+                'freq': freq,
+                'phase': random.uniform(0.0, 2.0 * math.pi),
+                'amplitude': 1.0,
+            }
+
+    def update(self, dt: float):
+        for b in self.bands.values():
+            b['phase'] = (b['phase'] + 2.0 * math.pi * b['freq'] * dt / 1000.0) % (2.0 * math.pi)
+
+    def get_drive(self, neuron_id: int, total_neurons: int) -> float:
+        phi = 2.0 * math.pi * neuron_id / max(total_neurons, 1)
+        theta_phase = self.bands['theta']['phase']
+        gamma_phase = self.bands['gamma']['phase']
+        slow_phase = self.bands['slow']['phase']
+        infra_phase = self.bands['infraslow']['phase']
+        gate_theta = max(0.0, math.cos(theta_phase + phi))
+        gamma_sig = self.bands['gamma']['amplitude'] * gate_theta * math.sin(gamma_phase + 2.0 * phi)
+        slow_sig = self.bands['slow']['amplitude'] * math.sin(slow_phase + 0.3 * phi)
+        infra_sig = self.bands['infraslow']['amplitude'] * math.sin(infra_phase)
+        return self.coupling * (gamma_sig + 0.5 * slow_sig + 0.3 * infra_sig)
+
+    def to_dict(self) -> dict:
+        return {'coupling': self.coupling, 'bands': self.bands}
+
+
+# =============================================================================
+# NEUROMODULATOR SYSTEM  (Algorithm 5)
+# =============================================================================
+
+class NeuromodulatorSystem:
+    """4 neuromodulators with tonic/phasic, 9 receptor subtypes, crosstalk."""
+
+    def __init__(self, params: NetworkParameters):
+        self.params = params
+        self.levels: Dict[str, Dict[str, float]] = {
+            'DA':  {'tonic': params.dopamine_baseline,       'phasic': 0.0},
+            '5HT': {'tonic': params.serotonin_baseline,      'phasic': 0.0},
+            'ACh': {'tonic': params.acetylcholine_baseline,   'phasic': 0.0},
+            'NA':  {'tonic': params.norepinephrine_baseline,  'phasic': 0.0},
+        }
+        st = float(params.receptor_slope_tonic)
+        sp = float(params.receptor_slope_phasic)
+        self.receptors: Dict[str, ReceptorSubtype] = {
+            'D1':     ReceptorSubtype('D1',     'DA',  0.35, 1.0, False, sp),
+            'D2':     ReceptorSubtype('D2',     'DA',  0.25, 1.0, True,  st),
+            '5HT1A':  ReceptorSubtype('5HT1A',  '5HT', 0.05, 1.0, True,  st),
+            '5HT2A':  ReceptorSubtype('5HT2A',  '5HT', 0.30, 1.0, False, sp),
+            '5HT4':   ReceptorSubtype('5HT4',   '5HT', 0.20, 1.0, False, sp),
+            'M1':     ReceptorSubtype('M1',     'ACh', 0.30, 1.0, False, sp),
+            'M2':     ReceptorSubtype('M2',     'ACh', 0.10, 1.0, True,  st),
+            'beta1':  ReceptorSubtype('beta1',  'NA',  0.20, 1.0, False, sp),
+            'alpha2': ReceptorSubtype('alpha2', 'NA',  0.08, 1.0, True,  st),
+        }
+
+    def get_flat_levels(self) -> Dict[str, float]:
+        return {
+            'dopamine':       self.levels['DA']['tonic']  + self.levels['DA']['phasic'],
+            'serotonin':      self.levels['5HT']['tonic'] + self.levels['5HT']['phasic'],
+            'acetylcholine':  self.levels['ACh']['tonic'] + self.levels['ACh']['phasic'],
+            'norepinephrine': self.levels['NA']['tonic']  + self.levels['NA']['phasic'],
+        }
+
+    def set_level(self, name: str, value: float):
+        mapping = {'dopamine': 'DA', 'serotonin': '5HT',
+                   'acetylcholine': 'ACh', 'norepinephrine': 'NA'}
+        key = mapping.get(name, name)
+        if key in self.levels:
+            self.levels[key]['tonic'] = max(0.0, min(1.0, value))
+
+    def update(self, network_activity: Dict[str, float], dt: float):
+        p = self.params
+        mean_act = network_activity.get('mean_activity', 0.0)
+        exc_frac = network_activity.get('excitatory_fraction', 0.0)
+        change_rate = network_activity.get('state_change_rate', 0.0)
+
+        for key, bl_attr in [('DA', 'dopamine_baseline'), ('5HT', 'serotonin_baseline'),
+                             ('ACh', 'acetylcholine_baseline'), ('NA', 'norepinephrine_baseline')]:
+            baseline = getattr(p, bl_attr)
+            self.levels[key]['tonic'] += dt / p.tau_tonic * (baseline - self.levels[key]['tonic'])
+            self.levels[key]['phasic'] += dt / p.tau_phasic * (0.0 - self.levels[key]['phasic'])
+
+        rr = p.neuromod_release_rate
+        self.levels['DA']['phasic']  += rr * change_rate * dt
+        self.levels['5HT']['tonic'] += rr * mean_act * dt
+        self.levels['ACh']['phasic'] += rr * exc_frac * dt
+        self.levels['NA']['phasic']  += rr * change_rate * dt
+
+        # Crosstalk
+        self.levels['ACh']['phasic'] *= max(0.0, 1.0 - 0.1 * self.levels['DA']['phasic'])
+        self.levels['5HT']['tonic'] += 0.02 * (self.levels['NA']['tonic'] + self.levels['NA']['phasic']) * dt
+
+        for key in self.levels:
+            for comp in ('tonic', 'phasic'):
+                self.levels[key][comp] = max(0.0, min(2.0, self.levels[key][comp]))
+
+    def compute_receptor_activations(self) -> Dict[str, float]:
+        activations: Dict[str, float] = {}
+        for rname, receptor in self.receptors.items():
+            parent = receptor.parent_modulator
+            conc = self.levels[parent]['tonic'] if receptor.is_tonic else (
+                self.levels[parent]['tonic'] + self.levels[parent]['phasic'])
+            cap = float(getattr(self.params, 'receptor_concentration_cap', 1.0))
+            if cap > 0.0:
+                conc = max(0.0, min(cap, float(conc)))
+            else:
+                conc = max(0.0, float(conc))
+            activations[rname] = receptor.compute_activation(conc)
+        return activations
+
+    def to_dict(self) -> dict:
+        return {'levels': self.levels, 'receptors': {k: v.to_dict() for k, v in self.receptors.items()}}
+
+
+# =============================================================================
+# SYNAPSE  (Algorithm 3 + ChronoPlasticity from Algorithm 1 steps 1-4)
+# =============================================================================
+
+class Synapse:
+    """Triple-weight synapse with ChronoPlasticity, STDP+DA gating, AGMP."""
+
+    def __init__(self, pre_id: int, post_id: int, branch_id: int,
+                 params: NetworkParameters):
+        self.pre_id = pre_id
+        self.post_id = post_id
+        self.branch_id = branch_id
+        self.params = params
+
+        # Dendritic position index (assigned by network; used for neighbour distances d_ij)
+        self.branch_index: int = 0
+
+        self.w_fast = random.uniform(params.w_fast_init_min, params.w_fast_init_max)
+        self.w_slow = random.uniform(params.w_slow_init_min, params.w_slow_init_max)
+        self.w_meta = random.uniform(params.w_meta_init_min, params.w_meta_init_max)
+
+        self.is_silent = random.random() < 0.1
+        self.is_modulatory = random.random() < 0.2
+        self.integrity = 1.0
+
+        self.pre_trace = 0.0
+        self.post_trace = 0.0
+        self.recent_delta_w = 0.0
+
+        # ChronoPlasticity (Eqs 5-7)
+        self.chrono_fast_trace = 0.0
+        self.chrono_slow_trace = 0.0
+        self.chrono_omega = 0.5
+
+        # AGMP eligibility (Eq 8)
+        self.eligibility = 0.0
+
+        self.synapse_type = self._determine_type()
+
+    def _determine_type(self) -> SynapseType:
+        if self.is_silent: return SynapseType.SILENT
+        elif self.is_modulatory: return SynapseType.METABOTROPIC
+        elif abs(self.w_fast) > abs(self.w_slow): return SynapseType.IONOTROPIC_FAST
+        else: return SynapseType.IONOTROPIC_SLOW
+
+    # ===== ALGORITHM 1 STEP 1: Synaptic Time Warping (Eqs 5-7) =====
+    def update_chrono_traces(self, pre_state: int):
+        """Learned warp factor omega_t controls slow trace decay.
+
+        Note: In short runs with constant s_pre, Eq 5 can produce large steady-state traces
+        (e.g., ~±20 for alpha_f=0.95). To prevent omega_t saturating at 0/1 and to keep
+        Chrono traces numerically well-behaved, we apply:
+          - bounded gating via tanh(z / gate_norm) in the omega_t controller
+          - raw pre-sigmoid clipping
+          - omega clamping and optional EMA smoothing
+          - trace clipping
+        """
+        if not self.params.chrono_enabled:
+            return
+        p = self.params
+        # Preserve trinary sign (paper uses s_pre ∈ {-1,0,1})
+        s_pre = float(max(-1, min(1, int(pre_state))))
+
+        # ---- Eq 7 (stabilized): omega_t = sigmoid(g([s_pre, z_{t-1}])) ----
+        # Use a bounded view of the slow trace so large |z| does not pin omega_t.
+        gate_norm = float(getattr(p, 'chrono_gate_norm', 10.0))
+        if gate_norm <= 0:
+            z_gate = self.chrono_slow_trace
+        else:
+            z_gate = math.tanh(self.chrono_slow_trace / gate_norm)
+
+        raw = 2.0 * s_pre + 1.5 * z_gate - 1.0
+
+        raw_clip = float(getattr(p, 'chrono_raw_clip', 8.0))
+        if raw_clip > 0:
+            raw = max(-raw_clip, min(raw_clip, raw))
+
+        new_omega = 1.0 / (1.0 + math.exp(-raw))
+
+        # Clamp away from 0/1 to avoid alpha_s**omega -> 1.0 (no decay) at omega=0.
+        o_min = float(getattr(p, 'chrono_omega_min', 0.05))
+        o_max = float(getattr(p, 'chrono_omega_max', 0.95))
+        if o_max < o_min:
+            o_min, o_max = o_max, o_min
+        new_omega = max(o_min, min(o_max, new_omega))
+
+        # Optional smoothing (EMA) to avoid abrupt flips.
+        beta = float(getattr(p, 'chrono_omega_smoothing', 0.2))
+        beta = max(0.0, min(1.0, beta))
+        self.chrono_omega = (1.0 - beta) * self.chrono_omega + beta * new_omega
+
+        # ---- Eq 5: f_t = alpha_f * f_{t-1} + s_pre ----
+        self.chrono_fast_trace = p.chrono_alpha_f * self.chrono_fast_trace + s_pre
+
+        # ---- Eq 6: z_t = alpha_s**omega_t * z_{t-1} + s_pre ----
+        alpha_s_warped = p.chrono_alpha_s ** self.chrono_omega
+        self.chrono_slow_trace = alpha_s_warped * self.chrono_slow_trace + s_pre
+
+        # Clip traces to keep Chrono contributions bounded and avoid pathological omega_t.
+        tclip = float(getattr(p, 'chrono_trace_clip', 10.0))
+        if tclip > 0:
+            self.chrono_fast_trace = max(-tclip, min(tclip, self.chrono_fast_trace))
+            self.chrono_slow_trace = max(-tclip, min(tclip, self.chrono_slow_trace))
+
+    def compute_input(self, pre_state: int) -> float:
+        """Algorithm 1 line 4: warped multi-trace synaptic current."""
+        if self.is_silent:
+            return 0.0
+        w_total = self.w_fast + self.w_slow
+        base = w_total * pre_state
+        if not self.params.chrono_enabled:
+            return base
+        p = self.params
+        chrono_extra = (p.chrono_lambda_f * self.w_fast * self.chrono_fast_trace +
+                        p.chrono_lambda_s * self.w_slow * self.chrono_slow_trace)
+        return base + chrono_extra
+
+    # ===== STDP + DA gating + associative (Algorithm 3) =====
+    def update(self, pre_state: int, post_state: int,
+               receptor_activations: Dict[str, float],
+               neighbour_delta_ws: List[Tuple[float, float]], dt: float):
+        p = self.params
+        tau = p.tau_stdp
+
+        self.update_chrono_traces(pre_state)
+
+        # STDP traces
+        self.pre_trace += (-self.pre_trace / tau + (1.0 if pre_state == 1 else 0.0)) * dt
+        self.post_trace += (-self.post_trace / tau + (1.0 if post_state == 1 else 0.0)) * dt
+
+        A_plus = self.pre_trace * (1.0 if post_state == 1 else 0.0)
+        A_minus = self.post_trace * (1.0 if pre_state == 1 else 0.0)
+
+        # Differential DA gating
+        d1_act = receptor_activations.get('D1', 0.5)
+        d2_act = receptor_activations.get('D2', 0.5)
+        delta_w = p.learning_rate * A_plus * d1_act - p.learning_rate * A_minus * d2_act
+
+        # Trinary-specific rules
+        if pre_state == 1 and post_state == 1:
+            delta_w += p.learning_rate * 0.5 * d1_act
+        if pre_state == 1 and post_state == -1:
+            delta_w -= p.learning_rate * 0.5 * d2_act
+        if pre_state == 0 and post_state == 0:
+            delta_w *= 0.1
+
+        # Associative neighbour plasticity
+        for neighbour_dw, distance in neighbour_delta_ws:
+            if distance > 0:
+                delta_w += p.associative_alpha * neighbour_dw / distance
+
+        self.recent_delta_w = delta_w
+
+        # Weight updates
+        self.w_fast += dt / p.tau_fast * (-self.w_fast + 0.3 * delta_w)
+        self.w_fast = max(-1.0, min(1.0, self.w_fast))
+
+        self.w_slow += dt / p.tau_slow * (-self.w_slow + 0.1 * delta_w)
+        self.w_slow = max(-1.0, min(1.0, self.w_slow))
+
+        # Meta weight - 5-HT modulated
+        ht2a = receptor_activations.get('5HT2A', 0.0)
+        ht1a = receptor_activations.get('5HT1A', 0.0)
+        serotonin_factor = 0.5 * ht2a + 0.1 * (1.0 - ht1a)
+        self.w_meta += dt / p.tau_meta * (-self.w_meta + 0.05 * delta_w * serotonin_factor)
+        self.w_meta = max(-0.5, min(0.5, self.w_meta))
+
+        # Integrity
+        if abs(self.w_fast) < 0.01 and abs(self.w_slow) < 0.01:
+            self.integrity -= p.synapse_death_prob * dt
+        else:
+            self.integrity = min(1.0, self.integrity + 0.001 * dt)
+
+        # Unsilence
+        if self.is_silent and pre_state == 1 and post_state == 1:
+            if random.random() < 0.05:
+                self.is_silent = False
+                self.synapse_type = self._determine_type()
+
+    # ===== AGMP eligibility (Eq 8) =====
+    def update_eligibility(self, pre_state: int, post_output: int, params: NetworkParameters):
+        if not params.agmp_enabled:
+            return
+        psi = 0.0
+        if pre_state == 1 and post_output == 1: psi = 1.0
+        elif pre_state == 1 and post_output == -1: psi = -0.5
+        elif pre_state == -1 and post_output == 1: psi = -0.3
+        self.eligibility = params.agmp_lambda_e * self.eligibility + psi
+
+    def get_modulatory_effect(self) -> float:
+        return self.w_meta if self.is_modulatory else 0.0
+
+    def to_dict(self) -> dict:
+        return {
+            'pre_id': self.pre_id, 'post_id': self.post_id, 'branch_id': self.branch_id,
+            'branch_index': getattr(self, 'branch_index', 0),
+            'w_fast': self.w_fast, 'w_slow': self.w_slow, 'w_meta': self.w_meta,
+            'is_silent': self.is_silent, 'is_modulatory': self.is_modulatory,
+            'integrity': self.integrity, 'synapse_type': self.synapse_type.value,
+            'pre_trace': self.pre_trace, 'post_trace': self.post_trace,
+            'chrono_fast_trace': self.chrono_fast_trace, 'chrono_slow_trace': self.chrono_slow_trace,
+            'chrono_omega': self.chrono_omega, 'eligibility': self.eligibility,
+        }
+
+
+# =============================================================================
+# MSTH: Multi-Scale Temporal Homeostasis (Section 5)
+# =============================================================================
+
+class MSTHState:
+    """
+    Four coordinated regulatory loops:
+      Ultra-fast (~5ms): emergency suppression / runaway prevention
+      Fast (~2s): rapid Ca2+/homeostatic control of excitability
+      Medium (~5min): synaptic scaling / gain normalisation
+      Slow (~1-24h): structural adjustments and long-horizon stability
+    """
+
+    def __init__(self, params: NetworkParameters):
+        self.params = params
+        self.ultrafast_activity = 0.0
+        self.fast_excitability = 0.0
+        self.medium_gain = 1.0
+        self.slow_structural = 0.0
+
+    def update(self, current_state_abs: float, dt: float) -> dict:
+        p = self.params
+
+        # Ultra-fast (~5ms): track bursts
+        alpha_uf = dt / p.msth_ultrafast_tau
+        self.ultrafast_activity = (1.0 - alpha_uf) * self.ultrafast_activity + alpha_uf * current_state_abs
+        ultrafast_suppress = self.ultrafast_activity > p.msth_ultrafast_ceiling
+
+        # Fast (~2s): calcium-like homeostatic excitability
+        alpha_f = dt / p.msth_fast_tau
+        self.fast_excitability = (1.0 - alpha_f) * self.fast_excitability + alpha_f * current_state_abs
+        fast_threshold_shift = p.msth_fast_gain * (self.fast_excitability - p.target_firing_rate)
+
+        # Medium (~5min): synaptic gain
+        alpha_m = dt / p.msth_medium_tau
+        target_dev = current_state_abs - p.target_firing_rate
+        self.medium_gain += alpha_m * (-p.msth_medium_gain * target_dev * self.medium_gain)
+        self.medium_gain = max(0.5, min(2.0, self.medium_gain))
+
+        # Slow (~1h+): structural pressure
+        alpha_s = dt / p.msth_slow_tau
+        self.slow_structural = (1.0 - alpha_s) * self.slow_structural + alpha_s * abs(target_dev)
+
+        return {
+            'ultrafast_suppress': ultrafast_suppress,
+            'fast_threshold_shift': fast_threshold_shift,
+            'medium_gain': self.medium_gain,
+            'slow_structural_pressure': self.slow_structural,
+        }
+
+    def to_dict(self) -> dict:
+        return {
+            'ultrafast_activity': self.ultrafast_activity,
+            'fast_excitability': self.fast_excitability,
+            'medium_gain': self.medium_gain,
+            'slow_structural': self.slow_structural,
+        }
+
+
+# =============================================================================
+# NEURAXON UNIT  (Algorithm 4 + Algorithm 1 pipeline)
+# =============================================================================
+
+class Neuraxon:
+    """
+    Bio-inspired trinary neuron. Full Algorithm 1 pipeline:
+      Step 1: Synaptic time warping  (handled in Synapse)
+      Step 2: DSN dynamic decay
+      Step 3: CTSN complemented state
+      Step 4: Trinary readout on s_tilde
+      Step 5: AGMP  (handled in Network)
+    Plus: dendritic integration, MSTH, homeostasis, spontaneous firing.
+    """
+
+    def __init__(self, neuron_id: int, neuron_type: NeuronType,
+                 params: NetworkParameters):
+        self.id = neuron_id
+        self.type = neuron_type
+        self.params = params
+
+        self.state = 0.0
+        self.trinary_state = 0
+        self.adaptation = 0.0
+        self.autoreceptor = 0.0
+
+        # CTSN
+        self.complement_h = 0.0
+        self.state_tilde = 0.0
+
+        # DSN
+        self.dsn_input_buffer: List[float] = [0.0] * params.dsn_kernel_size
+        self.dsn_alpha = 0.5
+
+        # DSN kernel (learnable per-neuron; initialised from params)
+        base_kernel = params.dsn_kernel_weights or []
+        if len(base_kernel) != params.dsn_kernel_size:
+            # Fallback to default triangular kernel (mirrors params.__post_init__)
+            k = max(int(params.dsn_kernel_size), 1)
+            base_kernel = [(i + 1.0) for i in range(k)]
+            s = sum(abs(x) for x in base_kernel) or 1.0
+            base_kernel = [float(x) / s for x in base_kernel]
+        self.dsn_kernel_weights: List[float] = [float(x) for x in base_kernel]
+        self._dsn_last_x: float = 0.0
+
+        # CTSN phi parameters (learnable per-neuron; initialised from params)
+        self.ctsn_phi_gain: float = float(params.ctsn_phi_gain)
+        self.ctsn_phi_bias: float = float(params.ctsn_phi_bias)
+        self._ctsn_last_x: float = 0.0
+        self._ctsn_last_phi: float = 0.0
+
+        # Dendritic
+        self.branch_potentials = [0.0] * params.num_dendritic_branches
+
+        # Homeostatic
+        self.firing_rate_avg = params.target_firing_rate
+
+        # MSTH
+        self.msth = MSTHState(params)
+
+        # AGMP astrocyte
+        self.astrocyte_state = 0.0
+
+        # Health
+        self.health = 1.0
+        self.is_active = True
+        self.prev_state = 0
+
+        self.state_history: List[int] = []
+        self.potential_history: List[float] = []
+
+    @property
+    def membrane_potential(self) -> float:
+        return self.state
+    @membrane_potential.setter
+    def membrane_potential(self, value: float):
+        self.state = value
+
+    def dendritic_integration(self, inputs_by_branch: Dict[int, List[float]]) -> float:
+        """Algorithm 4 lines 4-15: nonlinear dendritic branches."""
+        p = self.params
+        total = 0.0
+        for b in range(p.num_dendritic_branches):
+            branch_inputs = inputs_by_branch.get(b, [])
+            sigma_b = sum(branch_inputs)
+            self.branch_potentials[b] = sigma_b
+            if abs(sigma_b) > p.dendritic_spike_threshold:
+                sign = 1.0 if sigma_b > 0 else -1.0
+                total += sign * (abs(sigma_b) ** p.dendritic_supralinear_gamma)
+            else:
+                total += sigma_b
+        return total
+
+    def _compute_dsn_alpha(self, current_input: float) -> float:
+        """Algorithm 1 lines 5-6: alpha_t = Sigmoid(CausalConv1D(X_{t-k+1:t}))"""
+        if not self.params.dsn_enabled:
+            return 0.5
+
+        # Maintain causal buffer of the driving input stream X(t)
+        self.dsn_input_buffer.pop(0)
+        self.dsn_input_buffer.append(float(current_input))
+
+        # CausalConv1D: dot(kernel, buffer) + bias
+        kernel = getattr(self, 'dsn_kernel_weights', []) or []
+        if len(kernel) != len(self.dsn_input_buffer):
+            # Fallback: re-initialise to a safe triangular kernel
+            k = max(int(self.params.dsn_kernel_size), 1)
+            kernel = [(i + 1.0) for i in range(k)]
+            s = sum(abs(x) for x in kernel) or 1.0
+            kernel = [float(x) / s for x in kernel]
+            self.dsn_kernel_weights = kernel
+
+        conv_out = sum(w * x for w, x in zip(kernel, self.dsn_input_buffer)) + float(self.params.dsn_bias)
+
+        # Paper form: alpha_t = sigmoid(conv_out)
+        exponent = max(-50.0, min(50.0, -conv_out))
+        self.dsn_alpha = 1.0 / (1.0 + math.exp(exponent))
+
+        # Optional online learning for DSN kernel weights (minimal, local rule)
+        # Goal: make alpha_t high when input stream is stable, low when it changes abruptly.
+        if self.params.dsn_learn_enabled and self.type != NeuronType.INPUT:
+            buf = self.dsn_input_buffer
+            if len(buf) >= 2:
+                delta_x = abs(buf[-1] - buf[-2])
+            else:
+                delta_x = abs(buf[-1]) if buf else 0.0
+
+            # target_alpha = sigmoid(bias - sensitivity * |ΔX|)
+            t = float(self.params.dsn_target_bias) - float(self.params.dsn_target_sensitivity) * float(delta_x)
+            t_exp = max(-50.0, min(50.0, -t))
+            target_alpha = 1.0 / (1.0 + math.exp(t_exp))
+
+            err = (self.dsn_alpha - target_alpha)
+            dalpha = self.dsn_alpha * (1.0 - self.dsn_alpha)  # d sigmoid
+            common = err * dalpha
+
+            lr = float(self.params.dsn_learn_lr)
+            clip = float(self.params.dsn_kernel_clip)
+
+            new_kernel = []
+            for w, x in zip(kernel, buf):
+                nw = float(w) - lr * common * float(x)
+                # Safety clip before renormalisation
+                nw = max(-clip, min(clip, nw))
+                new_kernel.append(nw)
+
+            # Renormalise (L1 over absolute values) for stability
+            s = sum(abs(x) for x in new_kernel) or 1.0
+            new_kernel = [float(x) / s for x in new_kernel]
+            self.dsn_kernel_weights = new_kernel
+
+        return self.dsn_alpha
+
+    def _update_complement(self, x_t: float):
+        """Algorithm 1 lines 7-8: h_t, s_tilde(t) = s(t) + h(t)
+
+        Paper note: phi_h(X(t)) is a lightweight learnable filter. Here we implement a
+        parameterised proxy: tanh(gain * X(t) + bias).
+        """
+        if not self.params.ctsn_enabled:
+            self.complement_h = 0.0
+            return
+        rho = float(self.params.ctsn_rho)
+        phi = math.tanh(float(self.ctsn_phi_gain) * float(x_t) + float(self.ctsn_phi_bias))
+        self._ctsn_last_x = float(x_t)
+        self._ctsn_last_phi = float(phi)
+        self.complement_h = rho * self.complement_h + (1.0 - rho) * phi
+
+    def update(self, inputs_by_branch: Dict[int, List[float]],
+               modulatory_inputs: List[float], external_input: float,
+               osc_drive: float, receptor_activations: Dict[str, float], dt: float):
+        """Full Neuraxon update: Alg 4 + Alg 1 Steps 2-4 + MSTH."""
+        if not self.is_active:
+            return
+        p = self.params
+
+        # Dendritic integration (Alg 4 line 17)
+        D = self.dendritic_integration(inputs_by_branch)
+        total_input_mag = abs(D) + abs(external_input)
+
+        # Homeostatic rate tracking (Alg 4 line 19)
+        self.firing_rate_avg += p.firing_rate_alpha * (
+            abs(self.trinary_state) - self.firing_rate_avg) * dt
+
+        # MSTH update (Section 5)
+        msth_signals = self.msth.update(abs(self.trinary_state), dt)
+
+        # NA-modulated gain + spontaneous (Alg 4 lines 21-22)
+        beta1_act = receptor_activations.get('beta1', 0.0)
+        alpha2_act = receptor_activations.get('alpha2', 0.0)
+        g_NA = 1.0 + 0.5 * beta1_act + 0.2 * alpha2_act
+        spontaneous = 0.0
+        spont_rate = p.spontaneous_firing_rate + 0.3 * alpha2_act
+        if random.random() < spont_rate * dt:
+            spontaneous = random.gauss(0.0, 0.3)
+
+        # === ALG 1 STEP 2: DSN Dynamic Decay ===
+        D_scaled = D * msth_signals['medium_gain']
+        raw_input = g_NA * D_scaled + external_input + osc_drive - self.adaptation + spontaneous
+        alpha_t = self._compute_dsn_alpha(raw_input)
+        self.state = alpha_t * self.state + (1.0 - alpha_t) * raw_input
+
+        # MSTH ultra-fast: emergency suppression
+        if msth_signals['ultrafast_suppress']:
+            self.state *= 0.5
+
+        # === ALG 1 STEP 3: CTSN Complement ===
+        self._update_complement(raw_input)
+        self.state_tilde = self.state + self.complement_h
+
+        # Saturated Modulation + Homeostasis (Eq 1 / Alg 4 lines 25-29)
+        raw_mod = sum(modulatory_inputs)
+        raw_mod += 0.3 * receptor_activations.get('M1', 0.0) - 0.2 * receptor_activations.get('M2', 0.0)
+        delta_theta_meta = p.threshold_mod_k * math.tanh(raw_mod)
+        delta_theta_homeo = p.homeostatic_rate * (self.firing_rate_avg - p.target_firing_rate)
+        delta_theta_fast = msth_signals['fast_threshold_shift']
+
+        theta_eff1 = p.firing_threshold_excitatory - delta_theta_meta + delta_theta_homeo + delta_theta_fast - 0.1 * self.autoreceptor
+        theta_eff2 = p.firing_threshold_inhibitory - delta_theta_meta + delta_theta_homeo + delta_theta_fast + 0.1 * self.autoreceptor
+
+        # === ALG 1 STEP 4: Trinary readout on s_tilde ===
+        self.prev_state = self.trinary_state
+        if self.state_tilde > theta_eff1:
+            self.trinary_state = 1
+        elif self.state_tilde < theta_eff2:
+            self.trinary_state = -1
+        else:
+            self.trinary_state = 0
+
+        # Optional online learning for CTSN phi parameters (minimal, local rule)
+        # Uses homeostatic error as a proxy learning signal to shape phi_h(X(t)).
+        if p.ctsn_learn_enabled and p.ctsn_enabled and self.type != NeuronType.INPUT:
+            e = float(p.target_firing_rate) - float(self.firing_rate_avg)
+            rho = float(p.ctsn_rho)
+            x = float(getattr(self, '_ctsn_last_x', raw_input))
+            phi = float(getattr(self, '_ctsn_last_phi', math.tanh(self.ctsn_phi_gain * x + self.ctsn_phi_bias)))
+
+            dphi = 1.0 - phi * phi  # d/dz tanh(z)
+            scale = (1.0 - rho)
+            lr = float(p.ctsn_learn_lr)
+
+            self.ctsn_phi_gain += lr * e * scale * dphi * x
+            self.ctsn_phi_bias += lr * e * scale * dphi
+
+            gclip = float(p.ctsn_phi_gain_clip)
+            bclip = float(p.ctsn_phi_bias_clip)
+            self.ctsn_phi_gain = max(-gclip, min(gclip, self.ctsn_phi_gain))
+            self.ctsn_phi_bias = max(-bclip, min(bclip, self.ctsn_phi_bias))
+
+        # Adaptation (Alg 4 line 31)
+        self.adaptation += dt / p.adaptation_tau * (-self.adaptation + 0.1 * abs(self.trinary_state))
+        # Autoreceptor (Alg 4 line 32)
+        self.autoreceptor += dt / p.autoreceptor_tau * (-self.autoreceptor + 0.2 * self.trinary_state)
+        # AGMP astrocyte (Eq 9)
+        if p.agmp_enabled:
+            self.astrocyte_state = p.agmp_lambda_a * self.astrocyte_state + (1.0 - p.agmp_lambda_a) * abs(self.state_tilde)
+
+        # Health
+        if abs(self.state) / 2.0 < 0.01:
+            self.health -= p.neuron_health_decay * dt
+        else:
+            self.health = min(1.0, self.health + 0.0005 * dt)
+        if self.type == NeuronType.HIDDEN and self.health < p.neuron_death_threshold:
+            if random.random() < 0.001:
+                self.is_active = False
+
+        self.state_history.append(self.trinary_state)
+        self.potential_history.append(self.state)
+        if len(self.state_history) > 1000:
+            self.state_history.pop(0)
+            self.potential_history.pop(0)
+
+    def set_state(self, state: int):
+        if state in (-1, 0, 1):
+            # Mirror the non-input update path: preserve previous trinary for change-rate tracking.
+            self.prev_state = self.trinary_state
+            self.trinary_state = state
+            self.state = state * self.params.firing_threshold_excitatory
+            self.state_tilde = self.state + self.complement_h
+
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id, 'type': self.type.value,
+            'membrane_potential': self.state, 'trinary_state': self.trinary_state,
+            'prev_state': getattr(self, 'prev_state', 0),
+            'adaptation': self.adaptation, 'autoreceptor': self.autoreceptor,
+            'complement_h': self.complement_h, 'state_tilde': self.state_tilde,
+            'dsn_alpha': getattr(self, 'dsn_alpha', 0.5),
+            'dsn_input_buffer': getattr(self, 'dsn_input_buffer', []),
+            'dsn_kernel_weights': getattr(self, 'dsn_kernel_weights', []),
+            'ctsn_phi_gain': getattr(self, 'ctsn_phi_gain', self.params.ctsn_phi_gain),
+            'ctsn_phi_bias': getattr(self, 'ctsn_phi_bias', self.params.ctsn_phi_bias),
+            'firing_rate_avg': self.firing_rate_avg, 'astrocyte_state': self.astrocyte_state,
+            'msth': self.msth.to_dict(), 'health': self.health, 'is_active': self.is_active,
+        }
+
+
+# =============================================================================
+# NEURAXON NETWORK  (Algorithm 6)
+# =============================================================================
+
+class NeuraxonNetwork:
+    """Complete Neuraxon v2.0 network with all subsystems."""
+
+    def __init__(self, params: Optional[NetworkParameters] = None):
+        self.params = params or NetworkParameters()
+        self.input_neurons: List[Neuraxon] = []
+        self.hidden_neurons: List[Neuraxon] = []
+        self.output_neurons: List[Neuraxon] = []
+        self.all_neurons: List[Neuraxon] = []
+        self.synapses: List[Synapse] = []
+
+        self.neuromod_system = NeuromodulatorSystem(self.params)
+        self.oscillators = OscillatorBank(coupling=self.params.oscillator_coupling)
+        self.neuromodulators: Dict[str, float] = self.neuromod_system.get_flat_levels()
+
+        self.time = 0.0
+        self.step_count = 0
+        self.energy_usage = 0.0
+
+        self._initialize_neurons()
+        self._initialize_synapses_watts_strogatz()
+
+    def _initialize_neurons(self):
+        nid = 0
+        for _ in range(self.params.num_input_neurons):
+            self.input_neurons.append(Neuraxon(nid, NeuronType.INPUT, self.params))
+            self.all_neurons.append(self.input_neurons[-1]); nid += 1
+        for _ in range(self.params.num_hidden_neurons):
+            self.hidden_neurons.append(Neuraxon(nid, NeuronType.HIDDEN, self.params))
+            self.all_neurons.append(self.hidden_neurons[-1]); nid += 1
+        for _ in range(self.params.num_output_neurons):
+            self.output_neurons.append(Neuraxon(nid, NeuronType.OUTPUT, self.params))
+            self.all_neurons.append(self.output_neurons[-1]); nid += 1
+
+    def _initialize_synapses_watts_strogatz(self):
+        N = len(self.all_neurons)
+        if N == 0: return
+        k = min(self.params.ws_k, N - 1)
+        half_k = max(k // 2, 1)
+        beta = self.params.ws_beta
+        B = self.params.num_dendritic_branches
+        edge_set = set()
+
+        for i in range(N):
+            for j in range(1, half_k + 1):
+                for target in [(i + j) % N, (i - j) % N]:
+                    pre_type = self.all_neurons[i].type
+                    post_type = self.all_neurons[target].type
+                    pre_id = self.all_neurons[i].id
+                    post_id = self.all_neurons[target].id
+                    if pre_type == NeuronType.OUTPUT and post_type == NeuronType.INPUT:
+                        continue
+                    if pre_id != post_id:
+                        edge_set.add((pre_id, post_id))
+
+        edges_list = list(edge_set)
+        for pre_id, post_id in edges_list:
+            if random.random() < beta:
+                edge_set.discard((pre_id, post_id))
+                new_target = random.randint(0, N - 1)
+                new_post_id = self.all_neurons[new_target].id
+                new_post_type = self.all_neurons[new_target].type
+                pre_idx = next(i for i, n in enumerate(self.all_neurons) if n.id == pre_id)
+                pre_type = self.all_neurons[pre_idx].type
+                if (new_post_id != pre_id and (pre_id, new_post_id) not in edge_set and
+                        not (pre_type == NeuronType.OUTPUT and new_post_type == NeuronType.INPUT)):
+                    edge_set.add((pre_id, new_post_id))
+                else:
+                    edge_set.add((pre_id, post_id))
+
+        for pre_id, post_id in edge_set:
+            branch = random.randint(0, B - 1)
+            self.synapses.append(Synapse(pre_id, post_id, branch, self.params))
+
+        self._assign_branch_positions()
+
+    def _assign_branch_positions(self):
+        """Assign a stable position index along each (post_id, branch_id) dendrite.
+
+        This implements d_ij for Algorithm 3 neighbour plasticity, so that nearby synapses
+        on the same dendrite have stronger associative coupling.
+        """
+        groups: Dict[Tuple[int, int], List[Synapse]] = {}
+        for syn in self.synapses:
+            groups.setdefault((syn.post_id, syn.branch_id), []).append(syn)
+
+        for syns in groups.values():
+            syns_sorted = sorted(syns, key=lambda s: (s.pre_id, s.post_id))
+            for pos, syn in enumerate(syns_sorted):
+                syn.branch_index = pos
+
+    def _compute_network_activity(self) -> Dict[str, float]:
+        active = [n for n in self.all_neurons if n.is_active]
+        if not active:
+            return {'mean_activity': 0.0, 'excitatory_fraction': 0.0, 'state_change_rate': 0.0}
+        states = [n.trinary_state for n in active]
+        return {
+            'mean_activity': sum(abs(s) for s in states) / len(states),
+            'excitatory_fraction': sum(1 for s in states if s == 1) / len(states),
+            'state_change_rate': sum(1 for n in active if n.trinary_state != n.prev_state) / len(active),
+        }
+
+    def _neuron_by_id(self, nid: int) -> Optional[Neuraxon]:
+        return self.all_neurons[nid] if 0 <= nid < len(self.all_neurons) else None
+
+    def simulate_step(self, external_inputs: Optional[Dict[int, float]] = None):
+        """
+        One full network step implementing Algorithm 1 pipeline:
+          Step 1: Synaptic Time Warping (in Synapse.compute_input)
+          Step 2: DSN Dynamic Decay (in Neuraxon.update)
+          Step 3: CTSN Complement (in Neuraxon.update)
+          Step 4: Trinary Readout (in Neuraxon.update)
+          Step 5: AGMP Astrocyte-Gated Plasticity (below)
+        """
+        external_inputs = external_inputs or {}
+        p = self.params; dt = p.dt
+
+        # Neuromodulator + oscillator update
+        activity = self._compute_network_activity()
+        self.neuromod_system.update(activity, dt)
+        R = self.neuromod_system.compute_receptor_activations()
+        self.neuromodulators = self.neuromod_system.get_flat_levels()
+        self.oscillators.update(dt)
+        N = len(self.all_neurons)
+
+        # Collect inputs by dendritic branch (Step 1 happens in compute_input)
+        branch_inputs: Dict[int, Dict[int, List[float]]] = {
+            n.id: {b: [] for b in range(p.num_dendritic_branches)} for n in self.all_neurons}
+        mod_inputs: Dict[int, List[float]] = {n.id: [] for n in self.all_neurons}
+
+        for syn in self.synapses:
+            if syn.integrity <= 0: continue
+            pre = self._neuron_by_id(syn.pre_id)
+            if pre is None or not pre.is_active: continue
+            inp = syn.compute_input(pre.trinary_state)
+            branch_inputs[syn.post_id][syn.branch_id].append(inp)
+            me = syn.get_modulatory_effect()
+            if me != 0.0:
+                mod_inputs[syn.post_id].append(me)
+
+        # Update neurons (*** INPUT NEURONS SKIP ODE — hold their set state ***)
+        for neuron in self.all_neurons:
+            if not neuron.is_active: continue
+            if neuron.type == NeuronType.INPUT:
+                # Mirror Neuraxon.update() bookkeeping so state_change_rate is meaningful for inputs too.
+                neuron.prev_state = neuron.trinary_state
+                ext = external_inputs.get(neuron.id, 0.0)
+                if ext != 0.0:
+                    neuron.set_state(int(max(-1, min(1, round(ext)))))
+                continue  # <-- CRITICAL: inputs are NOT updated by the ODE
+            ext = external_inputs.get(neuron.id, 0.0)
+            osc = self.oscillators.get_drive(neuron.id, N)
+            neuron.update(branch_inputs[neuron.id], mod_inputs[neuron.id], ext, osc, R, dt)
+
+        # Update synapses
+        branch_synapses: Dict[Tuple[int, int], List[Synapse]] = {}
+        for syn in self.synapses:
+            branch_synapses.setdefault((syn.post_id, syn.branch_id), []).append(syn)
+
+        for syn in self.synapses:
+            if syn.integrity <= 0: continue
+            pre = self._neuron_by_id(syn.pre_id)
+            post = self._neuron_by_id(syn.post_id)
+            if pre is None or post is None or not pre.is_active or not post.is_active: continue
+            neighbours = [(o.recent_delta_w, abs(o.branch_index - syn.branch_index) + 1.0)
+                          for o in branch_synapses.get((syn.post_id, syn.branch_id), []) if o is not syn]
+            syn.update(pre.trinary_state, post.trinary_state, R, neighbours, dt)
+
+            # === ALG 1 STEP 5: AGMP ===
+            if p.agmp_enabled:
+                syn.update_eligibility(pre.trinary_state, post.trinary_state, p)
+                m_t = self.neuromod_system.levels['DA']['phasic']
+                a_t = post.astrocyte_state
+                delta_agmp = p.agmp_eta * m_t * a_t * syn.eligibility
+                syn.w_fast = max(-1.0, min(1.0, syn.w_fast + delta_agmp * 0.3))
+                syn.w_slow = max(-1.0, min(1.0, syn.w_slow + delta_agmp * 0.1))
+
+        # Homeostatic synaptic scaling
+        for neuron in self.all_neurons:
+            if not neuron.is_active or neuron.type == NeuronType.INPUT: continue
+            scale = 1.0 + p.homeostatic_rate * (p.target_firing_rate - neuron.firing_rate_avg) * neuron.msth.medium_gain
+            for syn in self.synapses:
+                if syn.post_id == neuron.id and syn.integrity > 0:
+                    syn.w_fast = max(-1.0, min(1.0, syn.w_fast * scale))
+                    syn.w_slow = max(-1.0, min(1.0, syn.w_slow * scale))
+
+        self._apply_structural_plasticity()
+        active_count = sum(1 for n in self.all_neurons if n.is_active and n.trinary_state != 0)
+        self.energy_usage += 0.01 * active_count * dt
+        self.time += dt
+        self.step_count += 1
+
+    def _apply_structural_plasticity(self):
+        p = self.params
+        self.synapses = [s for s in self.synapses if s.integrity > p.synapse_integrity_threshold]
+        for n in self.hidden_neurons:
+            if n.is_active and n.health < p.neuron_death_threshold:
+                if random.random() < 0.001: n.is_active = False
+        avg_slow = 0.0
+        ah = [n for n in self.hidden_neurons if n.is_active]
+        if ah: avg_slow = sum(n.msth.slow_structural for n in ah) / len(ah)
+        if random.random() < p.synapse_formation_prob * (1.0 + avg_slow):
+            active_neurons = [n for n in self.all_neurons if n.is_active]
+            if len(active_neurons) >= 2:
+                pre = random.choice(active_neurons)
+                post = random.choice(active_neurons)
+                if (pre.id != post.id and
+                        not (pre.type == NeuronType.OUTPUT and post.type == NeuronType.INPUT) and
+                        not any(s.pre_id == pre.id and s.post_id == post.id for s in self.synapses)):
+                    self.synapses.append(Synapse(pre.id, post.id,
+                                                 random.randint(0, p.num_dendritic_branches - 1), p))
+
+        # Recompute dendritic positions for neighbour plasticity after structural changes
+        self._assign_branch_positions()
+
+    def set_input_states(self, states: List[int]):
+        for i, state in enumerate(states[:len(self.input_neurons)]):
+            self.input_neurons[i].set_state(state)
+
+    def get_output_states(self) -> List[int]:
+        return [n.trinary_state for n in self.output_neurons if n.is_active]
+
+    def get_all_states(self) -> Dict[str, List[int]]:
+        return {
+            'input': [n.trinary_state for n in self.input_neurons],
+            'hidden': [n.trinary_state for n in self.hidden_neurons if n.is_active],
+            'output': [n.trinary_state for n in self.output_neurons if n.is_active],
+        }
+
+    def modulate(self, neuromodulator: str, level: float):
+        self.neuromod_system.set_level(neuromodulator, level)
+        self.neuromodulators = self.neuromod_system.get_flat_levels()
+
+    def get_energy(self) -> float:
+        return self.energy_usage
+
+    def to_dict(self) -> dict:
+        return {
+            'version': '2.0', 'parameters': asdict(self.params),
+            'neurons': {
+                'input': [n.to_dict() for n in self.input_neurons],
+                'hidden': [n.to_dict() for n in self.hidden_neurons],
+                'output': [n.to_dict() for n in self.output_neurons],
+            },
+            'synapses': [s.to_dict() for s in self.synapses],
+            'neuromodulator_system': self.neuromod_system.to_dict(),
+            'oscillators': self.oscillators.to_dict(),
+            'neuromodulators': self.neuromodulators,
+            'time': self.time, 'step_count': self.step_count, 'energy_usage': self.energy_usage,
+        }
+
+
+# =============================================================================
+# AIGARTH ITU  (Algorithm 7)
+# =============================================================================
+
+class AigarthITU:
+    def __init__(self, size: int, num_inputs: int, num_outputs: int, params: NetworkParameters):
+        self.size = size; self.num_inputs = num_inputs; self.num_outputs = num_outputs
+        self.params = params; self.neurons: List[Neuraxon] = []
+        num_hidden = size - num_inputs - num_outputs
+        assert num_hidden >= 0
+        nid = 0
+        for _ in range(num_inputs):
+            self.neurons.append(Neuraxon(nid, NeuronType.INPUT, params)); nid += 1
+        for _ in range(num_hidden):
+            self.neurons.append(Neuraxon(nid, NeuronType.HIDDEN, params)); nid += 1
+        for _ in range(num_outputs):
+            self.neurons.append(Neuraxon(nid, NeuronType.OUTPUT, params)); nid += 1
+        self.circle_weights = [random.choice([-1, 0, 1]) for _ in range(size)]
+        self.input_skew = random.uniform(-0.5, 0.5)
+        self.fitness = 0.0
+
+    def feedforward(self, input_vec: List[int], tick_cap: int = 20) -> List[int]:
+        for i, val in enumerate(input_vec[:self.num_inputs]):
+            self.neurons[i].set_state(val)
+        prev_outputs = None
+        for tick in range(tick_cap):
+            for j in range(self.num_inputs, self.size):
+                left = (j - 1) % self.size; right = (j + 1) % self.size
+                sigma = (self.circle_weights[left] * self.neurons[left].trinary_state +
+                         self.circle_weights[right] * self.neurons[right].trinary_state + self.input_skew)
+                self.neurons[j].trinary_state = 1 if sigma > 0.5 else (-1 if sigma < -0.5 else 0)
+            outputs = [self.neurons[self.size - self.num_outputs + i].trinary_state for i in range(self.num_outputs)]
+            if outputs == prev_outputs: break
+            prev_outputs = outputs[:]
+        return [self.neurons[self.size - self.num_outputs + i].trinary_state for i in range(self.num_outputs)]
+
+    def mutate(self):
+        if self.size == 0: return
+        idx = random.randint(0, self.size - 1)
+        self.circle_weights[idx] += random.choice([-1, 1])
+        if abs(self.circle_weights[idx]) > 1:
+            self.circle_weights[idx] = max(-1, min(1, self.circle_weights[idx]))
+            if self.size > self.num_inputs + self.num_outputs:
+                si = (idx + 1) % self.size
+                if self.neurons[si].type == NeuronType.HIDDEN:
+                    new_nid = max(n.id for n in self.neurons) + 1
+                    nn = Neuraxon(new_nid, NeuronType.HIDDEN, self.params)
+                    nn.state = self.neurons[si].state
+                    self.neurons.insert(si + 1, nn)
+                    self.circle_weights.insert(si + 1, random.choice([-1, 0, 1]))
+                    self.size += 1
+        to_rm = [i for i in range(self.num_inputs, self.size - self.num_outputs)
+                 if self.circle_weights[i] == 0 and self.neurons[i].health < 0.3
+                 and self.neurons[i].type == NeuronType.HIDDEN]
+        for i in reversed(to_rm):
+            self.neurons.pop(i); self.circle_weights.pop(i); self.size -= 1
+
+
+class NeuraxonAigarthHybrid:
+    def __init__(self, params: NetworkParameters):
+        self.params = params
+        self.population = [AigarthITU(params.aigarth_itu_size, params.num_input_neurons,
+                                      params.num_output_neurons, params) for _ in range(params.aigarth_pop_size)]
+
+    def evaluate_fitness(self, dataset):
+        for itu in self.population:
+            score = 0.0
+            for inp, expected in dataset:
+                output = itu.feedforward(inp, self.params.aigarth_tick_cap)
+                score += sum(1 for a, b in zip(output, expected) if a == b) / max(len(expected), 1)
+            itu.fitness = score / max(len(dataset), 1)
+
+    def evolve(self, dataset, seasons=5, episodes=10):
+        for _ in range(seasons):
+            for _ in range(episodes):
+                self.evaluate_fitness(dataset)
+                self.population.sort(key=lambda x: x.fitness, reverse=True)
+                half = len(self.population) // 2
+                for i in range(half, len(self.population)):
+                    child = copy.deepcopy(self.population[i % half])
+                    child.mutate()
+                    for neuron in child.neurons:
+                        if random.random() < self.params.aigarth_mutation_wf_prob:
+                            neuron.state += random.gauss(0, 0.15)
+                    self.population[i] = child
+        self.evaluate_fitness(dataset)
+        self.population.sort(key=lambda x: x.fitness, reverse=True)
+
+    def best(self): return self.population[0]
+
+
+# =============================================================================
+# APPLICATION LAYER  (Algorithm 8)
+# =============================================================================
+
+class NeuraxonApplication:
+    def __init__(self, params=None):
+        self.params = params or NetworkParameters()
+        self.network = NeuraxonNetwork(self.params)
+        self.patterns: Dict[str, List[int]] = {}
+
+    def present_pattern(self, pattern, steps=10):
+        self.network.set_input_states(pattern)
+        for _ in range(steps):
+            self.network.simulate_step()
+
+    def store_pattern(self, name, pattern, steps=20):
+        self.patterns[name] = pattern
+        self.present_pattern(pattern, steps)
+
+    def recall_pattern(self, name, steps=20, mask_fraction=0.5):
+        if name not in self.patterns: return []
+        partial = [0 if random.random() < mask_fraction else v for v in self.patterns[name]]
+        self.present_pattern(partial, steps)
+        return self.network.get_output_states()
+
+    def train_sequence(self, sequence, repetitions=5, steps_per=10):
+        for _ in range(repetitions):
+            for pattern in sequence:
+                self.present_pattern(pattern, steps_per)
+
+    def get_network(self): return self.network
+
+
+# =============================================================================
+# JSON SAVE / LOAD
+# =============================================================================
+
+def save_network(network: NeuraxonNetwork, filename: str):
+    with open(filename, 'w') as f:
+        json.dump(network.to_dict(), f, indent=2)
+    print(f"Network saved to {filename}")
+
+def load_network(filename: str) -> NeuraxonNetwork:
+    with open(filename, 'r') as f:
+        data = json.load(f)
+    param_data = data.get('parameters', {})
+    defaults = asdict(NetworkParameters())
+    for key, val in defaults.items():
+        if key not in param_data: param_data[key] = val
+    params = NetworkParameters(**param_data)
+    network = NeuraxonNetwork(params)
+
+    def _restore(nlist, dlist):
+        for nd in dlist:
+            for n in nlist:
+                if n.id == nd['id']:
+                    n.state = nd.get('membrane_potential', 0.0)
+                    n.trinary_state = nd.get('trinary_state', 0)
+                    n.prev_state = nd.get('prev_state', n.trinary_state)
+                    # Restore DSN internal state for continuity (optional in older saves)
+                    n.dsn_alpha = nd.get('dsn_alpha', getattr(n, 'dsn_alpha', 0.5))
+                    buf = nd.get('dsn_input_buffer', None)
+                    if isinstance(buf, list) and len(buf) > 0:
+                        k = max(int(params.dsn_kernel_size), 1)
+                        buf = [float(x) for x in buf][-k:]
+                        if len(buf) < k:
+                            buf = [0.0] * (k - len(buf)) + buf
+                        n.dsn_input_buffer = buf
+                    # Restore per-neuron DSN kernel weights (optional in older saves)
+                    kw = nd.get('dsn_kernel_weights', None)
+                    if isinstance(kw, list) and len(kw) > 0:
+                        k = max(int(params.dsn_kernel_size), 1)
+                        kw = [float(x) for x in kw][-k:]
+                        if len(kw) < k:
+                            kw = [0.0] * (k - len(kw)) + kw
+                        # Renormalise L1 abs for stability
+                        s = sum(abs(x) for x in kw) or 1.0
+                        n.dsn_kernel_weights = [float(x) / s for x in kw]
+                    else:
+                        n.dsn_kernel_weights = list(params.dsn_kernel_weights or [])
+
+                    # Restore per-neuron CTSN phi parameters (optional in older saves)
+                    n.ctsn_phi_gain = float(nd.get('ctsn_phi_gain', params.ctsn_phi_gain))
+                    n.ctsn_phi_bias = float(nd.get('ctsn_phi_bias', params.ctsn_phi_bias))
+                    n.health = nd.get('health', 1.0)
+                    n.is_active = nd.get('is_active', True)
+                    n.adaptation = nd.get('adaptation', 0.0)
+                    n.autoreceptor = nd.get('autoreceptor', 0.0)
+                    n.complement_h = nd.get('complement_h', 0.0)
+                    n.firing_rate_avg = nd.get('firing_rate_avg', params.target_firing_rate)
+                    n.astrocyte_state = nd.get('astrocyte_state', 0.0)
+                    md = nd.get('msth', {})
+                    if md:
+                        n.msth.ultrafast_activity = md.get('ultrafast_activity', 0.0)
+                        n.msth.fast_excitability = md.get('fast_excitability', 0.0)
+                        n.msth.medium_gain = md.get('medium_gain', 1.0)
+                        n.msth.slow_structural = md.get('slow_structural', 0.0)
+                    break
+
+    _restore(network.input_neurons, data['neurons'].get('input', []))
+    _restore(network.hidden_neurons, data['neurons'].get('hidden', []))
+    _restore(network.output_neurons, data['neurons'].get('output', []))
+
+    network.synapses = []
+    for sd in data.get('synapses', []):
+        syn = Synapse(sd['pre_id'], sd['post_id'],
+                      sd.get('branch_id', random.randint(0, params.num_dendritic_branches-1)), params)
+        for attr in ['w_fast','w_slow','w_meta','is_silent','is_modulatory','integrity',
+                     'pre_trace','post_trace','chrono_fast_trace','chrono_slow_trace','chrono_omega','eligibility']:
+            if attr in sd: setattr(syn, attr, sd[attr])
+        if 'synapse_type' in sd:
+            try:
+                syn.synapse_type = SynapseType(sd['synapse_type'])
+            except Exception:
+                pass
+        if 'branch_index' in sd:
+            try:
+                syn.branch_index = int(sd['branch_index'])
+            except Exception:
+                syn.branch_index = 0
+        network.synapses.append(syn)
+
+    # Ensure dendritic positions are valid for neighbour plasticity
+    if hasattr(network, '_assign_branch_positions'):
+        network._assign_branch_positions()
+
+    nm = data.get('neuromodulator_system', {})
+    if 'levels' in nm:
+        for k in network.neuromod_system.levels:
+            if k in nm['levels']: network.neuromod_system.levels[k] = nm['levels'][k]
+    elif 'neuromodulators' in data:
+        lm = {'dopamine':'DA','serotonin':'5HT','acetylcholine':'ACh','norepinephrine':'NA'}
+        for name, key in lm.items():
+            if name in data['neuromodulators']:
+                network.neuromod_system.levels[key]['tonic'] = data['neuromodulators'][name]
+
+        # Restore oscillator bank state (phases/amplitudes) if present
+    osc = data.get('oscillators', None)
+    if isinstance(osc, dict):
+        try:
+            if 'coupling' in osc: network.oscillators.coupling = float(osc['coupling'])
+            if 'bands' in osc and isinstance(osc['bands'], dict):
+                # Shallow replace; keeps expected structure {'freq','phase','amplitude'} per band
+                network.oscillators.bands = osc['bands']
+        except Exception:
+            pass
+
+    # Restore receptor activations (optional; they will be recomputed anyway)
+    if isinstance(nm, dict) and 'receptors' in nm and isinstance(nm['receptors'], dict):
+        for rname, rd in nm['receptors'].items():
+            if rname in network.neuromod_system.receptors and isinstance(rd, dict):
+                try:
+                    network.neuromod_system.receptors[rname].activation = float(rd.get('activation', network.neuromod_system.receptors[rname].activation))
+                except Exception:
+                    pass
+
+    network.neuromodulators = network.neuromod_system.get_flat_levels()
+    network.time = data.get('time', 0.0)
+    network.step_count = data.get('step_count', 0)
+    network.energy_usage = data.get('energy_usage', 0.0)
+    print(f"Network loaded from {filename}")
+    return network
+
+
+# =============================================================================
+# DEMO
+# =============================================================================
+
+if __name__ == "__main__":
+    random.seed(10)
+    print("=" * 70)
+    print("NEURAXON v2.0 — Bio-Inspired Neural Network")
+    print("Pipeline: Time Warping -> Dynamic Decay -> CTSN -> AGMP")
+    print("=" * 70)
+
+    params = NetworkParameters()
+    params = NetworkParameters()
+    params.dsn_learn_enabled = True
+    params.ctsn_learn_enabled = True
+
+    # (optional) tune learning rates
+    params.dsn_learn_lr = 0.002
+    params.ctsn_learn_lr = 0.001
+
+    # Reduce Chrono strength
+    params.chrono_trace_clip = 6.0
+    params.chrono_lambda_f *= 0.5
+    params.chrono_lambda_s *= 0.5
+
+
+    # Make MSTH less suppressive (depending on implementation)
+    params.msth_ultrafast_tau *= 0.5   # faster recovery
+    # or if you have a threshold/scale for ultrafast suppression, reduce its sensitivity
+
+    network = NeuraxonNetwork(params)
+    print(f"\n1. Network: {len(network.input_neurons)}in / {len(network.hidden_neurons)}hid / "
+          f"{len(network.output_neurons)}out, {len(network.synapses)} synapses")
+
+    print("\n2. Setting inputs [1, -1, 0, 1, -1]")
+    network.set_input_states([1, -1, 0, 1, -1])
+
+    print("\n3. Simulating 50 steps...")
+    for step in range(50):
+        network.simulate_step()
+        if step % 10 == 0:
+            s = network.get_all_states()
+            ha = sum(1 for x in s['hidden'] if x != 0)
+            print(f"   Step {step:3d}: In={s['input']} HidActive={ha}/{len(s['hidden'])} "
+                  f"Out={s['output']} E={network.energy_usage:.3f}")
+
+    h0 = network.hidden_neurons[0]; s0 = network.synapses[0]
+    print(f"\n4. MSTH (hidden[0]): uf={h0.msth.ultrafast_activity:.4f} "
+          f"fast={h0.msth.fast_excitability:.4f} med_gain={h0.msth.medium_gain:.4f} "
+          f"slow={h0.msth.slow_structural:.6f}")
+    print(f"5. Chrono (syn[0]): omega={s0.chrono_omega:.4f} f_trace={s0.chrono_fast_trace:.4f} "
+          f"z_trace={s0.chrono_slow_trace:.4f} elig={s0.eligibility:.4f}")
+    print(f"6. CTSN (hidden[0]): s={h0.state:.4f} h={h0.complement_h:.4f} s_tilde={h0.state_tilde:.4f}")
+
+    print("\n7. Neuromodulation: DA -> 0.8")
+    network.modulate('dopamine', 0.8)
+    for _ in range(10): network.simulate_step()
+    R = network.neuromod_system.compute_receptor_activations()
+    print(f"   D1={R['D1']:.3f} D2={R['D2']:.3f} 5HT1A={R['5HT1A']:.3f} "
+          f"5HT2A={R['5HT2A']:.3f} M1={R['M1']:.3f} M2={R['M2']:.3f} "
+          f"b1={R['beta1']:.3f} a2={R['alpha2']:.3f}")
+    print(f"   Outputs: {network.get_output_states()}")
+
+    print("\n8. Application layer...")
+    app = NeuraxonApplication(params)
+    app.store_pattern("A", [1, 1, -1, -1, 1], steps=50)
+    app.store_pattern("B", [-1, -1, 1, 1, -1], steps=50)
+    print(f"   Recall A: {app.recall_pattern('A', steps=30, mask_fraction=0.3)}")
+    print(f"   Recall B: {app.recall_pattern('B', steps=30, mask_fraction=0.3)}")
+
+    print("\n9. Aigarth hybrid...")
+    dataset = [([1,0,0,0,0],[1,0,0,0,0]),([0,1,0,0,0],[0,1,0,0,0]),
+               ([0,0,1,0,0],[0,0,1,0,0]),([-1,0,0,0,0],[-1,0,0,0,0])]
+    hybrid = NeuraxonAigarthHybrid(params)
+    hybrid.evolve(dataset, seasons=3, episodes=10)
+    print(f"   Best fitness: {hybrid.best().fitness:.3f}")
+
+    print("\n10. Signal propagation test [1,1,1,1,1]...")
+    net2 = NeuraxonNetwork(params)
+    net2.set_input_states([1, 1, 1, 1, 1])
+    for step in range(30):
+        net2.simulate_step()
+        if step % 5 == 0:
+            s = net2.get_all_states()
+            print(f"   Step {step:3d}: Active={sum(1 for n in net2.all_neurons if n.trinary_state!=0)}/{len(net2.all_neurons)} Out={s['output']}")
+    
+    print("\n11. Kernels")
+    n0 = net2.hidden_neurons[0]
+    print("DSN kernel:", getattr(n0, "dsn_kernel_weights", None))
+    print("CTSN gain/bias:", getattr(n0, "ctsn_phi_gain", None), getattr(n0, "ctsn_phi_bias", None))
+
+    print("\n11. Save/load...")
+    save_network(network, "neuraxon_v2_network.json")
+    loaded = load_network("neuraxon_v2_network.json")
+    print(f"   Synapses: {len(loaded.synapses)}, Energy: {loaded.energy_usage:.4f}")
+
+    print("\n" + "=" * 70)
+    print("All Neuraxon v2.0 core systems operational.")
+    print("=" * 70)
+
+# =============================================================================
+# MULTI-SPHERE EXTENSION  (Neuraxon v2.0 kept intact; composition added on top)
+# =============================================================================
+
+from collections import deque
+import os
+import tempfile
+
+
+@dataclass
+class SphereInterface:
+    """Maps existing Neuraxon v2.0 input/output neurons to inter-sphere ports.
+
+    The base NeuraxonNetwork is left untouched. Multi-Sphere uses selected existing
+    input neurons as inbound interface ports and selected existing output neurons as
+    outbound interface ports.
+    """
+
+    sensory_input_ids: List[int] = field(default_factory=list)
+    relay_input_ids: List[int] = field(default_factory=list)
+    relay_output_ids: List[int] = field(default_factory=list)
+    readout_output_ids: List[int] = field(default_factory=list)
+
+    def all_input_ids(self) -> List[int]:
+        return sorted(set(self.sensory_input_ids + self.relay_input_ids))
+
+    def all_output_ids(self) -> List[int]:
+        return sorted(set(self.relay_output_ids + self.readout_output_ids))
+
+    def to_dict(self) -> dict:
+        return {
+            'sensory_input_ids': list(self.sensory_input_ids),
+            'relay_input_ids': list(self.relay_input_ids),
+            'relay_output_ids': list(self.relay_output_ids),
+            'readout_output_ids': list(self.readout_output_ids),
+        }
+
+
+@dataclass
+class SphereLayer:
+    """Optional grouping of spheres into deeper tissue-like abstractions."""
+
+    layer_id: str
+    depth: int = 0
+    description: str = ""
+    sphere_ids: List[str] = field(default_factory=list)
+
+    def add_sphere(self, sphere_id: str):
+        if sphere_id not in self.sphere_ids:
+            self.sphere_ids.append(sphere_id)
+
+    def remove_sphere(self, sphere_id: str):
+        self.sphere_ids = [sid for sid in self.sphere_ids if sid != sphere_id]
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class SphereLinkParameters:
+    """Parameters for graph links between Neuraxon spheres.
+
+    Bio-inspired defaults:
+      - positive weights by default (long-range cortical projections are mostly excitatory)
+      - finite conduction delay
+      - optional phase-coherence gating for communication-through-coherence
+      - optional local Hebbian plasticity for the inter-sphere projection matrix
+    """
+
+    gain: float = 1.0
+    delay_steps: int = 1
+    transmission_threshold: float = 0.25
+    coherence_strength: float = 0.2
+    coherence_band: str = "theta"
+    topology: str = "dense"  # dense | sparse | topographic | one_to_one
+    sparse_prob: float = 1.0
+    allow_negative_weights: bool = False
+    plasticity_rate: float = 0.0
+    weight_decay: float = 0.0
+    weight_clip: float = 1.5
+    normalize_rows: bool = True
+    bias: float = 0.0
+    kind: str = "driving"  # feedforward | feedback | lateral | thalamic_like | context
+
+    def __post_init__(self):
+        self.gain = float(self.gain)
+        self.delay_steps = max(0, int(self.delay_steps))
+        self.transmission_threshold = max(0.0, float(self.transmission_threshold))
+        self.coherence_strength = max(0.0, min(1.0, float(self.coherence_strength)))
+        self.sparse_prob = max(0.0, min(1.0, float(self.sparse_prob)))
+        self.plasticity_rate = max(0.0, float(self.plasticity_rate))
+        self.weight_decay = max(0.0, float(self.weight_decay))
+        self.weight_clip = max(0.1, float(self.weight_clip))
+        self.bias = float(self.bias)
+        self.topology = str(self.topology)
+        self.kind = str(self.kind)
+        self.coherence_band = str(self.coherence_band)
+
+        # Helpful biologically inspired defaults by link class.
+        if self.kind == "feedforward" and self.coherence_band == "theta":
+            self.coherence_band = "gamma"
+        elif self.kind == "feedback" and self.coherence_band == "theta":
+            self.coherence_band = "beta"
+        elif self.kind == "thalamic_like" and self.coherence_band == "gamma":
+            self.coherence_band = "theta"
+
+
+def _continuous_to_trinary(value: float, threshold: float = 0.25) -> int:
+    v = float(value)
+    if v > threshold:
+        return 1
+    if v < -threshold:
+        return -1
+    return 0
+
+
+class NeuraxonSphere:
+    """Wraps an unchanged NeuraxonNetwork as one trainable sphere/module."""
+
+    def __init__(self, sphere_id: str, network: Optional[NeuraxonNetwork] = None,
+                 interface: Optional[SphereInterface] = None,
+                 label: str = "", layer_id: str = "L0",
+                 modality_tags: Optional[List[str]] = None,
+                 description: str = ""):
+        self.sphere_id = str(sphere_id)
+        self.network = network or NeuraxonNetwork(NetworkParameters(network_name=f"{sphere_id} Sphere"))
+        self.label = label or self.sphere_id
+        self.layer_id = layer_id
+        self.modality_tags = list(modality_tags or [])
+        self.description = description
+        self.interface = interface or self._default_interface()
+        self._validate_interface()
+
+        self.last_user_inputs: Dict[int, float] = {}
+        self.last_link_inputs: Dict[int, float] = {}
+        self.last_combined_inputs: Dict[int, int] = {}
+
+    def _default_interface(self) -> SphereInterface:
+        input_ids = [n.id for n in self.network.input_neurons]
+        output_ids = [n.id for n in self.network.output_neurons]
+        return SphereInterface(
+            sensory_input_ids=list(input_ids),
+            relay_input_ids=list(input_ids),
+            relay_output_ids=list(output_ids),
+            readout_output_ids=list(output_ids),
+        )
+
+    def _validate_interface(self):
+        input_ids = {n.id for n in self.network.input_neurons}
+        output_ids = {n.id for n in self.network.output_neurons}
+        for nid in self.interface.sensory_input_ids + self.interface.relay_input_ids:
+            if nid not in input_ids:
+                raise ValueError(f"Sphere {self.sphere_id}: neuron {nid} is not an input neuron")
+        for nid in self.interface.relay_output_ids + self.interface.readout_output_ids:
+            if nid not in output_ids:
+                raise ValueError(f"Sphere {self.sphere_id}: neuron {nid} is not an output neuron")
+
+    def relay_outputs(self) -> Dict[int, int]:
+        return {nid: self.network._neuron_by_id(nid).trinary_state for nid in self.interface.relay_output_ids}
+
+    def readout_outputs(self) -> Dict[int, int]:
+        return {nid: self.network._neuron_by_id(nid).trinary_state for nid in self.interface.readout_output_ids}
+
+    def relay_inputs(self) -> Dict[int, int]:
+        return {nid: self.network._neuron_by_id(nid).trinary_state for nid in self.interface.relay_input_ids}
+
+    def all_states(self) -> dict:
+        data = self.network.get_all_states()
+        data['relay_inputs'] = self.relay_inputs()
+        data['relay_outputs'] = self.relay_outputs()
+        data['readout_outputs'] = self.readout_outputs()
+        return data
+
+    def to_dict(self) -> dict:
+        return {
+            'sphere_id': self.sphere_id,
+            'label': self.label,
+            'layer_id': self.layer_id,
+            'modality_tags': list(self.modality_tags),
+            'description': self.description,
+            'interface': self.interface.to_dict(),
+            'last_user_inputs': self.last_user_inputs,
+            'last_link_inputs': self.last_link_inputs,
+            'last_combined_inputs': self.last_combined_inputs,
+            'network': self.network.to_dict(),
+        }
+
+
+class SphereLink:
+    """Weighted, delayed projection bundle between two spheres."""
+
+    def __init__(self, link_id: str, source_sphere_id: str, target_sphere_id: str,
+                 source_output_ids: List[int], target_input_ids: List[int],
+                 params: Optional[SphereLinkParameters] = None,
+                 weight_matrix: Optional[List[List[float]]] = None):
+        self.link_id = str(link_id)
+        self.source_sphere_id = str(source_sphere_id)
+        self.target_sphere_id = str(target_sphere_id)
+        self.source_output_ids = list(source_output_ids)
+        self.target_input_ids = list(target_input_ids)
+        self.params = params or SphereLinkParameters()
+        self.weight_matrix = self._init_weight_matrix(weight_matrix)
+        self.delay_buffer = deque(
+            [[0.0 for _ in self.target_input_ids] for _ in range(self.params.delay_steps)],
+            maxlen=max(1, self.params.delay_steps + 1),
+        )
+
+    def _sample_weight(self) -> float:
+        if self.params.allow_negative_weights:
+            return random.uniform(-1.0, 1.0)
+        return random.uniform(0.2, 1.0)
+
+    def _normalise_rows(self, matrix: List[List[float]]) -> List[List[float]]:
+        if not self.params.normalize_rows:
+            return matrix
+        out = []
+        for row in matrix:
+            scale = sum(abs(v) for v in row)
+            if scale <= 0.0:
+                out.append(row[:])
+            else:
+                out.append([float(v) / scale for v in row])
+        return out
+
+    def _init_weight_matrix(self, weight_matrix: Optional[List[List[float]]]) -> List[List[float]]:
+        n_tgt = len(self.target_input_ids)
+        n_src = len(self.source_output_ids)
+        if n_tgt == 0 or n_src == 0:
+            raise ValueError(f"Link {self.link_id} needs at least one source and one target port")
+
+        if weight_matrix is not None:
+            matrix = [list(map(float, row)) for row in weight_matrix]
+            if len(matrix) != n_tgt or any(len(row) != n_src for row in matrix):
+                raise ValueError(
+                    f"Link {self.link_id}: weight matrix must be shaped [{n_tgt} x {n_src}]"
+                )
+            return self._normalise_rows(matrix)
+
+        topo = self.params.topology
+        matrix = [[0.0 for _ in range(n_src)] for _ in range(n_tgt)]
+
+        if topo == 'one_to_one':
+            for i in range(min(n_tgt, n_src)):
+                matrix[i][i] = self._sample_weight()
+        elif topo == 'topographic':
+            for ti in range(n_tgt):
+                center = 0.0 if n_tgt == 1 else ti * (n_src - 1) / max(n_tgt - 1, 1)
+                for si in range(n_src):
+                    dist = abs(si - center)
+                    val = max(0.0, 1.0 - dist / max(1.0, n_src / 2.0))
+                    if val > 0.0:
+                        matrix[ti][si] = self._sample_weight() * val
+        elif topo == 'sparse':
+            for ti in range(n_tgt):
+                for si in range(n_src):
+                    if random.random() < self.params.sparse_prob:
+                        matrix[ti][si] = self._sample_weight()
+                if not any(abs(v) > 0.0 for v in matrix[ti]):
+                    matrix[ti][random.randint(0, n_src - 1)] = self._sample_weight()
+        else:  # dense
+            for ti in range(n_tgt):
+                for si in range(n_src):
+                    matrix[ti][si] = self._sample_weight()
+
+        return self._normalise_rows(matrix)
+
+    def _communication_gate(self, source_net: NeuraxonNetwork, target_net: NeuraxonNetwork) -> float:
+        c = self.params.coherence_strength
+        if c <= 0.0:
+            return 1.0
+        band = self.params.coherence_band
+        src_band = source_net.oscillators.bands.get(band)
+        tgt_band = target_net.oscillators.bands.get(band)
+        if not src_band or not tgt_band:
+            return 1.0
+        phase_diff = float(src_band['phase']) - float(tgt_band['phase'])
+        phase_gate = 0.5 * (1.0 + math.cos(phase_diff))
+        return (1.0 - c) + c * phase_gate
+
+    def project(self, source_sphere: NeuraxonSphere, target_sphere: NeuraxonSphere) -> Dict[int, float]:
+        source_states = [
+            source_sphere.network._neuron_by_id(nid).trinary_state
+            for nid in self.source_output_ids
+        ]
+        gate = self._communication_gate(source_sphere.network, target_sphere.network)
+        payload = []
+        for row in self.weight_matrix:
+            total = self.params.bias + sum(w * s for w, s in zip(row, source_states))
+            payload.append(float(self.params.gain) * gate * total)
+
+        if self.params.delay_steps <= 0:
+            delayed = payload
+        else:
+            self.delay_buffer.append(payload)
+            delayed = self.delay_buffer.popleft()
+
+        return {nid: delayed[i] for i, nid in enumerate(self.target_input_ids)}
+
+    def update_plasticity(self, source_sphere: NeuraxonSphere, target_sphere: NeuraxonSphere):
+        if self.params.plasticity_rate <= 0.0:
+            return
+
+        src = [
+            source_sphere.network._neuron_by_id(nid).trinary_state
+            for nid in self.source_output_ids
+        ]
+        tgt = [
+            target_sphere.network._neuron_by_id(nid).trinary_state
+            for nid in self.target_input_ids
+        ]
+
+        for ti in range(len(self.weight_matrix)):
+            for si in range(len(self.weight_matrix[ti])):
+                hebb = float(src[si]) * float(tgt[ti])
+                self.weight_matrix[ti][si] += self.params.plasticity_rate * hebb
+                if self.params.weight_decay > 0.0:
+                    self.weight_matrix[ti][si] *= (1.0 - self.params.weight_decay)
+                clip = self.params.weight_clip
+                self.weight_matrix[ti][si] = max(-clip, min(clip, self.weight_matrix[ti][si]))
+
+        self.weight_matrix = self._normalise_rows(self.weight_matrix)
+
+    def to_dict(self) -> dict:
+        return {
+            'link_id': self.link_id,
+            'source_sphere_id': self.source_sphere_id,
+            'target_sphere_id': self.target_sphere_id,
+            'source_output_ids': list(self.source_output_ids),
+            'target_input_ids': list(self.target_input_ids),
+            'params': asdict(self.params),
+            'weight_matrix': [row[:] for row in self.weight_matrix],
+            'delay_buffer': list(self.delay_buffer),
+        }
+
+
+class NeuraxonMultiSphere:
+    """Graph of Neuraxon v2.0 spheres with arbitrary non-linear connectivity.
+
+    Each sphere is an unchanged NeuraxonNetwork. Multi-Sphere only adds graph-level
+    composition, interface-port routing, delayed bundles, optional oscillatory gating,
+    optional grouping into layers, and convenience methods for independent or joint use.
+    """
+
+    ZERO_EPS = 1e-12  # forces base NeuraxonNetwork input-neuron update to write a zero state
+
+    def __init__(self, name: str = "Neuraxon Multi-Sphere"):
+        self.name = name
+        self.spheres: Dict[str, NeuraxonSphere] = {}
+        self.links: Dict[str, SphereLink] = {}
+        self.layers: Dict[str, SphereLayer] = {}
+        self.time = 0.0
+        self.step_count = 0
+
+    def register_layer(self, layer_id: str, depth: int = 0, description: str = ""):
+        if layer_id not in self.layers:
+            self.layers[layer_id] = SphereLayer(layer_id=layer_id, depth=depth, description=description)
+        else:
+            self.layers[layer_id].depth = depth
+            if description:
+                self.layers[layer_id].description = description
+
+    def add_sphere(self, sphere_id: str, params: Optional[NetworkParameters] = None,
+                   network: Optional[NeuraxonNetwork] = None,
+                   interface: Optional[SphereInterface] = None,
+                   label: str = "", layer_id: str = "L0", layer_depth: int = 0,
+                   modality_tags: Optional[List[str]] = None,
+                   description: str = "") -> NeuraxonSphere:
+        if sphere_id in self.spheres:
+            raise ValueError(f"Sphere '{sphere_id}' already exists")
+        self.register_layer(layer_id, depth=layer_depth)
+        net = network or NeuraxonNetwork(params or NetworkParameters(network_name=f"{sphere_id} Sphere"))
+        sphere = NeuraxonSphere(
+            sphere_id=sphere_id,
+            network=net,
+            interface=interface,
+            label=label or sphere_id,
+            layer_id=layer_id,
+            modality_tags=modality_tags,
+            description=description,
+        )
+        self.spheres[sphere_id] = sphere
+        self.layers[layer_id].add_sphere(sphere_id)
+        return sphere
+
+    def connect_spheres(self, source_sphere_id: str, target_sphere_id: str,
+                        source_output_ids: Optional[List[int]] = None,
+                        target_input_ids: Optional[List[int]] = None,
+                        params: Optional[SphereLinkParameters] = None,
+                        weight_matrix: Optional[List[List[float]]] = None,
+                        link_id: Optional[str] = None,
+                        bidirectional: bool = False) -> str:
+        if source_sphere_id not in self.spheres or target_sphere_id not in self.spheres:
+            raise KeyError("Both spheres must be added before linking")
+        src = self.spheres[source_sphere_id]
+        tgt = self.spheres[target_sphere_id]
+        src_ids = list(source_output_ids or src.interface.relay_output_ids)
+        tgt_ids = list(target_input_ids or tgt.interface.relay_input_ids)
+        link_name = link_id or f"{source_sphere_id}__to__{target_sphere_id}__{len(self.links)}"
+        if link_name in self.links:
+            raise ValueError(f"Link '{link_name}' already exists")
+        self.links[link_name] = SphereLink(
+            link_id=link_name,
+            source_sphere_id=source_sphere_id,
+            target_sphere_id=target_sphere_id,
+            source_output_ids=src_ids,
+            target_input_ids=tgt_ids,
+            params=params,
+            weight_matrix=weight_matrix,
+        )
+        if bidirectional:
+            rev_params = copy.deepcopy(params) if params is not None else SphereLinkParameters()
+            rev_id = f"{link_name}__rev"
+            self.connect_spheres(target_sphere_id, source_sphere_id,
+                                 source_output_ids=tgt.interface.relay_output_ids,
+                                 target_input_ids=src.interface.relay_input_ids,
+                                 params=rev_params,
+                                 link_id=rev_id,
+                                 bidirectional=False)
+        return link_name
+
+    def connect_layers(self, source_layer_id: str, target_layer_id: str,
+                       params: Optional[SphereLinkParameters] = None,
+                       bidirectional: bool = False):
+        if source_layer_id not in self.layers or target_layer_id not in self.layers:
+            raise KeyError("Both layers must be registered before connecting them")
+        for source_sphere_id in self.layers[source_layer_id].sphere_ids:
+            for target_sphere_id in self.layers[target_layer_id].sphere_ids:
+                self.connect_spheres(source_sphere_id, target_sphere_id, params=copy.deepcopy(params),
+                                     bidirectional=bidirectional)
+
+    def spheres_in_layer(self, layer_id: str) -> List[str]:
+        if layer_id not in self.layers:
+            return []
+        return list(self.layers[layer_id].sphere_ids)
+
+    def _aggregate_link_inputs(self) -> Dict[str, Dict[int, float]]:
+        aggregated: Dict[str, Dict[int, float]] = {sid: {} for sid in self.spheres}
+        for link in self.links.values():
+            source = self.spheres[link.source_sphere_id]
+            target = self.spheres[link.target_sphere_id]
+            payload = link.project(source, target)
+            for nid, value in payload.items():
+                aggregated[target.sphere_id][nid] = aggregated[target.sphere_id].get(nid, 0.0) + float(value)
+        return aggregated
+
+    def _prepare_external_inputs(self, sphere: NeuraxonSphere,
+                                 user_inputs: Dict[int, float],
+                                 link_inputs: Dict[int, float]) -> Dict[int, float]:
+        user_inputs = dict(user_inputs or {})
+        link_inputs = dict(link_inputs or {})
+        prepared: Dict[int, float] = {}
+
+        input_port_ids = set(sphere.interface.all_input_ids())
+        all_input_ids = set(n.id for n in sphere.network.input_neurons)
+        managed_ids = sorted(input_port_ids | set(link_inputs.keys()) | {nid for nid in user_inputs if nid in all_input_ids})
+
+        combined_trinary: Dict[int, int] = {}
+        for nid in managed_ids:
+            total = float(user_inputs.get(nid, 0.0)) + float(link_inputs.get(nid, 0.0))
+            state = _continuous_to_trinary(total)
+            combined_trinary[nid] = state
+            prepared[nid] = float(state) if state != 0 else self.ZERO_EPS
+
+        # Pass through direct continuous inputs to non-input neurons unchanged.
+        for nid, value in user_inputs.items():
+            if nid not in all_input_ids:
+                prepared[nid] = float(value)
+
+        sphere.last_user_inputs = {int(k): float(v) for k, v in user_inputs.items()}
+        sphere.last_link_inputs = {int(k): float(v) for k, v in link_inputs.items()}
+        sphere.last_combined_inputs = combined_trinary
+        return prepared
+
+    def simulate_step(self, external_inputs_by_sphere: Optional[Dict[str, Dict[int, float]]] = None):
+        external_inputs_by_sphere = external_inputs_by_sphere or {}
+        routed_inputs = self._aggregate_link_inputs()
+
+        for sphere_id, sphere in self.spheres.items():
+            prepared = self._prepare_external_inputs(
+                sphere,
+                external_inputs_by_sphere.get(sphere_id, {}),
+                routed_inputs.get(sphere_id, {}),
+            )
+            sphere.network.simulate_step(prepared)
+
+        for link in self.links.values():
+            link.update_plasticity(self.spheres[link.source_sphere_id], self.spheres[link.target_sphere_id])
+
+        self.step_count += 1
+        self.time = max((sphere.network.time for sphere in self.spheres.values()), default=0.0)
+
+    def simulate(self, steps: int,
+                 external_input_schedule: Optional[Any] = None):
+        for step in range(int(steps)):
+            if callable(external_input_schedule):
+                ext = external_input_schedule(step)
+            elif isinstance(external_input_schedule, dict):
+                ext = external_input_schedule.get(step, {})
+            else:
+                ext = {}
+            self.simulate_step(ext)
+
+    def train_sphere_independently(self, sphere_id: str, patterns: List[Any],
+                                   steps_per_pattern: int = 10, repetitions: int = 1):
+        if sphere_id not in self.spheres:
+            raise KeyError(f"Unknown sphere '{sphere_id}'")
+        sphere = self.spheres[sphere_id]
+        port_ids = sphere.interface.sensory_input_ids or [n.id for n in sphere.network.input_neurons]
+
+        for _ in range(int(repetitions)):
+            for pattern in patterns:
+                if isinstance(pattern, dict):
+                    payload = dict(pattern)
+                else:
+                    values = list(pattern)
+                    payload = {port_ids[i]: values[i] for i in range(min(len(values), len(port_ids)))}
+                prepared = self._prepare_external_inputs(sphere, payload, {})
+                for _ in range(int(steps_per_pattern)):
+                    sphere.network.simulate_step(prepared)
+
+    def set_global_modulator(self, neuromodulator: str, level: float,
+                             sphere_ids: Optional[List[str]] = None):
+        targets = sphere_ids or list(self.spheres.keys())
+        for sid in targets:
+            self.spheres[sid].network.modulate(neuromodulator, level)
+
+    def get_sphere_outputs(self, sphere_id: str, port: str = 'readout') -> Dict[int, int]:
+        if sphere_id not in self.spheres:
+            raise KeyError(f"Unknown sphere '{sphere_id}'")
+        sphere = self.spheres[sphere_id]
+        if port == 'relay':
+            return sphere.relay_outputs()
+        return sphere.readout_outputs()
+
+    def get_global_state(self) -> Dict[str, Any]:
+        return {
+            sid: {
+                'layer_id': sphere.layer_id,
+                'label': sphere.label,
+                'modality_tags': list(sphere.modality_tags),
+                'states': sphere.all_states(),
+                'last_combined_inputs': dict(sphere.last_combined_inputs),
+            }
+            for sid, sphere in self.spheres.items()
+        }
+
+    def get_energy(self) -> float:
+        return sum(sphere.network.get_energy() for sphere in self.spheres.values())
+
+    def to_dict(self) -> dict:
+        return {
+            'name': self.name,
+            'time': self.time,
+            'step_count': self.step_count,
+            'total_energy': self.get_energy(),
+            'layers': {lid: layer.to_dict() for lid, layer in self.layers.items()},
+            'spheres': {sid: sphere.to_dict() for sid, sphere in self.spheres.items()},
+            'links': {lid: link.to_dict() for lid, link in self.links.items()},
+        }
+
+
+# =============================================================================
+# MULTI-SPHERE SAVE / LOAD
+# =============================================================================
+
+def save_multisphere(multisphere: NeuraxonMultiSphere, filename: str):
+    with open(filename, 'w') as f:
+        json.dump(multisphere.to_dict(), f, indent=2)
+    print(f"Multi-sphere saved to {filename}")
+
+
+
+def _load_network_from_dict(data: dict) -> NeuraxonNetwork:
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.json') as tmp:
+            json.dump(data, tmp)
+            tmp_path = tmp.name
+        return load_network(tmp_path)
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
+
+
+
+def load_multisphere(filename: str) -> NeuraxonMultiSphere:
+    with open(filename, 'r') as f:
+        data = json.load(f)
+
+    model = NeuraxonMultiSphere(name=data.get('name', 'Neuraxon Multi-Sphere'))
+
+    for layer_id, layer_data in data.get('layers', {}).items():
+        model.register_layer(
+            layer_id=layer_id,
+            depth=int(layer_data.get('depth', 0)),
+            description=layer_data.get('description', ''),
+        )
+
+    for sphere_id, sphere_data in data.get('spheres', {}).items():
+        interface = SphereInterface(**sphere_data.get('interface', {}))
+        network = _load_network_from_dict(sphere_data['network'])
+        sphere = model.add_sphere(
+            sphere_id=sphere_id,
+            network=network,
+            interface=interface,
+            label=sphere_data.get('label', sphere_id),
+            layer_id=sphere_data.get('layer_id', 'L0'),
+            modality_tags=sphere_data.get('modality_tags', []),
+            description=sphere_data.get('description', ''),
+        )
+        sphere.last_user_inputs = sphere_data.get('last_user_inputs', {})
+        sphere.last_link_inputs = sphere_data.get('last_link_inputs', {})
+        sphere.last_combined_inputs = sphere_data.get('last_combined_inputs', {})
+
+    for link_id, link_data in data.get('links', {}).items():
+        params = SphereLinkParameters(**link_data.get('params', {}))
+        link = SphereLink(
+            link_id=link_id,
+            source_sphere_id=link_data['source_sphere_id'],
+            target_sphere_id=link_data['target_sphere_id'],
+            source_output_ids=link_data['source_output_ids'],
+            target_input_ids=link_data['target_input_ids'],
+            params=params,
+            weight_matrix=link_data.get('weight_matrix'),
+        )
+        saved_buffer = link_data.get('delay_buffer', [])
+        if isinstance(saved_buffer, list):
+            link.delay_buffer = deque(
+                [list(map(float, row)) for row in saved_buffer],
+                maxlen=max(1, params.delay_steps + 1),
+            )
+        model.links[link_id] = link
+
+    model.time = float(data.get('time', 0.0))
+    model.step_count = int(data.get('step_count', 0))
+    print(f"Multi-sphere loaded from {filename}")
+    return model
+
+
+# =============================================================================
+# MULTI-SPHERE DEMO
+# =============================================================================
+
+if __name__ == "__main__":
+    print("\n" + "=" * 70)
+    print("NEURAXON v2.0 MULTI-SPHERE — Linked Tissue-Like Graph Demo")
+    print("=" * 70)
+
+    def _small_params(name: str, n_in: int, n_hid: int, n_out: int) -> NetworkParameters:
+        p = NetworkParameters(
+            network_name=name,
+            num_input_neurons=n_in,
+            num_hidden_neurons=n_hid,
+            num_output_neurons=n_out,
+            ws_k=min(4, max(2, n_in + n_hid + n_out - 1)),
+            ws_beta=0.25,
+            dsn_learn_enabled=False,
+            ctsn_learn_enabled=False,
+        )
+        p.spontaneous_firing_rate = 0.01
+        p.chrono_lambda_f *= 0.4
+        p.chrono_lambda_s *= 0.4
+        return p
+
+    brain = NeuraxonMultiSphere("Perception-Association-Motor Tissue")
+
+    visual_net = NeuraxonNetwork(_small_params("Visual Sphere", 6, 16, 4))
+    auditory_net = NeuraxonNetwork(_small_params("Auditory Sphere", 6, 16, 4))
+    association_net = NeuraxonNetwork(_small_params("Association Sphere", 8, 20, 5))
+    motor_net = NeuraxonNetwork(_small_params("Motor Sphere", 6, 16, 4))
+
+    vis_inputs = [n.id for n in visual_net.input_neurons]
+    vis_outputs = [n.id for n in visual_net.output_neurons]
+    aud_inputs = [n.id for n in auditory_net.input_neurons]
+    aud_outputs = [n.id for n in auditory_net.output_neurons]
+    assoc_inputs = [n.id for n in association_net.input_neurons]
+    assoc_outputs = [n.id for n in association_net.output_neurons]
+    motor_inputs = [n.id for n in motor_net.input_neurons]
+    motor_outputs = [n.id for n in motor_net.output_neurons]
+
+    brain.add_sphere(
+        "visual",
+        network=visual_net,
+        interface=SphereInterface(
+            sensory_input_ids=vis_inputs[:4],
+            relay_input_ids=vis_inputs[4:],
+            relay_output_ids=vis_outputs[:3],
+            readout_output_ids=vis_outputs,
+        ),
+        layer_id="sensory",
+        layer_depth=0,
+        modality_tags=["vision"],
+        description="Visual cortex-like sphere",
+    )
+
+    brain.add_sphere(
+        "auditory",
+        network=auditory_net,
+        interface=SphereInterface(
+            sensory_input_ids=aud_inputs[:4],
+            relay_input_ids=aud_inputs[4:],
+            relay_output_ids=aud_outputs[:3],
+            readout_output_ids=aud_outputs,
+        ),
+        layer_id="sensory",
+        layer_depth=0,
+        modality_tags=["audition"],
+        description="Auditory cortex-like sphere",
+    )
+
+    brain.add_sphere(
+        "association",
+        network=association_net,
+        interface=SphereInterface(
+            sensory_input_ids=assoc_inputs[:2],
+            relay_input_ids=assoc_inputs[2:],
+            relay_output_ids=assoc_outputs[:4],
+            readout_output_ids=assoc_outputs,
+        ),
+        layer_id="association",
+        layer_depth=1,
+        modality_tags=["multimodal", "context"],
+        description="Association cortex-like sphere",
+    )
+
+    brain.add_sphere(
+        "motor",
+        network=motor_net,
+        interface=SphereInterface(
+            sensory_input_ids=motor_inputs[:2],
+            relay_input_ids=motor_inputs[2:],
+            relay_output_ids=motor_outputs[:3],
+            readout_output_ids=motor_outputs,
+        ),
+        layer_id="motor",
+        layer_depth=2,
+        modality_tags=["action"],
+        description="Motor cortex-like sphere",
+    )
+
+    ff = SphereLinkParameters(kind="feedforward", topology="topographic", delay_steps=1,
+                              gain=1.0, coherence_strength=0.25, plasticity_rate=0.001)
+    fb = SphereLinkParameters(kind="feedback", topology="sparse", sparse_prob=0.6, delay_steps=2,
+                              gain=0.8, coherence_strength=0.2, plasticity_rate=0.0005)
+    ctx = SphereLinkParameters(kind="thalamic_like", topology="dense", delay_steps=1,
+                               gain=0.6, coherence_strength=0.35, plasticity_rate=0.0005)
+
+    brain.connect_spheres("visual", "association", params=copy.deepcopy(ff))
+    brain.connect_spheres("auditory", "association", params=copy.deepcopy(ff))
+    brain.connect_spheres("association", "motor", params=copy.deepcopy(ff))
+    brain.connect_spheres("motor", "association", params=copy.deepcopy(fb))
+    brain.connect_spheres("association", "visual", params=copy.deepcopy(ctx))
+    brain.connect_spheres("association", "auditory", params=copy.deepcopy(ctx))
+
+    print(f"Spheres: {list(brain.spheres.keys())}")
+    print(f"Layers: {list(brain.layers.keys())}")
+    print(f"Links: {list(brain.links.keys())}")
+
+    # Light independent pre-training of the sensory spheres.
+    brain.train_sphere_independently("visual", patterns=[[1, 1, 0, 0], [0, 1, 1, 0]], steps_per_pattern=4, repetitions=2)
+    brain.train_sphere_independently("auditory", patterns=[[0, 1, 0, 1], [1, 0, 1, 0]], steps_per_pattern=4, repetitions=2)
+
+    def _pack(ids: List[int], values: List[int]) -> Dict[int, float]:
+        return {ids[i]: values[i] for i in range(min(len(ids), len(values)))}
+
+    print("\nSimulating linked spheres...")
+    visual_ports = brain.spheres['visual'].interface.sensory_input_ids
+    auditory_ports = brain.spheres['auditory'].interface.sensory_input_ids
+    association_ports = brain.spheres['association'].interface.sensory_input_ids
+
+    patterns = [
+        {
+            'visual': _pack(visual_ports, [1, 1, 0, -1]),
+            'auditory': _pack(auditory_ports, [0, 1, 0, 1]),
+            'association': _pack(association_ports, [0, 0]),
+        },
+        {
+            'visual': _pack(visual_ports, [0, 1, 1, 0]),
+            'auditory': _pack(auditory_ports, [1, 0, 1, 0]),
+            'association': _pack(association_ports, [1, 0]),
+        },
+        {
+            'visual': _pack(visual_ports, [-1, 0, 1, 1]),
+            'auditory': _pack(auditory_ports, [0, -1, 1, 1]),
+            'association': _pack(association_ports, [0, 1]),
+        },
+    ]
+
+    for step in range(12):
+        ext = patterns[step % len(patterns)]
+        brain.simulate_step(ext)
+        if step % 3 == 0:
+            print(
+                f"Step {step:2d} | "
+                f"Visual={brain.get_sphere_outputs('visual')} | "
+                f"Auditory={brain.get_sphere_outputs('auditory')} | "
+                f"Association={brain.get_sphere_outputs('association')} | "
+                f"Motor={brain.get_sphere_outputs('motor')} | "
+                f"Energy={brain.get_energy():.3f}"
+            )
+
+    save_multisphere(brain, "neuraxon_v2_multisphere.json")
+    restored = load_multisphere("neuraxon_v2_multisphere.json")
+    print(f"Restored multi-sphere: {list(restored.spheres.keys())}, links={len(restored.links)}, energy={restored.get_energy():.3f}")
+
+    print("\n" + "=" * 70)
+    print("All Neuraxon v2.0 Multi-Sphere systems operational.")
+    print("=" * 70)
