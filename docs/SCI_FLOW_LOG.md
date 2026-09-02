@@ -1821,7 +1821,7 @@ Optional omega-bridged carryover session (50-tick DSR); Graphitti CI green. No C
 
 ---
 
-## Entry 051 — 2026-09-02 — M-D1-DO-Z-EOI causal remapping (D1×L2/L3)
+## Entry 052 — 2026-09-02 — M-D1-DO-Z-EOI causal remapping (D1×L2/L3)
 
 **Session:** D01 EOI-k remapped from do(X) twin to registered do(Z) for proof-ledger admissibility  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  

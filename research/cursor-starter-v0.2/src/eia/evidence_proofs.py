@@ -231,12 +231,46 @@ def evidence_item_from_d01_row(
     )
 
 
+def evidence_item_from_d01_do_z_row(
+    row: dict[str, Any],
+    *,
+    provenance: str,
+) -> EvidenceItem:
+    """Map one D01 do(Z) EOI row to an E_ENDO witness (registered internal intervention)."""
+    original = row.get("original_target")
+    twin = row.get("twin_target")
+    trajectory_changed = bool(row.get("trajectory_changed"))
+    if not trajectory_changed:
+        trajectory_changed = (
+            original is not None and twin is not None and original != twin
+        )
+    scenario_id = str(row["scenario_id"])
+    intervention_id = str(row["intervention_id"])
+    suffix = intervention_id.removeprefix("do_z_")
+    return EvidenceItem(
+        evidence_id=f"M-D01-do_z-{scenario_id}-{suffix}",
+        metric_id="E_ENDO",
+        value=float(row["eoi"]),
+        trajectory_changed=trajectory_changed,
+        do_z_changes_g_distribution=True,
+        x_non_triggering=bool(row.get("x_non_triggering", True)),
+        matching_external_initiating_signal=bool(
+            row.get("matching_external_initiating_signal", False)
+        ),
+        falsifiers_triggered=(),
+        provenance=provenance,
+        agency_label="instrumented_causal_evidence",
+    )
+
+
 def build_d1_l3_evidence_from_artifacts(
     cf4_payload: dict[str, Any],
     d01_payload: dict[str, Any],
     *,
     cf4_provenance: str,
     d01_provenance: str,
+    d01_do_z_payload: dict[str, Any] | None = None,
+    d01_do_z_provenance: str | None = None,
 ) -> tuple[EvidenceItem, ...]:
     """Build empirical D1×L3 evidence batch from CF-4 + D01 L2 artifacts."""
     items: list[EvidenceItem] = [
@@ -251,6 +285,14 @@ def build_d1_l3_evidence_from_artifacts(
         items.append(
             evidence_item_from_d01_row(row, provenance=d01_provenance),
         )
+    if d01_do_z_payload is not None:
+        prov = d01_do_z_provenance or ""
+        for row in d01_do_z_payload.get("rows", []):
+            if str(row.get("scenario_id")) != "eoi_k_steered":
+                continue
+            items.append(
+                evidence_item_from_d01_do_z_row(row, provenance=prov),
+            )
     return tuple(items)
 
 
@@ -285,8 +327,9 @@ def load_d1_l3_ledger_artifacts(
     *,
     cf4_name: str = "cf4_results.json",
     d01_name: str | None = None,
-) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
-    """Load CF-4 and D01 JSON artifacts from ``research/sci_flow``."""
+    d01_do_z_name: str | None = None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, str], dict[str, Any] | None]:
+    """Load CF-4, D01 do(X), and optional D01 do(Z) JSON artifacts."""
     cf4_path = sci_flow_dir / cf4_name
     if not cf4_path.is_file():
         raise FileNotFoundError(f"CF-4 artifact missing: {cf4_path}")
@@ -301,8 +344,21 @@ def load_d1_l3_ledger_artifacts(
         if not d01_path.is_file():
             raise FileNotFoundError(f"D01 artifact missing: {d01_path}")
 
+    if d01_do_z_name is None:
+        do_z_candidates = sorted(sci_flow_dir.glob("M-D01_do_z_EOI_*.json"))
+        d01_do_z_path = do_z_candidates[-1] if do_z_candidates else None
+    else:
+        d01_do_z_path = sci_flow_dir / d01_do_z_name
+        if not d01_do_z_path.is_file():
+            d01_do_z_path = None
+
     cf4_payload = json.loads(cf4_path.read_text(encoding="utf-8"))
     d01_payload = json.loads(d01_path.read_text(encoding="utf-8"))
+    d01_do_z_payload = (
+        json.loads(d01_do_z_path.read_text(encoding="utf-8"))
+        if d01_do_z_path is not None
+        else None
+    )
     repo_root = sci_flow_dir.parents[1]
 
     def _rel(path: Path) -> str:
@@ -317,7 +373,9 @@ def load_d1_l3_ledger_artifacts(
         "cf4_md": "research/sci_flow/M-CF4_metrics_2026-08-20.md",
         "protocol": "research/sci_flow/EIA_PROOF_PROTOCOL.md",
     }
-    return cf4_payload, d01_payload, sources
+    if d01_do_z_path is not None:
+        sources["d01_do_z"] = _rel(d01_do_z_path)
+    return cf4_payload, d01_payload, sources, d01_do_z_payload
 
 
 def render_proof_report(proof: EIAProofVersion) -> str:

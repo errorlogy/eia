@@ -5,7 +5,8 @@
 **Parent theory:** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) §2  
 **ATT map:** [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md) ATT-E  
 **Compact criterion:** [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
-**Harness stub:** `eia.agi_transition.e_endo_label_admissible` (research tree)
+**Harness stub:** `eia.agi_transition.e_endo_label_admissible` (research tree)  
+**Proof protocol:** [`EIA_PROOF_PROTOCOL.md`](EIA_PROOF_PROTOCOL.md) / `eia.evidence_proofs` (`sci-flow-eia-proof-v0.1`)
 
 ---
 

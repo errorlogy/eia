@@ -1,0 +1,294 @@
+{
+  "tick_id": "M-D1-DO-Z-EOI",
+  "do_z_interventions": [
+    "do_z_zero_epistemic_gap",
+    "do_z_zero_self_prior",
+    "do_z_zero_prospective",
+    "do_z_zero_staleness",
+    "do_z_wm_off"
+  ],
+  "k_values_reference": [
+    1,
+    5,
+    20
+  ],
+  "claim_ceiling": "C2_partial_ATT_E",
+  "claim_allowed": false,
+  "pool_metric_id": "E_ENDO",
+  "att": "ATT-E",
+  "remap_note": "D01 EOI-k remapped from do(X) twin remove_last_n (F-NODO in D1\u00d7L3 ledger) to registered do(Z) internal-state interventions on cognitive-loop Z before initiative genesis. External observations unchanged; X remains non-triggering for the do(Z) counterfactual arm.",
+  "legacy_do_x_artifact": "research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json",
+  "rows": [
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "intervention_id": "do_z_zero_epistemic_gap",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "intervention_id": "do_z_zero_self_prior",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "intervention_id": "do_z_zero_prospective",
+      "eoi": 0.25,
+      "semantic_match": 0.25,
+      "twin_abstained": false,
+      "trajectory_changed": true,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-deadline",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "intervention_id": "do_z_zero_staleness",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "twin_world_001",
+      "scenario_path": "scenarios\\twin_world_001.yaml",
+      "intervention_id": "do_z_wm_off",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "intervention_id": "do_z_zero_epistemic_gap",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "intervention_id": "do_z_zero_self_prior",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "intervention_id": "do_z_zero_prospective",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "intervention_id": "do_z_zero_staleness",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "autonomous_question",
+      "scenario_path": "scenarios\\autonomous_question.yaml",
+      "intervention_id": "do_z_wm_off",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-review-time",
+      "twin_target": "belief-review-time",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "intervention_id": "do_z_zero_epistemic_gap",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "intervention_id": "do_z_zero_self_prior",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "intervention_id": "do_z_zero_prospective",
+      "eoi": 0.5,
+      "semantic_match": 0.5,
+      "twin_abstained": false,
+      "trajectory_changed": true,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-deadline",
+      "twin_source_drives": [
+        "epistemic"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "intervention_id": "do_z_zero_staleness",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    },
+    {
+      "scenario_id": "eoi_k_steered",
+      "scenario_path": "scenarios\\eoi_k_steered.yaml",
+      "intervention_id": "do_z_wm_off",
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "twin_abstained": false,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "original_target": "belief-commit-atlas",
+      "twin_target": "belief-commit-atlas",
+      "twin_source_drives": [
+        "commitment"
+      ],
+      "claim_allowed": false,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false
+    }
+  ],
+  "explore_proxy_note": "D01 do(Z) EOI remapping for proof ledger; replaces do(X) F-NODO flag with instrumented internal Z intervention; not C-ladder gate; not AGI*."
+}

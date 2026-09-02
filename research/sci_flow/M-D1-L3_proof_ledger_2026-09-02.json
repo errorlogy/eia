@@ -11,7 +11,8 @@
     "cf4": "research/sci_flow/cf4_results.json",
     "d01": "research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json",
     "cf4_md": "research/sci_flow/M-CF4_metrics_2026-08-20.md",
-    "protocol": "research/sci_flow/EIA_PROOF_PROTOCOL.md"
+    "protocol": "research/sci_flow/EIA_PROOF_PROTOCOL.md",
+    "d01_do_z": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json"
   },
   "evidence_items": [
     {
@@ -61,6 +62,66 @@
       "falsifiers_triggered": [],
       "provenance": "research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json",
       "agency_label": "instrumented_causal_evidence"
+    },
+    {
+      "evidence_id": "M-D01-do_z-eoi_k_steered-zero_epistemic_gap",
+      "metric_id": "E_ENDO",
+      "value": 1.0,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false,
+      "falsifiers_triggered": [],
+      "provenance": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json",
+      "agency_label": "instrumented_causal_evidence"
+    },
+    {
+      "evidence_id": "M-D01-do_z-eoi_k_steered-zero_self_prior",
+      "metric_id": "E_ENDO",
+      "value": 1.0,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false,
+      "falsifiers_triggered": [],
+      "provenance": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json",
+      "agency_label": "instrumented_causal_evidence"
+    },
+    {
+      "evidence_id": "M-D01-do_z-eoi_k_steered-zero_prospective",
+      "metric_id": "E_ENDO",
+      "value": 0.5,
+      "trajectory_changed": true,
+      "do_z_changes_g_distribution": true,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false,
+      "falsifiers_triggered": [],
+      "provenance": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json",
+      "agency_label": "instrumented_causal_evidence"
+    },
+    {
+      "evidence_id": "M-D01-do_z-eoi_k_steered-zero_staleness",
+      "metric_id": "E_ENDO",
+      "value": 1.0,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false,
+      "falsifiers_triggered": [],
+      "provenance": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json",
+      "agency_label": "instrumented_causal_evidence"
+    },
+    {
+      "evidence_id": "M-D01-do_z-eoi_k_steered-wm_off",
+      "metric_id": "E_ENDO",
+      "value": 1.0,
+      "trajectory_changed": false,
+      "do_z_changes_g_distribution": true,
+      "x_non_triggering": true,
+      "matching_external_initiating_signal": false,
+      "falsifiers_triggered": [],
+      "provenance": "research/sci_flow/M-D01_do_z_EOI_2026-09-02.json",
+      "agency_label": "instrumented_causal_evidence"
     }
   ],
   "proof": {
@@ -68,12 +129,17 @@
     "claim_ceiling": "C2",
     "e_endo_support": "partial",
     "accepted_evidence_ids": [
-      "M-CF4-do_z-epistemic_gap"
+      "M-CF4-do_z-epistemic_gap",
+      "M-D01-do_z-eoi_k_steered-zero_prospective"
     ],
     "rejected_evidence_ids": [
       "M-D01-eoi_k_steered-k1",
       "M-D01-eoi_k_steered-k5",
-      "M-D01-eoi_k_steered-k20"
+      "M-D01-eoi_k_steered-k20",
+      "M-D01-do_z-eoi_k_steered-zero_epistemic_gap",
+      "M-D01-do_z-eoi_k_steered-zero_self_prior",
+      "M-D01-do_z-eoi_k_steered-zero_staleness",
+      "M-D01-do_z-eoi_k_steered-wm_off"
     ],
     "falsifier_ids": [
       "F-NARR",

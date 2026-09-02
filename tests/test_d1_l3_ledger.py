@@ -9,29 +9,30 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 SCI_FLOW = REPO / "research" / "sci_flow"
-SRC = REPO / "research" / "cursor-starter-v0.2" / "src"
 
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
 if str(SCI_FLOW) not in sys.path:
     sys.path.insert(0, str(SCI_FLOW))
 
-from eia.evidence_proofs import (  # noqa: E402
-    build_d1_l3_evidence_from_artifacts,
-    evaluate_d1_l3_proof_ledger,
-    load_d1_l3_ledger_artifacts,
-)
-from run_d1_l3_ledger import build_ledger  # noqa: E402
+from run_d1_l3_ledger import _load_evidence_proofs, build_ledger  # noqa: E402
+
+_ep = _load_evidence_proofs()
+build_d1_l3_evidence_from_artifacts = _ep.build_d1_l3_evidence_from_artifacts
+evaluate_d1_l3_proof_ledger = _ep.evaluate_d1_l3_proof_ledger
+load_d1_l3_ledger_artifacts = _ep.load_d1_l3_ledger_artifacts
 
 
 class D1L3LedgerTests(unittest.TestCase):
     def test_cf4_and_d01_evidence_batch(self) -> None:
-        cf4_payload, d01_payload, sources = load_d1_l3_ledger_artifacts(SCI_FLOW)
+        cf4_payload, d01_payload, sources, d01_do_z_payload = load_d1_l3_ledger_artifacts(
+            SCI_FLOW
+        )
         evidence = build_d1_l3_evidence_from_artifacts(
             cf4_payload,
             d01_payload,
             cf4_provenance=sources["cf4"],
             d01_provenance=sources["d01"],
+            d01_do_z_payload=d01_do_z_payload,
+            d01_do_z_provenance=sources.get("d01_do_z"),
         )
         self.assertGreaterEqual(len(evidence), 4)
         self.assertEqual(evidence[0].metric_id, "CF4_E_PARTIAL")
@@ -50,14 +51,25 @@ class D1L3LedgerTests(unittest.TestCase):
         self.assertFalse(ledger["agi_star_claim"])
         self.assertIn("M-CF4-do_z-epistemic_gap", ledger["proof"]["accepted_evidence_ids"])
         self.assertTrue(ledger["proof"]["rejected_evidence_ids"])
+        do_z_accepted = [
+            eid
+            for eid in ledger["proof"]["accepted_evidence_ids"]
+            if eid.startswith("M-D01-do_z")
+        ]
+        if SCI_FLOW.joinpath("M-D01_do_z_EOI_2026-09-02.json").is_file():
+            self.assertTrue(do_z_accepted)
 
     def test_ledger_json_roundtrip_fields(self) -> None:
-        cf4_payload, d01_payload, sources = load_d1_l3_ledger_artifacts(SCI_FLOW)
+        cf4_payload, d01_payload, sources, d01_do_z_payload = load_d1_l3_ledger_artifacts(
+            SCI_FLOW
+        )
         evidence = build_d1_l3_evidence_from_artifacts(
             cf4_payload,
             d01_payload,
             cf4_provenance=sources["cf4"],
             d01_provenance=sources["d01"],
+            d01_do_z_payload=d01_do_z_payload,
+            d01_do_z_provenance=sources.get("d01_do_z"),
         )
         ledger = evaluate_d1_l3_proof_ledger(
             evidence,

@@ -125,12 +125,16 @@ def check_d1_l3() -> CellResult:
     evidence_proofs = _load_woe_submodule("evidence_proofs")
 
     t0 = time.perf_counter()
-    cf4_payload, d01_payload, sources = evidence_proofs.load_d1_l3_ledger_artifacts(SCI_FLOW)
+    cf4_payload, d01_payload, sources, d01_do_z_payload = (
+        evidence_proofs.load_d1_l3_ledger_artifacts(SCI_FLOW)
+    )
     evidence = evidence_proofs.build_d1_l3_evidence_from_artifacts(
         cf4_payload,
         d01_payload,
         cf4_provenance=sources["cf4"],
         d01_provenance=sources["d01"],
+        d01_do_z_payload=d01_do_z_payload,
+        d01_do_z_provenance=sources.get("d01_do_z"),
     )
     ledger = evidence_proofs.evaluate_d1_l3_proof_ledger(evidence, sources=sources)
     proof = ledger["proof"]
