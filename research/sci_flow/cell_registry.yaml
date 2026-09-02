@@ -95,7 +95,7 @@ cells:
       registry: research/cursor-starter-v0.2/src/eia/intervention_cube.py
       registry_count: 13
     L2:
-      status: partial
+      status: filled
       tier: D
       claim_allowed: false
       harnesses:
@@ -105,10 +105,12 @@ cells:
           att: ATT-N
           artifact: research/sci_flow/M-N_metrics_2026-08-21.md
           n_h_claim: false
-        - scaffold: eia.governor.ContactGovernor
-          note: governor gate smoke only
-      gap: CF-7 do_z_governor_isolation — registered, no dedicated runner
-      proposed_harness: research/sci_flow/run_cf7_governor_isolation.py
+        - command: python research/sci_flow/run_cf7_governor_isolation.py
+          intervention_kind: do_z
+          interventions: [do_z_governor_isolation]
+          att: CF-7
+          artifact: research/sci_flow/M-D3-L2_CF7_2026-09-02.json
+          implementation: research/sci_flow/cf7_governor_isolation_harness.py
     L3:
       status: filled
       tier: B_soft_NH
@@ -120,14 +122,16 @@ cells:
 
 express_smoke:
   command: python research/sci_flow/run_3d_express.py
-  last_run: "2026-09-01"
-  duration_ms: 1810.0
+  tier0_gate: scripts/check_sci_tier0.py
+  last_run: "2026-09-02"
+  duration_ms: null
   cells_pass: 9
-  note: smoke pass does not override strict filled/partial rubric
+  budget_s: 60
+  note: M-EXPRESS-CI — 9/9 pass enforced in tier-0; smoke does not override filled/partial rubric
 
 fill_summary:
-  filled: 8
-  partial: 1
+  filled: 9
+  partial: 0
   empty: 0
-  l2_column_filled: 2
-  l2_column_partial: 1
+  l2_column_filled: 3
+  l2_column_partial: 0

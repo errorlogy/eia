@@ -2,7 +2,7 @@
 
 **Status:** `OPERATIONAL` scaffold (2026-09-01) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-3D-01 + M-3D-EXPRESS  
+**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS  
 **Methodology:** [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) — sci-flow v3 = incremental cube cell-filling with harnesses  
 **Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py` · [`cell_registry.yaml`](cell_registry.yaml)  
 **Claim ceiling:** **C2** — scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
@@ -37,7 +37,7 @@
 |---|-------------------|-----------------|----------------|
 | **D1 Causal** | **filled** — [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) bar, F-DECL/F-EXT | **filled** — CF-4, EOI, **D01 deepened** (counterfactual + carryover) | **filled** — [`EIA_PROOF_PROTOCOL.md`](EIA_PROOF_PROTOCOL.md), ATT-E witness stub |
 | **D2 Dynamic** | **filled** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), \(\mathfrak{E}\) vector | **filled** — ATT-R/M-R-LIVE, DSR smoke, OMEGA | **filled** — M-R-LIVE JSON, ATT-R shadow witness |
-| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **partial** — ATT-N explore, governor scaffold | **filled** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft \(N_H\); no strong \(N_H\) |
+| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **filled** — ATT-N explore + **CF-7** governor isolation | **filled** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft \(N_H\); no strong \(N_H\) |
 
 Legend: **filled** = theory + falsifiers documented; **partial** = harness exists, thresholds TBD or explore-only; **empty** = not instrumented.
 
@@ -56,6 +56,7 @@ Legend: **filled** = theory + falsifiers documented; **partial** = harness exist
 | M-R / M-R-LIVE | D2×L2, D2×L3 | ATT-R recurrence |
 | M-O / [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md) | D2×L2 | Tier C explore |
 | M-N / ATT-N | D3×L2 | Explore under budget \(B\) |
+| **M-D3-L2-CF7** | **D3×L2** | Paired governor-off vs governor-on under \(X^{\mathrm{trigger}}=0\) |
 | D3 boundary witness (`boundary_witness_harness.py`) | **D3×L3** | Tier B soft \(N_H\); falsifier + governor + NAMM corpus |
 | M-EMP pool | cross-axis | Registry YAML |
 

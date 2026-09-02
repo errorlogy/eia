@@ -1370,3 +1370,37 @@ Shadow arm: Neuraxon O_t → OmegaWaveState multitick; Graphitti CI build (optio
 ### Next
 
 I02 figures for framework paper; multi-seed EOI-k batch. No C-level raise.
+
+---
+
+## Entry 038 — 2026-09-02 — M-D3-L2-CF7 governor isolation harness
+
+**Session:** D3×L2 cell fill — paired CF-7 governor-off vs governor-on under X^trigger=0  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `intervention_cube.py`, `boundary_witness_harness.py`, `woe_receipt.apply_governor_isolation` |
+| S2 | Created `cf7_governor_isolation_harness.py` + `run_cf7_governor_isolation.py` — paired arms |
+| S3 | Artifact `M-D3-L2_CF7_2026-09-02.json` + `.md`; tests `tests/test_cf7_governor_isolation.py` |
+| S4 | `cell_registry.yaml` D3×L2 → filled; `SCI_FLOW_3D_CUBE.md` + `run_3d_express.py` CF-7 smoke |
+| S5 | `check_sci_tier0` + pytest; cube now **9/9 filled** |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/cf7_governor_isolation_harness.py` |
+| Runner | `python research/sci_flow/run_cf7_governor_isolation.py` |
+| Intervention | `do_z_governor_isolation` (CF-7) |
+| Paired pass | 9/9 seeds (10 attempted; 1 no intent) |
+| Cube cell | **D3×L2** (dynamics) |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` after commit |
+
+### Next
+
+Multi-seed EOI-k batch; D1×L3 empirical proof ledger. No C-level raise.

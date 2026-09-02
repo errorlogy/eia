@@ -124,30 +124,36 @@ def check_d1_l2() -> CellResult:
 def check_d1_l3() -> CellResult:
     evidence_proofs = _load_woe_submodule("evidence_proofs")
 
-    item = evidence_proofs.EvidenceItem(
-        evidence_id="express-att-e-stub",
-        metric_id="E_ENDO",
-        value=0.35,
-        trajectory_changed=True,
-        do_z_changes_g_distribution=False,
-        x_non_triggering=True,
-        matching_external_initiating_signal=False,
-        falsifiers_triggered=(),
-        provenance="research/sci_flow/run_3d_express.py",
+    t0 = time.perf_counter()
+    cf4_payload, d01_payload, sources = evidence_proofs.load_d1_l3_ledger_artifacts(SCI_FLOW)
+    evidence = evidence_proofs.build_d1_l3_evidence_from_artifacts(
+        cf4_payload,
+        d01_payload,
+        cf4_provenance=sources["cf4"],
+        d01_provenance=sources["d01"],
     )
-    proof = evidence_proofs.evaluate_eia_proof_version((item,))
-    ok = proof.c_ladder_raise_allowed is False and proof.agi_star_claim is False
+    ledger = evidence_proofs.evaluate_d1_l3_proof_ledger(evidence, sources=sources)
+    proof = ledger["proof"]
+    ok = (
+        proof["c_ladder_raise_allowed"] is False
+        and proof["agi_star_claim"] is False
+        and ledger["e_endo_support"] == "partial"
+        and ledger["claim_allowed"] is False
+    )
     return CellResult(
         cell="D1×L3",
         axis="D1",
         layer="L3",
         status="pass" if ok else "partial",
-        message="ATT-E proof-protocol witness stub (shadow receipt)",
-        duration_ms=0.0,
+        message="D1×L3 empirical proof ledger (CF-4 + D01 EvidenceItems)",
+        duration_ms=(time.perf_counter() - t0) * 1000.0,
         details={
-            "protocol_version": proof.protocol_version,
-            "e_endo_support": proof.e_endo_support,
-            "claim_ceiling": proof.claim_ceiling,
+            "protocol_version": proof["protocol_version"],
+            "e_endo_support": ledger["e_endo_support"],
+            "claim_ceiling": ledger["claim_ceiling"],
+            "claim_allowed": ledger["claim_allowed"],
+            "accepted_evidence_ids": proof["accepted_evidence_ids"],
+            "artifact": ledger["sources"].get("cf4"),
         },
     )
 
@@ -229,9 +235,8 @@ def check_d3_l1() -> CellResult:
 
 
 def check_d3_l2() -> CellResult:
-    from eia.governor import ContactGovernor, GovernorConfig
+    from cf7_governor_isolation_harness import run_cf7_paired_batch
 
-    gov = ContactGovernor(GovernorConfig())
     non_embeddability = _load_woe_submodule("non_embeddability")
 
     batch = non_embeddability.run_att_n_batch(
@@ -243,15 +248,20 @@ def check_d3_l2() -> CellResult:
     causal_rate = causal.get("rate")
     if causal_rate is not None:
         causal_rate = float(causal_rate)
+
+    cf7 = run_cf7_paired_batch(REPO, seeds=(7, 8))
+    ok = cf7.passed and cf7.n_pass >= 1
     return CellResult(
         cell="D3×L2",
         axis="D3",
         layer="L2",
-        status="pass",
-        message="Governor scaffold + ATT-N smoke (n=2)",
+        status="pass" if ok else "partial",
+        message="CF-7 governor isolation + ATT-N smoke (n=2)",
         duration_ms=0.0,
         details={
-            "governor_min_contact": gov.config.min_contact_score,
+            "cf7_passed": cf7.passed,
+            "cf7_n_pass": cf7.n_pass,
+            "cf7_n_paired": cf7.n_paired,
             "att_n_causal_rate": causal_rate,
             "budget_b": budget_val,
         },
@@ -407,7 +417,7 @@ def _update_cube_doc(payload: dict[str, Any]) -> None:
         "| **D2 Dynamic** | **filled** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), $\\mathfrak{E}$ vector | **partial** — ATT-R/M-R-LIVE, DSR, OMEGA | **partial** — M-R-LIVE JSON, [`M-E04_DSR_metrics_2026-09-01.md`](M-E04_DSR_metrics_2026-09-01.md) |":
             f"| **D2 Dynamic** | **{_layer_status('D2', 'L1')}** — [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md), $\\mathfrak{{E}}$ vector | **{_layer_status('D2', 'L2')}** — ATT-R/M-R-LIVE, DSR smoke, OMEGA | **{_layer_status('D2', 'L3')}** — M-R-LIVE JSON, ATT-R shadow witness |",
         "| **D3 Boundary** | **filled** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **partial** — ATT-N explore, governor scaffold | **empty/partial** — NAMM soft witness optional; no strong $N_H$ |":
-            f"| **D3 Boundary** | **{_layer_status('D3', 'L1')}** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **{_layer_status('D3', 'L2')}** — ATT-N explore, governor scaffold | **{_layer_status('D3', 'L3')}** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft $N_H$; no strong $N_H$ |",
+            f"| **D3 Boundary** | **{_layer_status('D3', 'L1')}** — [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) conjunction | **{_layer_status('D3', 'L2')}** — ATT-N explore + CF-7 governor isolation | **{_layer_status('D3', 'L3')}** — [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) Tier B soft $N_H$; no strong $N_H$ |",
     }
     for old, new in replacements.items():
         if old in text:

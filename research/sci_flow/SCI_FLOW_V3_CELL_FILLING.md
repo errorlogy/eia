@@ -11,7 +11,7 @@
 
 ## Резюме (RU)
 
-**Sci-flow v3** — операционная методология: **3D Evidence Cube** (D1/D2/D3 × L1/L2/L3) задаёт онтологию оценки; каждая из **9 ячеек** заполняется инкрементально на тиках sci-flow под потолком **C2**. Заполнение ячейки = инвариант (L1), runnable harness с `do(·)`-рукой (L2), witness-артефакт JSON/trace (L3) — **на своём слое**, не все три в одной ячейке. Текущий инвентарь: **8/9 ячеек filled**, **1 partial** (D3×L2); **L2-столбец (harness): 2 filled + 1 partial**. Топ-пробелы: D3×L2 (CF-7 governor isolation), D1×L3 (эмпирический proof-witness вместо stub), D1×L2 (continuous `E_C` + multi-seed EOI-k). Тики = приращения заполнения; express (`run_3d_express.py`) — smoke, не замена rubric.
+**Sci-flow v3** — операционная методология: **3D Evidence Cube** (D1/D2/D3 × L1/L2/L3) задаёт онтологию оценки; каждая из **9 ячеек** заполняется инкрементально на тиках sci-flow под потолком **C2**. Заполнение ячейки = инвариант (L1), runnable harness с `do(·)`-рукой (L2), witness-артефакт JSON/trace (L3) — **на своём слое**, не все три в одной ячейке. Текущий инвентарь: **9/9 ячеек filled**, **0 partial**. **L2-столбец (harness): 3 filled**. Топ-пробелы: D1×L3 (эмпирический proof-witness вместо stub), D1×L2 deepen (continuous `E_C` + multi-seed EOI-k). Тики = приращения заполнения; express (`run_3d_express.py`) — smoke, не замена rubric.
 
 ---
 
@@ -70,11 +70,11 @@ Last express smoke: [`M-3D-EXPRESS_2026-09-01.md`](M-3D-EXPRESS_2026-09-01.md) �
 | **D2×L2** | filled | [`run_dsr_carryover.py`](run_dsr_carryover.py), [`run_shadow_att_r.py`](run_shadow_att_r.py), [`run_live_att_r.py`](run_live_att_r.py), [`run_mo_neuroplasticity_probe.py`](run_mo_neuroplasticity_probe.py), [`run_md.py`](run_md.py) | [`M-E04_DSR_metrics_2026-09-01.md`](M-E04_DSR_metrics_2026-09-01.md), [`M-MO_neuroplasticity_probe_2026-09-01.json`](M-MO_neuroplasticity_probe_2026-09-01.json) | B / C | false |
 | **D2×L3** | filled | [`run_shadow_att_r.py`](run_shadow_att_r.py), [`run_live_att_r.py`](run_live_att_r.py) | [`M-R-LIVE_metrics_2026-08-21.md`](M-R-LIVE_metrics_2026-08-21.md), shadow `G'` events | B | false |
 | **D3×L1** | filled | `intervention_cube.py` (13 interventions) | [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) | D | false |
-| **D3×L2** | **partial** | [`run_non_embeddability.py`](run_non_embeddability.py), `ContactGovernor` | [`M-N_metrics_2026-08-21.md`](M-N_metrics_2026-08-21.md) | D explore | false |
+| **D3×L2** | **filled** | [`run_non_embeddability.py`](run_non_embeddability.py), [`run_cf7_governor_isolation.py`](run_cf7_governor_isolation.py) | [`M-N_metrics_2026-08-21.md`](M-N_metrics_2026-08-21.md), [`M-D3-L2_CF7_2026-09-02.json`](M-D3-L2_CF7_2026-09-02.json) | D explore | false |
 | **D3×L3** | filled (soft) | [`run_boundary_witness.py`](run_boundary_witness.py), [`boundary_witness_harness.py`](boundary_witness_harness.py) | [`D3_BOUNDARY_WITNESS.md`](D3_BOUNDARY_WITNESS.md) | B soft \(N_H\) | false |
 
-**Summary counts (strict rubric):** 8 filled · 1 partial · 0 empty.  
-**L2-column (harness focus):** D1×L2 filled · D2×L2 filled · D3×L2 partial → **2/3 L2 cells fully filled**.
+**Summary counts (strict rubric):** 9 filled · 0 partial · 0 empty.  
+**L2-column (harness focus):** D1×L2 filled · D2×L2 filled · D3×L2 filled → **3/3 L2 cells fully filled**.
 
 ---
 
@@ -101,7 +101,7 @@ flowchart TD
 | D×L1 before D×L2 | Same-axis dynamics | Harness must cite falsifiers from invariant doc |
 | D×L2 before D×L3 (strict filled) | Same-axis witness | L3 receipts must reference L2 runner + metric ids |
 | D1×L2 before D1×L3 empirical | Causal witness | Proof protocol accepts Tier A metrics produced by CF4/EOI runs |
-| `intervention_cube.py` before D3×L2 CF-7 | Governor isolation | `do_z_governor_isolation` registered but no dedicated runner |
+| `intervention_cube.py` before D3×L2 CF-7 | Governor isolation | `do_z_governor_isolation` + `run_cf7_governor_isolation.py` |
 | M-CLI-P2 carryover before D2 longitudinal | DSR/ATT-R on main loop | Phase 2 shadow + optional daemon hydration |
 | Express smoke | None (parallel) | Regression gate; does not upgrade partial→filled |
 
@@ -137,7 +137,7 @@ flowchart TD
 
 | Gap cell | Current state | Proposed next harness | Notes |
 |----------|---------------|----------------------|-------|
-| **D3×L2** | partial | `run_cf7_governor_isolation.py` (stub) exercising `do_z_governor_isolation` + proposer/governor split | CF-7 registered in cube; no runner |
+| **D3×L2** | filled | `run_cf7_governor_isolation.py` — paired governor-off/on under X^trigger=0 | CF-7 harness complete (Entry 038) |
 | **D1×L3** | partial | Wire `M-CF4` + D01 rows into `EvidenceItem` batch → `evaluate_eia_proof_version` artifact JSON | Stub accepts only when `do_z_changes_g_distribution=true` |
 | **D1×L2** | filled (deepen) | `run_e_c_continuous.py` — continuous \(E_C\) under each `do_z_*` from cube | Pool `E_C` status=proxy |
 | D2×L2 | filled (extend) | E04 part 2: EOI drift on 50-tick carryover session | Deferred in Entry 028 |
