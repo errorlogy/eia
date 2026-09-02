@@ -14,9 +14,16 @@ cells:
       tier: A
       claim_allowed: false
       invariant_doc: research/sci_flow/CAUSAL_ENDOGENEITY.md
-      harness: null
-      artifact: research/sci_flow/CAUSAL_ENDOGENEITY.md
-      falsifiers: [F-DECL, F-EXT, F-NARR, F-NODO]
+      harness: python research/sci_flow/run_b05_no_llm_mood.py
+      harnesses:
+        - command: python research/sci_flow/run_b05_no_llm_mood.py
+          implementation: research/sci_flow/b05_no_llm_mood_harness.py
+          artifact: research/sci_flow/M-B05_no_llm_mood_2026-09-02.json
+          invariant: no_llm_mood
+          tier: "0"
+          note: M-B05 — drives orthogonal to mock LLM mood/embedding proxy
+      artifact: research/sci_flow/M-B05_no_llm_mood_2026-09-02.json
+      falsifiers: [F-DECL, F-EXT, F-NARR, F-NODO, F-EMBED]
     L2:
       status: filled
       tier: A
@@ -63,6 +70,12 @@ cells:
           intervention_kind: shadow_carryover
           pool_metric_id: B_D
           artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
+        - command: python research/sci_flow/run_e04_eoi_drift.py
+          intervention_kind: shadow_carryover
+          pool_metric_id: E_ENDO
+          att: ATT-E
+          artifact: research/sci_flow/M-E04_EOI_drift_2026-09-02.json
+          note: E04 part 2 longitudinal EOI drift vs bootstrap baseline (50 ticks)
         - command: python research/sci_flow/run_shadow_att_r.py
           intervention_kind: closed_loop
           pool_metric_id: R_RECURRENCE
@@ -98,6 +111,10 @@ cells:
           tier: C
           artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
           witness: paired_do_o_arms
+        - command: python research/sci_flow/run_graphitti_witness.py
+          tier: C
+          artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
+          witness: graphitti_binary_spike_rate
 
   D3:
     L1:

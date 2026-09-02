@@ -67,7 +67,7 @@ Last express smoke: [`M-3D-EXPRESS_2026-09-01.md`](M-3D-EXPRESS_2026-09-01.md) �
 | **D1×L2** | filled | [`run_cf4.py`](run_cf4.py), [`run_eoi_k.py`](run_eoi_k.py), [`eoi_k_harness.py`](eoi_k_harness.py) | [`M-CF4_metrics_2026-08-20.md`](M-CF4_metrics_2026-08-20.md), [`M-D01_EOI_k_metrics_2026-09-01.json`](M-D01_EOI_k_metrics_2026-09-01.json) | A | false |
 | **D1×L3** | partial | [`run_eia_proof_protocol.py`](run_eia_proof_protocol.py), `evidence_proofs.py` | [`EIA_PROOF_PROTOCOL.md`](EIA_PROOF_PROTOCOL.md) | A | **partial** (protocol classifier only) |
 | **D2×L1** | filled | — (doc) | [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md) | B | false |
-| **D2×L2** | filled | [`run_dsr_carryover.py`](run_dsr_carryover.py), [`run_shadow_att_r.py`](run_shadow_att_r.py), [`run_live_att_r.py`](run_live_att_r.py), [`run_mo_neuroplasticity_probe.py`](run_mo_neuroplasticity_probe.py), [`run_md.py`](run_md.py) | [`M-E04_DSR_metrics_2026-09-01.md`](M-E04_DSR_metrics_2026-09-01.md), [`M-MO_neuroplasticity_probe_2026-09-01.json`](M-MO_neuroplasticity_probe_2026-09-01.json) | B / C | false |
+| **D2×L2** | filled | [`run_dsr_carryover.py`](run_dsr_carryover.py), [`run_e04_eoi_drift.py`](run_e04_eoi_drift.py), [`run_shadow_att_r.py`](run_shadow_att_r.py), [`run_live_att_r.py`](run_live_att_r.py), [`run_mo_neuroplasticity_probe.py`](run_mo_neuroplasticity_probe.py), [`run_md.py`](run_md.py) | [`M-E04_DSR_metrics_2026-09-01.md`](M-E04_DSR_metrics_2026-09-01.md), [`M-E04_EOI_drift_2026-09-02.json`](M-E04_EOI_drift_2026-09-02.json), [`M-MO_neuroplasticity_probe_2026-09-01.json`](M-MO_neuroplasticity_probe_2026-09-01.json) | B / C | false |
 | **D2×L3** | filled | [`run_shadow_att_r.py`](run_shadow_att_r.py), [`run_live_att_r.py`](run_live_att_r.py) | [`M-R-LIVE_metrics_2026-08-21.md`](M-R-LIVE_metrics_2026-08-21.md), shadow `G'` events | B | false |
 | **D3×L1** | filled | `intervention_cube.py` (13 interventions) | [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md) | D | false |
 | **D3×L2** | **filled** | [`run_non_embeddability.py`](run_non_embeddability.py), [`run_cf7_governor_isolation.py`](run_cf7_governor_isolation.py) | [`M-N_metrics_2026-08-21.md`](M-N_metrics_2026-08-21.md), [`M-D3-L2_CF7_2026-09-02.json`](M-D3-L2_CF7_2026-09-02.json) | D explore | false |
@@ -140,7 +140,7 @@ flowchart TD
 | **D3×L2** | filled | `run_cf7_governor_isolation.py` — paired governor-off/on under X^trigger=0 | CF-7 harness complete (Entry 038) |
 | **D1×L3** | partial | Wire `M-CF4` + D01 rows into `EvidenceItem` batch → `evaluate_eia_proof_version` artifact JSON | Stub accepts only when `do_z_changes_g_distribution=true` |
 | **D1×L2** | filled (deepen) | `run_e_c_continuous.py` — continuous \(E_C\) under each `do_z_*` from cube | Pool `E_C` status=proxy |
-| D2×L2 | filled (extend) | E04 part 2: EOI drift on 50-tick carryover session | Deferred in Entry 028 |
+| D2×L2 | filled (extend) | ~~E04 part 2: EOI drift on 50-tick carryover session~~ **done** Entry 043 | Entry 028 deferred → Entry 043 |
 | D2×L2 M-O | Tier C | Neuraxon `O_t` → `OmegaWaveState` shadow multitick | Entry 036 next |
 | D3×L2 ATT-N | explore | Multi-seed `run_non_embeddability.py` batch (n≥20) | Single-seed smoke only |
 | D1×L2 EOI-k | filled | Multi-seed k-sweep + pre-registered JSON merge | Harden D01 against seed variance |

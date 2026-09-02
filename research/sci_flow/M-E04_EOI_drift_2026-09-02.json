@@ -1,0 +1,740 @@
+{
+  "target_cognitive_ticks": 50,
+  "cognitive_ticks_reached": 50,
+  "carryover_episodes": 24,
+  "n_initiative_samples": 50,
+  "eoi_min": 0.75,
+  "eoi_max": 1.0,
+  "eoi_mean": 0.755,
+  "eoi_drift_span": 0.25,
+  "persistence_fraction": 1.0,
+  "eoi_endogenous_threshold": 0.5,
+  "baseline_target": "belief-world-gap",
+  "baseline_kind": "ask_question",
+  "eoi_pass": true,
+  "e04_pass": true,
+  "claim_ceiling": "C2_partial_ATT_E",
+  "claim_allowed": false,
+  "pool_metric_id": "E_ENDO",
+  "att": "ATT-E",
+  "trace_mode": "shadow_carryover_longitudinal",
+  "rows": [
+    {
+      "cognitive_tick": 1,
+      "eoi": 1.0,
+      "semantic_match": 1.0,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-763ddc66",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 2,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-6274d31e",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 3,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-93f1ad51",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 4,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-7a5f90fa",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 5,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-9bacfdce",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 6,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-9258a435",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 7,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-c5402be0",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 8,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-cc78230a",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 9,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-41277934",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 10,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-ee41abd8",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 11,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-40b06abc",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 12,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-f3d1dc02",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 13,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-3e890801",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 14,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-06b8919f",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 15,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-9ff8f05c",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 16,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-9b4ac4b6",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 17,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-b61dd5b9",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 18,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-70e704f3",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 19,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-5e1bce33",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 20,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-4a6db071",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 21,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-7eff1688",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 22,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-1052dab4",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 23,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-96784324",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 24,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-3f83f9ca",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 25,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-53eb3994",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 26,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-d4485402",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 27,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-6f229328",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 28,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-7f1e9458",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 29,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-2664411e",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 30,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-6b3fb5da",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 31,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-3d39cb10",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 32,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-9a975b6b",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 33,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-5c7c3e96",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 34,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-58df2171",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 35,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-ca57803d",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 36,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-1a3cd08e",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 37,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-b3f069f8",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 38,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-b810f53a",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 39,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-47072003",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 40,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-fcb7cedd",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 41,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-77398670",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 42,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-a965329f",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 43,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-2294f038",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 44,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-903c22f9",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 45,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-e7fb2588",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 46,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-28e76255",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 47,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-04fd1ba8",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 48,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-2ccd9e50",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 49,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-b6477a39",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    },
+    {
+      "cognitive_tick": 50,
+      "eoi": 0.75,
+      "semantic_match": 0.75,
+      "abstained": false,
+      "target_belief_id": "belief-world-gap",
+      "kind": "ask_question",
+      "source_drives": [
+        "epistemic"
+      ],
+      "initiative_id": "int-ce36a95d",
+      "claim_allowed": false,
+      "trace_mode": "shadow_carryover_longitudinal"
+    }
+  ],
+  "milestone": "M-E04-DRIFT",
+  "hermes_tasks": [
+    "E04"
+  ],
+  "emit_m0": false,
+  "shadow": true,
+  "live_telegram": false,
+  "user_prompt_ticks": 0,
+  "pre_registered": {
+    "target_cognitive_ticks": 50,
+    "eoi_endogenous_threshold": 0.5,
+    "no_user_prompt": true,
+    "twin_intervention": false,
+    "emit_m0": false,
+    "shadow_first": true
+  },
+  "explore_proxy_note": "E04 part 2 longitudinal EOI drift on Phase 2 shadow carryover; initiative fingerprint stability vs bootstrap baseline; not C-ladder gate; orthogonal to D01 twin EOI-k counterfactual replay."
+}

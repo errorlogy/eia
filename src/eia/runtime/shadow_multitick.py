@@ -122,6 +122,23 @@ class AttREvent:
         }
 
 
+def _initiative_sample(cognitive_tick: int, initiative: Any) -> dict[str, Any]:
+    """Serialize one cognition-tick initiative for longitudinal EOI drift scoring."""
+    cand = initiative.candidate
+    target = cand.target_belief_id if not initiative.abstained else None
+    drives = tuple(d.value for d in cand.source_drives) if not initiative.abstained else ()
+    return {
+        "cognitive_tick": cognitive_tick,
+        "initiative_id": initiative.id,
+        "abstained": initiative.abstained,
+        "target_belief_id": target,
+        "kind": cand.kind.value if not initiative.abstained else None,
+        "source_drives": list(drives),
+        "expected_info_gain": cand.expected_info_gain if not initiative.abstained else 0.0,
+        "initiative": initiative.model_dump(mode="json"),
+    }
+
+
 @dataclass
 class ShadowEpisodeResult:
     """One shadow multi-tick episode (always non-claiming)."""
@@ -137,6 +154,7 @@ class ShadowEpisodeResult:
     motive_ids: list[str] = field(default_factory=list)
     carryover: ShadowSessionCarryover | None = None
     used_carryover: bool = False
+    initiative_samples: list[dict[str, Any]] = field(default_factory=list)
     gap_vs_live_daemon: str = (
         "Daemon recreates CognitiveLoop per tick without cross-tick W'→G' "
         "carryover; this harness keeps one loop + post-action world update."
@@ -166,6 +184,8 @@ class ShadowEpisodeResult:
                 "drive_tick": self.carryover.drive_tick,
                 "has_beliefs": bool(self.carryover.beliefs_json),
             }
+        if self.initiative_samples:
+            payload["initiative_sample_count"] = len(self.initiative_samples)
         return payload
 
 
@@ -358,7 +378,9 @@ def _multitick_cognitive_episode(
             )
         )
 
-        mot, _init, decision, _ = loop.tick_cognition(tick=1, hour=14, finalize=True)
+        initiative_samples: list[dict[str, Any]] = []
+        mot, init1, decision, _ = loop.tick_cognition(tick=1, hour=14, finalize=True)
+        initiative_samples.append(_initiative_sample(1, init1))
         motive_ids.append(mot.id)
         g0 = mot.id
         events.append(AttREvent("n2", "G", g0, ("n0", "n1"), 0))
@@ -387,6 +409,7 @@ def _multitick_cognitive_episode(
                 ticks_run=ticks_run,
                 motive_ids=motive_ids,
                 used_carryover=used_carryover,
+                initiative_samples=initiative_samples,
             )
 
         # Closed / no-novel arms: apply real post-action world update on loop
@@ -394,7 +417,8 @@ def _multitick_cognitive_episode(
         events.append(AttREvent("n5", "X", "x_observation", ("n4",), 2))
         events.append(AttREvent("n6", "W_prime", "world_update", ("n5", "n4"), 2))
 
-        mot2, _init2, _dec2, _ = loop.tick_cognition(tick=2, hour=14, finalize=True)
+        mot2, init2, _dec2, _ = loop.tick_cognition(tick=2, hour=14, finalize=True)
+        initiative_samples.append(_initiative_sample(2, init2))
         motive_ids.append(mot2.id)
         ticks_run = 2
         last_motive = mot2.id
@@ -428,6 +452,7 @@ def _multitick_cognitive_episode(
             kuramoto_r=0.42,  # incidental; must not drive pass
             carryover=session_carryover,
             used_carryover=used_carryover,
+            initiative_samples=initiative_samples,
         )
 
 
@@ -455,8 +480,10 @@ def run_shadow_carryover_tick(
             )
         )
 
+        initiative_samples: list[dict[str, Any]] = []
         tick1 = base_tick + 1
-        mot, _init, decision, _ = loop.tick_cognition(tick=tick1, hour=14, finalize=True)
+        mot, init1, decision, _ = loop.tick_cognition(tick=tick1, hour=14, finalize=True)
+        initiative_samples.append(_initiative_sample(tick1, init1))
         motive_ids.append(mot.id)
         events.append(AttREvent("c2", "G", mot.id, ("c0", "c1"), tick1))
         events.append(AttREvent("c3", "Pi", "pi_carryover", ("c2",), tick1))
@@ -469,7 +496,8 @@ def run_shadow_carryover_tick(
         events.append(AttREvent("c5", "X", "x_ambient", ("c4",), tick2))
         events.append(AttREvent("c6", "W_prime", "world_update", ("c5", "c4"), tick2))
 
-        mot2, _init2, _dec2, _ = loop.tick_cognition(tick=tick2, hour=14, finalize=True)
+        mot2, init2, _dec2, _ = loop.tick_cognition(tick=tick2, hour=14, finalize=True)
+        initiative_samples.append(_initiative_sample(tick2, init2))
         motive_ids.append(mot2.id)
         novel = mot2.id != mot.id
         events.append(
@@ -494,6 +522,7 @@ def run_shadow_carryover_tick(
             motive_ids=motive_ids,
             carryover=next_carryover,
             used_carryover=True,
+            initiative_samples=initiative_samples,
             gap_vs_live_daemon=(
                 "Shadow session carryover tick; live daemon hydrates from StateStore "
                 "when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."

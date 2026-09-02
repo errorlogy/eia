@@ -1504,3 +1504,75 @@ E04 EOI drift on carryover; refine E_C theta_E pre-registration. No C-level rais
 
 Graphitti CI binary run (optional); shadow multitick with vendor-fed O_t. No C-level raise.
 
+---
+
+## Entry 043 — 2026-09-02 — M-E04-DRIFT EOI drift on 50-tick carryover (D2×L2)
+
+**Session:** E04 part 2 — longitudinal initiative-fingerprint stability on shadow carryover  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `run_dsr_carryover.py`, `eoi_k_harness.py`, shadow carryover API |
+| S2 | `eoi_drift_harness.py` + `run_e04_eoi_drift.py`; initiative capture in `shadow_multitick` |
+| S3 | Artifact `M-E04_EOI_drift_2026-09-02.json` + `.md`; `cell_registry.yaml` D2×L2 updated |
+| S4 | `tests/test_e04_eoi_drift.py`; tier-0 includes E04 EOI drift tests |
+| S5 | `check_sci_tier0` OK; SCI_FLOW_LOG Entry 043 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/eoi_drift_harness.py` |
+| Runner | `python research/sci_flow/run_e04_eoi_drift.py` |
+| Artifact | `research/sci_flow/M-E04_EOI_drift_2026-09-02.json` |
+| Cognitive ticks | 50 |
+| `eoi_min` / `eoi_max` / `eoi_mean` | 0.75 / 1.0 / 0.755 |
+| `eoi_drift_span` | 0.25 |
+| `persistence_fraction` | 1.0 |
+| Baseline target | `belief-world-gap` |
+| Cube cell | **D2×L2** (longitudinal dynamics) |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` after commit |
+
+### Next
+
+Multi-seed EOI drift batch; live daemon StateStore carryover. No C-level raise.
+
+---
+
+## Entry 044 — 2026-09-02 — M-B05 no-LLM-mood structural test (D1×L1)
+
+**Session:** Formalize drives ≠ LLM embedding/mood proxy (Hermes B05 / M-CLI Tier 0)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read CURSOR_TASKS_TRIAGE B05, STABLE_ENDOGENEITY, DriveEngine, cell_registry D1×L1 |
+| S2 | Created `b05_no_llm_mood_harness.py` + `run_b05_no_llm_mood.py` — 7-check Tier 0 battery |
+| S3 | Orthogonality falsifiers: same mock mood ≠ same drives; diff mood + same gradients = same drives |
+| S4 | `tests/test_b05_no_llm_mood.py`; `cell_registry.yaml` D1×L1 harness; tier-0 includes test |
+| S5 | Artifact `M-B05_no_llm_mood_2026-09-02.json` + `.md`; `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/b05_no_llm_mood_harness.py` |
+| Runner | `python research/sci_flow/run_b05_no_llm_mood.py` |
+| Artifact | `research/sci_flow/M-B05_no_llm_mood_2026-09-02.json` |
+| Checks | 7/7 pass (constitution, signature, AST purity, orthogonality ×2, side-channel, explanation) |
+| Cube cell | **D1×L1** (invariant / no_llm_mood) |
+| `claim_allowed` | **false** (Tier 0) |
+| Tier-0 | `check_sci_tier0` after commit |
+
+### Next
+
+Main-stack `tests/test_no_llm_mood.py` mirror (CURSOR_TASKS B05); D01-BATCH / E-C-01 deepen. No C-level raise.
+

@@ -51,6 +51,8 @@ def main() -> int:
             "tests/test_oscillatory_mo.py",
             "tests/test_mo_do_o_arms.py",
             "tests/test_eoi_k_batch.py",
+            "tests/test_b05_no_llm_mood.py",
+            "tests/test_e04_eoi_drift.py",
             "tests/test_check_sci_tier0.py",
             "-q",
         ]
