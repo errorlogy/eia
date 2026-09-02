@@ -284,9 +284,9 @@ milestones:
       claim_allowed: false
       ci_workflow: .github/workflows/graphitti-witness.yml
       ci_build_script: scripts/build_graphitti.sh
-      witness_kind_local: stub
+      witness_kind_local: regression_xml_ok
       witness_kind_ci: binary_ok
-      blocker: "cmake/g++ unavailable on Windows; WSL apt offline — CI path added"
+      blocker: "Windows/WSL: no cmake; CI googletest bootstrap added in build_graphitti.sh"
       upgrade_plan: research/vendor/README.md#graphitti
     omega_metric:
       status: in_progress

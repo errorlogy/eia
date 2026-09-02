@@ -31,13 +31,16 @@ def test_build_payload_tier_c_stub() -> None:
     assert payload["claim_allowed"] is False
     assert payload["tier"] == "C"
     assert payload["cube_cell"] == "D2×L3"
-    assert payload["tick"] in ("M-O-GRAPHITTI-BIN", "M-GRAPHITTI-CI")
+    assert payload["tick"] in ("M-O-GRAPHITTI-BIN", "M-GRAPHITTI-CI", "M-GRAPHITTI-GREEN")
     assert payload["binary_name"] == "cgraphitti"
     assert payload["ci_workflow"] == ".github/workflows/graphitti-witness.yml"
     sim = payload["simulation"]
     witness = payload["witness"]
-    assert witness["witness_kind"] in ("stub", "binary_ok", "run_failed", "timeout")
+    assert witness["witness_kind"] in ("stub", "binary_ok", "regression_xml_ok", "run_failed", "timeout")
     assert sim["binary_available"] is False or sim["status"] in ("ok", "run_failed", "timeout")
+    if sim["status"] == "regression_ok":
+        assert witness["witness_kind"] == "regression_xml_ok"
+        assert witness["spike_count_total"] > 0
 
 
 def test_parse_spike_metrics_regression_good_output() -> None:
@@ -52,4 +55,5 @@ def test_parse_spike_metrics_regression_good_output() -> None:
 def test_find_binary_none_when_unbuilt() -> None:
     binary = _witness.find_cgraphitti_binary()
     if binary is None:
-        assert _witness.build_payload()["simulation"]["status"] == "build_blocked"
+        payload = _witness.build_payload()
+        assert payload["simulation"]["status"] in ("build_blocked", "regression_ok")

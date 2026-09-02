@@ -10,7 +10,23 @@ BUILD_DIR="${GRAPHITTI}/build"
 CONFIG="../configfiles/test-tiny.xml"
 JOBS="${GRAPHITTI_BUILD_JOBS:-$(nproc 2>/dev/null || echo 2)}"
 
+GTEST_DIR="${GRAPHITTI}/Testing/lib/googletest-master"
+GTEST_INCLUDE_LINK="${GRAPHITTI}/Testing/lib/GoogleTest/googletest-master"
+
+bootstrap_googletest() {
+  if [[ -f "${GTEST_DIR}/CMakeLists.txt" ]]; then
+    return 0
+  fi
+  echo "==> Bootstrap googletest (vendor snapshot omits Testing/lib)"
+  mkdir -p "${GRAPHITTI}/Testing/lib"
+  git clone --depth 1 --branch release-1.12.1 \
+    https://github.com/google/googletest.git "${GTEST_DIR}"
+  mkdir -p "${GRAPHITTI}/Testing/lib/GoogleTest"
+  ln -sfn googletest-master "${GTEST_INCLUDE_LINK}"
+}
+
 echo "==> Graphitti build (ENABLE_CUDA=NO)"
+bootstrap_googletest
 mkdir -p "${BUILD_DIR}"
 cd "${BUILD_DIR}"
 

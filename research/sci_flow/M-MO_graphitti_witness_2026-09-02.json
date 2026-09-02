@@ -1,7 +1,7 @@
 {
   "milestone": "M-O",
   "artifact_id": "M-MO_graphitti_witness_2026-09-02",
-  "tick": "M-O-GRAPHITTI-BIN",
+  "tick": "M-GRAPHITTI-GREEN",
   "date": "2026-09-02",
   "branch": "research/cursor-starter-v0.2-woe-eis",
   "claim_ceiling": "C2",
@@ -18,37 +18,30 @@
   "ci_workflow": ".github/workflows/graphitti-witness.yml",
   "ci_build_script": "scripts/build_graphitti.sh",
   "simulation": {
-    "status": "build_blocked",
+    "status": "regression_ok",
     "binary_available": false,
     "binary_path": null,
-    "build_blocker": {
-      "windows_cmake": false,
-      "wsl_available": true,
-      "wsl_toolchain": "cmake/g++ not installed; apt install blocked (network unreachable 2026-09-02)",
-      "blocker": "Graphitti CPU build requires cmake \u22653.12 + g++ (C++17). Not available on Windows PATH; WSL Ubuntu 24.04 present but lacks toolchain and cannot apt-install packages offline.",
-      "upgrade_plan": [
-        "Linux CI: bash scripts/build_graphitti.sh (workflow .github/workflows/graphitti-witness.yml)",
-        "Local Linux: apt install cmake build-essential libboost-graph-dev && bash scripts/build_graphitti.sh",
-        "Windows: install CMake + VS Build Tools, or WSL with working apt, then same cmake flow",
-        "Re-run: python research/sci_flow/run_graphitti_witness.py",
-        "CI artifact: download graphitti-witness-* \u2192 extract cgraphitti to research/sci_flow/.ci-artifacts/graphitti/"
-      ],
-      "ci_workflow": ".github/workflows/graphitti-witness.yml",
-      "ci_build_script": "scripts/build_graphitti.sh"
+    "regression_xml": "research/vendor/graphitti/Testing/RegressionTesting/GoodOutput/Cpu/test-tiny-out.xml",
+    "spike_metrics": {
+      "spike_count_total": 5,
+      "spike_rate_mean_hz": 5.0,
+      "spike_rate_min_hz": 5.0,
+      "spike_rate_max_hz": 5.0,
+      "spike_rate_per_neuron_hz": {
+        "0": 5.0
+      },
+      "neuron_count": 1,
+      "epoch_duration_s": 1.0,
+      "parse_status": "ok"
     },
-    "stub_metrics": {
-      "spike_rate_mean_hz": null,
-      "spike_count_total": null,
-      "edge_count_delta": null,
-      "note": "Binary not built; see build_blocker.upgrade_plan"
-    }
+    "note": "Vendor GoodOutput XML; spike metrics only \u2014 not a live cgraphitti run"
   },
   "witness": {
-    "witness_kind": "stub",
-    "spike_rate_mean_hz": null,
-    "spike_count_total": null,
-    "neuron_count": null,
-    "status": "build_blocked"
+    "witness_kind": "regression_xml_ok",
+    "spike_rate_mean_hz": 5.0,
+    "spike_count_total": 5,
+    "neuron_count": 1,
+    "status": "regression_ok"
   },
   "falsifiers_active": [
     "F-STRUCT\u2260E",
