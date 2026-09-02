@@ -179,15 +179,22 @@ M-R-LIVE JSON; ATT-R shadow witness \\
 & \textit{status: filled} & \textit{status: filled} & \textit{status: filled} \\ \midrule
 \textbf{D3 Boundary} &
 $AGI^{*}$ conjunction; governor constitution &
-ATT-N explore; governor scaffold &
+CF-7 governor isolation; ATT-N explore &
 Tier\,B soft $N_H$ boundary witness \\
-& \textit{status: filled} & \textit{status: partial} & \textit{status: filled} \\ \bottomrule
+& \textit{status: filled} & \textit{status: filled} & \textit{status: filled} \\ \bottomrule
 \end{tabular}
 \caption{9-cell evidence matrix. \textbf{filled} = theory + falsifiers documented (L1) or harness + witness instrumented (L2/L3); \textbf{partial} = harness exists, thresholds TBD; \textbf{empty} = not instrumented. Status placeholders updated by empirical agent.}
 \label{tab:matrix}
 \end{table}
 
 \textbf{Legend.} No single cell raises the C-ladder. Kuramoto/OMEGA occupy D2 as \textbf{Tier\,C explore adjunct}, not Tier\,A proof. $AGI^{*}=E_{\mathrm{endo}}\land C_{\mathrm{non\text{-}emb}}(H)\land\cdots$; active ceiling \textbf{C2}; partial cells do not authorize C-level raises.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.72\linewidth]{figures/cube_status_heatmap.pdf}
+\caption{9-cell status heatmap from \texttt{cell\_registry.yaml} (2026-09-02). All cells \textbf{filled}; D3$\times$L2 harness thresholds remain explore-only in places but instrumentation is complete.}
+\label{fig:cube-matrix}
+\end{figure}
 
 \textbf{Intervention registry.} Typed interventions in \texttt{intervention\_cube.py} map to axes:
 \begin{itemize}[leftmargin=*]
@@ -197,7 +204,14 @@ Tier\,B soft $N_H$ boundary witness \\
 \end{itemize}
 API: \texttt{get\_intervention(id)}, \texttt{list\_by\_axis("D1"|"D2"|"D3")}, \texttt{eoi\_k\_interventions()}.
 
-\textbf{Express smoke.} \texttt{run\_3d\_express.py} provides a $<$\,60\,s nine-cell smoke pass; express success does not imply empirical closure.
+\textbf{Express smoke.} \texttt{run\_3d\_express.py} provides a $<$\,60\,s nine-cell smoke pass; express success does not imply empirical closure (Figure~\ref{fig:express-pipeline}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/express_pipeline.pdf}
+\caption{M-3D-EXPRESS sequential smoke pipeline wired into tier-0 (\texttt{check\_sci\_tier0.py}). Measured total duration 3835.5\,ms on 2026-09-02; budget $<$\,60\,s.}
+\label{fig:express-pipeline}
+\end{figure}
 
 \section{Bridge to EIA Theory}\label{sec:bridge}
 

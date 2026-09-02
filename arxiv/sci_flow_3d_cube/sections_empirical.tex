@@ -1,1 +1,62 @@
-% filled by empirical agent
+\section{Empirical Cell Status and Harnesses}\label{sec:empirical}
+
+This section reports machine-readable cell statuses and partial harness results referenced by the theory paper. All metrics operate under \texttt{claim\_allowed=false} and C2 ceiling; express pass does not authorize C-level raises.
+
+\subsection{Registry snapshot}
+
+As of 2026-09-02, \texttt{cell\_registry.yaml} records \textbf{9/9 filled} cells (0 partial, 0 empty). Figure~\ref{fig:cube-matrix} visualizes the matrix; Figure~\ref{fig:express-pipeline} shows the M-3D-EXPRESS smoke ordering enforced in tier-0 regression.
+
+\subsection{CF-4 causal ablation (D1$\times$L2)}
+
+CF-4 named $do(Z)$ resets provide the strongest current ATT-E proxy. Figure~\ref{fig:cf4-empirical} summarizes intent-rate pass proxies from \texttt{cf4\_results.json}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/cf4_ablation_bars.pdf}
+\caption{CF-4 ablation bars: \texttt{default} 0.95, \texttt{zero\_epistemic\_gap} 0.06, \texttt{wm\_off} 0.00 (n=100 seeds per condition). Proof-protocol acceptance yields \texttt{e\_endo\_support=partial} at best.}
+\label{fig:cf4-empirical}
+\end{figure}
+
+\subsection{Continuous $E_C$ batch (D1$\times$L2 deepen)}
+
+\texttt{run\_e\_c\_continuous.py} (M-D01) registers a minimal continuous $E_C$ proxy under each \texttt{do\_z\_*} intervention from the intervention cube (3 seeds $\times$ 5 interventions). Pool metric \texttt{E\_C} status=\textbf{proxy}; $\theta_E$ remains TBD. Mean $E_C$ by intervention: \texttt{do\_z\_wm\_off} 1.0; \texttt{do\_z\_zero\_epistemic\_gap} 1.0; \texttt{do\_z\_zero\_staleness} 0.33; \texttt{do\_z\_zero\_self\_prior} 0.0; \texttt{do\_z\_zero\_prospective} 0.0. Artifact: \texttt{M-D01\_E\_C\_continuous\_2026-09-02.json}.
+
+\subsection{D1$\times$L3 empirical proof ledger}
+
+\texttt{run\_eia\_proof\_protocol.py} (protocol \texttt{sci-flow-eia-proof-v0.1}) accepts CF-4 + D01 \texttt{EvidenceItem}s conservatively. Current ledger: \texttt{e\_endo\_support=partial}, \texttt{claim\_ceiling=C2}, accepted evidence \texttt{M-CF4-do\_z-epistemic\_gap}. Declaration-only and OMEGA-only inputs are rejected (F-DECL, F-SYNC).
+
+\subsection{M-O paired $do(O)$ arms (D2$\times$L2, Tier\,C)}
+
+\texttt{run\_mo\_do\_o\_arms.py} compares Neuraxon baseline, \texttt{plasticity\_off}, and native \texttt{oscillatory\_state.py} (50 steps, seed 42). Paired $\Omega_t$ final: baseline 0.293, native 0.897 ($\Delta{=}0.604$); Kuramoto $R$: baseline 0.604, native 0.994. Structural events: baseline 1, \texttt{plasticity\_off} 0. Falsifier hints: F-STRUCT$\neq$E active; F-KURAMOTO-AS-E not triggered at this seed. \textbf{Explore only}---does not establish $E_{\mathrm{endo}}$ or ATT-G linkage. Artifact: \texttt{M-MO\_do\_o\_arms\_2026-09-02.json}.
+
+\subsection{Graphitti binary witness (D2$\times$L3, Tier\,C)}
+
+\texttt{run\_graphitti\_witness.py} documents ConnGrowth + STDP config parse and build path for \texttt{cgraphitti}. Binary status: \textbf{build\_blocked} (Windows: no cmake; WSL: toolchain/apt offline). Spike-rate metrics deferred to Linux CI; regression parser validated against \texttt{test-tiny-out.xml}. Artifact: \texttt{M-MO\_graphitti\_witness\_2026-09-02.json}.
+
+\subsection{M-E04 EOI drift (D2$\times$L2)}
+
+\texttt{run\_e04\_eoi\_drift.py} on 50-tick shadow carryover: $\mathrm{EOI}$ mean 0.755, span 0.25, persistence fraction 1.0, \texttt{e04\_pass=true}. Orthogonal to DSR $B_D$ evidence (M-E04/D05). Artifact: \texttt{M-E04\_EOI\_drift\_2026-09-02.json}.
+
+\subsection{M-B05 no-LLM-mood structural test (D1$\times$L1)}
+
+\texttt{run\_b05\_no\_llm\_mood.py} --- 7/7 Tier\,0 checks: \texttt{no\_llm\_mood=true}, drive source = BeliefField gradients only; mock LLM mood proxy orthogonal (same mood $\neq$ same drives; diff mood + same gradients = same drives). Structural invariant, not a live LLM test. Artifact: \texttt{M-B05\_no\_llm\_mood\_2026-09-02.json}.
+
+\subsection{Express pass receipt}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lccp{4.8cm}}
+\toprule Cell & Status & ms & Message \\ \midrule
+D1$\times$L1 & pass & 0.4 & Causal bar definitions present \\
+D1$\times$L2 & pass & 747.0 & D01 EOI-$k$ counterfactual sweep \\
+D1$\times$L3 & pass & 328.0 & D1$\times$L3 empirical proof ledger \\
+D2$\times$L1 & pass & 1.1 & Stable endogeneity invariants documented \\
+D2$\times$L2 & pass & 158.3 & DSR smoke on shadow carryover \\
+D2$\times$L3 & pass & 50.3 & ATT-R shadow closed-loop witness \\
+D3$\times$L1 & pass & 1.8 & Falsifier/intervention registry (15 entries) \\
+D3$\times$L2 & pass & 1967.0 & CF-7 governor isolation + ATT-N smoke \\
+D3$\times$L3 & pass & 581.5 & Tier\,B soft $N_H$ boundary witness \\ \bottomrule
+\end{tabular}
+\caption{M-3D-EXPRESS receipt (2026-09-02). Total 3835.5\,ms; budget $<$\,60\,s.}
+\label{tab:express-receipt}
+\end{table}

@@ -4,3 +4,4 @@ arxiv>=2.0.0
 arxiv-latex-cleaner>=1.0.0
 matplotlib>=3.8.0
 seaborn>=0.13.0
+pyyaml>=6.0

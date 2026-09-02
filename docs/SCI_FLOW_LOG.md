@@ -1575,3 +1575,70 @@ Optional Linux CI workflow to build `cgraphitti` and re-run witness for live spi
 
 Main-stack `tests/test_no_llm_mood.py` mirror (CURSOR_TASKS B05); D01-BATCH / E-C-01 deepen. No C-level raise.
 
+---
+
+## Entry 044 — 2026-09-02 — I05 arXiv figures batch (EIA + 3D cube)
+
+**Session:** Generate publication figures for framework and 3D cube papers; wire `\includegraphics`; recompile  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `cell_registry.yaml`, `cf4_results.json`, M-3D-EXPRESS, `generate_figures.py` |
+| S2 | Extended `scripts/arxiv_toolkit/generate_figures.py` — heatmap, express pipeline, CF-4 bars, Pearl DAG (A04) |
+| S3 | Figures in `arxiv/figures/` + `arxiv/sci_flow_3d_cube/figures/` (PDF+PNG each) |
+| S4 | Updated `main.tex` (EIA), `sci_flow_3d_cube/main.tex` + `sections_empirical.tex`; recompiled both PDFs |
+| S5 | `config.yaml` I05 → done; `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Figures | `cube_status_heatmap`, `express_pipeline`, `cf4_ablation_bars`, `dag` |
+| EIA paper | `arxiv/main.pdf` — **11 pages** |
+| 3D cube paper | `arxiv/sci_flow_3d_cube/main.pdf` — **9 pages** |
+| Registry | 9/9 filled cells visualized |
+| CF-4 bars | default 0.95 / zero\_epistemic\_gap 0.06 / wm\_off 0.00 |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+I02 BibTeX merge / G2 pack; drive\_decay + trace\_manifold (remaining I05 CURSOR_TASKS). No C-level raise.
+
+---
+
+## Entry 045 — 2026-09-02 — I04-package arXiv sync + submission packages (post wave-2)
+
+**Session:** Sync EIA + 3D cube papers with wave-2 sci-flow; package for arXiv upload; push branch  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Polled wave-2 agents: I05 figures done; Graphitti witness committed (build_blocked stub) |
+| S2 | Synced `sections_empirical.tex` — CF-7 9/9, D1×L3 ledger, $E_C$ batch, M-O arms, E04 drift, B05, express CI |
+| S3 | Updated `arxiv/main.tex` cross-ref to 3D cube companion; D3×L2 → filled |
+| S4 | Recompiled both papers; `clean_and_package.py` for EIA + 3D cube |
+| S5 | `docs/ARXIV_SUBMISSION.md`; `config.yaml` I04-package → done; `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| EIA paper | `arxiv/main.pdf` — **11 pages** |
+| 3D cube paper | `arxiv/sci_flow_3d_cube/main.pdf` — **10 pages** |
+| Express total | 3835.5 ms (9/9 pass) |
+| Packages | `arxiv/arxiv_arXiv_submission.tar.gz`, `arxiv/sci_flow_3d_cube/sci_flow_3d_cube_arXiv_submission.tar.gz` (local, not committed) |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+Upload tarballs to arXiv when ready; optional Linux CI for Graphitti binary. No C-level raise.
+

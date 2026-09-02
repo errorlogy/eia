@@ -65,11 +65,13 @@ Produces `sci_flow_3d_cube_arXiv_submission.tar.gz` next to `arxiv/sci_flow_3d_c
 python scripts/arxiv_toolkit/fetch_literature.py -q "proactive LLM agents endogenous" -n 5 -o arxiv/references.bib
 ```
 
-### 3. Generate figures (placeholder until I05)
+### 3. Generate figures (I05)
 
 ```powershell
 python scripts/arxiv_toolkit/generate_figures.py
 ```
+
+Produces `cube_status_heatmap`, `express_pipeline`, `cf4_ablation_bars`, and `dag` (PDF+PNG) in both `arxiv/figures/` and `arxiv/sci_flow_3d_cube/figures/`.
 
 ### 4. Clean and package for arXiv upload
 
