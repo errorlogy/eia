@@ -6,7 +6,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENDOR_GRAPHITTI="${REPO_ROOT}/research/vendor/graphitti"
-GRAPHITTI_PIN="${GRAPHITTI_PIN:-b96e96c}"
+GRAPHITTI_PIN="${GRAPHITTI_PIN:-b96e96c32b11ae7fc5526da7f2c8452c903a28bf}"
 GRAPHITTI_REPO="${GRAPHITTI_REPO:-https://github.com/UWB-Biocomputing/Graphitti.git}"
 FULL_GRAPHITTI="${REPO_ROOT}/research/sci_flow/.ci-artifacts/graphitti-src"
 BUILD_DIR_MARKER="${REPO_ROOT}/research/sci_flow/.ci-artifacts/graphitti-build-dir.txt"
@@ -15,20 +15,20 @@ JOBS="${GRAPHITTI_BUILD_JOBS:-$(nproc 2>/dev/null || echo 2)}"
 
 resolve_graphitti_src() {
   if [[ -f "${VENDOR_GRAPHITTI}/Simulator/Core/Graphitti_Main.cpp" ]]; then
-    echo "${VENDOR_GRAPHITTI}"
+    printf '%s\n' "${VENDOR_GRAPHITTI}"
     return 0
   fi
-  echo "==> Vendor snapshot incomplete; fetching Graphitti at ${GRAPHITTI_PIN}"
+  echo "==> Vendor snapshot incomplete; fetching Graphitti at ${GRAPHITTI_PIN}" >&2
   if [[ ! -f "${FULL_GRAPHITTI}/Simulator/Core/Graphitti_Main.cpp" ]]; then
     rm -rf "${FULL_GRAPHITTI}"
-    git clone --filter=blob:none --no-checkout "${GRAPHITTI_REPO}" "${FULL_GRAPHITTI}"
+    git clone --depth 1 --branch master "${GRAPHITTI_REPO}" "${FULL_GRAPHITTI}"
     (
       cd "${FULL_GRAPHITTI}"
       git fetch --depth 1 origin "${GRAPHITTI_PIN}"
-      git checkout FETCH_HEAD
+      git checkout "${GRAPHITTI_PIN}"
     )
   fi
-  echo "${FULL_GRAPHITTI}"
+  printf '%s\n' "${FULL_GRAPHITTI}"
 }
 
 bootstrap_googletest() {
