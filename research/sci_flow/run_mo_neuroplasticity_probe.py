@@ -140,9 +140,9 @@ def probe_graphitti() -> dict[str, Any]:
     graphml = GRAPHITTI / "configfiles" / "graphs" / "test-tiny.graphml"
     cmake = shutil.which("cmake")
     binary_candidates = [
-        GRAPHITTI / "build" / "graphitti",
-        GRAPHITTI / "build" / "graphitti.exe",
-        GRAPHITTI / "build" / "Release" / "graphitti.exe",
+        GRAPHITTI / "build" / "cgraphitti",
+        GRAPHITTI / "build" / "cgraphitti.exe",
+        GRAPHITTI / "build" / "Release" / "cgraphitti.exe",
     ]
     binary = next((p for p in binary_candidates if p.is_file()), None)
 
@@ -153,7 +153,8 @@ def probe_graphitti() -> dict[str, Any]:
         "graphml_path": str(graphml.relative_to(REPO)).replace("\\", "/") if graphml.is_file() else None,
         "build_path": "research/vendor/graphitti/build",
         "build_command": "cmake -D ENABLE_CUDA=NO .. && make -j",
-        "run_command": "./graphitti -c ../configfiles/test-tiny.xml",
+        "run_command": "./cgraphitti -c ../configfiles/test-tiny.xml",
+        "witness_harness": "research/sci_flow/run_graphitti_witness.py",
         "cmake_available": cmake is not None,
         "binary_available": binary is not None,
         "binary_path": str(binary.relative_to(REPO)).replace("\\", "/") if binary else None,

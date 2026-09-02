@@ -173,7 +173,7 @@ From [`SCI_FLOW_3D_CUBE.md`](SCI_FLOW_3D_CUBE.md):
 |------|-----------|---------|
 | **D2×L1** Invariants | **filled** (extended) | F-KURAMOTO-AS-E, F-STRUCT≠E, F-OMEGA-DECOR; vendor hard ban |
 | **D2×L2** Dynamics | **partial → filled** (probe) | M-O vendor probe, do(O) registry, Neuraxon/Graphitti harness |
-| **D2×L3** Witness | **partial** | `M-MO_neuroplasticity_probe_2026-09-01.json`; Graphitti binary witness deferred |
+| **D2×L3** Witness | **partial** | `M-MO_neuroplasticity_probe_2026-09-01.json`; `M-MO_graphitti_witness_2026-09-02.json` (build_blocked stub) |
 
 ### Invariants preserved (D2×L1)
 

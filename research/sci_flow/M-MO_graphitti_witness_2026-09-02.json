@@ -1,0 +1,52 @@
+{
+  "milestone": "M-O",
+  "artifact_id": "M-MO_graphitti_witness_2026-09-02",
+  "tick": "M-O-GRAPHITTI-BIN",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "tier": "C",
+  "cube_cell": "D2\u00d7L3",
+  "vendor": "graphitti",
+  "commit_pin": "b96e96c",
+  "config_path": "research/vendor/graphitti/configfiles/test-tiny.xml",
+  "build_path": "research/vendor/graphitti/build",
+  "binary_name": "cgraphitti",
+  "build_command": "cmake -D ENABLE_CUDA=NO .. && make -j",
+  "run_command": "./cgraphitti -c ../configfiles/test-tiny.xml",
+  "simulation": {
+    "status": "build_blocked",
+    "binary_available": false,
+    "binary_path": null,
+    "build_blocker": {
+      "windows_cmake": false,
+      "wsl_available": true,
+      "wsl_toolchain": "cmake/g++ not installed; apt install blocked (network unreachable 2026-09-02)",
+      "blocker": "Graphitti CPU build requires cmake \u22653.12 + g++ (C++17). Not available on Windows PATH; WSL Ubuntu 24.04 present but lacks toolchain and cannot apt-install packages offline.",
+      "upgrade_plan": [
+        "Linux CI or dev host: apt install cmake build-essential && cd research/vendor/graphitti/build && cmake -DENABLE_CUDA=NO .. && make -j",
+        "Windows: install CMake + VS Build Tools, or WSL with working apt, then same cmake flow",
+        "Re-run: python research/sci_flow/run_graphitti_witness.py",
+        "Optional: pin prebuilt cgraphitti in CI artifact cache (not tier-0 gate)"
+      ]
+    },
+    "stub_metrics": {
+      "spike_rate_mean_hz": null,
+      "spike_count_total": null,
+      "edge_count_delta": null,
+      "note": "Binary not built; see build_blocker.upgrade_plan"
+    }
+  },
+  "witness": {
+    "spike_rate_mean_hz": null,
+    "spike_count_total": null,
+    "neuron_count": null,
+    "status": "build_blocked"
+  },
+  "falsifiers_active": [
+    "F-STRUCT\u2260E",
+    "F-EXT"
+  ],
+  "note": "Graphitti binary witness only; spike rates do not establish E_endo. Starter neurons + ConnGrowth config parsed in neuroplasticity probe."
+}

@@ -257,6 +257,15 @@ milestones:
       artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
       arms: [neuraxon_baseline, do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off, native_oscillatory_state]
       claim_allowed: false
+    graphitti_binary_witness:
+      status: blocked
+      completed: "2026-09-02"
+      harness: research/sci_flow/run_graphitti_witness.py
+      artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
+      cube_cell: D2×L3
+      claim_allowed: false
+      blocker: "cmake/g++ unavailable on Windows; WSL apt offline"
+      upgrade_plan: research/vendor/README.md#graphitti
     omega_metric:
       status: in_progress
       artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
