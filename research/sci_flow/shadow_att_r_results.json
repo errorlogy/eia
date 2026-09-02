@@ -25,5 +25,5 @@
     "external_schedule": false,
     "kuramoto_only": false
   },
-  "gap_vs_live_daemon": "Shadow multitick + ShadowSessionCarryover close W'\u2192G' within/between session ticks; production run_daemon_tick still resets CognitiveLoop per APScheduler interval (BeliefField JSON in StateStore deferred)."
+  "gap_vs_live_daemon": "Shadow multitick + ShadowSessionCarryover close W'\u2192G' within/between session ticks; live daemon hydrates from StateStore when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
 }

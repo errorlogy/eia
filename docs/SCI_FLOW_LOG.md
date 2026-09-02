@@ -1631,10 +1631,10 @@ I02 BibTeX merge / G2 pack; drive\_decay + trace\_manifold (remaining I05 CURSOR
 
 | Item | Value |
 |------|-------|
-| EIA paper | `arxiv/main.pdf` — **11 pages** |
+| EIA paper | `arxiv/main.pdf` — **12 pages** |
 | 3D cube paper | `arxiv/sci_flow_3d_cube/main.pdf` — **10 pages** |
 | Express total | 3835.5 ms (9/9 pass) |
-| Packages | `arxiv/arxiv_arXiv_submission.tar.gz`, `arxiv/sci_flow_3d_cube/sci_flow_3d_cube_arXiv_submission.tar.gz` (local, not committed) |
+| Packages | `arxiv_arXiv_submission.tar.gz` (repo root), `arxiv/sci_flow_3d_cube_arXiv_submission.tar.gz` (local, not committed) |
 | `claim_allowed` | **false** |
 | Tier-0 | `check_sci_tier0` OK |
 

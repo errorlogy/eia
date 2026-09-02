@@ -2,7 +2,7 @@
 
 **Status:** `OPERATIONAL` scaffold (2026-09-01) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS  
+**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS  
 **Methodology:** [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) — sci-flow v3 = incremental cube cell-filling with harnesses  
 **Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py` · [`cell_registry.yaml`](cell_registry.yaml)  
 **Claim ceiling:** **C2** — scoped \(E_{\mathrm{endo}}\) / ATT-E partial only

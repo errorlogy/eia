@@ -22,7 +22,7 @@
     "external_schedule_prompt_spam_is_not_recurrence": true,
     "kuramoto_sync_alone_is_not_att_r": true
   },
-  "gap_vs_live_daemon": "Shadow multitick + ShadowSessionCarryover close W'\u2192G' within/between session ticks; production run_daemon_tick still resets CognitiveLoop per APScheduler interval (BeliefField JSON in StateStore deferred).",
+  "gap_vs_live_daemon": "Shadow multitick + ShadowSessionCarryover close W'\u2192G' within/between session ticks; live daemon hydrates from StateStore when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default).",
   "phase_2_carryover_smoke": {
     "used_carryover": true,
     "g_prime_from_carryover": true,
@@ -220,5 +220,5 @@
     "emit_m0_rate_with_genesis": 0.0,
     "att_g_smoke_rate": 0.9
   },
-  "explore_proxy_note": "Shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; >=1 closed W\u2192M\u2192G\u2192\u03a0\u2192A\u2192X'\u2192W'\u2192G' with emit_m0=false; Kuramoto alone never counts; smoke threshold overrides are not evidence; not C-ladder gate. Phase 2 shadow carryover closes session gap; production daemon still per-tick loop reset until StateStore hydration."
+  "explore_proxy_note": "Shadow multi-tick on main CognitiveLoop under ATT-R falsifiers; >=1 closed W\u2192M\u2192G\u2192\u03a0\u2192A\u2192X'\u2192W'\u2192G' with emit_m0=false; Kuramoto alone never counts; smoke threshold overrides are not evidence; not C-ladder gate. Phase 2 carryover: shadow session + live StateStore when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default)."
 }
