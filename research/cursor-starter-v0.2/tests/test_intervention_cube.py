@@ -38,6 +38,15 @@ class InterventionCubeTests(unittest.TestCase):
     def test_registry_non_empty(self) -> None:
         self.assertGreater(len(list_all()), 10)
 
+    def test_mo_vendor_do_o_interventions(self) -> None:
+        nx = get_intervention("do_o_neuraxon_plasticity_off")
+        gf = get_intervention("do_o_graphitti_growth_off")
+        self.assertEqual(nx.axis, "D2")
+        self.assertEqual(nx.kind, "do_o")
+        self.assertIn("F-STRUCT≠E", nx.falsifiers)
+        self.assertEqual(gf.axis, "D2")
+        self.assertIn("F-EXT", gf.falsifiers)
+
 
 if __name__ == "__main__":
     unittest.main()

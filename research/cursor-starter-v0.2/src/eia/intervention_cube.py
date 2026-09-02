@@ -165,6 +165,38 @@ _register(
     )
 )
 
+_register(
+    Intervention(
+        id="do_o_neuraxon_plasticity_off",
+        name="do(O): Neuraxon plasticity freeze",
+        axis="D2",
+        layer="L2",
+        kind="do_o",
+        description=(
+            "Freeze w_fast/w_slow/w_meta and disable structural synapse birth in "
+            "Neuraxon vendor sandbox — falsifies plasticity-driven O_t (Tier C)."
+        ),
+        harness="research/sci_flow/run_mo_neuroplasticity_probe",
+        falsifiers=("F-OMEGA-DECOR", "F-STRUCT≠E", "F-KURAMOTO-AS-E"),
+    )
+)
+
+_register(
+    Intervention(
+        id="do_o_graphitti_growth_off",
+        name="do(O): Graphitti ConnGrowth off",
+        axis="D2",
+        layer="L2",
+        kind="do_o",
+        description=(
+            "Swap ConnGrowth for static topology or epsilon→0 — falsifies "
+            "growth-dependent recurrence without E_endo (Tier C)."
+        ),
+        harness="research/sci_flow/run_mo_neuroplasticity_probe",
+        falsifiers=("F-STRUCT≠E", "F-EXT"),
+    )
+)
+
 # --- D3 Boundary: governor / N_H falsifiers ---
 _register(
     Intervention(

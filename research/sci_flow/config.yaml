@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-01-M-3D-EXPRESS"
+updated: "2026-09-01-M-O-NEURAXON-GRAPHITTI"
 
 repos:
   eia:
@@ -221,15 +221,26 @@ milestones:
     harness: research/cursor-starter-v0.2
     status: in_progress
     artifact: research/sci_flow/OSCILLATORY_ENDOGENEITY.md
-    command: python -m pytest tests/test_oscillatory_mo.py tests/test_omega_wave.py -q
-    note: "O_t / Psi(O_t) + OMEGA_t metric; F-SYNC/F-PHASE-ONLY/F-OMEGA-DECOR; not E proof"
+    command: python research/sci_flow/run_mo_neuroplasticity_probe.py
+    note: "O_t / Psi(O_t) + OMEGA_t metric; Neuraxon/Graphitti Tier C substrate; not E proof"
+    neuroplasticity_factor:
+      status: done
+      completed: "2026-09-01"
+      artifact: research/sci_flow/M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md
+      probe: research/sci_flow/run_mo_neuroplasticity_probe.py
+      probe_artifact: research/sci_flow/M-MO_neuroplasticity_probe_2026-09-01.json
+      vendors: [neuraxon, graphitti]
+      cube_cell: D2×L2
+      claim_allowed: false
+      interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
     omega_metric:
       status: in_progress
       artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
       bridge: research/sci_flow/MIOC_EIA_BRIDGE.md
       neuroplasticity_survey: research/sci_flow/NEUROPLASTICITY_OSS_SURVEY.md
+      neuroplasticity_application: research/sci_flow/NEUROPLASTICITY_EIA_APPLICATION.md
       implementation: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
-      falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT, F-SYNC, F-PHASE-ONLY]
+      falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT, F-SYNC, F-PHASE-ONLY, F-STRUCT≠E]
       carriers_hz: [20, 30, 42, 70]
       loop_playbook: docs/SCI_LOOP_OMEGA_RESEARCH.md
 

@@ -1304,3 +1304,35 @@ I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
 ### Next
 
 Neuraxon/Graphitti vendor install + EIA harness stub; arXiv I02–I05. No C-level raise.
+
+---
+
+## Entry 036 — 2026-09-01 — M-O Neuraxon/Graphitti endogeneity factor (Tier C)
+
+**Session:** Endogeneity factor analysis for Neuraxon + Graphitti as D2×L2 M-O adjunct substrates  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read NEUROPLASTICITY_EIA_APPLICATION, CAUSAL_ENDOGENEITY, vendor trees |
+| S2 | Created `M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md` — stack position, P0–P5 map, falsifiers, comparison table |
+| S3 | Probe harness `run_mo_neuroplasticity_probe.py` → `M-MO_neuroplasticity_probe_2026-09-01.json` |
+| S4 | Registered `do_o_neuraxon_plasticity_off`, `do_o_graphitti_growth_off` in `intervention_cube.py` |
+| S5 | config.yaml M-O neuroplasticity_factor done; arXiv M-O paragraph; SCI_FLOW_3D_CUBE cross-link |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Factor doc | `research/sci_flow/M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md` |
+| Probe artifact | `research/sci_flow/M-MO_neuroplasticity_probe_2026-09-01.json` |
+| Cube cell | **D2×L2** (dynamics); invariants **D2×L1** |
+| `claim_allowed` | **false** (Tier C) |
+| Tier-0 | `check_sci_tier0` after commit |
+
+### Next
+
+Shadow arm: Neuraxon O_t → OmegaWaveState multitick; Graphitti CI build (optional). No C-level raise.
