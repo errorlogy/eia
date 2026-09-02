@@ -1,6 +1,6 @@
 ﻿.PHONY: check-sci-tier0 arxiv-compile arxiv-package arxiv-3d-cube-compile arxiv-3d-cube-package
 
-# M-CLI Phase 0 — Tier 0 ATT baseline (no LLM). See docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md
+# M-CLI Phase 0 — Tier 0 ATT baseline + M-EXPRESS-CI 3D cube smoke (no LLM). See docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md
 check-sci-tier0:
 	python scripts/check_sci_tier0.py
 

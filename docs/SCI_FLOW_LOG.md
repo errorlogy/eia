@@ -1436,3 +1436,37 @@ Multi-seed EOI-k batch; D1×L3 empirical proof ledger. No C-level raise.
 
 Continue sci-flow cell filling. No C-level raise.
 
+---
+
+## Entry 041 — 2026-09-02 — M-D1-L2-EC + E05: multi-seed EOI-k batch + E_C probe
+
+**Session:** D1×L2 deepen — seeds {0,7,42} EOI-k batch + minimal continuous E_C under do(Z)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Scoped D01-BATCH + E-C-01; `claim_allowed=false` |
+| S2 | `run_eoi_k_batch.py`, `e_c_continuous_harness.py`, `run_e_c_continuous.py`; `d1_do_z_interventions()` |
+| S3 | `tests/test_eoi_k_batch.py`; tier-0 includes batch + intervention_cube tests |
+| S4 | `M-D01_EOI_k_batch_2026-09-02.json` + `.md`; `M-D01_E_C_continuous_2026-09-02.json` |
+| S5 | `cell_registry.yaml` D1×L2 harnesses; `endogeneity_metrics.yaml` E_C harness path |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Batch runner | `python research/sci_flow/run_eoi_k_batch.py` |
+| E_C runner | `python research/sci_flow/run_e_c_continuous.py` |
+| Seeds | 0, 7, 42 |
+| Steered gradient | stable all seeds: k=1 EOI=1.0 → k≥5 EOI=0.35 |
+| E_C proxy | epistemic_gap/wm_off mean E_C=1.0; self_prior/prospective=0.0 |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+E04 EOI drift on carryover; refine E_C theta_E pre-registration. No C-level raise.
+
