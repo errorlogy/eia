@@ -1241,6 +1241,41 @@ I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
 
 ---
 
+## Entry 035 — 2026-09-01 — I01 arXiv v0.2 framework paper expansion
+
+**Session:** Expand `arxiv/main.tex` toward submission-ready framework paper (v0.2 sections)
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Sharpened Introduction (reactive vs endogenous initiative, Pearl $do(\cdot)$ anchor) |
+| S2 | Added Related Work (intrinsic motivation, world models, language agents, causal eval) |
+| S3 | Formal Framework: $E_{\mathrm{endo}}$ causal bar, $\mathfrak{E}$ vector, multi-loop stack, EOI |
+| S4 | Evaluation Protocol: ATT suite, falsifiers, proof-protocol ledger, intervention taxonomy |
+| S5 | Reorganized 3D cube, Preliminary Results, Discussion (M-O Tier C horizon), Conclusion |
+| S6 | Expanded `references.bib` with 12 external citations (Pearl, Schmidhuber, Burda, CoALA, …) |
+| S7 | Recompiled PDF (9 pp); `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/main.tex` — v0.2 framework paper structure |
+| BibTeX | `arxiv/references.bib` — 18 entries (6 internal + 12 external) |
+| Pages | 9 (no padding; target 12–15 deferred to I02 figures) |
+| Compile | `python scripts/arxiv_toolkit/compile_paper.py` |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
+
+---
+
 ## Entry 035 — 2026-09-01 — Neuroplasticity OSS survey (M-O explore adjunct)
 
 **Session:** Catalogued 27 GitHub/HF repos for synaptic plasticity, connectome growth, dynamic synapses, GNN connectomes  

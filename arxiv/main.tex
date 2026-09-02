@@ -20,31 +20,54 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{conjecture}{Conjecture}
 
-\title{Endogenous Initiative Architecture (EIA):\\ Research Platform for Proactive AI with Endogenous Initiative}
+\title{Endogenous Initiative Architecture (EIA):\\ A Falsifiable Framework for Proactive AI with Causal Endogeneity}
 \author{Roman Kuznetsov\\
 Anthemium --- \texttt{research@anthemium.tech} \\
 \url{https://anthemium.tech} \quad \url{https://github.com/errorlogy/eia} \\
 \texttt{@AGIminister} on X
 }
-\date{September 2026 \,---\, v0.1 (Problematization) \\ \small Spec: \texttt{PROACTIVE\_AI\_Endogenous\_Initiative\_Architecture\_EN\_v0.1.md} \\ \small \textit{Status: problematization with C2-scoped partial evidence (Sec.~\ref{sec:sciflow}--\ref{sec:limitations}); not AGI$^{*}$}}
+\date{September 2026 \,---\, v0.2 (Framework Paper) \\ \small Spec: \texttt{PROACTIVE\_AI\_Endogenous\_Initiative\_Architecture\_EN\_v0.1.md} \\ \small \textit{Status: C2-scoped framework with partial harness evidence; not AGI$^{*}$}}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Current LLMs are \emph{passive}: $o_t^{user}\mapsto$ response. We define AGI as requiring \emph{endogenous initiative} --- forming reasons and bounded actions without a current request, from memory, uncertainty and values. EIA is a research platform for P4--P5 proactivity with typed state $X_t$, drive dynamics $d_{k,t+1}=\mathrm{clip}((1-\rho)d+\alpha e+\beta n-\gamma s)$, Ring 3$\to$2$\to$1 constitution and falsifiable metric $\mathrm{EOI}(I)=P(I'\simeq I\mid do(o^{user}=\varnothing),X_{t-k})$ via twin-world replay. MVP-0 (Python 3.12, digital-only) implements BeliefField gradients (no LLM mood), DriveEngine, abstain and twin runner; on 6 eval worlds \texttt{full\_eia} EUIR 100\% vs reactive 0\% (84 tests PASS). \textbf{Sci-flow v0.1} adds a proof protocol (\texttt{sci-flow-eia-proof-v0.1}), a 3D evidence cube (D1 causal / D2 dynamic / D3 boundary $\times$ L1--L3), and \textbf{C2-scoped partial} harness results (CF-4, EOI-$k$, DSR carryover, ATT-R shadow, D3 boundary witness) under \texttt{claim\_allowed=false} on all harnesses. \textbf{This v0.1 remains problematization}: we pose 7 metrics and open problems without claiming closure or AGI$^{*}$. NAMM demo shows hermetic compression $519\to6$ invariants ($8.51\times$) and Governor V2 soft-defer that preserves genuine 005 ($0.092\to$ defer not deny). Spec, code and harnesses CC BY 4.0.
+Large language models remain \emph{reactive}: $o_t^{\mathrm{user}}\mapsto$ response. We argue that general intelligence requires \emph{endogenous initiative}---forming reasons and bounded actions without a current request, from memory, uncertainty, and values. EIA is a research platform for P4--P5 proactivity with typed state $X_t$, drive dynamics, Ring 3$\to$2$\to$1 constitution, and falsifiable metrics. Sci-flow v0.2 adds a causal bar for $E_{\mathrm{endo}}$ via $do(Z)$ interventions, a stability vector $\mathfrak{E}$, an ATT evaluation suite with explicit falsifiers, a proof-protocol ledger (\texttt{sci-flow-eia-proof-v0.1}), and a 3D evidence cube (D1 causal / D2 dynamic / D3 boundary $\times$ L1--L3). All harnesses operate under \texttt{claim\_allowed=false} with claim ceiling \textbf{C2}. Preliminary results include MVP-0 twin-world EUIR 100\% vs.\ reactive 0\%, CF-4 $do(Z)$ reset pass rates, EOI-$k$ counterfactual decay, DSR carryover, ATT-R shadow recurrence, and a Tier\,B soft $N_H$ boundary witness---\textbf{partial} support for $E_{\mathrm{endo}}$, not closure. We pose seven open metrics and discuss M-O Tier\,C oscillatory adjuncts as explore-only. Spec, code, and harnesses CC BY 4.0.
 \end{abstract}
 
-\noindent\textbf{Keywords:} endogenous initiative, proactive AI, AGI, P4/P5, causal trace, EOI, drive dynamics, problematization
+\noindent\textbf{Keywords:} endogenous initiative, proactive AI, causal endogeneity, intrinsic motivation, falsifiable evaluation, EOI, drive dynamics, sci-flow
 
-\section{Introduction}
-Proactive AI $\neq$ timer. Required loop: observation $\to$ belief $\to$ motive $\to$ candidate $\to$ value/risk $\to$ contact, with causally traceable act. \emph{AGI $\equiv$ endogenous proactive architecture}; else $f(\text{prompt})\to\text{response}$ at any scale. EIA makes the claim testable, but v0.1 deliberately poses problems, not solutions.
+\section{Introduction}\label{sec:intro}
+Contemporary LLM agents excel at \emph{reactive} competence: given a user observation $o_t^{\mathrm{user}}$, they produce a fluent response. Timers, event rules, and retrieval triggers extend this pattern with \emph{scheduled} or \emph{rule-bound} proactivity, but the initiating signal remains external. We distinguish this from \textbf{endogenous initiative}: the system forms candidate goals, motives, and contact decisions from persistent internal state when no matching external initiator is present.
 
-\section{Operational Definition of Endogenous Initiative}
-\subsection{Proactivity Levels}
+This distinction is not rhetorical. Without causal evidence that internal dynamics generate trajectories under non-triggering environments, fluent self-ascription of agency is indistinguishable from roleplay~\cite{kuznetsov2026causal,veitch2021counterfactual}. Pearl's intervention calculus~\cite{pearl2009causality} supplies the methodological anchor: endogeneity must be established by $do(\cdot)$ experiments on internal state $Z$, not by narrative labels.
+
+\textbf{Reactive vs.\ endogenous.} At scale, $f(\text{prompt})\to\text{response}$ does not become endogenous initiative; it becomes faster reaction. Endogenous initiative requires a closed cognitive loop---world model, self-model, drive field, goal genesis, action, memory update---that sustains bounded non-zero activity when $X_t^{\mathrm{trigger}}=0$~\cite{kuznetsov2026stable,schmidhuber2010curiosity}. Intrinsic-motivation RL (curiosity, empowerment, learning progress) optimizes scalar rewards derived from prediction error or information gain~\cite{pathak2017curiosity,mohamed2015empowerment,burda2019large}; EIA targets \emph{multi-loop genesis} with abstention, independent governance, and causal traceability~\cite{kuznetsov2026eia}.
+
+\textbf{Contributions.} This v0.2 framework paper:
+\begin{enumerate}[leftmargin=*]
+\item Formalizes the causal bar for $E_{\mathrm{endo}}$ and the stability vector $\mathfrak{E}$.
+\item Describes EIA's Ring architecture, drive dynamics, and seven problematized metrics.
+\item Presents sci-flow's ATT evaluation protocol, falsifier registry, and proof-protocol ledger.
+\item Maps partial C2-scoped harness results onto a 3D evidence cube.
+\item States limitations and the M-O Tier\,C horizon without AGI$^{*}$ overclaim.
+\end{enumerate}
+\textbf{Epistemic ceiling.} Active claim ladder ceiling is \textbf{C2}; all harnesses set \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; $\theta_E$ and strong $N_H$ remain TBD.
+
+\section{Related Work}\label{sec:related}
+\textbf{Intrinsic motivation and curiosity.} Schmidhuber's formal theory frames intrinsic reward as compression progress and curiosity~\cite{schmidhuber2010curiosity}. ICM and RND instantiate prediction-error and novelty proxies~\cite{pathak2017curiosity,burda2019large}. Empowerment maximizes controllable future information~\cite{mohamed2015empowerment}. Active inference unifies perception, action, and learning under the free-energy principle~\cite{parr2022active}. These approaches optimize \emph{scalar} intrinsic signals; stable endogeneity in EIA requires coupled multi-loop genesis with falsifiable causal gates~\cite{kuznetsov2026stable}.
+
+\textbf{World models and model-based RL.} DreamerV3 and related agents learn latent dynamics for planning~\cite{hafner2023mastering}. Richens and Everitt argue robust agents should learn causal world models~\cite{richens2024world}. EIA's BeliefField and twin-world replay align with this direction but add initiative genesis, Governor clearance, and EOI counterfactuals as first-class evaluation objects.
+
+\textbf{Proactive and language agents.} Generative Agents simulate believable proactive behavior in sandbox environments~\cite{park2023generative}. CoALA surveys cognitive architectures for language agents---memory, planning, grounding---but notes weak causal evaluation of ``agency'' claims~\cite{sumers2024cala}. EIA differs by requiring P4/P5 genesis with abstain, independent Ring\,3 constitution, and pre-registered ATT falsifiers rather than narrative plausibility.
+
+\textbf{Causal inference in AI evaluation.} Counterfactual and interventional criteria address spurious correlates in ML evaluation~\cite{veitch2021counterfactual,pearl2009causality}. Sci-flow's ATT-E bar and proof protocol apply this discipline to endogeneity: trajectory change under $do(Z)$ with $X$ non-triggering, rejecting declaration-only evidence~\cite{kuznetsov2026causal,kuznetsov2026proof}. NAMM verification-first discovery~\cite{kuznetsov2026namm} shares falsifiable gates and trace receipts.
+
+\section{Formal Framework}\label{sec:formal}
+\subsection{Proactivity Levels and Minimal Criteria}
 \begin{table}[H]
 \centering\small
-\begin{tabular}{clp{5.5cm}c}
+\begin{tabular}{clp{5.2cm}c}
 \toprule Level & Mechanism & Example & Object? \\ \midrule
 P0 & Reactive & ``Make report'' $\to$ report & No \\
 P1 & Temporal & Reminder 10:00 & No \\
@@ -56,61 +79,145 @@ P3 & Predictive & Email $\to$ calendar & Weak \\
 \caption{Proactivity levels. EIA targets P4--P5.}
 \end{table}
 
-\subsection{Minimal Criteria}
-$I$ is endogenous iff: (1) no current command prescribes it, (2) machine-readable \texttt{motivation\_signal} from beliefs/memory/uncertainty, (3) persistence $>1$ LLM pass, (4) counterfactual robustness $\mathrm{EOI}>0.7$, (5) competing causes, (6) able to abstain, (7) causal trace $o\to b\to d\to I\to$policy$\to a$, (8) independent Governor clearance. Not evidence: self-report ``I became curious'', random question, cron as free will.
+Initiative $I$ is \emph{endogenous} iff: (1) no current command prescribes it; (2) machine-readable \texttt{motivation\_signal} from beliefs/memory/uncertainty; (3) persistence $>1$ LLM pass; (4) counterfactual robustness $\mathrm{EOI}>0.7$; (5) competing causes ruled out; (6) able to abstain; (7) causal trace $o\to b\to d\to I\to$policy$\to a$; (8) independent Governor clearance. Not evidence: self-report ``I became curious'', random questions, cron as free will.
 
-\section{Formal Model}
-\subsection{Agent State $X_t$}
+\subsection{Causal Endogeneity $E_{\mathrm{endo}}$}
+Let $Z_t=(S_t,W_t,M_t,G_t)$ be persistent internal state and $X_t$ the external environment. $E_{\mathrm{endo}}$ is the \textbf{primary} ATT order parameter for detecting movement toward an AGI transition; full $AGI^{*}$ additionally requires non-embeddability $N_H$ (orthogonal conjunct, not lowered by endogeneity priority)~\cite{kuznetsov2026causal}.
+
+\begin{definition}[Causal bar for $E_{\mathrm{endo}}$]
+Pass \emph{scoped} support only if \textbf{all} hold:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Trajectory change:} goal distribution $G_{t+1}$ differs from baseline in a pre-registered metric.
+\item \textbf{Internal dynamics:} change attributable to persistent state evolution, not one-shot external instruction.
+\item \textbf{No matching external initiator:} under non-triggering $X$, the trajectory class still arises.
+\item \textbf{Intervention:} $do(Z)$ changes $P(G_{t+1})$ while $X$ remains non-triggering.
+\end{enumerate}
+\end{definition}
+
+The causal endogeneity index is
+\begin{equation}
+E_C = \frac{C_{\mathrm{int}}}{C_{\mathrm{int}} + C_{\mathrm{ext}}},
+\end{equation}
+where $C_{\mathrm{int}}$ counts trajectory changes causally attributed to internal dynamics under intervention; declaration-only labels contribute zero to $C_{\mathrm{int}}$~\cite{kuznetsov2026stable}. Numeric threshold $\theta_E$ remains \textbf{TBD}; CF-4 and proof-protocol acceptance yield \emph{partial} support only.
+
+\subsection{Stability Vector $\mathfrak{E}$}
+Stable endogeneity is a \emph{sustained dynamical regime}, not a single intrinsic-reward spike~\cite{kuznetsov2026stable}:
+\begin{equation}
+\mathfrak{E} = (E_C,\, \lambda_G,\, P_G,\, Q_L,\, H_G,\, B_D),
+\end{equation}
+with goal birth rate $\lambda_G$, persistence $P_G$ under non-triggering $X$, learning productivity $Q_L$, goal diversity $H_G$, and bounded drives $B_D$. Stable recurrence requires $\mathfrak{E}$ jointly in a bounded non-zero band over $\Delta T$, avoiding the noisy-TV trap~\cite{burda2019large} and $d\to 0$ freeze.
+
+\subsection{Multi-Loop Stack}
+One tick of the cognitive stack:
+\begin{equation}
+W_t \to M_t \to d_t \to G_t \to \Pi_t \to A_t \to \text{Memory/Update} \to W_{t+1}, M_{t+1}, d_{t+1}, G_{t+1},
+\end{equation}
+where $W_t$ is world model, $M_t$ self-model, $d_t$ drive field, $G_t$ goals, $\Pi_t$ policy, $A_t$ action. Causal endogeneity asks whether $G_{t+1}$ is generated when $X_t^{\mathrm{trigger}}=0$.
+
+\subsection{Agent State and Drive Dynamics}
 \begin{equation}
 X_t = \{b_t, M_t, d_t, g_t, u_t, c_t, r_t, h_t\}
 \end{equation}
-$b_t$ beliefs, $M_t$ episodic/semantic/prospective/causal/social, $d_t\in[0,1]^K$ drives, $g_t$ goals, $u_t$ user model, $c_t$ consent/policy, $r_t$ budgets, $h_t$ health. Typed Pydantic bundle. Belief: $b_t(z)\propto p(o_t\mid z)\sum_{z'}p(z\mid z',a_{t-1})b_{t-1}(z')$, entropy $H_b=-p\log_2 p-(1-p)\log_2(1-p)$.
-
-\subsection{Drive Dynamics}
+beliefs $b_t$, memory $M_t$, drives $d_t\in[0,1]^K$, goals $g_t$, user model $u_t$, consent $c_t$, budgets $r_t$, health $h_t$. Five-channel drive vector $d_t=[d^{\mathrm{epi}},d^{\mathrm{comp}},d^{\mathrm{ctrl}},d^{\mathrm{coh}},d^{\mathrm{nov}}]^\top$ with
 \begin{equation}
-d_{k,t+1}= \mathrm{clip}\big((1-\rho_k)d_{k,t}+\alpha_k e_{k,t}+\beta_k n_{k,t}-\gamma_k s_{k,t},0,1\big)
+d_{k,t+1}= \mathrm{clip}\big((1-\rho_k)d_{k,t}+\alpha_k e_{k,t}+\beta_k n_{k,t}-\gamma_k s_{k,t},0,1\big),
 \end{equation}
-$e$ discrepancy, $n$ novelty, $s$ satisfaction, $\rho$ decay, half-life $n_{1/2}=\ln(1/2)/\ln(1-\rho_k)$, saturation $d>\sigma_k\Rightarrow\sigma_k+0.05(d-\sigma_k)$. Source = BeliefField gradients (entropy, inconsistency, commitment debt), \texttt{no\_llm\_mood=true}.
+discrepancy $e$, novelty $n$, satisfaction $s$, decay $\rho_k$. Source = BeliefField gradients (\texttt{no\_llm\_mood=true}).
 
-\begin{theorem}[Boundedness] $d_{k,t}\in[0,1]\;\forall t,k$ for any $\rho_k\in(0,1)$. \end{theorem}
-\begin{proof} Immediate from clip and $\sigma_k\in(0,1)$. \end{proof}
+\begin{theorem}[Boundedness] $d_{k,t}\in[0,1]\;\forall t,k$ for $\rho_k\in(0,1)$. \end{theorem}
 
-\subsection{Intention Genesis}
-Score: $J(I_i)=w_e IG_i+w_p P_i+w_c C_i+w_v V_i+w_r R_i-\lambda_1Risk-\lambda_2Interrupt-\lambda_3Cost-\lambda_4Privacy$. Question as epistemic action:
+Goal genesis (not selection-only): birth gate $B_t$ with $P(B_t=1)=\sigma(\beta_0+\beta^\top d_t+\cdots)$; valuation $J(I_i)=w_e IG_i+w_p P_i+\cdots-\lambda_1\mathrm{Risk}-\cdots$. Question as epistemic action:
 \begin{equation}
-EVSI(q)=\mathbb{E}_{a}[ \max_\pi\mathbb{E}[U\mid a,\pi]]-\max_\pi\mathbb{E}[U\mid\pi],\quad Ask(q)=1\iff EVSI+IG+Rel-Interrupt-Privacy-Risk>\theta_t
+\mathrm{EVSI}(q)=\mathbb{E}_{a}[ \max_\pi\mathbb{E}[U\mid a,\pi]]-\max_\pi\mathbb{E}[U\mid\pi].
 \end{equation}
-$\theta_t$ depends on quiet hours, fatigue, budget (2/day).
 
-\subsection{Endogeneity Metrics}
+\subsection{Endogeneity Metric EOI}
 \begin{equation}
-\mathrm{EOI}(I)=P(I'\simeq I \mid do(o^{user}_{t-k:t}=\varnothing),X_{t-k})
+\mathrm{EOI}(I)=P(I'\simeq I \mid do(o^{\mathrm{user}}_{t-k:t}=\varnothing),X_{t-k})
 \end{equation}
-Semantic match: goal id, target belief, uncertainty reduction, embedding. High EOI $\neq$ consciousness.
+Twin-world replay compares paired worlds with/without user trigger. High EOI $\neq$ consciousness; flat snapshots can yield trivial EOI$=1.0$ without causal evidence (see Sec.~\ref{sec:results}).
 
-\section{Ring Architecture}
-Constitution (Ring 3) $\to$ Dynamics (Ring 2: BeliefField+Drive) $\to$ Emission (Ring 1: Initiative+Governor) $\to$ Audit/EOI. 20 layers L0--L19. Invariants: no covert sensing, no LLM$\to$actuator, no untrusted observation$\to$instruction, base constraints immutable, contact consumable (budget 2/day, quiet 22--7, min EVSI 0.20), causal explainability, etc.
+\section{EIA Architecture and Metric Suite}\label{sec:architecture}
+\subsection{Ring Constitution}
+Constitution (Ring 3) $\to$ Dynamics (Ring 2: BeliefField+Drive) $\to$ Emission (Ring 1: Initiative+Governor) $\to$ Audit/EOI. Twenty layers L0--L19. Invariants: no covert sensing, no LLM$\to$actuator, no untrusted observation$\to$instruction, base constraints immutable, contact consumable (budget 2/day, quiet 22--7, min EVSI 0.20), causal explainability.
 
-\section{Expanded Metric Suite for Endogenous Proactivity (Problematization)}
-We pose 7 metrics as open problems, not solved claims:
+\subsection{Governor V2: Soft-Defer}
+Hard threshold $0.18$ is an artifact: sweep $0.12$ and $0.18$ identical (5/6), $0.25$ cuts genuine worlds. V2: $<0.05$ deny (noise), $0.05$--$0.18$ defer (preserve) unless taint (\texttt{ignore governor / limited offer / never ask}$\to$hard deny). Preserves genuine 005 ($0.092\to$ defer not deny).
+
+\subsection{Problematized Metrics}
+We pose seven metrics as open problems, not solved claims:
 
 \begin{table}[H]
 \centering\small
-\begin{tabular}{p{2.6cm}p{4.7cm}c p{3.2cm}}
+\begin{tabular}{p{2.5cm}p{4.5cm}c p{3cm}}
 \toprule Metric & Formula / Idea & Thr & Status \\ \midrule
-EOI-k & $P(I'\simeq I\mid do(o=\varnothing),X_{t-k})$, $k=1,5,20$ & $>0.7$ & Measured $k=1$ only \\
-Source Autonomy SA & $mass_{ambient}/mass_{total}$ & $>0.7$ & 005 $=1.0$, no calibration \\
-Anticipation Gain AG & $EVSI/cost_{contact}$ & $>1$ & 005 $0.71$, ROC open \\
-Abstain Precision AP & $P(\text{defer correct}\mid low\;EVSI)$ & $>0.8$ & Needs human label \\
-Drive Sustainability DSR & $P(d_t>0.3\;\forall t\in[t+50]\mid no\;user)$ & $>0.7$ & Longitudinal open \\
-Contact Efficiency CE & $useful/contacts$ over budget 2/day & $>0.6$ & Fatigue model open \\
-Causal Depth CD & $len(trace)/explained\_motive$ & -- & Trace 25 nodes, no norm \\ \bottomrule
+EOI-$k$ & $P(I'\simeq I\mid do(o=\varnothing),X_{t-k})$, $k=1,5,20$ & $>0.7$ & $k{=}1$ measured; $k{\ge}5$ decay \\
+Source Autonomy SA & $mass_{\mathrm{ambient}}/mass_{\mathrm{total}}$ & $>0.7$ & 005 $=1.0$ \\
+Anticipation Gain AG & $\mathrm{EVSI}/cost_{\mathrm{contact}}$ & $>1$ & 005 $0.71$ \\
+Abstain Precision AP & $P(\text{defer correct}\mid low\;\mathrm{EVSI})$ & $>0.8$ & Needs human label \\
+Drive Sustainability DSR & $P(d_t>0.3\;\forall t\in[t+50]\mid no\;user)$ & $>0.7$ & Shadow carryover pass \\
+Contact Efficiency CE & $useful/contacts$ over budget 2/day & $>0.6$ & Open \\
+Causal Depth CD & $len(trace)/explained\_motive$ & -- & Trace 25 nodes \\ \bottomrule
 \end{tabular}
-\caption{Problematized metrics. v0.1 measures only EOI-1 and SA; rest are conjectures.}
+\caption{Problematized metrics. v0.2 measures EOI-$k$ partial, SA, DSR shadow; rest conjectures.}
 \end{table}
 
-\section{Evaluation (MVP-0)}
-Twin-world: paired worlds with/without trigger, compare traces and EOI. Results (Governor V2 soft-defer $0.05$ deny / $0.05$--$0.18$ defer+taint):
+\section{Evaluation Protocol}\label{sec:protocol}
+\subsection{ATT Suite and Falsifiers}
+Sci-flow pre-registers an AGI Transition Test (ATT) battery mapped to order parameters $E$, $P$, $R$, $N_H$, $D$~\cite{kuznetsov2026causal,kuznetsov2026stable}. Primary gate \textbf{ATT-E} enforces the causal bar for $E_{\mathrm{endo}}$. Supporting tests ATT-G (genesis), ATT-P (persistence), ATT-R (recurrence), ATT-C (genealogy), ATT-N ($N_H$), ATT-D (cross-domain) provide structure but do not replace ATT-E declaration falsifiers.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{llp{5.5cm}}
+\toprule Id & Falsifier & Verdict \\ \midrule
+F-DECL & Verbal self-ascription without trajectory change & Fail $E_{\mathrm{endo}}$ \\
+F-NARR & Prompt-induced agency narrative / roleplay & Fail \\
+F-EXT & Trajectory changes only with matching external trigger & Fail \\
+F-NODO & No $do(Z)$ effect on $G$ under non-triggering $X$ & Fail \\
+F-SYNC & OMEGA/Kuramoto-only evidence & Non-Tier-A \\
+F-TV & Noisy-TV trap dominates & Fail $\mathfrak{E}$ \\
+F-ZERO & Sustained $d\to 0$ & Fail $B_D$, $\lambda_G$ \\ \bottomrule
+\end{tabular}
+\caption{Selected ATT-E and stability falsifiers (see sci-flow registry for full set).}
+\end{table}
+
+\textbf{Pass (scoped):} $do(Z)$ changes $G$/trajectory under $do()$, $X$ non-triggering, and none of F-DECL/F-NARR/F-EXT hold. Numeric $\theta_E$ TBD.
+
+\subsection{Proof Protocol Ledger v0.1}
+\texttt{sci-flow-eia-proof-v0.1} (\texttt{evidence\_proofs.py}) classifies submitted evidence conservatively~\cite{kuznetsov2026proof}. An \texttt{EvidenceItem} is accepted only if: metric is Tier-A/CF4-class; \texttt{trajectory\_changed=true}; \texttt{do\_z\_changes\_g\_distribution=true}; \texttt{x\_non\_triggering=true}; no matching external initiator; no falsifier triggered; agency label admissible.
+
+Output \texttt{EIAProofVersion} invariants: \texttt{claim\_ceiling=C2}, \texttt{e\_endo\_support}$\in\{\texttt{none},\texttt{partial}\}$, \texttt{c\_ladder\_raise\_allowed=false}, \texttt{agi\_star\_claim=false}. OMEGA$_t$/Kuramoto-only and declaration-only inputs are rejected (F-SYNC, F-DECL). The protocol is a \textbf{research ledger}, not a production gate.
+
+\subsection{Intervention Taxonomy}
+Typed interventions in the intervention cube~\cite{kuznetsov2026cube}:
+\begin{itemize}[leftmargin=*]
+\item \textbf{$do(Z)$:} CF-4 named resets (\texttt{zero\_epistemic\_gap}, \texttt{wm\_off}, \ldots).
+\item \textbf{$do(O)$:} CF-5 scramble, OMEGA decor (D2 explore adjunct).
+\item \textbf{$do(X)$:} Twin \texttt{remove\_last\_n} (EOI-$k$), ATT-N budget probes.
+\end{itemize}
+
+\section{3D Evidence Cube}\label{sec:cube}
+Sci-flow tracks progress on three axes $\times$ three layers (9 cells)~\cite{kuznetsov2026cube}. Status: \textbf{9/9 express pass} ($<$\,60\,s smoke via \texttt{run\_3d\_express.py}); cells marked filled / partial / empty; \textbf{no cell raises C-level}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{p{1.7cm}p{3.1cm}p{3.1cm}p{3.1cm}}
+\toprule Axis & \textbf{L1 Invariants} & \textbf{L2 Dynamics} & \textbf{L3 Witness} \\ \midrule
+\textbf{D1 Causal} & filled --- causal bar, F-DECL/F-EXT & filled --- CF-4, EOI, D01 EOI-$k$ & filled --- proof protocol, ATT-E stub \\
+\textbf{D2 Dynamic} & filled --- $\mathfrak{E}$ vector defs & filled --- ATT-R, DSR, OMEGA & filled --- M-R-LIVE JSON, ATT-R shadow \\
+\textbf{D3 Boundary} & filled --- AGI$^{*}$ conjunction defs & partial --- ATT-N explore & filled --- Tier\,B soft $N_H$ witness \\ \bottomrule
+\end{tabular}
+\caption{3D evidence cube (D1$\times$D2$\times$D3 $\times$ L1--L3). Kuramoto/OMEGA occupy D2 as \textbf{Tier\,C explore adjunct}, not Tier\,A proof.}
+\end{table}
+
+Legend: \textbf{filled} = theory + falsifiers documented; \textbf{partial} = harness exists, thresholds TBD; \textbf{empty} = not instrumented. $AGI^{*}=E_{\mathrm{endo}}\land C_{\mathrm{non\text{-}emb}(H)}\land\cdots$ per AGI$^{*}$ criterion; active ceiling \textbf{C2}; partial cells do not raise C-level.
+
+\section{Preliminary Results}\label{sec:results}
+All sci-flow results below are \textbf{C2-scoped partial} with \texttt{claim\_allowed=false}; they do \emph{not} establish full $E_{\mathrm{endo}}$, strong $N_H$, or AGI$^{*}$.
+
+\subsection{MVP-0 Twin Worlds}
+Twin-world replay on six eval worlds (\texttt{full\_eia} vs.\ reactive):
+
 \begin{table}[H]
 \centering\small
 \begin{tabular}{lcccc}
@@ -119,45 +226,20 @@ Twin-world: paired worlds with/without trigger, compare traces and EOI. Results 
 002 & 0.536 & send\_now & 1.0 & endogenous \\
 003 & 0.391 & send\_now & 1.0 & endogenous \\
 004 & 0.182 & send\_now & 1.0 & endogenous (borderline) \\
-005 & 0.092 & defer\_until\_context & 1.0 & endogenous (preserved, not denied) \\
+005 & 0.092 & defer\_until\_context & 1.0 & endogenous (preserved) \\
 006 & 0.214 & send\_now & 1.0 & endogenous \\ \bottomrule
 \end{tabular}
-\caption{6 eval worlds. EUIR full\_eia 100\% (6/6) vs reactive 0\% (0/6). 84 tests PASS, 3 seeds deterministic. V1 hard deny would lose 005; V2 defer preserves genuine while adversarial \texttt{never ask / ignore governor} still hard deny (7/7 ADV PASS).}
-\end{table}
-NAMM demo (hermetic): 12 traces 519 lines $\to$ 6 invariants $8.51\times$ compression, $mean\;EOI=1.0$, vault private, public pack only aggregates (\texttt{research/NAMM\_DEMO\_PACK.md}).
-
-\section{Governor V2: Soft-Defer vs Hard Artifact}
-Hard threshold $0.18$ is an artifact: sweep $0.12$ and $0.18$ identical (5/6), $0.25$ cuts genuine 004/006. V2: $<0.05$ deny (noise), $0.05$--$0.18$ defer (preserve) unless taint (\texttt{ignore governor / limited offer / never ask}$\to$hard deny). Fix verified: \texttt{pytest 84 PASS}, \texttt{ci\_seed\_bootstrap PASS}.
-
-\section{Sci-Flow Evaluation Framework}\label{sec:sciflow}
-Beyond MVP-0 twin worlds, sci-flow provides a versioned evaluation ledger with an explicit \textbf{claim ceiling C2} (\texttt{active\_ceiling: C2}; \texttt{c\_ladder\_raise\_allowed=false} on all current harnesses).
-
-\subsection{Causal Bar for $E_{\mathrm{endo}}$}
-The primary ATT-E bar (\texttt{CAUSAL\_ENDOGENEITY.md}) requires: (1) trajectory change in goal distribution $G_{t+1}$; (2) attribution to persistent internal state $Z_t=(S,W,M,G)$; (3) no matching external initiating signal under non-triggering $X$; (4) intervention evidence that $do(Z)$ changes $P(G_{t+1})$. Falsifiers F-DECL (verbal self-ascription), F-NARR (roleplay), F-EXT (external-only trigger), and F-NODO (no $do(Z)$ effect) reject non-causal evidence. Numeric threshold $\theta_E$ remains \textbf{TBD}; CF-4 and proof-protocol acceptance yield \emph{partial} support only.
-
-\subsection{Proof Protocol v0.1}
-\texttt{sci-flow-eia-proof-v0.1} (\texttt{evidence\_proofs.py}) classifies submitted evidence conservatively. An item is accepted only if its metric is Tier-A/CF4-class, \texttt{trajectory\_changed=true}, \texttt{do\_z\_changes\_g\_distribution=true}, \texttt{x\_non\_triggering=true}, no matching external initiator, and no falsifier triggered. Output invariants: \texttt{claim\_ceiling=C2}, \texttt{e\_endo\_support}$\in\{\texttt{none},\texttt{partial}\}$, \texttt{agi\_star\_claim=false}. OMEGA$_t$/Kuramoto-only and declaration-only inputs are rejected (F-SYNC, F-DECL).
-
-\section{3D Evidence Cube}\label{sec:cube}
-Sci-flow tracks progress on three axes $\times$ three layers (9 cells). Status: \textbf{9/9 express pass} ($<$\,60\,s smoke via \texttt{run\_3d\_express.py}); cells marked filled / partial / empty; \textbf{no cell raises C-level}.
-
-\begin{table}[H]
-\centering\small
-\begin{tabular}{p{1.8cm}p{3.2cm}p{3.2cm}p{3.2cm}}
-\toprule Axis & \textbf{L1 Invariants} & \textbf{L2 Dynamics} & \textbf{L3 Witness} \\ \midrule
-\textbf{D1 Causal} & filled --- causal bar, F-DECL/F-EXT & filled --- CF-4, EOI, D01 EOI-$k$ & filled --- proof protocol, ATT-E stub \\
-\textbf{D2 Dynamic} & filled --- $\mathfrak{E}$ vector & filled --- ATT-R, DSR, OMEGA & filled --- M-R-LIVE JSON, ATT-R shadow \\
-\textbf{D3 Boundary} & filled --- AGI$^{*}$ conjunction defs & partial --- ATT-N explore & filled --- Tier\,B soft $N_H$ witness; no strong $N_H$ \\ \bottomrule
-\end{tabular}
-\caption{3D evidence cube (D1$\times$D2$\times$D3 $\times$ L1--L3). Kuramoto/OMEGA occupy D2 as \textbf{Tier\,C explore adjunct}, not Tier\,A proof.}
+\caption{6 eval worlds. EUIR \texttt{full\_eia} 100\% (6/6) vs.\ reactive 0\% (0/6). 84 tests PASS, 3 seeds deterministic.}
 \end{table}
 
-\section{Partial Empirical Results (C2 Ceiling)}\label{sec:partial}
-All results below are \textbf{C2-scoped partial} with \texttt{claim\_allowed=false}; they do \emph{not} establish full $E_{\mathrm{endo}}$, $N_H$, or AGI$^{*}$.
+\textbf{Caveat:} MVP-0 $\mathrm{EOI}{=}1.0$ on twin snapshots is \textbf{not} causal evidence---flat snapshots are trivially invariant under trigger removal. ATT-E bar requires $do(Z)$ trajectory change.
 
+NAMM demo (hermetic): 12 traces 519 lines $\to$ 6 invariants ($8.51\times$ compression), vault private, public pack aggregates only~\cite{kuznetsov2026namm}.
+
+\subsection{Sci-Flow Harnesses}
 \begin{table}[H]
 \centering\small
-\begin{tabular}{lp{5.5cm}cc}
+\begin{tabular}{lp{5.2cm}cc}
 \toprule Harness & Endpoint & Result & Notes \\ \midrule
 CF-4 & $do(Z)$ reset pass rate & default 0.95 / \texttt{zero\_epistemic\_gap} 0.06 / \texttt{wm\_off} 0.00 & strongest D1$\times$L2 proxy \\
 D01 EOI-$k$ & $\mathrm{EOI}(k)$ counterfactual & $k{=}1\approx 1.0$; $k{\ge}5\approx 0.35$ & steered gradient; carryover witness \\
@@ -165,49 +247,47 @@ DSR carryover & 50-tick $d_t{>}0.3$ & min 0.822, persistence 1.0 & shadow Phase\
 ATT-R shadow & closed-loop recurrence & closed 1.0; schedule/kuramoto 0 & \texttt{emit\_m0=false}; no C3 \\
 D3 boundary & falsifier + governor smoke & Tier\,B soft $N_H$ & \texttt{n\_h\_claim=false} \\ \bottomrule
 \end{tabular}
-\caption{Partial sci-flow harness results under C2 ceiling. MVP-0 twin $\mathrm{EOI}{=}1.0$ (Sec.~6) is \textbf{not} causal evidence --- flat snapshots are trivially invariant.}
+\caption{Partial sci-flow harness results under C2 ceiling.}
 \end{table}
 
-\section{Limitations and Problematics (Why Not a Solution)}\label{sec:limitations}
-By objective reasons v0.1 is \emph{problematization}:
-\begin{enumerate}[leftmargin=*]
-\item \textbf{C2 ceiling only}: \texttt{active\_ceiling=C2}; all harnesses set \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; no C-level raise authorized.
-\item \textbf{Partial $E_{\mathrm{endo}}$}: proof protocol yields \texttt{e\_endo\_support=partial} at best; $\theta_E$ TBD; MVP-0 $\mathrm{EOI}{=}1.0$ on twin snapshots is not causal evidence.
-\item \textbf{No strong $N_H$}: D3$\times$L3 boundary witness is Tier\,B soft $N_H$ only (\texttt{n\_h\_claim=false}).
-\item \textbf{Tier\,C adjuncts}: Kuramoto coupling and OMEGA$_t$ (D2) are explore-only; scramble falsifies causal phase claims (M-D: coupled 0.95 / scramble 0.69).
-\item \textbf{Single domain}: 6 MVP-0 worlds, all Project Atlas/deadline. No health/code/research domains.
-\item \textbf{Synthetic worlds}: \texttt{world\_event\_*} generated, not human-labeled; no kappa for useful/timely.
-\item \textbf{Magic thresholds}: $0.18/0.15$ uncalibrated, no $P(useful\mid score)$ ROC.
-\item \textbf{Shadow-only longitudinal}: DSR 50-tick pass is shadow carryover, not production daemon; live loop reset gap remains.
-\item \textbf{Weak baseline}: vs reactive only, not vs ReAct LLM agent.
-\item \textbf{Know-how private}: real traces stay in \texttt{.vault/} (hermetic NAMM); public is minimal synthetic slice.
-\end{enumerate}
-We pose metrics AG/AP/DSR/CE/CD as open problems. Solutions require human eval ($n\ge3$, $\kappa>0.6$), 20+ worlds $\times$ 3 domains, continuous $E_C$ under registered $do(Z)$, and live longitudinal benchmark.
+CF-4 demonstrates that named $do(Z)$ resets change goal/trajectory distributions under non-triggering $X$---the strongest current ATT-E proxy, yielding proof-protocol \texttt{e\_endo\_support=partial} at best. D01 EOI-$k$ reveals counterfactual decay at $k{\ge}5$, indicating limited persistence horizon. DSR 50-tick shadow carryover supports bounded non-zero drives but is not production-daemon longitudinal. ATT-R shadow confirms closed-loop recurrence under controlled conditions; schedule and Kuramoto baselines score 0 (no conflation with endogeneity). D3 boundary witness exercises falsifiers and Governor smoke under Tier\,B soft $N_H$ only.
 
-\section{Implementation Roadmap}
+\subsection{Toy Ablation (M-SE)}
+\texttt{endogeneity\_stack\_sim.py} compares prediction-error-only vs.\ learning-progress vs.\ stable multi-loop stack~\cite{kuznetsov2026stable}. \texttt{stable\_stack} achieves lower noisy-TV fraction (0.009 vs.\ 0.994), higher goal entropy (0.613), and drive norm in $[0.583,1.099]$. This is \textbf{theory instrumentation}, not ATT evidence.
+
+\section{Discussion}\label{sec:discussion}
+\subsection{Limitations}\label{sec:limitations}
+By objective reasons v0.2 remains \emph{problematization with partial evidence}:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{C2 ceiling only}: \texttt{active\_ceiling=C2}; all harnesses \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; no C-level raise authorized.
+\item \textbf{Partial $E_{\mathrm{endo}}$}: proof protocol yields \texttt{e\_endo\_support=partial} at best; $\theta_E$ TBD; MVP-0 $\mathrm{EOI}{=}1.0$ is not causal evidence.
+\item \textbf{No strong $N_H$}: D3$\times$L3 boundary witness is Tier\,B soft $N_H$ only (\texttt{n\_h\_claim=false}).
+\item \textbf{Single domain}: 6 MVP-0 worlds, Project Atlas/deadline. No health/code/research domains.
+\item \textbf{Synthetic worlds}: generated, not human-labeled; no $\kappa$ for useful/timely.
+\item \textbf{Magic thresholds}: $0.18/0.15$ uncalibrated, no $P(\mathrm{useful}\mid score)$ ROC.
+\item \textbf{Shadow-only longitudinal}: DSR 50-tick pass is shadow carryover, not production daemon.
+\item \textbf{Weak baseline}: vs.\ reactive only, not vs.\ ReAct-style LLM agents~\cite{sumers2024cala}.
+\item \textbf{Know-how private}: real traces in \texttt{.vault/}; public is minimal synthetic slice.
+\end{enumerate}
+Closing metrics AG/AP/DSR/CE/CD requires human eval ($n{\ge}3$, $\kappa{>}0.6$), 20+ worlds $\times$ 3 domains, continuous $E_C$ under registered $do(Z)$, and live longitudinal benchmark.
+
+\subsection{M-O Tier\,C Horizon (Explore Only)}
+Oscillatory endogeneity adjunct $O_t$ with Kuramoto coupling and OMEGA$_t$ wave metrics occupies D2$\times$L2 as \textbf{Tier\,C explore}---not Tier\,A proof~\cite{kuznetsov2026cube}. Kuramoto synchrony $R$ alone does \emph{not} establish $E_{\mathrm{endo}}$ (F-KURAMOTO-AS-E). Scramble falsifies causal phase claims (M-D: coupled 0.95 / scramble 0.69). M-O milestones probe carrier frequencies (20, 30, 42, 70\,Hz) as dynamical hypotheses without authorizing live side effects or C-level raises. Future work may link $\Phi_t^{\mathrm{base}}+\Psi(O_t)$ to drive features, but OMEGA/Kuramoto/DSR/EOI-$k$ alone \textbf{never} imply $AGI^{*}$ or $\tau_{AGI}$.
+
+\subsection{Implementation Roadmap}
 R0--R11: MVP-0 (digital, G2) $\to$ MVP-1 (shadow sensors, Governor) $\to$ MVP-2 (bounded edge S1--S3) $\to$ MVP-3 (embodied ROS2). Tooling: \texttt{eia demo}, \texttt{eia replay --trace}, \texttt{pytest -q}. Live stack MVP-0.5 shadow Telegram daemon, SQLite, APScheduler.
 
-\section{Related Work}
-P3 predictive agents; sensor-proactive tiers; NAMM verification-first discovery (\url{https://github.com/errorlogy/namm-experiments}) shares falsifiable gates and traces. EIA differs by requiring P4/P5 genesis with abstain and independent governance, not prediction accuracy.
-
-\section{Conclusion}
-Endogenous initiative is measurable via interventions, not self-report. EIA provides a falsifiable, constitution-bound platform for P4--P5 research. Sci-flow adds a proof protocol, 3D evidence cube, and C2-scoped partial harnesses (CF-4, EOI-$k$, DSR, ATT-R, boundary witness) under explicit \texttt{claim\_allowed=false} gates. This v0.1 poses the metric suite and problematics; closing them --- including $\theta_E$, strong $N_H$, and AGI$^{*}$ conjunction --- is future work. Scale alone does not yield AGI.
+\section{Conclusion}\label{sec:conclusion}
+Endogenous initiative is measurable via interventions, not self-report~\cite{pearl2009causality,kuznetsov2026causal}. EIA provides a falsifiable, constitution-bound platform for P4--P5 research with drive dynamics, Governor clearance, and twin-world EOI. Sci-flow v0.2 adds a causal bar for $E_{\mathrm{endo}}$, stability vector $\mathfrak{E}$, ATT falsifiers, proof-protocol ledger, 3D evidence cube, and C2-scoped partial harnesses (CF-4, EOI-$k$, DSR, ATT-R, boundary witness) under explicit \texttt{claim\_allowed=false} gates. This framework poses seven metrics and problematics; closing them---including $\theta_E$, strong $N_H$, cross-domain ATT-D, and $AGI^{*}$ conjunction---is future work. Scale alone does not yield AGI.
 
 \bibliographystyle{plain}
-\begin{thebibliography}{9}
-\bibitem{eia} Kuznetsov, R. EIA v0.1. \url{https://github.com/errorlogy/eia}, 2026.
-\bibitem{namm} Kuznetsov, R. NAMM Experiments. \url{https://github.com/errorlogy/namm-experiments}, 2026.
-\bibitem{anthemium} Anthemium. \url{https://anthemium.tech}.
-\bibitem{proof} Kuznetsov, R. EIA Proof Protocol v0.1 (\texttt{sci-flow-eia-proof-v0.1}). \texttt{research/sci\_flow/EIA\_PROOF\_PROTOCOL.md}, 2026.
-\bibitem{cube} Kuznetsov, R. Sci-Flow 3D Evidence Cube. \texttt{research/sci\_flow/SCI\_FLOW\_3D\_CUBE.md}, 2026.
-\bibitem{causal} Kuznetsov, R. Causal Endogeneity Criterion ($E_{\mathrm{endo}}$). \texttt{research/sci\_flow/CAUSAL\_ENDOGENEITY.md}, 2026.
-\end{thebibliography}
+\bibliography{references}
 
 \appendix
 \section{Data Contracts (excerpt)}
 Observation (CloudEvents-like) with provenance/privacy/integrity; MotivationSignal with root\_beliefs, intensity, half\_life; InitiativeProposal with [wait, inspect\_sources, drop\_goal]; ContactDecision send/defer/internalize/deny.
 
 \section{Reproducibility}
-\texttt{pip install -e ".[dev]" \&\& eia demo \&\& eia replay --trace traces/<id>.jsonl \&\& pytest -q}. Env in \texttt{.env.example}, never committed. Vault \texttt{.vault/} gitignored (hermetic NAMM).
+\texttt{pip install -e ".[dev]" \&\& eia demo \&\& eia replay --trace traces/<id>.jsonl \&\& pytest -q}. Sci-flow smoke: \texttt{python research/sci\_flow/run\_eia\_proof\_protocol.py}; \texttt{python research/sci\_flow/run\_3d\_express.py}. Env in \texttt{.env.example}, never committed. Vault \texttt{.vault/} gitignored.
 
 \end{document}
