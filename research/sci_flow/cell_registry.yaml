@@ -70,12 +70,6 @@ cells:
           intervention_kind: shadow_carryover
           pool_metric_id: B_D
           artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
-        - command: python research/sci_flow/run_e04_eoi_drift.py
-          intervention_kind: shadow_carryover
-          pool_metric_id: E_ENDO
-          att: ATT-E
-          artifact: research/sci_flow/M-E04_EOI_drift_2026-09-02.json
-          note: E04 part 2 longitudinal EOI drift vs bootstrap baseline (50 ticks)
         - command: python research/sci_flow/run_shadow_att_r.py
           intervention_kind: closed_loop
           pool_metric_id: R_RECURRENCE

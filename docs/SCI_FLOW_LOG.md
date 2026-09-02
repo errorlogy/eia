@@ -1506,9 +1506,9 @@ Graphitti CI binary run (optional); shadow multitick with vendor-fed O_t. No C-l
 
 ---
 
-## Entry 043 — 2026-09-02 — M-E04-DRIFT EOI drift on 50-tick carryover (D2×L2)
+## Entry 043 — 2026-09-02 — M-O Graphitti binary witness (D2×L3)
 
-**Session:** E04 part 2 — longitudinal initiative-fingerprint stability on shadow carryover  
+**Session:** M-O-GRAPHITTI-BIN — cmake build attempt + binary witness harness  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Claim level:** **C2** unchanged. **No AGI\* claim.**
 
@@ -1516,31 +1516,30 @@ Graphitti CI binary run (optional); shadow multitick with vendor-fed O_t. No C-l
 
 | Loop | Summary |
 |------|---------|
-| S1 | Read `run_dsr_carryover.py`, `eoi_k_harness.py`, shadow carryover API |
-| S2 | `eoi_drift_harness.py` + `run_e04_eoi_drift.py`; initiative capture in `shadow_multitick` |
-| S3 | Artifact `M-E04_EOI_drift_2026-09-02.json` + `.md`; `cell_registry.yaml` D2×L2 updated |
-| S4 | `tests/test_e04_eoi_drift.py`; tier-0 includes E04 EOI drift tests |
-| S5 | `check_sci_tier0` OK; SCI_FLOW_LOG Entry 043 |
+| S1 | Read `research/vendor/graphitti/`, probe harness, M-O endogeneity doc |
+| S2 | Attempted build: Windows cmake absent; WSL Ubuntu 24.04 lacks g++/cmake; apt offline |
+| S3 | Created `run_graphitti_witness.py` + `M-MO_graphitti_witness_2026-09-02.json` (build_blocked stub) |
+| S4 | Updated `vendor/README.md` build instructions; `cell_registry` D2×L3; `tests/test_graphitti_witness.py` |
+| S5 | `check_sci_tier0` after commit |
 
 ### Metrics
 
 | Item | Value |
 |------|-------|
-| Harness | `research/sci_flow/eoi_drift_harness.py` |
-| Runner | `python research/sci_flow/run_e04_eoi_drift.py` |
-| Artifact | `research/sci_flow/M-E04_EOI_drift_2026-09-02.json` |
-| Cognitive ticks | 50 |
-| `eoi_min` / `eoi_max` / `eoi_mean` | 0.75 / 1.0 / 0.755 |
-| `eoi_drift_span` | 0.25 |
-| `persistence_fraction` | 1.0 |
-| Baseline target | `belief-world-gap` |
-| Cube cell | **D2×L2** (longitudinal dynamics) |
-| `claim_allowed` | **false** |
-| Tier-0 | `check_sci_tier0` after commit |
+| Harness | `research/sci_flow/run_graphitti_witness.py` |
+| Artifact | `research/sci_flow/M-MO_graphitti_witness_2026-09-02.json` |
+| Binary | `cgraphitti` — **not built** (blocker documented) |
+| Spike parser | Regression against `GoodOutput/Cpu/test-tiny-out.xml` |
+| Cube cell | **D2×L3** witness (stub until Linux CI build) |
+| `claim_allowed` | **false** (Tier C) |
+
+### Blocker
+
+Windows PATH: no cmake. WSL: no toolchain; `apt-get install cmake build-essential` fails (archive.ubuntu.com unreachable). Upgrade: Linux CI or WSL with network → cmake flow in `research/vendor/README.md`.
 
 ### Next
 
-Multi-seed EOI drift batch; live daemon StateStore carryover. No C-level raise.
+Optional Linux CI workflow to build `cgraphitti` and re-run witness for live spike-rate metrics. No C-level raise.
 
 ---
 
