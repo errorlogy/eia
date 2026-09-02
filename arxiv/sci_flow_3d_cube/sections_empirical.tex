@@ -17,21 +17,46 @@ CF-4 named $do(Z)$ resets provide the strongest current ATT-E proxy. Figure~\ref
 \label{fig:cf4-empirical}
 \end{figure}
 
+\subsection{D1$\times$L3 empirical proof ledger}
+
+\texttt{run\_d1\_l3\_ledger.py} (protocol \texttt{sci-flow-eia-proof-v0.1}) accepts CF-4 + D01 $do(Z)$ \texttt{EvidenceItem}s conservatively. Current ledger: \texttt{e\_endo\_support=partial}, \texttt{claim\_ceiling=C2}, \textbf{two} accepted items:
+\begin{itemize}[leftmargin=*]
+\item \texttt{M-CF4-do\_z-epistemic\_gap} --- CF-4 trajectory change under $do(Z)$
+\item \texttt{M-D01-do\_z-eoi\_k\_steered-zero\_prospective} --- D01 causal remapping with trajectory change
+\end{itemize}
+Legacy do(X) EOI-$k$ rows (k=1/5/20) rejected F-NODO; do(Z) rows without trajectory change rejected F-NARR. Artifact: \texttt{M-D1-L3\_proof\_ledger\_2026-09-02.json}.
+
+\subsection{D01 $do(Z)$ causal remapping (D1$\times$L2)}
+
+\texttt{run\_d01\_do\_z\_eoi.py} remaps D01 from do(X) twin \texttt{remove\_last\_n} (F-NODO) to registered $do(Z)$ internal-state interventions on cognitive-loop $Z$ before initiative genesis. Of five $do(Z)$ sweeps on \texttt{eoi\_k\_steered}, only \texttt{do\_z\_zero\_prospective} yields \texttt{trajectory\_changed=true} with \texttt{do\_z\_changes\_g\_distribution=true} (belief-commit-atlas $\to$ belief-deadline). Artifact: \texttt{M-D01\_do\_z\_EOI\_2026-09-02.json}.
+
+\subsection{G2 E01 partial multi-world eval (D1$\times$L2)}
+
+\texttt{run\_g2\_worlds\_eval.py} evaluates \textbf{8} MVP-0 Atlas/ops twin worlds ($\times$1 domain; E01 target 20$\times$3 deferred). Aggregate: \texttt{full\_eia} mean EOI 1.0, EUIR proxy 100\% (8/8 endogenous); \texttt{reactive\_only} mean EOI 0.0, EUIR 0\%. Supports G2 directional claim (full $>$ reactive) but does \textbf{not} close E01 or authorize C-level raise. Artifact: \texttt{M-G2\_E01\_worlds\_2026-09-02.json}.
+
 \subsection{Continuous $E_C$ batch (D1$\times$L2 deepen)}
 
 \texttt{run\_e\_c\_continuous.py} (M-D01) registers a minimal continuous $E_C$ proxy under each \texttt{do\_z\_*} intervention from the intervention cube (3 seeds $\times$ 5 interventions). Pool metric \texttt{E\_C} status=\textbf{proxy}; $\theta_E$ remains TBD. Mean $E_C$ by intervention: \texttt{do\_z\_wm\_off} 1.0; \texttt{do\_z\_zero\_epistemic\_gap} 1.0; \texttt{do\_z\_zero\_staleness} 0.33; \texttt{do\_z\_zero\_self\_prior} 0.0; \texttt{do\_z\_zero\_prospective} 0.0. Artifact: \texttt{M-D01\_E\_C\_continuous\_2026-09-02.json}.
-
-\subsection{D1$\times$L3 empirical proof ledger}
-
-\texttt{run\_eia\_proof\_protocol.py} (protocol \texttt{sci-flow-eia-proof-v0.1}) accepts CF-4 + D01 \texttt{EvidenceItem}s conservatively. Current ledger: \texttt{e\_endo\_support=partial}, \texttt{claim\_ceiling=C2}, accepted evidence \texttt{M-CF4-do\_z-epistemic\_gap}. Declaration-only and OMEGA-only inputs are rejected (F-DECL, F-SYNC).
 
 \subsection{M-O paired $do(O)$ arms (D2$\times$L2, Tier\,C)}
 
 \texttt{run\_mo\_do\_o\_arms.py} compares Neuraxon baseline, \texttt{plasticity\_off}, and native \texttt{oscillatory\_state.py} (50 steps, seed 42). Paired $\Omega_t$ final: baseline 0.293, native 0.897 ($\Delta{=}0.604$); Kuramoto $R$: baseline 0.604, native 0.994. Structural events: baseline 1, \texttt{plasticity\_off} 0. Falsifier hints: F-STRUCT$\neq$E active; F-KURAMOTO-AS-E not triggered at this seed. \textbf{Explore only}---does not establish $E_{\mathrm{endo}}$ or ATT-G linkage. Artifact: \texttt{M-MO\_do\_o\_arms\_2026-09-02.json}.
 
-\subsection{Graphitti binary witness (D2$\times$L3, Tier\,C)}
+\subsection{M-O shadow bridge ATT-R parity (D2$\times$L2, Tier\,C)}
 
-\texttt{run\_graphitti\_witness.py} documents ConnGrowth + STDP config parse and build path for \texttt{cgraphitti}. Binary status: \textbf{build\_blocked} (Windows: no cmake; WSL: toolchain/apt offline). Spike-rate metrics deferred to Linux CI; regression parser validated against \texttt{test-tiny-out.xml}. Artifact: \texttt{M-MO\_graphitti\_witness\_2026-09-02.json}.
+\texttt{run\_mo\_shadow\_bridge.py} crosswalks Neuraxon/OMEGA into \texttt{OmegaWaveState} and compares ATT-R closed-loop evidence on matched seed. Native vs.\ omega-bridged: both \texttt{att\_r\_evidence=true}, closed\_cycles=1; parity native$\leftrightarrow$bridged confirmed. Invariants: \texttt{e\_endo\_support=none}, \texttt{claim\_allowed=false}. Artifact: \texttt{M-MO\_shadow\_bridge\_2026-09-02.json}.
+
+\subsection{M-O proof adjunct ledger (D2$\times$L3, Tier\,C)}
+
+\texttt{run\_mo\_proof\_bridge.py} (protocol \texttt{sci-flow-mo-adjunct-v0.1}) admits paired $do(O)$ metric witnesses to \textbf{D2$\times$L3 only}. Current: \texttt{witness\_support=partial}, \texttt{e\_endo\_support=none}, accepted \texttt{M-MO-do\_o-plasticity\_off-structural\_events} + \texttt{M-MO-do\_o-plasticity\_off-w\_fast\_drift}; rejected OMEGA/Kuramoto-only rows (F-OMEGA-DECOR, F-SYNC). Does \textbf{not} establish $E_{\mathrm{endo}}$ or authorize C-ladder raise. Artifact: \texttt{M-MO\_proof\_adjunct\_2026-09-02.json}.
+
+\subsection{Graphitti witness (D2$\times$L3, Tier\,C)}
+
+\texttt{run\_graphitti\_witness.py} documents ConnGrowth + STDP config parse and build path for \texttt{cgraphitti}. CI workflow (\texttt{.github/workflows/graphitti-witness.yml}) yields \texttt{witness\_kind=binary\_ok} on Linux; local Windows fallback: \texttt{regression\_xml\_ok} (spike\_rate\_mean\_hz=5.0, spike\_count\_total=5 from GoodOutput XML). Tier\,C explore only; does not satisfy ATT-E causal bar. Artifact: \texttt{M-MO\_graphitti\_witness\_2026-09-02.json}.
+
+\subsection{Live-path carryover witness (D2$\times$L3)}
+
+\texttt{run\_live\_path\_witness.py} compares shadow \texttt{ShadowSessionCarryover} vs.\ opt-in live \texttt{StateStore} hydration (\texttt{EIA\_DAEMON\_BELIEF\_CARRYOVER=1}). \textbf{12/12} structural parity checks pass; \texttt{witness\_pass=true}, \texttt{gap\_narrowed=true}. Shadow session\_tick=6; live-on session\_tick=2 with beliefs round-trip. Residual gap: tick granularity and observation source differ. Artifact: \texttt{M-LIVE-PATH\_witness\_2026-09-02.json}.
 
 \subsection{M-E04 EOI drift (D2$\times$L2)}
 

@@ -352,7 +352,22 @@ milestones:
     artifacts:
       - arxiv_arXiv_submission.tar.gz
       - sci_flow_3d_cube_arXiv_submission.tar.gz
-    note: "Post wave-2 sync; tarballs documented in docs/ARXIV_SUBMISSION.md; binaries not committed"
+    note: "v0.3 sync post M-O adjunct + D1 do(Z) + mode B; tarballs in docs/ARXIV_SUBMISSION.md; binaries not committed"
+
+  arxiv_v0.3:
+    name: arXiv v0.3 sync (M-O adjunct, D1 do(Z), G2 E01, live-path, Graphitti)
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: arxiv/
+    status: done
+    completed: "2026-09-02"
+    command: make arxiv-compile && make arxiv-3d-cube-compile && make arxiv-package && make arxiv-3d-cube-package
+    artifacts:
+      - arxiv/main.tex
+      - arxiv/sci_flow_3d_cube/main.tex
+      - arxiv/sci_flow_3d_cube/sections_empirical.tex
+      - docs/ARXIV_SUBMISSION.md
+    note: "v0.3 September 2026; D1×L3 2 admissible items; claim_allowed=false; no AGI*"
 
   M-EMP:
     name: Endogeneity Metrics Pool (Tier A–E registry + ERI)

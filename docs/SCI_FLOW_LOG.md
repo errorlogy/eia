@@ -1855,3 +1855,37 @@ Optional omega-bridged carryover session (50-tick DSR); Graphitti CI green. No C
 
 Multi-seed do(Z) batch; continuous `E_C` under each `do_z_*`. No C-level raise.
 
+---
+
+## Entry 053 — 2026-09-02 — arXiv v0.3 sync + package + push
+
+**Session:** Sync EIA + 3D cube papers to v0.3; package for arXiv upload; push branch  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Polled sci-flow ticks 047–052: M-LIVE-PATH, Graphitti GREEN, M-O adjunct, shadow bridge, D1 do(Z) ledger |
+| S2 | Synced `arxiv/main.tex` v0.3 — D1×L3 2 admissible items, G2 E01 8-world, live-path, M-O adjunct + shadow bridge |
+| S3 | Synced `arxiv/sci_flow_3d_cube/sections_empirical.tex` — full v0.3 empirical sections |
+| S4 | Regenerated figures; recompiled both PDFs; `clean_and_package.py` for EIA + 3D cube |
+| S5 | `docs/ARXIV_SUBMISSION.md`; `config.yaml` `arxiv_v0.3` → done; `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| EIA paper | `arxiv/main.pdf` — **12 pages** (v0.3) |
+| 3D cube paper | `arxiv/sci_flow_3d_cube/main.pdf` — **11 pages** (v0.3) |
+| D1×L3 accepted | `M-CF4-do_z-epistemic_gap`, `M-D01-do_z-eoi_k_steered-zero_prospective` |
+| Express total | 3807.4 ms (9/9 pass) |
+| Packages | `arxiv_arXiv_submission.tar.gz` (176.7 KB), `arxiv/sci_flow_3d_cube_arXiv_submission.tar.gz` (60.7 KB) |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+Upload tarballs to arXiv when ready; E01 20×3 domains deferred. No C-level raise.
+

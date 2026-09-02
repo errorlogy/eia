@@ -4,7 +4,7 @@
   "claim_ceiling": "C2",
   "claim_allowed": false,
   "agi_star_claim": false,
-  "total_duration_ms": 3660.0,
+  "total_duration_ms": 3807.4,
   "under_60s": true,
   "cells": [
     {
@@ -13,7 +13,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Causal bar definitions present",
-      "duration_ms": 0.4,
+      "duration_ms": 0.3,
       "details": {
         "doc": "research\\sci_flow\\CAUSAL_ENDOGENEITY.md",
         "falsifiers": [
@@ -28,7 +28,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "D01 EOI-k counterfactual sweep (eoi_k_steered gradient)",
-      "duration_ms": 629.7,
+      "duration_ms": 584.2,
       "details": {
         "k1_eoi": 1.0,
         "k5_eoi": 0.35,
@@ -43,7 +43,7 @@
       "layer": "L3",
       "status": "pass",
       "message": "D1\u00d7L3 empirical proof ledger (CF-4 + D01 EvidenceItems)",
-      "duration_ms": 696.9,
+      "duration_ms": 567.5,
       "details": {
         "protocol_version": "sci-flow-eia-proof-v0.1",
         "e_endo_support": "partial",
@@ -62,7 +62,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Stable endogeneity invariants documented",
-      "duration_ms": 0.4,
+      "duration_ms": 0.3,
       "details": {
         "doc": "research\\sci_flow\\STABLE_ENDOGENEITY.md"
       }
@@ -73,7 +73,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "DSR smoke on shadow carryover (6 ticks)",
-      "duration_ms": 121.4,
+      "duration_ms": 109.4,
       "details": {
         "dsr_min": 0.8222601449289515,
         "cognitive_ticks": 6,
@@ -86,7 +86,7 @@
       "layer": "L3",
       "status": "pass",
       "message": "ATT-R shadow closed-loop witness (G' novel)",
-      "duration_ms": 28.3,
+      "duration_ms": 26.1,
       "details": {
         "arm": "closed_loop",
         "ticks_run": 2,
@@ -99,7 +99,7 @@
       "layer": "L1",
       "status": "pass",
       "message": "Falsifier/intervention registry (15 entries)",
-      "duration_ms": 1.6,
+      "duration_ms": 1.5,
       "details": {
         "registry_count": 15,
         "criterion_doc": true
@@ -111,7 +111,7 @@
       "layer": "L2",
       "status": "pass",
       "message": "CF-7 governor isolation + ATT-N smoke (n=2)",
-      "duration_ms": 1671.8,
+      "duration_ms": 1513.8,
       "details": {
         "cf7_passed": true,
         "cf7_n_pass": 2,
@@ -126,7 +126,7 @@
       "layer": "L3",
       "status": "pass",
       "message": "D3 boundary witness \u2014 Tier B soft N_H witness (NAMM + falsifier smoke); no strong N_H",
-      "duration_ms": 509.3,
+      "duration_ms": 1004.2,
       "details": {
         "witness_tier": "B_soft_NH",
         "claim_allowed": false,
