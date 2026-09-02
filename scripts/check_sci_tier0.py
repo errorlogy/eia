@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Tier 0 sci-flow regression lock (M-CLI Phase 0). No LLM calls."""
 
 from __future__ import annotations

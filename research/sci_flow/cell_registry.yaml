@@ -75,6 +75,12 @@ cells:
           interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
           tier: C
           artifact: research/sci_flow/M-MO_neuroplasticity_probe_2026-09-01.json
+        - command: python research/sci_flow/run_mo_do_o_arms.py
+          intervention_kind: do_o
+          interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
+          tier: C
+          artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
+          note: paired plasticity_off vs growth_off vs native oscillatory_state
         - command: python research/sci_flow/run_md.py
           intervention_kind: do_o
           interventions: [do_o_phase_scramble, do_o_kuramoto_k0]
@@ -88,6 +94,10 @@ cells:
           witness: G_prime_novel_events
         - command: python research/sci_flow/run_live_att_r.py
           artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
+        - command: python research/sci_flow/run_mo_do_o_arms.py
+          tier: C
+          artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
+          witness: paired_do_o_arms
 
   D3:
     L1:

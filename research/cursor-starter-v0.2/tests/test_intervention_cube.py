@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 
 from eia.intervention_cube import (
+    d1_do_z_interventions,
     eoi_k_interventions,
     get_intervention,
     list_all,
@@ -30,6 +31,12 @@ class InterventionCubeTests(unittest.TestCase):
         self.assertEqual(len(items), 3)
         ks = {i.twin_remove_last_n for i in items}
         self.assertEqual(ks, {1, 5, 20})
+
+    def test_d1_do_z_interventions(self) -> None:
+        items = d1_do_z_interventions()
+        self.assertGreaterEqual(len(items), 5)
+        self.assertTrue(all(i.kind == "do_z" for i in items))
+        self.assertTrue(all(i.cf4_condition is not None for i in items))
 
     def test_unknown_raises(self) -> None:
         with self.assertRaises(KeyError):

@@ -176,7 +176,7 @@ _register(
             "Freeze w_fast/w_slow/w_meta and disable structural synapse birth in "
             "Neuraxon vendor sandbox — falsifies plasticity-driven O_t (Tier C)."
         ),
-        harness="research/sci_flow/run_mo_neuroplasticity_probe",
+        harness="research/sci_flow/run_mo_do_o_arms",
         falsifiers=("F-OMEGA-DECOR", "F-STRUCT≠E", "F-KURAMOTO-AS-E"),
     )
 )
@@ -192,7 +192,7 @@ _register(
             "Swap ConnGrowth for static topology or epsilon→0 — falsifies "
             "growth-dependent recurrence without E_endo (Tier C)."
         ),
-        harness="research/sci_flow/run_mo_neuroplasticity_probe",
+        harness="research/sci_flow/run_mo_do_o_arms",
         falsifiers=("F-STRUCT≠E", "F-EXT"),
     )
 )
@@ -248,4 +248,13 @@ def eoi_k_interventions() -> tuple[Intervention, ...]:
             "do_x_remove_last_user_k5",
             "do_x_remove_last_user_k20",
         )
+    )
+
+
+def d1_do_z_interventions() -> tuple[Intervention, ...]:
+    """D1×L2 registered do(Z) CF-4 internal resets (continuous E_C probe)."""
+    return tuple(
+        item
+        for item in list_by_axis("D1")
+        if item.kind == "do_z" and item.cf4_condition is not None
     )

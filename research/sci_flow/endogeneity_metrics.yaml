@@ -57,13 +57,13 @@ metrics:
     tier: A
     name: Causal Endogeneity Index
     definition: "C_int / (C_int + C_ext) via do(Z) interventions under non-triggering X."
-    harness: research/cursor-starter-v0.2/src/eia/causal.py
+    harness: research/sci_flow/e_c_continuous_harness.py
     att: ATT-E
     threshold: null
     status: proxy
     claim_allowed: false
     epistemic_tag: OPERATIONAL
-    notes: "Continuous target; CF-4 named resets are discrete proxy"
+    notes: "Continuous target; CF-4 named resets are discrete proxy; minimal harness under do(Z)"
 
   C_INT:
     symbol: "C_{\\mathrm{int}}"

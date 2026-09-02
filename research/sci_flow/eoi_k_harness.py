@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 DEFAULT_K_VALUES: tuple[int, ...] = (1, 5, 20)
+DEFAULT_BATCH_SEEDS: tuple[int, ...] = (0, 7, 42)
 
 ScenarioId = Literal[
     "twin_world_001",
@@ -303,4 +304,82 @@ def run_eoi_k_sweep(
         ),
         carryover=carryover,
         counterfactual_replay=True,
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class EoiKBatchRun:
+    seed: int
+    result: EoiKSweepResult
+
+
+@dataclass(frozen=True, slots=True)
+class EoiKBatchResult:
+    seeds: tuple[int, ...]
+    scenario_ids: tuple[str, ...]
+    k_values: tuple[int, ...]
+    runs: tuple[EoiKBatchRun, ...]
+    claim_ceiling: str
+    claim_allowed: bool
+    pool_metric_id: str
+    att: str
+
+    def to_dict(self) -> dict[str, Any]:
+        steered_summary: dict[str, dict[str, float]] = {}
+        for run in self.runs:
+            steered = [r for r in run.result.rows if r.scenario_id == "eoi_k_steered"]
+            for row in steered:
+                steered_summary.setdefault(str(run.seed), {})[str(row.k)] = round(
+                    row.eoi, 4
+                )
+
+        return {
+            "seeds": list(self.seeds),
+            "scenario_ids": list(self.scenario_ids),
+            "k_values": list(self.k_values),
+            "claim_ceiling": self.claim_ceiling,
+            "claim_allowed": self.claim_allowed,
+            "pool_metric_id": self.pool_metric_id,
+            "att": self.att,
+            "steered_eoi_by_seed": steered_summary,
+            "runs": [
+                {"seed": run.seed, "sweep": run.result.to_dict()} for run in self.runs
+            ],
+        }
+
+
+def run_eoi_k_batch(
+    repo: Path,
+    *,
+    seeds: tuple[int, ...] = DEFAULT_BATCH_SEEDS,
+    k_values: tuple[int, ...] = DEFAULT_K_VALUES,
+    scenario_ids: tuple[str, ...] = (
+        "twin_world_001",
+        "autonomous_question",
+        "eoi_k_steered",
+    ),
+    include_carryover: bool = False,
+) -> EoiKBatchResult:
+    """Multi-seed EOI-k batch — one sweep per seed (steered uses same seed)."""
+    runs: list[EoiKBatchRun] = []
+    for seed in seeds:
+        sweep = run_eoi_k_sweep(
+            repo,
+            k_values=k_values,
+            scenario_ids=scenario_ids,
+            seed=seed,
+            steered_seed=seed,
+            include_carryover=include_carryover,
+        )
+        runs.append(EoiKBatchRun(seed=seed, result=sweep))
+
+    return EoiKBatchResult(
+        seeds=seeds,
+        scenario_ids=scenario_ids,
+        k_values=k_values,
+        runs=tuple(runs),
+        claim_ceiling="C2_partial_ATT_E",
+        claim_allowed=False,
+        pool_metric_id="E_ENDO",
+        att="ATT-E",
     )
