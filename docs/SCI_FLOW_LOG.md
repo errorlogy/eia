@@ -1238,3 +1238,34 @@ I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
 ### Next
 
 I02–I05: figures (DAG, drive decay), BibTeX merge, G2 pack. No C-level raise.
+
+---
+
+## Entry 035 — 2026-09-01 — Neuroplasticity OSS survey (M-O explore adjunct)
+
+**Session:** Catalogued 27 GitHub/HF repos for synaptic plasticity, connectome growth, dynamic synapses, GNN connectomes  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Scoped OSS scan to neuroplasticity / connection formation; excluded Neuraxon + Graphitti (separate Tier A doc) |
+| S2 | Created `research/sci_flow/NEUROPLASTICITY_OSS_SURVEY.md` — 5 categories, license + EIA tier per repo |
+| S3 | Cross-linked from `SCI_FLOW_3D_CUBE.md`; Tier A reserved for `NEUROPLASTICITY_EIA_APPLICATION.md` |
+| S4 | Mapped Tier B/C repos to D1/D2 cube axes (explore only) |
+| S5 | SCI_FLOW_LOG Entry 035 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Survey doc | `research/sci_flow/NEUROPLASTICITY_OSS_SURVEY.md` |
+| Repo count | 27 (excl. Neuraxon, Graphitti) |
+| Tier A vendors | Neuraxon + Graphitti → separate application doc |
+| `claim_allowed` | **false** (literature survey) |
+
+### Next
+
+Neuraxon/Graphitti vendor install + EIA harness stub; arXiv I02–I05. No C-level raise.

@@ -82,6 +82,8 @@ API: `get_intervention(id)`, `list_by_axis("D1"|"D2"|"D3")`, `eoi_k_intervention
 | [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md) | D2 stability vector |
 | [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md) | D2 OMEGA adjunct |
 | [`ENDOGENEITY_METRICS_POOL.md`](ENDOGENEITY_METRICS_POOL.md) | Tier A–E registry |
+| [`NEUROPLASTICITY_OSS_SURVEY.md`](NEUROPLASTICITY_OSS_SURVEY.md) | M-O explore: 27 OSS repos (Tier A → Neuraxon/Graphitti doc) |
+| [`NEUROPLASTICITY_EIA_APPLICATION.md`](NEUROPLASTICITY_EIA_APPLICATION.md) | Tier A vendors: Neuraxon + Graphitti install/EIA map |
 | [`docs/CURSOR_TASKS.md`](../../docs/CURSOR_TASKS.md) | Hermes **D01** |
 | [`config.yaml`](config.yaml) | Milestone M-3D-01 |
 

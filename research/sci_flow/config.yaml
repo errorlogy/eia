@@ -227,6 +227,7 @@ milestones:
       status: in_progress
       artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
       bridge: research/sci_flow/MIOC_EIA_BRIDGE.md
+      neuroplasticity_survey: research/sci_flow/NEUROPLASTICITY_OSS_SURVEY.md
       implementation: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
       falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT, F-SYNC, F-PHASE-ONLY]
       carriers_hz: [20, 30, 42, 70]
