@@ -51,10 +51,13 @@ def main() -> int:
             "tests/test_oscillatory_mo.py",
             "tests/test_mo_do_o_arms.py",
             "tests/test_mo_proof_bridge.py",
+            "tests/test_mo_shadow_bridge.py",
             "tests/test_eoi_k_batch.py",
             "tests/test_b05_no_llm_mood.py",
             "tests/test_g2_worlds_eval.py",
             "tests/test_live_path_witness.py",
+            "tests/test_d01_do_z_eoi.py",
+            "tests/test_d1_l3_ledger.py",
             "tests/test_check_sci_tier0.py",
             "-q",
         ]

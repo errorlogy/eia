@@ -1748,3 +1748,109 @@ Windows: no cmake/g++. CI path is the upgrade; artifact download → `research/s
 
 Graphitti binary witness CI green; optional link adjunct ledger to express smoke. No C-level raise.
 
+---
+
+## Entry 051 — 2026-09-02 — M-GRAPHITTI-GREEN witness upgrade (D2×L3)
+
+**Session:** M-GRAPHITTI-GREEN — fix CI googletest bootstrap + regression XML witness upgrade  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | CI run `33662227903` failed: missing `Testing/lib/googletest-master` in vendor snapshot |
+| S2 | `scripts/build_graphitti.sh` — bootstrap googletest release-1.12.1 + include symlink |
+| S3 | `run_graphitti_witness.py` — `regression_xml_ok` fallback from GoodOutput `test-tiny-out.xml` |
+| S4 | Local artifact upgraded: `witness_kind: regression_xml_ok`, tick `M-GRAPHITTI-GREEN` |
+| S5 | `cell_registry` D2×L3; `config.yaml`; `tests/test_graphitti_witness.py`; tier-0 lock |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/run_graphitti_witness.py` |
+| Artifact | `research/sci_flow/M-MO_graphitti_witness_2026-09-02.json` |
+| Local witness | `regression_xml_ok` — spike_rate_mean_hz=5.0, spike_count_total=5 |
+| CI witness (expected) | `binary_ok` after googletest bootstrap fix |
+| CI prior | `33662227903` failure (googletest missing) |
+| Cube cell | **D2×L3** (Tier C explore) |
+| `claim_allowed` | **false** |
+
+### Next
+
+CI green on push; optional download artifact → `.ci-artifacts/graphitti/`. No C-level raise.
+
+---
+
+
+## Entry 050 — 2026-09-02 — M-O-SHADOW-BRIDGE Neuraxon→OmegaWaveState→ATT-R (D2×L2)
+
+**Session:** M-O shadow bridge — Neuraxon/OMEGA crosswalk into shadow multitick; ATT-R compare  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `mo_proof_bridge_harness.py`, `run_mo_do_o_arms.py`, `oscillatory_state.py`, `shadow_multitick.py` |
+| S2 | `mo_shadow_bridge_harness.py` + `run_mo_shadow_bridge.py` |
+| S3 | Artifacts `M-MO_shadow_bridge_2026-09-02.json` + `.md` |
+| S4 | `cell_registry` D2×L2; `test_mo_shadow_bridge.py`; `check_sci_tier0` |
+| S5 | Adjunct ledger unchanged (`witness_support=partial` already) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/mo_shadow_bridge_harness.py` |
+| Runner | `research/sci_flow/run_mo_shadow_bridge.py` |
+| Artifact | `research/sci_flow/M-MO_shadow_bridge_2026-09-02.json` |
+| Cube cell | **D2×L2** (Tier C explore) |
+| `e_endo_support` | **none** |
+| `claim_allowed` | **false** |
+| ATT-R | native vs omega-bridged shadow parity on matched seed |
+| Adjunct ledger | not refreshed (no witness_support improvement) |
+
+### Next
+
+Optional omega-bridged carryover session (50-tick DSR); Graphitti CI green. No C-level raise.
+
+---
+
+## Entry 051 — 2026-09-02 — M-D1-DO-Z-EOI causal remapping (D1×L2/L3)
+
+**Session:** D01 EOI-k remapped from do(X) twin to registered do(Z) for proof-ledger admissibility  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | D01 do(X) rows rejected F-NODO in D1×L3; scoped remap to do(Z) on cognitive-loop Z |
+| S2 | `d01_do_z_eoi_harness.py` + `run_d01_do_z_eoi.py` — paired baseline vs do(Z) |
+| S3 | `evidence_proofs.evidence_item_from_d01_do_z_row`; ledger loads `M-D01_do_z_EOI_*` |
+| S4 | Artifacts `M-D01_do_z_EOI_2026-09-02.json` + `.md`; refreshed `M-D1-L3_proof_ledger_2026-09-02.json` |
+| S5 | `cell_registry` D1×L2/L3; `test_d01_do_z_eoi.py`; `check_sci_tier0` |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Tick | **M-D1-DO-Z-EOI** |
+| Harness | `research/sci_flow/d01_do_z_eoi_harness.py` |
+| Runner | `research/sci_flow/run_d01_do_z_eoi.py` |
+| Artifact | `research/sci_flow/M-D01_do_z_EOI_2026-09-02.json` |
+| Cube cells | **D1×L2**, **D1×L3** |
+| `e_endo_support` | **partial** |
+| Accepted (ledger) | `M-CF4-do_z-epistemic_gap`, `M-D01-do_z-eoi_k_steered-zero_prospective` |
+| Rejected (ledger) | legacy do(X) k=1/5/20 (F-NODO); do(Z) rows without trajectory change (F-NARR) |
+| `claim_allowed` | **false** |
+
+### Next
+
+Multi-seed do(Z) batch; continuous `E_C` under each `do_z_*`. No C-level raise.
+

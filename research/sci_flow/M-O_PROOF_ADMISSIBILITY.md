@@ -111,6 +111,10 @@ run_mo_proof_bridge.py
     → build_mo_adjunct_evidence_from_arms_payload()
     → evaluate_mo_adjunct_ledger()
     → M-MO_proof_adjunct_2026-09-02.json + .md
+run_mo_shadow_bridge.py
+    → Neuraxon O_t → OmegaWaveState → shadow multitick
+    → ATT-R scorecard compare vs native shadow
+    → M-MO_shadow_bridge_2026-09-02.json + .md
 ```
 
 Arms compared:

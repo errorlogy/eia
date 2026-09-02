@@ -37,6 +37,12 @@ cells:
           intervention_kind: do_x
           interventions: [do_x_remove_last_user_k1, do_x_remove_last_user_k5, do_x_remove_last_user_k20]
           artifact: research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json
+        - command: python research/sci_flow/run_d01_do_z_eoi.py
+          intervention_kind: do_z
+          interventions: [do_z_zero_epistemic_gap, do_z_zero_self_prior, do_z_zero_prospective, do_z_zero_staleness, do_z_wm_off]
+          implementation: research/sci_flow/d01_do_z_eoi_harness.py
+          artifact: research/sci_flow/M-D01_do_z_EOI_2026-09-02.json
+          note: M-D1-DO-Z-EOI causal remapping for D1×L3 ledger admissibility
       registry: research/cursor-starter-v0.2/src/eia/intervention_cube.py
       pool_metric_id: E_ENDO
       att: ATT-E
@@ -51,6 +57,7 @@ cells:
       sources:
         cf4: research/sci_flow/cf4_results.json
         d01: research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json
+        d01_do_z: research/sci_flow/M-D01_do_z_EOI_2026-09-02.json
       e_endo_support: partial
 
   D2:
@@ -88,6 +95,12 @@ cells:
           tier: C
           artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
           note: paired plasticity_off vs growth_off vs native oscillatory_state
+        - command: python research/sci_flow/run_mo_shadow_bridge.py
+          intervention_kind: shadow_carryover
+          tier: C
+          artifact: research/sci_flow/M-MO_shadow_bridge_2026-09-02.json
+          att: ATT-R
+          note: Neuraxon→OmegaWaveState→shadow multitick; ATT-R compare; claim_allowed=false
         - command: python research/sci_flow/run_md.py
           intervention_kind: do_o
           interventions: [do_o_phase_scramble, do_o_kuramoto_k0]
@@ -117,10 +130,10 @@ cells:
           tier: C
           artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
           witness: graphitti_binary_spike_rate
-          witness_kind: stub
+          witness_kind: regression_xml_ok
           ci_workflow: .github/workflows/graphitti-witness.yml
           ci_build_script: scripts/build_graphitti.sh
-          upgrade_path: M-GRAPHITTI-CI — Linux CI build → witness_kind binary_ok
+          upgrade_path: M-GRAPHITTI-GREEN — regression XML local; CI → witness_kind binary_ok
         - command: python research/sci_flow/run_live_path_witness.py
           tier: B
           artifact: research/sci_flow/M-LIVE_PATH_witness_2026-09-02.json
