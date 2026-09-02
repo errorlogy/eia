@@ -1,0 +1,68 @@
+name: Graphitti Witness CI
+
+on:
+  push:
+    branches: [research/cursor-starter-v0.2-woe-eis]
+    paths:
+      - "research/vendor/graphitti/**"
+      - "research/sci_flow/run_graphitti_witness.py"
+      - "scripts/build_graphitti.sh"
+      - ".github/workflows/graphitti-witness.yml"
+  pull_request:
+    branches: [research/cursor-starter-v0.2-woe-eis]
+    paths:
+      - "research/vendor/graphitti/**"
+      - "research/sci_flow/run_graphitti_witness.py"
+      - "scripts/build_graphitti.sh"
+      - ".github/workflows/graphitti-witness.yml"
+  workflow_dispatch:
+
+jobs:
+  graphitti-binary-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential libboost-graph-dev
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build Graphitti and run test-tiny
+        run: bash scripts/build_graphitti.sh
+
+      - name: Run graphitti witness harness
+        env:
+          GRAPHITTI_CI: "1"
+          GRAPHITTI_BUILD_DIR: research/vendor/graphitti/build
+        run: python research/sci_flow/run_graphitti_witness.py
+
+      - name: Verify witness binary_ok
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("research/sci_flow/M-MO_graphitti_witness_2026-09-02.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          witness = payload["witness"]
+          sim = payload["simulation"]
+          assert witness.get("witness_kind") == "binary_ok", witness
+          assert sim["status"] == "ok", sim
+          assert witness.get("spike_rate_mean_hz") is not None
+          assert witness.get("spike_count_total", 0) > 0
+          print("witness: binary_ok spike_rate_mean_hz=", witness["spike_rate_mean_hz"])
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: graphitti-witness-${{ github.sha }}
+          retention-days: 14
+          path: |
+            research/vendor/graphitti/build/cgraphitti
+            research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
+            research/vendor/graphitti/build/Output/Results/test-tiny-out.xml

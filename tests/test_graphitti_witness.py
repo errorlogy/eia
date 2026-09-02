@@ -31,9 +31,12 @@ def test_build_payload_tier_c_stub() -> None:
     assert payload["claim_allowed"] is False
     assert payload["tier"] == "C"
     assert payload["cube_cell"] == "D2×L3"
-    assert payload["tick"] == "M-O-GRAPHITTI-BIN"
+    assert payload["tick"] in ("M-O-GRAPHITTI-BIN", "M-GRAPHITTI-CI")
     assert payload["binary_name"] == "cgraphitti"
+    assert payload["ci_workflow"] == ".github/workflows/graphitti-witness.yml"
     sim = payload["simulation"]
+    witness = payload["witness"]
+    assert witness["witness_kind"] in ("stub", "binary_ok", "run_failed", "timeout")
     assert sim["binary_available"] is False or sim["status"] in ("ok", "run_failed", "timeout")
 
 

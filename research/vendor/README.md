@@ -78,7 +78,28 @@ python research/sci_flow/run_graphitti_witness.py
 # → research/sci_flow/M-MO_graphitti_witness_2026-09-02.json (D2×L3, tier C)
 ```
 
-Parses XmlRecorder spike-time matrices for population spike-rate metrics when `cgraphitti` is built; otherwise emits `build_blocked` stub with upgrade plan.
+Parses XmlRecorder spike-time matrices for population spike-rate metrics when `cgraphitti` is built; otherwise emits `build_blocked` stub (`witness_kind: stub`) with upgrade plan.
+
+### Linux CI (M-GRAPHITTI-CI)
+
+Workflow: [`.github/workflows/graphitti-witness.yml`](../../.github/workflows/graphitti-witness.yml)
+
+```bash
+# Local Linux equivalent
+bash scripts/build_graphitti.sh
+GRAPHITTI_CI=1 python research/sci_flow/run_graphitti_witness.py
+# witness_kind → binary_ok when simulation status is ok
+```
+
+CI uploads artifact `graphitti-witness-<sha>` with `cgraphitti`, witness JSON, and `test-tiny-out.xml`. To use locally without rebuilding:
+
+```bash
+mkdir -p research/sci_flow/.ci-artifacts/graphitti
+cp cgraphitti research/sci_flow/.ci-artifacts/graphitti/
+python research/sci_flow/run_graphitti_witness.py
+```
+
+Or set `GRAPHITTI_BINARY=/path/to/cgraphitti` / `GRAPHITTI_BUILD_DIR=/path/to/build`.
 
 **Host status (2026-09-02, tick M-O-GRAPHITTI-BIN):**
 

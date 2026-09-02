@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""M-O Graphitti binary witness (Tier C explore, D2×L3).
+"""M-GRAPHITTI-CI Graphitti binary witness (Tier C explore, D2×L3).
 
 Attempts to locate `cgraphitti` CPU binary, run test-tiny.xml, and parse
 XmlRecorder spike-time output for population spike-rate metrics. When the
 binary is unavailable (typical on Windows without cmake/WSL toolchain),
 emits a documented stub witness with build-blocker notes.
+
+Set ``GRAPHITTI_BINARY`` or ``GRAPHITTI_BUILD_DIR`` to use a CI artifact path.
+Set ``GRAPHITTI_CI=1`` when running inside ``graphitti-witness.yml``.
 
 claim_allowed=false · C2 ceiling · no AGI* · no WoE→main merge.
 """
@@ -12,6 +15,7 @@ claim_allowed=false · C2 ceiling · no AGI* · no WoE→main merge.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -26,12 +30,32 @@ GRAPHITTI = REPO / "research" / "vendor" / "graphitti"
 BUILD_DIR = GRAPHITTI / "build"
 CONFIG = GRAPHITTI / "configfiles" / "test-tiny.xml"
 ARTIFACT_NAME = "M-MO_graphitti_witness_2026-09-02.json"
+CI_ARTIFACT_DIR = REPO / "research" / "sci_flow" / ".ci-artifacts" / "graphitti"
 DEFAULT_TIMEOUT_S = 300
+
+
+def _resolve_build_dir() -> Path:
+    override = os.environ.get("GRAPHITTI_BUILD_DIR", "").strip()
+    if override:
+        return Path(override).expanduser().resolve()
+    return BUILD_DIR
 
 
 def find_cgraphitti_binary() -> Path | None:
     """Return path to CPU Graphitti executable if built."""
+    env_bin = os.environ.get("GRAPHITTI_BINARY", "").strip()
+    if env_bin:
+        path = Path(env_bin).expanduser().resolve()
+        if path.is_file():
+            return path
+
+    build_dir = _resolve_build_dir()
     candidates = [
+        build_dir / "cgraphitti",
+        build_dir / "cgraphitti.exe",
+        build_dir / "Release" / "cgraphitti.exe",
+        build_dir / "Debug" / "cgraphitti.exe",
+        CI_ARTIFACT_DIR / "cgraphitti",
         BUILD_DIR / "cgraphitti",
         BUILD_DIR / "cgraphitti.exe",
         BUILD_DIR / "Release" / "cgraphitti.exe",
@@ -49,12 +73,12 @@ def _read_epoch_duration(config_path: Path) -> float:
     return 1.0
 
 
-def _output_path_from_config(config_path: Path) -> Path:
+def _output_path_from_config(config_path: Path, *, build_dir: Path | None = None) -> Path:
     tree = ET.parse(config_path)
     root = tree.getroot()
     el = root.find(".//resultFileName")
     rel = el.text.strip() if el is not None and el.text else "Output/Results/test-tiny-out.xml"
-    return BUILD_DIR / rel
+    return (build_dir or _resolve_build_dir()) / rel
 
 
 def parse_spike_metrics(output_xml: Path, *, epoch_duration_s: float) -> dict[str, Any]:
@@ -113,16 +137,20 @@ def build_blocker() -> dict[str, Any]:
             "and cannot apt-install packages offline."
         ),
         "upgrade_plan": [
-            "Linux CI or dev host: apt install cmake build-essential && cd research/vendor/graphitti/build && cmake -DENABLE_CUDA=NO .. && make -j",
+            "Linux CI: bash scripts/build_graphitti.sh (workflow .github/workflows/graphitti-witness.yml)",
+            "Local Linux: apt install cmake build-essential libboost-graph-dev && bash scripts/build_graphitti.sh",
             "Windows: install CMake + VS Build Tools, or WSL with working apt, then same cmake flow",
             "Re-run: python research/sci_flow/run_graphitti_witness.py",
-            "Optional: pin prebuilt cgraphitti in CI artifact cache (not tier-0 gate)",
+            "CI artifact: download graphitti-witness-* → extract cgraphitti to research/sci_flow/.ci-artifacts/graphitti/",
         ],
+        "ci_workflow": ".github/workflows/graphitti-witness.yml",
+        "ci_build_script": "scripts/build_graphitti.sh",
     }
 
 
 def run_simulation(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
     binary = find_cgraphitti_binary()
+    build_dir = _resolve_build_dir()
     if binary is None:
         return {
             "status": "build_blocked",
@@ -140,12 +168,15 @@ def run_simulation(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
     if not CONFIG.is_file():
         return {"status": "config_missing", "binary_available": True, "binary_path": str(binary)}
 
-    BUILD_DIR.mkdir(parents=True, exist_ok=True)
-    cmd = [str(binary), "-c", f"../configfiles/test-tiny.xml"]
+    build_dir.mkdir(parents=True, exist_ok=True)
+    config_arg = "../configfiles/test-tiny.xml"
+    if binary.parent.resolve() != build_dir.resolve():
+        config_arg = str(CONFIG)
+    cmd = [str(binary), "-c", config_arg]
     try:
         proc = subprocess.run(
             cmd,
-            cwd=BUILD_DIR,
+            cwd=build_dir if binary.parent.resolve() == build_dir.resolve() else REPO,
             capture_output=True,
             text=True,
             timeout=timeout_s,
@@ -159,7 +190,7 @@ def run_simulation(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
             "timeout_s": timeout_s,
         }
 
-    output_xml = _output_path_from_config(CONFIG)
+    output_xml = _output_path_from_config(CONFIG, build_dir=build_dir)
     epoch_s = _read_epoch_duration(CONFIG)
     result: dict[str, Any] = {
         "status": "ok" if proc.returncode == 0 and output_xml.is_file() else "run_failed",
@@ -175,15 +206,26 @@ def run_simulation(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
     return result
 
 
+def _witness_kind(status: str) -> str:
+    if status == "ok":
+        return "binary_ok"
+    if status == "build_blocked":
+        return "stub"
+    return status
+
+
 def build_payload(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
     sim = run_simulation(timeout_s=timeout_s)
     status = sim.get("status", "unknown")
     spike = sim.get("spike_metrics", {})
     stub = sim.get("stub_metrics", {})
+    ci_mode = os.environ.get("GRAPHITTI_CI", "").strip().lower() in ("1", "true", "yes")
+    tick = "M-GRAPHITTI-CI" if ci_mode else "M-O-GRAPHITTI-BIN"
+    build_dir = _resolve_build_dir()
     return {
         "milestone": "M-O",
         "artifact_id": "M-MO_graphitti_witness_2026-09-02",
-        "tick": "M-O-GRAPHITTI-BIN",
+        "tick": tick,
         "date": date.today().isoformat(),
         "branch": "research/cursor-starter-v0.2-woe-eis",
         "claim_ceiling": "C2",
@@ -193,12 +235,19 @@ def build_payload(*, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
         "vendor": "graphitti",
         "commit_pin": "b96e96c",
         "config_path": str(CONFIG.relative_to(REPO)).replace("\\", "/"),
-        "build_path": "research/vendor/graphitti/build",
+        "build_path": (
+            str(build_dir.relative_to(REPO)).replace("\\", "/")
+            if REPO in build_dir.parents or build_dir == REPO
+            else str(build_dir)
+        ),
         "binary_name": "cgraphitti",
-        "build_command": "cmake -D ENABLE_CUDA=NO .. && make -j",
+        "build_command": "bash scripts/build_graphitti.sh",
         "run_command": "./cgraphitti -c ../configfiles/test-tiny.xml",
+        "ci_workflow": ".github/workflows/graphitti-witness.yml",
+        "ci_build_script": "scripts/build_graphitti.sh",
         "simulation": sim,
         "witness": {
+            "witness_kind": _witness_kind(status),
             "spike_rate_mean_hz": spike.get("spike_rate_mean_hz") or stub.get("spike_rate_mean_hz"),
             "spike_count_total": spike.get("spike_count_total") or stub.get("spike_count_total"),
             "neuron_count": spike.get("neuron_count"),
