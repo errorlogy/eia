@@ -1404,3 +1404,35 @@ I02 figures for framework paper; multi-seed EOI-k batch. No C-level raise.
 ### Next
 
 Multi-seed EOI-k batch; D1×L3 empirical proof ledger. No C-level raise.
+
+---
+
+## Entry 040 — 2026-09-02 — M-EXPRESS-CI (tier-0 3D cube smoke)
+
+**Session:** Wire `run_3d_express.py` into tier-0 regression (9/9 pass, <60s)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `scripts/check_sci_tier0.py` runs express + `_verify_express_nine_pass` |
+| S2 | `tests/test_check_sci_tier0.py` self-test for tier-0 wiring |
+| S3 | `cell_registry.yaml` `express_smoke.tier0_gate` |
+| S4 | Makefile comment; CI unchanged (`eia-sci-tier0.yml` → `check_sci_tier0`) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Express runner | `python research/sci_flow/run_3d_express.py` |
+| Tier-0 gate | `make check-sci-tier0` |
+| Cells | 9/9 pass required |
+| Budget | <60s (`under_60s`) |
+| `claim_allowed` | **false** |
+
+### Next
+
+Continue sci-flow cell filling. No C-level raise.
+
