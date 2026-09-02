@@ -38,8 +38,13 @@ jobs:
       - name: Run graphitti witness harness
         env:
           GRAPHITTI_CI: "1"
-          GRAPHITTI_BUILD_DIR: research/vendor/graphitti/build
-        run: python research/sci_flow/run_graphitti_witness.py
+        run: |
+          if [[ -f research/sci_flow/.ci-artifacts/graphitti-build-dir.txt ]]; then
+            export GRAPHITTI_BUILD_DIR="$(cat research/sci_flow/.ci-artifacts/graphitti-build-dir.txt)"
+          else
+            export GRAPHITTI_BUILD_DIR=research/vendor/graphitti/build
+          fi
+          python research/sci_flow/run_graphitti_witness.py
 
       - name: Verify witness binary_ok
         run: |
@@ -58,11 +63,18 @@ jobs:
           print("witness: binary_ok spike_rate_mean_hz=", witness["spike_rate_mean_hz"])
           PY
 
+      - name: Stage graphitti CI artifacts
+        run: |
+          BUILD_DIR="$(cat research/sci_flow/.ci-artifacts/graphitti-build-dir.txt)"
+          mkdir -p research/sci_flow/.ci-artifacts/graphitti
+          cp "${BUILD_DIR}/cgraphitti" research/sci_flow/.ci-artifacts/graphitti/
+          cp "${BUILD_DIR}/Output/Results/test-tiny-out.xml" research/sci_flow/.ci-artifacts/graphitti/
+
       - uses: actions/upload-artifact@v4
         with:
           name: graphitti-witness-${{ github.sha }}
           retention-days: 14
           path: |
-            research/vendor/graphitti/build/cgraphitti
+            research/sci_flow/.ci-artifacts/graphitti/cgraphitti
+            research/sci_flow/.ci-artifacts/graphitti/test-tiny-out.xml
             research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
-            research/vendor/graphitti/build/Output/Results/test-tiny-out.xml

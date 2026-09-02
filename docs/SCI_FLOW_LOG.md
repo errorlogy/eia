@@ -1761,7 +1761,8 @@ Graphitti binary witness CI green; optional link adjunct ledger to express smoke
 | Loop | Summary |
 |------|---------|
 | S1 | CI run `33662227903` failed: missing `Testing/lib/googletest-master` in vendor snapshot |
-| S2 | `scripts/build_graphitti.sh` — bootstrap googletest release-1.12.1 + include symlink |
+| S1b | CI run `33670698998` failed: vendor snapshot omits `Simulator/Core/` sources |
+| S2 | `scripts/build_graphitti.sh` — bootstrap googletest + shallow clone full Graphitti at `b96e96c` when incomplete |
 | S3 | `run_graphitti_witness.py` — `regression_xml_ok` fallback from GoodOutput `test-tiny-out.xml` |
 | S4 | Local artifact upgraded: `witness_kind: regression_xml_ok`, tick `M-GRAPHITTI-GREEN` |
 | S5 | `cell_registry` D2×L3; `config.yaml`; `tests/test_graphitti_witness.py`; tier-0 lock |
