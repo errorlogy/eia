@@ -1,0 +1,117 @@
+{
+  "tick_id": "M-MO-PROOF-ADJUNCT",
+  "cell": "D2\u00d7L3",
+  "generated": "2026-09-02",
+  "evidence_class": "mo_tier_c_witness",
+  "tier": "C",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "witness_support": "partial",
+  "e_endo_support": "none",
+  "c_ladder_raise_allowed": false,
+  "agi_star_claim": false,
+  "sources": {
+    "arms": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json",
+    "protocol": "research/sci_flow/EIA_PROOF_PROTOCOL.md",
+    "admissibility": "research/sci_flow/M-O_PROOF_ADMISSIBILITY.md",
+    "implementation": "research/cursor-starter-v0.2/src/eia/evidence_proofs.py"
+  },
+  "arms_summary": {
+    "artifact_id": "M-MO_do_o_arms_2026-09-02",
+    "seed": 42,
+    "steps": 50,
+    "do_o_interventions": [
+      "do_o_neuraxon_plasticity_off",
+      "do_o_graphitti_growth_off"
+    ]
+  },
+  "evidence_items": [
+    {
+      "evidence_id": "M-MO-do_o-plasticity_off-omega_t",
+      "evidence_class": "mo_tier_c_witness",
+      "metric_id": "OMEGA_T",
+      "baseline_value": 0.29286693887341186,
+      "intervention_value": 0.29286693887341186,
+      "metric_delta": 0.0,
+      "intervention_id": "do_o_neuraxon_plasticity_off",
+      "arm": "do_o_neuraxon_plasticity_off",
+      "paired_arm": "neuraxon_baseline",
+      "vendor": "neuraxon",
+      "falsifiers_triggered": [],
+      "annotation_falsifiers": [],
+      "provenance": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json"
+    },
+    {
+      "evidence_id": "M-MO-do_o-plasticity_off-kuramoto_r",
+      "evidence_class": "mo_tier_c_witness",
+      "metric_id": "KURAMOTO_R",
+      "baseline_value": 0.6038195614859427,
+      "intervention_value": 0.6038195614859427,
+      "metric_delta": 0.0,
+      "intervention_id": "do_o_neuraxon_plasticity_off",
+      "arm": "do_o_neuraxon_plasticity_off",
+      "paired_arm": "neuraxon_baseline",
+      "vendor": "neuraxon",
+      "falsifiers_triggered": [],
+      "annotation_falsifiers": [],
+      "provenance": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json"
+    },
+    {
+      "evidence_id": "M-MO-do_o-plasticity_off-structural_events",
+      "evidence_class": "mo_tier_c_witness",
+      "metric_id": "MO_STRUCTURAL_DELTA",
+      "baseline_value": 1.0,
+      "intervention_value": 0.0,
+      "metric_delta": -1.0,
+      "intervention_id": "do_o_neuraxon_plasticity_off",
+      "arm": "do_o_neuraxon_plasticity_off",
+      "paired_arm": "neuraxon_baseline",
+      "vendor": "neuraxon",
+      "falsifiers_triggered": [],
+      "annotation_falsifiers": [
+        "F-STRUCT\u2260E"
+      ],
+      "provenance": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json"
+    },
+    {
+      "evidence_id": "M-MO-do_o-plasticity_off-w_fast_drift",
+      "evidence_class": "mo_tier_c_witness",
+      "metric_id": "MO_W_FAST_DRIFT",
+      "baseline_value": 0.00736662562586164,
+      "intervention_value": 0.0,
+      "metric_delta": -0.007367,
+      "intervention_id": "do_o_neuraxon_plasticity_off",
+      "arm": "do_o_neuraxon_plasticity_off",
+      "paired_arm": "neuraxon_baseline",
+      "vendor": "neuraxon",
+      "falsifiers_triggered": [],
+      "annotation_falsifiers": [],
+      "provenance": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json"
+    }
+  ],
+  "proof": {
+    "protocol_version": "sci-flow-mo-adjunct-v0.1",
+    "claim_ceiling": "C2",
+    "witness_support": "partial",
+    "e_endo_support": "none",
+    "accepted_evidence_ids": [
+      "M-MO-do_o-plasticity_off-structural_events",
+      "M-MO-do_o-plasticity_off-w_fast_drift"
+    ],
+    "rejected_evidence_ids": [
+      "M-MO-do_o-plasticity_off-omega_t",
+      "M-MO-do_o-plasticity_off-kuramoto_r"
+    ],
+    "falsifier_ids": [
+      "F-OMEGA-DECOR",
+      "F-SYNC"
+    ],
+    "annotation_falsifier_ids": [
+      "F-STRUCT\u2260E"
+    ],
+    "c_ladder_raise_allowed": false,
+    "agi_star_claim": false,
+    "claim_allowed": false,
+    "rationale": "Scoped D2xL3 M-O Tier C witness: paired do(O) metric deltas accepted under adjunct rules; does not establish E_endo, ATT-G, or C-ladder raise."
+  }
+}

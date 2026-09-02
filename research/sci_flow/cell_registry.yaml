@@ -105,6 +105,14 @@ cells:
           tier: C
           artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
           witness: paired_do_o_arms
+        - command: python research/sci_flow/run_mo_proof_bridge.py
+          tier: C
+          evidence_class: mo_tier_c_witness
+          protocol_version: sci-flow-mo-adjunct-v0.1
+          artifact: research/sci_flow/M-MO_proof_adjunct_2026-09-02.json
+          witness: paired_do_o_adjunct_ledger
+          admissibility_doc: research/sci_flow/M-O_PROOF_ADMISSIBILITY.md
+          note: D2×L3 witness only; e_endo_support=none; claim_allowed=false
         - command: python research/sci_flow/run_graphitti_witness.py
           tier: C
           artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json

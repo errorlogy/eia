@@ -50,6 +50,7 @@ def main() -> int:
             "tests/test_daemon_carryover.py",
             "tests/test_oscillatory_mo.py",
             "tests/test_mo_do_o_arms.py",
+            "tests/test_mo_proof_bridge.py",
             "tests/test_eoi_k_batch.py",
             "tests/test_b05_no_llm_mood.py",
             "tests/test_g2_worlds_eval.py",

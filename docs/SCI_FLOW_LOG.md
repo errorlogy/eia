@@ -1712,6 +1712,39 @@ Multi-tick live longitudinal soak on APScheduler; tick-granularity parity with s
 
 Windows: no cmake/g++. CI path is the upgrade; artifact download → `research/sci_flow/.ci-artifacts/graphitti/`.
 
+---
+
+## Entry 049 — 2026-09-02 — M-O Tier C proof adjunct admissibility (D2×L3)
+
+**Session:** Formal M-O admissibility path for proof protocol — D2×L3 witness ledger only  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `M-O_PROOF_ADMISSIBILITY.md` — rules, falsifiers, CAN/CANNOT table |
+| S2 | `evidence_proofs.py` — `evaluate_mo_adjunct_ledger()`, `MOAdjunctEvidenceItem` |
+| S3 | `mo_proof_bridge_harness.py` + `run_mo_proof_bridge.py` |
+| S4 | Artifacts `M-MO_proof_adjunct_2026-09-02.json` + `.md` |
+| S5 | `EIA_PROOF_PROTOCOL.md` adjunct section; `cell_registry` D2×L3; `test_mo_proof_bridge.py` |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Protocol | `sci-flow-mo-adjunct-v0.1` |
+| Evidence class | `mo_tier_c_witness` |
+| `witness_support` | **partial** (paired do(O) Δ) |
+| `e_endo_support` | **none** (hard; no D1 bleed) |
+| `claim_allowed` | **false** |
+| `c_ladder_raise_allowed` | **false** |
+| Cube cell | **D2×L3** |
+| Falsifiers | F-KURAMOTO-AS-E (annotation), F-OMEGA-DECOR, F-SYNC, F-STRUCT≠E |
+| Tier-0 | `check_sci_tier0` after commit |
+
 ### Next
 
-Monitor first green `graphitti-witness` CI run; optional commit refreshed artifact with `binary_ok`. No C-level raise.
+Graphitti binary witness CI green; optional link adjunct ledger to express smoke. No C-level raise.
+

@@ -122,8 +122,35 @@ Expected smoke invariants:
 
 ---
 
+## M-O Tier C proof adjunct (D2×L3 only)
+
+**Protocol:** `sci-flow-mo-adjunct-v0.1`  
+**Doc:** [`M-O_PROOF_ADMISSIBILITY.md`](M-O_PROOF_ADMISSIBILITY.md)  
+**Bridge:** `python research/sci_flow/run_mo_proof_bridge.py`
+
+Kuramoto / OMEGA / M-O remain **Tier C explore** and are **rejected** by the D1 classifier above (`F-SYNC`, `NON_TIER_A_OR_NON_CLAIMABLE`). A separate adjunct path makes them **admissible only for the D2×L3 witness ledger**:
+
+| Field | D1 protocol (`evaluate_eia_proof_version`) | M-O adjunct (`evaluate_mo_adjunct_ledger`) |
+|-------|------------------------------------------|--------------------------------------------|
+| Evidence class | Tier-A / CF4 metrics | `mo_tier_c_witness` |
+| `e_endo_support` | `none` or `partial` | **always `none`** |
+| `witness_support` | n/a | `none` or `partial` |
+| `claim_allowed` | false | **false** |
+| Paired `do(O)` Δ | n/a | required for acceptance |
+| Kuramoto = E | rejected | **annotation only** (F-KURAMOTO-AS-E) |
+
+Adjunct acceptance requires non-empty `intervention_id`, `|metric_delta| ≥ 1e-6`, and no blocking falsifier (`F-OMEGA-DECOR`, `F-SYNC`). Annotation falsifiers (`F-KURAMOTO-AS-E`, `F-STRUCT≠E`) are logged but do not raise C-level or bleed into D1.
+
+```bash
+python research/sci_flow/run_mo_proof_bridge.py
+# → research/sci_flow/M-MO_proof_adjunct_<date>.json
+```
+
+---
+
 ## Document history
 
 | Date | Change |
 |------|--------|
+| 2026-09-02 | M-O Tier C proof adjunct path (`sci-flow-mo-adjunct-v0.1`) for D2×L3 witness only |
 | 2026-09-01 | Initial proof protocol v0.1: conservative classifier + tests + smoke runner |
