@@ -1644,9 +1644,45 @@ Upload tarballs to arXiv when ready; optional Linux CI for Graphitti binary. No 
 
 ---
 
-## Entry 046 — 2026-09-02 — M-G2-E01 partial worlds eval (arxiv mode B)
+## Entry 047 — 2026-09-02 — M-LIVE-PATH shadow vs live carryover witness
 
-**Session:** G2 eval refresh — batch twin-world ATT-E metrics for arXiv empirical section  
+**Session:** Structural witness comparing shadow `ShadowSessionCarryover` vs opt-in live `StateStore` hydration (`EIA_DAEMON_BELIEF_CARRYOVER=1`)  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `daemon.py`, `shadow_multitick.py`, `StateStore`, `test_daemon_carryover.py` |
+| S2 | `live_path_witness_harness.py` + `run_live_path_witness.py` — shadow bootstrap + 2 carryover ticks vs live off/on arms |
+| S3 | Artifacts `M-LIVE_PATH_witness_2026-09-02.json` + `.md` |
+| S4 | `cell_registry.yaml` D2×L3 `shadow_vs_live_carryover`; `arxiv/main.tex` limitation narrowed |
+| S5 | `tests/test_live_path_witness.py`; `check_sci_tier0` includes new test |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Parity checks | **12/12 pass** |
+| `witness_pass` | **true** |
+| `gap_narrowed` | **true** |
+| Shadow `session_tick` (final) | 6 |
+| Live on `session_tick` (tick 2) | 2 |
+| Live off store beliefs | false (legacy reset) |
+| Cube cell | **D2×L3** |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+Multi-tick live longitudinal soak on APScheduler; tick-granularity parity with shadow W'→G' closure. No C-level raise.
+
+---
+
+## Entry 048 — 2026-09-02 — M-GRAPHITTI-CI Linux binary witness (D2×L3)
+
+**Session:** M-GRAPHITTI-CI — Graphitti CPU build via GitHub Actions + witness upgrade path  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Claim level:** **C2** unchanged. **No AGI\* claim.**
 
@@ -1654,24 +1690,28 @@ Upload tarballs to arXiv when ready; optional Linux CI for Graphitti binary. No 
 
 | Loop | Summary |
 |------|---------|
-| S1 | Read CURSOR_TASKS E01/E10, twin scenarios, `cell_registry` D1×L2 |
-| S2 | `g2_worlds_harness.py` + `run_g2_worlds_eval.py` — 8 worlds × 2 baselines |
-| S3 | Artifact `M-G2_E01_worlds_2026-09-02.json` + `.md` |
-| S4 | `arxiv/main.tex` G2 partial table; `cell_registry` D1×L2 harness; `tests/test_g2_worlds_eval.py` |
-| S5 | `check_sci_tier0` OK |
+| S1 | Read `research/vendor/graphitti/`, `run_graphitti_witness.py`, upstream `tests.yml` |
+| S2 | Created `scripts/build_graphitti.sh` — cmake `-D ENABLE_CUDA=NO`, run `test-tiny.xml` |
+| S3 | Created `.github/workflows/graphitti-witness.yml` — ubuntu-latest, boost-graph, witness verify |
+| S4 | Updated witness harness: `GRAPHITTI_BINARY` / `GRAPHITTI_BUILD_DIR` / `.ci-artifacts`; `witness_kind` stub→binary_ok |
+| S5 | `cell_registry` D2×L3 CI upgrade path; `config.yaml` `ci_ready`; local stub artifact refreshed |
 
 ### Metrics
 
 | Item | Value |
 |------|-------|
-| Worlds | 8/20 (1/3 domains — `ops_atlas` only) |
-| Mean EOI (full vs reactive) | 1.0 vs 0.0 |
-| EUIR proxy (full vs reactive) | 100% vs 0% |
-| Initiative precision (full) | 7/7 scored |
-| ATT | ATT-E / pool `E_ENDO` |
+| Harness | `research/sci_flow/run_graphitti_witness.py` |
+| Build script | `scripts/build_graphitti.sh` |
+| CI workflow | `.github/workflows/graphitti-witness.yml` |
+| Local witness | `witness_kind: stub` (Windows build blocked) |
+| CI witness (expected) | `witness_kind: binary_ok` + live spike-rate metrics |
+| Cube cell | **D2×L3** (Tier C explore) |
 | `claim_allowed` | **false** |
-| Tier-0 | `check_sci_tier0` OK |
+
+### Blocker (local)
+
+Windows: no cmake/g++. CI path is the upgrade; artifact download → `research/sci_flow/.ci-artifacts/graphitti/`.
 
 ### Next
 
-E01 health/code_review twins; E10 G2 pack refresh. No C-level raise.
+Monitor first green `graphitti-witness` CI run; optional commit refreshed artifact with `binary_ok`. No C-level raise.

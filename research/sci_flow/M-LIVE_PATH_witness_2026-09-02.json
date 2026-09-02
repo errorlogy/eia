@@ -1,0 +1,133 @@
+{
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "milestone": "M-LIVE-PATH",
+  "tick": "M-LIVE-PATH",
+  "cube_cell": "D2\u00d7L3",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "seed": 11,
+  "shadow_carryover_ticks": 2,
+  "shadow_snapshots": [
+    {
+      "path": "shadow",
+      "tick_label": "bootstrap",
+      "session_tick": 2,
+      "drive_tick": 2,
+      "motivation_count": 2,
+      "drive_epistemic": 0.8222601449289515,
+      "drive_coherence": 0.0,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.8222601449289515,
+      "has_beliefs": true,
+      "used_carryover": false,
+      "belief_carryover_enabled": true
+    },
+    {
+      "path": "shadow",
+      "tick_label": "carryover_1",
+      "session_tick": 4,
+      "drive_tick": 4,
+      "motivation_count": 4,
+      "drive_epistemic": 0.8686537929711763,
+      "drive_coherence": 0.09100000000000001,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.8734073574473776,
+      "has_beliefs": true,
+      "used_carryover": true,
+      "belief_carryover_enabled": true
+    },
+    {
+      "path": "shadow",
+      "tick_label": "carryover_2",
+      "session_tick": 6,
+      "drive_tick": 6,
+      "motivation_count": 6,
+      "drive_epistemic": 0.8687436110737861,
+      "drive_coherence": 0.15218840000000003,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.8819732257138431,
+      "has_beliefs": true,
+      "used_carryover": true,
+      "belief_carryover_enabled": true
+    }
+  ],
+  "live_off_snapshots": [
+    {
+      "path": "live_off",
+      "tick_label": "tick_1",
+      "session_tick": 0,
+      "drive_tick": 0,
+      "motivation_count": 0,
+      "drive_epistemic": 0.0,
+      "drive_coherence": 0.0,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.0,
+      "has_beliefs": false,
+      "used_carryover": false,
+      "belief_carryover_enabled": false
+    },
+    {
+      "path": "live_off",
+      "tick_label": "tick_2",
+      "session_tick": 0,
+      "drive_tick": 0,
+      "motivation_count": 0,
+      "drive_epistemic": 0.0,
+      "drive_coherence": 0.0,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.0,
+      "has_beliefs": false,
+      "used_carryover": false,
+      "belief_carryover_enabled": false
+    }
+  ],
+  "live_on_snapshots": [
+    {
+      "path": "live_on",
+      "tick_label": "tick_1",
+      "session_tick": 1,
+      "drive_tick": 1,
+      "motivation_count": 1,
+      "drive_epistemic": 0.0375,
+      "drive_coherence": 0.05,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.0625,
+      "has_beliefs": true,
+      "used_carryover": false,
+      "belief_carryover_enabled": true
+    },
+    {
+      "path": "live_on",
+      "tick_label": "tick_2",
+      "session_tick": 2,
+      "drive_tick": 2,
+      "motivation_count": 2,
+      "drive_epistemic": 0.07050000000000001,
+      "drive_coherence": 0.09100000000000001,
+      "drive_commitment": 0.0,
+      "drive_norm": 0.11511407385719612,
+      "has_beliefs": true,
+      "used_carryover": true,
+      "belief_carryover_enabled": true
+    }
+  ],
+  "parity_checks": {
+    "shadow_session_tick_advances": true,
+    "shadow_beliefs_persist": true,
+    "shadow_second_tick_uses_carryover": true,
+    "live_off_no_store_beliefs": true,
+    "live_off_session_tick_zero": true,
+    "live_on_first_tick_persists": true,
+    "live_on_second_tick_hydrates": true,
+    "live_on_session_tick_monotonic": true,
+    "live_on_drive_tick_monotonic": true,
+    "live_on_beliefs_round_trip": true,
+    "structural_parity_session_tick": true,
+    "structural_parity_drive_norm_positive": true
+  },
+  "gap_vs_shadow": "Shadow closes W'\u2192G' in-process via run_shadow_carryover_tick; live daemon uses run_daemon_tick + digital observations + StateStore round-trip when EIA_DAEMON_BELIEF_CARRYOVER=1 (off by default). Tick granularity differs (shadow 2 cognition ticks/episode vs 1 daemon tick).",
+  "gap_narrowed": true,
+  "witness_pass": true,
+  "explore_proxy_note": "M-LIVE-PATH structural witness: shadow-only longitudinal metrics (DSR, EOI drift, ATT-R) now have opt-in live StateStore parity for belief+drive carryover; not C-ladder gate; emit_m0=false."
+}

@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-02-M-O-GRAPHITTI-BIN"
+updated: "2026-09-02-M-LIVE-PATH"
 
 repos:
   eia:
@@ -176,6 +176,24 @@ milestones:
     completed: "2026-09-01"
     command: pytest tests/test_shadow_multitick.py tests/test_daemon_carryover.py -q
     note: "ShadowSessionCarryover + live StateStore hydration (EIA_DAEMON_BELIEF_CARRYOVER=1); off by default; emit_m0=false"
+  M-LIVE-PATH:
+    name: M-LIVE-PATH shadow vs live carryover witness (D2×L3)
+    claim: architecture_explore
+    att: ATT-R
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-02"
+    command: python research/sci_flow/run_live_path_witness.py
+    result: "witness_pass=true / gap_narrowed=true / 12/12 parity checks"
+    artifact: research/sci_flow/M-LIVE_PATH_witness_2026-09-02.json
+    implementation:
+      - research/sci_flow/live_path_witness_harness.py
+      - src/eia/runtime/daemon.py
+      - src/eia/runtime/state_store.py
+    tests:
+      - tests/test_live_path_witness.py
+    note: "Structural parity shadow ShadowSessionCarryover vs opt-in live StateStore; claim_allowed=false"
   M-E04-D05:
     name: E04/D05 longitudinal DSR on shadow carryover (50 ticks)
     claim: architecture_explore
@@ -258,13 +276,17 @@ milestones:
       arms: [neuraxon_baseline, do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off, native_oscillatory_state]
       claim_allowed: false
     graphitti_binary_witness:
-      status: blocked
+      status: ci_ready
       completed: "2026-09-02"
       harness: research/sci_flow/run_graphitti_witness.py
       artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
       cube_cell: D2×L3
       claim_allowed: false
-      blocker: "cmake/g++ unavailable on Windows; WSL apt offline"
+      ci_workflow: .github/workflows/graphitti-witness.yml
+      ci_build_script: scripts/build_graphitti.sh
+      witness_kind_local: stub
+      witness_kind_ci: binary_ok
+      blocker: "cmake/g++ unavailable on Windows; WSL apt offline — CI path added"
       upgrade_plan: research/vendor/README.md#graphitti
     omega_metric:
       status: in_progress

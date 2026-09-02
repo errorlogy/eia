@@ -292,7 +292,7 @@ By objective reasons v0.2 remains \emph{problematization with partial evidence}:
 \item \textbf{Single domain}: 6 MVP-0 worlds, Project Atlas/deadline. No health/code/research domains.
 \item \textbf{Synthetic worlds}: generated, not human-labeled; no $\kappa$ for useful/timely.
 \item \textbf{Magic thresholds}: $0.18/0.15$ uncalibrated, no $P(\mathrm{useful}\mid score)$ ROC.
-\item \textbf{Shadow-only longitudinal}: DSR 50-tick pass is shadow carryover, not production daemon.
+\item \textbf{Shadow-only longitudinal}: DSR 50-tick and EOI drift remain shadow-instrumented; opt-in live \texttt{StateStore} carryover (\texttt{EIA\_DAEMON\_BELIEF\_CARRYOVER=1}, off by default) now structurally witnesses belief+drive round-trip across \texttt{run\_daemon\_tick} (M-LIVE-PATH), but production APScheduler soak and tick-granularity parity are open.
 \item \textbf{Weak baseline}: vs.\ reactive only, not vs.\ ReAct-style LLM agents~\cite{sumers2024cala}.
 \item \textbf{Know-how private}: real traces in \texttt{.vault/}; public is minimal synthetic slice.
 \end{enumerate}

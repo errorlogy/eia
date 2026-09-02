@@ -53,6 +53,7 @@ def main() -> int:
             "tests/test_eoi_k_batch.py",
             "tests/test_b05_no_llm_mood.py",
             "tests/test_g2_worlds_eval.py",
+            "tests/test_live_path_witness.py",
             "tests/test_check_sci_tier0.py",
             "-q",
         ]
