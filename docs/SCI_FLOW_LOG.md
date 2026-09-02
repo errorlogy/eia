@@ -1470,3 +1470,37 @@ Continue sci-flow cell filling. No C-level raise.
 
 E04 EOI drift on carryover; refine E_C theta_E pre-registration. No C-level raise.
 
+---
+
+## Entry 042 — 2026-09-02 — M-O paired do(O) arms (D2×L2 deepen)
+
+**Session:** Paired do(O) comparison harness — plasticity_off vs growth_off vs native oscillatory_state  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read M-O_NEURAXON_GRAPHITTI_ENDOGENEITY, probe harness, intervention_cube |
+| S2 | Created `run_mo_do_o_arms.py` — 4 paired arms + Neuraxon→OmegaWaveState crosswalk |
+| S3 | Artifact `M-MO_do_o_arms_2026-09-02.json`; `cell_registry.yaml` D2×L2/L3 updated |
+| S4 | `tests/test_mo_do_o_arms.py`; intervention_cube harness → `run_mo_do_o_arms` |
+| S5 | `check_sci_tier0` OK; SCI_FLOW_LOG Entry 042 |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/run_mo_do_o_arms.py` |
+| Artifact | `research/sci_flow/M-MO_do_o_arms_2026-09-02.json` |
+| Arms | neuraxon_baseline, do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off, native_oscillatory_state |
+| Crosswalk | Neuraxon bands → `OmegaWaveState.from_carrier_phases` (**feasible**) |
+| Cube cell | **D2×L2** (dynamics); witness **D2×L3** |
+| `claim_allowed` | **false** (Tier C) |
+| Tier-0 | `check_sci_tier0` after commit |
+
+### Next
+
+Graphitti CI binary run (optional); shadow multitick with vendor-fed O_t. No C-level raise.
+

@@ -1,0 +1,284 @@
+{
+  "milestone": "M-O",
+  "artifact_id": "M-MO_do_o_arms_2026-09-02",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "tier": "C",
+  "cube_cell": "D2\u00d7L2",
+  "seed": 42,
+  "steps": 50,
+  "arms": {
+    "neuraxon_baseline": {
+      "arm": "neuraxon_baseline",
+      "intervention_id": null,
+      "vendor": "neuraxon",
+      "seed": 42,
+      "steps": 50,
+      "status": "ok",
+      "step_count": 50,
+      "time_ms": 50.0,
+      "synapse_count": {
+        "initial": 73,
+        "final": 74,
+        "delta": 1
+      },
+      "oscillator_bands_final": {
+        "infraslow": {
+          "freq_hz": 0.05,
+          "phase": 4.033345028355388,
+          "amplitude": 1.0
+        },
+        "slow": {
+          "freq_hz": 0.5,
+          "phase": 0.31422684241601617,
+          "amplitude": 1.0
+        },
+        "theta": {
+          "freq_hz": 6.0,
+          "phase": 3.613015764374338,
+          "amplitude": 1.0
+        },
+        "alpha": {
+          "freq_hz": 10.0,
+          "phase": 4.5440670839311865,
+          "amplitude": 1.0
+        },
+        "gamma": {
+          "freq_hz": 40.0,
+          "phase": 4.6273851119960385,
+          "amplitude": 1.0
+        }
+      },
+      "kuramoto_r_final": 0.6038195614859427,
+      "omega_t": {
+        "final": 0.29286693887341186,
+        "mean": 0.23566863761708415,
+        "min": 0.1866470686153453,
+        "max": 0.29286693887341186
+      },
+      "omega_wave_state": {
+        "phase_coherence": 0.7557350116263011,
+        "cadence": 1.0,
+        "synchrony": 0.5114700232526023,
+        "productive_tension": 1.0,
+        "handoff": 0.0,
+        "drift": 0.39618043851405726,
+        "closure_velocity": 1.0,
+        "n_bands": 5
+      },
+      "plasticity": {
+        "w_fast_mean_final": 0.0007013496907660012,
+        "w_fast_drift": 0.00736662562586164,
+        "structural_events": 1
+      },
+      "activity": {
+        "active_neurons_final": 0,
+        "active_neurons_mean": 0.0
+      },
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": true,
+        "carrier_hz": [
+          0.05,
+          0.5,
+          6.0,
+          10.0,
+          40.0
+        ]
+      }
+    },
+    "do_o_neuraxon_plasticity_off": {
+      "arm": "do_o_neuraxon_plasticity_off",
+      "intervention_id": "do_o_neuraxon_plasticity_off",
+      "vendor": "neuraxon",
+      "seed": 42,
+      "steps": 50,
+      "status": "ok",
+      "intervention": {
+        "freeze_weights": true,
+        "agmp_enabled": false,
+        "learning_rate": 0.0,
+        "synapse_formation_prob": 0.0
+      },
+      "step_count": 50,
+      "time_ms": 50.0,
+      "synapse_count": {
+        "initial": 73,
+        "final": 73,
+        "delta": 0
+      },
+      "oscillator_bands_final": {
+        "infraslow": {
+          "freq_hz": 0.05,
+          "phase": 4.033345028355388,
+          "amplitude": 1.0
+        },
+        "slow": {
+          "freq_hz": 0.5,
+          "phase": 0.31422684241601617,
+          "amplitude": 1.0
+        },
+        "theta": {
+          "freq_hz": 6.0,
+          "phase": 3.613015764374338,
+          "amplitude": 1.0
+        },
+        "alpha": {
+          "freq_hz": 10.0,
+          "phase": 4.5440670839311865,
+          "amplitude": 1.0
+        },
+        "gamma": {
+          "freq_hz": 40.0,
+          "phase": 4.6273851119960385,
+          "amplitude": 1.0
+        }
+      },
+      "kuramoto_r_final": 0.6038195614859427,
+      "omega_t": {
+        "final": 0.29286693887341186,
+        "mean": 0.23566863761708415,
+        "min": 0.1866470686153453,
+        "max": 0.29286693887341186
+      },
+      "omega_wave_state": {
+        "phase_coherence": 0.7557350116263011,
+        "cadence": 1.0,
+        "synchrony": 0.5114700232526023,
+        "productive_tension": 1.0,
+        "handoff": 0.0,
+        "drift": 0.39618043851405726,
+        "closure_velocity": 1.0,
+        "n_bands": 5
+      },
+      "plasticity": {
+        "w_fast_mean_final": -0.008331595143914723,
+        "w_fast_drift": 0.0,
+        "structural_events": 0
+      },
+      "activity": {
+        "active_neurons_final": 9,
+        "active_neurons_mean": 1.56
+      },
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": true,
+        "carrier_hz": [
+          0.05,
+          0.5,
+          6.0,
+          10.0,
+          40.0
+        ]
+      }
+    },
+    "do_o_graphitti_growth_off": {
+      "arm": "do_o_graphitti_growth_off",
+      "intervention_id": "do_o_graphitti_growth_off",
+      "vendor": "graphitti",
+      "seed": 42,
+      "status": "stub_metrics",
+      "config_path": "research/vendor/graphitti/configfiles/test-tiny.xml",
+      "baseline": {
+        "connections_class": "ConnGrowth",
+        "conn_growth_params": {
+          "epsilon": "0.60",
+          "beta": "0.10",
+          "rho": "0.0001",
+          "targetRate": "1.9"
+        },
+        "has_conn_growth": true
+      },
+      "intervention": {
+        "connections_class": "ConnStatic",
+        "epsilon": "0",
+        "note": "ConnGrowth epsilon\u21920 or ConnStatic swap \u2014 topology frozen"
+      },
+      "stub_metrics": {
+        "edge_count_delta_baseline": null,
+        "edge_count_delta_growth_off": 0,
+        "spike_rate_mean": null,
+        "note": "Binary not run in tier-0; config-level growth_off documented"
+      },
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": false,
+        "graphitti_rate_to_omega": false
+      }
+    },
+    "native_oscillatory_state": {
+      "arm": "native_oscillatory_state",
+      "intervention_id": null,
+      "vendor": "eia.oscillatory_state",
+      "seed": 42,
+      "status": "ok",
+      "carriers_hz": [
+        20.0,
+        30.0,
+        42.0,
+        70.0
+      ],
+      "kuramoto_r_final": 0.9937606691655041,
+      "omega_t": {
+        "final": 0.8969438342286497,
+        "mean": 0.8969438342286497,
+        "min": 0.8969438342286497,
+        "max": 0.8969438342286497
+      },
+      "omega_wave_state": {
+        "phase_coherence": 0.9993751301974831,
+        "cadence": 1.0,
+        "synchrony": 0.9987502603949662,
+        "productive_tension": 1.0,
+        "handoff": 0.9987502603949662,
+        "drift": 0.006239330834495904,
+        "closure_velocity": 1.0,
+        "n_bands": 4
+      },
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": false,
+        "native_default_carriers": true
+      }
+    }
+  },
+  "paired_comparison": {
+    "omega_t_final": {
+      "neuraxon_baseline": 0.29286693887341186,
+      "plasticity_off": 0.29286693887341186,
+      "native_oscillatory": 0.8969438342286497,
+      "delta_plasticity_off_vs_baseline": 0.0,
+      "delta_native_vs_baseline": 0.604077
+    },
+    "kuramoto_r_final": {
+      "neuraxon_baseline": 0.6038195614859427,
+      "plasticity_off": 0.6038195614859427,
+      "native_oscillatory": 0.9937606691655041,
+      "delta_plasticity_off_vs_baseline": 0.0
+    },
+    "structural_events": {
+      "neuraxon_baseline": 1,
+      "plasticity_off": 0,
+      "graphitti_growth_off_stub": 0
+    },
+    "w_fast_drift": {
+      "neuraxon_baseline": 0.00736662562586164,
+      "plasticity_off": 0.0
+    },
+    "falsifier_hints": {
+      "F-OMEGA-DECOR": false,
+      "F-STRUCT\u2260E": true,
+      "F-KURAMOTO-AS-E": false
+    }
+  },
+  "do_o_interventions": [
+    "do_o_neuraxon_plasticity_off",
+    "do_o_graphitti_growth_off"
+  ],
+  "falsifiers_active": [
+    "F-KURAMOTO-AS-E",
+    "F-STRUCT\u2260E",
+    "F-OMEGA-DECOR",
+    "F-SYNC"
+  ],
+  "crosswalk_feasible": true,
+  "note": "Paired do(O) arms harness; vendor + native oscillatory compare only. Does not establish E_endo or ATT-G linkage."
+}

@@ -233,6 +233,13 @@ milestones:
       cube_cell: D2×L2
       claim_allowed: false
       interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
+    do_o_arms:
+      status: done
+      completed: "2026-09-02"
+      harness: research/sci_flow/run_mo_do_o_arms.py
+      artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
+      arms: [neuraxon_baseline, do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off, native_oscillatory_state]
+      claim_allowed: false
     omega_metric:
       status: in_progress
       artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
