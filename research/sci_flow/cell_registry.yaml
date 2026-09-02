@@ -37,6 +37,14 @@ cells:
           intervention_kind: do_x
           interventions: [do_x_remove_last_user_k1, do_x_remove_last_user_k5, do_x_remove_last_user_k20]
           artifact: research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json
+        - command: python research/sci_flow/run_g2_worlds_eval.py
+          intervention_kind: do_x
+          interventions: [do_x_twin_user_removal]
+          att: ATT-E
+          pool_metric_id: E_ENDO
+          tier: "0"
+          artifact: research/sci_flow/M-G2_E01_worlds_2026-09-02.json
+          note: M-G2-E01 partial multi-world batch (8/20 worlds, 1/3 domains)
       registry: research/cursor-starter-v0.2/src/eia/intervention_cube.py
       pool_metric_id: E_ENDO
       att: ATT-E

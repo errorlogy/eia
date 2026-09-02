@@ -1642,3 +1642,36 @@ I02 BibTeX merge / G2 pack; drive\_decay + trace\_manifold (remaining I05 CURSOR
 
 Upload tarballs to arXiv when ready; optional Linux CI for Graphitti binary. No C-level raise.
 
+---
+
+## Entry 046 — 2026-09-02 — M-G2-E01 partial worlds eval (arxiv mode B)
+
+**Session:** G2 eval refresh — batch twin-world ATT-E metrics for arXiv empirical section  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read CURSOR_TASKS E01/E10, twin scenarios, `cell_registry` D1×L2 |
+| S2 | `g2_worlds_harness.py` + `run_g2_worlds_eval.py` — 8 worlds × 2 baselines |
+| S3 | Artifact `M-G2_E01_worlds_2026-09-02.json` + `.md` |
+| S4 | `arxiv/main.tex` G2 partial table; `cell_registry` D1×L2 harness; `tests/test_g2_worlds_eval.py` |
+| S5 | `check_sci_tier0` OK |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Worlds | 8/20 (1/3 domains — `ops_atlas` only) |
+| Mean EOI (full vs reactive) | 1.0 vs 0.0 |
+| EUIR proxy (full vs reactive) | 100% vs 0% |
+| Initiative precision (full) | 7/7 scored |
+| ATT | ATT-E / pool `E_ENDO` |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+E01 health/code_review twins; E10 G2 pack refresh. No C-level raise.
