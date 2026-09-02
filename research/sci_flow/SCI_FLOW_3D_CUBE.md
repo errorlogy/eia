@@ -2,8 +2,9 @@
 
 **Status:** `OPERATIONAL` scaffold (2026-09-01) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS  
-**Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py`  
+**Milestone:** M-3D-01 + M-3D-EXPRESS  
+**Methodology:** [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) — sci-flow v3 = incremental cube cell-filling with harnesses  
+**Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py` · [`cell_registry.yaml`](cell_registry.yaml)  
 **Claim ceiling:** **C2** — scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
 
 ---
@@ -78,6 +79,7 @@ API: `get_intervention(id)`, `list_by_axis("D1"|"D2"|"D3")`, `eoi_k_intervention
 
 | Doc | Role |
 |-----|------|
+| [`arxiv/sci_flow_3d_cube/main.tex`](../../arxiv/sci_flow_3d_cube/main.tex) | **I03** standalone arXiv paper (theory + empirical) |
 | [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) | D1 causal bar |
 | [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md) | D2 stability vector |
 | [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md) | D2 OMEGA adjunct |
@@ -87,6 +89,8 @@ API: `get_intervention(id)`, `list_by_axis("D1"|"D2"|"D3")`, `eoi_k_intervention
 | [`M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md`](M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md) | M-O endogeneity factor analysis + probe (D2×L2) |
 | [`docs/CURSOR_TASKS.md`](../../docs/CURSOR_TASKS.md) | Hermes **D01** |
 | [`config.yaml`](config.yaml) | Milestone M-3D-01 |
+| [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) | v3 cell-filling methodology + rubric |
+| [`cell_registry.yaml`](cell_registry.yaml) | Machine-readable cell → harness map |
 
 ---
 

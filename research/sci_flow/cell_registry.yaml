@@ -1,0 +1,133 @@
+# Sci-flow v3 — 3D Evidence Cube cell → harness registry
+# Cross-ref: SCI_FLOW_V3_CELL_FILLING.md, SCI_FLOW_3D_CUBE.md
+# Claim ceiling: C2 — no AGI*
+
+version: "0.1"
+updated: "2026-09-02"
+claim_ceiling: C2
+methodology_doc: research/sci_flow/SCI_FLOW_V3_CELL_FILLING.md
+
+cells:
+  D1:
+    L1:
+      status: filled
+      tier: A
+      claim_allowed: false
+      invariant_doc: research/sci_flow/CAUSAL_ENDOGENEITY.md
+      harness: null
+      artifact: research/sci_flow/CAUSAL_ENDOGENEITY.md
+      falsifiers: [F-DECL, F-EXT, F-NARR, F-NODO]
+    L2:
+      status: filled
+      tier: A
+      claim_allowed: false
+      harnesses:
+        - command: python research/sci_flow/run_cf4.py
+          intervention_kind: do_z
+          interventions: [do_z_zero_epistemic_gap, do_z_wm_off]
+          artifact: research/sci_flow/M-CF4_metrics_2026-08-20.md
+        - command: python research/sci_flow/run_eoi_k.py
+          intervention_kind: do_x
+          interventions: [do_x_remove_last_user_k1, do_x_remove_last_user_k5, do_x_remove_last_user_k20]
+          artifact: research/sci_flow/M-D01_EOI_k_metrics_2026-09-01.json
+      registry: research/cursor-starter-v0.2/src/eia/intervention_cube.py
+      pool_metric_id: E_ENDO
+      att: ATT-E
+    L3:
+      status: partial
+      tier: A
+      claim_allowed: partial
+      harness: python research/sci_flow/run_eia_proof_protocol.py
+      implementation: research/cursor-starter-v0.2/src/eia/evidence_proofs.py
+      artifact: research/sci_flow/EIA_PROOF_PROTOCOL.md
+      protocol_version: sci-flow-eia-proof-v0.1
+      gap: empirical EvidenceItem from CF4/D01 runs not yet ledgered
+
+  D2:
+    L1:
+      status: filled
+      tier: B
+      claim_allowed: false
+      invariant_doc: research/sci_flow/STABLE_ENDOGENEITY.md
+      harness: null
+      artifact: research/sci_flow/STABLE_ENDOGENEITY.md
+    L2:
+      status: filled
+      tier: B
+      claim_allowed: false
+      harnesses:
+        - command: python research/sci_flow/run_dsr_carryover.py
+          intervention_kind: shadow_carryover
+          pool_metric_id: B_D
+          artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
+        - command: python research/sci_flow/run_shadow_att_r.py
+          intervention_kind: closed_loop
+          pool_metric_id: R_RECURRENCE
+          att: ATT-R
+        - command: python research/sci_flow/run_live_att_r.py
+          intervention_kind: closed_loop
+          artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
+        - command: python research/sci_flow/run_mo_neuroplasticity_probe.py
+          intervention_kind: do_o
+          interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
+          tier: C
+          artifact: research/sci_flow/M-MO_neuroplasticity_probe_2026-09-01.json
+        - command: python research/sci_flow/run_md.py
+          intervention_kind: do_o
+          interventions: [do_o_phase_scramble, do_o_kuramoto_k0]
+          tier: C
+    L3:
+      status: filled
+      tier: B
+      claim_allowed: false
+      harnesses:
+        - command: python research/sci_flow/run_shadow_att_r.py
+          witness: G_prime_novel_events
+        - command: python research/sci_flow/run_live_att_r.py
+          artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
+
+  D3:
+    L1:
+      status: filled
+      tier: D
+      claim_allowed: false
+      invariant_doc: research/sci_flow/AGI_STAR_CRITERION.md
+      registry: research/cursor-starter-v0.2/src/eia/intervention_cube.py
+      registry_count: 13
+    L2:
+      status: partial
+      tier: D
+      claim_allowed: false
+      harnesses:
+        - command: python research/sci_flow/run_non_embeddability.py
+          intervention_kind: do_x
+          interventions: [do_x_encoding_budget_b]
+          att: ATT-N
+          artifact: research/sci_flow/M-N_metrics_2026-08-21.md
+          n_h_claim: false
+        - scaffold: eia.governor.ContactGovernor
+          note: governor gate smoke only
+      gap: CF-7 do_z_governor_isolation — registered, no dedicated runner
+      proposed_harness: research/sci_flow/run_cf7_governor_isolation.py
+    L3:
+      status: filled
+      tier: B_soft_NH
+      claim_allowed: false
+      n_h_claim: false
+      harness: python research/sci_flow/run_boundary_witness.py
+      implementation: research/sci_flow/boundary_witness_harness.py
+      artifact: research/sci_flow/D3_BOUNDARY_WITNESS.md
+
+express_smoke:
+  command: python research/sci_flow/run_3d_express.py
+  last_run: "2026-09-01"
+  duration_ms: 1810.0
+  cells_pass: 9
+  note: smoke pass does not override strict filled/partial rubric
+
+fill_summary:
+  filled: 8
+  partial: 1
+  empty: 0
+  l2_column_filled: 2
+  l2_column_partial: 1
