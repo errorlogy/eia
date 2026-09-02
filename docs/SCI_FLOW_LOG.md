@@ -1336,3 +1336,37 @@ Neuraxon/Graphitti vendor install + EIA harness stub; arXiv I02–I05. No C-leve
 ### Next
 
 Shadow arm: Neuraxon O_t → OmegaWaveState multitick; Graphitti CI build (optional). No C-level raise.
+
+---
+
+## Entry 037 — 2026-09-02 — arXiv 3D Evidence Cube standalone (I03)
+
+**Session:** Assembled standalone arXiv paper for sci-flow 3D evidence cube in EIA theory context  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Created `arxiv/sci_flow_3d_cube/` — `main.tex` (theory) + `sections_empirical.tex` (harness results) |
+| S2 | Merged `references.bib` + `references_empirical.bib` (24 entries) |
+| S3 | Makefile targets `arxiv-3d-cube-compile`, `arxiv-3d-cube-package`; toolkit README I03 path |
+| S4 | Compiled PDF; `check_sci_tier0` OK; config I03 → done |
+| S5 | SCI_FLOW_LOG Entry 037; cross-link from `SCI_FLOW_3D_CUBE.md` |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/sci_flow_3d_cube/main.tex` — standalone cube paper |
+| Empirical | `arxiv/sci_flow_3d_cube/sections_empirical.tex` |
+| BibTeX | 24 entries (18 base + 6 empirical artifacts) |
+| Pages | 12 |
+| Compile | `python scripts/arxiv_toolkit/compile_paper.py -d arxiv/sci_flow_3d_cube` |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+I02 figures for framework paper; multi-seed EOI-k batch. No C-level raise.

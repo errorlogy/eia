@@ -256,6 +256,18 @@ milestones:
     toolkit: scripts/arxiv_toolkit/
     note: "Synced with sci-flow C2 proof protocol, 3D cube, partial harnesses; claim_allowed=false; no AGI*"
 
+  I03:
+    name: arXiv 3D Evidence Cube standalone paper
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: arxiv/sci_flow_3d_cube/
+    status: done
+    completed: "2026-09-02"
+    command: make arxiv-3d-cube-compile
+    artifact: arxiv/sci_flow_3d_cube/main.tex
+    toolkit: scripts/arxiv_toolkit/
+    note: "Standalone cube paper; sections_empirical.tex; merged bib; claim_allowed=false; no AGI*"
+
   M-EMP:
     name: Endogeneity Metrics Pool (Tier A–E registry + ERI)
     claim: registry

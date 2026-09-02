@@ -1,0 +1,255 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
+
+\title{The EIA 3D Evidence Cube:\\
+A Causal-Dynamic-Boundary Framework for Endogenous Initiative Evaluation}
+\author{Roman Kuznetsov\\
+Anthemium --- \texttt{research@anthemium.tech} \\
+\url{https://anthemium.tech} \quad \url{https://github.com/errorlogy/eia} \\
+\texttt{@AGIminister} on X
+}
+\date{September 2026 \,---\, Theory Paper (3D Cube) \\
+\small \textit{Companion to EIA framework v0.2} \\
+\small \textit{Status: C2-scoped evaluation ontology; not AGI$^{*}$}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Evaluating whether an AI system exhibits \emph{endogenous initiative}---forming goals and trajectories from persistent internal dynamics rather than external prompts---requires more than scalar benchmarks or narrative plausibility. We introduce the \textbf{EIA 3D Evidence Cube}, a $3\times 3$ evaluation ontology for sci-flow research: three axes (\textbf{D1} causal endogeneity $E_{\mathrm{endo}}$, \textbf{D2} dynamical stability $\mathfrak{E}$, \textbf{D3} trans-anthropic boundary $N_H$) crossed with three evidentiary layers (\textbf{L1} invariants, \textbf{L2} dynamics, \textbf{L3} witness). Each of nine cells tracks theory documentation, harness instrumentation, and trace receipts independently, preventing partial progress on one axis from masquerading as closure on another. The cube bridges EIA's multi-loop stack ($W\to M\to d\to G\to A$), the ATT evaluation battery, and the proof-protocol ledger (\texttt{sci-flow-eia-proof-v0.1}). All claims operate under claim ceiling \textbf{C2}: scoped partial support for $E_{\mathrm{endo}}$ at best; no AGI$^{*}$ authorization. OMEGA, Kuramoto synchrony, DSR carryover, and EOI-$k$ alone never imply $AGI^{*}$ or $\tau_{AGI}$. Empirical cell statuses and harness results are reported in a companion empirical section.
+\end{abstract}
+
+\noindent\textbf{Keywords:} endogenous initiative, evidence ontology, causal evaluation, sci-flow, falsifiable metrics, intervention cube, claim ladder
+
+\section{Introduction}\label{sec:intro}
+
+Contemporary language agents excel at \emph{reactive} competence: given an observation $o_t^{\mathrm{user}}$, they produce a fluent response. Timers, event rules, and retrieval triggers extend this pattern with \emph{scheduled} or \emph{rule-bound} proactivity, but the initiating signal remains external. We distinguish this from \textbf{endogenous initiative}: the system forms candidate goals, motives, and contact decisions from persistent internal state when no matching external initiator is present~\cite{kuznetsov2026causal}.
+
+This distinction is not rhetorical. Without causal evidence that internal dynamics generate trajectories under non-triggering environments, fluent self-ascription of agency is indistinguishable from roleplay~\cite{veitch2021counterfactual}. Pearl's intervention calculus~\cite{pearl2009causality} supplies the methodological anchor: endogeneity must be established by $do(\cdot)$ experiments on internal state $Z$, not by narrative labels.
+
+\textbf{Why three axes $\times$ three layers?} Endogenous initiative is not a single scalar. Causal origin ($E_{\mathrm{endo}}$), dynamical sustainability ($\mathfrak{E}$, recurrence, OMEGA adjuncts), and trans-anthropic non-embeddability ($N_H$, governor clearance, falsifiers) are \emph{orthogonal conjuncts} in the full $AGI^{*}$ criterion; elevating one without the others invites overclaim. Within each axis, evidence stratifies naturally: \textbf{L1} invariants (definitions, falsifier taxonomy, hard bans), \textbf{L2} dynamics (harnesses, interventions, longitudinal metrics), and \textbf{L3} witness (trace receipts, JSON metrics, external certificates). Mapping work onto a $3\times 3$ matrix makes gaps visible: a filled L1 cell does not license L3 claims; a partial L2 harness does not raise the C-ladder.
+
+\textbf{Reactive vs.\ endogenous.} At scale, $f(\text{prompt})\to\text{response}$ does not become endogenous initiative; it becomes faster reaction. Endogenous initiative requires a closed cognitive loop---world model, self-model, drive field, goal genesis, action, memory update---that sustains bounded non-zero activity when $X_t^{\mathrm{trigger}}=0$~\cite{kuznetsov2026stable,schmidhuber2010curiosity}. Intrinsic-motivation RL optimizes scalar rewards derived from prediction error or information gain~\cite{pathak2017curiosity}; EIA targets \emph{multi-loop genesis} with abstention, independent governance, and causal traceability.
+
+\textbf{Contributions.} This theory paper:
+\begin{enumerate}[leftmargin=*]
+\item Formalizes the three evaluation axes (D1 causal, D2 dynamic, D3 boundary) and three evidentiary layers (L1--L3).
+\item Defines the nine-cell matrix with cell semantics and status taxonomy (filled / partial / empty).
+\item Bridges the cube to EIA's multi-loop stack, the proof-protocol ledger, and the C-ladder claim ceiling.
+\item States epistemic discipline: active ceiling \textbf{C2}, no AGI$^{*}$ claim; partial cells do not raise C-level.
+\end{enumerate}
+
+\textbf{Epistemic ceiling.} Active claim ladder ceiling is \textbf{C2}; all harnesses set \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; numeric $\theta_E$ and strong $N_H$ remain TBD.
+
+\section{Related Work}\label{sec:related}
+
+\textbf{Causal inference in ML evaluation.} Counterfactual and interventional criteria address spurious correlates in ML evaluation~\cite{veitch2021counterfactual,pearl2009causality}. Sci-flow's ATT-E bar and proof protocol apply this discipline to endogeneity: trajectory change under $do(Z)$ with $X$ non-triggering, rejecting declaration-only evidence~\cite{kuznetsov2026causal,kuznetsov2026proof}. The 3D cube generalizes this into a multi-axis evidence ontology rather than a single causal gate.
+
+\textbf{Intrinsic motivation and curiosity.} Schmidhuber's formal theory frames intrinsic reward as compression progress and curiosity~\cite{schmidhuber2010curiosity}. ICM and related agents instantiate prediction-error proxies~\cite{pathak2017curiosity}. These approaches optimize \emph{scalar} intrinsic signals; stable endogeneity in EIA requires coupled multi-loop genesis with falsifiable causal gates~\cite{kuznetsov2026stable}. The D2 axis tracks whether dynamical stability indicators ($\mathfrak{E}$) remain in a bounded non-zero band, not merely whether curiosity spikes.
+
+\textbf{Proactive and language agents.} CoALA surveys cognitive architectures for language agents---memory, planning, grounding---but notes weak causal evaluation of ``agency'' claims~\cite{sumers2024cala}. EIA differs by requiring P4/P5 genesis with abstain, independent Ring\,3 constitution, and pre-registered ATT falsifiers rather than narrative plausibility. The cube's L1 layer encodes these falsifiers explicitly; L3 requires trace receipts, not demo scripts.
+
+\textbf{Evidence hierarchies.} Clinical and safety research stratify evidence (definitions $\to$ trials $\to$ audits). Sci-flow adapts this pattern: L1 invariants precede L2 harness dynamics and L3 witness artifacts. The intervention cube registry (\texttt{intervention\_cube.py}) types $do(Z)$, $do(O)$, and $do(X)$ interventions per axis, preventing conflation of causal resets with oscillatory explore adjuncts.
+
+\section{Formal Framework: Three Axes}\label{sec:axes}
+
+Let $Z_t=(S_t,W_t,M_t,G_t)$ denote persistent internal state, $X_t$ the external environment, and $G_{t+1}$ the goal/trajectory distribution at the next tick. The cube partitions evaluation along three axes~\cite{kuznetsov2026cube}.
+
+\subsection{D1: Causal Axis ($E_{\mathrm{endo}}$, $do(Z)$)}
+
+\textbf{Scope.} Axis D1 tracks causal endogeneity---whether new cognitive trajectories are generated by persistent internal dynamics in the absence of a corresponding external initiating signal~\cite{kuznetsov2026causal}.
+
+\begin{definition}[Causal bar for $E_{\mathrm{endo}}$]
+Pass \emph{scoped} support only if \textbf{all} hold:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Trajectory change:} goal distribution $G_{t+1}$ differs from baseline in a pre-registered metric.
+\item \textbf{Internal dynamics:} change attributable to persistent state evolution, not one-shot external instruction.
+\item \textbf{No matching external initiator:} under non-triggering $X$, the trajectory class still arises.
+\item \textbf{Intervention:} $do(Z)$ changes $P(G_{t+1})$ while $X$ remains non-triggering.
+\end{enumerate}
+\end{definition}
+
+The causal endogeneity index is
+\begin{equation}
+E_C = \frac{C_{\mathrm{int}}}{C_{\mathrm{int}} + C_{\mathrm{ext}}},
+\end{equation}
+where $C_{\mathrm{int}}$ counts trajectory changes causally attributed to internal dynamics under intervention; declaration-only labels contribute zero to $C_{\mathrm{int}}$~\cite{kuznetsov2026stable}. D1 instruments include CF-4 named $do(Z)$ resets, EOI-$k$ twin counterfactuals ($do(X)$ via \texttt{remove\_last\_n}), and ATT-E witness stubs. Numeric threshold $\theta_E$ remains \textbf{TBD}; CF-4 and proof-protocol acceptance yield \emph{partial} support only.
+
+\textbf{D1 falsifiers (L1).} F-DECL (verbal self-ascription without trajectory change), F-NARR (prompt-induced agency narrative), F-EXT (trajectory changes only with matching external trigger), F-NODO (no $do(Z)$ effect on $G$ under non-triggering $X$).
+
+\subsection{D2: Dynamic Axis ($\mathfrak{E}$, OMEGA, Recurrence)}
+
+\textbf{Scope.} Axis D2 tracks whether endogenous activity is \emph{stable}---a sustained dynamical regime rather than a single intrinsic-reward spike or noisy-TV trap~\cite{kuznetsov2026stable,kuznetsov2026theorytz}.
+
+\begin{definition}[Stability vector $\mathfrak{E}$]
+\begin{equation}
+\mathfrak{E} = (E_C,\, \lambda_G,\, P_G,\, Q_L,\, H_G,\, B_D),
+\end{equation}
+with goal birth rate $\lambda_G$, persistence $P_G$ under non-triggering $X$, learning productivity $Q_L$, goal diversity $H_G$, and bounded drives $B_D$.
+\end{definition}
+
+Stable endogenous causal recurrence requires $\mathfrak{E}$ jointly in a bounded non-zero band over horizon $\Delta T$, avoiding the noisy-TV trap and $d\to 0$ freeze. D2 instruments include ATT-R/M-R-LIVE closed-loop recurrence, DSR 50-tick carryover, and OMEGA wave metrics (Tier\,C explore adjunct---not Tier\,A proof). Interventions $do(O)$ (CF-5 scramble, OMEGA decor) probe whether dynamical claims survive causal scrambling.
+
+\textbf{D2 falsifiers (L1).} F-TV (noisy-TV trap dominates), F-ZERO (sustained $d\to 0$), F-LOOP (no closed recurrence), F-SYNC (OMEGA/Kuramoto-only evidence).
+
+\subsection{D3: Boundary Axis ($N_H$, Governor, Falsifiers)}
+
+\textbf{Scope.} Axis D3 tracks trans-anthropic non-embeddability $N_H$, governor clearance, and boundary falsifiers. Full $AGI^{*}$ requires $N_H$ as an orthogonal conjunct to $E_{\mathrm{endo}}$; endogeneity priority does not lower the $N_H$ bar.
+
+D3 instruments include ATT-N budget probes ($do(X)$), governor scaffold, and Tier\,B soft $N_H$ boundary witness (falsifier + governor + NAMM corpus smoke). Strong $N_H$ claims remain unauthorized; D3$\times$L3 witness is soft $N_H$ only (\texttt{n\_h\_claim=false}).
+
+\textbf{D3 falsifiers (L1).} Opacity $\neq$ $N_H$; structural growth or high synchrony alone do not establish non-embeddability (F-STRUCT$\neq$E, F-KURAMOTO-AS-E).
+
+\section{Three Layers}\label{sec:layers}
+
+Each axis stratifies evidence across three layers~\cite{kuznetsov2026cube}.
+
+\subsection{L1: Invariants}
+
+\textbf{Role.} Definitions, falsifier taxonomy, hard bans, and epistemic tags (\texttt{DEFINITION}, \texttt{OPERATIONAL}, \texttt{CONJECTURE}). L1 cells document what \emph{would} falsify a claim before any harness runs.
+
+\textbf{Content per axis.}
+\begin{itemize}[leftmargin=*]
+\item \textbf{D1$\times$L1:} Causal endogeneity criterion, F-DECL/F-EXT/F-NARR/F-NODO registry~\cite{kuznetsov2026causal}.
+\item \textbf{D2$\times$L1:} Stability vector $\mathfrak{E}$ definitions, metastability band, multi-loop stack topology~\cite{kuznetsov2026stable}.
+\item \textbf{D3$\times$L1:} $AGI^{*}$ conjunction definitions; governor constitution; opacity $\neq$ causation $\neq$ $N_H$.
+\end{itemize}
+
+A filled L1 cell means theory and falsifiers are documented; it does \emph{not} constitute empirical evidence.
+
+\subsection{L2: Dynamics}
+
+\textbf{Role.} Harnesses, typed interventions, longitudinal metrics, and explore-only adjuncts. L2 is where $do(\cdot)$ experiments execute.
+
+\textbf{Content per axis.}
+\begin{itemize}[leftmargin=*]
+\item \textbf{D1$\times$L2:} CF-4 named resets, EOI-$k$ counterfactual suite (D01), \texttt{e\_endo\_partial} proxies.
+\item \textbf{D2$\times$L2:} ATT-R/M-R-LIVE recurrence, DSR smoke, OMEGA wave metrics (Tier\,C).
+\item \textbf{D3$\times$L2:} ATT-N explore under budget $B$; governor scaffold.
+\end{itemize}
+
+Status \textbf{partial} indicates a harness exists but thresholds are TBD or explore-only; \textbf{empty} means not instrumented.
+
+\subsection{L3: Witness}
+
+\textbf{Role.} Trace receipts, JSON metrics, external certificates, and proof-protocol outputs. L3 is the audit layer: what a third party can verify without re-running theory.
+
+\textbf{Content per axis.}
+\begin{itemize}[leftmargin=*]
+\item \textbf{D1$\times$L3:} Proof-protocol ledger (\texttt{sci-flow-eia-proof-v0.1}), ATT-E witness stubs~\cite{kuznetsov2026proof}.
+\item \textbf{D2$\times$L3:} M-R-LIVE JSON artifacts, ATT-R shadow witness files.
+\item \textbf{D3$\times$L3:} Boundary witness harness (Tier\,B soft $N_H$); falsifier + governor smoke receipts.
+\end{itemize}
+
+L3 receipts are classified by the proof protocol; OMEGA-only or declaration-only inputs are rejected.
+
+\section{The 9-Cell Matrix}\label{sec:matrix}
+
+The cube is the Cartesian product D1$\times$D2$\times$D3 crossed with L1$\times$L2$\times$L3, yielding nine primary cells (one per axis-layer pair). Table~\ref{tab:matrix} defines each cell's semantic scope and current scaffold status. Status placeholders are updated by the empirical assembly agent; this theory paper fixes \emph{definitions}, not empirical closure.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{p{1.8cm}p{3.2cm}p{3.2cm}p{3.2cm}}
+\toprule Axis & \textbf{L1 Invariants} & \textbf{L2 Dynamics} & \textbf{L3 Witness} \\ \midrule
+\textbf{D1 Causal} &
+Causal bar $E_{\mathrm{endo}}$; F-DECL, F-EXT, F-NARR, F-NODO &
+CF-4 $do(Z)$; EOI-$k$ twin $do(X)$; D01 counterfactual suite &
+Proof protocol v0.1; ATT-E witness stub \\
+& \textit{status: filled} & \textit{status: filled} & \textit{status: filled} \\ \midrule
+\textbf{D2 Dynamic} &
+$\mathfrak{E}$ vector; metastability; multi-loop defs &
+ATT-R/M-R-LIVE; DSR carryover; OMEGA (Tier\,C) &
+M-R-LIVE JSON; ATT-R shadow witness \\
+& \textit{status: filled} & \textit{status: filled} & \textit{status: filled} \\ \midrule
+\textbf{D3 Boundary} &
+$AGI^{*}$ conjunction; governor constitution &
+ATT-N explore; governor scaffold &
+Tier\,B soft $N_H$ boundary witness \\
+& \textit{status: filled} & \textit{status: partial} & \textit{status: filled} \\ \bottomrule
+\end{tabular}
+\caption{9-cell evidence matrix. \textbf{filled} = theory + falsifiers documented (L1) or harness + witness instrumented (L2/L3); \textbf{partial} = harness exists, thresholds TBD; \textbf{empty} = not instrumented. Status placeholders updated by empirical agent.}
+\label{tab:matrix}
+\end{table}
+
+\textbf{Legend.} No single cell raises the C-ladder. Kuramoto/OMEGA occupy D2 as \textbf{Tier\,C explore adjunct}, not Tier\,A proof. $AGI^{*}=E_{\mathrm{endo}}\land C_{\mathrm{non\text{-}emb}}(H)\land\cdots$; active ceiling \textbf{C2}; partial cells do not authorize C-level raises.
+
+\textbf{Intervention registry.} Typed interventions in \texttt{intervention\_cube.py} map to axes:
+\begin{itemize}[leftmargin=*]
+\item \textbf{$do(Z)$:} CF-4 named resets (\texttt{zero\_epistemic\_gap}, \texttt{wm\_off}, \ldots) $\to$ D1.
+\item \textbf{$do(O)$:} CF-5 scramble, OMEGA decor $\to$ D2 explore.
+\item \textbf{$do(X)$:} Twin \texttt{remove\_last\_n} (EOI-$k$), ATT-N budget probes $\to$ D1 / D3.
+\end{itemize}
+API: \texttt{get\_intervention(id)}, \texttt{list\_by\_axis("D1"|"D2"|"D3")}, \texttt{eoi\_k\_interventions()}.
+
+\textbf{Express smoke.} \texttt{run\_3d\_express.py} provides a $<$\,60\,s nine-cell smoke pass; express success does not imply empirical closure.
+
+\section{Bridge to EIA Theory}\label{sec:bridge}
+
+The cube is not an independent ontology; it indexes evidence against EIA's operational stack and claim machinery.
+
+\subsection{Multi-Loop Stack $W\to M\to d\to G\to A$}
+
+One tick of the EIA cognitive stack~\cite{kuznetsov2026stable,kuznetsov2026theorytz}:
+\begin{equation}
+W_t \to M_t \to d_t \to G_t \to \Pi_t \to A_t \to \text{Memory/Update} \to W_{t+1}, M_{t+1}, d_{t+1}, G_{t+1},
+\end{equation}
+where $W_t$ is world model, $M_t$ self-model, $d_t$ the bounded drive field, $G_t$ goals, $\Pi_t$ policy, $A_t$ action. Causal endogeneity (D1) asks whether $G_{t+1}$ is generated when $X_t^{\mathrm{trigger}}=0$. Dynamical stability (D2) asks whether $\mathfrak{E}$ remains in a bounded non-zero band over $\Delta T$. Boundary clearance (D3) asks whether governor and $N_H$ gates are exercised without conflating opacity with non-embeddability.
+
+Operational state compact:
+\begin{equation}
+S_t^{\mathrm{op}} = (z_t, W_t, M_t, d_t, G_t).
+\end{equation}
+Significance test: interventions on internal components change $P(G_{t+1}\mid do(\cdot))$ with $X_t^{\mathrm{trigger}}=0$.
+
+\subsection{Proof Protocol Ledger}
+
+\texttt{sci-flow-eia-proof-v0.1} (\texttt{evidence\_proofs.py}) classifies submitted evidence conservatively~\cite{kuznetsov2026proof}. An \texttt{EvidenceItem} is accepted only if: metric is Tier-A/CF4-class; \texttt{trajectory\_changed=true}; \texttt{do\_z\_changes\_g\_distribution=true}; \texttt{x\_non\_triggering=true}; no matching external initiator; no falsifier triggered; agency label admissible.
+
+Output \texttt{EIAProofVersion} invariants:
+\begin{itemize}[leftmargin=*]
+\item \texttt{claim\_ceiling = C2}
+\item \texttt{e\_endo\_support} $\in \{\texttt{none}, \texttt{partial}\}$ only
+\item \texttt{c\_ladder\_raise\_allowed = false}
+\item \texttt{agi\_star\_claim = false}
+\end{itemize}
+
+The protocol maps primarily to D1$\times$L3; rejection reasons (F-DECL, F-SYNC, F-EXT, F-NODO) cross-cut L1 falsifiers. OMEGA$_t$/Kuramoto-only inputs are rejected (F-SYNC); they occupy D2$\times$L2 as explore adjuncts, not proof ledger entries.
+
+\subsection{C-Ladder Claim Ceiling}
+
+The claim ladder enforces epistemic discipline across all nine cells:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Active ceiling: C2} --- scoped partial on $E_{\mathrm{endo}}$ at best.
+\item \textbf{No cell raises C-level} --- filled L1 theory or partial L2 harnesses do not authorize promotion.
+\item \textbf{No AGI$^{*}$ claim} --- $AGI^{*}$ is a conjunction requiring $E_{\mathrm{endo}}$, $N_H$, and additional order parameters; the cube tracks progress without authorizing horizon claims.
+\item \textbf{OMEGA / Kuramoto / DSR / EOI-$k$ alone} never imply $AGI^{*}$ or $\tau_{AGI}$.
+\end{itemize}
+
+Cross-axis milestones (M-EMP pool, \texttt{config.yaml} registry) link metrics to cells without collapsing axes. Theory (invariants) and implementation annex (WoE v0.2, CLI adapters) remain separable per THEORY\_TZ~\cite{kuznetsov2026theorytz}.
+
+\input{sections_empirical.tex}
+
+\section{Conclusion}\label{sec:conclusion}
+
+The EIA 3D Evidence Cube provides a falsifiable evaluation ontology for endogenous initiative research: three orthogonal axes (causal, dynamic, boundary) stratified across invariant definitions, dynamical harnesses, and witness receipts. By requiring independent progress on each cell before claims escalate, the cube prevents narrative agency, oscillatory synchrony, or partial causal proxies from masquerading as closure. All evaluation operates under C2 ceiling with explicit \texttt{claim\_allowed=false} gates; the proof-protocol ledger and ATT falsifier registry supply the audit backbone. Closing $\theta_E$, strong $N_H$, cross-domain ATT-D, and the full $AGI^{*}$ conjunction remains future work---tracked cell-by-cell, not asserted by rhetoric.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

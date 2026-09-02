@@ -1,18 +1,24 @@
-# arXiv Toolkit (I01)
+# arXiv Toolkit (I01 / I03)
 
-Ported from [AI_NATIVE_GOV](https://github.com/errorlogy) generic arXiv workflow for the EIA problematization draft at `arxiv/`.
+Ported from [AI_NATIVE_GOV](https://github.com/errorlogy) generic arXiv workflow for EIA papers.
 
-**Task crosswalk:** [docs/CURSOR_TASKS.md](../../docs/CURSOR_TASKS.md) — **I01** arXiv v0.1 problematization (C2 ceiling; no AGI\* claims in edits).
+**Task crosswalk:** [docs/CURSOR_TASKS.md](../../docs/CURSOR_TASKS.md) — **I01** arXiv v0.1 problematization; **I03** sci-flow 3D Evidence Cube standalone (C2 ceiling; no AGI\* claims in edits).
 
 ## Layout
 
 ```text
 PROACTIVE_AI/
 ├── arxiv/
-│   ├── main.tex           # v0.1 problematization draft
-│   ├── references.bib     # BibTeX stub (manual bib in main.tex for now)
-│   ├── main.pdf           # pre-built PDF from draft bundle
-│   └── figures/           # I05 figures (dag.pdf, drive_decay.pdf, …)
+│   ├── main.tex                    # I01 v0.2 framework paper
+│   ├── references.bib
+│   ├── main.pdf
+│   ├── figures/                    # I05 figures (dag.pdf, drive_decay.pdf, …)
+│   └── sci_flow_3d_cube/           # I03 3D Evidence Cube standalone
+│       ├── main.tex
+│       ├── sections_empirical.tex
+│       ├── references.bib          # merged (base + references_empirical.bib)
+│       ├── references_empirical.bib
+│       └── figures/
 └── scripts/arxiv_toolkit/
     ├── compile_paper.py
     ├── clean_and_package.py
@@ -42,6 +48,17 @@ python scripts/arxiv_toolkit/compile_paper.py
 python scripts/arxiv_toolkit/compile_paper.py -d arxiv
 ```
 
+## I03 workflow (3D Evidence Cube standalone)
+
+```powershell
+python scripts/arxiv_toolkit/compile_paper.py -d arxiv/sci_flow_3d_cube
+# or:
+make arxiv-3d-cube-compile
+make arxiv-3d-cube-package
+```
+
+Produces `sci_flow_3d_cube_arXiv_submission.tar.gz` next to `arxiv/sci_flow_3d_cube/`.
+
 ### 2. Fetch literature (verified BibTeX via arXiv API)
 
 ```powershell
@@ -67,6 +84,8 @@ Produces `arxiv_arXiv_submission.tar.gz` next to `arxiv/`.
 ```powershell
 make arxiv-compile
 make arxiv-package
+make arxiv-3d-cube-compile
+make arxiv-3d-cube-package
 ```
 
 ## Notes
