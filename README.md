@@ -1,5 +1,20 @@
 # Endogenous Initiative Architecture (EIA)
 
+## Active research (sci-flow)
+
+**This main branch** is the stable runtime slice (MVP-0 prototype, CI). **Sci-flow harnesses, arXiv papers, and 3D evidence-cube work** live on the research branch — not merged here by design.
+
+| | |
+|---|---|
+| **Branch** | [
+esearch/cursor-starter-v0.2-woe-eis](https://github.com/errorlogy/eia/tree/research/cursor-starter-v0.2-woe-eis) |
+| **Release tag** | [sci-flow-v0.3](https://github.com/errorlogy/eia/releases/tag/sci-flow-v0.3) (44e7808) |
+| **Claim ceiling** | **C2** — partial evidence only; claim_allowed=false; **no AGI\*** claims in papers or release notes |
+
+**Papers (at tag):** [EIA framework PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/main.pdf) · [3D Evidence Cube PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/sci_flow_3d_cube/main.pdf) · [arXiv submission guide](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/docs/ARXIV_SUBMISSION.md) · [release notes](./docs/SCI_FLOW_RELEASE.md)
+
+---
+
 [![EIA CI](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml/badge.svg)](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml)
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
