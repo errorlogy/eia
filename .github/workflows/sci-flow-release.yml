@@ -1,0 +1,47 @@
+name: Sci-Flow Release
+
+on:
+  push:
+    tags:
+      - "sci-flow-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install LaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended
+
+      - name: Install package and arXiv toolkit
+        run: |
+          pip install -e ".[dev,sim]"
+          pip install -r scripts/arxiv_toolkit/requirements.txt
+
+      - name: Tier 0 sci-flow lock
+        run: python scripts/check_sci_tier0.py
+
+      - name: Build arXiv submission bundles
+        run: |
+          make arxiv-package
+          make arxiv-3d-cube-package
+
+      - name: Publish GitHub release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            arxiv_arXiv_submission.tar.gz
+            arxiv/sci_flow_3d_cube_arXiv_submission.tar.gz

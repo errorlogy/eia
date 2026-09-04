@@ -1,0 +1,27 @@
+name: WoE Merge Guard
+
+# Block accidental merge of WoE research runtime into main/src/eia policy surface.
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  woe-ban:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Block WoE research runtime paths
+        run: |
+          set -euo pipefail
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          CHANGED="$(git diff --name-only "${BASE}" "${HEAD}")"
+          if echo "${CHANGED}" | grep -q '^research/cursor-starter-v0.2/src/eia/'; then
+            echo "::error::PR touches research/cursor-starter-v0.2/src/eia/ — WoE runtime must not merge to main. See docs/CI_CD.md"
+            exit 1
+          fi
+          echo "WoE guard: no blocked paths in diff."

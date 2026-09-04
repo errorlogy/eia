@@ -42,6 +42,7 @@ $env:PYTHONPATH="src"; python -m pytest tests/test_model_roles.py -q
 
 ## Related docs
 
+- [`docs/CI_CD.md`](docs/CI_CD.md) — CI/CD workflows, local commands, branch protection
 - [`docs/RESEARCH_BRANCHES.md`](docs/RESEARCH_BRANCHES.md)
 - [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md)
 - [`.cursor/skills/eia-sci-flow/SKILL.md`](.cursor/skills/eia-sci-flow/SKILL.md) (agent sci-flow)
