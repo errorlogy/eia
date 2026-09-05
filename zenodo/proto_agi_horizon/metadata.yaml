@@ -1,0 +1,72 @@
+# Zenodo / Invenio-style metadata reference for Proto-AGI Horizon (2026)
+# Paste fields manually in Zenodo UI — see docs/ZENODO_SUBMISSION.md
+
+title: >-
+  Proto-AGI Horizon: Endogenous Proactive Architecture, OMEGA Coherence,
+  and Partial Evidence under C2 Ceiling
+
+upload_type: publication
+publication_type: article
+publication_date: '2026-09-05'
+
+creators:
+  - name: Kuznetsov, Roman A.
+    affiliation: Anthemium
+    orcid: ''
+    email: research@anthemium.tech
+
+description: >-
+  We present an operational research horizon for proto-AGI evaluation within
+  the Endogenous Initiative Architecture (EIA) sci-flow program. Under this
+  construction, general intelligence is not a benchmark score but a sustained
+  dynamical regime in which cognitive goals arise from persistent internal
+  state when X_t^trigger=0. We contrast passive architectures (reactive_only,
+  schedule-entrained controls) with proactive endogenous candidates (full_eia,
+  WoE carriers, oscillatory substrates). A twelve-member proto-AGI ensemble
+  registers operational configs for Max consensus diagnostics over (E, OMEGA, P,
+  R). We report the OMEGA→ΔG bridge experiment (M-OMEGA-DELTA-G): F-OMEGA-DECOR
+  confirmed (aggregate, C2) with OMEGA span 0.604. Partial empirical results
+  map onto the 3D evidence cube (D1 causal / D2 dynamic / D3 boundary). All
+  harnesses operate under claim_allowed=false; active ceiling C2. This paper
+  does not claim AGI*, τ_AGI, consciousness, or biological identity.
+
+keywords:
+  - proto-AGI
+  - endogenous initiative
+  - proactive architecture
+  - OMEGA coherence
+  - Max consensus
+  - falsifiable evaluation
+  - sci-flow
+  - claim ladder
+  - EIA
+  - evidence cube
+
+license: CC-BY-4.0
+access_right: open
+
+communities: []
+
+notes: >-
+  Research Horizon Paper (non-final). C2-scoped partial evidence;
+  claim_allowed=false; not AGI*. Companion repo companions (EIA framework v0.3,
+  3D Evidence Cube) cited at tag sci-flow-v0.3 — not separate deposits.
+
+related_identifiers:
+  - relation: isSupplementTo
+    identifier: https://github.com/errorlogy/eia/tree/sci-flow-v0.3
+    resource_type: software
+  - relation: isReferencedBy
+    identifier: https://github.com/Anthemium/AGI-Manifesto
+    resource_type: other
+  - relation: isReferencedBy
+    identifier: https://github.com/errorlogy/namm-experiments
+    resource_type: software
+
+grants: []
+
+version: '1.0.0'
+
+references:
+  - 'Kuznetsov R.A. (2026). Proto-AGI Horizon. Zenodo.'
+  - 'EIA empirical platform: https://github.com/errorlogy/eia (tag sci-flow-v0.3)'

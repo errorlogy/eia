@@ -4,6 +4,16 @@
 **Version:** v0.4 (September 2026)  
 **Claim ceiling:** C2 — `claim_allowed=false`; no AGI\* claims in papers.
 
+## Primary publication path
+
+| Path | When to use |
+|------|-------------|
+| **[Zenodo](ZENODO_SUBMISSION.md) (recommended if blocked)** | **Primary** when arXiv endorsement is unavailable or pending. Upload `zenodo/proto_agi_horizon_upload.zip`; get DOI immediately on Publish. |
+| **arXiv** (below) | Optional mirror once endorsement is approved; same PDF/sources as Zenodo bundle. |
+
+Full Zenodo checklist, metadata copy-paste, and X template: **`docs/ZENODO_SUBMISSION.md`**.  
+Bundle: `zenodo/proto_agi_horizon/` and `zenodo/proto_agi_horizon_upload.zip`.
+
 ## Upload strategy (M-ARXIV-PROTO-AGI)
 
 **Primary (sole) arXiv upload:** `arxiv/proto_agi_horizon/main.tex` — the most comprehensive horizon paper (proto-AGI ensemble, Max consensus, OMEGA→ΔG bridge, Miller analog-waves bridge, metrics catalog, manifesto/NAMM lineage).

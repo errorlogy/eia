@@ -2151,3 +2151,38 @@ T-NAMM-01 D3/NAMM witness alignment; T-PROTO-01 ensemble batch. No C-level raise
 ### Next
 
 Upload proto tarball to arXiv; note repo companions in arXiv comment. T-PROTO-01 ensemble batch. No C-level raise.
+
+---
+
+## Entry 063 — 2026-09-05 — M-ZENODO-PREP
+
+**Session:** Zenodo upload package for Proto-AGI Horizon — bilingual submission guide, metadata files, PDF + sources bundle, drag-drop zip. Zenodo documented as **primary path** when arXiv endorsement blocked.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Verified `main.pdf` newer than `main.tex` (no recompile) |
+| S2 | `zenodo/proto_agi_horizon/`: PDF rename, sources tarball, `metadata.yaml`, `datacite.xml`, `README.txt` |
+| S3 | `zenodo/proto_agi_horizon_upload.zip` for drag-drop upload |
+| S4 | `docs/ZENODO_SUBMISSION.md` (RU + EN); `docs/ARXIV_SUBMISSION.md` Zenodo primary note |
+| S5 | Commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-ZENODO-PREP** |
+| PDF | `zenodo/proto_agi_horizon/Kuznetsov_2026_Proto_AGI_Horizon.pdf` |
+| Zip | `zenodo/proto_agi_horizon_upload.zip` |
+| Sources | `zenodo/proto_agi_horizon/sources/proto_agi_horizon_arXiv_submission.tar.gz` |
+| Guide | `docs/ZENODO_SUBMISSION.md` |
+| License | CC BY 4.0 |
+| Related IDs | EIA `sci-flow-v0.3`, AGI-Manifesto, namm-experiments |
+| `claim_allowed` | **false** |
+
+### Next
+
+Manual Zenodo Publish → copy DOI → X post template in guide. arXiv when endorsement available. T-PROTO-01 ensemble batch. No C-level raise.
