@@ -1959,3 +1959,7 @@ Optional omega-bridged 50-tick DSR carryover; no C-level raise from OMEGA alone.
 
 T-PROTO-01 ensemble batch harness; pre-register \(\theta_\bullet\), \(\Delta T\). G2 E01 20×3 domains. No C-level raise.
 
+## Entry 056 — 2026-09-05 — PROTO_AGI §7 ↔ M-OMEGA_delta_G cross-link
+
+**Session:** Doc patch — link F-OMEGA-DECOR falsifier in `PROTO_AGI_MAX_CONSENSUS.md` §7 to empirical `M-OMEGA_delta_G_2026-09-05` evidence (confirmed aggregate, C2; OMEGA span 0.604, genesis span 0.0, fingerprint parity True; SHA-256 `88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34`; harness `b9a8110`). Reciprocal one-liner in `OMEGA_WAVE_METRIC.md` §7.
+

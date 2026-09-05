@@ -212,6 +212,8 @@ Timescale separation (from [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md)):
 | **F-PASSIVE-WINS** | \(\Phi_{\max}\) sustained on `PA-00`/`PA-01` with \(X^{\mathrm{trigger}}=0\) | Fail proactive thesis |
 | **F-SINGLE-SPIKE** | One-tick conjunction without \(\Delta T\) | Fail consensus definition |
 
+`OPERATIONAL` · **F-OMEGA-DECOR empirical status** ([`M-OMEGA_delta_G_2026-09-05.md`](M-OMEGA_delta_G_2026-09-05.md)): **confirmed (aggregate, C2)** — OMEGA span `0.604`, genesis span `0.0`, fingerprint parity `True`; SHA-256 `88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34`; harness `b9a8110`.
+
 **C2 ceiling:** Active empirical ceiling per [`config.yaml`](config.yaml) `claim_ladder.active_ceiling: C2`. Ensemble peaks and partial G2 E01 **do not** raise C-level.
 
 **No AGI\* claim:** \(N_H\), \(D\), and sustained \(\tau_{AGI}\) conjunction are **out of scope** for this note. Vendor substrates (Neuraxon, Graphitti) remain **Tier C**, `e_endo_support=none` for D1 ledger ([`M-O_PROOF_ADMISSIBILITY.md`](M-O_PROOF_ADMISSIBILITY.md)).

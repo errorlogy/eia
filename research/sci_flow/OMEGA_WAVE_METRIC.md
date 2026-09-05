@@ -137,7 +137,7 @@ Implementation default: `DEFAULT_WOE_CARRIERS` in `oscillatory_state.py`. Factor
 | **F-PHASE-ONLY** | Phase coherence without do(O) effect on P(G_{t+1}) | Fail (extends M-O) |
 | **F-KURAMOTO-AS-E** | Kuramoto sync claimed as E_endo | **Fail** (M-D + ATT-R) |
 
-Unit tests: `tests/test_omega_wave.py` (F-OMEGA-DECOR), `tests/test_oscillatory_mo.py` (F-SYNC, F-PHASE-ONLY).
+Unit tests: `tests/test_omega_wave.py` (F-OMEGA-DECOR), `tests/test_oscillatory_mo.py` (F-SYNC, F-PHASE-ONLY). Empirical probe: [`M-OMEGA_delta_G_2026-09-05.md`](M-OMEGA_delta_G_2026-09-05.md) (confirmed aggregate, C2); cross-ref [`PROTO_AGI_MAX_CONSENSUS.md`](PROTO_AGI_MAX_CONSENSUS.md) §7.
 
 ---
 
