@@ -1996,3 +1996,31 @@ T-PROTO-01 ensemble batch harness; pre-register \(\theta_\bullet\), \(\Delta T\)
 
 Upload tarball when ready; T-PROTO-01 ensemble batch; pre-register $\theta_\bullet$, $\Delta T$. No C-level raise.
 
+---
+
+## Entry 058 — 2026-09-05 — M-ARXIV-PROTO-AGI author block + status header
+
+**Session:** Refine `arxiv/proto_agi_horizon/main.tex` author/affiliation block (Roman A. Kuznetsov; Anthemium · research@anthemium.tech; `\thanks` footnote with labeled links) and move status header to post-`\maketitle` block per agreed format.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S4 | Recompiled PDF; regenerated `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| S5 | Author block + status header patch; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/proto_agi_horizon/main.tex` |
+| Milestone | **M-ARXIV-PROTO-AGI** (author block) |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| `claim_allowed` | **false** |
+
+### Next
+
+Upload tarball when ready; T-PROTO-01 ensemble batch. No C-level raise.
+
