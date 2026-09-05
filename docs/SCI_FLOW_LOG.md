@@ -1963,3 +1963,36 @@ T-PROTO-01 ensemble batch harness; pre-register \(\theta_\bullet\), \(\Delta T\)
 
 **Session:** Doc patch — link F-OMEGA-DECOR falsifier in `PROTO_AGI_MAX_CONSENSUS.md` §7 to empirical `M-OMEGA_delta_G_2026-09-05` evidence (confirmed aggregate, C2; OMEGA span 0.604, genesis span 0.0, fingerprint parity True; SHA-256 `88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34`; harness `b9a8110`). Reciprocal one-liner in `OMEGA_WAVE_METRIC.md` §7.
 
+---
+
+## Entry 057 — 2026-09-05 — M-ARXIV-PROTO-AGI horizon paper + package
+
+**Session:** arXiv proto-AGI horizon paper — theory (ensemble, Max consensus, OMEGA vs Hz, Miller bridge), partial empirical (CF-4, G2 E01, M-3D-EXPRESS, M-O, OMEGA→ΔG), open questions, limitations
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Chose standalone `arxiv/proto_agi_horizon/main.tex` (complements EIA + 3D cube; documented in `docs/ARXIV_SUBMISSION.md`) |
+| S2 | Wrote ~12pp paper: passive vs proactive, 12-member ensemble, $\Phi_{\max}$, OMEGA→ΔG table, cube map, falsifiers, open T-PROTO-01…06 |
+| S3 | `references.bib` — Miller/Picower analog waves + EIA proof protocol; figures from `arxiv/figures/` |
+| S4 | Makefile `arxiv-proto-agi-compile` / `arxiv-proto-agi-package`; cross-link in `PROTO_AGI_MAX_CONSENSUS.md` |
+| S5 | Compile + tarball; `check_sci_tier0`; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/proto_agi_horizon/main.tex` |
+| Milestone | **M-ARXIV-PROTO-AGI** |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| F-OMEGA-DECOR | confirmed aggregate (OMEGA span 0.604, genesis span 0.0) |
+| M-3D-EXPRESS | 9/9 pass, 3783.4 ms |
+| `claim_allowed` | **false** |
+
+### Next
+
+Upload tarball when ready; T-PROTO-01 ensemble batch; pre-register $\theta_\bullet$, $\Delta T$. No C-level raise.
+

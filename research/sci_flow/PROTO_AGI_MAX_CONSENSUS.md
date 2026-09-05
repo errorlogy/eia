@@ -3,7 +3,8 @@
 **Status:** `CONJECTURE` / `OPERATIONAL` scaffold (2026-09-05) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Milestone:** M-PROTO-AGI (theory + ensemble registry)  
-**Claim ceiling:** **C2** scoped partial only. **`claim_allowed=false`**. **No AGI\*** claim.
+**Claim ceiling:** **C2** scoped partial only. **`claim_allowed=false`**. **No AGI\*** claim.  
+**arXiv paper:** [`arxiv/proto_agi_horizon/main.tex`](../../arxiv/proto_agi_horizon/main.tex) — standalone horizon companion (M-ARXIV-PROTO-AGI); see [`docs/ARXIV_SUBMISSION.md`](../../docs/ARXIV_SUBMISSION.md).
 
 ---
 
@@ -239,4 +240,5 @@ All ticks: `claim_allowed=false`, tier-0 verify via `make check-sci-tier0`.
 
 | Date | Change |
 |------|--------|
+| 2026-09-05 | arXiv horizon paper `arxiv/proto_agi_horizon/main.tex` (M-ARXIV-PROTO-AGI); cross-link in header |
 | 2026-09-05 | Initial proto-AGI ensemble, Max consensus \(\Phi_{\max}\), OMEGA vs Hz, MIT bridge, 3D cube map, falsifiers, research ticks |

@@ -1,4 +1,4 @@
-﻿.PHONY: check-sci-tier0 arxiv-compile arxiv-package arxiv-3d-cube-compile arxiv-3d-cube-package
+﻿.PHONY: check-sci-tier0 arxiv-compile arxiv-package arxiv-3d-cube-compile arxiv-3d-cube-package arxiv-proto-agi-compile arxiv-proto-agi-package
 
 # M-CLI Phase 0 — Tier 0 ATT baseline + M-EXPRESS-CI 3D cube smoke (no LLM). See docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md
 check-sci-tier0:
@@ -17,3 +17,10 @@ arxiv-3d-cube-compile:
 
 arxiv-3d-cube-package:
 	python scripts/arxiv_toolkit/clean_and_package.py -d arxiv/sci_flow_3d_cube
+
+# I04 arXiv Proto-AGI Horizon standalone — see docs/ARXIV_SUBMISSION.md
+arxiv-proto-agi-compile:
+	python scripts/arxiv_toolkit/compile_paper.py -d arxiv/proto_agi_horizon
+
+arxiv-proto-agi-package:
+	python scripts/arxiv_toolkit/clean_and_package.py -d arxiv/proto_agi_horizon
