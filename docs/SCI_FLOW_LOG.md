@@ -2024,3 +2024,35 @@ Upload tarball when ready; T-PROTO-01 ensemble batch; pre-register $\theta_\bull
 
 Upload tarball when ready; T-PROTO-01 ensemble batch. No C-level raise.
 
+---
+
+## Entry 059 — 2026-09-05 — M-ARXIV-PROTO-AGI full endogeneity expansion
+
+**Session:** Full audit expansion of `arxiv/proto_agi_horizon/main.tex` — theory horizon (§2.5), endogeneity metrics catalog (§5.1), D2 evidence (ATT-R, DSR, EOI drift), proof-protocol ledger (2/9 accepted), appendices A–C.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S2 | §2.5 AGI\* conjunction, regime table, ATT-E causal bar, $\mathfrak{E}$ vector, Manifesto bridge |
+| S3 | §5.1 metrics catalog; §5.2 D2 headline table; §5.3 proof ledger (F-NODO rejections) |
+| S4 | Appendices: full metrics pool, OMEGA/$\Phi_{\max}$ negative results, EOI-$k$/$do(Z)$ tables |
+| S5 | Recompiled PDF (11 pp); regenerated tarball; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/proto_agi_horizon/main.tex` |
+| Milestone | **M-ARXIV-PROTO-AGI** (endogeneity expansion) |
+| Pages | **11** (was ~9) |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| Top-5 | CF-4 0.95/0.06/0.00; ledger partial; G2 1.0/0.0; ATT-R 1.0/0.0; DSR+EOI drift |
+| Proof ledger | 2 accepted / 7 rejected (F-NODO) |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-PROTO-01 ensemble $\Phi_i$ batch; G2 E01 20×3 closure. No C-level raise.
