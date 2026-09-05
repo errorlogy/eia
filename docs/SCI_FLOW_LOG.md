@@ -2087,3 +2087,34 @@ T-PROTO-01 ensemble $\Phi_i$ batch; G2 E01 20×3 closure. No C-level raise.
 ### Next
 
 T-PROTO-01 ensemble $\Phi_i$ batch; optional T-PROTO-07 manifesto correspondence audit. No C-level raise.
+
+---
+
+## Entry 061 — 2026-09-05 — M-ARXIV-PROTO-AGI NAMM open-questions research strand
+
+**Session:** Add §2.7 `Research Program Lineage: NAMM Strand and Non-Anthropic Mathematics` to `arxiv/proto_agi_horizon/main.tex` — parallel verification-first program (not postulates); EIA endogeneity → limits of human coordinate systems → NAMM $K_A/K_H$ mapping table; T-NAMM-01..03 open questions; `kuznetsov2026namm` bib + author footnote link.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S2 | §2.7 NAMM strand lineage; 4-row research mapping table; propositions (explore + conjecture); hard-ban footer |
+| S3 | §9 T-NAMM-01..03; conclusion cross-ref; PROTO_AGI_MAX_CONSENSUS cross-link |
+| S4 | Recompiled PDF; regenerated `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| S5 | SCI_FLOW_LOG Entry 061; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/proto_agi_horizon/main.tex` |
+| Milestone | **M-ARXIV-PROTO-AGI** (NAMM research strand) |
+| Local NAMM | `C:\Users\Public\NAMM` → `github.com/errorlogy/namm-experiments` |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-NAMM-01 D3/NAMM witness alignment; T-PROTO-01 ensemble batch. No C-level raise.

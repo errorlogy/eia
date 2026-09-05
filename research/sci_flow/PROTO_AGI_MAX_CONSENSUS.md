@@ -26,6 +26,7 @@
 **Parent theory:** [`AGI_PHASE_TRANSITION.md`](AGI_PHASE_TRANSITION.md) · [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
 **Oscillatory adjunct:** [`OMEGA_WAVE_METRIC.md`](OMEGA_WAVE_METRIC.md)  
 **Stable recurrence:** [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md)  
+**NAMM parallel strand:** [NAMM experiments](https://github.com/errorlogy/namm-experiments) · `arxiv/proto_agi_horizon/main.tex` §2.7 (soft mapping; Tier B witness only)  
 **3D cube:** [`SCI_FLOW_3D_CUBE.md`](SCI_FLOW_3D_CUBE.md) · [`cell_registry.yaml`](cell_registry.yaml)  
 **G2 partial E01:** [`M-G2_E01_worlds_2026-09-02.md`](M-G2_E01_worlds_2026-09-02.md)  
 **M-O substrates:** [`M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md`](M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md)
@@ -231,6 +232,9 @@ Timescale separation (from [`STABLE_ENDOGENEITY.md`](STABLE_ENDOGENEITY.md)):
 | **T-PROTO-04** | Paired `do(O)` + \(\Phi_i\) delta under F-OMEGA-* | `run_mo_do_o_arms.py` | D2×L2 |
 | **T-PROTO-05** | \(\Phi_{\max}\) vs passive controls on EOI-k steered worlds | `eoi_k_harness` + G2 registry | D1×L2 |
 | **T-PROTO-06** | Pre-register \(\theta_E, \theta_\Omega, \theta_P, \theta_R, \Delta T\) | ATT pre-reg amendment | D1×L1 |
+| **T-NAMM-01** | Align D3 soft \(N_H\) witnesses with NAMM \(K_A/K_H\) gates | boundary harness + NAMM-007 receipts | D3×L3 |
+| **T-NAMM-02** | Crosswalk proof protocol with NAMM Protocol v2 SNH gates | `certificate.json` / `rejections.jsonl` | D3×L3 |
+| **T-NAMM-03** | NAMM open-problem shadow calibration (005/008) | `namm sci-flow run` (local `C:\Users\Public\NAMM`) | D3 explore |
 
 All ticks: `claim_allowed=false`, tier-0 verify via `make check-sci-tier0`.
 
@@ -241,4 +245,5 @@ All ticks: `claim_allowed=false`, tier-0 verify via `make check-sci-tier0`.
 | Date | Change |
 |------|--------|
 | 2026-09-05 | arXiv horizon paper `arxiv/proto_agi_horizon/main.tex` (M-ARXIV-PROTO-AGI); cross-link in header |
+| 2026-09-05 | NAMM parallel strand §2.7 + T-NAMM-01..03 open questions (Entry 061) |
 | 2026-09-05 | Initial proto-AGI ensemble, Max consensus \(\Phi_{\max}\), OMEGA vs Hz, MIT bridge, 3D cube map, falsifiers, research ticks |
