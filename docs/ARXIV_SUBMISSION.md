@@ -4,56 +4,59 @@
 **Version:** v0.4 (September 2026)  
 **Claim ceiling:** C2 — `claim_allowed=false`; no AGI\* claims in papers.
 
-## Package choice (M-ARXIV-PROTO-AGI)
+## Upload strategy (M-ARXIV-PROTO-AGI)
 
-We add a **third standalone paper** rather than extending `arxiv/main.tex`:
+**Primary (sole) arXiv upload:** `arxiv/proto_agi_horizon/main.tex` — the most comprehensive horizon paper (proto-AGI ensemble, Max consensus, OMEGA→ΔG bridge, Miller analog-waves bridge, metrics catalog, manifesto/NAMM lineage).
 
-| Option | Rationale |
-|--------|-----------|
-| **Chosen:** `arxiv/proto_agi_horizon/main.tex` | Proto-AGI ensemble, Max consensus $(E,\mathrm{OMEGA},P,R)$, OMEGA$\to\Delta G$ bridge, and Miller analog-waves bridge form a distinct **research horizon** that complements (not duplicates) the EIA framework (I01) and 3D Evidence Cube (I03) papers. Standalone packaging matches the existing `sci_flow_3d_cube/` toolkit pattern. |
-| Not chosen: extend `arxiv/main.tex` | Would inflate the framework paper with ensemble theory + OMEGA decorrelation experiment; harder to revise independently. |
+| Package | arXiv upload | Role |
+|---------|--------------|------|
+| **`arxiv/proto_agi_horizon/`** | **Yes — upload this** | Standalone horizon monograph; §Code and Data Availability; repo tag `sci-flow-v0.3` |
+| `arxiv/main.tex` | **No — deferred** | Repo companion (EIA framework v0.3); cited from proto paper only |
+| `arxiv/sci_flow_3d_cube/` | **No — deferred** | Repo companion (3D Evidence Cube theory); cited from proto paper only |
 
-## Papers
+Companion LaTeX for EIA framework and 3D cube remains in-repo under tag `sci-flow-v0.3`; proto paper states they are **not** separate arXiv submissions.
 
-| Paper | Source | PDF | Pages (target) |
-|-------|--------|-----|----------------|
-| EIA framework | `arxiv/main.tex` | `arxiv/main.pdf` | **12** (v0.3) |
-| 3D Evidence Cube | `arxiv/sci_flow_3d_cube/main.tex` | `arxiv/sci_flow_3d_cube/main.pdf` | **11** (v0.3) |
-| **Proto-AGI Horizon** | `arxiv/proto_agi_horizon/main.tex` | `arxiv/proto_agi_horizon/main.pdf` | **~12–15** (v0.1) |
+## Build (proto only)
 
-## Build
+```powershell
+make arxiv-proto-agi-compile
+make arxiv-proto-agi-package
+make check-sci-tier0
+```
+
+Optional (companions, not packaged for upload):
 
 ```powershell
 make arxiv-compile
 make arxiv-3d-cube-compile
-make arxiv-proto-agi-compile
 python scripts/arxiv_toolkit/generate_figures.py   # I05 figures (EIA + 3D cube)
-make arxiv-package
-make arxiv-3d-cube-package
-make arxiv-proto-agi-package
 ```
 
-## Submission tarballs (local, not committed)
+## Submission tarball (local, not committed)
 
-Large binaries are **not** tracked in git. After packaging, tarballs appear next to each paper directory:
+Large binaries are **not** tracked in git. Regenerate before upload:
+
+| Package | Path |
+|---------|------|
+| **Proto-AGI Horizon (upload)** | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+
+Deferred companions (regenerate only if editing those sources):
 
 | Package | Path |
 |---------|------|
 | EIA framework | `arxiv_arXiv_submission.tar.gz` (repo root) |
 | 3D Evidence Cube | `arxiv/sci_flow_3d_cube_arXiv_submission.tar.gz` |
-| **Proto-AGI Horizon** | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
 
-Regenerate before upload with the `make arxiv-*-package` targets.
+## Upload checklist (single tarball)
 
-## Upload checklist
-
-- [ ] Recompile all three papers
-- [ ] Regenerate EIA/3D figures if needed (`python scripts/arxiv_toolkit/generate_figures.py`)
-- [ ] Package all three (`make arxiv-package`, `make arxiv-3d-cube-package`, `make arxiv-proto-agi-package`)
-- [ ] Verify `claim_allowed=false` and no AGI\* in abstracts
-- [ ] Verify C2 ceiling stated in all papers
-- [ ] Upload tarballs to arXiv
-- [ ] Cross-link papers in arXiv comments (EIA ↔ 3D cube ↔ Proto-AGI horizon)
+- [ ] Recompile proto paper (`make arxiv-proto-agi-compile`)
+- [ ] Regenerate proto tarball (`make arxiv-proto-agi-package`)
+- [ ] Verify `claim_allowed=false` and no AGI\* in abstract
+- [ ] Verify C2 ceiling stated; §Code and Data Availability before References
+- [ ] Verify bib: `kuznetsov2026eia` + `sci-flow-v0.3`; artifact URLs under `research/sci_flow/...`
+- [ ] Run tier-0 smoke (`make check-sci-tier0`)
+- [ ] Upload `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` to arXiv
+- [ ] arXiv comment: cite repo companions (`arxiv/main.tex`, `arxiv/sci_flow_3d_cube/main.tex`) at tag `sci-flow-v0.3`, not as co-submissions
 
 ## Synced sci-flow milestones (v0.4)
 
@@ -79,7 +82,3 @@ Regenerate before upload with the `make arxiv-*-package` targets.
 ## Figures (Proto-AGI paper)
 
 `cf4_ablation_bars`, `cube_status_heatmap` — PDF in `arxiv/proto_agi_horizon/figures/` (copied from `arxiv/figures/`).
-
-## Figures (I05 — EIA + 3D cube)
-
-`cube_status_heatmap`, `express_pipeline`, `cf4_ablation_bars`, `dag` — PDF+PNG in `arxiv/figures/` and `arxiv/sci_flow_3d_cube/figures/`.

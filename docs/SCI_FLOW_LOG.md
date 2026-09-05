@@ -2118,3 +2118,36 @@ T-PROTO-01 ensemble $\Phi_i$ batch; optional T-PROTO-07 manifesto correspondence
 ### Next
 
 T-NAMM-01 D3/NAMM witness alignment; T-PROTO-01 ensemble batch. No C-level raise.
+
+---
+
+## Entry 062 — 2026-09-05 — M-ARXIV proto-only upload prep (references, code availability)
+
+**Session:** arXiv upload prep scoped to **proto-AGI horizon only** (`arxiv/proto_agi_horizon/`). §Code and Data Availability; bib `howpublished` + `sci-flow-v0.3` artifact URLs; companion-material paragraph (EIA framework + 3D cube as repo companions, not separate arXiv). Reverted partial 3-paper edits to `arxiv/main.tex` and `arxiv/sci_flow_3d_cube/`.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Revert unnecessary changes to `arxiv/main.tex`, `arxiv/sci_flow_3d_cube/` (partial Entry 062 work) |
+| S2 | Proto: §Code and Data Availability; bib hygiene (`howpublished`, full `research/sci_flow/...` URLs, `kuznetsov2026sciflowrelease`); `\cite{kuznetsov2026eia}` on first EIA mention |
+| S3 | Companion-material paragraph: EIA + 3D cube at `sci-flow-v0.3` repo paths; sole arXiv upload = proto |
+| S4 | Recompiled proto PDF; regenerated `proto_agi_horizon_arXiv_submission.tar.gz`; `make check-sci-tier0` |
+| S5 | `docs/ARXIV_SUBMISSION.md` single-tarball checklist; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Primary upload | `arxiv/proto_agi_horizon/main.tex` |
+| Repo companions (deferred) | `arxiv/main.tex`, `arxiv/sci_flow_3d_cube/main.tex` |
+| Milestone | **M-ARXIV** proto-only upload prep |
+| Tier-0 | `make check-sci-tier0` |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| `claim_allowed` | **false** |
+
+### Next
+
+Upload proto tarball to arXiv; note repo companions in arXiv comment. T-PROTO-01 ensemble batch. No C-level raise.
