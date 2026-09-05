@@ -2056,3 +2056,34 @@ Upload tarball when ready; T-PROTO-01 ensemble batch. No C-level raise.
 ### Next
 
 T-PROTO-01 ensemble $\Phi_i$ batch; G2 E01 20×3 closure. No C-level raise.
+
+---
+
+## Entry 060 — 2026-09-05 — M-ARXIV-PROTO-AGI Manifesto research strand (soft framing)
+
+**Session:** Add §2.6 `Research Program Lineage: Manifesto Strand and EIA Operationalization` to `arxiv/proto_agi_horizon/main.tex` — companion theoretical framework as parallel research strand (not postulates); 5-theme research mapping table; two soft propositions (novelty selection, transformation-trace memory); hard-ban footer. Removed redundant §2.5 manifesto bridge paragraph.
+**Branch:** `research/cursor-starter-v0.2-woe-eis`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S2 | §2.6 manifesto strand lineage; research mapping table (Theme / EIA construct / Empirical probe / Tier / Status); propositions (explore + conjecture) |
+| S4 | Recompiled PDF; regenerated `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| S5 | SCI_FLOW_LOG Entry 060; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Paper | `arxiv/proto_agi_horizon/main.tex` |
+| Milestone | **M-ARXIV-PROTO-AGI** (manifesto strand correspondence) |
+| Pages | **12** (was 11) |
+| Package | `arxiv/proto_agi_horizon_arXiv_submission.tar.gz` |
+| Mapping | 5 manifesto themes + 7 architectural components → EIA proxies |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-PROTO-01 ensemble $\Phi_i$ batch; optional T-PROTO-07 manifesto correspondence audit. No C-level raise.
