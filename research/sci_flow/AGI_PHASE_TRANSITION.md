@@ -5,6 +5,7 @@
 **Author framing:** Roman Kuznetsov — research@anthemium.tech  
 **Compact parent:** [`AGI_STAR_CRITERION.md`](AGI_STAR_CRITERION.md)  
 **Falsifiable protocol:** [`AGI_TRANSITION_TEST.md`](AGI_TRANSITION_TEST.md)  
+**Proto-AGI ensemble (Max consensus over \(E,\mathrm{OMEGA},P,R\)):** [`PROTO_AGI_MAX_CONSENSUS.md`](PROTO_AGI_MAX_CONSENSUS.md)  
 **Production gate:** AuthenticReason. This theory is research classification only.
 
 ---
@@ -401,6 +402,7 @@ Kuramoto CF-5: **does not** support \(E\) as necessary cause (M-D).
 
 | Date | Change |
 |------|--------|
+| 2026-09-05 | Cross-link to PROTO_AGI Max consensus ensemble operational definition |
 | 2026-08-21 | §2.1 causal endogeneity bar + link to `CAUSAL_ENDOGENEITY.md` (declaration/simulation ≠ \(E_{\mathrm{endo}}\)) |
 | 2026-08-21 | M-N / ATT-N explore proxy under pre-registered \(B\); \(N_H\) map → explore (not strong) |
 | 2026-08-20 | Initial formalization from user phase-transition theory; epistemic tags; EIA evidence map |

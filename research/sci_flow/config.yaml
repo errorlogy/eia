@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-09-02-M-LIVE-PATH"
+updated: "2026-09-05-M-PROTO-AGI"
 
 repos:
   eia:
@@ -353,6 +353,15 @@ milestones:
       - arxiv_arXiv_submission.tar.gz
       - sci_flow_3d_cube_arXiv_submission.tar.gz
     note: "v0.3 sync post M-O adjunct + D1 do(Z) + mode B; tarballs in docs/ARXIV_SUBMISSION.md; binaries not committed"
+
+  M-PROTO-AGI:
+    name: Proto-AGI Max consensus ensemble (theory)
+    claim: theory_only
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-05"
+    artifact: research/sci_flow/PROTO_AGI_MAX_CONSENSUS.md
+    note: "12-member ensemble; Phi_max + (E,OMEGA,P,R) consensus over Delta T; C2 ceiling; claim_allowed=false"
 
   arxiv_v0.3:
     name: arXiv v0.3 sync (M-O adjunct, D1 do(Z), G2 E01, live-path, Graphitti)

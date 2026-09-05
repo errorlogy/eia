@@ -2,7 +2,7 @@
 
 **Status:** `OPERATIONAL` scaffold (2026-09-01) — **not** an AGI\* claim  
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
-**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS  
+**Milestone:** M-3D-01 + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS + M-3D-EXPRESS  
 **Methodology:** [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) — sci-flow v3 = incremental cube cell-filling with harnesses  
 **Registry:** `research/cursor-starter-v0.2/src/eia/intervention_cube.py` · [`cell_registry.yaml`](cell_registry.yaml)  
 **Claim ceiling:** **C2** — scoped \(E_{\mathrm{endo}}\) / ATT-E partial only
@@ -88,6 +88,7 @@ API: `get_intervention(id)`, `list_by_axis("D1"|"D2"|"D3")`, `eoi_k_intervention
 | [`NEUROPLASTICITY_OSS_SURVEY.md`](NEUROPLASTICITY_OSS_SURVEY.md) | M-O explore: 27 OSS repos (Tier A → Neuraxon/Graphitti doc) |
 | [`NEUROPLASTICITY_EIA_APPLICATION.md`](NEUROPLASTICITY_EIA_APPLICATION.md) | Tier A vendors: Neuraxon + Graphitti install/EIA map |
 | [`M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md`](M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md) | M-O endogeneity factor analysis + probe (D2×L2) |
+| [`PROTO_AGI_MAX_CONSENSUS.md`](PROTO_AGI_MAX_CONSENSUS.md) | 12-member proto-AGI ensemble; \(\Phi_{\max}\) + \((E,\mathrm{OMEGA},P,R)\) consensus over \(\Delta T\) |
 | [`docs/CURSOR_TASKS.md`](../../docs/CURSOR_TASKS.md) | Hermes **D01** |
 | [`config.yaml`](config.yaml) | Milestone M-3D-01 |
 | [`SCI_FLOW_V3_CELL_FILLING.md`](SCI_FLOW_V3_CELL_FILLING.md) | v3 cell-filling methodology + rubric |

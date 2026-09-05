@@ -18,6 +18,7 @@
 **Canonical primary bar:** [`CAUSAL_ENDOGENEITY.md`](CAUSAL_ENDOGENEITY.md) — do(Z) under non-triggering X.  
 **Oscillatory substrate:** [`OSCILLATORY_ENDOGENEITY.md`](OSCILLATORY_ENDOGENEITY.md).  
 **MIOC crosswalk:** [`MIOC_EIA_BRIDGE.md`](MIOC_EIA_BRIDGE.md).  
+**Proto-AGI ensemble (OMEGA in consensus vector):** [`PROTO_AGI_MAX_CONSENSUS.md`](PROTO_AGI_MAX_CONSENSUS.md).  
 **Metrics pool (Tier C):** [`ENDOGENEITY_METRICS_POOL.md`](ENDOGENEITY_METRICS_POOL.md) — `OMEGA_T`, `O_T`, `KURAMOTO_R` are **explore adjunct only**, explicitly **not** Tier A.
 
 ---
@@ -176,4 +177,5 @@ Tier 0 verify: `make check-sci-tier0`
 
 | Date | Change |
 |------|--------|
+| 2026-09-05 | Cross-link to PROTO_AGI Max consensus ensemble doc |
 | 2026-08-28 | OMEGA_t metric; MIT/MIOC bridges; falsifiers; do(Omega) protocol; AGI horizon (C2 ceiling) |
