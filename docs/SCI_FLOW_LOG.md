@@ -1889,3 +1889,73 @@ Multi-seed do(Z) batch; continuous `E_C` under each `do_z_*`. No C-level raise.
 
 Upload tarballs to arXiv when ready; E01 20×3 domains deferred. No C-level raise.
 
+---
+
+## Entry 054 — 2026-09-05 — M-OMEGA-DELTA-G bridge (F-OMEGA-DECOR probe, D2×L2)
+
+**Session:** OMEGA→ΔG bridge — correlate OMEGA_t arms with shadow genesis delta under X_trigger=0  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Read `mo_shadow_bridge_harness.py`, `oscillatory_state.py`, `shadow_multitick.py`, M-O admissibility |
+| S2 | `omega_delta_g_harness.py` + `run_omega_delta_g_bridge.py` — 4 arms (native, neuraxon-bridged, plasticity_off, phase_scramble) |
+| S3 | Artifacts `M-OMEGA_delta_G_2026-09-05.json` + `.md` |
+| S4 | `cell_registry` D2×L2; `test_omega_delta_g_bridge.py`; `check_sci_tier0` |
+| S5 | Adjunct ledger unchanged (F-OMEGA-DECOR confirmed; no witness_support improvement) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Harness | `research/sci_flow/omega_delta_g_harness.py` |
+| Runner | `research/sci_flow/run_omega_delta_g_bridge.py` |
+| Artifact | `research/sci_flow/M-OMEGA_delta_G_2026-09-05.json` |
+| SHA-256 | `88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34` |
+| Cube cell | **D2×L2** (Tier C explore) |
+| `e_endo_support` | **none** |
+| `claim_allowed` | **false** |
+| OMEGA span | 0.604 (native vs neuraxon) |
+| Genesis span | 0.0 (fingerprint parity across arms) |
+| **F-OMEGA-DECOR** | **confirmed** (aggregate decorrelation) |
+
+### Next
+
+Optional omega-bridged 50-tick DSR carryover; no C-level raise from OMEGA alone.
+
+---
+
+## Entry 055 — 2026-09-05 — PROTO_AGI Max consensus + OMEGA horizon doc
+
+**Session:** Proto-AGI ensemble operational definition; Max consensus over \((E,\mathrm{OMEGA},P,R)\); cross-links to phase-transition, OMEGA, 3D cube  
+**Branch:** `research/cursor-starter-v0.2-woe-eis`  
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Thesis: AGI = proactive endogenous architecture; passive (`reactive_only`, schedule) = non-AGI controls |
+| S2 | Registered 12-member proto-AGI ensemble (WoE carriers, oscillatory_state, Neuraxon, Graphitti, baselines, shadow, toy) |
+| S3 | Defined \(\Phi_i\), \(\Phi_{\max}=\max_i\Phi_i\), sustained consensus conjunction on \(\Delta T\) |
+| S4 | OMEGA vs Hz distinction; MIT Miller analog-waves bridge (Picower URL); 3D cube D1/D2/D3 map |
+| S5 | Falsifiers + C2 ceiling; proposed T-PROTO-01…06 ticks; cross-links + `cell_registry` note |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Doc | `research/sci_flow/PROTO_AGI_MAX_CONSENSUS.md` |
+| Milestone | **M-PROTO-AGI** (theory registry) |
+| Ensemble size | **12** operational configs/substrates |
+| G2 E01 reference | `M-G2_E01_worlds_2026-09-02` — full_eia EOI 1.0 vs reactive 0.0 (partial 8/20 worlds) |
+| `claim_allowed` | **false** |
+| Tier-0 | `check_sci_tier0` OK |
+
+### Next
+
+T-PROTO-01 ensemble batch harness; pre-register \(\theta_\bullet\), \(\Delta T\). G2 E01 20×3 domains. No C-level raise.
+

@@ -1,9 +1,10 @@
 # Sci-flow v3 — 3D Evidence Cube cell → harness registry
 # Cross-ref: SCI_FLOW_V3_CELL_FILLING.md, SCI_FLOW_3D_CUBE.md
+# Proto-AGI ensemble (12 configs/substrates, Phi_max consensus): PROTO_AGI_MAX_CONSENSUS.md
 # Claim ceiling: C2 — no AGI*
 
 version: "0.1"
-updated: "2026-09-02"
+updated: "2026-09-05"
 claim_ceiling: C2
 methodology_doc: research/sci_flow/SCI_FLOW_V3_CELL_FILLING.md
 
@@ -101,6 +102,14 @@ cells:
           artifact: research/sci_flow/M-MO_shadow_bridge_2026-09-02.json
           att: ATT-R
           note: Neuraxon→OmegaWaveState→shadow multitick; ATT-R compare; claim_allowed=false
+        - command: python research/sci_flow/run_omega_delta_g_bridge.py
+          intervention_kind: do_o
+          interventions: [do_o_phase_scramble, do_o_neuraxon_plasticity_off]
+          tier: C
+          implementation: research/sci_flow/omega_delta_g_harness.py
+          artifact: research/sci_flow/M-OMEGA_delta_G_2026-09-05.json
+          att: ATT-R
+          note: OMEGA_t vs ΔG genesis probe; F-OMEGA-DECOR; X_trigger=0; claim_allowed=false
         - command: python research/sci_flow/run_md.py
           intervention_kind: do_o
           interventions: [do_o_phase_scramble, do_o_kuramoto_k0]

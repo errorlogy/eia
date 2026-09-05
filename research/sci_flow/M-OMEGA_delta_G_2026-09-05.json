@@ -1,0 +1,110 @@
+{
+  "milestone": "M-OMEGA-DELTA-G",
+  "artifact_id": "M-OMEGA_delta_G_2026-09-05",
+  "tick_id": "M-OMEGA-DELTA-G",
+  "date": "2026-09-05",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "cell": "D2\u00d7L2",
+  "tier": "C",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "e_endo_support": "none",
+  "witness_support": "none",
+  "c_ladder_raise_allowed": false,
+  "agi_star_claim": false,
+  "att": "ATT-R",
+  "x_trigger_zero": true,
+  "seed": 42,
+  "sources": {
+    "arms": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json",
+    "admissibility": "research/sci_flow/M-O_PROOF_ADMISSIBILITY.md",
+    "shadow_bridge": "research/sci_flow/mo_shadow_bridge_harness.py",
+    "oscillatory_state": "research/cursor-starter-v0.2/src/eia/oscillatory_state.py",
+    "shadow_runtime": "src/eia/runtime/shadow_multitick.py"
+  },
+  "arms": {
+    "native_oscillatory": {
+      "omega_t": 0.8969438342286497,
+      "genesis_delta": 1.0,
+      "goal_symbol_changed": true,
+      "has_novel_g_prime": true,
+      "initiative_fingerprint": "G:mot-1|Pi:pi_research|A:act_probe:abstain|G_prime:mot-2",
+      "f_omega_decor_arm": false,
+      "intervention_id": null
+    },
+    "neuraxon_bridged": {
+      "omega_t": 0.29286693887341186,
+      "genesis_delta": 1.0,
+      "goal_symbol_changed": true,
+      "has_novel_g_prime": true,
+      "initiative_fingerprint": "G:mot-1|Pi:pi_research|A:act_probe:abstain|G_prime:mot-2",
+      "f_omega_decor_arm": false,
+      "intervention_id": null
+    },
+    "plasticity_off": {
+      "omega_t": 0.29286693887341186,
+      "genesis_delta": 1.0,
+      "goal_symbol_changed": true,
+      "has_novel_g_prime": true,
+      "initiative_fingerprint": "G:mot-1|Pi:pi_research|A:act_probe:abstain|G_prime:mot-2",
+      "f_omega_decor_arm": false,
+      "intervention_id": null
+    },
+    "phase_scramble": {
+      "omega_t": 0.44142135623730955,
+      "genesis_delta": 1.0,
+      "goal_symbol_changed": true,
+      "has_novel_g_prime": true,
+      "initiative_fingerprint": "G:mot-1|Pi:pi_research|A:act_probe:abstain|G_prime:mot-2",
+      "f_omega_decor_arm": false,
+      "intervention_id": "do_o_phase_scramble"
+    }
+  },
+  "paired_vendor_omega_delta": {
+    "plasticity_off_vs_baseline": 0.0,
+    "native_vs_baseline": 0.604077
+  },
+  "shadow_genesis_compare": {
+    "native_vs_neuraxon": {
+      "omega_delta": 0.604077,
+      "genesis_delta_unchanged": true,
+      "fingerprint_match": true
+    },
+    "plasticity_off_vs_neuraxon": {
+      "omega_delta": 0.0,
+      "genesis_delta_unchanged": true,
+      "fingerprint_match": true
+    },
+    "phase_scramble_vs_native": {
+      "omega_delta": -0.455522,
+      "genesis_delta_unchanged": true,
+      "fingerprint_match": true
+    }
+  },
+  "omega_g_correlation": {
+    "omega_span": 0.604077,
+    "genesis_span": 0.0,
+    "fingerprint_parity": true,
+    "decorrelation_confirmed": true,
+    "f_omega_decor_aggregate": true
+  },
+  "f_omega_decor": {
+    "status": "confirmed",
+    "aggregate": true,
+    "per_arm": {
+      "native_oscillatory": false,
+      "neuraxon_bridged": false,
+      "plasticity_off": false,
+      "phase_scramble": false
+    },
+    "vendor_hints": false
+  },
+  "falsifiers_active": [
+    "F-KURAMOTO-AS-E",
+    "F-OMEGA-DECOR",
+    "F-SYNC",
+    "F-STRUCT\u2260E"
+  ],
+  "note": "OMEGA_t span across arms does not induce \u0394G / initiative fingerprint change on matched-seed omega-bridged shadow multitick (X_trigger=0). Does not establish E_endo or raise C-level.",
+  "artifact_sha256": "88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34"
+}

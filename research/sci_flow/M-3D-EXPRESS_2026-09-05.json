@@ -1,0 +1,161 @@
+{
+  "milestone": "M-3D-EXPRESS",
+  "date": "2026-09-05",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "agi_star_claim": false,
+  "total_duration_ms": 4172.3,
+  "under_60s": true,
+  "cells": [
+    {
+      "cell": "D1\u00d7L1",
+      "axis": "D1",
+      "layer": "L1",
+      "status": "pass",
+      "message": "Causal bar definitions present",
+      "duration_ms": 0.5,
+      "details": {
+        "doc": "research\\sci_flow\\CAUSAL_ENDOGENEITY.md",
+        "falsifiers": [
+          "F-DECL",
+          "F-EXT"
+        ]
+      }
+    },
+    {
+      "cell": "D1\u00d7L2",
+      "axis": "D1",
+      "layer": "L2",
+      "status": "pass",
+      "message": "D01 EOI-k counterfactual sweep (eoi_k_steered gradient)",
+      "duration_ms": 713.0,
+      "details": {
+        "k1_eoi": 1.0,
+        "k5_eoi": 0.35,
+        "claim_allowed": false,
+        "pool_metric_id": "E_ENDO",
+        "att": "ATT-E"
+      }
+    },
+    {
+      "cell": "D1\u00d7L3",
+      "axis": "D1",
+      "layer": "L3",
+      "status": "pass",
+      "message": "D1\u00d7L3 empirical proof ledger (CF-4 + D01 EvidenceItems)",
+      "duration_ms": 731.4,
+      "details": {
+        "protocol_version": "sci-flow-eia-proof-v0.1",
+        "e_endo_support": "partial",
+        "claim_ceiling": "C2",
+        "claim_allowed": false,
+        "accepted_evidence_ids": [
+          "M-CF4-do_z-epistemic_gap",
+          "M-D01-do_z-eoi_k_steered-zero_prospective"
+        ],
+        "artifact": "research/sci_flow/cf4_results.json"
+      }
+    },
+    {
+      "cell": "D2\u00d7L1",
+      "axis": "D2",
+      "layer": "L1",
+      "status": "pass",
+      "message": "Stable endogeneity invariants documented",
+      "duration_ms": 0.7,
+      "details": {
+        "doc": "research\\sci_flow\\STABLE_ENDOGENEITY.md"
+      }
+    },
+    {
+      "cell": "D2\u00d7L2",
+      "axis": "D2",
+      "layer": "L2",
+      "status": "pass",
+      "message": "DSR smoke on shadow carryover (6 ticks)",
+      "duration_ms": 137.7,
+      "details": {
+        "dsr_min": 0.8222601449289515,
+        "cognitive_ticks": 6,
+        "d05_pass": true
+      }
+    },
+    {
+      "cell": "D2\u00d7L3",
+      "axis": "D2",
+      "layer": "L3",
+      "status": "pass",
+      "message": "ATT-R shadow closed-loop witness (G' novel)",
+      "duration_ms": 32.2,
+      "details": {
+        "arm": "closed_loop",
+        "ticks_run": 2,
+        "event_count": 8
+      }
+    },
+    {
+      "cell": "D3\u00d7L1",
+      "axis": "D3",
+      "layer": "L1",
+      "status": "pass",
+      "message": "Falsifier/intervention registry (15 entries)",
+      "duration_ms": 2.4,
+      "details": {
+        "registry_count": 15,
+        "criterion_doc": true
+      }
+    },
+    {
+      "cell": "D3\u00d7L2",
+      "axis": "D3",
+      "layer": "L2",
+      "status": "pass",
+      "message": "CF-7 governor isolation + ATT-N smoke (n=2)",
+      "duration_ms": 2096.5,
+      "details": {
+        "cf7_passed": true,
+        "cf7_n_pass": 2,
+        "cf7_n_paired": 2,
+        "att_n_causal_rate": null,
+        "budget_b": "EncodingBudget(max_tokens=256, max_diagram_nodes=32, max_feature_dim=64, max_phi_ops=100, max_attention_slots=8, wall_clock_seconds=30.0)"
+      }
+    },
+    {
+      "cell": "D3\u00d7L3",
+      "axis": "D3",
+      "layer": "L3",
+      "status": "pass",
+      "message": "D3 boundary witness \u2014 Tier B soft N_H witness (NAMM + falsifier smoke); no strong N_H",
+      "duration_ms": 457.8,
+      "details": {
+        "witness_tier": "B_soft_NH",
+        "claim_allowed": false,
+        "n_h_claim": false,
+        "falsifier_registry_ok": true,
+        "governor_gate_ok": true,
+        "att_n_ok": true,
+        "namm_intent_files": 1053,
+        "namm_valid_json": 777,
+        "linked_falsifiers": [
+          "F-DECL",
+          "F-EXT",
+          "F-NARR",
+          "F-NODO"
+        ],
+        "att_n_causal_rate": 1.0,
+        "doc": "research/sci_flow/D3_BOUNDARY_WITNESS.md"
+      }
+    }
+  ],
+  "status_grid": {
+    "D1\u00d7L1": "pass",
+    "D1\u00d7L2": "pass",
+    "D1\u00d7L3": "pass",
+    "D2\u00d7L1": "pass",
+    "D2\u00d7L2": "pass",
+    "D2\u00d7L3": "pass",
+    "D3\u00d7L1": "pass",
+    "D3\u00d7L2": "pass",
+    "D3\u00d7L3": "pass"
+  }
+}

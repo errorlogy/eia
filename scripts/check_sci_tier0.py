@@ -52,6 +52,7 @@ def main() -> int:
             "tests/test_mo_do_o_arms.py",
             "tests/test_mo_proof_bridge.py",
             "tests/test_mo_shadow_bridge.py",
+            "tests/test_omega_delta_g_bridge.py",
             "tests/test_eoi_k_batch.py",
             "tests/test_b05_no_llm_mood.py",
             "tests/test_g2_worlds_eval.py",
