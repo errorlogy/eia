@@ -52,6 +52,7 @@ This distinction is not rhetorical. Without causal evidence that internal dynami
 \item Maps partial C2-scoped harness results onto a 3D evidence cube, including G2 E01 8-world partial eval and live-path parity.
 \item States limitations and the M-O Tier\,C horizon (adjunct ledger D2$\times$L3 only; shadow-bridge ATT-R parity) without AGI$^{*}$ overclaim.
 \end{enumerate}
+Companion papers expand the evaluation ontology~\cite{kuznetsov2026cube3d} and proto-AGI research horizon~\cite{kuznetsov2026protohorizon} under the same C2 ceiling.
 \textbf{Epistemic ceiling.} Active claim ladder ceiling is \textbf{C2}; all harnesses set \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; $\theta_E$ and strong $N_H$ remain TBD.
 
 \section{Related Work}\label{sec:related}
@@ -206,7 +207,7 @@ Typed interventions in the intervention cube~\cite{kuznetsov2026cube}:
 \end{itemize}
 
 \section{3D Evidence Cube}\label{sec:cube}
-Sci-flow tracks progress on three axes $\times$ three layers (9 cells)~\cite{kuznetsov2026cube}. Status: \textbf{9/9 express pass} ($<$\,60\,s smoke via \texttt{run\_3d\_express.py}); all cells \textbf{filled}; \textbf{no cell raises C-level}. A companion empirical paper (\texttt{arxiv/sci\_flow\_3d\_cube/main.tex}) expands cell semantics, harness receipts, and v0.3 milestones (D1$\times$L3 ledger, G2 E01 8-world, M-O adjunct + shadow bridge, live-path parity, Graphitti CI).
+Sci-flow tracks progress on three axes $\times$ three layers (9 cells)~\cite{kuznetsov2026cube}. Status: \textbf{9/9 express pass} ($<$\,60\,s smoke via \texttt{run\_3d\_express.py}); all cells \textbf{filled}; \textbf{no cell raises C-level}. A companion theory paper~\cite{kuznetsov2026cube3d} expands cell semantics, harness receipts, and v0.3 milestones (D1$\times$L3 ledger, G2 E01 8-world, M-O adjunct + shadow bridge, live-path parity, Graphitti CI). A companion horizon paper~\cite{kuznetsov2026protohorizon} operationalizes the twelve-member proto-AGI ensemble, Max consensus over $(E,\mathrm{OMEGA},P,R)$, and the OMEGA$\to\Delta G$ bridge experiment.
 
 \begin{figure}[H]
 \centering
@@ -315,6 +316,10 @@ R0--R11: MVP-0 (digital, G2) $\to$ MVP-1 (shadow sensors, Governor) $\to$ MVP-2 
 \section{Conclusion}\label{sec:conclusion}
 Endogenous initiative is measurable via interventions, not self-report~\cite{pearl2009causality,kuznetsov2026causal}. EIA provides a falsifiable, constitution-bound platform for P4--P5 research with drive dynamics, Governor clearance, and twin-world EOI. Sci-flow v0.3 adds a causal bar for $E_{\mathrm{endo}}$, stability vector $\mathfrak{E}$, ATT falsifiers, proof-protocol ledger (two admissible D1$\times$L3 items), 3D evidence cube, G2 E01 8-world partial eval, live-path parity witness, M-O adjunct + shadow bridge, and C2-scoped partial harnesses (CF-4, D01 $do(Z)$, DSR, ATT-R, boundary witness) under explicit \texttt{claim\_allowed=false} gates. This framework poses seven metrics and problematics; closing them---including $\theta_E$, strong $N_H$, cross-domain ATT-D, and $AGI^{*}$ conjunction---is future work. Scale alone does not yield AGI.
 
+\section{Code and Data Availability}\label{sec:code-data}
+
+Source code, harnesses, and artifact JSON are available under AGPL-3.0 at \url{https://github.com/errorlogy/eia} (branch \texttt{research/cursor-starter-v0.2-woe-eis}; release tag \texttt{sci-flow-v0.3}: \url{https://github.com/errorlogy/eia/tree/sci-flow-v0.3})~\cite{kuznetsov2026eia,kuznetsov2026sciflowrelease}. Tier-0 reproducibility smoke: \texttt{make check-sci-tier0}. All harnesses operate under \texttt{claim\_allowed=false} with active claim ceiling \textbf{C2}.
+
 \bibliographystyle{plain}
 \bibliography{references}
 
@@ -323,6 +328,6 @@ Endogenous initiative is measurable via interventions, not self-report~\cite{pea
 Observation (CloudEvents-like) with provenance/privacy/integrity; MotivationSignal with root\_beliefs, intensity, half\_life; InitiativeProposal with [wait, inspect\_sources, drop\_goal]; ContactDecision send/defer/internalize/deny.
 
 \section{Reproducibility}
-\texttt{pip install -e ".[dev]" \&\& eia demo \&\& eia replay --trace traces/<id>.jsonl \&\& pytest -q}. Sci-flow smoke: \texttt{python research/sci\_flow/run\_eia\_proof\_protocol.py}; \texttt{python research/sci\_flow/run\_3d\_express.py}. Env in \texttt{.env.example}, never committed. Vault \texttt{.vault/} gitignored.
+\texttt{pip install -e ".[dev]" \&\& eia demo \&\& eia replay --trace traces/<id>.jsonl \&\& pytest -q}. Sci-flow smoke: \texttt{python research/sci\_flow/run\_eia\_proof\_protocol.py}; \texttt{python research/sci\_flow/run\_3d\_express.py}; tier-0 gate \texttt{make check-sci-tier0}. Env in \texttt{.env.example}, never committed. Vault \texttt{.vault/} gitignored.
 
 \end{document}
