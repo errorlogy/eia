@@ -114,6 +114,12 @@ cells:
           intervention_kind: do_o
           interventions: [do_o_phase_scramble, do_o_kuramoto_k0]
           tier: C
+        - command: python research/brain_ai/run_t_brain_01.py
+          intervention_kind: connectome_ot
+          tier: C
+          implementation: research/brain_ai/harnesses/t_brain_01_connectome_ot.py
+          artifact: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
+          note: M-BRAIN-AI adjunct — connectome subgraph→spike→OmegaWaveState; claim_allowed=false
     L3:
       status: filled
       tier: B

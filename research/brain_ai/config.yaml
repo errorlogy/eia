@@ -1,0 +1,30 @@
+# T-BRAIN-01 connectome → O_t harness defaults
+# Tier C · claim_allowed=false · no AGI*
+
+version: "0.1"
+updated: "2026-09-09"
+
+harness:
+  id: T-BRAIN-01
+  milestone: M-BRAIN-AI
+  tier: C
+  claim_ceiling: C2
+  claim_allowed: false
+  agi_star_claim: false
+  e_endo_support: none
+  witness_support: none
+  c_ladder_raise_allowed: false
+  cell: D2×L2
+
+simulation:
+  seed: 42
+  n_nodes: 8
+  duration_ms: 100.0
+  dt_ms: 1.0
+  prefer_brian2: true
+
+carriers_hz: [20, 30, 42, 70]
+
+artifacts:
+  json: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
+  md: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.md

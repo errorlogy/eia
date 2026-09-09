@@ -2186,3 +2186,38 @@ Upload proto tarball to arXiv; note repo companions in arXiv comment. T-PROTO-01
 ### Next
 
 Manual Zenodo Publish → copy DOI → X post template in guide. arXiv when endorsement available. T-PROTO-01 ensemble batch. No C-level raise.
+
+---
+
+## Entry 064 — 2026-09-09 — M-BRAIN-AI T-BRAIN-01 connectome→O_t skeleton
+
+**Session:** Skeleton `research/brain_ai/` strand on branch `research/brain-ai-connectome` — connectome subgraph export, optional Brian2 LIF (graceful skip), spike-phase→`OmegaWaveState` crosswalk, T-BRAIN-01 harness artifact.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Branch `research/brain-ai-connectome` from `research/cursor-starter-v0.2-woe-eis` |
+| S2 | `research/brain_ai/` layout: adapters, harness, config, docs, bundled `tiny_subgraph.json` |
+| S3 | T-BRAIN-01 harness: synthetic/Brian2 spike dynamics → `omega_metric()` via `ot_injection` |
+| S4 | Registry: `cell_registry.yaml` D2×L2 adjunct; `config.yaml` M-BRAIN-AI; `tests/test_t_brain_01_connectome_ot.py` |
+| S5 | Run harness; `make check-sci-tier0`; commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-01** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json` |
+| Spike backend | synthetic (Brian2 optional skip) |
+| `claim_allowed` | **false** |
+| `agi_star_claim` | **false** |
+
+### Next
+
+FlyWire offline export adapter; Brian2 CI opt-in; shadow bridge extension (no C raise).
