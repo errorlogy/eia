@@ -14,6 +14,8 @@ connectome adjacency
 | Dynamics | `adapters/brian2_lif_subgraph.py` | C |
 | Crosswalk | `adapters/ot_injection.py` | C |
 | Metric | `research/cursor-starter-v0.2/src/eia/oscillatory_state.py` | C |
-| Harness | `harnesses/t_brain_01_connectome_ot.py` | C |
+| Harness T-BRAIN-01 | `harnesses/t_brain_01_connectome_ot.py` | C |
+| Behavior metrics | `adapters/behavior_metrics.py` | C |
+| Harness T-BRAIN-02 | `harnesses/t_brain_02_omega_behavior.py` | C |
 
-No shadow multitick or ATT-R closure in T-BRAIN-01 MVP — observational O_t crosswalk only.
+No shadow multitick or ATT-R closure in T-BRAIN-01/02 MVP — observational O_t crosswalk and behavior diagnostic only.

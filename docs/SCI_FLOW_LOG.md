@@ -2248,3 +2248,41 @@ FlyWire offline export adapter; Brian2 CI opt-in; shadow bridge extension (no C 
 ### Next
 
 X post template (Step 5 in ZENODO guide). arXiv mirror when endorsement available. No C-level raise.
+
+---
+
+## Entry 066 — 2026-09-10 — M-BRAIN-AI T-BRAIN-02 OMEGA vs behavior
+
+**Session:** T-BRAIN-02 diagnostic harness — multi-arm synthetic spike dynamics, behavioral proxies (activity rate, burstiness, population sync) vs OMEGA_t / Kuramoto R; F-OMEGA-DECOR via `phase_scramble_control`.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `adapters/behavior_metrics.py`, `adapters/spike_arms.py` — 5 falsifier arms |
+| S2 | `harnesses/t_brain_02_omega_behavior.py` + `run_t_brain_02.py` |
+| S3 | Artifact `M-T-BRAIN-02_2026-09-10`; registry + `config.yaml` update |
+| S4 | `tests/test_t_brain_02_omega_behavior.py` (8 tests); run harness |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-02** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json` |
+| `omega_span` | 0.283 |
+| `r(OMEGA_t, activity)` | 0.348 |
+| `r(Kuramoto, pop_sync)` | −0.459 |
+| F-OMEGA-DECOR | **confirmed** (phase_scramble) |
+| `diagnostic_pass` | **true** |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-BRAIN-03 shadow bridge or FlyWire offline export; Brian2 multi-arm parity optional; no C raise.

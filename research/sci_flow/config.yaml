@@ -364,25 +364,29 @@ milestones:
     note: "12-member ensemble; Phi_max + (E,OMEGA,P,R) consensus over Delta T; C2 ceiling; claim_allowed=false"
 
   M-BRAIN-AI:
-    name: Connectome subgraph → OMEGA_t crosswalk (T-BRAIN-01)
+    name: Connectome subgraph → OMEGA_t crosswalk + behavior diagnostic (T-BRAIN-01/02)
     claim: architecture_explore
     att: ATT-R
     branch: research/brain-ai-connectome
     status: in_progress
-    completed: "2026-09-09"
-    command: python research/brain_ai/run_t_brain_01.py
-    artifact: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
+    completed: "2026-09-10"
+    command: python research/brain_ai/run_t_brain_02.py
+    artifact: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json
     implementation:
       - research/brain_ai/harnesses/t_brain_01_connectome_ot.py
+      - research/brain_ai/harnesses/t_brain_02_omega_behavior.py
       - research/brain_ai/adapters/connectome_export.py
       - research/brain_ai/adapters/brian2_lif_subgraph.py
+      - research/brain_ai/adapters/behavior_metrics.py
+      - research/brain_ai/adapters/spike_arms.py
       - research/brain_ai/adapters/ot_injection.py
     tests:
       - tests/test_t_brain_01_connectome_ot.py
+      - tests/test_t_brain_02_omega_behavior.py
     cube_cell: D2×L2
     claim_allowed: false
     agi_star_claim: false
-    note: "Tier C adjunct; synthetic/bundled connectome MVP; Brian2 LIF optional; no E_endo bleed"
+    note: "Tier C adjunct; T-BRAIN-02 OMEGA vs behavior arms; synthetic MVP; Brian2 deferred; no E_endo bleed"
 
   arxiv_v0.3:
     name: arXiv v0.3 sync (M-O adjunct, D1 do(Z), G2 E01, live-path, Graphitti)

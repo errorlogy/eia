@@ -120,6 +120,12 @@ cells:
           implementation: research/brain_ai/harnesses/t_brain_01_connectome_ot.py
           artifact: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
           note: M-BRAIN-AI adjunct — connectome subgraph→spike→OmegaWaveState; claim_allowed=false
+        - command: python research/brain_ai/run_t_brain_02.py
+          intervention_kind: connectome_omega_behavior
+          tier: C
+          implementation: research/brain_ai/harnesses/t_brain_02_omega_behavior.py
+          artifact: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json
+          note: T-BRAIN-02 OMEGA_t vs behavior diagnostic; F-OMEGA-DECOR; claim_allowed=false
     L3:
       status: filled
       tier: B

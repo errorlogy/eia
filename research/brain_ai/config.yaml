@@ -28,3 +28,17 @@ carriers_hz: [20, 30, 42, 70]
 artifacts:
   json: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
   md: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.md
+
+t_brain_02:
+  id: T-BRAIN-02
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.md
+  arms:
+    - coupled_active
+    - passive_quiescent
+    - burst_clustered
+    - decoupled_sparse
+    - phase_scramble_control
+  future_hooks:
+    - FlyWire offline subgraph export
+    - Brian2 LIF multi-arm parity

@@ -8,7 +8,8 @@ Tier **C** adjunct strand: connectome subgraph → spike dynamics → `OmegaWave
 
 ```bash
 python research/brain_ai/run_t_brain_01.py
-pytest tests/test_t_brain_01_connectome_ot.py -q
+python research/brain_ai/run_t_brain_02.py
+pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py -q
 ```
 
 ## Layout
@@ -16,8 +17,11 @@ pytest tests/test_t_brain_01_connectome_ot.py -q
 | Path | Role |
 |------|------|
 | `harnesses/t_brain_01_connectome_ot.py` | T-BRAIN-01 payload builder |
+| `harnesses/t_brain_02_omega_behavior.py` | T-BRAIN-02 OMEGA vs behavior diagnostic |
 | `adapters/connectome_export.py` | Synthetic / offline connectome subgraph |
 | `adapters/brian2_lif_subgraph.py` | Optional Brian2 LIF (graceful skip) |
+| `adapters/behavior_metrics.py` | Activity / burstiness / sync proxies |
+| `adapters/spike_arms.py` | Multi-arm spike falsifier suite |
 | `adapters/ot_injection.py` | Spike phases → `OmegaWaveState` |
 | `config.yaml` | Harness defaults |
 | `CONNECTOME_SOURCES.md` | FlyWire / offline source notes |

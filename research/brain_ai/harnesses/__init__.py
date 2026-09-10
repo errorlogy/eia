@@ -1,1 +1,1 @@
-"""T-BRAIN-01 harnesses (connectome → O_t)."""
+"""T-BRAIN harnesses (connectome → O_t; OMEGA vs behavior)."""
