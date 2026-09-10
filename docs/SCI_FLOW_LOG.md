@@ -2221,3 +2221,30 @@ Manual Zenodo Publish → copy DOI → X post template in guide. arXiv when endo
 ### Next
 
 FlyWire offline export adapter; Brian2 CI opt-in; shadow bridge extension (no C raise).
+
+---
+
+## Entry 065 — 2026-09-10 — DOI badge in README
+
+**Session:** Published Zenodo DOI linked from repo README and submission docs.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S4 | README: Zenodo DOI badge + Proto-AGI Horizon preprint link |
+| S5 | `docs/ZENODO_SUBMISSION.md` and `docs/ARXIV_SUBMISSION.md` note published DOI; commit + push |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| DOI | `10.5281/zenodo.22646895` |
+| Record | https://zenodo.org/records/22646895 |
+| Badge | README top (with CI + License) |
+
+### Next
+
+X post template (Step 5 in ZENODO guide). arXiv mirror when endorsement available. No C-level raise.

@@ -3,7 +3,8 @@
 **Branch:** `research/cursor-starter-v0.2-woe-eis`  
 **Milestone:** M-ZENODO-PREP  
 **Version:** v1.0.0 (September 2026)  
-**Claim ceiling:** C2 — `claim_allowed=false`; no AGI\* claims.
+**Claim ceiling:** C2 — `claim_allowed=false`; no AGI\* claims.  
+**Published DOI:** [10.5281/zenodo.22646895](https://doi.org/10.5281/zenodo.22646895) — [record](https://zenodo.org/records/22646895)
 
 ---
 

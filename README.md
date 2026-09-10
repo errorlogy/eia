@@ -1,8 +1,10 @@
 # Endogenous Initiative Architecture (EIA)
 
 [![EIA CI](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml/badge.svg)](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml)
-
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22646895.svg)](https://doi.org/10.5281/zenodo.22646895)
+
+[Proto-AGI Horizon preprint (C2 research horizon)](https://zenodo.org/records/22646895)
 
 **Program name:** **Endogenous Initiative Architecture (EIA)**  
 **Legacy / benchmark prefix:** PROACTIVE AI · **PAI-EI** benchmark
