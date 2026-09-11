@@ -1,0 +1,25 @@
+{
+  "harness_id": "T-KAI-05",
+  "artifact_id": "T-KAI-05_2026-09-11",
+  "date": "2026-09-11",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a72.1 Klein enantiodromic flip, K^2 = I",
+  "seed": 42,
+  "n_samples": 128,
+  "statistics": {
+    "samples": 128.0,
+    "mean_fidelity_k_squared": 1.0,
+    "min_fidelity_k_squared": 0.9999999999999996,
+    "max_fidelity_k_squared": 1.0000000000000004,
+    "mean_half_overlap": 0.7833140229977863
+  },
+  "open_questions": {
+    "involution_holds_numerically": true,
+    "half_turn_low_overlap": true
+  },
+  "interpretation_notes": [
+    "Operator: K|\u03a8\u27e9 = e^{i\u03c0} \u03c3_x |\u03a8*\u27e9 per theory tractate.",
+    "Fidelity after K\u2218K measures numerical preservation of state (target 1.0).",
+    "Half-turn overlap probes enantiodromic inversion, not EIA endogenous genesis."
+  ]
+}

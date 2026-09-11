@@ -1,0 +1,312 @@
+{
+  "harness_id": "T-KAI-02",
+  "artifact_id": "T-KAI-02_2026-09-11",
+  "date": "2026-09-11",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a73 VSA/HDC holographic compression",
+  "dim": 4096,
+  "max_pairs_tested": 48,
+  "retrieval_threshold": 0.25,
+  "seed": 42,
+  "capacity_curve": [
+    {
+      "num_pairs": 1.0,
+      "mean_retrieval_cosine": 1.0,
+      "min_retrieval_cosine": 1.0,
+      "theory_noise_scale": 0.0
+    },
+    {
+      "num_pairs": 2.0,
+      "mean_retrieval_cosine": 0.7076244921390158,
+      "min_retrieval_cosine": 0.7076244921390158,
+      "theory_noise_scale": 0.015625
+    },
+    {
+      "num_pairs": 3.0,
+      "mean_retrieval_cosine": 0.5775381781512129,
+      "min_retrieval_cosine": 0.5706806168296387,
+      "theory_noise_scale": 0.02209708691207961
+    },
+    {
+      "num_pairs": 4.0,
+      "mean_retrieval_cosine": 0.5018277141484915,
+      "min_retrieval_cosine": 0.4938004167336101,
+      "theory_noise_scale": 0.027063293868263706
+    },
+    {
+      "num_pairs": 5.0,
+      "mean_retrieval_cosine": 0.4492180706516602,
+      "min_retrieval_cosine": 0.4395658821417233,
+      "theory_noise_scale": 0.03125
+    },
+    {
+      "num_pairs": 6.0,
+      "mean_retrieval_cosine": 0.4072170647789975,
+      "min_retrieval_cosine": 0.3938940788546069,
+      "theory_noise_scale": 0.034938562148434216
+    },
+    {
+      "num_pairs": 7.0,
+      "mean_retrieval_cosine": 0.37542492931479704,
+      "min_retrieval_cosine": 0.3569244219807746,
+      "theory_noise_scale": 0.038273277230987154
+    },
+    {
+      "num_pairs": 8.0,
+      "mean_retrieval_cosine": 0.3516059000989247,
+      "min_retrieval_cosine": 0.3336393680523985,
+      "theory_noise_scale": 0.04133986423538423
+    },
+    {
+      "num_pairs": 9.0,
+      "mean_retrieval_cosine": 0.3327541264086372,
+      "min_retrieval_cosine": 0.3169570010695512,
+      "theory_noise_scale": 0.04419417382415922
+    },
+    {
+      "num_pairs": 10.0,
+      "mean_retrieval_cosine": 0.3171682568054376,
+      "min_retrieval_cosine": 0.303127996141106,
+      "theory_noise_scale": 0.046875
+    },
+    {
+      "num_pairs": 11.0,
+      "mean_retrieval_cosine": 0.30215308637064386,
+      "min_retrieval_cosine": 0.2860330910007108,
+      "theory_noise_scale": 0.04941058844013093
+    },
+    {
+      "num_pairs": 12.0,
+      "mean_retrieval_cosine": 0.2868605131297362,
+      "min_retrieval_cosine": 0.2618482811459501,
+      "theory_noise_scale": 0.05182226234930312
+    },
+    {
+      "num_pairs": 13.0,
+      "mean_retrieval_cosine": 0.27584592861117413,
+      "min_retrieval_cosine": 0.25639552272451893,
+      "theory_noise_scale": 0.05412658773652741
+    },
+    {
+      "num_pairs": 14.0,
+      "mean_retrieval_cosine": 0.264336988269419,
+      "min_retrieval_cosine": 0.2448849223899238,
+      "theory_noise_scale": 0.05633673867912483
+    },
+    {
+      "num_pairs": 15.0,
+      "mean_retrieval_cosine": 0.25566498261070747,
+      "min_retrieval_cosine": 0.2403861987893504,
+      "theory_noise_scale": 0.05846339666834283
+    },
+    {
+      "num_pairs": 16.0,
+      "mean_retrieval_cosine": 0.24600072646615292,
+      "min_retrieval_cosine": 0.22677222792744708,
+      "theory_noise_scale": 0.06051536478449089
+    },
+    {
+      "num_pairs": 17.0,
+      "mean_retrieval_cosine": 0.24007099584286043,
+      "min_retrieval_cosine": 0.21906337616090277,
+      "theory_noise_scale": 0.0625
+    },
+    {
+      "num_pairs": 18.0,
+      "mean_retrieval_cosine": 0.23467059548939162,
+      "min_retrieval_cosine": 0.21489101489425927,
+      "theory_noise_scale": 0.06442352540027595
+    },
+    {
+      "num_pairs": 19.0,
+      "mean_retrieval_cosine": 0.22883722017615518,
+      "min_retrieval_cosine": 0.21090426930275777,
+      "theory_noise_scale": 0.06629126073623882
+    },
+    {
+      "num_pairs": 20.0,
+      "mean_retrieval_cosine": 0.22325713874364692,
+      "min_retrieval_cosine": 0.2064603634149713,
+      "theory_noise_scale": 0.06810779599282303
+    },
+    {
+      "num_pairs": 21.0,
+      "mean_retrieval_cosine": 0.2186841899710874,
+      "min_retrieval_cosine": 0.2002090415823928,
+      "theory_noise_scale": 0.06987712429686843
+    },
+    {
+      "num_pairs": 22.0,
+      "mean_retrieval_cosine": 0.21453566612637925,
+      "min_retrieval_cosine": 0.1935626910064009,
+      "theory_noise_scale": 0.071602745233685
+    },
+    {
+      "num_pairs": 23.0,
+      "mean_retrieval_cosine": 0.20896544777747186,
+      "min_retrieval_cosine": 0.18713600576097855,
+      "theory_noise_scale": 0.07328774624724109
+    },
+    {
+      "num_pairs": 24.0,
+      "mean_retrieval_cosine": 0.2043482796625449,
+      "min_retrieval_cosine": 0.18060305934609328,
+      "theory_noise_scale": 0.07493486755176124
+    },
+    {
+      "num_pairs": 25.0,
+      "mean_retrieval_cosine": 0.2004292269106479,
+      "min_retrieval_cosine": 0.17306607691234477,
+      "theory_noise_scale": 0.07654655446197431
+    },
+    {
+      "num_pairs": 26.0,
+      "mean_retrieval_cosine": 0.1958138904591438,
+      "min_retrieval_cosine": 0.17014015303175248,
+      "theory_noise_scale": 0.078125
+    },
+    {
+      "num_pairs": 27.0,
+      "mean_retrieval_cosine": 0.1919203456312419,
+      "min_retrieval_cosine": 0.1680105717019497,
+      "theory_noise_scale": 0.07967217989988726
+    },
+    {
+      "num_pairs": 28.0,
+      "mean_retrieval_cosine": 0.18768591972837417,
+      "min_retrieval_cosine": 0.1588826350175841,
+      "theory_noise_scale": 0.08118988160479113
+    },
+    {
+      "num_pairs": 29.0,
+      "mean_retrieval_cosine": 0.18480524906840243,
+      "min_retrieval_cosine": 0.1524241171809411,
+      "theory_noise_scale": 0.08267972847076846
+    },
+    {
+      "num_pairs": 30.0,
+      "mean_retrieval_cosine": 0.1818655734479606,
+      "min_retrieval_cosine": 0.14820355765525037,
+      "theory_noise_scale": 0.08414320011147662
+    },
+    {
+      "num_pairs": 31.0,
+      "mean_retrieval_cosine": 0.17940716521733893,
+      "min_retrieval_cosine": 0.14714400890370746,
+      "theory_noise_scale": 0.0855816496101822
+    },
+    {
+      "num_pairs": 32.0,
+      "mean_retrieval_cosine": 0.17685759873268717,
+      "min_retrieval_cosine": 0.1428751428752143,
+      "theory_noise_scale": 0.08699631816921909
+    },
+    {
+      "num_pairs": 33.0,
+      "mean_retrieval_cosine": 0.17378893555991612,
+      "min_retrieval_cosine": 0.14039596951252903,
+      "theory_noise_scale": 0.08838834764831845
+    },
+    {
+      "num_pairs": 34.0,
+      "mean_retrieval_cosine": 0.17085455172121733,
+      "min_retrieval_cosine": 0.13927946367920624,
+      "theory_noise_scale": 0.0897587913521567
+    },
+    {
+      "num_pairs": 35.0,
+      "mean_retrieval_cosine": 0.16829350576190585,
+      "min_retrieval_cosine": 0.13362868153409607,
+      "theory_noise_scale": 0.09110862335695782
+    },
+    {
+      "num_pairs": 36.0,
+      "mean_retrieval_cosine": 0.166447247782495,
+      "min_retrieval_cosine": 0.13225419252911058,
+      "theory_noise_scale": 0.0924387466109315
+    },
+    {
+      "num_pairs": 37.0,
+      "mean_retrieval_cosine": 0.1644163427012679,
+      "min_retrieval_cosine": 0.12762050666449745,
+      "theory_noise_scale": 0.09375
+    },
+    {
+      "num_pairs": 38.0,
+      "mean_retrieval_cosine": 0.16251922630241716,
+      "min_retrieval_cosine": 0.12737296115454327,
+      "theory_noise_scale": 0.09504316453590968
+    },
+    {
+      "num_pairs": 39.0,
+      "mean_retrieval_cosine": 0.16023236999171667,
+      "min_retrieval_cosine": 0.12837863323946222,
+      "theory_noise_scale": 0.09631896879639025
+    },
+    {
+      "num_pairs": 40.0,
+      "mean_retrieval_cosine": 0.15880335594493902,
+      "min_retrieval_cosine": 0.12391258520898481,
+      "theory_noise_scale": 0.09757809372497497
+    },
+    {
+      "num_pairs": 41.0,
+      "mean_retrieval_cosine": 0.1566083784187735,
+      "min_retrieval_cosine": 0.12281282601022181,
+      "theory_noise_scale": 0.09882117688026186
+    },
+    {
+      "num_pairs": 42.0,
+      "mean_retrieval_cosine": 0.15409691437758125,
+      "min_retrieval_cosine": 0.12531309235549884,
+      "theory_noise_scale": 0.10004881620988826
+    },
+    {
+      "num_pairs": 43.0,
+      "mean_retrieval_cosine": 0.15270623041291623,
+      "min_retrieval_cosine": 0.12195193160806818,
+      "theory_noise_scale": 0.10126157341262282
+    },
+    {
+      "num_pairs": 44.0,
+      "mean_retrieval_cosine": 0.1507222089530744,
+      "min_retrieval_cosine": 0.11971833330378756,
+      "theory_noise_scale": 0.10245997694221876
+    },
+    {
+      "num_pairs": 45.0,
+      "mean_retrieval_cosine": 0.1488996420246259,
+      "min_retrieval_cosine": 0.11615882153419774,
+      "theory_noise_scale": 0.10364452469860624
+    },
+    {
+      "num_pairs": 46.0,
+      "mean_retrieval_cosine": 0.1477030913152251,
+      "min_retrieval_cosine": 0.11793187737747331,
+      "theory_noise_scale": 0.10481568644530265
+    },
+    {
+      "num_pairs": 47.0,
+      "mean_retrieval_cosine": 0.14656342767492972,
+      "min_retrieval_cosine": 0.11589490223996682,
+      "theory_noise_scale": 0.10597390598633231
+    },
+    {
+      "num_pairs": 48.0,
+      "mean_retrieval_cosine": 0.1452333733939821,
+      "min_retrieval_cosine": 0.11781168750840507,
+      "theory_noise_scale": 0.10711960313126631
+    }
+  ],
+  "estimated_capacity_pairs": 13,
+  "first_failure_at_pairs": 14,
+  "open_questions": {
+    "theory_noise_scale_tracks_retrieval": true,
+    "4096_supports_dozens_of_bindings": false
+  },
+  "interpretation_notes": [
+    "Binding via Hadamard product; bundling via vector sum; unbinding via key multiply.",
+    "Theory predicts interference ~ sqrt((m-1)/D); empirical min cosine tracks this qualitatively.",
+    "Capacity here is engineering retrieval quality, not AGI memory certification."
+  ]
+}

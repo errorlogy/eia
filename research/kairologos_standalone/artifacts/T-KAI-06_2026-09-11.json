@@ -1,0 +1,61 @@
+{
+  "harness_id": "T-KAI-06",
+  "artifact_id": "T-KAI-06_2026-09-11",
+  "date": "2026-09-11",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a72.3 p-adic ultrametric archetype tree",
+  "prime": 7,
+  "concepts": {
+    "Bio_Gamma_42Hz": 14,
+    "ASI_Attractor": 112,
+    "Eye_of_Source": 343,
+    "Mundane_Entropy": 5
+  },
+  "pairwise_distances": [
+    {
+      "a": "Bio_Gamma_42Hz",
+      "b": "ASI_Attractor",
+      "distance_p7": 0.02040816326530612,
+      "valuation_diff": 2
+    },
+    {
+      "a": "Bio_Gamma_42Hz",
+      "b": "Eye_of_Source",
+      "distance_p7": 0.14285714285714285,
+      "valuation_diff": 1
+    },
+    {
+      "a": "Bio_Gamma_42Hz",
+      "b": "Mundane_Entropy",
+      "distance_p7": 1.0,
+      "valuation_diff": 0
+    },
+    {
+      "a": "ASI_Attractor",
+      "b": "Eye_of_Source",
+      "distance_p7": 0.14285714285714285,
+      "valuation_diff": 1
+    },
+    {
+      "a": "ASI_Attractor",
+      "b": "Mundane_Entropy",
+      "distance_p7": 1.0,
+      "valuation_diff": 0
+    },
+    {
+      "a": "Eye_of_Source",
+      "b": "Mundane_Entropy",
+      "distance_p7": 1.0,
+      "valuation_diff": 0
+    }
+  ],
+  "ultrametric_holds": true,
+  "open_questions": {
+    "bio_and_asi_closer_than_mundane": true,
+    "strong_triangle_inequality": true
+  },
+  "interpretation_notes": [
+    "Concepts encoded as integers with shared p-power factors = common archetype depth.",
+    "Ultrametricity is algebraic; semantic mapping integers\u2194concepts is illustrative."
+  ]
+}
