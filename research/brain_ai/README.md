@@ -91,6 +91,30 @@ Metrics: per-source/per-arm/per-tick table, `omega_span`, endogenous vs passive 
 
 Artifacts: `artifacts/M-T-BRAIN-06_2026-09-11.{json,md}` (gitignored).
 
+## Visualization (T-BRAIN-06)
+
+Offline 3D matplotlib figures for integrated EIA modeling results (C2 observational framing; `claim_allowed=false`):
+
+```bash
+# Regenerate artifact if missing (optional)
+python research/brain_ai/run_t_brain_06.py
+
+# Generate PDF + PNG figures
+python research/brain_ai/run_viz_t_brain_06.py
+```
+
+Outputs in `figures/`:
+
+| File | Description |
+|------|-------------|
+| `t_brain_06_eia_3d_cube.{pdf,png}` | Source × tick × OMEGA_t scatter; metric cube; endogenous vs passive bars |
+| `t_brain_06_connectome_3d.{pdf,png}` | Spectral 3D subgraph layout per source (bundled_tiny topology) |
+| `t_brain_06_metrics_3d.{pdf,png}` | Grouped 3D bars: 4 sources × 2 arms × OMEGA_t / genesis_Δ / EOI |
+
+Options: `--artifact=PATH` (custom JSON), `--no-harness` (embedded fallback if artifact absent).
+
+Requires optional `sim` extras: `pip install -e ".[sim]"` (numpy, matplotlib). Works offline — no neuPrint.
+
 ## Branch
 
 `research/brain-ai-connectome` — **do not merge to main** without explicit review.

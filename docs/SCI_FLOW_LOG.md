@@ -2330,6 +2330,38 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 072 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 3D visualization
+
+**Session:** 3D matplotlib figures for T-BRAIN-06 integrated EIA results — evidence cube, connectome subgraph, metrics bars; offline from artifact JSON.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `viz/t_brain_06_3d.py` — load artifact / harness / fallback; mplot3d cube + connectome + metrics |
+| S2 | `run_viz_t_brain_06.py` CLI; figures committed to `figures/` |
+| S3 | README Visualization section |
+| S4 | Run viz runner (6 outputs: 3 PDF + 3 PNG) |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-06** (viz) |
+| Figures | `t_brain_06_eia_3d_cube`, `t_brain_06_connectome_3d`, `t_brain_06_metrics_3d` |
+| `omega_span` (artifact) | **0.226** |
+| `claim_allowed` | **false** |
+
+### Next
+
+Real neuPrint export overlays; optional plotly HTML if dep added; no C raise.
+
+---
+
 ## Entry 071 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 integrated EIA modeling
 
 **Session:** T-BRAIN-06 — integrated EIA modeling across connectome sources (`bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female`); full pipeline connectome → spike → OMEGA_t → shadow bridge → 2-tick carryover; endogenous (`coupled_active`, full_eia+Ψ) vs passive (`passive_quiescent`, reactive_only) per source.
