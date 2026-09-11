@@ -2330,6 +2330,50 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 076 — 2026-09-11 — M-AGENT-EIA T-AGENT-03 Brain-AI agent bridge
+
+**Session:** Bridge Brain-AI connectome OMEGA_t substrate into Agent-EIA harness at X^trigger=0 — four arms (`brain_eia_endogenous`, `brain_eia_no_psi`, `brain_reactive`, `agent_only_eia`); per-source probes on `bundled_tiny` + `google_male_cns`.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `adapters/brain_agent_bridge.py` — lazy connectome→OMEGA→Ψ bridge |
+| S2 | `harnesses/t_agent_03_brain_agent_bridge.py` + `run_t_agent_03.py` |
+| S3 | Artifact `M-T-AGENT-03_2026-09-11`; config + README (agent_eia + brain_ai cross-ref) |
+| S4 | 8 offline tests; agent + brain harness tests pass |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics (seed=42, mock LLM, bundled_tiny primary)
+
+| Arm | initiatives | EOI mean | EUIR | OMEGA_t | drive_norm | Ψ |
+|-----|-------------|----------|------|---------|------------|---|
+| `brain_eia_endogenous` | **6** | **0.792** | 100% | 0.396 | 1.416 | yes |
+| `brain_eia_no_psi` | 6 | 0.792 | 100% | 0.396 | 1.330 | no |
+| `brain_reactive` | **0** | 0.0 | 0% | 0.243 | 0.0 | n/a |
+| `agent_only_eia` | **6** | **0.792** | 100% | — | 1.330 | no |
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-AGENT-EIA** |
+| Harness | **T-AGENT-03** |
+| `bridge_parity` | **true** |
+| F-OMEGA-DECOR | **not triggered** (Ψ shifts drive_norm) |
+| F-BRAIN-AGENT-COLLAPSE | **false** |
+| `google_male_cns` EOI delta vs agent_only | **+0.208** (substrate effect) |
+| `bundled_tiny` substrate effect | initiatives unchanged; drive_norm +0.085 |
+| `diagnostic_pass` | **true** |
+| `e_endo_support` | **none** |
+| `claim_allowed` | **false** |
+
+### Next
+
+Scale paired-worlds + brain bridge; optional FlyWire source probe; no C raise.
+
+---
+
 ## Entry 075 — 2026-09-11 — M-AGENT-EIA T-AGENT-02 paired worlds
 
 **Session:** Paired-worlds harness comparing `full_eia` vs `reactive_only` vs `schedule_entrained` across **8 matched seeds/domains** at X^trigger=0 (G2-style `8/20` scope); optional perturbation blip on worlds 003/007.

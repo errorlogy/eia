@@ -143,6 +143,11 @@ Options: `--artifact=PATH`, `--no-harness`, `--frames=N`, `--fps=N`, `--view=cub
 
 Interpolate between session ticks when `session_ticks=2`; use `--session-ticks=4` to regenerate payload with more discrete ticks.
 
+## Related (Agent-EIA)
+
+- `research/agent_eia/adapters/brain_agent_bridge.py` — connectome OMEGA_t → Agent-EIA Ψ bridge
+- `research/agent_eia/harnesses/t_agent_03_brain_agent_bridge.py` — **T-AGENT-03** Brain-AI + LLM agent harness at X^trigger=0
+
 ## Branch
 
 `research/brain-ai-connectome` — **do not merge to main** without explicit review.
