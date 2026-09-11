@@ -2327,3 +2327,43 @@ T-BRAIN-03 shadow bridge or FlyWire offline export; Brian2 multi-arm parity opti
 ### Next
 
 T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi-arm parity optional; no C raise.
+
+---
+
+## Entry 068 — 2026-09-10 — M-BRAIN-AI T-BRAIN-04 longitudinal carryover
+
+**Session:** T-BRAIN-04 — `ShadowSessionCarryover` across 2+ session ticks at X_trigger=0; endogenous (`coupled_active`, full_eia+Ψ) vs passive (`passive_quiescent`, reactive_only) vs scramble (`phase_scramble_control`, full_eia w/o Ψ); no Ψ(O_t) on carryover ticks.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | Extended `adapters/shadow_bridge.py` — carryover tick, EIA baseline mapping, EOI proxy |
+| S2 | `harnesses/t_brain_04_longitudinal_carryover.py` + `run_t_brain_04.py` |
+| S3 | Artifact `M-T-BRAIN-04_2026-09-10`; `config.yaml` + README update |
+| S4 | `tests/test_t_brain_04_longitudinal_carryover.py` (9 tests); run harness |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-04** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-04_2026-09-10.json` |
+| Session ticks | **2** |
+| `coupled_active` cumulative genesis_Δ / EOI min | see artifact |
+| `passive_quiescent` initiatives (all ticks) | **0** |
+| `phase_scramble_control` F-OMEGA-DECOR | **confirmed** |
+| F-CARRYOVER-BLEED | **absent** |
+| endogenous sustained genesis | **true** |
+| `diagnostic_pass` | **true** |
+| `claim_allowed` | **false** |
+
+### Next
+
+Brian2 multi-arm parity or FlyWire offline export; optional merge review to main; no C raise.

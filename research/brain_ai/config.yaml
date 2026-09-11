@@ -2,7 +2,14 @@
 # Tier C · claim_allowed=false · no AGI*
 
 version: "0.1"
-updated: "2026-09-09"
+updated: "2026-09-10"
+
+connectome:
+  source: bundled_tiny  # bundled_tiny | synthetic | google_male_cns | flywire_female
+  google_male_subgraph: research/brain_ai/data/google_male_subgraph.json
+  flywire_female_subgraph: research/brain_ai/data/flywire_female_subgraph.json
+  offline_fallback: synthetic
+  max_subgraph_nodes: 500
 
 harness:
   id: T-BRAIN-01
@@ -48,6 +55,17 @@ t_brain_03:
   artifact_json: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.json
   artifact_md: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.md
   shadow_seed: 42
+  x_trigger_zero: true
+  arms:
+    - coupled_active
+    - passive_quiescent
+    - phase_scramble_control
+
+t_brain_04:
+  id: T-BRAIN-04
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-04_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-04_2026-09-10.md
+  session_ticks: 2
   x_trigger_zero: true
   arms:
     - coupled_active

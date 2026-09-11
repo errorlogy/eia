@@ -10,7 +10,8 @@ Tier **C** adjunct strand: connectome subgraph → spike dynamics → `OmegaWave
 python research/brain_ai/run_t_brain_01.py
 python research/brain_ai/run_t_brain_02.py
 python research/brain_ai/run_t_brain_03.py
-pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py -q
+python research/brain_ai/run_t_brain_04.py
+pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py tests/test_t_brain_04_longitudinal_carryover.py -q
 ```
 
 ## Layout
@@ -20,6 +21,7 @@ pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavi
 | `harnesses/t_brain_01_connectome_ot.py` | T-BRAIN-01 payload builder |
 | `harnesses/t_brain_02_omega_behavior.py` | T-BRAIN-02 OMEGA vs behavior diagnostic |
 | `harnesses/t_brain_03_shadow_bridge.py` | T-BRAIN-03 OMEGA → shadow multitick bridge |
+| `harnesses/t_brain_04_longitudinal_carryover.py` | T-BRAIN-04 multi-tick carryover + G2 gate analog |
 | `adapters/connectome_export.py` | Synthetic / offline connectome subgraph |
 | `adapters/brian2_lif_subgraph.py` | Optional Brian2 LIF (graceful skip) |
 | `adapters/behavior_metrics.py` | Activity / burstiness / sync proxies |
@@ -43,6 +45,20 @@ Closes the causal gap between Brain-AI OMEGA_t and EIA shadow multitick at **X_t
 Metrics: native vs omega-bridged ATT-R parity, ΔG per arm, OMEGA_t per arm. Genesis coupling is **behavior-gated** (omega alone decorative under scramble).
 
 Artifacts: `artifacts/M-T-BRAIN-03_2026-09-10.{json,md}` (gitignored).
+
+## T-BRAIN-04 (longitudinal carryover)
+
+Extends T-BRAIN-03 with **2+ session ticks** via `ShadowSessionCarryover` at X_trigger=0:
+
+| Arm | EIA baseline | Ψ(O_t) tick 0 | Expectation |
+|-----|--------------|---------------|-------------|
+| `coupled_active` | full_eia | yes | sustained genesis, ATT-R, EOI≥0.5 |
+| `passive_quiescent` | reactive_only | no | 0 initiatives, abstain |
+| `phase_scramble_control` | full_eia | no (decorative OMEGA) | F-OMEGA-DECOR |
+
+Carryover ticks: ambient obs only — no Ψ(O_t) re-injection (F-CARRYOVER-BLEED falsifier).
+
+Artifacts: `artifacts/M-T-BRAIN-04_2026-09-10.{json,md}` (gitignored).
 
 ## Branch
 
