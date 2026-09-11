@@ -2330,6 +2330,44 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 074 — 2026-09-11 — M-AGENT-EIA T-AGENT-01 LLM+EIA at X_trigger=0
+
+**Session:** First LLM-agent harness pairing EIA initiative architecture with shadow proposer at **X^trigger=0** — paired arms `full_eia` vs `reactive_only` vs `schedule_entrained` (F-EXT falsifier).
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `research/agent_eia/` — harness, mock LLM proposer, config |
+| S2 | `harnesses/t_agent_01_llm_eia.py` + `run_t_agent_01.py` + 7 offline tests |
+| S3 | Artifact `M-T-AGENT-01_2026-09-11`; README |
+| S4 | Run harness; `diagnostic_pass=true` |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics (seed=42, mock LLM)
+
+| Arm | initiative_count | EOI mean | EUIR proxy | genesis_Δ |
+|-----|------------------|----------|------------|-----------|
+| `full_eia` | **6** | **0.792** | 100% | 1.0 |
+| `reactive_only` | **0** | 0.0 | 0% | 0.0 |
+| `schedule_entrained` | 2 (ticks 3,6 only) | 1.0 | 33% | 0.0 |
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-AGENT-EIA** |
+| Harness | **T-AGENT-01** |
+| `diagnostic_pass` | **true** |
+| `e_endo_support` | **none** |
+| `claim_allowed` | **false** |
+
+### Next
+
+Optional real LLM backend wiring (OpenAI/Anthropic); brain_ai OMEGA Ψ(O_t) crosswalk; no C raise.
+
+---
+
 ## Entry 073 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 dynamic 3D animation
 
 **Session:** Time-evolving 3D matplotlib animations for T-BRAIN-06 — evidence cube, connectome activity, state-space trajectories; tick interpolation + optional 4-tick harness; pillow GIF (+ MP4 if ffmpeg).
