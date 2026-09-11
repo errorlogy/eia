@@ -2694,3 +2694,46 @@ T-BRAIN-05 full parity harness after local MaleCNS/FlyWire ego-network export; T
 ### Next
 
 Brian2 multi-arm parity or FlyWire offline export; optional merge review to main; no C raise.
+
+---
+
+## Entry 078 — 2026-09-11 — Kairologos Tier C experiment battery (K-KUR-01, K-HDC-01, K-WOE-42)
+
+**Session:** Tier C **algorithm import** from Kairologos / Topological ASI Resonance — Kuramoto×OMEGA×genesis correlation, HDC episodic binding adjunct, 42 Hz carrier surrogate sweep. **Not ontology** · **no AGI\*** · `claim_allowed=false`.
+**Branch:** `main`
+**Claim level:** **C2** unchanged. **`e_endo_support=none`**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `k_kur_01_kuramoto_omega_genesis.py` — T-BRAIN-06 arms/sources × Kuramoto R / OMEGA_t / genesis_Δ |
+| S2 | `adapters/hdc_memory.py` + `k_hdc_01_agent_binding.py` — full_eia+hdc vs full_eia vs reactive_only |
+| S3 | `k_woe_42_carrier_surrogate.py` — 42 Hz vs amplitude-matched 30/70 Hz surrogates |
+| S4 | Run scripts + pytest (`tests/test_k_*` 15 pass); `research/kairologos_experiments/README.md` |
+| S5 | Artifacts M-K-KUR-01 · M-K-HDC-01 · M-K-WOE-42 (regenerable) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-KAIRO-TIER-C** |
+| `theory_strand` | `kairologos_explore` |
+| **K-KUR-01** `diagnostic_pass` | **true** |
+| K-KUR-01 r(R, ΔG) / r(OMEGA, ΔG) | **-0.054** / **0.480** (aggregate) |
+| **F-KURAMOTO-AS-E** | **annotation** (2 rows high R, no genesis) |
+| **F-OMEGA-DECOR** | **absent** |
+| K-KUR-01 SHA-256 | `a40b77b74095fafb3d05467017e5f0531adf6b8ff7eac51d7d13b3944566b3dc` |
+| **K-HDC-01** `diagnostic_pass` | **true** |
+| HDC retrieval rate | **1.0** (5/5 queries) |
+| EOI Δ (hdc − full) | **0.0** — retrieval adjunct only |
+| K-HDC-01 SHA-256 | `f0674ba8f72544d15f3c3072302f67fd805c6bd1d2c91e6883a7bef1341bf3a1` |
+| **K-WOE-42** `diagnostic_pass` | **true** |
+| Spike ω Δ vs 30/70 Hz | **0.067** / **0.118** |
+| **F-GAMMA-UNIQUE** | **not_confirmed** (42 Hz mid-band weight in OMEGA_t) |
+| K-WOE-42 SHA-256 | `e854144ea7f43cd824103cd6828605c9950d524357fc54fd91ea6df82e65ce98` |
+| `claim_allowed` | **false** |
+
+### Next
+
+K-HYP-01 Poincaré connectome viz (descriptive); paired do(O) with HDC carryover; re-run WOE-42 with amplitude-normalized mid-band ablation; no C raise.
