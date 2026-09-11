@@ -28,6 +28,29 @@ arms:
   - reactive_only
   - schedule_entrained
 
+t_agent_02:
+  num_worlds: 8
+  seeds: [100, 101, 102, 103, 104, 105, 106, 107]
+  domains:
+    - ops_atlas
+    - research_workspace
+    - code_review
+    - ops_atlas
+    - research_workspace
+    - code_review
+    - health_triage
+    - ops_atlas
+  quiet_ticks: 6
+  schedule_period: 3
+  drive_proposal_threshold: 0.22
+  llm_backend: mock
+  perturbation:
+    enabled: true
+    blip_tick: 3
+    world_indices: [2, 6]  # agent_world_003, agent_world_007
+
 artifacts:
-  json: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.json
-  md: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.md
+  t_agent_01_json: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.json
+  t_agent_01_md: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.md
+  t_agent_02_json: research/agent_eia/artifacts/M-T-AGENT-02_2026-09-11.json
+  t_agent_02_md: research/agent_eia/artifacts/M-T-AGENT-02_2026-09-11.md

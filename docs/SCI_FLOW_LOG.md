@@ -2330,6 +2330,48 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 075 — 2026-09-11 — M-AGENT-EIA T-AGENT-02 paired worlds
+
+**Session:** Paired-worlds harness comparing `full_eia` vs `reactive_only` vs `schedule_entrained` across **8 matched seeds/domains** at X^trigger=0 (G2-style `8/20` scope); optional perturbation blip on worlds 003/007.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `harnesses/t_agent_02_paired_worlds.py` — multi-world paired arms |
+| S2 | `run_t_agent_02.py` + 7 offline tests |
+| S3 | Artifact `M-T-AGENT-02_2026-09-11`; config + README |
+| S4 | Run harness; `diagnostic_pass=true` (8/8 worlds pass) |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics (8 worlds, mock LLM)
+
+| Arm | mean initiatives | mean EOI | mean EUIR | mean abstain |
+|-----|------------------|----------|-----------|--------------|
+| `full_eia` | **6.0** | **0.792** | **100%** | 0% |
+| `reactive_only` | **0.0** | 0.0 | 0% | 100% |
+| `schedule_entrained` | 2.0 | 1.0 | 33% | 67% |
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-AGENT-EIA** |
+| Harness | **T-AGENT-02** |
+| Worlds pass | **8/8** |
+| Mean separation (full − reactive EUIR) | **1.0** |
+| Falsifiers | F-REACTIVE-COLLAPSE ✓ · F-SCHEDULE-AS-ENDO ✓ · F-WORLD-DRIFT ✓ |
+| Perturbation resume | **true** (post-blip initiatives on worlds 003/007) |
+| `diagnostic_pass` | **true** |
+| `e_endo_support` | **none** |
+| `claim_allowed` | **false** |
+
+### Next
+
+Scale to 20×3 domains when health/code_review scenarios land; brain_ai Ψ(O_t) crosswalk; no C raise.
+
+---
+
 ## Entry 074 — 2026-09-11 — M-AGENT-EIA T-AGENT-01 LLM+EIA at X_trigger=0
 
 **Session:** First LLM-agent harness pairing EIA initiative architecture with shadow proposer at **X^trigger=0** — paired arms `full_eia` vs `reactive_only` vs `schedule_entrained` (F-EXT falsifier).

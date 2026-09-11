@@ -8,7 +8,8 @@ Tier **C** research strand: first **LLM-agent harness** pairing EIA initiative a
 
 ```bash
 python research/agent_eia/run_t_agent_01.py
-pytest tests/test_t_agent_01_llm_eia.py -q
+python research/agent_eia/run_t_agent_02.py
+pytest tests/test_t_agent_01_llm_eia.py tests/test_t_agent_02_paired_worlds.py -q
 ```
 
 ## T-AGENT-01 (LLM + EIA at X^trigger=0)
@@ -29,6 +30,29 @@ X^trigger=0 (empty inbox)
 | `schedule_entrained` | Fake cron trigger only | initiatives only on scheduled ticks (F-EXT falsifier) |
 
 Artifacts: `artifacts/M-T-AGENT-01_2026-09-11.{json,md}` (gitignored).
+
+## T-AGENT-02 (Paired worlds)
+
+Runs **N≥8 matched worlds** (seeds/domains) comparing the three initiative arms at X^trigger=0, following the G2 EOI paired-worlds pattern (`8/20` worlds scope).
+
+| Metric | Description |
+|--------|-------------|
+| EUIR | Endogenous initiative rate proxy per arm/world |
+| initiative_count | Non-abstained initiatives per world |
+| EOI mean | Endogenous initiative quality proxy |
+| abstain_rate | Fraction of abstained ticks |
+| separation_score | `full_eia EUIR − reactive_only EUIR` per world |
+
+**Falsifiers:** F-REACTIVE-COLLAPSE · F-SCHEDULE-AS-ENDO · F-WORLD-DRIFT
+
+Optional **perturbation blip** (ticks 3 on worlds 003/007): brief X^trigger spike then return to 0 — tests post-blip endogenous resume.
+
+```bash
+python research/agent_eia/run_t_agent_02.py
+python research/agent_eia/run_t_agent_02.py --num-worlds=8
+```
+
+Artifacts: `artifacts/M-T-AGENT-02_2026-09-11.{json,md}` (gitignored).
 
 ## LLM backends (CI-safe default)
 
@@ -53,8 +77,10 @@ python research/agent_eia/run_t_agent_01.py --llm-backend=openai
 | Path | Role |
 |------|------|
 | `harnesses/t_agent_01_llm_eia.py` | T-AGENT-01 payload builder |
+| `harnesses/t_agent_02_paired_worlds.py` | T-AGENT-02 paired worlds harness |
 | `adapters/mock_llm_proposer.py` | Shadow LLM proposer (mock + backend resolver) |
-| `run_t_agent_01.py` | Artifact runner |
+| `run_t_agent_01.py` | T-AGENT-01 artifact runner |
+| `run_t_agent_02.py` | T-AGENT-02 artifact runner |
 | `config.yaml` | Harness defaults |
 
 ## Related
