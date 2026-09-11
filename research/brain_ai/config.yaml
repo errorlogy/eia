@@ -75,3 +75,22 @@ t_brain_05:
   future_hooks:
     - Brian2 multi-source parity
     - Real neuprint MaleCNS/FlyWire ego-network fetch
+
+t_brain_06:
+  id: T-BRAIN-06
+  status: implemented
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-06_2026-09-11.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-06_2026-09-11.md
+  session_ticks: 2
+  connectome_sources:
+    - bundled_tiny
+    - synthetic
+    - google_male_cns
+    - flywire_female
+  arms_compared:
+    - coupled_active
+    - passive_quiescent
+  future_hooks:
+    - Real neuprint subgraph exports
+    - Brian2 multi-source integrated parity
+    - Zebrafish/mouse connectome horizon

@@ -2330,6 +2330,45 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 071 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 integrated EIA modeling
+
+**Session:** T-BRAIN-06 — integrated EIA modeling across connectome sources (`bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female`); full pipeline connectome → spike → OMEGA_t → shadow bridge → 2-tick carryover; endogenous (`coupled_active`, full_eia+Ψ) vs passive (`passive_quiescent`, reactive_only) per source.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `harnesses/t_brain_06_eia_integrated.py` — per-source integrated probes, separation score, aggregate spans |
+| S2 | `run_t_brain_06.py` + `tests/test_t_brain_06_eia_integrated.py` (10 tests) |
+| S3 | Artifact `M-T-BRAIN-06_2026-09-11`; `EIA_BRAIN_MODELING.md` synthesis; README + config update |
+| S4 | Run harness seed=42 + full brain_ai pytest (53 pass) |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-06** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-06_2026-09-11.json` |
+| Sources | bundled_tiny, synthetic, google_male_cns, flywire_female |
+| omega_span | **0.226** (min 0.396, max 0.622) |
+| mean endogenous-passive separation | **2.75** |
+| per-source endogenous > passive (genesis + EOI) | **true** (all 4) |
+| `diagnostic_pass` | **true** |
+| `claim_allowed` | **false** |
+| Substrate framing | Drosophila CNS — **not** mammalian neocortex |
+
+### Next
+
+Real neuPrint MaleCNS/FlyWire ego-network export; Brian2 multi-source parity; zebrafish/mouse connectome horizon; no C raise.
+
+---
+
 ## Entry 070 — 2026-09-10 — M-BRAIN-AI T-BRAIN-05 connectome source parity
 
 **Session:** T-BRAIN-05 — multi-source connectome parity harness comparing `bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female` on shared spike→OMEGA→shadow pipeline; offline-first stubs when `data/` exports absent.

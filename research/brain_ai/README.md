@@ -12,7 +12,8 @@ python research/brain_ai/run_t_brain_02.py
 python research/brain_ai/run_t_brain_03.py
 python research/brain_ai/run_t_brain_04.py
 python research/brain_ai/run_t_brain_05.py
-pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py tests/test_t_brain_04_longitudinal_carryover.py tests/test_t_brain_05_connectome_parity.py -q
+python research/brain_ai/run_t_brain_06.py
+pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py tests/test_t_brain_04_longitudinal_carryover.py tests/test_t_brain_05_connectome_parity.py tests/test_t_brain_06_eia_integrated.py -q
 ```
 
 ## Layout
@@ -34,7 +35,10 @@ pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavi
 | `data/README.md` | Offline subgraph fetch instructions |
 | `harnesses/t_brain_04_longitudinal_carryover.py` | T-BRAIN-04 longitudinal shadow carryover |
 | `harnesses/t_brain_05_connectome_parity.py` | T-BRAIN-05 multi-source connectome parity |
+| `harnesses/t_brain_06_eia_integrated.py` | T-BRAIN-06 integrated EIA modeling |
 | `run_t_brain_05.py` | T-BRAIN-05 artifact runner |
+| `run_t_brain_06.py` | T-BRAIN-06 integrated EIA runner |
+| `EIA_BRAIN_MODELING.md` | Connectome → EIA endogenous proactivity synthesis |
 
 ## T-BRAIN-03 (shadow bridge)
 
@@ -64,6 +68,28 @@ Per source: connectome_export → spike dynamics (`coupled_active`) → OMEGA_t 
 Metrics: `omega_t` per source, `omega_span`, `behavior_span`, `genesis_delta`, `source_fallback` flags (stub vs real export). Falsifier **F-SOURCE-PARITY** — structurally distinct sources must not yield identical OMEGA.
 
 Artifacts: `artifacts/M-T-BRAIN-05_2026-09-10.{json,md}` (gitignored). Uses deterministic stubs when `data/` exports absent.
+
+## T-BRAIN-06 (integrated EIA modeling)
+
+End-to-end integrated pipeline per connectome source:
+
+```
+connectome → spike → OMEGA_t + behavior → shadow bridge (X_trigger=0)
+  → 2-tick longitudinal carryover → EIA metrics (genesis_Δ, EOI, ATT-R, drive_norm)
+```
+
+| Comparison | Arms |
+|------------|------|
+| Endogenous embodied | `coupled_active` (full_eia + Ψ) |
+| Passive | `passive_quiescent` (reactive_only) |
+
+Sources: `bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female`.
+
+**Honest framing:** Drosophila CNS connectome substrate (Google MaleCNS / FlyWire) — **not** mammalian neocortex. See `EIA_BRAIN_MODELING.md`.
+
+Metrics: per-source/per-arm/per-tick table, `omega_span`, endogenous vs passive `separation_score`, falsifier status.
+
+Artifacts: `artifacts/M-T-BRAIN-06_2026-09-11.{json,md}` (gitignored).
 
 ## Branch
 
