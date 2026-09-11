@@ -2330,6 +2330,40 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 069 — 2026-09-10 — M-BRAIN-AI Google male connectome source
+
+**Session:** Integrate Google/HHMI Janelia MaleCNS connectome (Sept 2026) as offline-first Brain-AI source — `google_male_cns` enum, `export_google_male_subgraph()` stub, docs + T-BRAIN-05 parity spec.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `CONNECTOME_SOURCES.md` — MaleCNS paper/dataset links, male vs female comparison |
+| S2 | `connectome_export.py` — `connectome_source` param, `google_male_cns` / `flywire_female` paths |
+| S3 | `config.yaml` connectome block + T-BRAIN-05 spec; `STACK_MAP.md` source tiers |
+| S4 | `data/README.md` offline fetch guide; T-BRAIN-05 harness stub; tests |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-05** (spec stub) |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| MaleCNS dataset | `male-cns:v1.0` (166k neurons, 125M synapses) |
+| CI path | `bundled_tiny` / synthetic fallback |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-BRAIN-05 full parity harness after local MaleCNS/FlyWire ego-network export; T-BRAIN-04 carryover may proceed in parallel; no C raise.
+
+---
+
 ## Entry 068 — 2026-09-10 — M-BRAIN-AI T-BRAIN-04 longitudinal carryover
 
 **Session:** T-BRAIN-04 — `ShadowSessionCarryover` across 2+ session ticks at X_trigger=0; endogenous (`coupled_active`, full_eia+Ψ) vs passive (`passive_quiescent`, reactive_only) vs scramble (`phase_scramble_control`, full_eia w/o Ψ); no Ψ(O_t) on carryover ticks.

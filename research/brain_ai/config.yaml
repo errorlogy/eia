@@ -61,13 +61,16 @@ t_brain_03:
     - passive_quiescent
     - phase_scramble_control
 
-t_brain_04:
-  id: T-BRAIN-04
-  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-04_2026-09-10.json
-  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-04_2026-09-10.md
-  session_ticks: 2
-  x_trigger_zero: true
-  arms:
-    - coupled_active
-    - passive_quiescent
-    - phase_scramble_control
+t_brain_05:
+  id: T-BRAIN-05
+  status: spec_stub
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.md
+  connectome_sources:
+    - bundled_tiny
+    - synthetic
+    - google_male_cns
+    - flywire_female
+  future_hooks:
+    - MaleCNS vs FlyWire subgraph parity
+    - OMEGA_t span cross-source comparison

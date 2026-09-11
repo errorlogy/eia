@@ -60,6 +60,25 @@ def test_connectome_subgraph_loads():
     assert len(sg.adjacency) == sg.n_nodes
 
 
+def test_google_male_cns_fallback_when_data_absent():
+    from connectome_export import load_subgraph
+
+    sg = load_subgraph(connectome_source="google_male_cns", seed=11, n_nodes=12)
+    assert "google_male_cns" in sg.source
+    assert sg.n_nodes == 12
+
+
+def test_export_google_male_subgraph_stub():
+    import tempfile
+    from connectome_export import export_google_male_subgraph
+
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp) / "male_stub.json"
+        payload = export_google_male_subgraph(out, seed=5, n_nodes=16)
+        assert payload["source"] == "google_male_cns_stub"
+        assert out.is_file()
+
+
 def test_ot_injection_produces_omega_wave_state():
     from connectome_export import load_subgraph
     from brian2_lif_subgraph import synthetic_spike_trains

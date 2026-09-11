@@ -64,6 +64,9 @@ postgres-data/
 pgdata/
 redis-data/
 data/
+!research/brain_ai/data/
+research/brain_ai/data/*
+!research/brain_ai/data/README.md
 *.dump
 *.sql.gz
 

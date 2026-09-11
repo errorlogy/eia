@@ -10,8 +10,7 @@ Tier **C** adjunct strand: connectome subgraph → spike dynamics → `OmegaWave
 python research/brain_ai/run_t_brain_01.py
 python research/brain_ai/run_t_brain_02.py
 python research/brain_ai/run_t_brain_03.py
-python research/brain_ai/run_t_brain_04.py
-pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py tests/test_t_brain_04_longitudinal_carryover.py -q
+pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py -q
 ```
 
 ## Layout
@@ -21,7 +20,6 @@ pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavi
 | `harnesses/t_brain_01_connectome_ot.py` | T-BRAIN-01 payload builder |
 | `harnesses/t_brain_02_omega_behavior.py` | T-BRAIN-02 OMEGA vs behavior diagnostic |
 | `harnesses/t_brain_03_shadow_bridge.py` | T-BRAIN-03 OMEGA → shadow multitick bridge |
-| `harnesses/t_brain_04_longitudinal_carryover.py` | T-BRAIN-04 multi-tick carryover + G2 gate analog |
 | `adapters/connectome_export.py` | Synthetic / offline connectome subgraph |
 | `adapters/brian2_lif_subgraph.py` | Optional Brian2 LIF (graceful skip) |
 | `adapters/behavior_metrics.py` | Activity / burstiness / sync proxies |
@@ -29,8 +27,10 @@ pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavi
 | `adapters/ot_injection.py` | Spike phases → `OmegaWaveState` |
 | `adapters/shadow_bridge.py` | Brain-AI OMEGA → shadow multitick adapter |
 | `config.yaml` | Harness defaults |
-| `CONNECTOME_SOURCES.md` | FlyWire / offline source notes |
+| `CONNECTOME_SOURCES.md` | MaleCNS / FlyWire / offline source notes |
 | `STACK_MAP.md` | Stack crosswalk (brief) |
+| `data/README.md` | Offline subgraph fetch instructions |
+| `harnesses/t_brain_05_connectome_parity.py` | T-BRAIN-05 multi-source parity (spec stub) |
 
 ## T-BRAIN-03 (shadow bridge)
 
@@ -46,19 +46,18 @@ Metrics: native vs omega-bridged ATT-R parity, ΔG per arm, OMEGA_t per arm. Gen
 
 Artifacts: `artifacts/M-T-BRAIN-03_2026-09-10.{json,md}` (gitignored).
 
-## T-BRAIN-04 (longitudinal carryover)
+## T-BRAIN-05 (connectome source parity — spec)
 
-Extends T-BRAIN-03 with **2+ session ticks** via `ShadowSessionCarryover` at X_trigger=0:
+Multi-source offline subgraph parity across `bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female`:
 
-| Arm | EIA baseline | Ψ(O_t) tick 0 | Expectation |
-|-----|--------------|---------------|-------------|
-| `coupled_active` | full_eia | yes | sustained genesis, ATT-R, EOI≥0.5 |
-| `passive_quiescent` | reactive_only | no | 0 initiatives, abstain |
-| `phase_scramble_control` | full_eia | no (decorative OMEGA) | F-OMEGA-DECOR |
+| Source | Dataset | Offline path |
+|--------|---------|--------------|
+| `google_male_cns` | MaleCNS v1.0 (166k neurons, male brain+CNS) | `data/google_male_subgraph.json` |
+| `flywire_female` | FlyWire v783 female brain | `data/flywire_female_subgraph.json` |
 
-Carryover ticks: ambient obs only — no Ψ(O_t) re-injection (F-CARRYOVER-BLEED falsifier).
+Planned metrics: OMEGA_t span per source, shadow genesis Δ parity under matched seeds, structural distance male vs female ego-networks. Configure via `config.yaml` → `connectome.source`.
 
-Artifacts: `artifacts/M-T-BRAIN-04_2026-09-10.{json,md}` (gitignored).
+Harness stub: `harnesses/t_brain_05_connectome_parity.py` — full artifact run deferred until local ego-network exports exist (`data/README.md`).
 
 ## Branch
 
