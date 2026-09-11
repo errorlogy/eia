@@ -2737,3 +2737,45 @@ Brian2 multi-arm parity or FlyWire offline export; optional merge review to main
 ### Next
 
 K-HYP-01 Poincaré connectome viz (descriptive); paired do(O) with HDC carryover; re-run WOE-42 with amplitude-normalized mid-band ablation; no C raise.
+
+---
+
+## Entry 079 — 2026-09-11 — Kairologos Tier C round 2 battery (K-WOE-42b, K-HDC-02, K-KUR-02)
+
+**Session:** Tier C round 2 — mid-band OMEGA_t ablation, HDC multi-tick carryover, paired do(O) scramble decorrelation. **Not ontology** · **no AGI\*** · `claim_allowed=false`.
+**Branch:** `main`
+**Claim level:** **C2** unchanged. **`e_endo_support=none`**
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `k_woe_42b_midband_ablation.py` — carrier_42 vs surrogates under default / equal-weight / mid-ablated OMEGA_t |
+| S2 | `hdc_memory.evaluate_tick_retrieval` + `k_hdc_02_carryover.py` — full_eia+hdc vs full_eia over 4 session ticks |
+| S3 | `k_kur_02_scramble_decorrelation.py` — paired do(O=scramble) on fixed spikes/behavior |
+| S4 | Run scripts + pytest (`tests/test_k_*` 30 pass); README Entry 079 |
+| S5 | Artifacts M-K-WOE-42b · M-K-HDC-02 · M-K-KUR-02 (regenerable) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-KAIRO-TIER-C** |
+| `theory_strand` | `kairologos_explore` |
+| **K-WOE-42b** `diagnostic_pass` | **true** |
+| Spike ω Δ vs 30/70 (default / equal_weight) | **0.067/0.118** · **0.064/0.108** |
+| **F-GAMMA-UNIQUE-ABLATION** | **not_confirmed** (42 Hz advantage persists under equal weights) |
+| K-WOE-42b SHA-256 | `1258823bed98c84f501ab9f1e88751bdfe3005ae933c35808a869fa3494c6fbc` |
+| **K-HDC-02** `diagnostic_pass` | **true** |
+| Tick retrieval accuracy (hdc) | **1.0** (3/3 cross-tick queries) |
+| EOI persistence / initiative parity | **1.0** / **Δ=0** vs full_eia |
+| K-HDC-02 SHA-256 | `de15b7da04d722fd55db3bb360e5090e98a5d07210c4cfabf7d8085ea1068aa2` |
+| **K-KUR-02** `diagnostic_pass` | **true** |
+| Paired ω Δ (bundled_tiny exemplar) | **0.166** (genesis_Δ invariant) |
+| **F-KURAMOTO-AS-E** | **confirmed_causal** (2/4 sources: R preserved, ΔG unchanged under do(O)) |
+| K-KUR-02 SHA-256 | `7bf450d186c87fdddc7a77091d7722de9fcf0080bf62164144d369f5dd67e67d` |
+| `claim_allowed` | **false** |
+
+### Next
+
+K-HYP-01 Poincaré connectome viz; cross-source replication of paired scramble; no C raise.

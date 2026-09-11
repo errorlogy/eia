@@ -132,3 +132,40 @@ class HDCEpisodicMemory:
                 self._query_hits / total_queries if total_queries else 0.0
             ),
         }
+
+    def evaluate_tick_retrieval(
+        self,
+        expectations: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        """Tick-to-tick retrieval accuracy for carryover diagnostics (K-HDC-02)."""
+        per_tick: list[dict[str, Any]] = []
+        hits = 0
+        for spec in expectations:
+            tick = int(spec["tick"])
+            key = str(spec["key"])
+            expected = spec.get("expected_value")
+            result = self.query(key)
+            value_match = (
+                expected is None
+                or (result["hit"] and result.get("value") == expected)
+            )
+            ok = bool(result["hit"]) and value_match
+            if ok:
+                hits += 1
+            per_tick.append(
+                {
+                    "tick": tick,
+                    "key": key,
+                    "hit": result["hit"],
+                    "value_match": value_match,
+                    "accuracy": 1.0 if ok else 0.0,
+                    "similarity": result.get("similarity", 0.0),
+                }
+            )
+        total = len(expectations)
+        return {
+            "per_tick": per_tick,
+            "accuracy": hits / total if total else 0.0,
+            "hits": hits,
+            "total": total,
+        }

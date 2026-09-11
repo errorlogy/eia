@@ -23,15 +23,21 @@ claims.
 | **K-KUR-01** | `research/brain_ai/harnesses/k_kur_01_kuramoto_omega_genesis.py` | `artifacts/M-K-KUR-01_2026-09-11.json` | F-KURAMOTO-AS-E, F-OMEGA-DECOR |
 | **K-HDC-01** | `research/agent_eia/harnesses/k_hdc_01_agent_binding.py` | `artifacts/M-K-HDC-01_2026-09-11.json` | F-HDC-AS-AGI (annotation) |
 | **K-WOE-42** | `research/brain_ai/harnesses/k_woe_42_carrier_surrogate.py` | `artifacts/M-K-WOE-42_2026-09-11.json` | F-GAMMA-UNIQUE |
+| **K-WOE-42b** | `research/brain_ai/harnesses/k_woe_42b_midband_ablation.py` | `artifacts/M-K-WOE-42b_2026-09-11.json` | F-GAMMA-UNIQUE-ABLATION |
+| **K-HDC-02** | `research/agent_eia/harnesses/k_hdc_02_carryover.py` | `artifacts/M-K-HDC-02_2026-09-11.json` | F-HDC-AS-AGI (annotation) |
+| **K-KUR-02** | `research/brain_ai/harnesses/k_kur_02_scramble_decorrelation.py` | `artifacts/M-K-KUR-02_2026-09-11.json` | F-KURAMOTO-AS-E (causal) |
 
 ## Run commands
 
 ```powershell
 cd C:\Users\Public\PROACTIVE_AI
 python research/brain_ai/run_k_kur_01.py
+python research/brain_ai/run_k_kur_02.py
 python research/brain_ai/run_k_woe_42.py
+python research/brain_ai/run_k_woe_42b.py
 python research/agent_eia/run_k_hdc_01.py
-pytest tests/test_k_kur_01_kuramoto_omega_genesis.py tests/test_k_woe_42_carrier_surrogate.py tests/test_k_hdc_01_agent_binding.py -q
+python research/agent_eia/run_k_hdc_02.py
+pytest tests/test_k_kur_01_kuramoto_omega_genesis.py tests/test_k_kur_02_scramble_decorrelation.py tests/test_k_woe_42_carrier_surrogate.py tests/test_k_woe_42b_midband_ablation.py tests/test_k_hdc_01_agent_binding.py tests/test_k_hdc_02_carryover.py -q
 ```
 
 ## Disclaimers
@@ -43,4 +49,4 @@ pytest tests/test_k_kur_01_kuramoto_omega_genesis.py tests/test_k_woe_42_carrier
 
 ## SCI-FLOW
 
-See `docs/SCI_FLOW_LOG.md` Entry 078 (Kairologos Tier C battery).
+See `docs/SCI_FLOW_LOG.md` Entry 078 (round 1) and Entry 079 (round 2 battery).
