@@ -42,3 +42,14 @@ t_brain_02:
   future_hooks:
     - FlyWire offline subgraph export
     - Brian2 LIF multi-arm parity
+
+t_brain_03:
+  id: T-BRAIN-03
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.md
+  shadow_seed: 42
+  x_trigger_zero: true
+  arms:
+    - coupled_active
+    - passive_quiescent
+    - phase_scramble_control

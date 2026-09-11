@@ -2286,3 +2286,44 @@ X post template (Step 5 in ZENODO guide). arXiv mirror when endorsement availabl
 ### Next
 
 T-BRAIN-03 shadow bridge or FlyWire offline export; Brian2 multi-arm parity optional; no C raise.
+
+---
+
+## Entry 067 — 2026-09-10 — M-BRAIN-AI T-BRAIN-03 shadow bridge
+
+**Session:** T-BRAIN-03 — Brain-AI `inject_omega_from_spikes()` → EIA shadow multitick at X_trigger=0; three-arm suite (coupled_active, passive_quiescent, phase_scramble_control); native vs omega-bridged ATT-R parity; behavior-gated ΔG(genesis).
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `adapters/shadow_bridge.py` — omega crosswalk + behavior-gated genesis |
+| S2 | `harnesses/t_brain_03_shadow_bridge.py` + `run_t_brain_03.py` |
+| S3 | Artifact `M-T-BRAIN-03_2026-09-10`; `config.yaml` + README update |
+| S4 | `tests/test_t_brain_03_shadow_bridge.py` (8 tests); run harness |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-03** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.json` |
+| `coupled_active` OMEGA_t / genesis_Δ | see artifact |
+| `passive_quiescent` OMEGA_t / genesis_Δ | see artifact |
+| `phase_scramble_control` OMEGA_t / genesis_Δ | see artifact |
+| active↔passive genesis diff | **true** |
+| F-OMEGA-DECOR | **confirmed** (phase_scramble) |
+| F-BEHAV-OMEGA-MISMATCH | **confirmed** |
+| ATT-R parity (native↔bridged active) | see artifact |
+| `diagnostic_pass` | **true** |
+| `claim_allowed` | **false** |
+
+### Next
+
+T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi-arm parity optional; no C raise.
