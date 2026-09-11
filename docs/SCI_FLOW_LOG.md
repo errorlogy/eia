@@ -2330,6 +2330,41 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 070 — 2026-09-10 — M-BRAIN-AI T-BRAIN-05 connectome source parity
+
+**Session:** T-BRAIN-05 — multi-source connectome parity harness comparing `bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female` on shared spike→OMEGA→shadow pipeline; offline-first stubs when `data/` exports absent.
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `harnesses/t_brain_05_connectome_parity.py` — per-source probes, span metrics, F-SOURCE-PARITY |
+| S2 | `run_t_brain_05.py` + `tests/test_t_brain_05_connectome_parity.py` |
+| S3 | Artifact `M-T-BRAIN-05_2026-09-10`; `config.yaml` + README update |
+| S4 | Run harness + full brain_ai pytest suite |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-05** |
+| Cell | D2×L2 adjunct |
+| Tier | **C** |
+| Artifact | `research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.json` |
+| Sources | bundled_tiny, synthetic, google_male_cns, flywire_female |
+| `diagnostic_pass` | **true** (see artifact for per-source OMEGA_t / spans) |
+| `claim_allowed` | **false** |
+
+### Next
+
+Brian2 multi-source parity; real neuprint MaleCNS/FlyWire ego-network fetch; optional merge review to main; no C raise.
+
+---
+
 ## Entry 069 — 2026-09-10 — M-BRAIN-AI Google male connectome source
 
 **Session:** Integrate Google/HHMI Janelia MaleCNS connectome (Sept 2026) as offline-first Brain-AI source — `google_male_cns` enum, `export_google_male_subgraph()` stub, docs + T-BRAIN-05 parity spec.

@@ -63,7 +63,7 @@ t_brain_03:
 
 t_brain_05:
   id: T-BRAIN-05
-  status: spec_stub
+  status: implemented
   artifact_json: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.json
   artifact_md: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.md
   connectome_sources:
@@ -71,6 +71,7 @@ t_brain_05:
     - synthetic
     - google_male_cns
     - flywire_female
+  include_shadow_bridge: true
   future_hooks:
-    - MaleCNS vs FlyWire subgraph parity
-    - OMEGA_t span cross-source comparison
+    - Brian2 multi-source parity
+    - Real neuprint MaleCNS/FlyWire ego-network fetch

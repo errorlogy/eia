@@ -10,7 +10,9 @@ Tier **C** adjunct strand: connectome subgraph → spike dynamics → `OmegaWave
 python research/brain_ai/run_t_brain_01.py
 python research/brain_ai/run_t_brain_02.py
 python research/brain_ai/run_t_brain_03.py
-pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py -q
+python research/brain_ai/run_t_brain_04.py
+python research/brain_ai/run_t_brain_05.py
+pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavior.py tests/test_t_brain_03_shadow_bridge.py tests/test_t_brain_04_longitudinal_carryover.py tests/test_t_brain_05_connectome_parity.py -q
 ```
 
 ## Layout
@@ -30,7 +32,9 @@ pytest tests/test_t_brain_01_connectome_ot.py tests/test_t_brain_02_omega_behavi
 | `CONNECTOME_SOURCES.md` | MaleCNS / FlyWire / offline source notes |
 | `STACK_MAP.md` | Stack crosswalk (brief) |
 | `data/README.md` | Offline subgraph fetch instructions |
-| `harnesses/t_brain_05_connectome_parity.py` | T-BRAIN-05 multi-source parity (spec stub) |
+| `harnesses/t_brain_04_longitudinal_carryover.py` | T-BRAIN-04 longitudinal shadow carryover |
+| `harnesses/t_brain_05_connectome_parity.py` | T-BRAIN-05 multi-source connectome parity |
+| `run_t_brain_05.py` | T-BRAIN-05 artifact runner |
 
 ## T-BRAIN-03 (shadow bridge)
 
@@ -46,7 +50,7 @@ Metrics: native vs omega-bridged ATT-R parity, ΔG per arm, OMEGA_t per arm. Gen
 
 Artifacts: `artifacts/M-T-BRAIN-03_2026-09-10.{json,md}` (gitignored).
 
-## T-BRAIN-05 (connectome source parity — spec)
+## T-BRAIN-05 (connectome source parity)
 
 Multi-source offline subgraph parity across `bundled_tiny`, `synthetic`, `google_male_cns`, `flywire_female`:
 
@@ -55,9 +59,11 @@ Multi-source offline subgraph parity across `bundled_tiny`, `synthetic`, `google
 | `google_male_cns` | MaleCNS v1.0 (166k neurons, male brain+CNS) | `data/google_male_subgraph.json` |
 | `flywire_female` | FlyWire v783 female brain | `data/flywire_female_subgraph.json` |
 
-Planned metrics: OMEGA_t span per source, shadow genesis Δ parity under matched seeds, structural distance male vs female ego-networks. Configure via `config.yaml` → `connectome.source`.
+Per source: connectome_export → spike dynamics (`coupled_active`) → OMEGA_t → optional shadow genesis Δ.
 
-Harness stub: `harnesses/t_brain_05_connectome_parity.py` — full artifact run deferred until local ego-network exports exist (`data/README.md`).
+Metrics: `omega_t` per source, `omega_span`, `behavior_span`, `genesis_delta`, `source_fallback` flags (stub vs real export). Falsifier **F-SOURCE-PARITY** — structurally distinct sources must not yield identical OMEGA.
+
+Artifacts: `artifacts/M-T-BRAIN-05_2026-09-10.{json,md}` (gitignored). Uses deterministic stubs when `data/` exports absent.
 
 ## Branch
 
