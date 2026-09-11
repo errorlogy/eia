@@ -278,6 +278,12 @@ from eia.audit.authentic_reason import (  # noqa: E402
     AuthenticReasonVerdict,
     EOI_AUTHENTIC_THRESHOLD,
 )
+from eia.audit.eis import (  # noqa: E402
+    EndogeneityVector,
+    EndogenousSpectrumLevel,
+    authentic_vs_eis_agreement,
+    infer_endogeneity_vector,
+)
 from eia.audit.topology import (  # noqa: E402
     CausalTraceTopology,
     SourceMass,
@@ -303,6 +309,10 @@ __all__ = [
     "AuthenticReasonCode",
     "AuthenticReasonDiscriminator",
     "AuthenticReasonVerdict",
+    "EndogeneityVector",
+    "EndogenousSpectrumLevel",
+    "authentic_vs_eis_agreement",
+    "infer_endogeneity_vector",
     "CausalTrace",
     "CausalTraceTopology",
     "ThresholdCalibration",

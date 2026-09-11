@@ -1,0 +1,1 @@
+Proto-AGI Horizon (Kuznetsov 2026) — Zenodo upload bundle. Primary file: Kuznetsov_2026_Proto_AGI_Horizon.pdf. Optional LaTeX sources: sources/proto_agi_horizon_arXiv_submission.tar.gz. Metadata: metadata.yaml, datacite.xml. Upload guide: docs/ZENODO_SUBMISSION.md. License: CC BY 4.0. Claim ceiling: C2; claim_allowed=false.

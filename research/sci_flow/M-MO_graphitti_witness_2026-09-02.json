@@ -1,0 +1,51 @@
+{
+  "milestone": "M-O",
+  "artifact_id": "M-MO_graphitti_witness_2026-09-02",
+  "tick": "M-GRAPHITTI-GREEN",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "tier": "C",
+  "cube_cell": "D2\u00d7L3",
+  "vendor": "graphitti",
+  "commit_pin": "b96e96c",
+  "config_path": "research/vendor/graphitti/configfiles/test-tiny.xml",
+  "build_path": "research/vendor/graphitti/build",
+  "binary_name": "cgraphitti",
+  "build_command": "bash scripts/build_graphitti.sh",
+  "run_command": "./cgraphitti -c ../configfiles/test-tiny.xml",
+  "ci_workflow": ".github/workflows/graphitti-witness.yml",
+  "ci_build_script": "scripts/build_graphitti.sh",
+  "simulation": {
+    "status": "regression_ok",
+    "binary_available": false,
+    "binary_path": null,
+    "regression_xml": "research/vendor/graphitti/Testing/RegressionTesting/GoodOutput/Cpu/test-tiny-out.xml",
+    "spike_metrics": {
+      "spike_count_total": 5,
+      "spike_rate_mean_hz": 5.0,
+      "spike_rate_min_hz": 5.0,
+      "spike_rate_max_hz": 5.0,
+      "spike_rate_per_neuron_hz": {
+        "0": 5.0
+      },
+      "neuron_count": 1,
+      "epoch_duration_s": 1.0,
+      "parse_status": "ok"
+    },
+    "note": "Vendor GoodOutput XML; spike metrics only \u2014 not a live cgraphitti run"
+  },
+  "witness": {
+    "witness_kind": "regression_xml_ok",
+    "spike_rate_mean_hz": 5.0,
+    "spike_count_total": 5,
+    "neuron_count": 1,
+    "status": "regression_ok"
+  },
+  "falsifiers_active": [
+    "F-STRUCT\u2260E",
+    "F-EXT"
+  ],
+  "note": "Graphitti binary witness only; spike rates do not establish E_endo. Starter neurons + ConnGrowth config parsed in neuroplasticity probe."
+}

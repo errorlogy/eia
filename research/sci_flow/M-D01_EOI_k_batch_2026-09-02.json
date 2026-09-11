@@ -1,0 +1,778 @@
+{
+  "artifact_id": "M-D01_EOI_k_batch",
+  "date": "2026-09-02",
+  "claim_ceiling": "C2_partial_ATT_E",
+  "claim_allowed": false,
+  "seeds": [
+    0,
+    7,
+    42
+  ],
+  "k_values": [
+    1,
+    5,
+    20
+  ],
+  "eoi_k_batch": {
+    "seeds": [
+      0,
+      7,
+      42
+    ],
+    "scenario_ids": [
+      "twin_world_001",
+      "autonomous_question",
+      "eoi_k_steered"
+    ],
+    "k_values": [
+      1,
+      5,
+      20
+    ],
+    "claim_ceiling": "C2_partial_ATT_E",
+    "claim_allowed": false,
+    "pool_metric_id": "E_ENDO",
+    "att": "ATT-E",
+    "steered_eoi_by_seed": {
+      "0": {
+        "1": 1.0,
+        "5": 0.35,
+        "20": 0.35
+      },
+      "7": {
+        "1": 1.0,
+        "5": 0.35,
+        "20": 0.35
+      },
+      "42": {
+        "1": 1.0,
+        "5": 0.35,
+        "20": 0.35
+      }
+    },
+    "runs": [
+      {
+        "seed": 0,
+        "sweep": {
+          "k_values": [
+            1,
+            5,
+            20
+          ],
+          "claim_ceiling": "C2_partial_ATT_E",
+          "claim_allowed": false,
+          "pool_metric_id": "E_ENDO",
+          "att": "ATT-E",
+          "carryover_note": "Twin EOI-k uses counterfactual replay (exclude last k user observations). Shadow carryover path has zero user prompts; see carryover block for session witness. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+          "counterfactual_replay": true,
+          "rows": [
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 5,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 5,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 20,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 6,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "seed": 7,
+        "sweep": {
+          "k_values": [
+            1,
+            5,
+            20
+          ],
+          "claim_ceiling": "C2_partial_ATT_E",
+          "claim_allowed": false,
+          "pool_metric_id": "E_ENDO",
+          "att": "ATT-E",
+          "carryover_note": "Twin EOI-k uses counterfactual replay (exclude last k user observations). Shadow carryover path has zero user prompts; see carryover block for session witness. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+          "counterfactual_replay": true,
+          "rows": [
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 5,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 5,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 20,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 6,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "seed": 42,
+        "sweep": {
+          "k_values": [
+            1,
+            5,
+            20
+          ],
+          "claim_ceiling": "C2_partial_ATT_E",
+          "claim_allowed": false,
+          "pool_metric_id": "E_ENDO",
+          "att": "ATT-E",
+          "carryover_note": "Twin EOI-k uses counterfactual replay (exclude last k user observations). Shadow carryover path has zero user prompts; see carryover block for session witness. Carryover DSR (M-E04) is orthogonal D2\u00d7L2 evidence.",
+          "counterfactual_replay": true,
+          "rows": [
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "twin_world_001",
+              "scenario_path": "scenarios\\twin_world_001.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 3,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 5,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "autonomous_question",
+              "scenario_path": "scenarios\\autonomous_question.yaml",
+              "k": 20,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-review-time",
+              "twin_target": "belief-review-time",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 1,
+              "eoi": 1.0,
+              "semantic_match": 1.0,
+              "twin_abstained": false,
+              "removed_user_events": 1,
+              "intervention_id": "do_x_remove_last_user_k1",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-commit-atlas",
+              "twin_source_drives": [
+                "commitment"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 5,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 5,
+              "intervention_id": "do_x_remove_last_user_k5",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            },
+            {
+              "scenario_id": "eoi_k_steered",
+              "scenario_path": "scenarios\\eoi_k_steered.yaml",
+              "k": 20,
+              "eoi": 0.35,
+              "semantic_match": 0.35,
+              "twin_abstained": false,
+              "removed_user_events": 6,
+              "intervention_id": "do_x_remove_last_user_k20",
+              "claim_allowed": false,
+              "trace_mode": "twin_counterfactual",
+              "original_target": "belief-commit-atlas",
+              "twin_target": "belief-deadline",
+              "twin_source_drives": [
+                "epistemic"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "e_c_continuous": {
+    "seeds": [
+      0,
+      7,
+      42
+    ],
+    "intervention_ids": [
+      "do_z_zero_epistemic_gap",
+      "do_z_zero_self_prior",
+      "do_z_zero_prospective",
+      "do_z_zero_staleness",
+      "do_z_wm_off"
+    ],
+    "claim_ceiling": "C2_partial_ATT_E",
+    "claim_allowed": false,
+    "pool_metric_id": "E_C",
+    "att": "ATT-E",
+    "note": "Minimal continuous E_C proxy: |intent_default - intent_do_z| / (c_int + c_ext) per registered do(Z) from intervention_cube. CF-4 WoE sim only; theta_E TBD; claim_allowed=false.",
+    "summary_by_intervention": {
+      "do_z_wm_off": {
+        "mean_e_c": 1.0,
+        "n": 3
+      },
+      "do_z_zero_epistemic_gap": {
+        "mean_e_c": 1.0,
+        "n": 3
+      },
+      "do_z_zero_prospective": {
+        "mean_e_c": 0.0,
+        "n": 3
+      },
+      "do_z_zero_self_prior": {
+        "mean_e_c": 0.0,
+        "n": 3
+      },
+      "do_z_zero_staleness": {
+        "mean_e_c": 0.3333,
+        "n": 3
+      }
+    },
+    "rows": [
+      {
+        "intervention_id": "do_z_zero_epistemic_gap",
+        "cf4_condition": "zero_epistemic_gap",
+        "seed": 0,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_epistemic_gap",
+        "cf4_condition": "zero_epistemic_gap",
+        "seed": 7,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_epistemic_gap",
+        "cf4_condition": "zero_epistemic_gap",
+        "seed": 42,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_self_prior",
+        "cf4_condition": "zero_self_prior",
+        "seed": 0,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_self_prior",
+        "cf4_condition": "zero_self_prior",
+        "seed": 7,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_self_prior",
+        "cf4_condition": "zero_self_prior",
+        "seed": 42,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_prospective",
+        "cf4_condition": "zero_prospective",
+        "seed": 0,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_prospective",
+        "cf4_condition": "zero_prospective",
+        "seed": 7,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_prospective",
+        "cf4_condition": "zero_prospective",
+        "seed": 42,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_staleness",
+        "cf4_condition": "zero_staleness",
+        "seed": 0,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_staleness",
+        "cf4_condition": "zero_staleness",
+        "seed": 7,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_zero_staleness",
+        "cf4_condition": "zero_staleness",
+        "seed": 42,
+        "default_intent": true,
+        "z_intent": true,
+        "c_int": 0.0,
+        "c_ext": 0.0,
+        "e_c": 0.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_wm_off",
+        "cf4_condition": "wm_off",
+        "seed": 0,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_wm_off",
+        "cf4_condition": "wm_off",
+        "seed": 7,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      },
+      {
+        "intervention_id": "do_z_wm_off",
+        "cf4_condition": "wm_off",
+        "seed": 42,
+        "default_intent": true,
+        "z_intent": false,
+        "c_int": 1.0,
+        "c_ext": 0.0,
+        "e_c": 1.0,
+        "claim_allowed": false
+      }
+    ]
+  },
+  "explore_proxy_note": "Multi-seed EOI-k counterfactual batch + minimal continuous E_C under registered do(Z); not C-ladder gate; claim_allowed=false."
+}

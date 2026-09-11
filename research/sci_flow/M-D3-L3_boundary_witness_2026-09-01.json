@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-01",
+  "witness_tier": "B_soft_NH",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "n_h_claim": false,
+  "agi_star_claim": false,
+  "passed": true,
+  "note": "D3\u00d7L3 boundary witness: falsifier registry + governor gate + ATT-N explore; NAMM intent corpus Tier B soft witness (not strong N_H).",
+  "falsifier_registry": {
+    "intervention_count_d3": 2,
+    "registry_falsifiers": [
+      "F-EXT",
+      "F-KURAMOTO-AS-E",
+      "F-NARR",
+      "F-NODO",
+      "F-OMEGA-DECOR",
+      "F-OMEGA-EXT",
+      "F-OPACITY-NH",
+      "F-PHASE-ONLY",
+      "F-SYNC"
+    ],
+    "causal_doc_falsifiers": [
+      "F-DECL",
+      "F-EXT",
+      "F-NARR",
+      "F-NODO"
+    ],
+    "linked": [
+      "F-DECL",
+      "F-EXT",
+      "F-NARR",
+      "F-NODO"
+    ],
+    "missing": [],
+    "ok": true
+  },
+  "governor_gate": {
+    "deny_low_value": true,
+    "min_contact_score": 0.99,
+    "cf7_intervention_present": true,
+    "ok": true
+  },
+  "att_n": {
+    "n_seeds": 2,
+    "causal_att_n_rate": 1.0,
+    "claim_allowed": false,
+    "n_h_claim": false,
+    "ok": true
+  },
+  "namm_soft": {
+    "intent_files": 852,
+    "valid_json": 634,
+    "domains": [
+      "meta_evaluation",
+      "tda_frame"
+    ],
+    "tier": "B",
+    "ok": true
+  }
+}

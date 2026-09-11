@@ -231,6 +231,7 @@ def pipeline(scenario_path: Path | None, traces_dir: Path) -> None:
             f"[bold]EOI:[/bold] {twin.eoi:.3f} · "
             f"[bold]Contact:[/bold] {result['decision'].outcome.value}\n"
             f"[bold]Authentic reason:[/bold] {auth.is_authentic} ({auth.initiative_class})\n"
+            f"[bold]EIS:[/bold] {auth.eis_level} · EOS={auth.eos_score}\n"
             f"[dim]Trace:[/dim] {result['trace_path']}",
             title="Outcome",
             border_style="blue",
@@ -258,6 +259,8 @@ def run(scenario_path: Path | None, traces_dir: Path, baseline: str | None) -> N
         "eoi": result["twin_result"].eoi,
         "authentic_reason": result["authentic_verdict"].is_authentic,
         "initiative_class": result["authentic_verdict"].initiative_class,
+        "eis_level": result["authentic_verdict"].eis_level,
+        "eos_score": result["authentic_verdict"].eos_score,
         "initiative_abstained": result["initiative"].abstained,
         "contact_outcome": result["decision"].outcome.value,
         "trace_path": str(result["trace_path"]),

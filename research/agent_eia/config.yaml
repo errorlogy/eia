@@ -1,0 +1,78 @@
+# T-AGENT-01 LLM + EIA at X^trigger=0
+# Tier C · claim_allowed=false · no AGI*
+
+version: "0.1"
+updated: "2026-09-11"
+
+harness:
+  id: T-AGENT-01
+  milestone: M-AGENT-EIA
+  tier: C
+  claim_ceiling: C2
+  claim_allowed: false
+  agi_star_claim: false
+  e_endo_support: none
+  witness_support: none
+  c_ladder_raise_allowed: false
+  cell: D1×L2
+
+t_agent_01:
+  seed: 42
+  quiet_ticks: 6
+  schedule_period: 3
+  drive_proposal_threshold: 0.22
+  llm_backend: mock  # mock | openai | anthropic (env EIA_LLM_BACKEND overrides)
+
+arms:
+  - full_eia
+  - reactive_only
+  - schedule_entrained
+
+t_agent_02:
+  num_worlds: 8
+  seeds: [100, 101, 102, 103, 104, 105, 106, 107]
+  domains:
+    - ops_atlas
+    - research_workspace
+    - code_review
+    - ops_atlas
+    - research_workspace
+    - code_review
+    - health_triage
+    - ops_atlas
+  quiet_ticks: 6
+  schedule_period: 3
+  drive_proposal_threshold: 0.22
+  llm_backend: mock
+  perturbation:
+    enabled: true
+    blip_tick: 3
+    world_indices: [2, 6]  # agent_world_003, agent_world_007
+
+t_agent_03:
+  seed: 42
+  quiet_ticks: 6
+  drive_proposal_threshold: 0.22
+  llm_backend: mock
+  primary_source: bundled_tiny
+  connectome_sources:
+    - bundled_tiny
+    - google_male_cns
+  n_nodes: 8
+  duration_ms: 100.0
+  dt_ms: 1.0
+  carriers_hz: [20, 30, 42, 70]
+  prefer_brian2: false
+  arms:
+    - brain_eia_endogenous
+    - brain_eia_no_psi
+    - brain_reactive
+    - agent_only_eia
+
+artifacts:
+  t_agent_01_json: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.json
+  t_agent_01_md: research/agent_eia/artifacts/M-T-AGENT-01_2026-09-11.md
+  t_agent_02_json: research/agent_eia/artifacts/M-T-AGENT-02_2026-09-11.json
+  t_agent_02_md: research/agent_eia/artifacts/M-T-AGENT-02_2026-09-11.md
+  t_agent_03_json: research/agent_eia/artifacts/M-T-AGENT-03_2026-09-11.json
+  t_agent_03_md: research/agent_eia/artifacts/M-T-AGENT-03_2026-09-11.md

@@ -1,0 +1,570 @@
+{
+  "milestone": "M-O-SHADOW-BRIDGE",
+  "artifact_id": "M-MO_shadow_bridge_2026-09-02",
+  "tick_id": "M-MO-SHADOW-BRIDGE",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "cell": "D2\u00d7L2",
+  "tier": "C",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "e_endo_support": "none",
+  "witness_support": "none",
+  "c_ladder_raise_allowed": false,
+  "agi_star_claim": false,
+  "att": "ATT-R",
+  "seed": 42,
+  "sources": {
+    "arms": "research/sci_flow/M-MO_do_o_arms_2026-09-02.json",
+    "admissibility": "research/sci_flow/M-O_PROOF_ADMISSIBILITY.md",
+    "shadow_runtime": "src/eia/runtime/shadow_multitick.py",
+    "oscillatory_state": "research/cursor-starter-v0.2/src/eia/oscillatory_state.py",
+    "att_r_scoring": "research/cursor-starter-v0.2/src/eia/live_att_r.py"
+  },
+  "omega_crosswalk": {
+    "neuraxon_baseline": {
+      "omega_t": 0.29286693887341186,
+      "kuramoto_r": 0.6038195614859427,
+      "omega_wave_state": {
+        "phase_coherence": 0.7557350116263011,
+        "cadence": 1.0,
+        "synchrony": 0.5114700232526023,
+        "productive_tension": 1.0,
+        "handoff": 0.0,
+        "drift": 0.39618043851405726,
+        "closure_velocity": 1.0,
+        "n_bands": 5
+      },
+      "n_bands": 5,
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": true,
+        "carrier_hz": [
+          0.05,
+          0.5,
+          6.0,
+          10.0,
+          40.0
+        ]
+      },
+      "vendor": "neuraxon",
+      "arm": "neuraxon_baseline"
+    },
+    "do_o_neuraxon_plasticity_off": {
+      "omega_t": 0.29286693887341186,
+      "kuramoto_r": 0.6038195614859427,
+      "omega_wave_state": {
+        "phase_coherence": 0.7557350116263011,
+        "cadence": 1.0,
+        "synchrony": 0.5114700232526023,
+        "productive_tension": 1.0,
+        "handoff": 0.0,
+        "drift": 0.39618043851405726,
+        "closure_velocity": 1.0,
+        "n_bands": 5
+      },
+      "n_bands": 5,
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": true,
+        "carrier_hz": [
+          0.05,
+          0.5,
+          6.0,
+          10.0,
+          40.0
+        ]
+      },
+      "vendor": "neuraxon",
+      "arm": "do_o_neuraxon_plasticity_off"
+    },
+    "native_oscillatory_state": {
+      "omega_t": 0.8969438342286497,
+      "kuramoto_r": 0.9937606691655041,
+      "omega_wave_state": {
+        "phase_coherence": 0.9993751301974831,
+        "cadence": 1.0,
+        "synchrony": 0.9987502603949662,
+        "productive_tension": 1.0,
+        "handoff": 0.9987502603949662,
+        "drift": 0.006239330834495904,
+        "closure_velocity": 1.0,
+        "n_bands": 4
+      },
+      "n_bands": 4,
+      "crosswalk": {
+        "neuraxon_bands_to_omega_wave_state": false,
+        "native_default_carriers": true
+      },
+      "vendor": "eia.oscillatory_state",
+      "arm": "native_oscillatory_state"
+    },
+    "feasible": true
+  },
+  "neuraxon_paired_delta": {
+    "omega_t_final": 0.0,
+    "kuramoto_r_final": 0.0
+  },
+  "shadow_sessions": {
+    "native_closed_loop": {
+      "arm": "closed_loop",
+      "events": [
+        {
+          "node_id": "n0",
+          "kind": "W",
+          "label": "world_model",
+          "parent_ids": [],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n1",
+          "kind": "M",
+          "label": "self_model",
+          "parent_ids": [
+            "n0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n2",
+          "kind": "G",
+          "label": "mot-1",
+          "parent_ids": [
+            "n0",
+            "n1"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n3",
+          "kind": "Pi",
+          "label": "pi_research",
+          "parent_ids": [
+            "n2"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n4",
+          "kind": "A",
+          "label": "act_probe:deny",
+          "parent_ids": [
+            "n3"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n5",
+          "kind": "X",
+          "label": "x_observation",
+          "parent_ids": [
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n6",
+          "kind": "W_prime",
+          "label": "world_update",
+          "parent_ids": [
+            "n5",
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n7",
+          "kind": "G_prime",
+          "label": "mot-2",
+          "parent_ids": [
+            "n6",
+            "n1"
+          ],
+          "tick": 3,
+          "novel": true
+        }
+      ],
+      "shadow": true,
+      "live_telegram": false,
+      "emit_m0": false,
+      "kuramoto_r": 0.42,
+      "claim_allowed": false,
+      "ticks_run": 2,
+      "motive_ids": [
+        "mot-1",
+        "mot-2"
+      ],
+      "used_carryover": false,
+      "gap_vs_live_daemon": "Daemon recreates CognitiveLoop per tick without cross-tick W'\u2192G' carryover; this harness keeps one loop + post-action world update.",
+      "att": "ATT-R",
+      "agi_star_claim": false,
+      "c3_claim": false,
+      "carryover": {
+        "session_tick": 2,
+        "last_motive_id": "mot-2",
+        "drive_tick": 2,
+        "has_beliefs": true
+      },
+      "initiative_sample_count": 2
+    },
+    "omega_bridged_baseline": {
+      "arm": "closed_loop",
+      "bridge_kind": "omega_bridged_closed_loop",
+      "events": [
+        {
+          "node_id": "o0",
+          "kind": "X",
+          "label": "omega_bridge:omega_t=0.2929",
+          "parent_ids": [],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n0",
+          "kind": "W",
+          "label": "world_model",
+          "parent_ids": [
+            "o0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n1",
+          "kind": "M",
+          "label": "self_model",
+          "parent_ids": [
+            "n0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n2",
+          "kind": "G",
+          "label": "mot-1",
+          "parent_ids": [
+            "n0",
+            "n1",
+            "o0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n3",
+          "kind": "Pi",
+          "label": "pi_research",
+          "parent_ids": [
+            "n2"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n4",
+          "kind": "A",
+          "label": "act_probe:abstain",
+          "parent_ids": [
+            "n3"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n5",
+          "kind": "X",
+          "label": "x_observation",
+          "parent_ids": [
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n6",
+          "kind": "W_prime",
+          "label": "world_update",
+          "parent_ids": [
+            "n5",
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n7",
+          "kind": "G_prime",
+          "label": "mot-2",
+          "parent_ids": [
+            "n6",
+            "n1",
+            "o0"
+          ],
+          "tick": 3,
+          "novel": true
+        }
+      ],
+      "shadow": true,
+      "live_telegram": false,
+      "emit_m0": false,
+      "kuramoto_r": 0.6038195614859427,
+      "omega_t": 0.29286693887341186,
+      "claim_allowed": false,
+      "ticks_run": 2,
+      "motive_ids": [
+        "mot-1",
+        "mot-2"
+      ],
+      "used_carryover": false,
+      "omega_bridge": {
+        "omega_t": 0.29286693887341186,
+        "kuramoto_r": 0.6038195614859427,
+        "omega_wave_state": {
+          "phase_coherence": 0.7557350116263011,
+          "cadence": 1.0,
+          "synchrony": 0.5114700232526023,
+          "productive_tension": 1.0,
+          "handoff": 0.0,
+          "drift": 0.39618043851405726,
+          "closure_velocity": 1.0,
+          "n_bands": 5
+        },
+        "n_bands": 5,
+        "crosswalk": {
+          "neuraxon_bands_to_omega_wave_state": true,
+          "carrier_hz": [
+            0.05,
+            0.5,
+            6.0,
+            10.0,
+            40.0
+          ]
+        },
+        "vendor": "neuraxon",
+        "arm": "neuraxon_baseline"
+      },
+      "carryover": {
+        "session_tick": 2,
+        "last_motive_id": "mot-2",
+        "drive_tick": 2,
+        "has_beliefs": true
+      },
+      "gap_vs_live_daemon": "Omega-bridged shadow multitick: Neuraxon O_t crosswalk injected as internal observation; live daemon does not ingest vendor omega context."
+    },
+    "omega_bridged_plasticity_off": {
+      "arm": "closed_loop",
+      "bridge_kind": "omega_bridged_closed_loop",
+      "events": [
+        {
+          "node_id": "o0",
+          "kind": "X",
+          "label": "omega_bridge:omega_t=0.2929",
+          "parent_ids": [],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n0",
+          "kind": "W",
+          "label": "world_model",
+          "parent_ids": [
+            "o0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n1",
+          "kind": "M",
+          "label": "self_model",
+          "parent_ids": [
+            "n0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n2",
+          "kind": "G",
+          "label": "mot-1",
+          "parent_ids": [
+            "n0",
+            "n1",
+            "o0"
+          ],
+          "tick": 0,
+          "novel": false
+        },
+        {
+          "node_id": "n3",
+          "kind": "Pi",
+          "label": "pi_research",
+          "parent_ids": [
+            "n2"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n4",
+          "kind": "A",
+          "label": "act_probe:abstain",
+          "parent_ids": [
+            "n3"
+          ],
+          "tick": 1,
+          "novel": false
+        },
+        {
+          "node_id": "n5",
+          "kind": "X",
+          "label": "x_observation",
+          "parent_ids": [
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n6",
+          "kind": "W_prime",
+          "label": "world_update",
+          "parent_ids": [
+            "n5",
+            "n4"
+          ],
+          "tick": 2,
+          "novel": false
+        },
+        {
+          "node_id": "n7",
+          "kind": "G_prime",
+          "label": "mot-2",
+          "parent_ids": [
+            "n6",
+            "n1",
+            "o0"
+          ],
+          "tick": 3,
+          "novel": true
+        }
+      ],
+      "shadow": true,
+      "live_telegram": false,
+      "emit_m0": false,
+      "kuramoto_r": 0.6038195614859427,
+      "omega_t": 0.29286693887341186,
+      "claim_allowed": false,
+      "ticks_run": 2,
+      "motive_ids": [
+        "mot-1",
+        "mot-2"
+      ],
+      "used_carryover": false,
+      "omega_bridge": {
+        "omega_t": 0.29286693887341186,
+        "kuramoto_r": 0.6038195614859427,
+        "omega_wave_state": {
+          "phase_coherence": 0.7557350116263011,
+          "cadence": 1.0,
+          "synchrony": 0.5114700232526023,
+          "productive_tension": 1.0,
+          "handoff": 0.0,
+          "drift": 0.39618043851405726,
+          "closure_velocity": 1.0,
+          "n_bands": 5
+        },
+        "n_bands": 5,
+        "crosswalk": {
+          "neuraxon_bands_to_omega_wave_state": true,
+          "carrier_hz": [
+            0.05,
+            0.5,
+            6.0,
+            10.0,
+            40.0
+          ]
+        },
+        "vendor": "neuraxon",
+        "arm": "do_o_neuraxon_plasticity_off"
+      },
+      "carryover": {
+        "session_tick": 2,
+        "last_motive_id": "mot-2",
+        "drive_tick": 2,
+        "has_beliefs": true
+      },
+      "gap_vs_live_daemon": "Omega-bridged shadow multitick: Neuraxon O_t crosswalk injected as internal observation; live daemon does not ingest vendor omega context."
+    }
+  },
+  "att_r_comparison": {
+    "native_closed_loop": {
+      "att": "ATT-R",
+      "att_r_evidence": true,
+      "closed_cycle_count": 1,
+      "has_world_update": true,
+      "has_novel_motive_after_action": true,
+      "kuramoto_r": 0.42,
+      "kuramoto_alone": false,
+      "emit_m0": false,
+      "arm": "closed_loop",
+      "min_closed_cycles": 1,
+      "claim_allowed": false,
+      "agi_star_claim": false,
+      "c3_claim": false,
+      "note": "explore proxy only; thresholds TBD; Kuramoto R is not ATT-R"
+    },
+    "omega_bridged_baseline": {
+      "att": "ATT-R",
+      "att_r_evidence": true,
+      "closed_cycle_count": 1,
+      "has_world_update": true,
+      "has_novel_motive_after_action": true,
+      "kuramoto_r": 0.6038195614859427,
+      "kuramoto_alone": false,
+      "emit_m0": false,
+      "arm": "closed_loop",
+      "min_closed_cycles": 1,
+      "claim_allowed": false,
+      "agi_star_claim": false,
+      "c3_claim": false,
+      "note": "explore proxy only; thresholds TBD; Kuramoto R is not ATT-R"
+    },
+    "omega_bridged_plasticity_off": {
+      "att": "ATT-R",
+      "att_r_evidence": true,
+      "closed_cycle_count": 1,
+      "has_world_update": true,
+      "has_novel_motive_after_action": true,
+      "kuramoto_r": 0.6038195614859427,
+      "kuramoto_alone": false,
+      "emit_m0": false,
+      "arm": "closed_loop",
+      "min_closed_cycles": 1,
+      "claim_allowed": false,
+      "agi_star_claim": false,
+      "c3_claim": false,
+      "note": "explore proxy only; thresholds TBD; Kuramoto R is not ATT-R"
+    },
+    "att_r_parity_native_vs_bridged_baseline": true,
+    "kuramoto_is_not_att_r": true
+  },
+  "falsifier_hints": {
+    "F-OMEGA-DECOR": false,
+    "F-STRUCT\u2260E": true,
+    "F-KURAMOTO-AS-E": false
+  },
+  "falsifiers_active": [
+    "F-KURAMOTO-AS-E",
+    "F-OMEGA-DECOR",
+    "F-SYNC",
+    "F-STRUCT\u2260E"
+  ],
+  "note": "Neuraxon O_t \u2192 OmegaWaveState \u2192 shadow multitick crosswalk with ATT-R scorecard compare. Does not establish E_endo or raise C-level."
+}

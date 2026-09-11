@@ -2,7 +2,7 @@
 
 ## Active research (sci-flow)
 
-**This main branch** is the stable runtime slice (MVP-0 prototype, CI). **Sci-flow harnesses, arXiv papers, and 3D evidence-cube work** live on the research branch — not merged here by design.
+**This main branch** is the stable runtime slice (MVP-0 prototype, CI) plus merged **Brain-AI** and **Agent-EIA** research harnesses (T-BRAIN-01..06, T-AGENT-01..03). Broader sci-flow harnesses and arXiv papers remain on the research branch.
 
 | | |
 |---|---|
@@ -10,6 +10,8 @@
 esearch/cursor-starter-v0.2-woe-eis](https://github.com/errorlogy/eia/tree/research/cursor-starter-v0.2-woe-eis) |
 | **Release tag** | [sci-flow-v0.3](https://github.com/errorlogy/eia/releases/tag/sci-flow-v0.3) (44e7808) |
 | **Claim ceiling** | **C2** — partial evidence only; claim_allowed=false; **no AGI\*** claims in papers or release notes |
+
+**Research strands (on main):** [`research/brain_ai/`](./research/brain_ai/) (connectome→O_t, T-BRAIN-01..06) · [`research/agent_eia/`](./research/agent_eia/) (LLM+EIA at X^trigger=0, T-AGENT-01..03)
 
 **Papers (at tag):** [EIA framework PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/main.pdf) · [3D Evidence Cube PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/sci_flow_3d_cube/main.pdf) · [arXiv submission guide](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/docs/ARXIV_SUBMISSION.md) · [release notes](./docs/SCI_FLOW_RELEASE.md)
 

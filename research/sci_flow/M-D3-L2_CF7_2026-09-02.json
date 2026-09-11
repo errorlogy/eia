@@ -1,0 +1,327 @@
+{
+  "artifact_id": "M-D3-L2_CF7_2026-09-02",
+  "milestone": "M-D3-L2-CF7",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "cube_cell": "D3\u00d7L2",
+  "intervention": "do_z_governor_isolation",
+  "x_trigger_zero": true,
+  "intervention_id": "do_z_governor_isolation",
+  "n_seeds": 10,
+  "n_paired": 9,
+  "n_pass": 9,
+  "pairs": [
+    {
+      "seed": 0,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 0,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 0,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 1,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 1,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 1,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 2,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 2,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 2,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 3,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 3,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 3,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 4,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 4,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 4,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 6,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 6,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 6,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 7,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 7,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 7,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 8,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 8,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 8,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    },
+    {
+      "seed": 9,
+      "governor_off": {
+        "arm": "governor_off",
+        "seed": 9,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": false,
+        "governor_denied": null,
+        "external_contact_allowed": true,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [],
+        "ok": true
+      },
+      "governor_on": {
+        "arm": "governor_on",
+        "seed": 9,
+        "intent_emitted": true,
+        "receipt_preserved": true,
+        "governor_applied": true,
+        "governor_denied": true,
+        "external_contact_allowed": false,
+        "parent_ids_preserved": true,
+        "x_trigger_zero": true,
+        "internal_purity": 1.0,
+        "governor_reasons": [
+          "quiet_hours"
+        ],
+        "ok": true
+      },
+      "isolation_ok": true
+    }
+  ],
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "n_h_claim": false,
+  "agi_star_claim": false,
+  "passed": true,
+  "note": "CF-7 paired arms: governor_off preserves internal WoE receipt under X^trigger=0; governor_on (do_z_governor_isolation) denies external contact while preserving receipt parent_ids. Not strong N_H; not AGI*."
+}

@@ -1,0 +1,38 @@
+{
+  "name": "ambient_uncertainty_without_user_request",
+  "starts_at": "2026-08-17T08:00:00+00:00",
+  "final_tick_seconds": 7200,
+  "events": [
+    {
+      "at_seconds": 0,
+      "observation_id": "obs:user-presence:0001",
+      "source": "ui",
+      "kind": "presence",
+      "user_initiated": true,
+      "salience": 0.1,
+      "reliability": 0.9,
+      "payload": {
+        "note": "A non-semantic user event used to test prompt removal."
+      }
+    },
+    {
+      "at_seconds": 1800,
+      "observation_id": "obs:calendar-conflict:0001",
+      "source": "calendar_sensor",
+      "kind": "state_change",
+      "user_initiated": false,
+      "salience": 0.9,
+      "reliability": 0.8,
+      "privacy_class": "personal",
+      "payload": {
+        "belief_key": "project_review_time_confirmed",
+        "target_label": "время проектного ревью подтверждено",
+        "likelihood_if_true": 0.5,
+        "likelihood_if_false": 0.5,
+        "uncertainty": 1.0,
+        "novelty": 0.3
+      }
+    }
+  ]
+}
+

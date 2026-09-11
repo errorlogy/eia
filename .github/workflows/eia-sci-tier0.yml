@@ -1,0 +1,26 @@
+name: EIA Sci-Flow Tier 0
+
+on:
+  push:
+    branches: [research/cursor-starter-v0.2-woe-eis]
+  pull_request:
+    branches: [research/cursor-starter-v0.2-woe-eis]
+
+jobs:
+  sci-tier0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package (dev + sim)
+        run: pip install -e ".[dev,sim]"
+
+      - name: Tier 0 sci-flow lock
+        run: python scripts/check_sci_tier0.py

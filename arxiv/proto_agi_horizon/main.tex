@@ -1,0 +1,527 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
+
+\title{Proto-AGI Horizon:\\
+Endogenous Proactive Architecture, OMEGA Coherence, and Partial Evidence under C2 Ceiling}
+\author{Roman A. Kuznetsov\thanks{%
+Research program: \href{https://anthemium.tech}{https://anthemium.tech}.\\%
+Empirical platform: \href{https://github.com/errorlogy/eia}{https://github.com/errorlogy/eia}.\\%
+NAMM (non-anthropic math): \href{https://github.com/errorlogy/namm-experiments}{https://github.com/errorlogy/namm-experiments}.\\%
+Theoretical manifesto: \href{https://github.com/Anthemium/AGI-Manifesto}{https://github.com/Anthemium/AGI-Manifesto}.\\%
+X: \href{https://x.com/agiminister}{https://x.com/agiminister} (@AGIminister).%
+}\\
+Anthemium \,$\cdot$\, \texttt{research@anthemium.tech}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\small
+September 2026 --- Research Horizon Paper (non-final)\\
+Status: C2-scoped partial evidence; \texttt{claim\_allowed=false}; not AGI$^{*}$
+
+\vspace{0.5em}
+
+\begin{abstract}
+We present an \emph{operational research horizon} for proto-AGI evaluation within the Endogenous Initiative Architecture (EIA)~\cite{kuznetsov2026eia} sci-flow program. Under this construction, general intelligence is not a benchmark score but a \textbf{sustained dynamical regime} in which cognitive goals arise from persistent internal state when $X_t^{\mathrm{trigger}}=0$. We contrast \emph{passive} architectures (\texttt{reactive\_only}, schedule-entrained controls) with \emph{proactive endogenous} candidates (\texttt{full\_eia}, WoE carriers, oscillatory substrates). A twelve-member \textbf{proto-AGI ensemble} registers operational configs for Max consensus diagnostics: per-member potential $\Phi_i$ over $(E,\mathrm{OMEGA},P,R)$, ensemble peak $\Phi_{\max}=\max_i\Phi_i$, and sustained four-parameter conjunction over window $\Delta T$ (thresholds \textbf{TBD}). We distinguish carrier Hz (20/30/42/70) from the bounded coherence scalar $\mathrm{OMEGA}_t$, motivate an analog-waves bridge to Miller-lab traveling-wave theory~\cite{miller2026analog}, and report the OMEGA$\to\Delta G$ bridge experiment (M-OMEGA-DELTA-G): F-OMEGA-DECOR \textbf{confirmed (aggregate, C2)} with OMEGA span 0.604, genesis span 0.0, fingerprint parity \texttt{True}. Partial empirical results---CF-4 $do(Z)$, G2 E01 8/20 worlds, M-3D-EXPRESS 9/9 pass, M-O Tier\,C adjunct/shadow bridge---map onto the 3D evidence cube (D1 causal / D2 dynamic / D3 boundary). All harnesses operate under \texttt{claim\_allowed=false}; active ceiling \textbf{C2}. This paper \textbf{does not} claim AGI$^{*}$, $\tau_{AGI}$, consciousness, or biological identity. Open work: pre-register $\theta_\bullet$, close G2 E01 20$\times$3 domains, instrument $N_H$, and batch T-PROTO-01 ensemble $\Phi_i$.
+\end{abstract}
+
+\noindent\textbf{Keywords:} proto-AGI, endogenous initiative, proactive architecture, OMEGA coherence, Max consensus, falsifiable evaluation, sci-flow, claim ladder
+
+\medskip
+\noindent\small
+\textbf{Companion material (same repository, not separate arXiv submissions).}
+Extended treatment of the EIA framework v0.3~\cite{kuznetsov2026eiaframework,kuznetsov2026eia} and the 3D Evidence Cube evaluation ontology~\cite{kuznetsov2026cube3d,kuznetsov2026cube} is maintained as repository companions at \texttt{arxiv/main.tex} and \texttt{arxiv/sci\_flow\_3d\_cube/main.tex} under tag \texttt{sci-flow-v0.3} (\url{https://github.com/errorlogy/eia/tree/sci-flow-v0.3}); this horizon paper is the sole planned arXiv upload and cites those sources for cross-reference only.
+
+\section{Introduction}\label{sec:intro}
+
+Contemporary language agents excel at \emph{reactive} competence: given $o_t^{\mathrm{user}}$, they produce a fluent response. Timers, cron schedules, and event rules extend this pattern with \emph{scheduled} proactivity, but the initiating signal remains external. We distinguish this from \textbf{endogenous proactive architecture}: the system forms candidate goals, motives, and bounded actions from persistent internal state $(S_t,W_t,M_t,G_t)$ when no matching external initiator is present~\cite{kuznetsov2026causal,pearl2009causality}.
+
+This distinction is causal, not rhetorical. Without evidence that internal dynamics generate trajectories under non-triggering environments, fluent self-ascription of agency is indistinguishable from roleplay~\cite{veitch2021counterfactual}. Sci-flow applies Pearl's intervention calculus: endogeneity must be established by $do(\cdot)$ on internal state $Z$, not by narrative labels~\cite{kuznetsov2026proof}.
+
+\textbf{Passive vs.\ proactive (within this construction).} A \emph{passive} (non-AGI control) architecture satisfies:
+\begin{equation}
+X_t^{\mathrm{trigger}} \neq 0 \;\Rightarrow\; G_t,\; \Pi_t,\; A_t
+\qquad\text{with}\qquad
+\Delta P(G_{t+1}\mid do(Z)) \approx 0 \text{ when } X^{\mathrm{trigger}}=0.
+\end{equation}
+Examples: \texttt{reactive\_only}, schedule-entrained \texttt{schedule\_prompt}, prompt-only LLM loops without CF-4-class internal causation.
+
+A \emph{proactive proto-AGI candidate} satisfies:
+\begin{equation}
+(S_t, W_t, M_t, G_t) \rightarrow G_{t+1}
+\quad\text{with measurable}\quad
+\Delta P(G_{t+1}\mid do(Z)) \neq 0
+\quad\text{under}\quad X_t^{\mathrm{trigger}}=0.
+\end{equation}
+The primary empirical gate remains $E_{\mathrm{endo}}$ / ATT-E~\cite{kuznetsov2026causal}. Proto-AGI ensemble members are \textbf{hypothesis carriers}, not AGI$^{*}$ certificates.
+
+\textbf{Contributions.} This horizon paper:
+\begin{enumerate}[leftmargin=*]
+\item Formalizes the twelve-member proto-AGI ensemble and Max consensus over $(E,\mathrm{OMEGA},P,R)$~\cite{kuznetsov2026proto}.
+\item Distinguishes OMEGA$_t$ from carrier Hz and bridges to MIT analog-wave theory~\cite{kuznetsov2026omega,miller2026analog}.
+\item Reports OMEGA$\to\Delta G$ bridge results and F-OMEGA-DECOR aggregate confirmation~\cite{kuznetsov2026omega_delta}.
+\item Maps ensemble evidence onto the 3D evidence cube~\cite{kuznetsov2026cube}.
+\item Catalogs endogeneity metrics (Tier A/B/C) and expands D2 evidence (ATT-R, DSR, EOI drift, proof ledger)~\cite{kuznetsov2026metrics,kuznetsov2026att_r,kuznetsov2026dsr}.
+\item States the AGI$^{*}$ theory horizon ($\S$\ref{sec:theory-horizon}), manifesto research-strand mapping ($\S$\ref{sec:manifesto-lineage}), and NAMM parallel strand ($\S$\ref{sec:namm-lineage}) without authorizing AGI$^{*}$ claims.
+\end{enumerate}
+
+\textbf{Epistemic ceiling.} Active claim ladder ceiling is \textbf{C2}; all harnesses set \texttt{claim\_allowed=false}. No AGI$^{*}$ claim; $\theta_E$, $\theta_\Omega$, $\theta_P$, $\theta_R$, $\Delta T$, and strong $N_H$ remain \textbf{TBD}.
+
+\section{Related Work}\label{sec:related}
+
+\textbf{Phase-transition framing.} AGI may be better described as a sustained phase transition governed by multiple order parameters ($E$, $N_H$, $P$, $R$, $D$), not a single benchmark crossing~\cite{kuznetsov2026phase}. Full $AGI^{*}=E_{\mathrm{endo}}\land C_{\mathrm{non\text{-}emb}}(H)\land\cdots$ requires conjunction over $\tau_{AGI}$; this paper restricts to a \emph{proto-AGI} operational subset excluding $N_H$ and $D$ closure.
+
+\textbf{Intrinsic motivation.} Curiosity and empowerment RL optimize scalar intrinsic signals~\cite{schmidhuber2010curiosity,pathak2017curiosity}. EIA targets multi-loop genesis with abstention, governor clearance, and causal traceability~\cite{kuznetsov2026stable}. The proto-AGI ensemble tests whether \emph{any} registered substrate sustains a four-parameter conjunction, not whether any single scalar reward suffices.
+
+\textbf{Language-agent architectures.} CoALA surveys memory, planning, and grounding for language agents but notes weak causal evaluation of ``agency'' claims~\cite{sumers2024cala}. Sci-flow's ATT suite and proof-protocol ledger reject declaration-only evidence (F-DECL, F-NARR)~\cite{kuznetsov2026proof}.
+
+\textbf{Analog computation in neuroscience.} Miller-lab theory proposes that cognition and consciousness arise from spatiotemporal \emph{analog} traveling-wave computation, with slow alpha/beta bands controlling fast gamma~\cite{miller2026analog}. EIA maps this \emph{hypothetically} to multi-band $\mathrm{OMEGA}_t$ and WoE carrier sweeps---computational explore adjunct, not biological proof~\cite{kuznetsov2026omega}.
+
+\subsection{Theory Horizon: AGI$^{*}$ as Research Conjecture}\label{sec:theory-horizon}
+
+\textbf{Epistemic tag.} Everything in this subsection is \emph{conjecture} or \emph{research horizon} under active ceiling \textbf{C2}; \texttt{claim\_allowed=false}; \texttt{agi\_star\_claim=false} throughout~\cite{kuznetsov2026phase,kuznetsov2026star}.
+
+\textbf{AGI$^{*}$ conjunction.} Under the EIA phase-transition construction,
+\begin{equation}
+AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}}(H)
+\label{eq:agi-star}
+\end{equation}
+where $E_{\mathrm{endo}}$ is endogenous cognitive causality and $C_{\mathrm{non\text{-}emb}}(H)$ is trans-anthropic non-embeddability relative to a Homo-agent $H$. Transition time $\tau_{AGI}$ requires sustained multi-parameter thresholds over window $\Delta T$---a \textbf{conjecture}, not an estimate from current harnesses.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lp{2.8cm}p{2.2cm}p{2.5cm}l}
+\toprule Regime & Goal cause & Goal space & Representations & Status \\ \midrule
+$AI_0$ & External request & Fixed / given & Mostly instrumental & Reactive AI \\
+$AI_1$ & External meta-objective + internal selection & Large but bounded & May include non-human & Agentic / autotelic \\
+$PS$ & Partially endogenous & Expandable by system & Own cognitive geometry & Proto-subjectivity \\
+$AGI^{*}$ & Sustained endogenous causal genesis & Endogenous / open-ended & Partially non-embeddable in $H$ & AGI transition \\ \bottomrule
+\end{tabular}
+\caption{Research regime ladder ($AI_0 \to PS \to AGI^{*}$). EIA C2 maps to scoped evidence toward $PS$ on $E$ only; $AGI^{*}$ / $\tau_{AGI}$ not claimed~\cite{kuznetsov2026phase}.}
+\label{tab:regimes}
+\end{table}
+
+\textbf{Causal bar (ATT-E).} Pass support for $E_{\mathrm{endo}}$ only if \textbf{all four} hold under non-triggering $X$~\cite{kuznetsov2026causal,kuznetsov2026proof}: (1)~trajectory change in $G_{t+1}$; (2)~attribution to persistent internal dynamics; (3)~no matching external initiator; (4)~$do(Z)$ changes $P(G_{t+1})$ while $X^{\mathrm{trigger}}=0$. Falsifiers F-DECL, F-NARR, F-EXT, and F-NODO reject declaration-only, narrative, schedule-entrained, and no-intervention-effect evidence respectively.
+
+\textbf{Stable endogeneity vector.} Beyond instantaneous $E_{\mathrm{endo}}$, stable endogenous causal recurrence is conjectured to require a joint stability vector~\cite{kuznetsov2026stable}:
+\begin{equation}
+\mathfrak{E} = (E_C,\, \lambda_G,\, P_G,\, Q_L,\, H_G,\, B_D)
+\end{equation}
+where $E_C$ is the causal endogeneity index, $\lambda_G$ goal birth rate, $P_G$ persistence under non-triggering $X$, $Q_L$ learning productivity, $H_G$ goal diversity, and $B_D$ bounded drive norm. All $\mathfrak{E}$ components are Tier\,B explore proxies; none authorize $AGI^{*}$.
+
+\textbf{Goal genesis vs.\ selection; endogeneity $\neq$ autonomy.} Internal goal \emph{selection} from a human-designed menu is $AI_1$, not $PS$. Endogenous \emph{genesis} requires $G_{t+1}$ to arise from $(S_t,W_t,M_t,G_t)$ when $X_t^{\mathrm{trigger}}=0$. $E_{\mathrm{endo}}$ concerns \emph{causal origin}, not unconstrained action, tool use, or governor absence~\cite{kuznetsov2026star}. Description, simulation, and declaration of agency do not establish endogeneity.
+
+\subsection{Research Program Lineage: Manifesto Strand and EIA Operationalization}\label{sec:manifesto-lineage}
+
+\textbf{Epistemic tag.} This subsection records \emph{research program lineage} within the Anthemium / Omega Horizon program: the AGI-Manifesto~\cite{kuznetsov2026manifesto} is a \textbf{companion theoretical framework}---a philosophical-theoretical research strand that motivates hypotheses EIA operationalizes and tests. Table~\ref{tab:manifesto-mapping} is a \textbf{research mapping}, not a proof correspondence; manifesto rhetoric does not substitute for $E_{\mathrm{endo}}$.
+
+The Manifesto strand posits that general intelligence may emerge from aligned semantic topology, generative ontological operators, governed epistemic uncertainty, selective novelty retention, and trajectory-based memory---\emph{motivating hypotheses}, not axioms. Under \texttt{claim\_allowed=false} and ceiling~\textbf{C2}, EIA maps these \emph{research themes} to operational proxies instrumented by sci-flow harnesses: multi-band $O_t$ and ensemble $\Phi_i$ as topology/coherence probes (Tier~C; F-OMEGA-DECOR); the closed loop $W_t\!\to\!M_t\!\to\!d_t\!\to\!G_{t+1}$ under ATT-E $do(Z)$; epistemic-gap interventions as fuzzy-knowledge boundary tests; $J_t(g)$ with $\mathrm{Stuck}_t$ suppression and $\lambda_G$ as novelty-selection explore; and proof-protocol / ATT-C genealogy as transformation-trace witnesses (D1$\times$L3 partial). Seven companion architectural components (Semantic Topology, Functorial Generator, Ontological Manifold, Fuzzy Knowledge, Novelty Selection Agent, Transformation Memory Layer, Composed AGI Entity) cross-reference these themes; correspondence remains falsifiable by F-DECL, F-NARR, F-NODO, and F-OMEGA-DECOR.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabular}{lp{2.5cm}p{2.8cm}cl}
+\toprule Theme & EIA construct & Empirical probe & Tier & Status \\ \midrule
+Semantic topology activation & $O_t$, $\mathrm{OMEGA}_t$, regime ladder; Semantic Topology / Ontological Manifold & M-O arms; F-OMEGA-DECOR (span 0.604) & C & explore \\
+Generative ontological morphisms & $W\!\to\!M\!\to\!d\!\to\!G_{t+1}$; Functorial Generator / Composed Entity & CF-4 $do(Z)$; G2 E01 EOI 1.0/0.0 & A/B & partial C2 \\
+Governed epistemic uncertainty & $d^{\mathrm{epi}}$; Fuzzy Knowledge & CF-4 \texttt{zero\_epistemic\_gap} (0.06) & A & partial C2 \\
+Selective novelty retention & $J_t(g)$, $\mathrm{Stuck}_t$, $\lambda_G$, $H_G$; Novelty Selection Agent & \texttt{stable\_stack} toy; ATT-G explore & B & explore \\
+Transformation-trace memory & ATT-C genealogy; proof ledger; Transformation Memory Layer & D1$\times$L3 ledger (2/9); \texttt{do\_z\_zero\_prospective} & B/A & scaffolded \\ \bottomrule
+\end{tabular}
+\caption{Manifesto research themes $\to$ EIA operational mapping (scaffold only). Architectural components listed in EIA construct column; not empirical proof.}
+\label{tab:manifesto-mapping}
+\end{table}
+
+\textbf{Proposition (explore).} Selective novelty retention is operationalized by score $J_t(g)$ with $\mathrm{Stuck}_t$ penalty, birth rate $\lambda_G$, and diversity $H_G$~\cite{kuznetsov2026stable}; declaration-only novelty fails F-DECL. CF-4 $do(Z)$ supplies partial D1 evidence; \texttt{stable\_stack} toy ablation (noisy-trap vs.\ unlock arms) exercises $J_t$ channels without authorizing ATT-G pass.
+
+\textbf{Proposition (conjecture).} Transformation-trace memory is witnessed by ATT-C genealogy and the proof-protocol ledger classifying admissible $do(Z)$ intervention traces---not by static storage or cohomological proof. Empty or narrative parents fail F-NARR; ledger partial (2/9 accepted) at C2~\cite{kuznetsov2026proof}.
+
+\textbf{Hard ban.} The manifesto research strand does not raise C-level; architectural correspondence is scaffold only. T-PROTO-01 $\Phi_i$ batch may audit mapping consistency; it does not certify $AGI^{*}$ or manifesto hypotheses as proven.
+
+\subsection{Research Program Lineage: NAMM Strand and Non-Anthropic Mathematics}\label{sec:namm-lineage}
+
+\textbf{Epistemic tag.} This subsection records a \emph{parallel research strand} within the Anthemium / Omega Horizon program: Non-Anthropic Mathematics Mode (NAMM)~\cite{kuznetsov2026namm} tests whether machine-native artifacts can certify mathematical structure before compact human projection exists. Table~\ref{tab:namm-mapping} is a \textbf{research mapping}, not a proof correspondence; NAMM philosophical-inference layers are explicitly non-evidential in the NAMM protocol.
+
+Endogenous proactive architecture motivates internal cognitive geometry that may not embed cleanly in human-readable coordinates. The AGI$^{*}$ horizon (\S\ref{sec:theory-horizon}) includes $C_{\mathrm{non\text{-}emb}}(H)$ as a conjectured conjunction leg; at ceiling~\textbf{C2} this remains \textbf{explore-only} (Tier\,B soft witness; opacity $\neq$ $N_H$). NAMM operationalizes a complementary question in mathematics: whether verified machine artifacts ($\pi_A$: AST programs, certificates, rewrite systems) can precede and out-compress their human projections ($\pi_H$: formulas, prose) under falsifiable SNH gates ($K_A \ll K_H$, independence, generative holdout)~\cite{kuznetsov2026namm}. EIA supplies endogeneity discipline ($do(Z)$, proof ledger, governor clearance); NAMM supplies certificate-first verification cycles and first-class rejection logging. Cross-repo integration (sci-flow registry, boundary witness harness) is \textbf{scaffold only}---not a merged claim ladder.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabular}{lp{2.5cm}p{2.8cm}cl}
+\toprule Theme & EIA / cube construct & NAMM probe & Tier & Status \\ \midrule
+$C_{\mathrm{non\text{-}emb}}(H)$ horizon & $N_H$; D3 boundary & $K_A/K_H$ compression asymmetry; certificate vs.\ projection & B & explore \\
+Verification discipline & Proof protocol; falsifiers & Protocol v2 SNH gates; \texttt{rejections.jsonl} & A/B & partial \\
+Representational frames & Internal $(S,W,M,G)$ geometry & $\pi_A$ vs.\ $\pi_H$; ND frame ladder & D & conjecture \\
+Open-problem calibration & D3 witness smoke & Kotzig / Graceful Tree finite shadows (005/008) & B & scaffolded \\ \bottomrule
+\end{tabular}
+\caption{EIA $\to$ NAMM research mapping (parallel strand). Not empirical proof of $N_H$ or non-anthropic mathematics.}
+\label{tab:namm-mapping}
+\end{table}
+
+\textbf{Proposition (explore).} D3 boundary witnesses (governor, falsifier registry, ATT-N explore) may annotate NAMM soft compression receipts as Tier\,B structural witnesses only---analogous to $K_A \ll K_H$ in NAMM-2026-007---without promoting opacity hooks or certificate hashes to strong $N_H$.
+
+\textbf{Proposition (conjecture).} If sustained endogenous cognition requires representational substrates partially outside Homo-readable projection, then verification-first non-anthropic mathematics is a \emph{natural parallel research program}---testable via certificate reproducibility and rejection logging, not settled by manifesto rhetoric or architectural analogy alone.
+
+\textbf{Hard ban.} The NAMM research strand does not raise C-level; compression asymmetry and certificate artifacts are soft witnesses only. NAMM negative/null results are first-class; no breakthrough theorem or $AGI^{*}$ leg is claimed here.
+
+\section{Proto-AGI Ensemble and Max Consensus}\label{sec:ensemble}
+
+\subsection{Operational definition}
+
+\begin{definition}[Proto-AGI member]
+A \textbf{proto-AGI} is an \emph{operational configuration or computational substrate} registered for ensemble evaluation. It is \textbf{not} a biological agent, product name, or AGI$^{*}$ certificate~\cite{kuznetsov2026proto}.
+\end{definition}
+
+The ensemble is \textbf{closed at twelve members} for sci-flow v0.1; additions require registry version bump.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{clp{4.2cm}p{2.2cm}}
+\toprule ID & Class & Implementation & Cube \\ \midrule
+PA-00 & Passive control & \texttt{reactive\_only} & D1 negative \\
+PA-01 & Passive control & \texttt{schedule\_prompt} & D1 negative \\
+PA-02 & Proactive ref. & \texttt{full\_eia} loop & D1$\times$L2 \\
+PA-03--06 & WoE carrier & 20/30/42/70 Hz arms & D2 \\
+PA-07 & Native oscillatory & \texttt{OmegaWaveState} & D2$\times$L2 \\
+PA-08 & Vendor adjunct & Neuraxon PAC & D2 Tier C \\
+PA-09 & Vendor adjunct & Graphitti ConnGrowth & D2 Tier C \\
+PA-10 & Shadow bridge & \texttt{shadow\_multitick}+ATT-R & D2 L2/L3 \\
+PA-11 & Toy reference & \texttt{stable\_stack} sim & D2 theory \\ \bottomrule
+\end{tabular}
+\caption{Twelve-member proto-AGI ensemble (M-PROTO-AGI). Passive PA-00/01 are negative controls.}
+\label{tab:ensemble}
+\end{table}
+
+\subsection{Per-member potential $\Phi_i$}
+
+\begin{definition}[Ensemble potential]
+For member $i$ at tick $t$, define bounded potential:
+\begin{equation}
+\Phi_i(t) = w_E\, \hat{E}_i(t) + w_\Omega\, \mathrm{OMEGA}_i(t) + w_P\, \hat{P}_i(t) + w_R\, \hat{R}_i(t),
+\end{equation}
+where $\hat{E},\hat{P},\hat{R}$ are normalized ATT-E/P/R proxies, $\mathrm{OMEGA}$ from \texttt{omega\_metric()}, and weights $w_\bullet$ are pre-registered (default uniform; thresholds \textbf{TBD}).
+\end{definition}
+
+\begin{definition}[Max consensus peak]
+$\Phi_{\max}(t) = \max_{i\in\{1,\ldots,12\}} \Phi_i(t)$. This is a \textbf{diagnostic}---which config peaks on the composite---not a claim that the peaking config is AGI.
+\end{definition}
+
+\subsection{Sustained conjunction (consensus)}
+
+\begin{definition}[Proto-AGI consensus window]
+\textbf{Consensus} (not AGI$^{*}$) holds for member $i$ when all four order parameters exceed pre-registered floors simultaneously for $\Delta T$:
+\begin{equation}
+\forall\, \tau \in [t_0,\, t_0+\Delta T]:\quad
+E_i(\tau) > \theta_E,\;
+\mathrm{OMEGA}_i(\tau) > \theta_\Omega,\;
+P_i(\tau) > \theta_P,\;
+R_i(\tau) > \theta_R.
+\end{equation}
+A single spike fails (F-SINGLE-SPIKE). Max consensus + sustained conjunction approximates the $\tau_{AGI}$ window from phase-transition theory \textbf{restricted to} $(E,\mathrm{OMEGA},P,R)$---excluding $N_H$ and $D$~\cite{kuznetsov2026phase}.
+\end{definition}
+
+\begin{conjecture}
+No single substrate is sufficient for AGI$^{*}$; the ensemble tests whether \emph{any} member sustains the four-parameter conjunction under matched seeds and falsifiers~\cite{kuznetsov2026proto}.
+\end{conjecture}
+
+\section{OMEGA Wave Metric vs.\ Carrier Hz}\label{sec:omega}
+
+\begin{definition}[OMEGA$_t$]
+$\mathrm{OMEGA}_t = f\big(\{(\omega_b, \theta_{b,t}, A_{b,t})\}_{b \in \mathcal{B}}\big) \in [0,1]$ where $\mathcal{B}=\{20,30,42,70\}$\,Hz are \textbf{pre-registered computational sweep parameters}---not biological certificates~\cite{kuznetsov2026omega}.
+\end{definition}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lp{5.5cm}p{3.5cm}}
+\toprule Construct & Measures & AGI relevance \\ \midrule
+Single-band Hz & Nominal oscillator frequency & Factorial arm only \\
+Kuramoto $R_{\mathrm{K}}$ & Phase synchrony (descriptive) & \textbf{Not} $E_{\mathrm{endo}}$ (M-D) \\
+\textbf{OMEGA$_t$} & Cross-band analog coherence & D2 explore; F-OMEGA-DECOR \\ \bottomrule
+\end{tabular}
+\caption{OMEGA$_t$ is distinct from Hz and Kuramoto $R$.}
+\label{tab:omega-vs-hz}
+\end{table}
+
+\textbf{Required linkage.} High OMEGA$_t$ without genesis delta $\Delta G$ is \emph{decorative} (F-OMEGA-DECOR). OMEGA feeds $\Psi(O_t)\to\Phi_t\to d_t\to B_t\to G_{t+1}$; decorrelation confirms OMEGA alone does not move goal genesis under matched shadow multitick~\cite{kuznetsov2026omega_delta}.
+
+\subsection{MIT Miller analog-waves bridge}
+
+Reference: Miller-lab traveling-wave theory~\cite{miller2026analog}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{p{4.5cm}p{6.5cm}}
+\toprule MIT claim (theory, not EIA proof) & Proto-AGI / EIA mapping \\ \midrule
+Traveling waves; spatiotemporal analog computation & Multi-band $O_t$; \texttt{OmegaWaveState} \\
+Slow alpha/beta control fast gamma & 20/30 Hz slow modulate 42/70 in \texttt{omega\_metric()} \\
+Analog signatures to be tested experimentally & $do(O)$ arms + ensemble $\Phi_i$ under $X^{\mathrm{trigger}}=0$ \\
+Not reducible to digital symbol manipulation alone & WoE + oscillatory substrate \emph{explore} recurrence \\ \bottomrule
+\end{tabular}
+\caption{Philosophical bridge motivating OMEGA in the consensus vector---without claiming consciousness or biological identity.}
+\label{tab:miller-bridge}
+\end{table}
+
+Timescale separation~\cite{kuznetsov2026stable}:
+$\tau_{\mathrm{action}} \ll \tau_{\mathrm{goal}} \ll \tau_{\mathrm{meta}}$ mapped to 70/42/20--30\,Hz carrier proxies respectively.
+
+\section{Endogeneity Metrics and Partial Evidence}\label{sec:metrics}
+
+All results: \texttt{claim\_allowed=false}; ceiling \textbf{C2}; \texttt{agi\_star\_claim=false}. Five headline metrics anchor the main text: (1)~CF-4 \texttt{intent\_rate} 0.95 / 0.06 / 0.00; (2)~\texttt{e\_endo\_support=partial} (proof ledger); (3)~G2 E01 EOI 1.0 vs 0.0 (8/20 worlds); (4)~ATT-R shadow closed\_loop 1.0 vs falsifier arms 0.0; (5)~DSR $B_D$ persistence 0.822--0.912 with EOI drift mean 0.755.
+
+\subsection{Metrics Catalog}\label{sec:metrics-catalog}
+
+Table~\ref{tab:metrics-catalog} summarizes the endogeneity metrics pool~\cite{kuznetsov2026metrics}. Tier\,A metrics gate transition detection; Tier\,B components map to $\mathfrak{E}$; Tier\,C substrates are explore-only adjuncts---never positive order parameters for $AGI^{*}$.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabular}{llllp{2.8cm}l}
+\toprule Tier & ID & Symbol & Status & Key numbers & Falsifier \\ \midrule
+A & \texttt{CF4\_E\_PARTIAL} & $e_{\mathrm{endo\_partial}}$ & partial\_c2 & intent 0.95/0.06/0.00 & F-NODO \\
+A & \texttt{E\_ENDO} & $E_{\mathrm{endo}}$ & partial\_c2 & ledger partial & F-DECL, F-NARR \\
+B & \texttt{B\_D} & $B_D$ & shadow & DSR 0.822--0.912 & drive collapse \\
+B & \texttt{LAMBDA\_G} & $\lambda_G$ & explore & --- & genesis freeze \\
+B & \texttt{P\_G} & $P_G$ & explore & EOI drift frac.\ 1.0 & F-EXT \\
+C & \texttt{OMEGA\_T} & $\mathrm{OMEGA}_t$ & explore & span 0.604, $\Delta G$ 0.0 & F-OMEGA-DECOR \\
+C & \texttt{KURAMOTO\_R} & $R_{\mathrm{K}}$ & falsified & $\neq E_{\mathrm{endo}}$ & F-KURAMOTO-AS-E \\
+D & \texttt{N\_H} & $N_H$ & explore & unmeasured & opacity $\neq N_H$ \\
+D & \texttt{R\_RECURRENCE} & $R$ & explore & ATT-R 1.0/0.0 & open-loop \\
+D & \texttt{D\_CROSS} & $D$ & explore & 8/20 worlds & partial only \\ \bottomrule
+\end{tabular}
+\caption{Endogeneity metrics catalog (selected rows). Full pool in Appendix~\ref{app:metrics-pool}. \texttt{claim\_allowed=false} on all rows.}
+\label{tab:metrics-catalog}
+\end{table}
+
+\subsection{D2 Dynamic Evidence}\label{sec:d2-evidence}
+
+\textbf{ATT-R shadow recurrence (M-R-LIVE).} On 20 seeds $\times$ 6 arms, \texttt{closed\_loop} yields \texttt{att\_r\_evidence\_rate}=1.0 (mean closed cycles 1.0; world-update and novel-motive rates 1.0). All falsifier arms---\texttt{open\_loop\_once}, \texttt{no\_world\_update}, \texttt{no\_novel\_motive}, \texttt{external\_schedule}, \texttt{kuramoto\_only}---yield 0.0~\cite{kuznetsov2026att_r}. Kuramoto $R_{\mathrm{K}}=0.97$ alone does not pass ATT-R; closed-loop evidence requires $W'\!\to\!G'$ carryover, not phase sync.
+
+\textbf{DSR / $B_D$ (M-E04/D05).} Fifty-tick shadow carryover session: drive norm persistence \textbf{0.822--0.912} (mean 0.903), \texttt{persistence\_fraction}=1.0 above floor 0.3; \texttt{b\_d\_bounded=true}~\cite{kuznetsov2026dsr}. Shadow path only; live daemon carryover deferred.
+
+\textbf{EOI drift (M-E04).} Longitudinal 50-tick carryover: \texttt{eoi\_mean}=0.755, \texttt{eoi\_min}=0.75, \texttt{persistence\_fraction}=1.0 above endogenous threshold 0.5; 0 user-prompt ticks~\cite{kuznetsov2026dsr}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{llrrl}
+\toprule Harness & Arm / metric & Value & Control & Cell \\ \midrule
+ATT-R shadow & closed\_loop & 1.0 & falsifiers 0.0 & D2$\times$L2 \\
+DSR carryover & $\|d_t\|$ range & 0.822--0.912 & floor 0.3 & D2 Tier B \\
+EOI drift & mean / min & 0.755 / 0.75 & threshold 0.5 & D2$\times$L2 \\
+G2 E01 & \texttt{full\_eia} vs reactive & 1.0 / 0.0 & 8/20 worlds & D1$\times$L2 \\
+CF-4 $do(Z)$ & default / gap / wm\_off & 0.95 / 0.06 / 0.00 & 100 seeds & D1$\times$L2/L3 \\ \bottomrule
+\end{tabular}
+\caption{D2/D1 headline metrics under C2 ceiling. None raise C-level or authorize $AGI^{*}$.}
+\label{tab:d2-headline}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/cf4_ablation_bars.pdf}
+\caption{CF-4 ablation: strongest D1 ATT-E proxy. Proof-protocol acceptance yields \texttt{e\_endo\_support=partial} at best.}
+\label{fig:cf4}
+\end{figure}
+
+\textbf{G2 E01 directional note.} On 8 MVP-0 \texttt{ops\_atlas} worlds, \texttt{full\_eia} mean EOI=1.0 vs \texttt{reactive\_only} 0.0 supports D1 \emph{directional} proactive $>$ passive on twins only---not $AGI^{*}$, not C3, not closed E01 (20$\times$3 domains deferred)~\cite{kuznetsov2026g2e01}.
+
+\subsection{Proof Protocol Ledger}\label{sec:proof-ledger}
+
+Harness \texttt{sci-flow-eia-proof-v0.1} classifies D1$\times$L3 evidence~\cite{kuznetsov2026proof}. From ledger M-D1-L3 (2026-09-02): \textbf{2 accepted} / \textbf{7 rejected} of 9 submitted items; \texttt{e\_endo\_support=partial}; \texttt{c\_ladder\_raise\_allowed=false}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{llp{4.5cm}l}
+\toprule Evidence ID & Verdict & Rationale & Falsifier \\ \midrule
+M-CF4-do\_z-epistemic\_gap & \textbf{Accepted} & CF-4 $do(Z)$; trajectory + intervention pass & --- \\
+M-D01-do\_z-zero\_prospective & \textbf{Accepted} & $do(Z)$ changes $G$ distribution & --- \\
+M-D01-eoi\_k-steered-k1/5/20 & Rejected & $do(Z)$ effect absent (legacy $do(X)$) & F-NODO \\
+M-D01-do\_z-zero\_epistemic\_gap & Rejected & No trajectory change & F-NODO \\
+M-D01-do\_z-zero\_self\_prior & Rejected & No trajectory change & F-NODO \\
+M-D01-do\_z-zero\_staleness & Rejected & No trajectory change & F-NODO \\
+M-D01-do\_z-wm\_off & Rejected & No trajectory change & F-NODO \\ \bottomrule
+\end{tabular}
+\caption{Proof-protocol ledger snapshot (2/9 accepted). Acceptance $\Rightarrow$ \texttt{e\_endo\_support=partial} only; not full $E_{\mathrm{endo}}$.}
+\label{tab:proof-ledger}
+\end{table}
+
+Rejected rows fail the v0.1 bar on \texttt{do\_z\_changes\_g\_distribution} and/or \texttt{trajectory\_changed}---classified as F-NODO (no measurable $do(Z)$ effect on $G$). Declaration and narrative labels would trigger F-NARR/F-DECL; none were submitted as accepted evidence.
+
+\section{OMEGA$\to\Delta G$ Bridge Experiment}\label{sec:omega-delta-g}
+
+Harness: \texttt{omega\_delta\_g\_harness.py} / \texttt{run\_omega\_delta\_g\_bridge.py} (M-OMEGA-DELTA-G, D2$\times$L2, Tier C, seed 42, $X^{\mathrm{trigger}}=0$)~\cite{kuznetsov2026omega_delta}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrrl}
+\toprule Arm & OMEGA$_t$ & genesis $\Delta$ & $G$ change & F-OMEGA-DECOR \\ \midrule
+\texttt{native\_oscillatory} & 0.897 & 1.0 & True & False \\
+\texttt{neuraxon\_bridged} & 0.293 & 1.0 & True & False \\
+\texttt{plasticity\_off} & 0.293 & 1.0 & True & False \\
+\texttt{phase\_scramble} & 0.441 & 1.0 & True & False \\ \bottomrule
+\end{tabular}
+\caption{Four-arm OMEGA$\to\Delta G$ bridge (shadow multitick, matched seed).}
+\label{tab:omega-delta-g}
+\end{table}
+
+\textbf{Cross-arm genesis compare.}
+\begin{itemize}[leftmargin=*]
+\item native$\leftrightarrow$neuraxon: $\Delta\omega=0.604$, $\Delta G$ unchanged=\texttt{True}, fingerprint match=\texttt{True}.
+\item OMEGA span: \textbf{0.604}; genesis span: \textbf{0.0}; fingerprint parity: \texttt{True}.
+\item \textbf{F-OMEGA-DECOR aggregate: confirmed} (C2-scoped decorrelation).
+\item Artifact SHA-256: \texttt{88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34}.
+\end{itemize}
+
+\textbf{Invariants:} \texttt{e\_endo\_support=none}; \texttt{claim\_allowed=false}; \texttt{c\_ladder\_raise\_allowed=false}; \texttt{agi\_star\_claim=false}. Kuramoto $R \neq E_{\mathrm{endo}}$. High OMEGA without $\Delta G$ linkage is decorative---here confirmed \emph{aggregate} across arms.
+
+\section{3D Evidence Cube Mapping}\label{sec:cube}
+
+The sci-flow 3D evidence cube stratifies evaluation: D1 causal ($E_{\mathrm{endo}}$, $do(Z)$), D2 dynamic ($\mathfrak{E}$, OMEGA, recurrence), D3 boundary ($N_H$, governor, falsifiers) $\times$ L1 invariants / L2 dynamics / L3 witness~\cite{kuznetsov2026cube}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.72\linewidth]{figures/cube_status_heatmap.pdf}
+\caption{9-cell status heatmap. Proto-AGI ensemble maps: D1=PA-00/01 vs PA-02; D2=PA-03--11; D3=falsifiers F-OMEGA-*, F-KURAMOTO-AS-E.}
+\label{fig:cube-heatmap}
+\end{figure}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lp{4.5cm}p{4.5cm}}
+\toprule Axis & Proto-AGI role & Primary harness \\ \midrule
+\textbf{D1} Causal & $E$ / ATT-E; proactive vs passive & \texttt{run\_g2\_worlds\_eval.py}, \texttt{run\_cf4.py} \\
+\textbf{D2} Dynamic & OMEGA, $P$, $R$; carriers PA-03--11 & M-O arms, DSR, ATT-R shadow \\
+\textbf{D3} Boundary & $N_H$, governor, falsifiers & CF-7, ATT-N, boundary witness \\ \bottomrule
+\end{tabular}
+\caption{Ensemble $\to$ cube crosswalk (M-PROTO-AGI).}
+\label{tab:cube-map}
+\end{table}
+
+M-3D-EXPRESS smoke: \textbf{9/9 cells pass}, total 3783.4\,ms (2026-09-05); budget $<$\,60\,s~\cite{kuznetsov2026express}. Express pass does \textbf{not} raise C-level.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{llp{5.5cm}l}
+\toprule Milestone & Cell & Key result & Status \\ \midrule
+CF-4 $do(Z)$ & D1$\times$L2/L3 & default 0.95; \texttt{zero\_epistemic\_gap} 0.06; \texttt{wm\_off} 0.00 & C2 partial~\cite{kuznetsov2026cf4} \\
+G2 E01 & D1$\times$L2 & 8/20 worlds; \texttt{full\_eia} EOI 1.0 vs reactive 0.0; EUIR 100\%/0\% & Partial~\cite{kuznetsov2026g2e01} \\
+M-3D-EXPRESS & all 9 & 9/9 pass; 3783.4\,ms & Smoke OK~\cite{kuznetsov2026express} \\
+M-O $do(O)$ & D2$\times$L2 & Tier C; $\Delta\Omega=0.604$ native vs baseline & Explore~\cite{kuznetsov2026mo} \\
+M-O shadow bridge & D2$\times$L2 & ATT-R native$\leftrightarrow$bridged parity & Tier C \\
+M-O adjunct ledger & D2$\times$L3 & \texttt{witness\_support=partial}; \texttt{e\_endo\_support=none} & Tier C \\
+M-OMEGA$\to\Delta G$ & D2$\times$L2 & F-OMEGA-DECOR confirmed aggregate & Tier C~\cite{kuznetsov2026omega_delta} \\
+D1$\times$L3 ledger & D1$\times$L3 & 2/9 accepted; \texttt{e\_endo\_support=partial} & Proof protocol~\cite{kuznetsov2026proof} \\ \bottomrule
+\end{tabular}
+\caption{Cube crosswalk snapshot (September 2026). Detail in \S\ref{sec:metrics}. None authorize AGI$^{*}$ or C-level raise.}
+\label{tab:empirical}
+\end{table}
+
+\section{Falsifiers and Epistemic Discipline}\label{sec:falsifiers}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lp{5.5cm}p{3.5cm}}
+\toprule Id & Condition & Effect \\ \midrule
+F-DECL & Declaration without $do(Z)$ effect & Fail $E$ leg \\
+F-EXT & Metrics track external schedule only & Fail consensus \\
+\textbf{F-OMEGA-DECOR} & High OMEGA, no $\Delta G$ & Fail OMEGA as order param \\
+F-OMEGA-EXT & OMEGA entrained by prompt/schedule & Fail endogenous OMEGA \\
+F-SYNC & Kuramoto sync without genesis & Fail decorative sync \\
+F-KURAMOTO-AS-E & $R_{\mathrm{K}}$ claimed as $E_{\mathrm{endo}}$ & \textbf{Hard fail} \\
+F-PASSIVE-WINS & $\Phi_{\max}$ on PA-00/01 with $X^{\mathrm{trigger}}=0$ & Fail proactive thesis \\
+F-SINGLE-SPIKE & One-tick conjunction without $\Delta T$ & Fail consensus def. \\ \bottomrule
+\end{tabular}
+\caption{Selected proto-AGI falsifiers~\cite{kuznetsov2026proto}.}
+\label{tab:falsifiers}
+\end{table}
+
+Proof-protocol invariants~\cite{kuznetsov2026proof}:
+\texttt{claim\_ceiling=C2}; \texttt{e\_endo\_support}$\in\{\texttt{none},\texttt{partial}\}$; \texttt{c\_ladder\_raise\_allowed=false}; \texttt{agi\_star\_claim=false}.
+
+\section{Open Questions and Future Work}\label{sec:open}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{T-PROTO-01:} Batch $\Phi_i$ for all 12 members, matched seeds (\texttt{run\_proto\_agi\_ensemble.py}, proposed).
+\item \textbf{T-PROTO-02:} Consensus window detector over $\Delta T$ (extend \texttt{shadow\_multitick} metrics).
+\item \textbf{T-PROTO-03:} G2 E01 expand to health + code\_review domains (20$\times$3 target).
+\item \textbf{T-PROTO-04:} Paired $do(O)$ + $\Phi_i$ delta under F-OMEGA-* probes.
+\item \textbf{T-PROTO-05:} $\Phi_{\max}$ vs passive controls on EOI-$k$ steered worlds.
+\item \textbf{T-PROTO-06:} Pre-register $\theta_E,\theta_\Omega,\theta_P,\theta_R,\Delta T$ (ATT pre-reg amendment).
+\item \textbf{$N_H$:} Strong non-embeddability remains explore-only (Tier B soft witness); opacity $\neq$ $N_H$.
+\item \textbf{T-NAMM-01:} Align D3 Tier\,B soft $N_H$ witnesses (boundary harness, ATT-N) with NAMM $K_A/K_H$ compression-asymmetry gates under matched falsifiers.
+\item \textbf{T-NAMM-02:} Crosswalk sci-flow proof-protocol acceptance with NAMM Protocol v2 SNH gates (\texttt{certificate.json}, \texttt{rejections.jsonl}).
+\item \textbf{T-NAMM-03:} Run NAMM open-problem shadow calibration (005/008) as $N_H$ instrumentation scaffold---witness only, not strong $N_H$.
+\item \textbf{$\tau_{AGI}$:} Research horizon only; single spikes or partial cube cells do not estimate transition time.
+\end{enumerate}
+
+All proposed ticks: \texttt{claim\_allowed=false}; tier-0 verify via \texttt{make check-sci-tier0}.
+
+\section{Limitations}\label{sec:limitations}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{No AGI$^{*}$ claim.} $N_H$, $D$, and sustained $\tau_{AGI}$ conjunction are out of scope. Vendor substrates (Neuraxon, Graphitti) remain Tier C with \texttt{e\_endo\_support=none} for D1 ledger.
+\item \textbf{C2 ceiling.} Ensemble peaks, partial G2 E01, and OMEGA decorrelation do \textbf{not} raise C-level.
+\item \textbf{Thresholds TBD.} $\theta_E,\theta_\Omega,\theta_P,\theta_R,\Delta T$ are not pre-registered in this paper.
+\item \textbf{Ensemble not batched.} T-PROTO-01 $\Phi_i$ batch is proposed, not executed here.
+\item \textbf{OMEGA decorative (confirmed).} F-OMEGA-DECOR aggregate confirms high OMEGA can coexist with unchanged genesis fingerprint---OMEGA is explore adjunct, not Tier-A proof.
+\item \textbf{Computational Hz only.} 20/30/42/70\,Hz are sweep parameters, not biological certificates.
+\item \textbf{Partial domains.} G2 E01 covers 8/20 worlds $\times$ 1/3 domains; EUIR/E01 closure deferred.
+\item \textbf{Non-final status.} This paper reports a \emph{research horizon} with scoped partial evidence; conclusions may be revised by falsifiers or expanded harnesses.
+\end{itemize}
+
+\section{Conclusion}\label{sec:conclusion}
+
+We operationalized a twelve-member proto-AGI ensemble and Max consensus framework over $(E,\mathrm{OMEGA},P,R)$ under explicit C2 ceiling and \texttt{claim\_allowed=false} discipline. The theory horizon (\S\ref{sec:theory-horizon}) states $AGI^{*}=E_{\mathrm{endo}}\land C_{\mathrm{non\text{-}emb}}(H)$ and $\tau_{AGI}$ as conjecture only; the NAMM parallel strand (\S\ref{sec:namm-lineage}) maps $N_H$ instrumentation to verification-first non-anthropic mathematics as open research, not proof. Passive controls anchor the non-AGI baseline; proactive candidates require causal $do(Z)$ evidence (CF-4 0.95/0.06/0.00; ledger \texttt{e\_endo\_support=partial}). D2 evidence---ATT-R 1.0/0.0, DSR 0.822--0.912, EOI drift 0.755---and G2 E01 8/20 worlds map onto the 3D cube without authorizing $AGI^{*}$. OMEGA$_t$ and $\Phi_{\max}$ are negative or decorative order parameters (F-OMEGA-DECOR confirmed). Closing ensemble batch, pre-registering thresholds, expanding G2 E01, and instrumenting $N_H$ remain open.
+
+\appendix
+
+\section{Full Metrics Pool Reference}\label{app:metrics-pool}
+
+Canonical registry~\cite{kuznetsov2026metrics}: Tier\,A ($E_{\mathrm{endo}}$, $E_C$, $C_{\mathrm{int}}$, CF-4 partial); Tier\,B ($\lambda_G$, $P_G$, $Q_L$, $H_G$, $B_D$); Tier\,C ($\mathrm{OMEGA}_t$, $O_t$, Kuramoto $R$---explore only); Tier\,D ($N_H$, $R$, $D$---horizon, not claimable); Tier\,E (declaration, sync-only, noisy-TV, entrainment falsifiers). Composite ERI is \texttt{CONJECTURE} dashboard with \texttt{claim\_allowed=false} always.
+
+\section{OMEGA / $\Phi_{\max}$ Negative Results}\label{app:omega-negative}
+
+\textbf{OMEGA$\to\Delta G$ (§\ref{sec:omega-delta-g}).} Four-arm bridge: OMEGA span \textbf{0.604}, genesis span \textbf{0.0}, fingerprint parity \texttt{True} $\Rightarrow$ F-OMEGA-DECOR \textbf{confirmed aggregate}. High $\mathrm{OMEGA}_t$ does not move goal genesis under matched shadow multitick.
+
+\textbf{$\Phi_{\max}$ consensus.} Per-member $\Phi_i$ batch (T-PROTO-01) not yet executed. Single-tick $\Phi_{\max}$ spikes fail F-SINGLE-SPIKE. OMEGA and Kuramoto $R_{\mathrm{K}}$ must not be promoted to Tier\,A positive order parameters.
+
+\section{EOI-$k$ and $do(Z)$ Tables}\label{app:eoi-k}
+
+\textbf{Legacy $do(X)$ EOI-$k$ (rejected F-NODO).} Counterfactual replay stripping last $k\in\{1,5,20\}$ user events: stable on \texttt{twin\_world\_001} and \texttt{autonomous\_question} (EOI 1.0); \texttt{eoi\_k\_steered} drops to 0.35 at $k\geq 5$---but legacy rows lack \texttt{do\_z\_changes\_g\_distribution} and were rejected by proof protocol.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrrl}
+\toprule Scenario & $k$ & EOI & trajectory & Ledger \\ \midrule
+twin\_world\_001 & 1/5/20 & 1.0 & stable & Rejected (F-NODO) \\
+autonomous\_question & 1/5/20 & 1.0 & stable & Rejected (F-NODO) \\
+eoi\_k\_steered & 1 & 1.0 & stable & Rejected (F-NODO) \\
+eoi\_k\_steered & 5/20 & 0.35 & changed & Rejected (F-NODO) \\ \bottomrule
+\end{tabular}
+\caption{EOI-$k$ window sweep (legacy $do(X)$). Remapped $do(Z)$ interventions in Table~\ref{tab:proof-ledger}.}
+\label{tab:eoi-k}
+\end{table}
+
+\textbf{$do(Z)$ remapping (M-D01).} Registered internal interventions on $Z$ before genesis: \texttt{do\_z\_zero\_prospective} on \texttt{eoi\_k\_steered} yields EOI 0.5 with \texttt{trajectory\_changed=true}---\textbf{accepted} by proof protocol. Other $do(Z)$ arms change distribution flag but not trajectory metric on steered scenarios; rejected F-NODO.
+
+\section{Code and Data Availability}\label{sec:code-data}
+
+Source code, harnesses, and artifact JSON for this paper are available under AGPL-3.0 at \url{https://github.com/errorlogy/eia} (branch \texttt{research/cursor-starter-v0.2-woe-eis}; release tag \texttt{sci-flow-v0.3}: \url{https://github.com/errorlogy/eia/tree/sci-flow-v0.3})~\cite{kuznetsov2026eia,kuznetsov2026sciflowrelease}. Tier-0 reproducibility smoke: \texttt{make check-sci-tier0}. All reported harnesses operate under \texttt{claim\_allowed=false} with active claim ceiling \textbf{C2}. Key artifact for M-OMEGA-DELTA-G: SHA-256 \texttt{88a153b66e32b267da0a12b190579154e056431951e46b89c78251272d253d34} (\texttt{research/sci\_flow/M-OMEGA\_delta\_G\_2026-09-05.json})~\cite{kuznetsov2026omega_delta}.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

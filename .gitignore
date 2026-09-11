@@ -64,6 +64,9 @@ postgres-data/
 pgdata/
 redis-data/
 data/
+!research/brain_ai/data/
+research/brain_ai/data/*
+!research/brain_ai/data/README.md
 *.dump
 *.sql.gz
 
@@ -135,3 +138,12 @@ traces/
 # Research starter archives (extracted content lives on research branches)
 *.zip
 _extracted/
+
+# LaTeX build artifacts (arxiv/ — keep main.tex, references.bib, main.pdf)
+arxiv/*.aux
+arxiv/*.fdb_latexmk
+arxiv/*.fls
+arxiv/*.out
+arxiv/*.synctex.gz
+arxiv/*_arXiv/
+arxiv/*_arXiv_submission.tar.gz

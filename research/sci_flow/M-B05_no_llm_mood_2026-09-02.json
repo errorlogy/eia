@@ -1,0 +1,53 @@
+{
+  "artifact_id": "M-B05_no_llm_mood_2026-09-02",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "milestone": "M-B05-NO-LLM",
+  "cube_cell": "D1\u00d7L1",
+  "tier": "0",
+  "checks": [
+    {
+      "name": "constitution_no_llm_mood",
+      "ok": true,
+      "detail": "drive_policy.no_llm_mood=true and source=belief_field_gradients"
+    },
+    {
+      "name": "compute_signature_pure",
+      "ok": true,
+      "detail": "params=['field', 'novelty_events', 'satisfaction', 'motivation_id']"
+    },
+    {
+      "name": "drive_source_purity",
+      "ok": true,
+      "detail": "DriveEngine identifiers have no embedding/LLM mood refs"
+    },
+    {
+      "name": "orthogonality_same_mood_diff_gradients",
+      "ok": true,
+      "detail": "mood=(0.42, 0.42, 0.42) gradients_a={'epistemic': 0.9999092749840702, 'coherence': 0.0, 'commitment': 0.0} gradients_b={'epistemic': 0.4689955935892812, 'coherence': 0.5, 'commitment': 0.0} drives_a=(0.4999546374920351, 0.0, 0.0) drives_b=(0.2344977967946406, 0.275, 0.0)"
+    },
+    {
+      "name": "orthogonality_diff_mood_same_gradients",
+      "ok": true,
+      "detail": "mood_c=(0.05, 0.05, 0.05) mood_d=(0.95, 0.95, 0.95) gradients={'epistemic': 0.9709505944546686, 'coherence': 0.0, 'commitment': 0.0} drives_c=(0.4854752972273343, 0.0, 0.0) drives_d=(0.4854752972273343, 0.0, 0.0)"
+    },
+    {
+      "name": "embedding_sidechannel_invariant",
+      "ok": true,
+      "detail": "drives unchanged after mood_proxy mutation: (0.4854752972273343, 0.0, 0.0) -> (0.4854752972273343, 0.0, 0.0)"
+    },
+    {
+      "name": "explanation_structural_not_embedding",
+      "ok": true,
+      "detail": "epistemic drive: error=1.000 from BeliefField gradient (not embedding similarity)"
+    }
+  ],
+  "n_checks": 7,
+  "n_pass": 7,
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "n_h_claim": false,
+  "agi_star_claim": false,
+  "passed": true,
+  "note": "Structural proof: DriveEngine reads BeliefField gradients only; mock LLM mood proxy is orthogonal (same mood \u2260 same drives; diff mood + same gradients = same drives). Not a live LLM test."
+}

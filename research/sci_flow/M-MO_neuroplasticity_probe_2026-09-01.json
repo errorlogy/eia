@@ -1,0 +1,119 @@
+{
+  "milestone": "M-O",
+  "artifact_id": "M-MO_neuroplasticity_probe_2026-09-01",
+  "date": "2026-09-02",
+  "branch": "research/cursor-starter-v0.2-woe-eis",
+  "claim_ceiling": "C2",
+  "claim_allowed": false,
+  "tier": "C",
+  "cube_cell": "D2\u00d7L2",
+  "neuraxon": {
+    "vendor": "neuraxon",
+    "commit_pin": "21eff5c",
+    "steps": 50,
+    "seed": 42,
+    "step_count": 50,
+    "time_ms": 50.0,
+    "synapse_count": {
+      "initial": 73,
+      "final": 74,
+      "delta": 1
+    },
+    "oscillator_bands_final": {
+      "infraslow": {
+        "freq_hz": 0.05,
+        "phase": 4.033345028355388,
+        "amplitude": 1.0
+      },
+      "slow": {
+        "freq_hz": 0.5,
+        "phase": 0.31422684241601617,
+        "amplitude": 1.0
+      },
+      "theta": {
+        "freq_hz": 6.0,
+        "phase": 3.613015764374338,
+        "amplitude": 1.0
+      },
+      "alpha": {
+        "freq_hz": 10.0,
+        "phase": 4.5440670839311865,
+        "amplitude": 1.0
+      },
+      "gamma": {
+        "freq_hz": 40.0,
+        "phase": 4.6273851119960385,
+        "amplitude": 1.0
+      }
+    },
+    "kuramoto_r_final": 0.6038195614859427,
+    "omega_t": {
+      "final": 0.29286693887341186,
+      "mean": 0.23566863761708415,
+      "min": 0.1866470686153453,
+      "max": 0.29286693887341186
+    },
+    "plasticity": {
+      "w_fast_mean_final": 0.0007013496907660012,
+      "w_fast_drift": 0.00736662562586164,
+      "structural_events": 1
+    },
+    "activity": {
+      "active_neurons_final": 0,
+      "active_neurons_mean": 0.0
+    },
+    "neuromodulators": {
+      "dopamine": 0.15,
+      "serotonin": 0.299267346482955,
+      "acetylcholine": 0.15,
+      "norepinephrine": 0.15
+    },
+    "energy_usage": 0.0,
+    "status": "ok"
+  },
+  "graphitti": {
+    "vendor": "graphitti",
+    "commit_pin": "b96e96c",
+    "config_path": "research/vendor/graphitti/configfiles/test-tiny.xml",
+    "graphml_path": "research/vendor/graphitti/configfiles/graphs/test-tiny.graphml",
+    "build_path": "research/vendor/graphitti/build",
+    "build_command": "cmake -D ENABLE_CUDA=NO .. && make -j",
+    "run_command": "./graphitti -c ../configfiles/test-tiny.xml",
+    "cmake_available": false,
+    "binary_available": false,
+    "binary_path": null,
+    "connections_class": "ConnGrowth",
+    "edges_class": "AllDSSynapses",
+    "conn_growth_params": {
+      "epsilon": "0.60",
+      "beta": "0.10",
+      "rho": "0.0001",
+      "targetRate": "1.9",
+      "startRadius": "0.4"
+    },
+    "starter_neurons": {
+      "starter_vthresh_min": "13.565e-3",
+      "starter_vthresh_max": "13.655e-3",
+      "injected_current_nA": "13.5e-09"
+    },
+    "has_conn_growth": true,
+    "has_stdp_edges": true,
+    "status": "stub_metrics",
+    "stub_metrics": {
+      "spike_rate_mean": null,
+      "edge_count_delta": null,
+      "note": "Binary not built; cmake unavailable on host"
+    }
+  },
+  "falsifiers_active": [
+    "F-KURAMOTO-AS-E",
+    "F-STRUCT\u2260E",
+    "F-OMEGA-DECOR",
+    "F-SYNC"
+  ],
+  "do_o_interventions": [
+    "do_o_neuraxon_plasticity_off",
+    "do_o_graphitti_growth_off"
+  ],
+  "note": "Vendor substrate probe only; does not establish E_endo. Kuramoto R and OMEGA_t are Tier C explore adjuncts."
+}

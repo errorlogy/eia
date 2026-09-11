@@ -54,11 +54,12 @@ Autonomous **scientific research** for Endogenous Initiative Architecture (EIA) 
 
 - Select **one claim level** from the ladder (do not over-claim):
   - **C0** — code behavior (simulator produces intent)
-  - **C1** — proximal request independence
-  - **C2** — internal-state causation (interventions)
+  - **C1** — proximal request independence (weak / partial \(E_{\mathrm{endo}}\))
+  - **C2** — internal-state causation (interventions; stronger scoped \(E_{\mathrm{endo}}\))
   - **C3** — emergent timing vs cron/rule baseline
   - **C4** — human usefulness (MVP-1 shadow only)
   - **C5** — cross-domain generalization (not in v0.2 scope)
+- **AGI\* is not a C-level.** Target criterion \(AGI^{*} = E_{\mathrm{endo}} \land C_{\mathrm{non\text{-}emb}(H)}\) — see [`AGI_STAR_CRITERION.md`](../research/sci_flow/AGI_STAR_CRITERION.md). C-ladder milestones approach AGI\*; they do not authorize claiming it.
 - Write falsifiers and primary endpoint before S2
 - Record hypothesis ID (e.g. `H-WOE-001`, `H-EIS-003`) in SCI_FLOW_PLAN
 

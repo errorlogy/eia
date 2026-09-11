@@ -1,0 +1,20 @@
+{
+  "runtime": {
+    "minimum_candidate_utility": 0.18,
+    "maximum_alternatives": 8
+  },
+  "contact_policy": {
+    "minimum_score": 0.2,
+    "maximum_contacts": 2,
+    "window_seconds": 86400,
+    "cooldown_seconds": 3600,
+    "maximum_privacy_cost": 0.35,
+    "maximum_combined_risk": 0.25
+  },
+  "research_mode": {
+    "external_side_effects": false,
+    "deterministic_replay": true,
+    "causal_trace_required": true
+  }
+}
+

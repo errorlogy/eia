@@ -4,7 +4,7 @@
 # NAMM mirror: c:/Users/Public/NAMM/data/sci_flow_registry.yaml
 
 version: "0.1"
-updated: "2026-08-18"
+updated: "2026-09-05-M-PROTO-AGI"
 
 repos:
   eia:
@@ -17,9 +17,30 @@ repos:
     cli: namm sci-flow run
 
 claim_ladder:
-  active_ceiling: C0
-  target: C1
+  active_ceiling: C2
+  target: C3
   protocol_doc: research/cursor-starter-v0.2/docs/RESEARCH_PROTOCOL_EIS_WOE.md
+  topologies_doc: docs/MULTI_TOPOLOGY_LOOPS.md
+
+
+model_roles:
+  enabled: false
+  tier: 0
+  world_imagination:
+    provider: null
+    offline_only: true
+    max_calls_per_episode: 0
+  goal_genesis:
+    provider: null
+    trigger: drive_birth
+    min_epistemic_pressure: 0.35
+    fallback: code
+  action_planner:
+    gated_by: [governor, authentic_reason]
+    shadow_only: true
+  att_evidence:
+    llm_allowed: false
+    auditor: python_only
 
 milestones:
   M-A:
@@ -28,16 +49,395 @@ milestones:
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
     command: make check
+    status: done
+    completed: "2026-08-18"
+    tests: 29
   M-B:
     name: EIS port to main audit
     claim: metadata
     branch: main
     harness: src/eia/audit/
+    status: done
+    completed: "2026-08-18"
+  M-C:
+    name: CF-1 prompt deletion suite
+    claim: C1
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-18"
+    command: python research/sci_flow/run_cf1.py
+    primary_endpoint: full_window_c1_pass_rate
+    result: 0.95
   M-G:
     name: Measured EIS vector
     claim: C2
     branch: research/cursor-starter-v0.2-woe-eis
     harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-18"
+  M-D:
+    name: Kuramoto coupling delay sweep
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-18"
+    c2_claim: false
+    command: python research/sci_flow/run_md.py
+    result: "coupled 0.95 / scramble 0.69 / k0 0.94"
+  M-CF4:
+    name: CF-4 internal-state reset suite
+    claim: C2
+    topology: T_EIA_state
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-20"
+    c2_claim: true
+    command: python research/sci_flow/run_cf4.py
+    result: "default 0.95 / zero_epistemic_gap 0.06 / wm_off 0.00"
+  M-M0:
+    name: AMAT M0-twin anti-median harness
+    claim: architecture
+    topology: T_AMAT_M0
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-20"
+    command: python research/sci_flow/run_m0_twin.py
+    result: "OFF collapse 1.0 / ON differs 1.0 / emit_m0=0"
+    artifact: research/sci_flow/M0_TWIN_METRICS_2026-08-20.md
+  M-E:
+    name: ATT-G non-catalog goal genesis
+    claim: C3_prep
+    att: ATT-G
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-20"
+    artifact: research/sci_flow/M-E_metrics_2026-08-20.md
+  M-P:
+    name: ATT-P multi-tick goal persistence
+    claim: C3_prep
+    att: ATT-P
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_goal_persistence.py
+    result: "endogenous 1.0 / ephemeral 0 / reprompt 0 / corrigible 1.0"
+    artifact: research/sci_flow/M-P_metrics_2026-08-21.md
+  M-R:
+    name: ATT-R closed goal-formation recurrence
+    claim: C3_prep
+    att: ATT-R
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_goal_recurrence.py
+    result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
+    artifact: research/sci_flow/M-R_metrics_2026-08-21.md
+  M-R-LIVE:
+    name: ATT-R shadow multi-tick closed-loop on main CognitiveLoop
+    claim: C3_prep
+    att: ATT-R
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_live_att_r.py
+    result: "closed 1.0 / open 0 / no_W 0 / no_novel 0 / schedule 0 / kuramoto 0"
+    artifact: research/sci_flow/M-R-LIVE_metrics_2026-08-21.md
+    note: "shadow-first; emit_m0=false; Phase 2 shadow carryover partial; live daemon loop reset gap remains; no C3"
+  M-N:
+    name: ATT-N non-embeddability under encoding budget B
+    claim: architecture_explore
+    att: ATT-N
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_non_embeddability.py
+    result: "causal 1.0 / opacity 0 / no_causal 0 / unbounded 0 / length 0 / faithful 0"
+    artifact: research/sci_flow/M-N_metrics_2026-08-21.md
+    note: "explore proxy only; n_h_claim=false; B pre-registered"
+  M-CLI:
+    name: M-CLI model role adapter (Tier 0 stub)
+    claim: scaffold
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-22"
+    command: make check-sci-tier0
+    note: "Phase 0-1; att_evidence.llm_allowed=false; no behavior change when disabled"
+  M-CLI-P2:
+    name: M-CLI Phase 2 daemon carryover (beliefs + drives)
+    claim: scaffold
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: src/eia/runtime/daemon.py
+    status: done
+    completed: "2026-09-01"
+    command: pytest tests/test_shadow_multitick.py tests/test_daemon_carryover.py -q
+    note: "ShadowSessionCarryover + live StateStore hydration (EIA_DAEMON_BELIEF_CARRYOVER=1); off by default; emit_m0=false"
+  M-LIVE-PATH:
+    name: M-LIVE-PATH shadow vs live carryover witness (D2×L3)
+    claim: architecture_explore
+    att: ATT-R
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-02"
+    command: python research/sci_flow/run_live_path_witness.py
+    result: "witness_pass=true / gap_narrowed=true / 12/12 parity checks"
+    artifact: research/sci_flow/M-LIVE_PATH_witness_2026-09-02.json
+    implementation:
+      - research/sci_flow/live_path_witness_harness.py
+      - src/eia/runtime/daemon.py
+      - src/eia/runtime/state_store.py
+    tests:
+      - tests/test_live_path_witness.py
+    note: "Structural parity shadow ShadowSessionCarryover vs opt-in live StateStore; claim_allowed=false"
+  M-E04-D05:
+    name: E04/D05 longitudinal DSR on shadow carryover (50 ticks)
+    claim: architecture_explore
+    att: M-SE
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-01"
+    command: python research/sci_flow/run_dsr_carryover.py
+    result: "dsr_min=0.822 / persistence=1.0 / d05_pass=true / e04_pass=true"
+    artifact: research/sci_flow/M-E04_DSR_metrics_2026-09-01.md
+    note: "Tier B B_D on main CognitiveLoop carryover; not production daemon; no C raise"
+  M-E04-DRIFT:
+    name: E04 part 2 EOI drift on 50-tick shadow carryover
+    claim: architecture_explore
+    att: ATT-E
+    topology: T_LIVE_ATTR
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-02"
+    command: python research/sci_flow/run_e04_eoi_drift.py
+    result: "eoi_min=0.75 / persistence=1.0 / eoi_pass=true / e04_pass=true"
+    artifact: research/sci_flow/M-E04_EOI_drift_2026-09-02.json
+    implementation:
+      - research/sci_flow/eoi_drift_harness.py
+      - src/eia/runtime/shadow_multitick.py
+    tests:
+      - tests/test_e04_eoi_drift.py
+    note: "Longitudinal EOI drift vs bootstrap baseline; orthogonal to D01 twin EOI-k; claim_allowed=false"
+  M-3D-01:
+    name: Sci-flow 3D evidence cube + D01 EOI-k (D1×L2)
+    claim: registry
+    att: ATT-E
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-01"
+    command: python research/sci_flow/run_eoi_k.py
+    artifact: research/sci_flow/SCI_FLOW_3D_CUBE.md
+    implementation:
+      - research/cursor-starter-v0.2/src/eia/intervention_cube.py
+      - research/sci_flow/eoi_k_harness.py
+      - scenarios/eoi_k_steered.yaml
+    tests:
+      - tests/test_eoi_k.py
+      - research/cursor-starter-v0.2/tests/test_intervention_cube.py
+    note: "Counterfactual EOI-k k=1,5,20 + shadow carryover witness; eoi_k_steered gradient; claim_allowed=false"
+  M-3D-EXPRESS:
+    name: 9-cell 3D express smoke pass (D×L matrix)
+    claim: registry
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-01"
+    command: python research/sci_flow/run_3d_express.py
+    artifact: research/sci_flow/M-3D-EXPRESS_2026-09-01.md
+    note: "<60s smoke; updates SCI_FLOW_3D_CUBE.md cell statuses; claim_allowed=false"
+  M-O:
+    name: Oscillatory endogeneity substrate (adjunct)
+    claim: theory_only
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: in_progress
+    artifact: research/sci_flow/OSCILLATORY_ENDOGENEITY.md
+    command: python research/sci_flow/run_mo_neuroplasticity_probe.py
+    note: "O_t / Psi(O_t) + OMEGA_t metric; Neuraxon/Graphitti Tier C substrate; not E proof"
+    neuroplasticity_factor:
+      status: done
+      completed: "2026-09-01"
+      artifact: research/sci_flow/M-O_NEURAXON_GRAPHITTI_ENDOGENEITY.md
+      probe: research/sci_flow/run_mo_neuroplasticity_probe.py
+      probe_artifact: research/sci_flow/M-MO_neuroplasticity_probe_2026-09-01.json
+      vendors: [neuraxon, graphitti]
+      cube_cell: D2×L2
+      claim_allowed: false
+      interventions: [do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off]
+    do_o_arms:
+      status: done
+      completed: "2026-09-02"
+      harness: research/sci_flow/run_mo_do_o_arms.py
+      artifact: research/sci_flow/M-MO_do_o_arms_2026-09-02.json
+      arms: [neuraxon_baseline, do_o_neuraxon_plasticity_off, do_o_graphitti_growth_off, native_oscillatory_state]
+      claim_allowed: false
+    graphitti_binary_witness:
+      status: ci_ready
+      completed: "2026-09-02"
+      harness: research/sci_flow/run_graphitti_witness.py
+      artifact: research/sci_flow/M-MO_graphitti_witness_2026-09-02.json
+      cube_cell: D2×L3
+      claim_allowed: false
+      ci_workflow: .github/workflows/graphitti-witness.yml
+      ci_build_script: scripts/build_graphitti.sh
+      witness_kind_local: regression_xml_ok
+      witness_kind_ci: binary_ok
+      blocker: "Windows/WSL: no cmake; CI googletest bootstrap added in build_graphitti.sh"
+      upgrade_plan: research/vendor/README.md#graphitti
+    omega_metric:
+      status: in_progress
+      artifact: research/sci_flow/OMEGA_WAVE_METRIC.md
+      bridge: research/sci_flow/MIOC_EIA_BRIDGE.md
+      neuroplasticity_survey: research/sci_flow/NEUROPLASTICITY_OSS_SURVEY.md
+      neuroplasticity_application: research/sci_flow/NEUROPLASTICITY_EIA_APPLICATION.md
+      implementation: research/cursor-starter-v0.2/src/eia/oscillatory_state.py
+      falsifiers: [F-OMEGA-DECOR, F-OMEGA-EXT, F-SYNC, F-PHASE-ONLY, F-STRUCT≠E]
+      carriers_hz: [20, 30, 42, 70]
+      loop_playbook: docs/SCI_LOOP_OMEGA_RESEARCH.md
+
+  I01:
+    name: arXiv v0.1 problematization draft
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: arxiv/
+    status: done
+    completed: "2026-09-01"
+    command: make arxiv-compile
+    artifact: arxiv/main.tex
+    toolkit: scripts/arxiv_toolkit/
+    note: "Synced with sci-flow C2 proof protocol, 3D cube, partial harnesses; claim_allowed=false; no AGI*"
+
+  I03:
+    name: arXiv 3D Evidence Cube standalone paper
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: arxiv/sci_flow_3d_cube/
+    status: done
+    completed: "2026-09-02"
+    command: make arxiv-3d-cube-compile
+    artifact: arxiv/sci_flow_3d_cube/main.tex
+    toolkit: scripts/arxiv_toolkit/
+    note: "Standalone cube paper; sections_empirical.tex; merged bib; claim_allowed=false; no AGI*"
+
+  I05:
+    name: arXiv figures batch (EIA + 3D cube)
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: scripts/arxiv_toolkit/generate_figures.py
+    status: done
+    completed: "2026-09-02"
+    command: python scripts/arxiv_toolkit/generate_figures.py
+    artifacts:
+      - arxiv/figures/
+      - arxiv/sci_flow_3d_cube/figures/
+    figures:
+      - cube_status_heatmap
+      - express_pipeline
+      - cf4_ablation_bars
+      - dag
+    note: "I05 batch; Pearl DAG (A04); real PDF/PNG; claim_allowed=false; no AGI*"
+
+  I04-package:
+    name: arXiv submission packages (EIA + 3D cube)
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: scripts/arxiv_toolkit/clean_and_package.py
+    status: done
+    completed: "2026-09-02"
+    command: make arxiv-package && make arxiv-3d-cube-package
+    artifacts:
+      - arxiv_arXiv_submission.tar.gz
+      - sci_flow_3d_cube_arXiv_submission.tar.gz
+    note: "v0.3 sync post M-O adjunct + D1 do(Z) + mode B; tarballs in docs/ARXIV_SUBMISSION.md; binaries not committed"
+
+  M-PROTO-AGI:
+    name: Proto-AGI Max consensus ensemble (theory)
+    claim: theory_only
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-09-05"
+    artifact: research/sci_flow/PROTO_AGI_MAX_CONSENSUS.md
+    note: "12-member ensemble; Phi_max + (E,OMEGA,P,R) consensus over Delta T; C2 ceiling; claim_allowed=false"
+
+  M-BRAIN-AI:
+    name: Connectome subgraph → OMEGA_t crosswalk + behavior diagnostic (T-BRAIN-01/02)
+    claim: architecture_explore
+    att: ATT-R
+    branch: research/brain-ai-connectome
+    status: in_progress
+    completed: "2026-09-10"
+    command: python research/brain_ai/run_t_brain_02.py
+    artifact: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json
+    implementation:
+      - research/brain_ai/harnesses/t_brain_01_connectome_ot.py
+      - research/brain_ai/harnesses/t_brain_02_omega_behavior.py
+      - research/brain_ai/adapters/connectome_export.py
+      - research/brain_ai/adapters/brian2_lif_subgraph.py
+      - research/brain_ai/adapters/behavior_metrics.py
+      - research/brain_ai/adapters/spike_arms.py
+      - research/brain_ai/adapters/ot_injection.py
+    tests:
+      - tests/test_t_brain_01_connectome_ot.py
+      - tests/test_t_brain_02_omega_behavior.py
+    cube_cell: D2×L2
+    claim_allowed: false
+    agi_star_claim: false
+    note: "Tier C adjunct; T-BRAIN-02 OMEGA vs behavior arms; synthetic MVP; Brian2 deferred; no E_endo bleed"
+
+  arxiv_v0.3:
+    name: arXiv v0.3 sync (M-O adjunct, D1 do(Z), G2 E01, live-path, Graphitti)
+    claim: C2
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: arxiv/
+    status: done
+    completed: "2026-09-02"
+    command: make arxiv-compile && make arxiv-3d-cube-compile && make arxiv-package && make arxiv-3d-cube-package
+    artifacts:
+      - arxiv/main.tex
+      - arxiv/sci_flow_3d_cube/main.tex
+      - arxiv/sci_flow_3d_cube/sections_empirical.tex
+      - docs/ARXIV_SUBMISSION.md
+    note: "v0.3 September 2026; D1×L3 2 admissible items; claim_allowed=false; no AGI*"
+
+  M-EMP:
+    name: Endogeneity Metrics Pool (Tier A–E registry + ERI)
+    claim: registry
+    branch: research/cursor-starter-v0.2-woe-eis
+    harness: research/cursor-starter-v0.2
+    status: done
+    completed: "2026-08-28"
+    command: python -m pytest tests/test_endogeneity_metrics_pool.py -q
+    artifact: research/sci_flow/ENDOGENEITY_METRICS_POOL.md
+    registry: research/sci_flow/endogeneity_metrics.yaml
+    implementation: research/cursor-starter-v0.2/src/eia/endogeneity_metrics.py
+    note: "E_endo PRIMARY Tier A; OMEGA_t Tier C explore; ERI conjecture; agi_star_auto_claim=false"
+
+  M-SE:
+    name: Stable endogeneity theory + stack sim ablation
+    claim: theory_only
+    att: ATT-E
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python endogeneity_stack_sim.py
+    artifact: research/sci_flow/STABLE_ENDOGENEITY.md
+    note: "toy sim only; E_endo primary in phase-transition docs; no C raise"
+
+  M-D2:
+    name: ATT-D cross-domain E_endo (woe_catalog + twin_ops)
+    claim: architecture_explore
+    att: ATT-D
+    branch: research/cursor-starter-v0.2-woe-eis
+    status: done
+    completed: "2026-08-21"
+    command: python research/sci_flow/run_cross_domain.py
+    result: "hold 1.0 / single 0 / schedule_prompt 0; domains 0.95/0.95"
+    artifact: research/sci_flow/M-D2_metrics_2026-08-21.md
+    note: "explore proxy only; c5_claim=false; emit_m0=false"
 
 eia_eval_scenarios:
   - id: twin_world_001

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns="http://datacite.org/schema/kernel-4"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4/metadata.xsd">
+  <identifier identifierType="URL">https://zenodo.org/record/TBD</identifier>
+  <creators>
+    <creator>
+      <creatorName nameType="Personal">Kuznetsov, Roman A.</creatorName>
+      <affiliation>Anthemium</affiliation>
+    </creator>
+  </creators>
+  <titles>
+    <title>Proto-AGI Horizon: Endogenous Proactive Architecture, OMEGA Coherence, and Partial Evidence under C2 Ceiling</title>
+  </titles>
+  <publisher>Zenodo</publisher>
+  <publicationYear>2026</publicationYear>
+  <subjects>
+    <subject>proto-AGI</subject>
+    <subject>endogenous initiative</subject>
+    <subject>proactive architecture</subject>
+    <subject>OMEGA coherence</subject>
+    <subject>Max consensus</subject>
+    <subject>falsifiable evaluation</subject>
+    <subject>sci-flow</subject>
+    <subject>claim ladder</subject>
+  </subjects>
+  <dates>
+    <date dateType="Issued">2026-09-05</date>
+  </dates>
+  <language>en</language>
+  <resourceType resourceTypeGeneral="Text">Article</resourceType>
+  <alternateIdentifiers>
+    <alternateIdentifier alternateIdentifierType="URL">https://github.com/errorlogy/eia/tree/sci-flow-v0.3</alternateIdentifier>
+  </alternateIdentifiers>
+  <relatedIdentifiers>
+    <relatedIdentifier relatedIdentifierType="URL" relationType="IsSupplementTo" resourceTypeGeneral="Software">
+      https://github.com/errorlogy/eia/tree/sci-flow-v0.3
+    </relatedIdentifier>
+    <relatedIdentifier relatedIdentifierType="URL" relationType="IsReferencedBy" resourceTypeGeneral="Other">
+      https://github.com/Anthemium/AGI-Manifesto
+    </relatedIdentifier>
+    <relatedIdentifier relatedIdentifierType="URL" relationType="IsReferencedBy" resourceTypeGeneral="Software">
+      https://github.com/errorlogy/namm-experiments
+    </relatedIdentifier>
+  </relatedIdentifiers>
+  <formats>
+    <format>application/pdf</format>
+  </formats>
+  <rightsList>
+    <rights rightsURI="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International</rights>
+  </rightsList>
+  <descriptions>
+    <description descriptionType="Abstract">We present an operational research horizon for proto-AGI evaluation within the Endogenous Initiative Architecture (EIA) sci-flow program. Under this construction, general intelligence is not a benchmark score but a sustained dynamical regime in which cognitive goals arise from persistent internal state when X_t^trigger=0. We contrast passive architectures with proactive endogenous candidates. A twelve-member proto-AGI ensemble registers operational configs for Max consensus diagnostics over (E, OMEGA, P, R). We report the OMEGA→ΔG bridge experiment (M-OMEGA-DELTA-G): F-OMEGA-DECOR confirmed (aggregate, C2). Partial empirical results map onto the 3D evidence cube. All harnesses operate under claim_allowed=false; active ceiling C2. This paper does not claim AGI*, τ_AGI, consciousness, or biological identity.</description>
+  </descriptions>
+</resource>

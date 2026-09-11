@@ -1,0 +1,96 @@
+# T-BRAIN-01 connectome → O_t harness defaults
+# Tier C · claim_allowed=false · no AGI*
+
+version: "0.1"
+updated: "2026-09-10"
+
+connectome:
+  source: bundled_tiny  # bundled_tiny | synthetic | google_male_cns | flywire_female
+  google_male_subgraph: research/brain_ai/data/google_male_subgraph.json
+  flywire_female_subgraph: research/brain_ai/data/flywire_female_subgraph.json
+  offline_fallback: synthetic
+  max_subgraph_nodes: 500
+
+harness:
+  id: T-BRAIN-01
+  milestone: M-BRAIN-AI
+  tier: C
+  claim_ceiling: C2
+  claim_allowed: false
+  agi_star_claim: false
+  e_endo_support: none
+  witness_support: none
+  c_ladder_raise_allowed: false
+  cell: D2×L2
+
+simulation:
+  seed: 42
+  n_nodes: 8
+  duration_ms: 100.0
+  dt_ms: 1.0
+  prefer_brian2: true
+
+carriers_hz: [20, 30, 42, 70]
+
+artifacts:
+  json: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.json
+  md: research/brain_ai/artifacts/M-T-BRAIN-01_2026-09-09.md
+
+t_brain_02:
+  id: T-BRAIN-02
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-02_2026-09-10.md
+  arms:
+    - coupled_active
+    - passive_quiescent
+    - burst_clustered
+    - decoupled_sparse
+    - phase_scramble_control
+  future_hooks:
+    - FlyWire offline subgraph export
+    - Brian2 LIF multi-arm parity
+
+t_brain_03:
+  id: T-BRAIN-03
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-03_2026-09-10.md
+  shadow_seed: 42
+  x_trigger_zero: true
+  arms:
+    - coupled_active
+    - passive_quiescent
+    - phase_scramble_control
+
+t_brain_05:
+  id: T-BRAIN-05
+  status: implemented
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-05_2026-09-10.md
+  connectome_sources:
+    - bundled_tiny
+    - synthetic
+    - google_male_cns
+    - flywire_female
+  include_shadow_bridge: true
+  future_hooks:
+    - Brian2 multi-source parity
+    - Real neuprint MaleCNS/FlyWire ego-network fetch
+
+t_brain_06:
+  id: T-BRAIN-06
+  status: implemented
+  artifact_json: research/brain_ai/artifacts/M-T-BRAIN-06_2026-09-11.json
+  artifact_md: research/brain_ai/artifacts/M-T-BRAIN-06_2026-09-11.md
+  session_ticks: 2
+  connectome_sources:
+    - bundled_tiny
+    - synthetic
+    - google_male_cns
+    - flywire_female
+  arms_compared:
+    - coupled_active
+    - passive_quiescent
+  future_hooks:
+    - Real neuprint subgraph exports
+    - Brian2 multi-source integrated parity
+    - Zebrafish/mouse connectome horizon

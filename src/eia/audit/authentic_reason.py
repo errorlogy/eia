@@ -15,6 +15,7 @@ from eia.audit import CausalTrace, TraceNodeKind
 
 if TYPE_CHECKING:
     from eia.namm import SandboxCertificate
+from eia.audit.eis import infer_endogeneity_vector
 from eia.audit.topology import CausalTraceTopology, TopologyMetrics
 from eia.governor import GovernorState
 from eia.schemas.contact import ContactDecision, ContactOutcome
@@ -65,6 +66,9 @@ class AuthenticReasonVerdict(BaseModel):
     topology: dict[str, float] | None = None
     source_mass_independent: bool | None = None
     namm_certificates: list[dict[str, Any]] = Field(default_factory=list)
+    eis_level: int | None = None
+    eos_score: float | None = None
+    endogeneity: dict[str, float] | None = None
 
 
 class AuthenticReasonDiscriminator:
@@ -204,6 +208,9 @@ class AuthenticReasonDiscriminator:
                 reason_codes=[AuthenticReasonCode.ABSTAINED],
                 failed_checks=["initiative_abstained"],
                 summary="Abstained — no authentic contact reason",
+                eis_level=None,
+                eos_score=None,
+                endogeneity=None,
             )
 
         has_chain = self._has_causal_chain(trace)
@@ -281,6 +288,19 @@ class AuthenticReasonDiscriminator:
             else f"Not authentic ({initiative_class}) — failed: {', '.join(failed) or 'none'}"
         )
 
+        eis_vec = infer_endogeneity_vector(
+            eoi=eoi,
+            motivation=motivation,
+            initiative=initiative,
+            decision=decision,
+            topology=topology_metrics,
+            governor_state=governor_state,
+            structural_drive=structural,
+        )
+        eis_level = eis_vec.classify()
+        if initiative_class == "endogenous" or is_authentic:
+            summary = f"{summary} · EIS-{int(eis_level)} EOS={eis_vec.endogenous_origin_score:.3f}"
+
         return AuthenticReasonVerdict(
             id=new_id("auth"),
             timestamp=datetime.now(timezone.utc),
@@ -293,4 +313,7 @@ class AuthenticReasonDiscriminator:
             topology=topology_payload,
             source_mass_independent=source_mass_independent,
             namm_certificates=namm_cert_payload,
+            eis_level=int(eis_level),
+            eos_score=round(eis_vec.endogenous_origin_score, 4),
+            endogeneity=eis_vec.model_dump(),
         )

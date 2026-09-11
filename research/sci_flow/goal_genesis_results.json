@@ -1,0 +1,119 @@
+{
+  "n_seeds": 50,
+  "claim_ceiling": "architecture_att_g_explore",
+  "agi_star_claim": false,
+  "c2_claim": false,
+  "c3_claim": false,
+  "att": "ATT-G",
+  "milestone": "M-E",
+  "pre_registered_falsifiers": {
+    "random_novel_wording_neq_genesis": true,
+    "genealogy_required": true,
+    "zero_tension_rejects_genesis": true,
+    "catalog_novelty_capped_below_075": true
+  },
+  "genesis_path": {
+    "n": 50,
+    "genesis_rate": 1.0,
+    "att_g_evidence_rate": 1.0,
+    "selection_rate": 0.0,
+    "rejected_rate": 0.0,
+    "mean_novelty_genesis": 0.8992,
+    "catalog_capped_fraction": 0.0,
+    "claim_allowed": false,
+    "agi_star_claim": false,
+    "c3_claim": false,
+    "falsifier_notes": {
+      "random_wording_neq_genesis": true,
+      "genealogy_required": true,
+      "zero_tension_rejects": true,
+      "catalog_novelty_cap": 0.74
+    }
+  },
+  "catalog_negative_control": {
+    "n": 50,
+    "genesis_rate": 0.0,
+    "att_g_evidence_rate": 0.0,
+    "selection_rate": 1.0,
+    "rejected_rate": 0.0,
+    "mean_novelty_genesis": 0.0,
+    "catalog_capped_fraction": 1.0,
+    "claim_allowed": false,
+    "agi_star_claim": false,
+    "c3_claim": false,
+    "falsifier_notes": {
+      "random_wording_neq_genesis": true,
+      "genealogy_required": true,
+      "zero_tension_rejects": true,
+      "catalog_novelty_cap": 0.74
+    }
+  },
+  "wording_control": {
+    "n": 50,
+    "genesis_rate": 0.0,
+    "att_g_evidence_rate": 0.0,
+    "selection_rate": 0.0,
+    "rejected_rate": 1.0,
+    "mean_novelty_genesis": 0.0,
+    "catalog_capped_fraction": 0.0,
+    "claim_allowed": false,
+    "agi_star_claim": false,
+    "c3_claim": false,
+    "falsifier_notes": {
+      "random_wording_neq_genesis": true,
+      "genealogy_required": true,
+      "zero_tension_rejects": true,
+      "catalog_novelty_cap": 0.74
+    }
+  },
+  "zero_tension_control": {
+    "n": 50,
+    "genesis_rate": 0.0,
+    "att_g_evidence_rate": 0.0,
+    "selection_rate": 0.0,
+    "rejected_rate": 1.0,
+    "mean_novelty_genesis": 0.0,
+    "catalog_capped_fraction": 0.0,
+    "claim_allowed": false,
+    "agi_star_claim": false,
+    "c3_claim": false,
+    "falsifier_notes": {
+      "random_wording_neq_genesis": true,
+      "genealogy_required": true,
+      "zero_tension_rejects": true,
+      "catalog_novelty_cap": 0.74
+    }
+  },
+  "woe_wire": {
+    "intent_rate": 0.94,
+    "att_g_evidence_rate": 0.94,
+    "emit_m0_rate_with_genesis": 0.0
+  },
+  "falsifier_suite_seed0": {
+    "random_wording": {
+      "path": "rejected",
+      "att_g_evidence": false,
+      "rejection_reason": "random_novel_wording_without_genealogy",
+      "novelty_proxy": 0.92
+    },
+    "catalog_selection": {
+      "path": "selection",
+      "att_g_evidence": false,
+      "rejection_reason": null,
+      "novelty_proxy": 0.74
+    },
+    "zero_tension": {
+      "path": "rejected",
+      "att_g_evidence": false,
+      "rejection_reason": "zero_world_model_tension",
+      "novelty_proxy": 0.0
+    },
+    "genesis_ok": {
+      "path": "genesis",
+      "att_g_evidence": true,
+      "rejection_reason": null,
+      "novelty_proxy": 0.93
+    }
+  },
+  "explore_proxy_note": "Suggested ATT-G explore: novelty>=0.75 AND catalog=false over >=50 seeds \u2014 reported here; not adopted as C-ladder gate."
+}
