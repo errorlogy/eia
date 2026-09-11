@@ -2330,6 +2330,38 @@ T-BRAIN-04 longitudinal shadow carryover or FlyWire offline export; Brian2 multi
 
 ---
 
+## Entry 073 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 dynamic 3D animation
+
+**Session:** Time-evolving 3D matplotlib animations for T-BRAIN-06 — evidence cube, connectome activity, state-space trajectories; tick interpolation + optional 4-tick harness; pillow GIF (+ MP4 if ffmpeg).
+**Branch:** `research/brain-ai-connectome`
+**Claim level:** **C2** unchanged. **No AGI\* claim.** `claim_allowed=false`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `viz/t_brain_06_3d_dynamic.py` — FuncAnimation, frame interpolation, three animated views |
+| S2 | `run_viz_t_brain_06_dynamic.py` CLI (`--fast`, `--session-ticks`, `--view`) |
+| S3 | README dynamic animation section; smoke test |
+| S4 | Run dynamic viz runner; verify GIF outputs |
+| S5 | Commit + push (no merge to main) |
+
+### Metrics
+
+| Item | Value |
+|------|-------|
+| Milestone | **M-BRAIN-AI** |
+| Harness | **T-BRAIN-06** (dynamic viz) |
+| Animations | `t_brain_06_eia_3d_dynamic`, `connectome_3d_dynamic`, `trajectory_3d_dynamic` |
+| Default loop | **36 frames @ 12 fps** (~3 s) |
+| `claim_allowed` | **false** |
+
+### Next
+
+Real neuPrint export overlays; optional plotly HTML if dep added; no C raise.
+
+---
+
 ## Entry 072 — 2026-09-11 — M-BRAIN-AI T-BRAIN-06 3D visualization
 
 **Session:** 3D matplotlib figures for T-BRAIN-06 integrated EIA results — evidence cube, connectome subgraph, metrics bars; offline from artifact JSON.

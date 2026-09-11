@@ -115,6 +115,34 @@ Options: `--artifact=PATH` (custom JSON), `--no-harness` (embedded fallback if a
 
 Requires optional `sim` extras: `pip install -e ".[sim]"` (numpy, matplotlib). Works offline — no neuPrint.
 
+### Dynamic animation (T-BRAIN-06)
+
+Time-evolving 3D animations via `matplotlib.animation.FuncAnimation` (pillow GIF; optional MP4 if ffmpeg present):
+
+```bash
+# Full loop (~3 s, 36 frames @ 12 fps) — all three views
+python research/brain_ai/run_viz_t_brain_06_dynamic.py
+
+# Quick smoke / CI (--fast: 6 frames, cube only)
+python research/brain_ai/run_viz_t_brain_06_dynamic.py --fast --view=cube --no-harness
+
+# Smoother tick motion from 4-tick harness (optional)
+python research/brain_ai/run_viz_t_brain_06_dynamic.py --session-ticks=4
+```
+
+Outputs in `figures/`:
+
+| File | Description |
+|------|-------------|
+| `t_brain_06_eia_3d_dynamic.gif` | Animated evidence cube: Source × Tick × OMEGA_t |
+| `t_brain_06_connectome_3d_dynamic.gif` | Connectome node color/size vs activity proxy over ticks |
+| `t_brain_06_trajectory_3d_dynamic.gif` | 3D state-space paths (OMEGA_t, genesis_Δ, EOI) |
+| `*.mp4` | Same stems when ffmpeg is on PATH |
+
+Options: `--artifact=PATH`, `--no-harness`, `--frames=N`, `--fps=N`, `--view=cube|connectome|trajectory`.
+
+Interpolate between session ticks when `session_ticks=2`; use `--session-ticks=4` to regenerate payload with more discrete ticks.
+
 ## Branch
 
 `research/brain-ai-connectome` — **do not merge to main** without explicit review.
