@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "source_file": "if_then_else.topo",
+  "name": "if_then_else_braid",
+  "layer": "D11",
+  "curvature": -0.2,
+  "entry": "input_x",
+  "exit": "braid_merge",
+  "nodes": [
+    {
+      "name": "input_x",
+      "kind": "concept",
+      "position": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "phase": 0.0,
+      "glyph": "Ψ",
+      "param": 1.0
+    },
+    {
+      "name": "test_pos",
+      "kind": "operator",
+      "position": [
+        0.0,
+        -0.3,
+        0.4
+      ],
+      "phase": 0.0,
+      "glyph": "?",
+      "param": 0.0
+    },
+    {
+      "name": "branch_then",
+      "kind": "operator",
+      "position": [
+        0.9,
+        0.5,
+        0.2
+      ],
+      "phase": 1.57,
+      "glyph": "+",
+      "param": 1.0
+    },
+    {
+      "name": "branch_else",
+      "kind": "operator",
+      "position": [
+        -0.9,
+        0.5,
+        0.2
+      ],
+      "phase": -1.57,
+      "glyph": "-",
+      "param": -1.0
+    },
+    {
+      "name": "braid_merge",
+      "kind": "braid-crossing",
+      "position": [
+        0.0,
+        1.4,
+        0.0
+      ],
+      "phase": 0.0,
+      "glyph": "X",
+      "param": 0.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_x",
+      "target": "test_pos",
+      "relation": "geodesic",
+      "weight": 1.0
+    },
+    {
+      "source": "test_pos",
+      "target": "branch_then",
+      "relation": "braid-over",
+      "weight": 0.8
+    },
+    {
+      "source": "test_pos",
+      "target": "branch_else",
+      "relation": "braid-under",
+      "weight": 0.8
+    },
+    {
+      "source": "branch_then",
+      "target": "braid_merge",
+      "relation": "geodesic",
+      "weight": 1.0
+    },
+    {
+      "source": "branch_else",
+      "target": "braid_merge",
+      "relation": "geodesic",
+      "weight": 1.0
+    }
+  ],
+  "execution": {
+    "path": [
+      "input_x",
+      "test_pos",
+      "branch_else",
+      "braid_merge"
+    ],
+    "phases": {
+      "input_x": 0.14014011638523968,
+      "test_pos": 0.14014011638523968,
+      "branch_then": 0.15026457896380713,
+      "branch_else": 0.13918278239857126,
+      "braid_merge": 0.14014011638523968
+    },
+    "order_parameter": 0.9999913386420118,
+    "final_vector": [
+      0.0,
+      0.0022957795349052377,
+      -2.8829609456056833
+    ]
+  },
+  "representation_dimension": 30
+}

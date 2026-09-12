@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "source_file": "borromeo_bind.topo",
+  "name": "borromeo_bind",
+  "layer": "D11",
+  "curvature": -0.15,
+  "entry": "ring_a",
+  "exit": "triad_lock",
+  "nodes": [
+    {
+      "name": "ring_a",
+      "kind": "concept",
+      "position": [
+        0.0,
+        0.0,
+        0.8
+      ],
+      "phase": 0.0,
+      "glyph": "A",
+      "param": 1.0
+    },
+    {
+      "name": "ring_b",
+      "kind": "concept",
+      "position": [
+        -0.7,
+        0.0,
+        -0.4
+      ],
+      "phase": 2.09,
+      "glyph": "B",
+      "param": 1.0
+    },
+    {
+      "name": "ring_c",
+      "kind": "concept",
+      "position": [
+        0.7,
+        0.0,
+        -0.4
+      ],
+      "phase": 4.19,
+      "glyph": "C",
+      "param": 1.0
+    },
+    {
+      "name": "triad_lock",
+      "kind": "braid-crossing",
+      "position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "phase": 0.0,
+      "glyph": "L6",
+      "param": 0.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "ring_a",
+      "target": "triad_lock",
+      "relation": "braid-over",
+      "weight": 1.0
+    },
+    {
+      "source": "ring_b",
+      "target": "triad_lock",
+      "relation": "braid-under",
+      "weight": 1.0
+    },
+    {
+      "source": "ring_c",
+      "target": "triad_lock",
+      "relation": "geodesic",
+      "weight": 1.0
+    }
+  ],
+  "execution": {
+    "path": [
+      "ring_a",
+      "triad_lock"
+    ],
+    "phases": {
+      "ring_a": 6.282304358358118,
+      "ring_b": 0.09692013903364133,
+      "ring_c": 6.184254459394983,
+      "triad_lock": 6.282304358358118
+    },
+    "order_parameter": 0.9976045626561787,
+    "final_vector": [
+      0.0,
+      2.290477546530819,
+      0.0
+    ]
+  },
+  "representation_dimension": 22
+}

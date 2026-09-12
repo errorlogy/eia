@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "source_file": "loop_geodesic.topo",
+  "name": "counter_loop",
+  "layer": "D12",
+  "curvature": 0.0,
+  "entry": "init",
+  "exit": "exit_gate",
+  "nodes": [
+    {
+      "name": "init",
+      "kind": "concept",
+      "position": [
+        0.0,
+        -1.2,
+        -0.5
+      ],
+      "phase": 0.0,
+      "glyph": "0",
+      "param": 0.0
+    },
+    {
+      "name": "increment",
+      "kind": "operator",
+      "position": [
+        0.8,
+        0.0,
+        0.0
+      ],
+      "phase": 0.785,
+      "glyph": "+1",
+      "param": 1.0
+    },
+    {
+      "name": "check",
+      "kind": "operator",
+      "position": [
+        0.0,
+        0.8,
+        0.5
+      ],
+      "phase": 1.57,
+      "glyph": "<",
+      "param": 3.0
+    },
+    {
+      "name": "body",
+      "kind": "concept",
+      "position": [
+        -0.8,
+        0.0,
+        0.0
+      ],
+      "phase": 3.14,
+      "glyph": "Σ",
+      "param": 0.5
+    },
+    {
+      "name": "exit_gate",
+      "kind": "braid-crossing",
+      "position": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "phase": 0.0,
+      "glyph": "Ω",
+      "param": 0.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "init",
+      "target": "increment",
+      "relation": "geodesic",
+      "weight": 1.0
+    },
+    {
+      "source": "increment",
+      "target": "check",
+      "relation": "geodesic",
+      "weight": 1.0
+    },
+    {
+      "source": "check",
+      "target": "body",
+      "relation": "geodesic",
+      "weight": 0.9
+    },
+    {
+      "source": "body",
+      "target": "increment",
+      "relation": "loop",
+      "weight": 1.0
+    },
+    {
+      "source": "check",
+      "target": "exit_gate",
+      "relation": "geodesic",
+      "weight": 1.1
+    }
+  ],
+  "execution": {
+    "path": [
+      "init",
+      "increment",
+      "check",
+      "exit_gate"
+    ],
+    "phases": {
+      "init": 1.2772227181382696,
+      "increment": 1.2778613346777454,
+      "check": 1.2784354045904052,
+      "body": 1.302838549636873,
+      "exit_gate": 1.2772227181382696
+    },
+    "order_parameter": 0.999949285332149,
+    "final_vector": [
+      0.0,
+      -1.0099541520926079,
+      1.012369799367258
+    ]
+  },
+  "representation_dimension": 30
+}

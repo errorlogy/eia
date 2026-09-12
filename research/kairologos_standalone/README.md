@@ -27,13 +27,23 @@ python research/kairologos_standalone/run_t_kai_02.py
 python research/kairologos_standalone/run_t_kai_05.py
 python research/kairologos_standalone/run_t_kai_06.py
 python research/kairologos_standalone/run_t_kai_08.py
+python research/kairologos_standalone/run_t_kai_11_viz.py
 pytest research/kairologos_standalone/tests -q
 ```
+
+## 3D TopoLang visualization (T-KAI-11)
+
+```powershell
+python research/kairologos_standalone/run_t_kai_11_viz.py
+```
+
+Opens `viz/topo_program_3d.html` — interactive Three.js graph of `.topo` programs.
+See `viz/VIZ_GUIDE.md` for controls and adding new programs.
 
 ## Artifacts
 
 JSON + MD outputs land in `artifacts/` with prefix `T-KAI-*`.
 
-See `RESEARCH_PROGRAM.md` for hypothesis map and roadmap T-KAI-01..10.
+See `RESEARCH_PROGRAM.md` for hypothesis map and roadmap T-KAI-01..11.
 
 See `TOPOLOGICAL_CODE_SYNTAX.md` for the 3D/topological programming paradigm (TopoLang prototype).

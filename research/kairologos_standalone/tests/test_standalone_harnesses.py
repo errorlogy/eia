@@ -17,6 +17,7 @@ from t_kai_06_padic_clustering import run_experiment as run_padic
 from t_kai_08_syntax_vs_semantics import run_experiment as run_t_kai_08
 from t_kai_09_attention_vs_diffusion import run_experiment as run_t_kai_09
 from t_kai_10_nd_quasi_orthogonality import run_experiment as run_t_kai_10
+from t_kai_11_topo_viz import run_experiment as run_t_kai_11
 from lemma_battery import run_lemma_battery
 
 
@@ -73,6 +74,16 @@ def test_t_kai_10_nd_quasi_orthogonality():
     payload = run_t_kai_10(seed=7)
     assert payload["harness_id"] == "T-KAI-10"
     assert payload["quasi_orthogonality"]["max_abs_cosine"] < 0.2
+
+
+def test_t_kai_11_topo_viz_export():
+    payload = run_t_kai_11()
+    assert payload["harness_id"] == "T-KAI-11"
+    assert payload["schema_validation"]["pass"] is True
+    assert payload["export_count"] >= 3
+    assert "if_then_else" in payload["exported_programs"]
+    assert payload["execution_path"][0] == "input_x"
+    assert payload["execution_path"][-1] == "braid_merge"
 
 
 def test_pre_proof_lemma_battery():

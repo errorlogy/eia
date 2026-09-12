@@ -38,7 +38,9 @@ Canonical tractate:
 | `PRE_PROOF.md` | Operational lemmas L-TOPO-* / L-MAT-* (empirical pass/fail) |
 | `LLM_MATRIX_BRIDGE.md` | Transformer matmul vs graph diffusion (RU+EN) |
 | `lib/llm_vs_topo_matrix.py` | Minimal attention vs Laplacian numpy demo |
-| `viz/topo_program_3d.html` | Canvas 3D view of example `.topo` program |
+| `viz/topo_program_3d.html` | Three.js interactive 3D TopoLang viewer (T-KAI-11) |
+| `viz/export_topo_json.py` | `.topo` → JSON exporter for viz |
+| `viz/VIZ_GUIDE.md` | How to open viz and add programs |
 | `run_all_preproof.py` | Full lemma battery runner |
 | `verify_trans_formula.py` | Multi-phase “trans-topological formula” pipeline (Klein→braid→p-adic→hyperbolic) |
 | `topomatrix_core.py` | HoTT types + TopoMatrix runtime/compiler sketch |
@@ -67,11 +69,12 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | §4.1 γ-band | 42 Hz prior shifts sync threshold vs other carriers (weak biological claim) | **T-KAI-01** |
 | §4 LLM bridge | Attention vs graph diffusion on 8-node task; HDC vs QK^T stability | **T-KAI-09** ✓ → L-MAT-1/2 |
 | ND attractor | High-D random vectors quasi-orthogonal; bundling scales | **T-KAI-10** ✓ |
+| §1 TopoLang viz | `.topo` exports to JSON; interactive 3D geodesic + Kuramoto animation | **T-KAI-11** ✓ |
 | PRE_PROOF | Six operational lemmas (geodesic mass, braid, p-adic hierarchy) | **lemma_battery** |
 
 ---
 
-## Roadmap T-KAI-01 .. T-KAI-10
+## Roadmap T-KAI-01 .. T-KAI-11
 
 | ID | Status | Question |
 |----|--------|----------|
@@ -85,6 +88,7 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | **T-KAI-08** | **operational** | Syntax vs semantics: pseudo-C vs 3D topo graph (HDC stability) |
 | **T-KAI-09** | **operational** | Attention vs graph diffusion; L-MAT-1/2 lemmas |
 | **T-KAI-10** | **operational** | ND quasi-orthogonality + bundling interference statistics |
+| **T-KAI-11** | **operational** | Interactive 3D TopoLang viz: export JSON + Three.js viewer |
 
 ---
 
@@ -94,6 +98,7 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 
 - Kuramoto sweeps, HDC capacity, Klein involution, p-adic distances, **topo syntax T-KAI-08**
 - **PRE_PROOF lemma battery**, attention vs diffusion **T-KAI-09**, ND orthogonality **T-KAI-10**
+- **TopoLang 3D viz** **T-KAI-11** (`viz/topo_program_3d.html`, `run_t_kai_11_viz.py`)
 - Artifacts: `artifacts/T-KAI-*_YYYY-MM-DD.json|md`, `artifacts/PRE_PROOF_*.json`
 
 **Speculative (theory narrative, not validated here):**

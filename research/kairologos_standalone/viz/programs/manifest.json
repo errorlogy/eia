@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "programs": [
+    {
+      "slug": "borromeo_bind",
+      "name": "borromeo_bind",
+      "layer": "D11",
+      "source_file": "borromeo_bind.topo",
+      "node_count": 4,
+      "edge_count": 3
+    },
+    {
+      "slug": "function_lift",
+      "name": "function_lift",
+      "layer": "D13",
+      "source_file": "function_lift.topo",
+      "node_count": 5,
+      "edge_count": 5
+    },
+    {
+      "slug": "horizontal_compose",
+      "name": "horizontal_compose",
+      "layer": "D10",
+      "source_file": "horizontal_compose.topo",
+      "node_count": 3,
+      "edge_count": 2
+    },
+    {
+      "slug": "if_then_else",
+      "name": "if_then_else_braid",
+      "layer": "D11",
+      "source_file": "if_then_else.topo",
+      "node_count": 5,
+      "edge_count": 5
+    },
+    {
+      "slug": "loop_geodesic",
+      "name": "counter_loop",
+      "layer": "D12",
+      "source_file": "loop_geodesic.topo",
+      "node_count": 5,
+      "edge_count": 5
+    }
+  ]
+}

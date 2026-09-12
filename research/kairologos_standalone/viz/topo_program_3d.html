@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TopoLang 3D — if_then_else.topo</title>
+  <title>TopoLang 3D — Kairologos</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -15,178 +15,465 @@
       flex-direction: column;
       align-items: center;
       padding: 1rem;
+      user-select: none;
     }
-    header { width: 100%; max-width: 960px; margin-bottom: 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.75rem; }
-    h1 { color: #38bdf8; font-size: 1.25rem; letter-spacing: 0.08em; }
+    header {
+      width: 100%; max-width: 1100px;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.75rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-end; gap: 0.75rem;
+    }
+    h1 { color: #38bdf8; font-size: 1.25rem; letter-spacing: 0.08em; text-shadow: 0 0 12px rgba(56,189,248,0.5); }
     .sub { color: #64748b; font-size: 0.75rem; margin-top: 0.25rem; }
-    main { display: grid; grid-template-columns: 1fr 280px; gap: 1rem; width: 100%; max-width: 960px; }
-    @media (max-width: 768px) { main { grid-template-columns: 1fr; } }
+    main {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1rem;
+      width: 100%; max-width: 1100px;
+    }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
     .panel {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(56, 189, 248, 0.2);
       border-radius: 1rem;
       overflow: hidden;
     }
-    canvas { width: 100%; height: 480px; display: block; cursor: grab; }
-    canvas:active { cursor: grabbing; }
-    .sidebar { padding: 1rem; font-size: 0.75rem; }
-    .sidebar h2 { color: #38bdf8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    .node-card { background: #0f172a; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 0.75rem; }
-    .glyph { font-size: 1.5rem; color: #fbbf24; }
+    .canvas-wrap { position: relative; height: 560px; }
+    #viewport { width: 100%; height: 100%; display: block; cursor: grab; }
+    #viewport:active { cursor: grabbing; }
+    .overlay-top {
+      position: absolute; top: 0.5rem; left: 0.5rem; right: 0.5rem;
+      display: flex; flex-wrap: wrap; gap: 0.35rem; z-index: 2; pointer-events: none;
+    }
+    .overlay-top > * { pointer-events: auto; }
+    .overlay-top button, .overlay-top select {
+      background: rgba(15,23,42,0.9); border: 1px solid #475569; color: #94a3b8;
+      padding: 0.25rem 0.5rem; border-radius: 0.35rem; font-size: 0.65rem; cursor: pointer;
+      font-family: inherit;
+    }
+    .overlay-top button:hover, .overlay-top select:hover { background: #334155; color: #e2e8f0; }
+    .overlay-top button.active { background: #0e7490; border-color: #38bdf8; color: #fff; }
+    .overlay-bottom {
+      position: absolute; bottom: 0.5rem; left: 0.5rem;
+      font-size: 0.65rem; color: #64748b;
+      background: rgba(15,23,42,0.85); padding: 0.35rem 0.6rem;
+      border-radius: 0.35rem; border: 1px solid #334155;
+      pointer-events: none;
+    }
+    .sidebar { padding: 1rem; font-size: 0.75rem; max-height: 560px; overflow-y: auto; }
+    .sidebar h2 {
+      color: #38bdf8; font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .stat-row { display: flex; justify-content: space-between; margin-bottom: 0.35rem; color: #94a3b8; }
+    .stat-row strong { color: #e2e8f0; }
+    .node-card {
+      background: #0f172a; border: 1px solid #334155; border-radius: 0.5rem;
+      padding: 0.6rem; margin-bottom: 0.5rem; transition: border-color 0.2s;
+    }
+    .node-card.active { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56,189,248,0.3); }
+    .glyph { font-size: 1.25rem; color: #fbbf24; }
     .kind-concept { color: #38bdf8; }
     .kind-operator { color: #10b981; }
-    .kind-braid { color: #f472b6; }
-    .legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-    .legend span { font-size: 0.65rem; padding: 0.15rem 0.4rem; border-radius: 0.25rem; background: #1e293b; }
-    .controls { position: absolute; top: 0.5rem; right: 0.5rem; display: flex; gap: 0.35rem; }
-    .controls button {
-      background: #1e293b; border: 1px solid #475569; color: #94a3b8;
-      padding: 0.25rem 0.5rem; border-radius: 0.35rem; font-size: 0.65rem; cursor: pointer;
+    .kind-braid-crossing { color: #f472b6; }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .legend span { font-size: 0.6rem; padding: 0.12rem 0.35rem; border-radius: 0.25rem; background: #1e293b; }
+    .step-bar {
+      margin: 0.75rem 0; height: 4px; background: #1e293b; border-radius: 2px; overflow: hidden;
     }
-    .controls button:hover { background: #334155; color: #e2e8f0; }
-    .canvas-wrap { position: relative; }
+    .step-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, #fbbf24); width: 0%; transition: width 0.15s; }
+    .hint { color: #64748b; line-height: 1.5; margin-top: 0.75rem; font-size: 0.65rem; }
+    select#programSelect { min-width: 140px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>TOPOLANG :: 3D PROGRAM VIEW</h1>
-    <p class="sub">Пример: if_then_else.topo — ветвление как перекрёст косы (D11, K=-0.2)</p>
+    <div>
+      <h1>TOPOLANG :: 3D PROGRAM VIEW</h1>
+      <p class="sub" id="subtitle">Kairologos standalone — геодезический поток + Kuramoto фаза</p>
+    </div>
+    <div class="sub">ЛКМ drag — орбита · колёсико — зум · D¹⁰–D¹³ слои</div>
   </header>
   <main>
     <div class="panel canvas-wrap">
-      <div class="controls">
+      <div class="overlay-top">
+        <select id="programSelect" title="Программа"></select>
+        <button id="btnPlay" title="Анимация потока">▶ Поток</button>
         <button id="btnRotate">🔄 Авто</button>
         <button id="btnReset">🎯 Сброс</button>
+        <button class="layer-btn active" data-layer="ALL">Все</button>
+        <button class="layer-btn" data-layer="D10">D10</button>
+        <button class="layer-btn" data-layer="D11">D11</button>
+        <button class="layer-btn" data-layer="D12">D12</button>
+        <button class="layer-btn" data-layer="D13">D13</button>
       </div>
-      <canvas id="cv"></canvas>
+      <div class="overlay-bottom" id="cameraInfo">step 0 / 0</div>
+      <div id="viewport"></div>
     </div>
     <div class="panel sidebar">
-      <h2>Узлы программы</h2>
-      <div id="info"></div>
+      <h2>Программа</h2>
+      <div class="stat-row"><span>Имя</span><strong id="progName">—</strong></div>
+      <div class="stat-row"><span>Слой</span><strong id="progLayer">—</strong></div>
+      <div class="stat-row"><span>Кривизна K</span><strong id="progCurv">—</strong></div>
+      <div class="stat-row"><span>Entry → Exit</span><strong id="progPath">—</strong></div>
+      <div class="stat-row"><span>Order r</span><strong id="progOrder">—</strong></div>
+      <div class="step-bar"><div class="step-fill" id="stepFill"></div></div>
+      <div class="stat-row"><span>Шаг выполнения</span><strong id="stepCounter">0 / 0</strong></div>
+      <h2 style="margin-top:0.75rem">Узлы</h2>
+      <div id="nodeList"></div>
       <div class="legend">
         <span class="kind-concept">● concept</span>
         <span class="kind-operator">● operator</span>
-        <span class="kind-braid">● braid-crossing</span>
+        <span class="kind-braid-crossing">● braid-crossing</span>
       </div>
-      <p style="margin-top:1rem;color:#64748b;line-height:1.5">
-        Программа — не лента токенов, а граф в 3D. Выполнение = геодезика от @entry к @exit.
-        ЛКМ+drag — вращение, колёсико — зум.
-      </p>
+      <p class="hint">Программа — граф в 3D, не лента токенов. Выполнение = геодезика @entry→@exit с Kuramoto-фазой на рёбрах.</p>
     </div>
   </main>
+
+  <script src="programs_bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script>
-    const nodes = [
-      { id: 'input_x', glyph: 'Ψ', kind: 'concept', x: 0, y: -1.5, z: 0, color: '#38bdf8' },
-      { id: 'test_pos', glyph: '?', kind: 'operator', x: 0, y: -0.3, z: 0.4, color: '#10b981' },
-      { id: 'branch_then', glyph: '+', kind: 'operator', x: 0.9, y: 0.5, z: 0.2, color: '#10b981' },
-      { id: 'branch_else', glyph: '-', kind: 'operator', x: -0.9, y: 0.5, z: 0.2, color: '#10b981' },
-      { id: 'braid_merge', glyph: 'X', kind: 'braid-crossing', x: 0, y: 1.4, z: 0, color: '#f472b6' },
-    ];
-    const edges = [
-      { from: 'input_x', to: 'test_pos', rel: 'geodesic' },
-      { from: 'test_pos', to: 'branch_then', rel: 'braid-over' },
-      { from: 'test_pos', to: 'branch_else', rel: 'braid-under' },
-      { from: 'branch_then', to: 'braid_merge', rel: 'geodesic' },
-      { from: 'branch_else', to: 'braid_merge', rel: 'geodesic' },
-    ];
-    const cv = document.getElementById('cv');
-    const ctx = cv.getContext('2d');
-    let ax = 0.3, ay = -0.6, zoom = 110, drag = false, px = 0, py = 0, auto = true, hover = null;
+    const KIND_COLORS = {
+      'concept': 0x38bdf8,
+      'operator': 0x10b981,
+      'braid-crossing': 0xf472b6,
+    };
+    const LAYER_COLORS = { D10: 0x3b82f6, D11: 0x38bdf8, D12: 0x10b981, D13: 0xfbbf24 };
+    const REL_DASH = { 'braid-over': true, 'braid-under': true };
 
-    function resize() {
-      const r = cv.parentElement.getBoundingClientRect();
-      cv.width = r.width;
-      cv.height = 480;
+    let scene, camera, renderer, controls;
+    let nodeMeshes = {}, edgeLines = [], pulseMesh = null;
+    let currentProgram = null, execStep = 0, playing = false, autoRotate = true;
+    let layerFilter = 'ALL', clock = new THREE.Clock();
+    let programs = window.TOPO_PROGRAMS || {};
+    let manifest = window.TOPO_MANIFEST || { programs: [] };
+
+    function initThree() {
+      const container = document.getElementById('viewport');
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x05070a, 0.08);
+
+      camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(4, 3, 5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setClearColor(0x05070a, 1);
+      container.appendChild(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.minDistance = 2;
+      controls.maxDistance = 20;
+
+      const amb = new THREE.AmbientLight(0x404060, 0.6);
+      scene.add(amb);
+      const dir = new THREE.DirectionalLight(0x38bdf8, 0.8);
+      dir.position.set(5, 8, 4);
+      scene.add(dir);
+      const rim = new THREE.PointLight(0xfbbf24, 0.4, 20);
+      rim.position.set(-3, 2, -2);
+      scene.add(rim);
+
+      const grid = new THREE.GridHelper(8, 16, 0x1e293b, 0x0f172a);
+      grid.position.y = -2.2;
+      scene.add(grid);
+
+      pulseMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.12, 16, 16),
+        new THREE.MeshBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.9 })
+      );
+      pulseMesh.visible = false;
+      scene.add(pulseMesh);
+
+      window.addEventListener('resize', onResize);
+      animate();
     }
-    window.addEventListener('resize', resize);
-    resize();
 
-    function proj(x, y, z) {
-      const cy = Math.cos(ay), sy = Math.sin(ay);
-      const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
-      const cx = Math.cos(ax), sx = Math.sin(ax);
-      const y2 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
-      const sz = z2 + 5;
-      const sc = sz > 0.1 ? (4.5 / sz) * zoom : 0;
-      return { x: cv.width / 2 + x1 * sc, y: cv.height / 2 - y2 * sc, sc, z: z2 };
+    function onResize() {
+      const container = document.getElementById('viewport');
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    function edgeStyle(rel) {
-      if (rel === 'braid-over') return { color: 'rgba(251,191,36,0.6)', dash: [6,3], w: 2 };
-      if (rel === 'braid-under') return { color: 'rgba(168,85,247,0.6)', dash: [3,5], w: 2 };
-      return { color: 'rgba(148,163,184,0.35)', dash: [], w: 1.5 };
+    function layerZOffset(layer) {
+      return { D10: -1.0, D11: -0.3, D12: 0.3, D13: 1.0 }[layer] || 0;
     }
 
-    function render() {
-      ctx.clearRect(0, 0, cv.width, cv.height);
-      if (auto && !drag) ay += 0.004;
+    function clearGraph() {
+      Object.values(nodeMeshes).forEach(m => scene.remove(m));
+      nodeMeshes = {};
+      edgeLines.forEach(l => scene.remove(l));
+      edgeLines = [];
+      pulseMesh.visible = false;
+    }
 
-      edges.forEach(e => {
-        const a = nodes.find(n => n.id === e.from), b = nodes.find(n => n.id === e.to);
-        const p1 = proj(a.x, a.y, a.z), p2 = proj(b.x, b.y, b.z);
-        const st = edgeStyle(e.rel);
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = st.color;
-        ctx.lineWidth = st.w;
-        ctx.setLineDash(st.dash);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      });
+    function buildGraph(prog) {
+      clearGraph();
+      currentProgram = prog;
+      execStep = 0;
 
-      nodes.map(n => ({ n, p: proj(n.x, n.y, n.z) }))
-        .sort((a, b) => b.p.z - a.p.z)
-        .forEach(({ n, p }) => {
-          const r = Math.max(8, 14 * p.sc / 40);
-          const hov = hover && hover.id === n.id;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = n.color + (hov ? 'ff' : 'cc');
-          ctx.fill();
-          ctx.strokeStyle = hov ? '#fff' : 'rgba(255,255,255,0.3)';
-          ctx.lineWidth = hov ? 2 : 1;
-          ctx.stroke();
-          ctx.fillStyle = '#fff';
-          ctx.font = `bold ${Math.max(10, 12 * p.sc / 40)}px monospace`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(n.glyph, p.x, p.y);
-          ctx.fillStyle = '#94a3b8';
-          ctx.font = '9px monospace';
-          ctx.fillText(n.id, p.x, p.y + r + 10);
+      const layerTint = LAYER_COLORS[prog.layer] || 0x38bdf8;
+      const zBias = layerZOffset(prog.layer);
+
+      prog.nodes.forEach(n => {
+        if (layerFilter !== 'ALL' && prog.layer !== layerFilter) return;
+        const [x, y, z] = n.position;
+        const geom = new THREE.SphereGeometry(0.18, 24, 24);
+        const baseColor = KIND_COLORS[n.kind] || 0xffffff;
+        const mat = new THREE.MeshStandardMaterial({
+          color: baseColor,
+          emissive: baseColor,
+          emissiveIntensity: 0.35,
+          metalness: 0.3,
+          roughness: 0.4,
         });
-      requestAnimationFrame(render);
+        const mesh = new THREE.Mesh(geom, mat);
+        mesh.position.set(x, y, z + zBias * 0.15);
+        mesh.userData = { node: n, baseColor, phase: n.phase };
+        scene.add(mesh);
+        nodeMeshes[n.name] = mesh;
+
+        const sprite = makeLabel(n.glyph || n.name.slice(0, 2));
+        sprite.position.copy(mesh.position);
+        sprite.position.y += 0.32;
+        scene.add(sprite);
+        mesh.userData.label = sprite;
+      });
+
+      prog.edges.forEach(e => {
+        const a = nodeMeshes[e.source], b = nodeMeshes[e.target];
+        if (!a || !b) return;
+        const points = [a.position.clone(), b.position.clone()];
+        const isBraid = e.relation.startsWith('braid');
+        const color = isBraid
+          ? (e.relation === 'braid-over' ? 0xfbbf24 : 0xa855f7)
+          : (e.relation === 'lift' ? 0xfbbf24 : (e.relation === 'loop' ? 0x10b981 : 0x64748b));
+        const mat = new THREE.LineBasicMaterial({
+          color, transparent: true, opacity: isBraid ? 0.75 : 0.45,
+        });
+        const geom = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geom, mat);
+        line.userData = { edge: e, from: e.source, to: e.target };
+        scene.add(line);
+        edgeLines.push(line);
+      });
+
+      updateSidebar();
+      updateStepDisplay();
     }
 
-    cv.addEventListener('mousedown', e => { drag = true; px = e.clientX; py = e.clientY; auto = false; });
-    window.addEventListener('mouseup', () => drag = false);
-    window.addEventListener('mousemove', e => {
-      if (drag) { ay += (e.clientX - px) * 0.008; ax += (e.clientY - py) * 0.008; px = e.clientX; py = e.clientY; }
-      const rect = cv.getBoundingClientRect();
-      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      hover = null;
-      nodes.forEach(n => {
-        const p = proj(n.x, n.y, n.z);
-        if (Math.hypot(p.x - mx, p.y - my) < 18) hover = n;
-      });
-      if (hover) {
-        document.getElementById('info').innerHTML =
-          `<div class="node-card"><div class="glyph">${hover.glyph}</div>
-           <strong>${hover.id}</strong><br>
-           <span class="kind-${hover.kind.replace('-','')}">${hover.kind}</span><br>
-           @ (${hover.x}, ${hover.y}, ${hover.z})</div>`;
-      }
-    });
-    cv.addEventListener('wheel', e => { e.preventDefault(); zoom = Math.max(60, Math.min(200, zoom - e.deltaY * 0.1)); });
-    document.getElementById('btnRotate').onclick = () => { auto = !auto; };
-    document.getElementById('btnReset').onclick = () => { ax = 0.3; ay = -0.6; zoom = 110; auto = true; };
+    function makeLabel(text) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64; canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = 'bold 36px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, 32, 32);
+      const tex = new THREE.CanvasTexture(canvas);
+      const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+      const sprite = new THREE.Sprite(mat);
+      sprite.scale.set(0.5, 0.5, 1);
+      return sprite;
+    }
 
-    document.getElementById('info').innerHTML = nodes.map(n =>
-      `<div class="node-card"><span class="glyph">${n.glyph}</span> <strong>${n.id}</strong>
-       <span class="kind-${n.kind.replace('-','')}"> (${n.kind})</span></div>`
-    ).join('');
-    render();
+    function updateSidebar() {
+      if (!currentProgram) return;
+      const p = currentProgram;
+      document.getElementById('progName').textContent = p.name;
+      document.getElementById('progLayer').textContent = p.layer;
+      document.getElementById('progCurv').textContent = p.curvature.toFixed(2);
+      document.getElementById('progPath').textContent = `${p.entry} → ${p.exit}`;
+      document.getElementById('progOrder').textContent = (p.execution?.order_parameter ?? 0).toFixed(3);
+      document.getElementById('subtitle').textContent =
+        `${p.source_file || p.name} — ${p.layer}, K=${p.curvature}`;
+
+      const path = p.execution?.path || [];
+      const activeName = path[execStep] || null;
+      const list = document.getElementById('nodeList');
+      list.innerHTML = p.nodes.map(n => {
+        const cls = n.name === activeName ? 'node-card active' : 'node-card';
+        const kindCls = 'kind-' + n.kind;
+        return `<div class="${cls}" data-name="${n.name}">
+          <span class="glyph">${n.glyph || '·'}</span> <strong>${n.name}</strong><br>
+          <span class="${kindCls}">${n.kind}</span>
+          phase=${n.phase.toFixed(2)} @ (${n.position.map(v=>v.toFixed(1)).join(', ')})
+        </div>`;
+      }).join('');
+    }
+
+    function updateStepDisplay() {
+      const path = currentProgram?.execution?.path || [];
+      const total = Math.max(1, path.length);
+      document.getElementById('stepCounter').textContent = `${execStep} / ${total - 1}`;
+      document.getElementById('stepFill').style.width = `${(execStep / (total - 1 || 1)) * 100}%`;
+      document.getElementById('cameraInfo').textContent =
+        `step ${execStep} → ${path[execStep] || '—'} | ${path.join(' → ')}`;
+      updateSidebar();
+      highlightStep();
+    }
+
+    function highlightStep() {
+      const path = currentProgram?.execution?.path || [];
+      const active = path[execStep];
+      Object.entries(nodeMeshes).forEach(([name, mesh]) => {
+        const isActive = name === active;
+        mesh.material.emissiveIntensity = isActive ? 0.9 : 0.35;
+        mesh.scale.setScalar(isActive ? 1.35 : 1.0);
+      });
+      if (execStep < path.length - 1) {
+        const from = nodeMeshes[path[execStep]];
+        const to = nodeMeshes[path[execStep + 1]];
+        if (from && to) {
+          pulseMesh.visible = true;
+          pulseMesh.position.lerpVectors(from.position, to.position, 0.5);
+        }
+      } else if (active && nodeMeshes[active]) {
+        pulseMesh.visible = true;
+        pulseMesh.position.copy(nodeMeshes[active].position);
+      }
+    }
+
+    function animatePulse(t) {
+      if (!currentProgram || !playing) return;
+      const path = currentProgram.execution.path;
+      if (path.length < 2) return;
+      const cycle = (t * 0.4) % 1;
+      const seg = Math.floor(cycle * (path.length - 1));
+      execStep = seg;
+      const local = (cycle * (path.length - 1)) - seg;
+      const from = nodeMeshes[path[seg]];
+      const to = nodeMeshes[path[seg + 1]];
+      if (from && to) {
+        pulseMesh.visible = true;
+        pulseMesh.position.lerpVectors(from.position, to.position, local);
+        const scale = 1 + 0.3 * Math.sin(t * 8);
+        pulseMesh.scale.setScalar(scale);
+      }
+      updateStepDisplay();
+
+      const phases = currentProgram.execution.phases || {};
+      edgeLines.forEach(line => {
+        const phA = phases[line.userData.from] || 0;
+        const phB = phases[line.userData.to] || 0;
+        const pulse = 0.35 + 0.35 * (0.5 + 0.5 * Math.sin(t * 3 + phA + phB));
+        line.material.opacity = pulse;
+      });
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      if (autoRotate) {
+        scene.rotation.y += 0.0015;
+      }
+      controls.update();
+      animatePulse(t);
+
+      Object.values(nodeMeshes).forEach(mesh => {
+        const ph = mesh.userData.phase || 0;
+        mesh.material.emissiveIntensity = 0.25 + 0.2 * (0.5 + 0.5 * Math.sin(t * 2 + ph));
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    function populateProgramSelect() {
+      const sel = document.getElementById('programSelect');
+      const slugs = Object.keys(programs).sort();
+      if (!slugs.length) {
+        sel.innerHTML = '<option value="">(нет программ — запустите export)</option>';
+        return;
+      }
+      sel.innerHTML = slugs.map(s => {
+        const p = programs[s];
+        return `<option value="${s}">${p.source_file || s} (${p.layer})</option>`;
+      }).join('');
+      const params = new URLSearchParams(location.search);
+      const q = params.get('program');
+      if (q && programs[q]) sel.value = q;
+      sel.onchange = () => loadProgram(sel.value);
+      loadProgram(sel.value || slugs[0]);
+    }
+
+    function loadProgram(slug) {
+      const prog = programs[slug];
+      if (!prog) return;
+      if (layerFilter !== 'ALL' && prog.layer !== layerFilter) {
+        layerFilter = 'ALL';
+        document.querySelectorAll('.layer-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.layer === 'ALL');
+        });
+      }
+      buildGraph(prog);
+    }
+
+    async function tryFetchPrograms() {
+      if (Object.keys(programs).length) return;
+      try {
+        const res = await fetch('programs/all_programs.json');
+        if (res.ok) {
+          programs = await res.json();
+          return;
+        }
+      } catch (_) {}
+      try {
+        const res = await fetch('programs/manifest.json');
+        if (!res.ok) return;
+        const man = await res.json();
+        for (const entry of man.programs) {
+          const r = await fetch(`programs/${entry.slug}.json`);
+          if (r.ok) programs[entry.slug] = await r.json();
+        }
+      } catch (_) {}
+    }
+
+    document.getElementById('btnPlay').onclick = () => {
+      playing = !playing;
+      document.getElementById('btnPlay').textContent = playing ? '⏸ Пауза' : '▶ Поток';
+      if (!playing) execStep = 0;
+      updateStepDisplay();
+    };
+    document.getElementById('btnRotate').onclick = () => {
+      autoRotate = !autoRotate;
+      document.getElementById('btnRotate').classList.toggle('active', autoRotate);
+    };
+    document.getElementById('btnReset').onclick = () => {
+      camera.position.set(4, 3, 5);
+      controls.target.set(0, 0, 0);
+      controls.update();
+      execStep = 0;
+      playing = false;
+      document.getElementById('btnPlay').textContent = '▶ Поток';
+      scene.rotation.y = 0;
+      updateStepDisplay();
+    };
+    document.querySelectorAll('.layer-btn').forEach(btn => {
+      btn.onclick = () => {
+        layerFilter = btn.dataset.layer;
+        document.querySelectorAll('.layer-btn').forEach(b => b.classList.toggle('active', b === btn));
+        const sel = document.getElementById('programSelect');
+        if (layerFilter !== 'ALL') {
+          const match = Object.keys(programs).find(s => programs[s].layer === layerFilter);
+          if (match) { sel.value = match; loadProgram(match); return; }
+        }
+        loadProgram(sel.value);
+      };
+    });
+
+    (async () => {
+      await tryFetchPrograms();
+      initThree();
+      populateProgramSelect();
+    })();
   </script>
 </body>
 </html>

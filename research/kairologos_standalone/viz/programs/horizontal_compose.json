@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "source_file": "horizontal_compose.topo",
+  "name": "horizontal_compose",
+  "layer": "D10",
+  "curvature": 0.0,
+  "entry": "concept_a",
+  "exit": "concept_c",
+  "nodes": [
+    {
+      "name": "concept_a",
+      "kind": "concept",
+      "position": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "phase": 0.0,
+      "glyph": "A",
+      "param": 1.0
+    },
+    {
+      "name": "morph_b",
+      "kind": "operator",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "phase": 0.5,
+      "glyph": "B",
+      "param": 0.0
+    },
+    {
+      "name": "concept_c",
+      "kind": "concept",
+      "position": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "phase": 1.0,
+      "glyph": "C",
+      "param": 0.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "concept_a",
+      "target": "morph_b",
+      "relation": "geodesic",
+      "weight": 1.0
+    },
+    {
+      "source": "morph_b",
+      "target": "concept_c",
+      "relation": "geodesic",
+      "weight": 1.0
+    }
+  ],
+  "execution": {
+    "path": [
+      "concept_a",
+      "morph_b",
+      "concept_c"
+    ],
+    "phases": {
+      "concept_a": 0.49986510792238437,
+      "morph_b": 0.5,
+      "concept_c": 0.5001348920776157
+    },
+    "order_parameter": 0.9999999939347091,
+    "final_vector": [
+      1.7551651237807455,
+      0.958851077208406,
+      0.0
+    ]
+  },
+  "representation_dimension": 16
+}
