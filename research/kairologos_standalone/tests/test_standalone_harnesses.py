@@ -15,6 +15,9 @@ from t_kai_02_hdc_binding_capacity import run_experiment as run_hdc
 from t_kai_05_klein_involution import run_experiment as run_klein
 from t_kai_06_padic_clustering import run_experiment as run_padic
 from t_kai_08_syntax_vs_semantics import run_experiment as run_t_kai_08
+from t_kai_09_attention_vs_diffusion import run_experiment as run_t_kai_09
+from t_kai_10_nd_quasi_orthogonality import run_experiment as run_t_kai_10
+from lemma_battery import run_lemma_battery
 
 
 def test_kuramoto_finds_sync_at_high_coupling():
@@ -57,6 +60,25 @@ def test_t_kai_08_syntax_vs_semantics():
     assert len(payload["tasks"]) == 5
     agg = payload["aggregate"]
     assert agg["mean_topological_shuffle_similarity"] >= agg["mean_linear_shuffle_similarity"]
+
+
+def test_t_kai_09_attention_vs_diffusion():
+    payload = run_t_kai_09(seed=7)
+    assert payload["harness_id"] == "T-KAI-09"
+    assert "eight_node_task" in payload
+    assert "lemma_results" in payload
+
+
+def test_t_kai_10_nd_quasi_orthogonality():
+    payload = run_t_kai_10(seed=7)
+    assert payload["harness_id"] == "T-KAI-10"
+    assert payload["quasi_orthogonality"]["max_abs_cosine"] < 0.2
+
+
+def test_pre_proof_lemma_battery():
+    payload = run_lemma_battery(seed=7)
+    assert payload["summary"]["total"] == 6
+    assert payload["summary"]["passed"] >= 4
 
 
 def test_no_eia_fields_in_payload():

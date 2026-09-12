@@ -1,0 +1,104 @@
+{
+  "artifact_id": "PRE_PROOF_2026-09-12",
+  "date": "2026-09-12",
+  "strand": "kairologos_standalone",
+  "framework": "PRE_PROOF operational lemmas (empirical, not QED)",
+  "seed": 42,
+  "lemmas": [
+    {
+      "lemma_id": "L-TOPO-1",
+      "hypothesis": "Topo encoding has lower semantic drift under node permutation than linear shuffle",
+      "mean_linear_shuffle_similarity": 0.20993652343749997,
+      "mean_topo_shuffle_similarity": 1.0,
+      "topo_wins_count": 5,
+      "harness": "T-KAI-08",
+      "pass": true
+    },
+    {
+      "lemma_id": "L-TOPO-2",
+      "hypothesis": "Closed geodesic preserves activation mass better than linear re-entry",
+      "loop_mass_retention": 1.4300000000000002,
+      "linear_reentry_mass_retention": 1.1335545191597063,
+      "margin_required": 0.05,
+      "pass": true
+    },
+    {
+      "lemma_id": "L-TOPO-3",
+      "hypothesis": "Braid crossing branch patterns distinguishable from path merge",
+      "separation_then_vs_merge": 0.5198757709714659,
+      "separation_else_vs_merge": 1.47872654415872,
+      "separation_then_vs_else": 1.9999987317275392,
+      "threshold_min_separation": 0.15,
+      "pass": true
+    },
+    {
+      "lemma_id": "L-TOPO-4",
+      "hypothesis": "Ultrametric p-adic clustering matches hierarchical program structure",
+      "prime": 7,
+      "hierarchy_encodings": {
+        "root": 1,
+        "module_a": 7,
+        "module_b": 49,
+        "fn_a1": 49,
+        "fn_a2": 343,
+        "fn_b1": 343,
+        "leaf_unrelated": 11
+      },
+      "mean_parent_child_distance": 0.4612244897959183,
+      "mean_unrelated_distance": 0.673469387755102,
+      "ultrametric_on_theory_concepts": true,
+      "pass": true
+    },
+    {
+      "lemma_id": "L-MAT-1",
+      "hypothesis": "HDC ND superposition differs from rank-1D pairwise attention stability",
+      "pass": true,
+      "detail": {
+        "noise_levels": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "attention_cosine_under_noise": [
+          1.0,
+          0.5083085914567607,
+          0.23053979359152713,
+          0.24721273605181865
+        ],
+        "hdc_bundle_cosine_under_noise": [
+          1.0,
+          0.9998638676824645,
+          0.9993998663498151,
+          0.9976540688497473
+        ],
+        "hdc_more_stable_at_max_noise": true,
+        "mean_attn_stability": 0.4965152802750266,
+        "mean_hdc_stability": 0.9992294507205066
+      },
+      "harness": "T-KAI-09"
+    },
+    {
+      "lemma_id": "L-MAT-2",
+      "hypothesis": "Graph diffusion more stable than attention under impulse noise (structural anchoring)",
+      "relabeling_attention_similarity": 0.9999999999999998,
+      "relabeling_diffusion_similarity": 1.0000000000000002,
+      "noise_attention_similarity": 0.8397359487681593,
+      "noise_diffusion_similarity": 0.8391446631888689,
+      "margin_required": 0.02,
+      "pass": false,
+      "harness": "T-KAI-09"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 5,
+    "failed": 1,
+    "pass_rate": 0.8333333333333334
+  },
+  "harness_refs": {
+    "T-KAI-08": "T-KAI-08_2026-09-12",
+    "T-KAI-09": "T-KAI-09_2026-09-12",
+    "T-KAI-10": "T-KAI-10_2026-09-12"
+  }
+}

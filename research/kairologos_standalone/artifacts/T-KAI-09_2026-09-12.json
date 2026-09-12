@@ -1,0 +1,111 @@
+{
+  "harness_id": "T-KAI-09",
+  "lemma_ids": [
+    "L-MAT-2",
+    "L-MAT-1"
+  ],
+  "artifact_id": "T-KAI-09_2026-09-12",
+  "date": "2026-09-12",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a74 transformer matmul stack vs \u00a71 topo Laplacian flow",
+  "seed": 42,
+  "eight_node_task": {
+    "n_nodes": 8,
+    "attention": {
+      "readout_node": 0,
+      "output_norm": 0.09904470274101897,
+      "stability_under_node_permutation": {
+        "mean_similarity": 0.9999999999999998,
+        "min_similarity": 0.9999999999999998,
+        "max_similarity": 1.0
+      }
+    },
+    "graph_diffusion": {
+      "readout_node": 7,
+      "output_norm": 0.4951660485681066,
+      "stability_under_node_permutation": {
+        "mean_similarity": 1.0000000000000002,
+        "min_similarity": 1.0000000000000002,
+        "max_similarity": 1.0000000000000002
+      }
+    },
+    "diffusion_more_stable": true
+  },
+  "impulse_noise_drift": {
+    "noise_std": 0.08,
+    "attention_mean_similarity": 0.8397359487681593,
+    "diffusion_mean_similarity": 0.8391446631888689,
+    "diffusion_more_stable": false
+  },
+  "l_mat_1_attention_vs_hdc": {
+    "noise_levels": [
+      0.0,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "attention_cosine_under_noise": [
+      1.0,
+      0.5083085914567607,
+      0.23053979359152713,
+      0.24721273605181865
+    ],
+    "hdc_bundle_cosine_under_noise": [
+      1.0,
+      0.9998638676824645,
+      0.9993998663498151,
+      0.9976540688497473
+    ],
+    "hdc_more_stable_at_max_noise": true,
+    "mean_attn_stability": 0.4965152802750266,
+    "mean_hdc_stability": 0.9992294507205066
+  },
+  "lemma_results": {
+    "L-MAT-2": {
+      "hypothesis": "Graph diffusion more stable than attention under impulse noise (structural anchoring)",
+      "relabeling_attention_similarity": 0.9999999999999998,
+      "relabeling_diffusion_similarity": 1.0000000000000002,
+      "noise_attention_similarity": 0.8397359487681593,
+      "noise_diffusion_similarity": 0.8391446631888689,
+      "margin_required": 0.02,
+      "pass": false
+    },
+    "L-MAT-1": {
+      "hypothesis": "HDC ND superposition differs from rank-1D pairwise attention stability",
+      "pass": true,
+      "detail": {
+        "noise_levels": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "attention_cosine_under_noise": [
+          1.0,
+          0.5083085914567607,
+          0.23053979359152713,
+          0.24721273605181865
+        ],
+        "hdc_bundle_cosine_under_noise": [
+          1.0,
+          0.9998638676824645,
+          0.9993998663498151,
+          0.9976540688497473
+        ],
+        "hdc_more_stable_at_max_noise": true,
+        "mean_attn_stability": 0.4965152802750266,
+        "mean_hdc_stability": 0.9992294507205066
+      }
+    }
+  },
+  "open_questions": {
+    "diffusion_wins_impulse_noise_stability": false,
+    "both_equivariant_under_consistent_relabeling": true,
+    "claims_transformer_replacement": false
+  },
+  "interpretation_notes": [
+    "8-node ring is a toy graph; not a benchmark for production LLMs.",
+    "Attention uses learned random projections; diffusion uses fixed adjacency + phases.",
+    "Relabeling tests equivariance; impulse-noise tests drift under structural anchoring."
+  ]
+}

@@ -35,7 +35,11 @@ Canonical tractate:
 | `topological_vm.py` | 3D geodesic ray through instruction nodes; Euclidean vs hyperbolic curvature |
 | `topo_lang/` (this folder) | `.topo` parser, TopoInterpreter, example programs |
 | `TOPOLOGICAL_CODE_SYNTAX.md` | Concept doc: 3D/topological programming paradigm (RU) |
+| `PRE_PROOF.md` | Operational lemmas L-TOPO-* / L-MAT-* (empirical pass/fail) |
+| `LLM_MATRIX_BRIDGE.md` | Transformer matmul vs graph diffusion (RU+EN) |
+| `lib/llm_vs_topo_matrix.py` | Minimal attention vs Laplacian numpy demo |
 | `viz/topo_program_3d.html` | Canvas 3D view of example `.topo` program |
+| `run_all_preproof.py` | Full lemma battery runner |
 | `verify_trans_formula.py` | Multi-phase “trans-topological formula” pipeline (Klein→braid→p-adic→hyperbolic) |
 | `topomatrix_core.py` | HoTT types + TopoMatrix runtime/compiler sketch |
 | `topomatrix_vsa.py` | VSA layer for TopoMatrix |
@@ -59,10 +63,11 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | §2.1 Klein | Numerical K² = I with low half-turn overlap | **T-KAI-05** ✓ |
 | §2.3 p-adic | Concept encodings cluster ultrametrically at p=7 | **T-KAI-06** ✓ |
 | §2.4 Braids | Artin relations hold; braid words invariant under Reidemeister-like ops | **T-KAI-07** |
-| §1 syntax | 3D topo graph vs 1D pseudo-C: representation stability under perturbation | **T-KAI-08** ✓ |
+| §1 syntax | 3D topo graph vs 1D pseudo-C: representation stability under perturbation | **T-KAI-08** ✓ → L-TOPO-1 |
 | §4.1 γ-band | 42 Hz prior shifts sync threshold vs other carriers (weak biological claim) | **T-KAI-01** |
-| Trans formula | Multi-topology pipeline composes without numeric blow-up | **T-KAI-09** |
-| ND attractor | High-D random vectors quasi-orthogonal; bundling scales | **T-KAI-10** |
+| §4 LLM bridge | Attention vs graph diffusion on 8-node task; HDC vs QK^T stability | **T-KAI-09** ✓ → L-MAT-1/2 |
+| ND attractor | High-D random vectors quasi-orthogonal; bundling scales | **T-KAI-10** ✓ |
+| PRE_PROOF | Six operational lemmas (geodesic mass, braid, p-adic hierarchy) | **lemma_battery** |
 
 ---
 
@@ -78,8 +83,8 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | **T-KAI-06** | **operational** | p-adic ultrametric clustering (p=7) |
 | **T-KAI-07** | planned | B₃ braid word invariants under generator permutations |
 | **T-KAI-08** | **operational** | Syntax vs semantics: pseudo-C vs 3D topo graph (HDC stability) |
-| **T-KAI-09** | planned | End-to-end trans-formula numeric stability |
-| **T-KAI-10** | planned | ND quasi-orthogonality + bundling interference statistics |
+| **T-KAI-09** | **operational** | Attention vs graph diffusion; L-MAT-1/2 lemmas |
+| **T-KAI-10** | **operational** | ND quasi-orthogonality + bundling interference statistics |
 
 ---
 
@@ -88,7 +93,8 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 **Operational (runnable now in this folder):**
 
 - Kuramoto sweeps, HDC capacity, Klein involution, p-adic distances, **topo syntax T-KAI-08**
-- Artifacts: `artifacts/T-KAI-*_YYYY-MM-DD.json|md`
+- **PRE_PROOF lemma battery**, attention vs diffusion **T-KAI-09**, ND orthogonality **T-KAI-10**
+- Artifacts: `artifacts/T-KAI-*_YYYY-MM-DD.json|md`, `artifacts/PRE_PROOF_*.json`
 
 **Speculative (theory narrative, not validated here):**
 
@@ -125,6 +131,9 @@ python research/kairologos_standalone/run_t_kai_02.py
 python research/kairologos_standalone/run_t_kai_05.py
 python research/kairologos_standalone/run_t_kai_06.py
 python research/kairologos_standalone/run_t_kai_08.py
+python research/kairologos_standalone/run_t_kai_09.py
+python research/kairologos_standalone/run_t_kai_10.py
+python research/kairologos_standalone/run_all_preproof.py
 pytest research/kairologos_standalone/tests -q
 ```
 
@@ -135,4 +144,5 @@ pytest research/kairologos_standalone/tests -q
 1. Port TVM + hyperbolic expansion into **T-KAI-03/04** harnesses (from `topological_vm.py`, `arche_topology_engine.py`)
 2. Wire TopoMatrix braid tests into **T-KAI-07**
 3. Extend `topo_lang/` with richer `.topo` validation and additional motif examples
-4. Keep EIA battery frozen unless user explicitly requests re-linking
+4. Tighten L-MAT-2 thresholds on larger graphs (16–64 nodes) if 8-node results too noisy
+5. Keep EIA battery frozen unless user explicitly requests re-linking

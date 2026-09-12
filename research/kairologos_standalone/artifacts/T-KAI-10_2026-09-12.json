@@ -1,0 +1,259 @@
+{
+  "harness_id": "T-KAI-10",
+  "artifact_id": "T-KAI-10_2026-09-12",
+  "date": "2026-09-12",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a73 ND attractor quasi-orthogonality + bundling",
+  "dim": 4096,
+  "seed": 42,
+  "quasi_orthogonality": {
+    "pair_count": 2016.0,
+    "mean_abs_cosine": 0.01242646716889881,
+    "max_abs_cosine": 0.06396484375,
+    "p95_abs_cosine": 0.0302734375,
+    "fraction_below_threshold": 1.0
+  },
+  "bundling_interference": [
+    {
+      "bundle_size": 2.0,
+      "bundle_norm": 90.92854337335444,
+      "expected_norm_scale": 90.50966799187809,
+      "interference_ratio": 1.0046279628549069,
+      "theory_noise_scale": 0.015625
+    },
+    {
+      "bundle_size": 3.0,
+      "bundle_norm": 110.63453348751464,
+      "expected_norm_scale": 110.85125168440814,
+      "interference_ratio": 0.9980449639169571,
+      "theory_noise_scale": 0.02209708691207961
+    },
+    {
+      "bundle_size": 4.0,
+      "bundle_norm": 126.91729590564086,
+      "expected_norm_scale": 128.0,
+      "interference_ratio": 0.9915413742628192,
+      "theory_noise_scale": 0.027063293868263706
+    },
+    {
+      "bundle_size": 5.0,
+      "bundle_norm": 144.3606594609487,
+      "expected_norm_scale": 143.10835055998655,
+      "interference_ratio": 1.0087507744730608,
+      "theory_noise_scale": 0.03125
+    },
+    {
+      "bundle_size": 6.0,
+      "bundle_norm": 158.694675399019,
+      "expected_norm_scale": 156.76734353812338,
+      "interference_ratio": 1.012294217771362,
+      "theory_noise_scale": 0.034938562148434216
+    },
+    {
+      "bundle_size": 7.0,
+      "bundle_norm": 170.24687956024334,
+      "expected_norm_scale": 169.3280839081338,
+      "interference_ratio": 1.0054261267883242,
+      "theory_noise_scale": 0.038273277230987154
+    },
+    {
+      "bundle_size": 8.0,
+      "bundle_norm": 182.18671740826773,
+      "expected_norm_scale": 181.01933598375618,
+      "interference_ratio": 1.0064489321992447,
+      "theory_noise_scale": 0.04133986423538423
+    },
+    {
+      "bundle_size": 9.0,
+      "bundle_norm": 192.97668252926312,
+      "expected_norm_scale": 192.0,
+      "interference_ratio": 1.0050868881732453,
+      "theory_noise_scale": 0.04419417382415922
+    },
+    {
+      "bundle_size": 10.0,
+      "bundle_norm": 203.63693181738915,
+      "expected_norm_scale": 202.3857702507763,
+      "interference_ratio": 1.0061820629240017,
+      "theory_noise_scale": 0.046875
+    },
+    {
+      "bundle_size": 11.0,
+      "bundle_norm": 211.62230506258078,
+      "expected_norm_scale": 212.2639865827456,
+      "interference_ratio": 0.9969769647197563,
+      "theory_noise_scale": 0.04941058844013093
+    },
+    {
+      "bundle_size": 12.0,
+      "bundle_norm": 221.11535450981236,
+      "expected_norm_scale": 221.70250336881628,
+      "interference_ratio": 0.9973516363140602,
+      "theory_noise_scale": 0.05182226234930312
+    },
+    {
+      "bundle_size": 13.0,
+      "bundle_norm": 229.46895214821546,
+      "expected_norm_scale": 230.7552816296953,
+      "interference_ratio": 0.9944255686266628,
+      "theory_noise_scale": 0.05412658773652741
+    },
+    {
+      "bundle_size": 14.0,
+      "bundle_norm": 238.7634812947742,
+      "expected_norm_scale": 239.46607275353225,
+      "interference_ratio": 0.9970660083464885,
+      "theory_noise_scale": 0.05633673867912483
+    },
+    {
+      "bundle_size": 15.0,
+      "bundle_norm": 247.7256547069762,
+      "expected_norm_scale": 247.8709341572747,
+      "interference_ratio": 0.9994138907379665,
+      "theory_noise_scale": 0.05846339666834283
+    },
+    {
+      "bundle_size": 16.0,
+      "bundle_norm": 256.64761834079036,
+      "expected_norm_scale": 256.0,
+      "interference_ratio": 1.0025297591437123,
+      "theory_noise_scale": 0.06051536478449089
+    },
+    {
+      "bundle_size": 17.0,
+      "bundle_norm": 263.81811916545837,
+      "expected_norm_scale": 263.8787600395303,
+      "interference_ratio": 0.9997701941828785,
+      "theory_noise_scale": 0.0625
+    },
+    {
+      "bundle_size": 18.0,
+      "bundle_norm": 271.68363955159316,
+      "expected_norm_scale": 271.5290039756342,
+      "interference_ratio": 1.0005694992936107,
+      "theory_noise_scale": 0.06442352540027595
+    },
+    {
+      "bundle_size": 19.0,
+      "bundle_norm": 277.9208520424475,
+      "expected_norm_scale": 278.96953238660313,
+      "interference_ratio": 0.9962408785820297,
+      "theory_noise_scale": 0.06629126073623882
+    },
+    {
+      "bundle_size": 20.0,
+      "bundle_norm": 282.8285699854242,
+      "expected_norm_scale": 286.2167011199731,
+      "interference_ratio": 0.9881623569788519,
+      "theory_noise_scale": 0.06810779599282303
+    },
+    {
+      "bundle_size": 21.0,
+      "bundle_norm": 288.527295069288,
+      "expected_norm_scale": 293.28484447717375,
+      "interference_ratio": 0.9837784000862138,
+      "theory_noise_scale": 0.06987712429686843
+    },
+    {
+      "bundle_size": 22.0,
+      "bundle_norm": 294.23120160853097,
+      "expected_norm_scale": 300.1866086286995,
+      "interference_ratio": 0.9801609837048568,
+      "theory_noise_scale": 0.071602745233685
+    },
+    {
+      "bundle_size": 23.0,
+      "bundle_norm": 301.14448359549937,
+      "expected_norm_scale": 306.933217492014,
+      "interference_ratio": 0.9811400866161862,
+      "theory_noise_scale": 0.07328774624724109
+    },
+    {
+      "bundle_size": 24.0,
+      "bundle_norm": 308.93364983439403,
+      "expected_norm_scale": 313.53468707624677,
+      "interference_ratio": 0.9853252688410394,
+      "theory_noise_scale": 0.07493486755176124
+    },
+    {
+      "bundle_size": 25.0,
+      "bundle_norm": 315.60735099170296,
+      "expected_norm_scale": 320.0,
+      "interference_ratio": 0.9862729718490717,
+      "theory_noise_scale": 0.07654655446197431
+    },
+    {
+      "bundle_size": 26.0,
+      "bundle_norm": 322.5399200099113,
+      "expected_norm_scale": 326.3372488699382,
+      "interference_ratio": 0.9883637896894194,
+      "theory_noise_scale": 0.078125
+    },
+    {
+      "bundle_size": 27.0,
+      "bundle_norm": 329.49658571827416,
+      "expected_norm_scale": 332.55375505322445,
+      "interference_ratio": 0.9908069919870218,
+      "theory_noise_scale": 0.07967217989988726
+    },
+    {
+      "bundle_size": 28.0,
+      "bundle_norm": 335.4996274215517,
+      "expected_norm_scale": 338.6561678162676,
+      "interference_ratio": 0.9906792177592098,
+      "theory_noise_scale": 0.08118988160479113
+    },
+    {
+      "bundle_size": 29.0,
+      "bundle_norm": 340.76384784774336,
+      "expected_norm_scale": 344.65054765660824,
+      "interference_ratio": 0.9887227806968774,
+      "theory_noise_scale": 0.08267972847076846
+    },
+    {
+      "bundle_size": 30.0,
+      "bundle_norm": 348.32743216691966,
+      "expected_norm_scale": 350.5424368033063,
+      "interference_ratio": 0.9936812083107943,
+      "theory_noise_scale": 0.08414320011147662
+    },
+    {
+      "bundle_size": 31.0,
+      "bundle_norm": 353.94914889006304,
+      "expected_norm_scale": 356.3369192211214,
+      "interference_ratio": 0.9932991216956203,
+      "theory_noise_scale": 0.0855816496101822
+    },
+    {
+      "bundle_size": 32.0,
+      "bundle_norm": 359.7054350437313,
+      "expected_norm_scale": 362.03867196751236,
+      "interference_ratio": 0.9935552826135922,
+      "theory_noise_scale": 0.08699631816921909
+    }
+  ],
+  "binding_spot_check": {
+    "num_pairs": 24,
+    "min_retrieval_cosine": 0.1875908503563788,
+    "mean_retrieval_cosine": 0.20703943904139713
+  },
+  "lemma_results": {
+    "ND-quasi-ortho": {
+      "pass": true,
+      "threshold_max_cosine": 0.15,
+      "threshold_fraction_below_0.08": 0.9
+    },
+    "ND-binding": {
+      "pass": false,
+      "retrieval_threshold": 0.25
+    }
+  },
+  "open_questions": {
+    "high_d_vectors_approximately_orthogonal": true,
+    "bundling_scales_with_sqrt_m": true
+  },
+  "interpretation_notes": [
+    "Quasi-orthogonality is probabilistic; bipolar HD at D=4096 matches theory \u221aD scaling.",
+    "Not evidence for external ND attractor \u2014 standard VSA statistics."
+  ]
+}
