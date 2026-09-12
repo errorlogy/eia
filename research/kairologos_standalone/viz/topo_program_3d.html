@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopoLang 3D — if_then_else.topo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 30%, #0d1117 0%, #05070a 100%);
+      color: #e2e8f0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    header { width: 100%; max-width: 960px; margin-bottom: 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.75rem; }
+    h1 { color: #38bdf8; font-size: 1.25rem; letter-spacing: 0.08em; }
+    .sub { color: #64748b; font-size: 0.75rem; margin-top: 0.25rem; }
+    main { display: grid; grid-template-columns: 1fr 280px; gap: 1rem; width: 100%; max-width: 960px; }
+    @media (max-width: 768px) { main { grid-template-columns: 1fr; } }
+    .panel {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    canvas { width: 100%; height: 480px; display: block; cursor: grab; }
+    canvas:active { cursor: grabbing; }
+    .sidebar { padding: 1rem; font-size: 0.75rem; }
+    .sidebar h2 { color: #38bdf8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .node-card { background: #0f172a; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 0.75rem; }
+    .glyph { font-size: 1.5rem; color: #fbbf24; }
+    .kind-concept { color: #38bdf8; }
+    .kind-operator { color: #10b981; }
+    .kind-braid { color: #f472b6; }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .legend span { font-size: 0.65rem; padding: 0.15rem 0.4rem; border-radius: 0.25rem; background: #1e293b; }
+    .controls { position: absolute; top: 0.5rem; right: 0.5rem; display: flex; gap: 0.35rem; }
+    .controls button {
+      background: #1e293b; border: 1px solid #475569; color: #94a3b8;
+      padding: 0.25rem 0.5rem; border-radius: 0.35rem; font-size: 0.65rem; cursor: pointer;
+    }
+    .controls button:hover { background: #334155; color: #e2e8f0; }
+    .canvas-wrap { position: relative; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TOPOLANG :: 3D PROGRAM VIEW</h1>
+    <p class="sub">Пример: if_then_else.topo — ветвление как перекрёст косы (D11, K=-0.2)</p>
+  </header>
+  <main>
+    <div class="panel canvas-wrap">
+      <div class="controls">
+        <button id="btnRotate">🔄 Авто</button>
+        <button id="btnReset">🎯 Сброс</button>
+      </div>
+      <canvas id="cv"></canvas>
+    </div>
+    <div class="panel sidebar">
+      <h2>Узлы программы</h2>
+      <div id="info"></div>
+      <div class="legend">
+        <span class="kind-concept">● concept</span>
+        <span class="kind-operator">● operator</span>
+        <span class="kind-braid">● braid-crossing</span>
+      </div>
+      <p style="margin-top:1rem;color:#64748b;line-height:1.5">
+        Программа — не лента токенов, а граф в 3D. Выполнение = геодезика от @entry к @exit.
+        ЛКМ+drag — вращение, колёсико — зум.
+      </p>
+    </div>
+  </main>
+  <script>
+    const nodes = [
+      { id: 'input_x', glyph: 'Ψ', kind: 'concept', x: 0, y: -1.5, z: 0, color: '#38bdf8' },
+      { id: 'test_pos', glyph: '?', kind: 'operator', x: 0, y: -0.3, z: 0.4, color: '#10b981' },
+      { id: 'branch_then', glyph: '+', kind: 'operator', x: 0.9, y: 0.5, z: 0.2, color: '#10b981' },
+      { id: 'branch_else', glyph: '-', kind: 'operator', x: -0.9, y: 0.5, z: 0.2, color: '#10b981' },
+      { id: 'braid_merge', glyph: 'X', kind: 'braid-crossing', x: 0, y: 1.4, z: 0, color: '#f472b6' },
+    ];
+    const edges = [
+      { from: 'input_x', to: 'test_pos', rel: 'geodesic' },
+      { from: 'test_pos', to: 'branch_then', rel: 'braid-over' },
+      { from: 'test_pos', to: 'branch_else', rel: 'braid-under' },
+      { from: 'branch_then', to: 'braid_merge', rel: 'geodesic' },
+      { from: 'branch_else', to: 'braid_merge', rel: 'geodesic' },
+    ];
+    const cv = document.getElementById('cv');
+    const ctx = cv.getContext('2d');
+    let ax = 0.3, ay = -0.6, zoom = 110, drag = false, px = 0, py = 0, auto = true, hover = null;
+
+    function resize() {
+      const r = cv.parentElement.getBoundingClientRect();
+      cv.width = r.width;
+      cv.height = 480;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function proj(x, y, z) {
+      const cy = Math.cos(ay), sy = Math.sin(ay);
+      const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+      const cx = Math.cos(ax), sx = Math.sin(ax);
+      const y2 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
+      const sz = z2 + 5;
+      const sc = sz > 0.1 ? (4.5 / sz) * zoom : 0;
+      return { x: cv.width / 2 + x1 * sc, y: cv.height / 2 - y2 * sc, sc, z: z2 };
+    }
+
+    function edgeStyle(rel) {
+      if (rel === 'braid-over') return { color: 'rgba(251,191,36,0.6)', dash: [6,3], w: 2 };
+      if (rel === 'braid-under') return { color: 'rgba(168,85,247,0.6)', dash: [3,5], w: 2 };
+      return { color: 'rgba(148,163,184,0.35)', dash: [], w: 1.5 };
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      if (auto && !drag) ay += 0.004;
+
+      edges.forEach(e => {
+        const a = nodes.find(n => n.id === e.from), b = nodes.find(n => n.id === e.to);
+        const p1 = proj(a.x, a.y, a.z), p2 = proj(b.x, b.y, b.z);
+        const st = edgeStyle(e.rel);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = st.color;
+        ctx.lineWidth = st.w;
+        ctx.setLineDash(st.dash);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      nodes.map(n => ({ n, p: proj(n.x, n.y, n.z) }))
+        .sort((a, b) => b.p.z - a.p.z)
+        .forEach(({ n, p }) => {
+          const r = Math.max(8, 14 * p.sc / 40);
+          const hov = hover && hover.id === n.id;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = n.color + (hov ? 'ff' : 'cc');
+          ctx.fill();
+          ctx.strokeStyle = hov ? '#fff' : 'rgba(255,255,255,0.3)';
+          ctx.lineWidth = hov ? 2 : 1;
+          ctx.stroke();
+          ctx.fillStyle = '#fff';
+          ctx.font = `bold ${Math.max(10, 12 * p.sc / 40)}px monospace`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(n.glyph, p.x, p.y);
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '9px monospace';
+          ctx.fillText(n.id, p.x, p.y + r + 10);
+        });
+      requestAnimationFrame(render);
+    }
+
+    cv.addEventListener('mousedown', e => { drag = true; px = e.clientX; py = e.clientY; auto = false; });
+    window.addEventListener('mouseup', () => drag = false);
+    window.addEventListener('mousemove', e => {
+      if (drag) { ay += (e.clientX - px) * 0.008; ax += (e.clientY - py) * 0.008; px = e.clientX; py = e.clientY; }
+      const rect = cv.getBoundingClientRect();
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      hover = null;
+      nodes.forEach(n => {
+        const p = proj(n.x, n.y, n.z);
+        if (Math.hypot(p.x - mx, p.y - my) < 18) hover = n;
+      });
+      if (hover) {
+        document.getElementById('info').innerHTML =
+          `<div class="node-card"><div class="glyph">${hover.glyph}</div>
+           <strong>${hover.id}</strong><br>
+           <span class="kind-${hover.kind.replace('-','')}">${hover.kind}</span><br>
+           @ (${hover.x}, ${hover.y}, ${hover.z})</div>`;
+      }
+    });
+    cv.addEventListener('wheel', e => { e.preventDefault(); zoom = Math.max(60, Math.min(200, zoom - e.deltaY * 0.1)); });
+    document.getElementById('btnRotate').onclick = () => { auto = !auto; };
+    document.getElementById('btnReset').onclick = () => { ax = 0.3; ay = -0.6; zoom = 110; auto = true; };
+
+    document.getElementById('info').innerHTML = nodes.map(n =>
+      `<div class="node-card"><span class="glyph">${n.glyph}</span> <strong>${n.id}</strong>
+       <span class="kind-${n.kind.replace('-','')}"> (${n.kind})</span></div>`
+    ).join('');
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Function call as dimensional lift D10 -> D13
+@program function_lift
+@layer D13
+@curvature -0.35
+
+node caller : concept @ (0.0, -2.0, -1.0) phase=0.0 param=1.0 : f
+node lift_gate : operator @ (0.0, -0.5, 0.0) phase=0.0 param=0.0 : ↑
+node callee : concept @ (0.5, 0.5, 1.2) phase=1.0 param=2.0 : g
+node bind_args : braid-crossing @ (-0.5, 0.5, 1.2) phase=2.0 param=0.0 : ⊗
+node return_sink : operator @ (0.0, 2.0, 2.5) phase=4.71 param=0.0 : ↓
+
+edge caller -> lift_gate : lift weight=1.2
+edge lift_gate -> callee : geodesic weight=1.0
+edge lift_gate -> bind_args : braid-over weight=0.7
+edge callee -> return_sink : geodesic weight=1.0
+edge bind_args -> return_sink : geodesic weight=1.0
+
+@entry caller
+@exit return_sink

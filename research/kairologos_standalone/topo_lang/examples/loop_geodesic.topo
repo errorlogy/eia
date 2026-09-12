@@ -1,0 +1,19 @@
+# Loop as closed geodesic on torus-like layer D12
+@program counter_loop
+@layer D12
+@curvature 0.0
+
+node init : concept @ (0.0, -1.2, -0.5) phase=0.0 param=0.0 : 0
+node increment : operator @ (0.8, 0.0, 0.0) phase=0.785 param=1.0 : +1
+node check : operator @ (0.0, 0.8, 0.5) phase=1.57 param=3.0 : <
+node body : concept @ (-0.8, 0.0, 0.0) phase=3.14 param=0.5 : Σ
+node exit_gate : braid-crossing @ (0.0, 1.5, 0.0) phase=0.0 param=0.0 : Ω
+
+edge init -> increment : geodesic weight=1.0
+edge increment -> check : geodesic weight=1.0
+edge check -> body : geodesic weight=0.9
+edge body -> increment : loop weight=1.0
+edge check -> exit_gate : geodesic weight=1.1
+
+@entry init
+@exit exit_gate

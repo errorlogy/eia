@@ -1,0 +1,16 @@
+# Borromeo-like triple binding: three concepts, pairwise unlink, triple link
+@program borromeo_bind
+@layer D11
+@curvature -0.15
+
+node ring_a : concept @ (0.0, 0.0, 0.8) phase=0.0 param=1.0 : A
+node ring_b : concept @ (-0.7, 0.0, -0.4) phase=2.09 param=1.0 : B
+node ring_c : concept @ (0.7, 0.0, -0.4) phase=4.19 param=1.0 : C
+node triad_lock : braid-crossing @ (0.0, 1.2, 0.0) phase=0.0 param=0.0 : L6
+
+edge ring_a -> triad_lock : braid-over weight=1.0
+edge ring_b -> triad_lock : braid-under weight=1.0
+edge ring_c -> triad_lock : geodesic weight=1.0
+
+@entry ring_a
+@exit triad_lock

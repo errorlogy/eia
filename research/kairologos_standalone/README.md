@@ -26,6 +26,7 @@ python research/kairologos_standalone/run_t_kai_01.py
 python research/kairologos_standalone/run_t_kai_02.py
 python research/kairologos_standalone/run_t_kai_05.py
 python research/kairologos_standalone/run_t_kai_06.py
+python research/kairologos_standalone/run_t_kai_08.py
 pytest research/kairologos_standalone/tests -q
 ```
 
@@ -34,3 +35,5 @@ pytest research/kairologos_standalone/tests -q
 JSON + MD outputs land in `artifacts/` with prefix `T-KAI-*`.
 
 See `RESEARCH_PROGRAM.md` for hypothesis map and roadmap T-KAI-01..10.
+
+See `TOPOLOGICAL_CODE_SYNTAX.md` for the 3D/topological programming paradigm (TopoLang prototype).

@@ -14,6 +14,7 @@ from t_kai_01_kuramoto_phase import run_experiment as run_kuramoto
 from t_kai_02_hdc_binding_capacity import run_experiment as run_hdc
 from t_kai_05_klein_involution import run_experiment as run_klein
 from t_kai_06_padic_clustering import run_experiment as run_padic
+from t_kai_08_syntax_vs_semantics import run_experiment as run_t_kai_08
 
 
 def test_kuramoto_finds_sync_at_high_coupling():
@@ -35,6 +36,27 @@ def test_klein_involution():
 def test_padic_ultrametric():
     payload = run_padic()
     assert payload["ultrametric_holds"] is True
+
+
+def test_topo_parser_and_interpreter():
+    topo_root = ROOT / "topo_lang"
+    sys.path.insert(0, str(topo_root))
+    from parser import load_topo  # noqa: E402
+    from interpreter import TopoInterpreter  # noqa: E402
+
+    program = load_topo(topo_root / "examples" / "if_then_else.topo")
+    trace = TopoInterpreter(program).execute()
+    assert trace.path[0] == "input_x"
+    assert trace.path[-1] == "braid_merge"
+    assert len(trace.path) >= 3
+
+
+def test_t_kai_08_syntax_vs_semantics():
+    payload = run_t_kai_08(seed=7)
+    assert payload["harness_id"] == "T-KAI-08"
+    assert len(payload["tasks"]) == 5
+    agg = payload["aggregate"]
+    assert agg["mean_topological_shuffle_similarity"] >= agg["mean_linear_shuffle_similarity"]
 
 
 def test_no_eia_fields_in_payload():

@@ -1,0 +1,443 @@
+{
+  "harness_id": "T-KAI-08",
+  "artifact_id": "T-KAI-08_2026-09-12",
+  "date": "2026-09-12",
+  "strand": "kairologos_standalone",
+  "theory_section": "\u00a71.2 semiotic geometry \u2014 syntax motifs vs spatial binding",
+  "seed": 42,
+  "hdc_dim": 512,
+  "tasks": [
+    {
+      "task_id": "if_then_else",
+      "topo_file": "if_then_else.topo",
+      "linear": {
+        "tokens": [
+          "if",
+          "x",
+          ">",
+          "0",
+          "then",
+          "return",
+          "x",
+          "else",
+          "return",
+          "neg",
+          "x"
+        ],
+        "representation_dimension": 11,
+        "perturbed_edit_distance_norm": 0.18181818181818182,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 0.015991210937499993,
+          "min_similarity": -0.07031249999999999,
+          "max_similarity": 0.11718749999999997
+        },
+        "base_trace": [
+          "ctrl:if",
+          "data:x",
+          "data:>",
+          "sym:0",
+          "ctrl:then",
+          "ctrl:return",
+          "data:x",
+          "ctrl:else",
+          "ctrl:return",
+          "data:neg",
+          "data:x"
+        ],
+        "perturbed_trace": [
+          "ctrl:return",
+          "data:x",
+          "data:>",
+          "sym:0",
+          "ctrl:then",
+          "ctrl:return",
+          "data:x",
+          "ctrl:else",
+          "ctrl:if",
+          "data:neg",
+          "data:x"
+        ]
+      },
+      "topological": {
+        "representation_dimension": 30,
+        "layer": "D11",
+        "curvature": -0.2,
+        "node_count": 5,
+        "edge_count": 5,
+        "perturbed_edit_distance_norm": 1.0,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 0.9999999999999999,
+          "min_similarity": 0.9999999999999999,
+          "max_similarity": 0.9999999999999999
+        },
+        "base_trace": [
+          "input_x:0.14",
+          "test_pos:0.14",
+          "branch_else:0.14",
+          "braid_merge:0.14"
+        ],
+        "perturbed_trace": [
+          "input_x:6.14",
+          "test_pos:6.14",
+          "branch_then:6.14",
+          "braid_merge:6.14"
+        ],
+        "execution": {
+          "path": [
+            "input_x",
+            "test_pos",
+            "branch_else",
+            "braid_merge"
+          ],
+          "order_parameter": 0.9999913386420118
+        }
+      },
+      "comparison": {
+        "dimension_ratio_topo_over_linear": 2.727272727272727,
+        "topo_more_stable_under_shuffle": true,
+        "topo_lower_perturbation_edit": false
+      }
+    },
+    {
+      "task_id": "loop_geodesic",
+      "topo_file": "loop_geodesic.topo",
+      "linear": {
+        "tokens": [
+          "init",
+          "i",
+          "=",
+          "0",
+          "while",
+          "i",
+          "<",
+          "3",
+          "i",
+          "++",
+          "sum",
+          "+=",
+          "i"
+        ],
+        "representation_dimension": 13,
+        "perturbed_edit_distance_norm": 0.15384615384615385,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": -0.010742187499999997,
+          "min_similarity": -0.10156249999999997,
+          "max_similarity": 0.07812499999999999
+        },
+        "base_trace": [
+          "data:init",
+          "data:i",
+          "data:=",
+          "sym:0",
+          "ctrl:while",
+          "data:i",
+          "data:<",
+          "sym:3",
+          "data:i",
+          "sym:++",
+          "data:sum",
+          "sym:+=",
+          "data:i"
+        ],
+        "perturbed_trace": [
+          "data:init",
+          "data:sum",
+          "data:=",
+          "sym:0",
+          "ctrl:while",
+          "data:i",
+          "data:<",
+          "sym:3",
+          "data:i",
+          "sym:++",
+          "data:i",
+          "sym:+=",
+          "data:i"
+        ]
+      },
+      "topological": {
+        "representation_dimension": 30,
+        "layer": "D12",
+        "curvature": 0.0,
+        "node_count": 5,
+        "edge_count": 5,
+        "perturbed_edit_distance_norm": 0.0,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 1.0,
+          "min_similarity": 1.0,
+          "max_similarity": 1.0
+        },
+        "base_trace": [
+          "init:1.28",
+          "increment:1.28",
+          "check:1.28",
+          "exit_gate:1.28"
+        ],
+        "perturbed_trace": [
+          "init:1.28",
+          "increment:1.28",
+          "check:1.28",
+          "exit_gate:1.28"
+        ],
+        "execution": {
+          "path": [
+            "init",
+            "increment",
+            "check",
+            "exit_gate"
+          ],
+          "order_parameter": 0.999949285332149
+        }
+      },
+      "comparison": {
+        "dimension_ratio_topo_over_linear": 2.3076923076923075,
+        "topo_more_stable_under_shuffle": true,
+        "topo_lower_perturbation_edit": true
+      }
+    },
+    {
+      "task_id": "function_lift",
+      "topo_file": "function_lift.topo",
+      "linear": {
+        "tokens": [
+          "y",
+          "=",
+          "g",
+          "(",
+          "f",
+          "(",
+          "x",
+          ")",
+          ")"
+        ],
+        "representation_dimension": 9,
+        "perturbed_edit_distance_norm": 0.2222222222222222,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 0.005615234374999998,
+          "min_similarity": -0.08593749999999999,
+          "max_similarity": 0.09765624999999997
+        },
+        "base_trace": [
+          "data:y",
+          "data:=",
+          "data:g",
+          "sym:(",
+          "data:f",
+          "sym:(",
+          "data:x",
+          "sym:)",
+          "sym:)"
+        ],
+        "perturbed_trace": [
+          "data:x",
+          "data:=",
+          "data:g",
+          "sym:(",
+          "data:f",
+          "sym:(",
+          "data:y",
+          "sym:)",
+          "sym:)"
+        ]
+      },
+      "topological": {
+        "representation_dimension": 30,
+        "layer": "D13",
+        "curvature": -0.35,
+        "node_count": 5,
+        "edge_count": 5,
+        "perturbed_edit_distance_norm": 0.0,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 1.0000000000000002,
+          "min_similarity": 1.0000000000000002,
+          "max_similarity": 1.0000000000000002
+        },
+        "base_trace": [
+          "caller:0.44",
+          "lift_gate:0.44",
+          "callee:0.44",
+          "return_sink:0.44"
+        ],
+        "perturbed_trace": [
+          "caller:0.44",
+          "lift_gate:0.44",
+          "callee:0.44",
+          "return_sink:0.44"
+        ],
+        "execution": {
+          "path": [
+            "caller",
+            "lift_gate",
+            "callee",
+            "return_sink"
+          ],
+          "order_parameter": 0.9999799211316946
+        }
+      },
+      "comparison": {
+        "dimension_ratio_topo_over_linear": 3.3333333333333335,
+        "topo_more_stable_under_shuffle": true,
+        "topo_lower_perturbation_edit": true
+      }
+    },
+    {
+      "task_id": "horizontal_compose",
+      "topo_file": "horizontal_compose.topo",
+      "linear": {
+        "tokens": [
+          "A",
+          ";",
+          "B",
+          ";",
+          "C"
+        ],
+        "representation_dimension": 5,
+        "perturbed_edit_distance_norm": 0.4,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 0.03881835937499999,
+          "min_similarity": -0.04687499999999999,
+          "max_similarity": 0.9999999999999998
+        },
+        "base_trace": [
+          "data:A",
+          "sym:;",
+          "data:B",
+          "sym:;",
+          "data:C"
+        ],
+        "perturbed_trace": [
+          "sym:;",
+          "sym:;",
+          "data:B",
+          "data:A",
+          "data:C"
+        ]
+      },
+      "topological": {
+        "representation_dimension": 16,
+        "layer": "D10",
+        "curvature": 0.0,
+        "node_count": 3,
+        "edge_count": 2,
+        "perturbed_edit_distance_norm": 0.0,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 1.0,
+          "min_similarity": 1.0,
+          "max_similarity": 1.0
+        },
+        "base_trace": [
+          "concept_a:0.50",
+          "morph_b:0.50",
+          "concept_c:0.50"
+        ],
+        "perturbed_trace": [
+          "concept_a:0.50",
+          "morph_b:0.50",
+          "concept_c:0.50"
+        ],
+        "execution": {
+          "path": [
+            "concept_a",
+            "morph_b",
+            "concept_c"
+          ],
+          "order_parameter": 0.9999999939347091
+        }
+      },
+      "comparison": {
+        "dimension_ratio_topo_over_linear": 3.2,
+        "topo_more_stable_under_shuffle": true,
+        "topo_lower_perturbation_edit": true
+      }
+    },
+    {
+      "task_id": "borromeo_bind",
+      "topo_file": "borromeo_bind.topo",
+      "linear": {
+        "tokens": [
+          "bind",
+          "A",
+          "B",
+          "C",
+          "triad",
+          "lock"
+        ],
+        "representation_dimension": 6,
+        "perturbed_edit_distance_norm": 0.3333333333333333,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 0.9999999999999998,
+          "min_similarity": 0.9999999999999998,
+          "max_similarity": 0.9999999999999998
+        },
+        "base_trace": [
+          "data:bind",
+          "data:A",
+          "data:B",
+          "data:C",
+          "data:triad",
+          "data:lock"
+        ],
+        "perturbed_trace": [
+          "data:triad",
+          "data:A",
+          "data:B",
+          "data:C",
+          "data:bind",
+          "data:lock"
+        ]
+      },
+      "topological": {
+        "representation_dimension": 22,
+        "layer": "D11",
+        "curvature": -0.15,
+        "node_count": 4,
+        "edge_count": 3,
+        "perturbed_edit_distance_norm": 0.0,
+        "meaning_stability_after_shuffle": {
+          "mean_similarity": 1.0,
+          "min_similarity": 1.0,
+          "max_similarity": 1.0
+        },
+        "base_trace": [
+          "ring_a:6.28",
+          "triad_lock:6.28"
+        ],
+        "perturbed_trace": [
+          "ring_a:6.28",
+          "triad_lock:6.28"
+        ],
+        "execution": {
+          "path": [
+            "ring_a",
+            "triad_lock"
+          ],
+          "order_parameter": 0.9976045626561787
+        }
+      },
+      "comparison": {
+        "dimension_ratio_topo_over_linear": 3.6666666666666665,
+        "topo_more_stable_under_shuffle": true,
+        "topo_lower_perturbation_edit": true
+      }
+    }
+  ],
+  "aggregate": {
+    "mean_linear_edit_distance_norm": 0.25824397824397827,
+    "mean_topological_edit_distance_norm": 0.2,
+    "mean_linear_shuffle_similarity": 0.20993652343749997,
+    "mean_topological_shuffle_similarity": 1.0,
+    "topo_wins_stability_count": 5,
+    "topo_wins_perturbation_count": 4
+  },
+  "open_questions": {
+    "does_spatial_encoding_reduce_perturbation_sensitivity": true,
+    "does_label_shuffle_preserve_topo_bundle_more": true,
+    "claims_turing_transcendence": false
+  },
+  "interpretation_notes": [
+    "Prototype comparison only \u2014 pseudo-C traces are toy projections, not a compiler.",
+    "Topological perturbation swaps node positions, not connectivity \u2014 tests geometry-first semantics.",
+    "HDC shuffle test permutes symbol order; high similarity does NOT prove consciousness or AGI.",
+    "Higher representation_dimension for topo is expected; question is stability, not compression."
+  ]
+}

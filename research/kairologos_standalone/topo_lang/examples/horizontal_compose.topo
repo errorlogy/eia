@@ -1,0 +1,14 @@
+# Horizontal composition A — B — C (time-like geodesic chain)
+@program horizontal_compose
+@layer D10
+@curvature 0.0
+
+node concept_a : concept @ (-1.0, 0.0, 0.0) phase=0.0 param=1.0 : A
+node morph_b : operator @ (0.0, 0.0, 0.0) phase=0.5 param=0.0 : B
+node concept_c : concept @ (1.0, 0.0, 0.0) phase=1.0 param=0.0 : C
+
+edge concept_a -> morph_b : geodesic weight=1.0
+edge morph_b -> concept_c : geodesic weight=1.0
+
+@entry concept_a
+@exit concept_c

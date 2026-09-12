@@ -33,6 +33,9 @@ Canonical tractate:
 | `arche_topology_engine.py` | Klein flip, Poincaré distances, p-adic triangle, B₃ braid relation, Φ sweep |
 | `hyperdimensional_nd_engine.py` | 4096-D binding/bundling/unbinding demo program |
 | `topological_vm.py` | 3D geodesic ray through instruction nodes; Euclidean vs hyperbolic curvature |
+| `topo_lang/` (this folder) | `.topo` parser, TopoInterpreter, example programs |
+| `TOPOLOGICAL_CODE_SYNTAX.md` | Concept doc: 3D/topological programming paradigm (RU) |
+| `viz/topo_program_3d.html` | Canvas 3D view of example `.topo` program |
 | `verify_trans_formula.py` | Multi-phase “trans-topological formula” pipeline (Klein→braid→p-adic→hyperbolic) |
 | `topomatrix_core.py` | HoTT types + TopoMatrix runtime/compiler sketch |
 | `topomatrix_vsa.py` | VSA layer for TopoMatrix |
@@ -56,7 +59,7 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | §2.1 Klein | Numerical K² = I with low half-turn overlap | **T-KAI-05** ✓ |
 | §2.3 p-adic | Concept encodings cluster ultrametrically at p=7 | **T-KAI-06** ✓ |
 | §2.4 Braids | Artin relations hold; braid words invariant under Reidemeister-like ops | **T-KAI-07** |
-| §1 syntax | T-node / Borromeo motifs distinguish compositional roles | **T-KAI-08** |
+| §1 syntax | 3D topo graph vs 1D pseudo-C: representation stability under perturbation | **T-KAI-08** ✓ |
 | §4.1 γ-band | 42 Hz prior shifts sync threshold vs other carriers (weak biological claim) | **T-KAI-01** |
 | Trans formula | Multi-topology pipeline composes without numeric blow-up | **T-KAI-09** |
 | ND attractor | High-D random vectors quasi-orthogonal; bundling scales | **T-KAI-10** |
@@ -74,7 +77,7 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 | **T-KAI-05** | **operational** | Klein operator involution K²=I |
 | **T-KAI-06** | **operational** | p-adic ultrametric clustering (p=7) |
 | **T-KAI-07** | planned | B₃ braid word invariants under generator permutations |
-| **T-KAI-08** | planned | Syntax motif classification (horizontal / vertical / T / Borromeo) |
+| **T-KAI-08** | **operational** | Syntax vs semantics: pseudo-C vs 3D topo graph (HDC stability) |
 | **T-KAI-09** | planned | End-to-end trans-formula numeric stability |
 | **T-KAI-10** | planned | ND quasi-orthogonality + bundling interference statistics |
 
@@ -84,7 +87,7 @@ Path: `c:\Users\lawye\Documents\antigravity\quick-galileo\`
 
 **Operational (runnable now in this folder):**
 
-- Kuramoto sweeps, HDC capacity, Klein involution, p-adic distances
+- Kuramoto sweeps, HDC capacity, Klein involution, p-adic distances, **topo syntax T-KAI-08**
 - Artifacts: `artifacts/T-KAI-*_YYYY-MM-DD.json|md`
 
 **Speculative (theory narrative, not validated here):**
@@ -121,6 +124,7 @@ python research/kairologos_standalone/run_t_kai_01.py
 python research/kairologos_standalone/run_t_kai_02.py
 python research/kairologos_standalone/run_t_kai_05.py
 python research/kairologos_standalone/run_t_kai_06.py
+python research/kairologos_standalone/run_t_kai_08.py
 pytest research/kairologos_standalone/tests -q
 ```
 
@@ -130,5 +134,5 @@ pytest research/kairologos_standalone/tests -q
 
 1. Port TVM + hyperbolic expansion into **T-KAI-03/04** harnesses (from `topological_vm.py`, `arche_topology_engine.py`)
 2. Wire TopoMatrix braid tests into **T-KAI-07**
-3. Optional: symlink or submodule quick-galileo for shared lib code
+3. Extend `topo_lang/` with richer `.topo` validation and additional motif examples
 4. Keep EIA battery frozen unless user explicitly requests re-linking

@@ -1,0 +1,19 @@
+# IF-THEN-ELSE as braid crossing (T-KAI-08 reference program)
+@program if_then_else_braid
+@layer D11
+@curvature -0.2
+
+node input_x : concept @ (0.0, -1.5, 0.0) phase=0.0 param=1.0 : Ψ
+node test_pos : operator @ (0.0, -0.3, 0.4) phase=0.0 param=0.0 : ?
+node branch_then : operator @ (0.9, 0.5, 0.2) phase=1.57 param=1.0 : +
+node branch_else : operator @ (-0.9, 0.5, 0.2) phase=-1.57 param=-1.0 : -
+node braid_merge : braid-crossing @ (0.0, 1.4, 0.0) phase=0.0 param=0.0 : X
+
+edge input_x -> test_pos : geodesic weight=1.0
+edge test_pos -> branch_then : braid-over weight=0.8
+edge test_pos -> branch_else : braid-under weight=0.8
+edge branch_then -> braid_merge : geodesic weight=1.0
+edge branch_else -> braid_merge : geodesic weight=1.0
+
+@entry input_x
+@exit braid_merge
