@@ -6,6 +6,7 @@
 | `draft_D1.patch` | **D1**: new `eia/audit/causal_drive.py` (`attribute_drives`: do(silence drive subsets), state-only and state+channel, exact Shapley, origin = memory/field-driven/drive-independent, overdetermination flag). `AuthenticReason.evaluate(causal_structural=...)` uses it instead of the keyword test when given; `run_scenario(causal_audit=False)` opt-in, result key `drive_attribution`. New `tests/test_causal_drive.py` (4 tests). | Applied to a clean HEAD copy: full suite **294 passed, 6 failed** — the same 6 pre-existing failures as unpatched HEAD; 4 new tests pass. Default behaviour unchanged. |
 
 Apply (after review): `git apply research/endogeneity_topology/patches/draft_C11_D6.patch` and/or `draft_D1.patch`
-(independent; both touch `pipeline.py` in different places — apply C11_D6 first, then D1 with `git apply --3way` if needed).
+(verified: both apply cleanly on HEAD in either this order — C11_D6 then D1 — and together pass the new tests plus
+`test_mvp0` / `test_authentic_reason`, 30/30).
 Default behaviour is unchanged; enabling `state_ior=True` in `CognitiveLoop` and calling `note_asked()` after
 emission is a separate decision (see FINDINGS D6, ticks 53–56).
