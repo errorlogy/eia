@@ -589,6 +589,27 @@ True module partition, rate 0.03, 2 seeds; E_norm with true W / blind conditiona
 - Design implication revised: sparse cross-coupling (≲10%) is needed for sub-agents to be **auditable
   without labels**; with known motive labels, endogeneity per motive can be audited up to μ ≈ 0.3.
 
+## Tick 49 — directed graphs: does endogeneity need cycles? (`tick49.py`)
+
+N=1000, mean out-degree 4; W scaled to mean branching ratio g (spectral radius of a DAG is 0). 2 seeds.
+Cells: rate × base / persist (activity kept after noise is switched off).
+
+| graph | ρ(W)/g | g=0.6 | 0.8 | 1.0 | 1.2 | 1.5 |
+|---|---|---|---|---|---|---|
+| strict DAG (no cycles) | 0.00 | 1.5/0.81 | 2.0/0.84 | 2.7/0.82 | 3.8/0.83 | 6.3/0.81 |
+| directed, reciprocity 0 | 1.01 | 1.8/0.93 | 3.1/0.82 | 20.7/0.99 | 25.1/1.01 | 27.2/1.00 |
+| directed, reciprocity 0.5 | 1.13 | 1.7/0.66 | 3.7/0.52 | 24.8/1.03 | 27.2/1.01 | 28.4/1.00 |
+| undirected | 1.14 | 1.7/0.46 | 3.8/0.62 | 26.2/1.02 | 28.1/1.01 | 28.9/1.00 |
+
+- **Without cycles there is no collective endogeneity**: the DAG never enters a self-amplifying regime even at
+  branching 1.5; activity rises only gently (×6). Its constant "persist" ≈ 0.82 is the per-unit aging clock
+  (tick 1 A1), not network self-sustainment.
+- With cycles, all directed/undirected variants show the explosive onset at g ≈ 1 (ρ(W) ≈ g); reciprocity
+  matters little.
+- Trade-off: feed-forward = safe and graded but only unit-level (clock-like) initiative; recurrent = collective
+  endogeneity but needs modularity/gating (A2, B12) to keep the onset graded. Supports the growth-point idea
+  of endogeneity as *closed causal loops within Z*.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

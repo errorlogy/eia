@@ -25,6 +25,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A15 | Lateral inhibition between modules removes the sparsity requirement (sub-agents at μ = 0.3) | tick 25 | holds (partly by construction) |
 | A16 | Lateral inhibition abolishes per-motive controllability | tick 26 | withdrawn (tick 27) |
 | A17 | Under lateral inhibition, controllability is state-dependent: boosting a non-dominant motive = takeover; boosting the dominant one ≈ inert | ticks 27–28 | holds (n = 40); sign flip withdrawn |
+| A18 | Collective (network-level) endogeneity requires cycles: a strict DAG never self-amplifies (×6 at branching 1.5, only per-unit aging clocks), while any cyclic directed/undirected graph shows the onset at g≈1 | holds (tick 49) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
