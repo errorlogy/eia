@@ -717,6 +717,21 @@ deterministic (aging 0.03 per episode) or stochastic (same mean: p = 0.1 events 
   the release is only as non-clock-like as the state dynamics that drive it.
 - Few events per run (3–12) → CV estimates are noisy; directional.
 
+## Tick 56 — tick 55 with 10 seeds, pooled intervals (`../eia_prototype/tick56_state_ior_ci.py`)
+
+4 scenarios × 10 seeds, 200 silent episodes; inter-ask intervals pooled; bootstrap 95 % CI of CV.
+
+| IOR / staleness | asks per run | pooled intervals | pooled CV | 95 % CI |
+|---|---|---|---|---|
+| fixed decay / stochastic | 60.1 | 2364 | 0.57 | 0.56–0.59 |
+| state / deterministic | 5.0 | 160 | 1.13 | 0.96–1.25 |
+| state / stochastic | 3.9 | 114 | **1.29** | 1.11–1.47 |
+
+- Confirms tick 55 with non-overlapping CIs: state-dependent release is ~12–15× sparser and its timing is
+  irregular (CV > 1), fixed-decay IOR is sub-Poisson (clock-like).
+- Caveat: pooling across scenarios mixes different mean intervals, which inflates CV somewhat; the ordering
+  and the gap are robust.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
