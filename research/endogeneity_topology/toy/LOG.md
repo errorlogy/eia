@@ -1066,6 +1066,24 @@ cross edges; rate-matched, 2 seeds. A26 signature for module 0 (hub in the star)
   when cut off *and* drives others) required intrinsic excitability (tick 85). Consistent with B16 (hub-rich SAL/SMA are
   high-influence but dependent).
 
+## Tick 88 — generator strength vs enslavement (`tick88.py`)
+
+SBM 10×100 (μ 0.1); module 0 excitability × f; rate-matched (global activity fixed), 2 seeds.
+
+| f | out (per unit share) | indep | generator's share of all activity | raw E of the other modules |
+|---|---|---|---|---|
+| 1.0 | 2.03 | 0.49 | 0.17 | 0.94 |
+| 1.3 | 1.29 | 0.76 | 0.25 | 0.93 |
+| 1.8 | 1.33 | 0.94 | 0.37 | 0.92 |
+| 2.5 | 1.42 | 0.97 | 0.42 | 0.91 |
+
+- A stronger generator becomes **self-sustaining** (independence 0.49 → 0.97) and takes a growing **share of the
+  activity budget** (0.17 → 0.42), but its per-unit influence on others does *not* grow and the other modules stay
+  sub-agents (E 0.94 → 0.91): **no enslavement** — under a fixed global budget a strong motive crowds others out rather
+  than driving them.
+- Design reading: an intrinsically strong motive is a *budget* risk (dominance of initiative share), not a *control*
+  risk (other motives keep their own causes). A Governor should cap per-motive activity share, not per-motive influence.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
