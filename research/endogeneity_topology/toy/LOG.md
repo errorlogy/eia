@@ -854,6 +854,10 @@ tick 62) + closed loop + state-dependent IOR + stochastic staleness. 7 scenarios
 - With calibration the proposed architecture keeps every behavioural gain **and** is eval-compatible (first
   initiative 100 %, EOI 0.95; only twin_world_005 drops to 0.67). The tick-57 cost is essentially gone.
 
+## Tick 64 — draft patch for C11 + D6 (`../patches/`), not applied
+
+Verified on a clean HEAD copy: 3 new tests pass, no regressions (6 pre-existing failures unrelated).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

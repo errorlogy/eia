@@ -1,0 +1,121 @@
+diff --git a/src/eia/intention/__init__.py b/src/eia/intention/__init__.py
+index 98c194c..1a36cd9 100644
+--- a/src/eia/intention/__init__.py
++++ b/src/eia/intention/__init__.py
+@@ -18,9 +18,41 @@ class IntentionGenesis:
+         *,
+         abstain_threshold: float = 0.35,
+         min_evsi: float = 0.15,
++        state_ior: bool = False,
++        ior_delta: float = 0.05,
+     ) -> None:
+         self.abstain_threshold = abstain_threshold
+         self.min_evsi = min_evsi
++        # State-dependent inhibition of return: a target asked at entropy H0 is re-admitted only when
++        # its belief entropy exceeds H0 + ior_delta (knowledge went stale / new conflicting evidence).
++        # Fixed-decay IOR would be a hidden clock (research/endogeneity_topology ticks 53-56).
++        self.state_ior = state_ior
++        self.ior_delta = ior_delta
++        self.asked_entropy: dict[str, float] = {}
++
++    @staticmethod
++    def _belief_entropy(field: BeliefField, belief_id: str) -> float | None:
++        belief = field.beliefs.get(belief_id)
++        if belief is None:
++            return None
++        from eia.beliefs import shannon_entropy
++
++        return shannon_entropy(belief.distribution) if belief.distribution else belief.uncertainty
++
++    def note_asked(self, initiative: Initiative, field: BeliefField) -> None:
++        """Record the target's entropy when a question was emitted (call after emission)."""
++        c = initiative.candidate
++        if initiative.abstained or c is None or c.target_belief_id is None:
++            return
++        h = self._belief_entropy(field, c.target_belief_id)
++        if h is not None:
++            self.asked_entropy[c.target_belief_id] = h
++
++    def _ior_admits(self, c: InitiativeCandidate, field: BeliefField) -> bool:
++        if not self.state_ior or c.target_belief_id not in self.asked_entropy:
++            return True
++        h = self._belief_entropy(field, c.target_belief_id)
++        return h is not None and h > self.asked_entropy[c.target_belief_id] + self.ior_delta
+ 
+     def generate_candidates(
+         self,
+@@ -136,6 +168,7 @@ class IntentionGenesis:
+         non_abstain = [
+             c for c in candidates
+             if c.kind not in (InitiativeKind.ABSTAIN, InitiativeKind.OBSERVE)
++            and self._ior_admits(c, field)
+         ]
+         observe = next((c for c in candidates if c.kind == InitiativeKind.OBSERVE), None)
+ 
+diff --git a/src/eia/pipeline.py b/src/eia/pipeline.py
+index 010cfe6..9bcaebd 100644
+--- a/src/eia/pipeline.py
++++ b/src/eia/pipeline.py
+@@ -156,7 +156,7 @@ class CognitiveLoop:
+ 
+         self._record_stage(
+             PipelineStage.MOTIVE_FORMATION,
+-            f"Dominant drive={motivation.dominant_drive.value}",
++            f"Dominant drive={getattr(motivation.dominant_drive, 'value', 'none')}",
+             motivation.model_dump(mode="json"),
+             trace_kind=TraceNodeKind.MOTIVE_FORMATION,
+             parent_kind=TraceNodeKind.SENSE_MAKING,
+diff --git a/tests/test_state_ior.py b/tests/test_state_ior.py
+new file mode 100644
+index 0000000..ce916d3
+--- /dev/null
++++ b/tests/test_state_ior.py
+@@ -0,0 +1,48 @@
++"""State-dependent inhibition of return in IntentionGenesis (opt-in)."""
++
++from datetime import datetime, timezone
++
++from eia.beliefs import BeliefField
++from eia.drives import DriveEngine
++from eia.intention import IntentionGenesis
++from eia.schemas.belief import Belief, BeliefKind
++
++
++def _field(p_top: float) -> BeliefField:
++    now = datetime.now(timezone.utc)
++    f = BeliefField()
++    f.add_belief(Belief(id="b1", kind=BeliefKind.CATEGORICAL, subject="s", claim="c",
++                        distribution={"a": p_top, "b": 1 - p_top}, uncertainty=0.9,
++                        created_at=now, updated_at=now))
++    return f
++
++
++def _choose(ig: IntentionGenesis, field: BeliefField):
++    return ig.best_or_abstain(DriveEngine().compute(field), field)
++
++
++def test_default_off_repeats_same_question():
++    ig = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12)
++    f = _field(0.8)
++    first = _choose(ig, f)
++    ig.note_asked(first, f)
++    assert _choose(ig, f).candidate.target_belief_id == first.candidate.target_belief_id
++
++
++def test_state_ior_blocks_until_entropy_grows():
++    ig = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12, state_ior=True)
++    f = _field(0.8)
++    first = _choose(ig, f)
++    assert first.candidate.target_belief_id == "b1"
++    ig.note_asked(first, f)
++    again = _choose(ig, f)
++    assert again.candidate.target_belief_id != "b1"          # observe / abstain instead of re-asking
++    f.beliefs["b1"].distribution = {"a": 0.5, "b": 0.5}       # knowledge went stale
++    assert _choose(ig, f).candidate.target_belief_id == "b1"
++
++
++def test_first_initiative_unchanged_by_state_ior():
++    f = _field(0.8)
++    a = _choose(IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12), f)
++    b = _choose(IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12, state_ior=True), f)
++    assert (a.candidate.kind, a.candidate.target_belief_id) == (b.candidate.kind, b.candidate.target_belief_id)
