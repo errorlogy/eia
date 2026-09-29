@@ -259,7 +259,8 @@ chosen by blind score. Held-out test. 2 seeds.
 - [x] tick 16: block-wise a_k / frequency detuning do NOT reproduce empirical boundaries (≈ shuffled null) — see ../human_connectome/RESULTS.md
 - [x] tick 17: HRF lag (≤2 s) + SNR (≤3×) do NOT fake boundaries → empirical boundaries likely genuine
 - [x] tick 18: block gating (g_in 3, g_out 0.03) reproduces empirical boundaries + E gain; empirical blocks are SC-compatible (easier to impose than random)
-- [ ] FC fit under gating; state-dependent (intermittent) gate vs constant
+- [x] tick 19: gating doubles FC fit (0.23→0.49); intermittent gate no shortcut (tonic property)
+- [ ] cross-subject validation of gated model vs shuffled-block gating
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)

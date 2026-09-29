@@ -142,3 +142,24 @@ Same gating on *shuffled* blocks: imposed blocks recovered worse (retest ARI 0.3
   neuromodulatory gating in the brain; the Governor role in EIA), not just wiring.
 - Open: required contrast is large; check FC fit under gating, and whether a *state-dependent*
   gate (on only part of the time) achieves the same with smaller average contrast.
+
+## Tick 19 — FC fit under gating; constant vs intermittent gate (`tick19_gate_state.py`)
+
+Subject 131217, 2 seeds. Intermittent = telegraph process (mean dwell 20 s), ON = (3, 0.03).
+
+| condition | ON time | ARI vs empirical | E gain | **FC fit** |
+|---|---|---|---|---|
+| no gate | — | 0.02 | 0.13 | 0.23 |
+| constant (2, 0.1) | 1 | 0.54 | 0.29 | 0.44 |
+| constant (3, 0.03) | 1 | **0.74** | **0.38** | **0.49** |
+| intermittent 25% | 0.23 | 0.09 | 0.09 | 0.24 |
+| intermittent 50% | 0.48 | 0.25 | 0.17 | 0.31 |
+| intermittent 75% | 0.77 | 0.38 | 0.23 | 0.35 |
+
+- **Gating doubles the FC fit (0.23 → 0.49)** — FC is a separate target from the boundary
+  detector (zero-lag correlation vs lagged event co-activation), so this is supporting, though
+  not independent evidence (blocks and FC come from the same scan).
+- Intermittent gating gives no shortcut: all metrics scale ~linearly with ON time. Boundaries
+  need the gate on most of the time — a *tonic* property, not an occasional state.
+- Next: cross-validation — gate with 131217's blocks on other subjects' SC and score their FC,
+  vs shuffled-block gating (control for "any gating helps FC").
