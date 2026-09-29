@@ -31,6 +31,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A21 | A sparse cross-module hub ("global workspace") layer doubles global ignitions (13.5 → 27.7 / 1000 ticks, up to 9/10 modules) while module endogeneity stays ≈ intact (E_norm 0.97 → 0.95) — broadcast without dissolving sub-agents. But a single motive's boost does *not* recruit ignition; it suppresses it (−5.8 / 1000 t, z −2.2) — ignitions are emergent, not motive-triggered | holds (ticks 67–68) |
 | A22 | Plain lagged-Hebbian plasticity + rate homeostasis on ER does not grow sub-agents: weights become heterogeneous (CV 0.5) but modularity stays below the shuffled null (0.33 vs 0.41) — learning builds cross-module cascade highways | holds (tick 69, 2 seeds) |
 | A23 | Plasticity rule decides the sign: lagged Hebb is anti-modular (Q − Q_null −0.075), synchronous Hebb with competitive input/output normalisation is modular (+0.02), + global inhibition +0.04 — sub-agents can self-organise, but slowly and weakly; the learned communities are functional (E_norm +0.12–0.14 vs the same partition on unlearned weights, 3 seeds; lagged Hebb ≈ 0) | **robust** (ticks 70–72) |
+| A24 | Spatial exponential-distance wiring (cortex-like EDR) without modules gives a characteristic sub-agent size ≈ 3λ (side where E_norm = 0.5: 0.17 at λ 0.05, 0.35 at λ 0.12) — continuous, location-free sub-agents with tunable grain | holds (tick 73, 2 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 

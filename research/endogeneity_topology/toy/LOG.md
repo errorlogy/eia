@@ -979,6 +979,23 @@ the learned weights; same partition evaluated on the unlearned ER weights as bas
 - Replicates across 3 seeds (with tick 71): competitive synchronous learning adds +0.12–0.14 endogeneity to its own
   communities; lagged Hebb adds none. A23 upgraded to robust.
 
+## Tick 73 — spatial networks with the exponential distance rule (`tick73.py`)
+
+N=1000 points in the unit square, P(edge) ∝ exp(−d/λ), degree 5, no explicit modules. E_norm (true W) of k×k spatial
+grid blocks; rate-matched, 2 seeds.
+
+| λ | E_norm for block side 0.083 / 0.125 / 0.2 / 0.333 / 0.5 | side where E_norm = 0.5 | side / λ |
+|---|---|---|---|
+| 0.02 | 0.58 / 0.70 / 0.78 / 0.91 / 0.92 | < 0.083 | < 4.2 |
+| 0.05 | 0.28 / 0.41 / 0.57 / 0.75 / 0.85 | 0.168 | 3.4 |
+| 0.12 | 0.09 / 0.15 / 0.28 / 0.48 / 0.65 | 0.350 | 2.9 |
+
+- Without any modules, **the connection length λ sets a characteristic sub-agent size ≈ 3λ** (block side where half
+  the initiatives are self-caused). Sub-agents are continuous (any location can be the centre), but their scale is
+  fixed by wiring geometry.
+- Cortex-like EDR wiring therefore yields a graded, location-free sub-agent structure whose grain is tunable by a
+  single parameter — an alternative to discrete modules for motive graphs embedded in a feature space.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
