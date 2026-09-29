@@ -6,7 +6,7 @@ import numpy as np, networkx as nx
 import topo_endo as te
 N = te.N = 500
 
-def run(variant, seed, T=30000, win=20, eta=0.05):
+def run(variant, seed, T=30000, win=20, eta=0.05, return_w=False):
     rng = np.random.default_rng(seed)
     A = nx.to_numpy_array(nx.erdos_renyi_graph(N, 8/N, seed=seed)); mask = A > 0
     W = A / 8.0; tot = W.sum(); gain = 0.9
@@ -34,10 +34,11 @@ def run(variant, seed, T=30000, win=20, eta=0.05):
             vals = Ws[np.triu(mask, 1)]; Wn = np.zeros_like(Ws); Wn[np.triu(mask, 1)] = rng.permutation(vals); Wn = Wn + Wn.T
             Gn = nx.from_numpy_array(Wn); Qn = nx.community.modularity(Gn, nx.community.louvain_communities(Gn, weight="weight", seed=seed), weight="weight")
             out.append((t + 1, Q, Qn, vals.std() / vals.mean(), gain, np.mean(act[-1000:])))
-    return out
+    return (out, W, gain) if return_w else out
 
-print(f"{'variant':<16}{'seed':>5}{'t':>7}{'Q':>7}{'Q null':>8}{'Q-Qn':>7}{'w CV':>6}{'gain':>6}{'rate':>7}")
-for variant in ("lagged", "sync+norm", "sync+norm+inh"):
-    for seed in (1, 2):
-        for t, Q, Qn, cv, g, r in run(variant, seed):
-            print(f"{variant:<16}{seed:>5}{t:>7}{Q:>7.3f}{Qn:>8.3f}{Q-Qn:>7.3f}{cv:>6.2f}{g:>6.2f}{r:>7.3f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'variant':<16}{'seed':>5}{'t':>7}{'Q':>7}{'Q null':>8}{'Q-Qn':>7}{'w CV':>6}{'gain':>6}{'rate':>7}")
+    for variant in ("lagged", "sync+norm", "sync+norm+inh"):
+        for seed in (1, 2):
+            for t, Q, Qn, cv, g, r in run(variant, seed):
+                print(f"{variant:<16}{seed:>5}{t:>7}{Q:>7.3f}{Qn:>8.3f}{Q-Qn:>7.3f}{cv:>6.2f}{g:>6.2f}{r:>7.3f}", flush=True)

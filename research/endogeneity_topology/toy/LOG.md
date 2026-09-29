@@ -953,6 +953,22 @@ emergent modularity beyond what weight heterogeneity alone gives).
   imposed structure/gating (B5) remains far stronger. Useful as a direction for learned motive graphs: learn from
   synchrony, not from lagged causation, under competition + inhibition.
 
+## Tick 71 — are the learned modules functional sub-agents? (`tick71.py`)
+
+After 30k ticks of learning (tick 70 rules), freeze W, simulate 3500 ticks, E_norm (true W) of the Louvain partition of
+the learned weights; same partition evaluated on the unlearned ER weights as baseline. 1 seed.
+
+| rule | parts | E_norm, learned W | E_norm, initial W (same partition) | gain |
+|---|---|---|---|---|
+| lagged Hebb | 14 | 0.41 | 0.44 | −0.03 |
+| synchronous + competitive | 19 | 0.52 | 0.42 | +0.10 |
+| + global inhibition | 13 | **0.59** | 0.45 | **+0.14** |
+
+- The small structural modularity of tick 70 is **functionally real**: competitive synchronous learning raises the
+  endogeneity of its own communities by +0.10–0.14 over the same partition on unlearned weights; lagged Hebb does not.
+- Random graphs already have weak Louvain communities (E_norm ≈ 0.43), so the learned increment, not the level, is
+  the signal. 1 seed — directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
