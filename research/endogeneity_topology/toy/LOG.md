@@ -935,6 +935,24 @@ adapted to keep rate ≈ 0.03 (homeostasis). Louvain Q of the weight graph vs we
 - Implication: sub-agent structure does not self-organise from plain Hebbian + homeostatic rules; it needs
   competitive/normalising rules or lateral inhibition (cf. A15) or has to be imposed (gating, B5).
 
+## Tick 70 — competitive plasticity (`tick70.py`)
+
+ER N=500, rate homeostasis, eta 0.05, 2 seeds; Q of weights minus Q of the shuffled-weight null (Q − Qn > 0 means
+emergent modularity beyond what weight heterogeneity alone gives).
+
+| rule | Q − Qn at 15k | Q − Qn at 30k |
+|---|---|---|
+| lagged Hebb, input normalisation (tick 69) | −0.027 | **−0.075** |
+| synchronous Hebb + input **and** output normalisation (competition) | +0.012 | +0.020 |
+| + global inhibition (γ = 3) | +0.030 | **+0.039** |
+
+- The sign flips: lagged Hebbian learning is **anti-modular** (reinforces cross-module cascade routes), synchronous
+  co-activation with competitive (doubly normalised) budgets is **modular**, and global inhibition strengthens it;
+  the excess grows with time in both seeds.
+- Effect sizes are small (Q − Qn ≤ 0.045 after 30k ticks) — self-organised sub-agents emerge slowly and weakly;
+  imposed structure/gating (B5) remains far stronger. Useful as a direction for learned motive graphs: learn from
+  synchrony, not from lagged causation, under competition + inhibition.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
