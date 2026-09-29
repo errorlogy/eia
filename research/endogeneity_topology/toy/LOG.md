@@ -258,7 +258,8 @@ chosen by blind score. Held-out test. 2 seeds.
 - [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
 - [x] tick 16: block-wise a_k / frequency detuning do NOT reproduce empirical boundaries (≈ shuffled null) — see ../human_connectome/RESULTS.md
 - [x] tick 17: HRF lag (≤2 s) + SNR (≤3×) do NOT fake boundaries → empirical boundaries likely genuine
-- [ ] block-wise coupling gain (effective connectivity) search
+- [x] tick 18: block gating (g_in 3, g_out 0.03) reproduces empirical boundaries + E gain; empirical blocks are SC-compatible (easier to impose than random)
+- [ ] FC fit under gating; state-dependent (intermittent) gate vs constant
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)

@@ -115,3 +115,30 @@ and/or block-specific measurement noise (blocks = empirical parts of 131217) →
   global-signal artefacts are not tested). The empirical boundaries look like a genuine
   dynamical feature that the SC-diffusive model lacks → leading candidate: **effective
   connectivity gating** (block-wise within/between coupling gain).
+
+## Tick 18 — effective-connectivity gating reproduces the boundaries (`tick18_gating.py`)
+
+C_eff = C · (g_in within block, g_out between blocks); blocks = empirical parts of 131217.
+Cells: ARI vs empirical / E gain.
+
+| g_in \ g_out | 1 | 0.3 | 0.1 | 0.03 |
+|---|---|---|---|---|
+| 1 | 0.00 / 0.12 | 0.04 / 0.11 | 0.18 / 0.21 | 0.17 / 0.21 |
+| 2 | 0.05 / 0.15 | 0.09 / 0.16 | 0.32 / 0.21 | 0.49 / 0.31 |
+| 3 | 0.09 / 0.14 | 0.19 / 0.19 | 0.69 / 0.28 | **0.71 / 0.34** |
+
+Fresh-seed retest of (3, 0.03): ARI vs empirical 0.69 / 0.51, E gain 0.33 / 0.36 (empirical 0.34).
+Same gating on *shuffled* blocks: imposed blocks recovered worse (retest ARI 0.33–0.38).
+
+- **Gating is sufficient**: strong within/between gain contrast (ratio ≳ 30–100) makes the model
+  match both the empirical partition and the empirical E gain. Partly circular (imposed blocks
+  become detectable by construction), but two non-trivial points:
+  1. the *magnitude* of E gain matches the empirical value at the same operating point;
+  2. **empirical blocks are easier to impose than random ones** of equal sizes (0.51–0.69 vs
+     0.33–0.38) — they are SC-compatible, i.e. anatomy supports these boundaries but does not
+     create them; dynamics-level gating does.
+- EIA reading: self-boundaries between the exogenous channel, internal generator + value, action
+  gate and executive blocks need **active gating** of inter-block influence (thalamic /
+  neuromodulatory gating in the brain; the Governor role in EIA), not just wiring.
+- Open: required contrast is large; check FC fit under gating, and whether a *state-dependent*
+  gate (on only part of the time) achieves the same with smaller average contrast.
