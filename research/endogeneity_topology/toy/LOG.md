@@ -339,8 +339,31 @@ Cells: ARI vs modules / E gain.
   (winner-take-most, like basal-ganglia action selection); excitatory cross-coupling must stay
   sparse (≲10%). Ties to tick 8–10: emergent suppression in hierarchy was a weak form of this.
 
+## Tick 26 — do(Z) under lateral inhibition (`tick26.py`, helpers `tick25_lib.py`)
+
+SBM 10×100, μ=0.2, rate-matched, u-only do(Z) on one module, exact twin, 10 seeds × 3 modules.
+
+| condition | early spread D_out@50 | extra initiatives in target (z) | spill-over (z) |
+|---|---|---|---|
+| all excitatory | 1.04 | +210 (**6.8**) | +499 (2.7, contagion) |
+| cross-module inhibitory | **0.36** | +11 (**0.1**) | −230 (−1.1) |
+| Dale 20% | 0.85 | +118 (2.3) | −426 (−0.9) |
+
+- **Dissociation**: lateral inhibition gives the cleanest *boundaries* (tick 25) and the best
+  *containment* here, but **abolishes the reliable local effect** of an internal intervention —
+  raising a motive's uncertainty no longer reliably raises that motive's initiatives.
+  Likely winner-take-most dynamics: whether the boosted motive gets to act depends on which
+  motive currently holds the floor (high variance, not zero mean effect per se — to check).
+- All-excitatory at μ=0.2 shows the opposite: strong local effect but global contagion.
+- ⇒ "Self-boundary" (E-profile) and "controllability of a motive" (do(Z) effect) are **different
+  properties** and can trade off. Hierarchy (tick 8) was the only topology so far with
+  containment + reliable local effect; lateral inhibition buys boundaries at the cost of control.
+- EIA reading: a Governor built as pure mutual inhibition between motives makes motives separable
+  but makes the agent's response to a changed internal state unpredictable per-motive; needs a
+  complementary mechanism (e.g. priority/bias input to the competition) for controllability.
+
 ## Queue (next ticks)
-- [ ] lateral inhibition + do(Z): containment and spill-over sign vs tick 8
+- [ ] check tick-26 variance hypothesis: condition do(Z) effect on which module holds the floor at t0
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
