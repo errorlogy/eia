@@ -442,3 +442,20 @@ Drive-units on plain SC + timescale hierarchy; DMN units' excitability α × f; 
 - Even doubling DMN excitability yields only a small specificity margin (+0.05) and a modest rise of its activity share
   (0.24 → 0.29): network position (hub strength) dominates intrinsic excitability. A DMN-specific internal generator is
   hard to get from local parameters in these models — consistent with B1 being robust.
+
+## Tick 79 — which regions self-initiate in real data? (`tick79_empirical_initiators.py`)
+
+Per region: share of BOLD events with no inferred parent activity in the previous 1–3 TR (conditional attribution,
+inferred on the first half, scored on the second). Mean over regions per module, 4 subjects.
+
+| module | VAL | BG | other | DMN | FPN | SAL | SMA | SEN |
+|---|---|---|---|---|---|---|---|---|
+| self-initiated share | **0.88** | 0.78 | 0.74 | 0.70 | 0.63 | 0.60 | 0.59 | **0.50** |
+
+- Top-10 regions: olfactory L/R, pallidum R, OFC (ant/lat/med), temporal pole, paracentral lobule, amygdala.
+- Spearman(self-initiation, SC strength) = **−0.55**; cross-subject consistency of the profile 0.36.
+- **Strongly confounded**: the most "self-initiating" regions are weakly connected and are the classic fMRI
+  susceptibility/dropout regions (orbitofrontal, olfactory, temporal pole) with low SNR — events there look uncaused
+  because nothing is inferred to drive them. The ranking therefore does not identify an internal generator; at most
+  it shows sensory cortex is the most externally driven (0.50) and DMN intermediate. Not promoted to FINDINGS.
+- A clean empirical test of B1 would need SNR-matched regions or a causal perturbation dataset (e.g. TMS-fMRI).
