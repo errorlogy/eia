@@ -352,3 +352,14 @@ a → +0.02 for 30 s; exact twin; relative envelope change over the next 120 s. 
   ~85 % — containment + controllability, as in toy hierarchies (A4).
 - **Tick-44 sign flip does not replicate**: with n = 24 the gated spill-over is small and *positive* (+0.7 %),
   not suppressive. The n = 8 estimate was noise. Withdrawn.
+
+## Tick 46 — toy A2 (transition smoothness) in the human model: not testable here (`tick46_brain_smoothness.py`)
+
+Sweep G 0.2–3.0, plain SC vs gated + homotopic, 4 subjects.
+
+- Mean activity **decreases monotonically** with G in both (0.062 → 0.027 plain; 0.054 → 0.026 gated):
+  with subcritical nodes (a = −0.02) and *diffusive* coupling (z_k − z_j), coupling synchronises and damps;
+  there is no silence→seizure transition to smooth. Burstiness (CV of the initiation drive) rises with G;
+  gating lowers it slightly at high G (0.245 → 0.214).
+- A2 cannot be tested in this model family — it needs additive excitatory coupling or near/supercritical
+  nodes. Left open (not a refutation).
