@@ -427,3 +427,18 @@ activity kept after silencing (relative to intact), 2 subjects × 2 seeds.
   drive-units, timescale hierarchy, gating + homotopic): in connectome-based models the internal generator is
   hub-bound. DMN specificity would need an ingredient not modelled here (e.g. region-specific excitability or
   neuromodulatory/receptor maps).
+
+## Tick 78 — how much DMN excitability buys specificity (`tick78_dmn_excitability.py`)
+
+Drive-units on plain SC + timescale hierarchy; DMN units' excitability α × f; rate-matched; 2 subjects × 2 seeds.
+
+| f | loop kept after silencing DMN | after silencing 16 strongest non-DMN | DMN-specific margin | DMN share of all activity |
+|---|---|---|---|---|
+| 1.0 | 0.27 | 0.27 | −0.00 | 0.24 |
+| 1.3 | 0.26 | 0.27 | +0.02 | 0.26 |
+| 1.6 | 0.27 | 0.32 | +0.05 | 0.27 |
+| 2.0 | 0.26 | 0.30 | +0.05 | 0.29 |
+
+- Even doubling DMN excitability yields only a small specificity margin (+0.05) and a modest rise of its activity share
+  (0.24 → 0.29): network position (hub strength) dominates intrinsic excitability. A DMN-specific internal generator is
+  hard to get from local parameters in these models — consistent with B1 being robust.
