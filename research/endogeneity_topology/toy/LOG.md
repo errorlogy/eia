@@ -818,6 +818,25 @@ Best tick-60 config (aging_k 0.05, alpha 0.2), readout scale burst_frac 0.15 / 0
 - Diminishing returns for this prototype line; the eval-neutral patches (D1 causal gate, D6 state-IOR, C11 guard)
   do not depend on it.
 
+## Tick 62 — subcritical motives resolve the trade-off (`../eia_prototype/tick62_subcritical.py`)
+
+TargetEngine (tension sets uncertainty target), aging_k 0.05, alpha 0.2; recurrent gain and readout scale swept.
+7 scenarios × 3 seeds; silent dynamics at tension 0.5 over 3000 steps.
+
+| gain | burst_frac | within-scenario ρ(tension, intensity) | 1st initiative same | silent burst CV | events |
+|---|---|---|---|---|---|
+| 1.0 | 0.15 | 0.73 | 0.86 | 0.66 | 1886 |
+| 0.7 | 0.15 | 0.86 | 0.86 | 0.70 | 1758 |
+| **0.4** | **0.15** | **0.91** | **1.00** | **1.03** | 586 |
+| 0.4 | 0.05 | 0.82 | 1.00 | 0.21 | 2900 |
+
+- With **subcritical motives (gain 0.4)** each drive's intensity follows its own tension (ρ 0.91 within scenarios),
+  the eval-scored initiative matches the current pipeline in **100 %** of runs, and silent initiative stays
+  irregular (CV ≈ 1) and sparse. Near-critical gain (1.0) was what flattened the drives (tick 61).
+- Consistent with the toy line: criticality maximises richness *within* a motive but destroys discriminability
+  *between* motives; for an EIA drive engine the working point is below criticality with tension-set targets.
+- This makes the population-drive proposal eval-compatible (removes the tick-57 cost).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
