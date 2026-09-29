@@ -210,8 +210,31 @@ inside B. Rate-matched (0.03), N=1000, 3 seeds. Aligned = structural partition
   (EOI, AuthenticReason) — auditing at a non-natural boundary misclassifies most
   initiatives as exogenous. Links growth item 18 (Markov blanket) to an operational test.
 
+## Tick 12 — blind boundary discovery from spike trains (`tick12.py`)
+
+Infer lagged excess co-activation K from 2000 ticks → top-10% graph → Louvain (res grid)
+→ pick partition maximising E(found) − E(random, same sizes) on **held-out** 2500 ticks.
+E attributed with the true W (semi-blind). 2 seeds.
+
+| topology | #parts | median size | E found | E null | ARI vs modules | ARI vs super-modules |
+|---|---|---|---|---|---|---|
+| small-world | 57–70 | 11–16 | 0.80–0.82 | 0.08 | 0.29–0.33 | — |
+| ER | 227–244 | 1–3 | 0.40–0.41 | 0.10 | 0.00 | — |
+| modular | 37–60 | 5 | 0.81–0.90 | 0.13 | **0.71–0.75** | — |
+| hier | 19–41 | 10–50 | 0.90–0.93 | 0.15 | 0.21 | **0.71–0.81** |
+
+- **Natural self-boundaries are recoverable blind from activity alone** and generalise to
+  held-out data: E of found parts ≈ E of structural parts (tick 11: 0.93 / 0.96 / 0.80).
+- In hierarchy the detector locks onto the **super-module** level (the level with the
+  largest E jump), not the 10-node modules.
+- ER: nothing to find — fragments into singletons; confirms "no sub-agents".
+- Caveats: E uses true W for attribution; resolution grid coarse (always picked 2).
+- Practical value: an E-profile + blind boundary detector could run on event logs of an
+  LLM agent stack or on neural recordings to locate where "self-driven" sub-agents live.
+
 ## Queue (next ticks)
-- [ ] boundary discovery: find partition maximising E(B) − null without structural labels (e.g. from spike trains only)
+- [ ] fully blind: attribute causes with inferred K, not true W
+- [ ] apply boundary detector to the human-connectome Hopf model — do found self-boundaries match DMN / Yeo networks?
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
