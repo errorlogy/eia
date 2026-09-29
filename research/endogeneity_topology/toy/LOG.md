@@ -804,6 +804,20 @@ silent dynamics at fixed tension 0.5 over 3000 steps.
   `Motivation` schema allows `dominant_drive=None`; an engine whose drives are all 0 crashes the pipeline. The
   current DriveEngine never returns None, so this is latent.
 
+## Tick 61 — the remaining eval disagreement is a discriminability problem (inline diagnostic)
+
+Best tick-60 config (aging_k 0.05, alpha 0.2), readout scale burst_frac 0.15 / 0.3 / 0.5; 7 scenarios × 3 seeds.
+
+- Agreement 0.86 / 0.86 / 0.43; the only persistent miss at 0.15–0.3 is twin_world_003, which needs commitment
+  **below** the 0.2 gate while the others stay above (current engine: 0.81 / 0.47 / 0.15).
+- The population engine's three drives come out nearly equal within a scenario (003: 0.96 / 0.90 / 0.88 at 0.15;
+  0.48 / 0.45 / 0.44 at 0.3) although their tensions differ 4× (0.54 vs 0.14). Rescaling the readout only moves all
+  three together (at 0.5 everything drops near the gate → agreement 0.43).
+- So tick 60's ρ = 0.78 is mostly *between scenarios*; *between drives* the prototype has little dynamic range —
+  near-critical recurrent activity dominates each motive's own uncertainty input.
+- Diminishing returns for this prototype line; the eval-neutral patches (D1 causal gate, D6 state-IOR, C11 guard)
+  do not depend on it.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
