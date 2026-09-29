@@ -77,11 +77,11 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    cannot shape *which* initiative is chosen.
 7. **Governor as constitutive, not add-on**: in the human data, functional self-boundaries need tonic
    gating (B5) — the Governor role is part of what makes sub-agents endogenous.
+8. **Metastable decomposition**: let the Governor re-route among several motive decompositions on a slow
+   timescale (B9–B10) instead of fixing one; audit the ensemble of high-E_norm partitions.
 9. **Close the cognitive loop with state-dependent, sparse, sub-unity gain** (A18–A19, C8): feed contact
    outcomes into `satisfaction`, make post-action belief updates depend on the action, derive novelty from
    state; report the measured loop gain as an architectural metric. See `eia_prototype/tick51_pipeline_loops.md`.
-8. **Metastable decomposition**: let the Governor re-route among several motive decompositions on a slow
-   timescale (B9–B10) instead of fixing one; audit the ensemble of high-E_norm partitions.
 
 ## E. Open threads
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model
