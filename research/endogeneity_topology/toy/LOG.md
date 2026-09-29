@@ -862,6 +862,25 @@ Verified on a clean HEAD copy: 3 new tests pass, no regressions (6 pre-existing 
 
 Interventional drive attribution as opt-in replacement for the lexical structural check; full suite 294 passed, 6 pre-existing failures, 4 new tests pass.
 
+## Tick 66 — higher-order (simplicial) interactions (`tick66.py`)
+
+Small-world ring k=6 (many triangles), N=1000, 1 seed. Extra input λ · (fraction of triangles through i whose two
+other nodes both fired) — coincidence detection. Up-sweep then down-sweep of pairwise gain g (state carried over)
+to look for hysteresis (bistability, the hallmark of simplicial contagion).
+
+| λ | rate × base up-sweep g = 0.6 … 1.2 | max jump | hysteresis (Σ down − up) |
+|---|---|---|---|
+| 0 | 1.5 1.6 2.1 5.5 29.6 29.7 29.7 | 24.2 | 0.3 |
+| 0.5 | 1.6 1.9 3.2 18.2 29.6 29.7 29.7 | 15.0 | 1.3 |
+| 1.0 | 1.8 2.6 7.5 29.4 29.7 29.7 29.7 | 21.9 | −0.4 |
+
+- Higher-order coincidence input acts as **extra effective gain**: onset moves to lower pairwise coupling
+  (0.95 → 0.85) but the transition does **not** become bistable — no hysteresis beyond noise.
+- Contrast with mean-field simplicial contagion (explosive, bistable): here noise + refractoriness + uncertainty
+  resolution melt the bistable region. For EIA this is reassuring: coincidence-triggered initiative ("act when two
+  motives agree") does not by itself create a latching/obsessive regime in noisy units.
+- 1 seed, one graph; directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
