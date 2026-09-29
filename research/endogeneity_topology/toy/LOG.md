@@ -254,7 +254,8 @@ chosen by blind score. Held-out test. 2 seeds.
 
 ## Queue (next ticks)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
-- [ ] apply boundary detector to the human-connectome Hopf model — do found self-boundaries match DMN / Yeo networks?
+- [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
+- [ ] run detector on empirical rs-fMRI onsets (4 HCP subjects) — does real brain have boundaries the model lacks?
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)

@@ -25,3 +25,24 @@ Conclusions
 Caveats: silencing = damping sink (a=-1) not node removal; AAL2→network mapping hand-made; 4 subjects, 1 seed.
 Next: real heterogeneity maps (neuromaps T1w/T2w, principal gradient, receptor densities; abagen), Schaefer-200 + Yeo-7 labels,
 per-region a_j fit (Deco 2017), node-removal lesions, multi-seed CIs, G as LC-NE gain.
+
+## Tick 14 — blind self-boundary detection on the Hopf model (`tick14_boundaries.py`)
+
+Events = envelope onsets above own 90th pct (0.2 s sampling, 1800 s). Directed lagged excess
+(lags 1–5), Louvain chosen by blind E gain on held-out half. 4 subjects × {homogeneous, heterogeneous a_j}.
+
+| | parts | E found | E null (same sizes) | E of EIA module map | ARI vs EIA map / hemispheres / SC communities |
+|---|---|---|---|---|---|
+| homogeneous | 2–3 | 0.65–0.81 | 0.44–0.59 | 0.30–0.34 | ≈ 0 / ≈ 0.1 / ≈ 0.1 |
+| heterogeneous | 3–6 | 0.53–0.71 | 0.36–0.54 | 0.28–0.33 | ≈ 0 / ≈ 0.1 / ≈ 0.1 |
+
+- Found parts are large, functionally mixed (DMN+SEN+VAL+BG in each), not hemispheric, not
+  frequency-sorted, and differ across subjects. Gain over null is small (0.13–0.23).
+- **In this model the human brain behaves like the ER case of the toy study**: no natural
+  sub-agent boundaries, endogeneity only at whole-brain level — consistent with E3 (initiative
+  is a distributed hub property). SC modularity (Q≈0.30) is not enough to create self-boundaries
+  under homogeneous diffusive Hopf coupling; the hand-made hetero a_j does not change this.
+- Hand-made EIA module map is a poor boundary (E 0.30), i.e. auditing initiative at the level of
+  "DMN / SAL / BG" modules would misattribute most events as exogenous in this model.
+- Next: finer parcellation (Schaefer-200), empirically fitted a_j, and running the same detector
+  on the *empirical* rs-fMRI (onsets from BOLD) — does real data have self-boundaries the model lacks?
