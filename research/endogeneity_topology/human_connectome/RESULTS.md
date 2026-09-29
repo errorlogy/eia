@@ -554,3 +554,25 @@ Plain Hopf model; incoming SC of BG regions scaled by k; 7 subjects × 2 seeds; 
   distinguish an intrinsic generator from a weakly coupled / isolated unit. A causal intervention (do(Z) inside vs
   input manipulation) is needed to tell them apart.
 - Profile correlations are noisy across seed sets (plain r 0.10 here vs 0.59 in tick 82).
+
+## Tick 86 — A26 generator signature per EIA block on the connectome (`tick86_generator_signature.py`)
+
+Drive-units on SC with timescale hierarchy; out = drop of everyone else's activity when the block is silenced, divided
+by the block's share of units; indep = block activity kept when its incoming cross-block links are cut. 2 subjects.
+
+| block | out (per unit share) | indep |
+|---|---|---|
+| SMA | 11.5 | 0.10 |
+| SAL | 9.8 | 0.17 |
+| FPN | 6.5 | 0.15 |
+| BG | 5.2 | 0.21 |
+| DMN | 4.0 | 0.15 |
+| SEN | 1.4 | 0.28 |
+| VAL | 0.8 | **0.57** |
+
+- **No block is a generator in the A26 sense**: every block loses ≥ 72 % of its activity when cut off from the rest
+  (indep ≤ 0.28), except VAL (0.57), which also has the weakest out-influence — an *isolated*-type block (slow + weakly
+  connected), not a generator.
+- Endogeneity in the connectome model is **collective**: blocks drive each other (small hub-rich blocks SAL/SMA have the
+  largest per-unit influence) but none sustains itself alone. DMN is a mid-level driver, not a self-sustaining source.
+- Caveat: out is normalised by block size, which inflates small blocks; 2 subjects, 1 seed.
