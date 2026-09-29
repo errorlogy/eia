@@ -19,7 +19,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A9 | ~92% of unit-level initiatives are neighbour-triggered: endogeneity is boundary-dependent | tick 10–11 | **robust** |
 | A10 | Endogeneity profile E(B): natural self-boundaries exist in modular / hierarchical graphs, not in ER | tick 11 | **robust** |
 | A11 | Self-boundaries are recoverable blind from activity (held-out); with conditional attribution + null-normalised E_norm the blind profile is calibrated (within 0.03 of truth) | ticks 12–13, 35 | **robust** |
-| A12 | Sub-agents appear only when < ~10–15 % of a module's links leave it (μ_c ≈ 0.08–0.15), far stricter than community detectability (~0.5) | ticks 22–24, 4 graph families | **robust** |
+| A12 | Sub-agents become *blindly discoverable* from activity only when < ~10–15 % of a module's links leave it (μ_c ≈ 0.08–0.15). With known labels they are already strongly endogenous at μ = 0.3 (E_norm ≈ 0.75) — μ_c is a discoverability, not an existence, threshold | ticks 22–24, 43 | **robust (reinterpreted)** |
 | A13 | Hierarchy steepness, not ultrametricity per se, controls sub-agents (p-adic α_c ≈ 1.45) | ticks 22–23 | holds |
 | A14 | Hyperbolic graphs behave like scale-free dynamically (never rich) but have real sub-agents | tick 22 | holds, not rate-matched |
 | A15 | Lateral inhibition between modules removes the sparsity requirement (sub-agents at μ = 0.3) | tick 25 | holds (partly by construction) |
@@ -61,8 +61,8 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    Classify initiatives as field-driven / memory-driven / overdetermined. Cost: ≤ 8 extra computes.
 2. **Give drives intrinsic dynamics** (aging + noise, or the population engine) so that silence produces
    graded, bursty initiative instead of pinning or decay (C1); calibrate readout before behavioural use.
-3. **Design rule for motive graphs**: excitatory cross-motive coupling ≲ 10 % of a motive's coupling
-   (A12); dense cross-coupling only as mutual inhibition (A15). Prefer hierarchical organisation for
+3. **Design rule for motive graphs**: excitatory cross-motive coupling ≲ 10 % of a motive's coupling if
+   motives must be auditable *without labels* (A12; with labels, ≲ 30 % suffices); dense cross-coupling only as mutual inhibition (A15). Prefer hierarchical organisation for
    containment (A4) and graded endogeneity gain (A2).
 4. **Audit at natural boundaries**: compute the endogeneity profile E(B) and audit initiatives (EOI,
    AuthenticReason) at the boundary with the largest E jump (A10–A11); auditing at a non-natural

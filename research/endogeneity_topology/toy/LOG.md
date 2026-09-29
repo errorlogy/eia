@@ -572,6 +572,23 @@ E_norm on the second half. 2 seeds.
   stable, strong self-boundaries. Switching the effective decomposition moves both numbers toward the human
   values — independent support (different model family) for B10's metastable-gating account.
 
+## Tick 43 — μ rule re-checked with endogeneity itself (`tick43.py`)
+
+True module partition, rate 0.03, 2 seeds; E_norm with true W / blind conditional attribution.
+
+| family | μ=0.3 | 0.2 | 0.15 | 0.1 | 0.07 | 0.05 | 0.03 |
+|---|---|---|---|---|---|---|---|
+| SBM 10×100 | 0.74/0.64 | 0.84/0.78 | 0.88/0.84 | 0.93/0.92 | 0.95/0.97 | 0.97/0.98 | 0.98/0.99 |
+| SBM 20×50 | 0.77/0.69 | 0.86/0.81 | 0.89/0.90 | 0.94/0.95 | 0.95/0.98 | 0.97/0.95 | 0.98/0.98 |
+
+- **Correction to A12**: when the partition is known, modules are already strongly endogenous at μ = 0.3
+  (E_norm ≈ 0.75) and E_norm rises smoothly — **no threshold near 0.1**. The μ_c ≈ 0.08–0.15 crossover of
+  ticks 23–24 is a **discoverability** threshold (can the sub-agent be found blind from activity), not an
+  existence threshold. (E(B) is a majority measure, so it only collapses as μ → 0.5.)
+- Blind conditional attribution tracks the truth within ~0.1 across the range (slightly low at high μ).
+- Design implication revised: sparse cross-coupling (≲10%) is needed for sub-agents to be **auditable
+  without labels**; with known motive labels, endogeneity per motive can be audited up to μ ≈ 0.3.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
