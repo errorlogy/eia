@@ -252,7 +252,30 @@ chosen by blind score. Held-out test. 2 seeds.
   calibration needs a correction (e.g. partial correlation / transfer entropy instead of
   raw lagged excess, or a surrogate-based null for edges).
 
+## Tick 22 — hyperbolic and p-adic (ultrametric) topologies (`tick22.py`)
+
+N=1000, 3 seeds. Sweep 0.85–1.25; blind boundary detector at rate 0.03.
+
+| topology | deg | clustering | max rate jump | rich width /9 | op gain | E found / null | median part |
+|---|---|---|---|---|---|---|---|
+| hyperbolic (Krioukov, γ≈2.5) | 6.0 | 0.67 | 0.3 | 0 | 1.40* | 0.58 / 0.28 | 44 |
+| p-adic α=1.0 (levels equal weight) | 9.5 | 0.06 | **15.7** | 2 | 0.94 | 0.49 / 0.32 | **1** |
+| p-adic α=1.5 (steep) | 4.4 | 0.18 | 4.4 | 2 | 1.08 | **0.88** / 0.17 | 14 |
+| hier-modular (ref) | 4.7 | 0.18 | 5.6 | 3 | 1.02 | 0.95 / 0.14 | 49 |
+| scale-free (ref) | 6.0 | 0.03 | 0.1 | 0 | 1.39* | 0.36 / 0.08 | 13 |
+
+\* bisection hit upper bound: rate 0.03 not reached — not rate-matched.
+
+- **Hyperbolic ≈ scale-free dynamically** ("safe but dull": hubs absorb gain, never rich), but its
+  angular locality gives it real sub-agent boundaries (E 0.58 vs SF 0.36), size ~44.
+- **Ultrametricity alone is not the ingredient; hierarchy steepness α is.** α=1.0 (each level
+  contributes equally, fractal) behaves like ER: abrupt transition, no self-boundaries. α=1.5
+  behaves like hier-modular: smooth transition, strong sub-agents at the leaf-group level.
+- ⇒ Conjecture: a critical α_c between 1.0 and 1.5 where endogenous sub-agents appear — a
+  "sub-agent existence" transition controlled by how fast coupling decays with ultrametric distance.
+
 ## Queue (next ticks)
+- [ ] α sweep 1.0–1.6 for p-adic: locate α_c (E gain, median part, jump)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
 - [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
