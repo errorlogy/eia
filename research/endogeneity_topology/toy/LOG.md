@@ -481,8 +481,18 @@ silencing non-source drives. Population: 8 noise draws; baseline deterministic.
 - Proposal for EIA audit: replace `_drive_is_structural` keyword test with this do(Z_k) test (cheap:
   one extra compute per drive from the snapshot).
 
+## Tick 32 — the "decorative" epistemic path is overdetermination (`../eia_prototype/tick32_overdetermination.md`)
+
+- IntentionGenesis picks candidates by per-kind constants (risk, interrupt_cost) first; drive intensity
+  is only a gate (≥0.2). Different drives often target the same belief → identical initiatives.
+- Population engine: single-drive do() = no change, **joint do(e+c) / do(c+m) = change** →
+  redundant (overdetermined) causation, not decoration. Causal gate must test drive subsets.
+- Baseline DriveEngine: **silencing all three drives changes nothing** — compute() re-derives drives
+  from the field gradient in one step, so the persistent drive state is causally inert; initiative is
+  a function of BeliefField alone except near the 0.2 gate.
+
 ## Queue (next ticks)
-- [ ] why is the epistemic path decorative? trace IntentionGenesis dependence on motivation vs field
+- [ ] subset-based causal gate (Shapley-style drive attribution) over all scenarios, both engines
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
