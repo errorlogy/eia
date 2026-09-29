@@ -33,22 +33,23 @@ def score(a_vec, w, seed):
     lab, m = detect(events(sim(a_vec, w, seed)), seed)
     return ari(lab, lab_emp), m["E_found"] - m["E_null"]
 
-rng = np.random.default_rng(16)
-base = score(np.full(94, -0.02), w0, 1)
-print(f"baseline homogeneous: ARI {base[0]:.2f}, E gain {base[1]:.2f}")
-results = {}
-for mech in ["A", "W"]:
-    for tag in ["true", "shuffled"]:
-        blocks = lab_emp if tag == "true" else lab_emp[rng.permutation(94)]
-        best = (-1, None)
-        for i in range(15):
-            p = rng.uniform(-0.06, 0.02, K) if mech == "A" else rng.uniform(-0.008, 0.008, K)
-            a_vec = p[blocks] if mech == "A" else np.full(94, -0.02)
-            w = w0 if mech == "A" else np.clip(w0 + p[blocks], 0.01, None)
-            sc = score(a_vec, w, 100 + i)
-            if sc[0] > best[0]: best = (sc[0], p, a_vec, w, sc[1])
-        retest = score(best[2], best[3], 999)
-        results[(mech, tag)] = dict(best_ARI=best[0], E_gain=best[4], retest_ARI=retest[0], retest_E_gain=retest[1], params=np.round(best[1], 4).tolist())
-        print(f"{mech} {tag:<9} best ARI {best[0]:.2f} (E gain {best[4]:.2f}) | fresh-seed retest ARI {retest[0]:.2f} (E gain {retest[1]:.2f}) params {np.round(best[1], 4)}")
-json.dump({f"{k[0]}_{k[1]}": v for k, v in results.items()} | {"baseline": base, "empirical_E_gain": emp["E_found"] - emp["E_null"]},
-          open(b.HERE / "tick16_fit.json", "w"), indent=1)
+if __name__ == "__main__":
+    rng = np.random.default_rng(16)
+    base = score(np.full(94, -0.02), w0, 1)
+    print(f"baseline homogeneous: ARI {base[0]:.2f}, E gain {base[1]:.2f}")
+    results = {}
+    for mech in ["A", "W"]:
+        for tag in ["true", "shuffled"]:
+            blocks = lab_emp if tag == "true" else lab_emp[rng.permutation(94)]
+            best = (-1, None)
+            for i in range(15):
+                p = rng.uniform(-0.06, 0.02, K) if mech == "A" else rng.uniform(-0.008, 0.008, K)
+                a_vec = p[blocks] if mech == "A" else np.full(94, -0.02)
+                w = w0 if mech == "A" else np.clip(w0 + p[blocks], 0.01, None)
+                sc = score(a_vec, w, 100 + i)
+                if sc[0] > best[0]: best = (sc[0], p, a_vec, w, sc[1])
+            retest = score(best[2], best[3], 999)
+            results[(mech, tag)] = dict(best_ARI=best[0], E_gain=best[4], retest_ARI=retest[0], retest_E_gain=retest[1], params=np.round(best[1], 4).tolist())
+            print(f"{mech} {tag:<9} best ARI {best[0]:.2f} (E gain {best[4]:.2f}) | fresh-seed retest ARI {retest[0]:.2f} (E gain {retest[1]:.2f}) params {np.round(best[1], 4)}")
+    json.dump({f"{k[0]}_{k[1]}": v for k, v in results.items()} | {"baseline": base, "empirical_E_gain": emp["E_found"] - emp["E_null"]},
+              open(b.HERE / "tick16_fit.json", "w"), indent=1)

@@ -93,3 +93,25 @@ shuffled; best candidate re-tested on a fresh noise seed. Empirical E gain for t
      between-block gain), which neither knob changes.
 - Next: (1) pass model output through a Balloon–Windkessel HRF with block-specific lags — does the
   detector then "find" blocks with no causal boundary? (2) block-wise coupling gain search.
+
+## Tick 17 — can hemodynamics fake the boundaries? (`tick17_hrf.py`)
+
+Homogeneous model (no causal blocks) → canonical double-gamma HRF with block-specific latency
+and/or block-specific measurement noise (blocks = empirical parts of 131217) → same detector.
+3 seeds.
+
+| condition | ARI vs blocks | E gain |
+|---|---|---|
+| common HRF | 0.03 ± 0.03 | 0.11 |
+| lag spread 1 s | 0.00 | 0.09 |
+| lag spread 2 s | 0.04 ± 0.02 | 0.09 |
+| SNR ×1..×3 | 0.01 ± 0.02 | 0.09 |
+| lag 2 s + SNR | 0.01 ± 0.02 | 0.08 |
+| *empirical (tick 15)* | *0.40 (vs EIA map)* | *0.34* |
+
+- **Hemodynamic latency (up to 2 s) and SNR differences (up to 3×) do not fake self-boundaries**;
+  ARI stays at null level and E gain stays far below the empirical 0.34.
+- This removes explanation 1 of tick 16 (at least for lag/SNR; motion, physiological noise and
+  global-signal artefacts are not tested). The empirical boundaries look like a genuine
+  dynamical feature that the SC-diffusive model lacks → leading candidate: **effective
+  connectivity gating** (block-wise within/between coupling gain).
