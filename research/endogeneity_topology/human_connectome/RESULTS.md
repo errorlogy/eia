@@ -498,3 +498,23 @@ Residualised self-initiation (tick 80 method), module means per subject, one-sam
 - Consistent with the EIA mapping in an interesting way: the *action-gate* (BG) and *internal generator* (DMN) blocks
   are the empirically self-starting ones, the exogenous channel (SEN) the most driven. The connectome models capture the
   SEN side (B13) but not DMN/BG specificity (B1).
+
+## Tick 82 — which model reproduces the empirical self-initiation profile? (`tick82_model_initiators.py`)
+
+Tick-81 pipeline applied to Hopf-model output for all 7 subjects. Module residuals (mean over subjects) and correlation
+of the 7-module profile with the empirical one.
+
+| variant | BG | DMN | SMA | SAL | FPN | VAL | SEN | r with empirical |
+|---|---|---|---|---|---|---|---|---|
+| *empirical* | +0.052 | +0.034 | +0.024 | +0.015 | −0.003 | −0.003 | −0.066 | |
+| plain SC | +0.015 | −0.001 | −0.004 | −0.006 | +0.013 | −0.013 | −0.014 | +0.59 |
+| **gated + homotopic** | +0.002 | **+0.027** | +0.009 | −0.007 | −0.016 | −0.012 | **−0.039** | **+0.85** |
+| + BG/DMN near bifurcation | −0.033 | +0.011 | +0.002 | −0.010 | +0.028 | −0.009 | −0.021 | +0.02 |
+
+- **Functional gating reproduces the empirical profile** (r = 0.85): the DMN excess (+0.027 vs +0.034) and the sensory
+  deficit come out without any DMN-specific local parameter. Raising BG/DMN excitability *breaks* the match (r 0.02).
+- So the empirical "DMN self-initiation" is plausibly a **block-gating effect** (DMN sits in a gated internal block, so
+  few of its events have inferred cross-block causes), not evidence of an intrinsic DMN generator — reconciling B14 with B1.
+- **BG is not reproduced** (+0.002 vs +0.052): basal-ganglia self-initiation needs an ingredient the model lacks
+  (subcortical loop dynamics / different haemodynamics).
+- Caveat: the gating blocks are the consensus of 4 subjects that are among the 7 — partly circular for those 4.
