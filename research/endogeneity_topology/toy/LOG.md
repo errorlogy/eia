@@ -255,7 +255,8 @@ chosen by blind score. Held-out test. 2 seeds.
 ## Queue (next ticks)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
-- [ ] run detector on empirical rs-fMRI onsets (4 HCP subjects) — does real brain have boundaries the model lacks?
+- [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
+- [ ] fit local dynamics so the model reproduces empirical self-boundaries (E-profile as fit target)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)

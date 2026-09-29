@@ -46,3 +46,25 @@ Events = envelope onsets above own 90th pct (0.2 s sampling, 1800 s). Directed l
   "DMN / SAL / BG" modules would misattribute most events as exogenous in this model.
 - Next: finer parcellation (Schaefer-200), empirically fitted a_j, and running the same detector
   on the *empirical* rs-fMRI (onsets from BOLD) — does real data have self-boundaries the model lacks?
+
+## Tick 15 — same detector on EMPIRICAL rs-fMRI vs model (`tick15_empirical.py`)
+
+Point-process events (upward +1 SD crossings of band-passed BOLD), lags 1–3 TR, 1200 TRs,
+train/test halves. Model processed identically (x sampled at TR).
+
+| source | parts | E found − null | ARI vs EIA functional map | ARI vs hemispheres / SC communities | cross-subject ARI |
+|---|---|---|---|---|---|
+| **empirical** | 2–5 | **0.20–0.34** | **0.19–0.40** | ≈ 0 / 0.04–0.11 | **0.18** |
+| model | 2–6 | 0.09–0.12 | ≈ 0 | 0–0.15 / 0.07–0.13 | 0.04 |
+
+Recurring empirical parts (3 of 4 subjects): **sensory block** (SEN), **DMN + value** (DMN, OFC,
+amygdala), **basal ganglia (+SMA)**, **fronto-parietal**. I.e. the real brain separates an
+exogenous channel from an internal-generator + value block and from an action-gate block —
+close to the EIA functional decomposition — while the homogeneous Hopf model has no such
+self-boundaries.
+
+- The model's missing ingredient is not SC (both use the same SC) but **local dynamics**.
+- Caveats: BOLD lagged co-activation is weak causal evidence (hemodynamic lag differences,
+  especially subcortex); 1200 TRs; AAL2 coarse; E uses inferred Ŵ (biased low, tick 13).
+- Next: fit per-region a_j / frequency so the model reproduces the empirical boundaries —
+  an "endogeneity-profile fit" as a new model-fitting target beyond FC.

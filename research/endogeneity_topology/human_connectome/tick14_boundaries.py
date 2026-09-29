@@ -49,30 +49,31 @@ def louvain(Wsym, res, seed):
     for k, c in enumerate(nx.community.louvain_communities(nx.from_numpy_array(Wsym), weight="weight", resolution=res, seed=seed)): lab[list(c)] = k
     return lab
 
-subj = {s: b.load(s) for s in b.SUBJECTS}
-w = np.mean([b.peak_freqs(tc) for _, tc in subj.values()], axis=0)
-a_hom = np.full(94, -0.02)
-a_het = a_hom.copy(); a_het[b.IDX["SEN"]] = -0.04; a_het[np.concatenate([b.IDX["DMN"], b.IDX["FPN"], b.IDX["VAL"]])] = -0.005
-known = MODLAB >= 0
-print(f"{'variant':<6}{'subj':<8}{'#parts':>7}{'E_found':>8}{'E_null':>7}{'E_EIAmods':>10}{'ARI_EIA':>8}{'ARI_hemi':>9}{'ARI_SC':>7}")
-out = []
-for variant, a_vec in [("hom", a_hom), ("het", a_het)]:
-    for s, (C, _) in subj.items():
-        seed = zlib.crc32(repr((s, variant, 14)).encode()); rng = np.random.default_rng(seed)
-        ev = onsets(sim(C, w, a_vec, seed)); tr, te_ = ev[:len(ev)//2], ev[len(ev)//2:]
-        Wh = infer(tr); best = None
-        for res in [0.5, 0.8, 1, 1.5, 2, 3]:
-            lab = louvain(Wh + Wh.T, res, seed)
-            sc = E_blind(te_, Wh, lab) - E_blind(te_, Wh, lab[rng.permutation(94)])
-            if best is None or sc > best[0]: best = (sc, lab)
-        lab = best[1]; sclab = louvain(C, 1.0, seed)
-        eia = MODLAB.copy(); eia[~known] = 100 + np.arange((~known).sum())   # unlabeled = singletons
-        row = dict(variant=variant, subj=s, parts=int(lab.max()+1), E_found=E_blind(te_, Wh, lab),
-                   E_null=E_blind(te_, Wh, lab[rng.permutation(94)]), E_eia=E_blind(te_, Wh, eia),
-                   ARI_eia=ari(lab[known], MODLAB[known]),
-                   ARI_hemi=ari(lab, HEMI),
-                   ARI_sc=ari(lab, sclab),
-                   groups={int(k): [b.LABELS[i] for i in np.flatnonzero(lab == k)] for k in np.unique(lab)})
-        out.append(row)
-        print(f"{variant:<6}{s:<8}{row['parts']:>7}{row['E_found']:>8.2f}{row['E_null']:>7.2f}{row['E_eia']:>10.2f}{row['ARI_eia']:>8.2f}{row['ARI_hemi']:>9.2f}{row['ARI_sc']:>7.2f}")
-json.dump(out, open(b.HERE / "tick14_boundaries.json", "w"), indent=1)
+if __name__ == "__main__":
+    subj = {s: b.load(s) for s in b.SUBJECTS}
+    w = np.mean([b.peak_freqs(tc) for _, tc in subj.values()], axis=0)
+    a_hom = np.full(94, -0.02)
+    a_het = a_hom.copy(); a_het[b.IDX["SEN"]] = -0.04; a_het[np.concatenate([b.IDX["DMN"], b.IDX["FPN"], b.IDX["VAL"]])] = -0.005
+    known = MODLAB >= 0
+    print(f"{'variant':<6}{'subj':<8}{'#parts':>7}{'E_found':>8}{'E_null':>7}{'E_EIAmods':>10}{'ARI_EIA':>8}{'ARI_hemi':>9}{'ARI_SC':>7}")
+    out = []
+    for variant, a_vec in [("hom", a_hom), ("het", a_het)]:
+        for s, (C, _) in subj.items():
+            seed = zlib.crc32(repr((s, variant, 14)).encode()); rng = np.random.default_rng(seed)
+            ev = onsets(sim(C, w, a_vec, seed)); tr, te_ = ev[:len(ev)//2], ev[len(ev)//2:]
+            Wh = infer(tr); best = None
+            for res in [0.5, 0.8, 1, 1.5, 2, 3]:
+                lab = louvain(Wh + Wh.T, res, seed)
+                sc = E_blind(te_, Wh, lab) - E_blind(te_, Wh, lab[rng.permutation(94)])
+                if best is None or sc > best[0]: best = (sc, lab)
+            lab = best[1]; sclab = louvain(C, 1.0, seed)
+            eia = MODLAB.copy(); eia[~known] = 100 + np.arange((~known).sum())   # unlabeled = singletons
+            row = dict(variant=variant, subj=s, parts=int(lab.max()+1), E_found=E_blind(te_, Wh, lab),
+                       E_null=E_blind(te_, Wh, lab[rng.permutation(94)]), E_eia=E_blind(te_, Wh, eia),
+                       ARI_eia=ari(lab[known], MODLAB[known]),
+                       ARI_hemi=ari(lab, HEMI),
+                       ARI_sc=ari(lab, sclab),
+                       groups={int(k): [b.LABELS[i] for i in np.flatnonzero(lab == k)] for k in np.unique(lab)})
+            out.append(row)
+            print(f"{variant:<6}{s:<8}{row['parts']:>7}{row['E_found']:>8.2f}{row['E_null']:>7.2f}{row['E_eia']:>10.2f}{row['ARI_eia']:>8.2f}{row['ARI_hemi']:>9.2f}{row['ARI_sc']:>7.2f}")
+    json.dump(out, open(b.HERE / "tick14_boundaries.json", "w"), indent=1)
