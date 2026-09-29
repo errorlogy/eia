@@ -411,3 +411,19 @@ Drive-units on SC (94 regions × 10 units). Homogeneous ρ vs hierarchy (DMN+val
 - But the hierarchy **decouples initiative from the sensory channel**: silencing sensory cortex costs 64 % of
   initiation-loop activity in the homogeneous model and only 20 % with slow association / fast sensory timescales —
   the endogenous drive migrates to the slow, internal part of the network (cf. A25).
+
+## Tick 77 — gating + timescale hierarchy: still no DMN specificity (`tick77_gate_timescale.py`)
+
+Drive-units on SC with the timescale hierarchy; plain SC vs gated + homotopic SC (LOO consensus). Initiation-loop
+activity kept after silencing (relative to intact), 2 subjects × 2 seeds.
+
+| SC | silence DMN | silence 16 strongest non-DMN | silence sensory | DMN-specific margin (top16 − DMN) |
+|---|---|---|---|---|
+| plain | 0.26 | 0.25 | 0.80 | −0.00 |
+| gated + homotopic | 0.54 | 0.50 | 0.92 | −0.04 |
+
+- Gating makes the initiation loop more robust to *any* silencing (containment, B11) but the DMN never becomes more
+  critical than equally strong hubs. **B1 holds across every model variant tried** (Hopf homogeneous / heterogeneous,
+  drive-units, timescale hierarchy, gating + homotopic): in connectome-based models the internal generator is
+  hub-bound. DMN specificity would need an ingredient not modelled here (e.g. region-specific excitability or
+  neuromodulatory/receptor maps).

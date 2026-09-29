@@ -27,24 +27,25 @@ def sim(W, rho, seed, T=3000, silent=None):
     return out[500:]
 
 loop_units = np.isin(reg, b.INIT_LOOP)
-print(f"{'condition':<13}{'silence DMN':>12}{'silence top-16':>15}{'silence SEN':>12}   (initiation-loop activity / intact)")
-for cond in ("homogeneous", "hierarchy"):
-    rows = []
-    for s_ in b.SUBJECTS[:2]:
-        C, _ = b.load(s_)
-        pool = np.setdiff1d(np.arange(R), np.concatenate([b.IDX["DMN"], b.INIT_LOOP]))
-        top = pool[np.argsort(C.sum(1)[pool])[-len(b.IDX["DMN"]):]]
-        rho_reg = np.full(R, 0.12)
-        if cond == "hierarchy":
-            rho_reg[np.concatenate([b.IDX["DMN"], b.IDX["VAL"]])] = 0.05; rho_reg[b.IDX["SEN"]] = 0.30
-        rho = rho_reg[reg]
-        for seed in (1, 2):
-            W1 = unit_matrix(C, seed); lo, hi = 0.5, 1.6
-            for _ in range(9):
-                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(sps.csr_matrix(W1*mid), rho, seed, 1500).mean() < 0.03 else (lo, mid)
-            W = sps.csr_matrix(W1*(lo+hi)/2)
-            base = sim(W, rho, seed)[:, loop_units].mean()
-            r = [sim(W, rho, seed, silent=np.isin(reg, grp))[:, loop_units].mean() / base
-                 for grp in (b.IDX["DMN"], top, b.IDX["SEN"])]
-            rows.append(r)
-    m = np.mean(rows, 0); print(f"{cond:<13}{m[0]:>12.2f}{m[1]:>15.2f}{m[2]:>12.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'condition':<13}{'silence DMN':>12}{'silence top-16':>15}{'silence SEN':>12}   (initiation-loop activity / intact)")
+    for cond in ("homogeneous", "hierarchy"):
+        rows = []
+        for s_ in b.SUBJECTS[:2]:
+            C, _ = b.load(s_)
+            pool = np.setdiff1d(np.arange(R), np.concatenate([b.IDX["DMN"], b.INIT_LOOP]))
+            top = pool[np.argsort(C.sum(1)[pool])[-len(b.IDX["DMN"]):]]
+            rho_reg = np.full(R, 0.12)
+            if cond == "hierarchy":
+                rho_reg[np.concatenate([b.IDX["DMN"], b.IDX["VAL"]])] = 0.05; rho_reg[b.IDX["SEN"]] = 0.30
+            rho = rho_reg[reg]
+            for seed in (1, 2):
+                W1 = unit_matrix(C, seed); lo, hi = 0.5, 1.6
+                for _ in range(9):
+                    mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(sps.csr_matrix(W1*mid), rho, seed, 1500).mean() < 0.03 else (lo, mid)
+                W = sps.csr_matrix(W1*(lo+hi)/2)
+                base = sim(W, rho, seed)[:, loop_units].mean()
+                r = [sim(W, rho, seed, silent=np.isin(reg, grp))[:, loop_units].mean() / base
+                     for grp in (b.IDX["DMN"], top, b.IDX["SEN"])]
+                rows.append(r)
+        m = np.mean(rows, 0); print(f"{cond:<13}{m[0]:>12.2f}{m[1]:>15.2f}{m[2]:>12.2f}", flush=True)
