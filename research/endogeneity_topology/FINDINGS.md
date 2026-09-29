@@ -33,6 +33,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A23 | Plasticity rule decides the sign: lagged Hebb is anti-modular (Q − Q_null −0.075), synchronous Hebb with competitive input/output normalisation is modular (+0.02), + global inhibition +0.04 — sub-agents can self-organise, but slowly and weakly; the learned communities are functional (E_norm +0.12–0.14 vs the same partition on unlearned weights, 3 seeds; lagged Hebb ≈ 0) | **robust** (ticks 70–72) |
 | A24 | Spatial exponential-distance wiring (cortex-like EDR) without modules gives a characteristic sub-agent size ≈ 3λ (side where E_norm = 0.5: 0.17 at λ 0.05, 0.35 at λ 0.12) — continuous, location-free sub-agents with tunable grain; the signed causal reach of do(Z) matches it (ℓ ≈ 4λ at λ 0.05; centre–surround sign flip at λ 0.12), while trajectory divergence is global | holds (ticks 73–74) |
 | A25 | A timescale hierarchy (slow vs fast drive integration, equal equilibrium) makes slow modules the internal generator: ×4.3 activity, higher endogeneity (0.96 vs 0.89), ~2.5× more slow→fast than fast→slow triggering in absolute terms | holds (tick 75, 3 seeds) |
+| A26 | Attribution-based self-initiation cannot tell an intrinsic generator from an isolated module (isolated scores highest, 1.00). Two interventions can: generator = high out-influence (0.17) + high independence (0.82); isolated = low out-influence (0.10) + high independence (0.92) | holds (tick 85, 4 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
@@ -85,6 +86,8 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 3. **Design rule for motive graphs**: excitatory cross-motive coupling ≲ 10 % of a motive's coupling if
    motives must be auditable *without labels* (A12; with labels, ≲ 30 % suffices); dense cross-coupling only as mutual inhibition (A15). Prefer hierarchical organisation for
    containment (A4) and graded endogeneity gain (A2).
+4b. **Define 'internal generator' by two interventions**, not attribution: keeps activity when inputs are cut AND
+   drives others when present (A26) — otherwise audits reward mere isolation.
 4. **Audit at natural boundaries**: compute the endogeneity profile E(B) and audit initiatives (EOI,
    AuthenticReason) at the boundary with the largest E jump (A10–A11); auditing at a non-natural
    boundary labels most initiatives exogenous.

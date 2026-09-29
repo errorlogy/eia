@@ -1031,6 +1031,24 @@ E = raw module endogeneity (true W); flow = cross-group triggers per unit of sou
 - Mirrors the human picture (slow association/DMN as internal generator vs faster sensory cortex) and suggests a
   design knob: give "reflective" motives slow integration and "reactive" ones fast integration. Modest effect sizes.
 
+## Tick 85 — generator vs isolated: interventions separate what attribution cannot (`tick85.py`)
+
+SBM 10×100 (μ 0.1); module 0 as normal / GENERATOR (excitability ×1.8) / ISOLATED (incoming cross-module links ×0.1).
+Rate-matched, 4 seeds.
+
+| module 0 | attribution self-initiation | out-influence (rest activity drop when module silenced) | independence (activity kept when its input is cut) |
+|---|---|---|---|
+| normal | 0.94 | 0.134 | 0.49 |
+| generator | 0.98 | **0.172** | 0.82 |
+| isolated | **1.00** | **0.097** | 0.92 |
+
+- Attribution-based self-initiation **cannot** separate them — the isolated module even scores highest (1.00).
+- A two-intervention signature does: **generator = high out-influence + high independence; isolated = low
+  out-influence + high independence**; normal = medium out-influence, low independence.
+- Operational definition proposal for EIA audits: an internal generator is a unit that (i) keeps its activity when its
+  inputs are cut and (ii) drives others when present. Attribution alone (EOI-style, SourceMass, E(B)) measures only (i)'s
+  shadow and rewards isolation.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
