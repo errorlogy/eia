@@ -518,3 +518,20 @@ of the 7-module profile with the empirical one.
 - **BG is not reproduced** (+0.002 vs +0.052): basal-ganglia self-initiation needs an ingredient the model lacks
   (subcortical loop dynamics / different haemodynamics).
 - Caveat: the gating blocks are the consensus of 4 subjects that are among the 7 — partly circular for those 4.
+
+## Tick 83 — held-out check of tick 82: withdrawn (`tick83_heldout_initiators.py`)
+
+Gating blocks from the 4 original subjects; evaluation only on the 3 new subjects against their own empirical profiles
+(3 model seeds each). Pearson r over 7 modules:
+
+| subject | plain SC | gated + homotopic |
+|---|---|---|
+| 211619 | +0.36 | +0.37 |
+| 213522 | +0.54 | +0.44 |
+| 377451 | +0.64 | +0.26 |
+| **mean** | **+0.51** | **+0.36** |
+
+- On held-out subjects the gated model does **not** beat plain SC (0.36 vs 0.51); the tick-82 r = 0.85 came from
+  circularity (4 of the 7 subjects shaped the blocks) and group averaging. **Tick-82 conclusion withdrawn**: the
+  empirical DMN excess is *not* shown to be a gating effect. Both models get the sensory deficit; neither reproduces
+  BG or a consistent DMN excess. B1 and B14 stand as an unresolved model–data gap.

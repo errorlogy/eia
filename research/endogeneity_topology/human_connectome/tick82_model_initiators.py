@@ -32,18 +32,19 @@ def residual_profile(C, x):
     r = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
     return {m: r[idx].mean() for m, idx in b.IDX.items()}
 
-co = sum((labels_of(x)[:, None] == labels_of(x)[None, :]).astype(float) for x in b.SUBJECTS) / 4
-np.fill_diagonal(co, 0); cons = louvain(co, 1.0, 21)
-a0 = np.full(94, -0.02); a1 = a0.copy(); a1[np.concatenate([b.IDX["BG"], b.IDX["DMN"]])] = -0.005
-variants = {"plain": lambda C: (C, a0), "gated+homotopic": lambda C: (gate(C + 0.05*H, cons), a0),
-            "gated+hom+BG/DMN excit": lambda C: (gate(C + 0.05*H, cons), a1)}
-mods = list(EMP)
-print(f"{'variant':<24}" + "".join(f"{m:>8}" for m in mods) + "   r(profile, empirical)")
-print(f"{'empirical (tick 81)':<24}" + "".join(f"{EMP[m]:>+8.3f}" for m in mods))
-for name, fn in variants.items():
-    per = {m: [] for m in mods}
-    for i, s in enumerate(SUBJ):
-        C, _ = load(s); Ce, a = fn(C); prof = residual_profile(C, sim(Ce, a, 800 + i))
-        for m in mods: per[m].append(prof[m])
-    means = np.array([np.mean(per[m]) for m in mods]); r = pearsonr(means, [EMP[m] for m in mods])[0]
-    print(f"{name:<24}" + "".join(f"{x:>+8.3f}" for x in means) + f"   {r:+.2f}", flush=True)
+if __name__ == "__main__":
+    co = sum((labels_of(x)[:, None] == labels_of(x)[None, :]).astype(float) for x in b.SUBJECTS) / 4
+    np.fill_diagonal(co, 0); cons = louvain(co, 1.0, 21)
+    a0 = np.full(94, -0.02); a1 = a0.copy(); a1[np.concatenate([b.IDX["BG"], b.IDX["DMN"]])] = -0.005
+    variants = {"plain": lambda C: (C, a0), "gated+homotopic": lambda C: (gate(C + 0.05*H, cons), a0),
+                "gated+hom+BG/DMN excit": lambda C: (gate(C + 0.05*H, cons), a1)}
+    mods = list(EMP)
+    print(f"{'variant':<24}" + "".join(f"{m:>8}" for m in mods) + "   r(profile, empirical)")
+    print(f"{'empirical (tick 81)':<24}" + "".join(f"{EMP[m]:>+8.3f}" for m in mods))
+    for name, fn in variants.items():
+        per = {m: [] for m in mods}
+        for i, s in enumerate(SUBJ):
+            C, _ = load(s); Ce, a = fn(C); prof = residual_profile(C, sim(Ce, a, 800 + i))
+            for m in mods: per[m].append(prof[m])
+        means = np.array([np.mean(per[m]) for m in mods]); r = pearsonr(means, [EMP[m] for m in mods])[0]
+        print(f"{name:<24}" + "".join(f"{x:>+8.3f}" for x in means) + f"   {r:+.2f}", flush=True)
