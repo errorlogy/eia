@@ -1099,6 +1099,24 @@ cap (checked every 50 ticks). Same W in both conditions; 2 seeds.
 - Cost: total initiative drops (0.029 → 0.018) — the others do not refill the freed budget; the generator was also
   feeding them. A budget Governor trades volume for balance.
 
+## Tick 90 — redistributing Governor (`tick90.py`)
+
+As tick 89 but thresholds may also *drop* below baseline for under-cap motives (lower bound θ − 0.3), optionally with a
+global offset that holds total rate at 0.03. Module 0 excitability ×2.5; 2 seeds.
+
+| condition | generator share | generator indep | E others | overall rate |
+|---|---|---|---|---|
+| no governor | 0.42 | 0.97 | 0.91 | 0.029 |
+| cap 0.15, thresholds free to drop | 0.10 | 0.98 | 0.95 | **0.159** (runaway) |
+| **cap 0.15 + hold total rate** | **0.07** | **0.90** | **0.94** | **0.035** |
+
+- Letting under-cap motives lower their thresholds without a total-rate constraint **runs away** (rate ×5) — a pure
+  share rule redistributes by pushing everyone else into over-activity.
+- Adding a global rate-holding offset gives the intended outcome: the strong motive is capped (share 0.07), stays a
+  generator (0.90), the others keep their sub-agency (0.94), and **total initiative is preserved** (0.035 vs 0.029) —
+  removing the tick-89 volume cost.
+- Governor design: *two* loops — per-motive share cap + global budget hold. Either alone fails (volume loss / runaway).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
