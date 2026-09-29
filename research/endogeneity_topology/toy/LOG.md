@@ -455,8 +455,34 @@ Monkeypatched harness (no `src/` changes): 40 internal steps per cognition tick,
 - Governor outcome for twin_world_005 changed (deny → send_now): drive intensities feed the contact
   score; population readout needs calibration before any behavioural comparison.
 
+## Tick 31 — causal replacement for the lexical structural gate (`../eia_prototype/tick31_causal_gate.py`)
+
+From the post-cognition snapshot, re-run MotiveFormation → IntentionGenesis under do(Z_k) = silence
+drive k. Causal+specific = silencing a source drive changes the initiative (P ≥ 0.5) more than
+silencing non-source drives. Population: 8 noise draws; baseline deterministic.
+
+| scenario | source drive | baseline P(change) e/c/m | population P(change) e/c/m | verdict baseline / population |
+|---|---|---|---|---|
+| twin_world_002 | commitment | 0 / 0 / 0 | 0 / 0 / 0.12 | NOT / NOT |
+| twin_world_003 | epistemic (base), commitment (pop) | 0 / 0 / 0 | 0 / 0 / 1 | NOT / causal+specific |
+| twin_world_004 | commitment | 0 / 0 / 1 | 0 / 0 / 1 | causal / causal |
+| twin_world_005 | commitment | 0 / 0 / 1 | 0 / 0 / 1 | causal / causal |
+| twin_world_006 | commitment | 0 / 0 / 1 | 0 / 0 / 1 | causal / causal |
+| twin_world_001 | commitment | 0 / 0 / 1 | 0 / 0 / 1 | causal / causal |
+| autonomous_question | epistemic | 0 / 0 / 0 | 0 / 0 / 0 | NOT / NOT |
+
+- Lexical gate: baseline 7/7 structural, population 0/7. **Causal gate: baseline 4/7, population 5/7.**
+  The keyword check is wrong in both directions.
+- Where both fail (autonomous_question, twin_world_002) the initiative is chosen from BeliefField
+  quantities inside IntentionGenesis (EVSI etc.) regardless of drive state — the listed source drive
+  is **decorative** there (analogue of F-OMEGA-DECOR). The epistemic path never passes in either engine.
+- Caveat: intervention strength is asymmetric — baseline silencing zeroes the scalar but compute
+  re-derives α·e from the gradient in the same step; population silencing is enforced during compute.
+- Proposal for EIA audit: replace `_drive_is_structural` keyword test with this do(Z_k) test (cheap:
+  one extra compute per drive from the snapshot).
+
 ## Queue (next ticks)
-- [ ] causal replacement for AuthenticReason structural check: per-drive do(Z) test inside the pipeline
+- [ ] why is the epistemic path decorative? trace IntentionGenesis dependence on motivation vs field
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
