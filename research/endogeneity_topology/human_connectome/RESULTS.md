@@ -378,3 +378,20 @@ Sweep G 0.2–3.0, plain SC vs gated + homotopic, 4 subjects.
 - **Toy A2 holds on the human connectome**: real SC gives a smoother onset of self-driven activity than a
   randomised SC (10.3 vs 16.7), and functional gating smooths it ~3× further (3.3), saturating at half
   the level (12 vs 21–28 × base) — a graded, controllable "endogeneity gain".
+
+## Tick 48 — which ingredient smooths the onset? (`tick48_units_decompose.py`)
+
+Tick-47 design, all 4 subjects × 2 seeds, gain 0.90–1.20. Max step jump of rate × base (mean ± sd):
+
+| SC variant | max jump |
+|---|---|
+| degree-preserving rewired | 16.8 ± 2.1 |
+| plain human SC | 10.5 ± 1.6 |
+| homotopic only | 11.2 ± 1.8 |
+| **gated only** | **3.8 ± 1.2** |
+| gated + homotopic | 4.2 ± 1.0 |
+
+- Consistent in every subject: anatomy smooths vs random (−37 %), **functional gating smooths ~2.8× further**;
+  homotopic links contribute nothing to smoothness (their role is the boundary profile, tick 38).
+- Division of labour: gating → graded endogeneity gain + containment (B11, B12); homotopic coupling →
+  human-like (function-, not hemisphere-bounded) sub-agent profile (B8).
