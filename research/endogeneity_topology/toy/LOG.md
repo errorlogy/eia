@@ -261,7 +261,7 @@ chosen by blind score. Held-out test. 2 seeds.
 - [x] tick 18: block gating (g_in 3, g_out 0.03) reproduces empirical boundaries + E gain; empirical blocks are SC-compatible (easier to impose than random)
 - [x] tick 19: gating doubles FC fit (0.23→0.49); intermittent gate no shortcut (tonic property)
 - [x] tick 20: cross-subject — boundaries transfer partially (ARI 0.19), FC gain does NOT (withdrawn)
-- [ ] consensus blocks from 3 subjects → leave-one-out on the 4th
+- [x] tick 21: LOO consensus blocks predict held-out subject's boundaries (ARI 0.17, 4/4 folds); human line summarised in ../human_connectome/RESULTS.md
 - [ ] back to toy: hyperbolic / p-adic tree; directed + inhibition
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)

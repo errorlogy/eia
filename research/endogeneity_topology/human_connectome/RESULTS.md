@@ -184,3 +184,30 @@ empirical FC and *their own* empirical partitions. Controls: no gate; 3 shuffled
   empirical cross-subject consistency (0.18, tick 15).
 - E gain rises with *any* gating (0.26 shuffled) — partly generic — but more with real blocks (0.35).
 - Net status: "self-boundaries require gating" stands; "gating explains FC" is withdrawn.
+
+## Tick 21 — leave-one-subject-out consensus blocks (`tick21_loo.py`)
+
+Consensus of 3 subjects' empirical partitions (co-assignment → Louvain, 2–3 blocks) gates the
+held-out subject's SC. 4 folds × 2 seeds.
+
+| condition (mean of 4 folds) | FC fit | ARI vs held-out own partition | E gain |
+|---|---|---|---|
+| no gate | 0.24 | 0.00 | 0.13 |
+| consensus blocks | 0.26 | **0.17** (4/4 folds > 0: 0.07–0.22) | **0.36** |
+| shuffled consensus | 0.13 | 0.00 | 0.29 |
+
+- Held-out prediction of self-boundaries works in every fold, at the level of the direct
+  consensus-vs-own agreement (0.07–0.27) — the gated model faithfully *carries* population
+  boundaries; it does not add information beyond them (expected).
+- FC: no gain over ungated (confirms tick 20); random gating halves FC fit.
+
+### Line summary (ticks 14–21)
+1. SC-diffusive Hopf model has no anatomical self-boundaries (ER-like).
+2. Empirical rs-fMRI has them: sensory / DMN+value / BG+SMA / FPN, partly consistent across people.
+3. Not a hemodynamic lag/SNR artefact.
+4. Local excitability or frequency heterogeneity cannot produce them; **inter-block gating can**,
+   tonically, and empirical blocks are SC-compatible. Population blocks predict held-out subjects.
+5. Gating does not explain FC (withdrawn after cross-validation).
+EIA implication: the functional separation "exogenous channel / internal generator + value /
+action gate / executive" is maintained by active gating, i.e. a Governor-like function is
+constitutive of endogenous sub-agents, not an add-on safety layer.
