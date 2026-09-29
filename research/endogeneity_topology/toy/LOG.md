@@ -770,6 +770,21 @@ Population intensity is dominated by intrinsic dynamics. Sweep of the tension co
   the coupling. Next fix: read intensity as evoked-minus-spontaneous activity (relative to the motive's own
   baseline), so intrinsic dynamics set timing while tension sets level.
 
+## Tick 59 — evoked-minus-spontaneous readout: negative (`../eia_prototype/tick59_relative_readout.py`)
+
+Intensity = (recent activity − motive's own zero-tension spontaneous rate) / (scale × spontaneous).
+
+| ext_gain | scale | Spearman(tension, intensity) | 1st initiative same | mean intensity |
+|---|---|---|---|---|
+| 0.1 | 1 / 3 / 10 | 0.06 / 0.05 / 0.06 | 0.86 / 0.48 / 0.38 | 0.76 / 0.48 / 0.23 |
+| 0.3 | 1 / 3 / 10 | 0.08 / 0.05 / 0.09 | 0.86 / 0.52 / 0.38 | 0.81 / 0.52 / 0.28 |
+
+- **Worse than tick 58**: tension–intensity correlation collapses to ≈ 0.
+- Diagnosis: the bottleneck is upstream of the readout. Tension enters as a *growth rate* of uncertainty
+  (`ext_gain · e · (1 − u)` every step), so any positive tension drives u → 1 within ~100 steps; the level of
+  tension is lost and acts as an on/off switch. Evoked activity is therefore the same for tension 0.14 and 0.54.
+- Fix to try: let tension set the uncertainty *target* (u relaxes towards u*(e)) instead of its growth rate.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
