@@ -317,8 +317,31 @@ Mean degree 5, rate-matched, blind detector, 3 seeds. Cells: ARI(found, true com
 - Refined design rule: cross-motive coupling ≲ 10% guarantees separate endogenous sub-agents;
   10–15% is the grey zone; ≳ 20% gives one undivided initiator.
 
+## Tick 25 — inhibition vs the μ_c threshold (`tick25.py`)
+
+SBM 10×100, degree 5, rate-matched, blind detector, 3 seeds. E attribution uses excitatory inputs.
+Cells: ARI vs modules / E gain.
+
+| condition | μ=0.3 | 0.2 | 0.15 | 0.1 |
+|---|---|---|---|---|
+| all excitatory | 0.05 / 0.29 | 0.16 / 0.37 | 0.22 / 0.39 | 0.42 / 0.55 |
+| **cross-module links inhibitory** | **0.80 / 0.80** | 0.94 / 0.81 | 0.96 / 0.83 | 0.98 / 0.81 |
+| Dale 20% random inhibitory nodes | 0.11 / 0.40 | 0.30 / 0.52 | 0.36 / 0.57 | 0.73 / 0.71 |
+
+(all-excitatory μ=0.1 is 0.42 here vs 0.56 in tick 24 — different bisection range; noise ≈ ±0.1.)
+
+- **Structured lateral inhibition removes the sparsity requirement**: if cross-motive coupling is
+  inhibitory, sub-agents exist even at μ = 0.3. Partly by construction (no excitatory cross-talk
+  left to attribute), but it is the design point: *competition instead of isolation*.
+- **Unstructured inhibition helps moderately**: 20% random inhibitory units shift μ_c from ~0.1 to
+  ~0.13–0.15 (ARI at μ=0.1: 0.42 → 0.73) — likely by keeping cascades small/local.
+- EIA reading: motives may be densely coupled *if* the cross-coupling is mutual inhibition
+  (winner-take-most, like basal-ganglia action selection); excitatory cross-coupling must stay
+  sparse (≲10%). Ties to tick 8–10: emergent suppression in hierarchy was a weak form of this.
+
 ## Queue (next ticks)
-- [ ] directed graphs + inhibition (E/I balance): does inhibition relax μ_c?
+- [ ] lateral inhibition + do(Z): containment and spill-over sign vs tick 8
+- [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
 - [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
