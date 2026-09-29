@@ -610,6 +610,26 @@ Cells: rate × base / persist (activity kept after noise is switched off).
   endogeneity but needs modularity/gating (A2, B12) to keep the onset graded. Supports the growth-point idea
   of endogeneity as *closed causal loops within Z*.
 
+## Tick 50 — how much recurrence is needed? (`tick50.py`)
+
+Strict DAG with a fraction f of edges reversed (creates cycles); W scaled to mean branching g; 2 seeds.
+Rate × base:
+
+| f | ρ(W)/g | g=0.6 | 0.8 | 1.0 | 1.2 | 1.5 | 2.0 | max jump |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 0.00 | 1.5 | 2.0 | 2.7 | 3.8 | 6.3 | 10.7 | 4.4 |
+| 0.02 | 0.47 | 1.5 | 2.0 | 2.8 | 4.3 | 8.1 | 14.7 | 6.6 |
+| 0.05 | 0.61 | 1.5 | 2.1 | 3.1 | 5.3 | 13.2 | 18.7 | 7.9 |
+| 0.10 | 0.72 | 1.6 | 2.2 | 3.6 | 8.6 | 19.8 | 23.3 | 11.2 |
+| 0.20 | 0.86 | 1.6 | 2.6 | 4.9 | 20.2 | 24.6 | 26.1 | 15.3 |
+| 0.50 | 0.99 | 1.8 | 3.0 | 20.2 | 25.0 | 27.3 | 28.0 | 17.2 |
+
+- The recurrent fraction sets the **loop gain** ρ(W)/g continuously (0 → 0.99); the onset of collective activity
+  tracks ρ(W) ≈ 1, not the branching ratio g.
+- Onset sharpness grows with recurrence (max jump 4.4 → 17.2). **Sparse recurrence (f ≈ 0.02–0.05)** gives
+  strong collective amplification (×15–19 at g = 2) with a graded onset — a second design knob, alongside
+  modularity/gating, for a controllable endogeneity gain.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

@@ -26,6 +26,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A16 | Lateral inhibition abolishes per-motive controllability | tick 26 | withdrawn (tick 27) |
 | A17 | Under lateral inhibition, controllability is state-dependent: boosting a non-dominant motive = takeover; boosting the dominant one ≈ inert | ticks 27–28 | holds (n = 40); sign flip withdrawn |
 | A18 | Collective (network-level) endogeneity requires cycles: a strict DAG never self-amplifies (×6 at branching 1.5, only per-unit aging clocks), while any cyclic directed/undirected graph shows the onset at g≈1 | holds (tick 49) |
+| A19 | The fraction of recurrent (cycle-forming) edges sets loop gain ρ(W)/g continuously; onset follows ρ(W) ≈ 1; sparse recurrence (2–5 % reversed edges) gives strong but graded collective amplification, dense recurrence a sharp onset | holds (tick 50, 2 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
