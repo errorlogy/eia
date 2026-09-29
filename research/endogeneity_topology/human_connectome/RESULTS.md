@@ -363,3 +363,18 @@ Sweep G 0.2–3.0, plain SC vs gated + homotopic, 4 subjects.
   gating lowers it slightly at high G (0.245 → 0.214).
 - A2 cannot be tested in this model family — it needs additive excitatory coupling or near/supercritical
   nodes. Left open (not a refutation).
+
+## Tick 47 — A2 on the human connectome with excitatory drive-units (`tick47_units_on_sc.py`)
+
+94 regions × 10 units (topo_endo dynamics, additive excitatory coupling via SC weights); gain sweep
+0.80–1.30; rate × base; 2 subjects × 2 seeds.
+
+| SC variant | rate at gain 1.0 → 1.05 | max step jump |
+|---|---|---|
+| degree-preserving rewired | 5.6 → 22.3 (at 0.95 → 1.0) | **16.7** |
+| plain human SC | 4.1 → 14.4 | 10.3 |
+| gated + homotopic (LOO consensus) | 4.4 → 7.7 | **3.3** |
+
+- **Toy A2 holds on the human connectome**: real SC gives a smoother onset of self-driven activity than a
+  randomised SC (10.3 vs 16.7), and functional gating smooths it ~3× further (3.3), saturating at half
+  the level (12 vs 21–28 × base) — a graded, controllable "endogeneity gain".
