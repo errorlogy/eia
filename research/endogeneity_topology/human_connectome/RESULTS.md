@@ -339,3 +339,16 @@ a → +0.02 for 30 s; exact twin; relative envelope change over the next 120 s. 
 - Boosting the internal-generator block (DMN+value) slightly *lowers* the initiation loop outside it under
   gating: blocks compete rather than recruit each other.
 - Small effects (≤ 1 % outside), n = 8, no CIs — directional.
+
+## Tick 45 — tick 44 with n = 24 (`tick45_brain_doZ_ci.py`)
+
+| condition | Δ inside (z) | Δ outside (z) | Δ initiation loop (z) |
+|---|---|---|---|
+| no gate | +6.6 % (15.6) | +4.5 % (11.4) | +5.3 % (11.0) |
+| gate | +16.8 % (7.8) | +0.7 % (2.1) | +0.6 % (2.2) |
+| paired gate − no gate | **+10.2 % (z 5.7)** | **−3.8 % (z −13.1)** | |
+
+- **Robust**: gating multiplies the local effect of do(Z) (~2.5×) and cuts leakage to the rest of the brain by
+  ~85 % — containment + controllability, as in toy hierarchies (A4).
+- **Tick-44 sign flip does not replicate**: with n = 24 the gated spill-over is small and *positive* (+0.7 %),
+  not suppressive. The n = 8 estimate was noise. Withdrawn.
