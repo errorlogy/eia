@@ -233,3 +233,21 @@ infer on first half, score second half. Mean of 4 subjects:
   detector (tick 14) missed the model's hemispheric boundary.
 - Sharper statement: SC-diffusive dynamics produce anatomical self-boundaries; the brain overrides them
   with functional ones — consistent with gating (B5) re-routing effective connectivity across anatomy.
+
+## Tick 37 — does gating convert anatomical → functional boundaries? (`tick37_gated_calibrated.py`)
+
+Held-out subject, LOO-consensus gate (3, 0.03), calibrated E_norm, 2 seeds × 4 folds (means):
+
+| model | own empirical parts | EIA map | hemispheres | SC communities |
+|---|---|---|---|---|
+| no gate | 0.11 | 0.03 | 0.32 | 0.21 |
+| consensus gate | **0.33** | **0.15** | 0.28 | 0.30 |
+| shuffled gate | 0.13 | 0.07 | 0.35 | 0.28 |
+| *empirical (tick 36)* | *0.68* | *0.25* | *0.05* | *0.24* |
+
+- Gating with *population* blocks roughly triples functional boundary strength on a held-out subject
+  (own parts 0.11 → 0.33, EIA map 0.03 → 0.15; shuffled control ≈ no gate) — about half the empirical level.
+- But it **does not dissolve the hemispheric boundary** (0.32 → 0.28 vs empirical 0.05). Gating adds
+  functional boundaries on top of anatomical ones rather than replacing them.
+- Candidate missing ingredient: inter-hemispheric (homotopic) coupling, which DTI tractography is known
+  to under-represent. Next: strengthen homotopic links and re-score.
