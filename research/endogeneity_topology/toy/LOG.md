@@ -274,8 +274,34 @@ N=1000, 3 seeds. Sweep 0.85–1.25; blind boundary detector at rate 0.03.
 - ⇒ Conjecture: a critical α_c between 1.0 and 1.5 where endogenous sub-agents appear — a
   "sub-agent existence" transition controlled by how fast coupling decays with ultrametric distance.
 
+## Tick 23 — locating α_c on p-adic graphs, mean degree fixed at 5 (`tick23.py`)
+
+μ = fraction of a 100-node mid-group's links that leave it (computed analytically from P(d)).
+
+| α | μ (mid) | E gain | E found | median part | ARI leaf (10) | ARI mid (100) | max jump |
+|---|---|---|---|---|---|---|---|
+| 1.0 | 0.33 | 0.28 | 0.49 | 1 | 0.03 | 0.02 | 13.6 |
+| 1.1 | 0.26 | 0.30 | 0.48 | 2 | 0.08 | 0.05 | 12.9 |
+| 1.2 | 0.20 | 0.37 | 0.74 | 1 | 0.01 | 0.11 | 11.1 |
+| 1.3 | 0.14 | 0.45 | 0.55 | 4 | 0.18 | 0.21 | 9.1 |
+| 1.4 | 0.10 | 0.56 | 0.69 | 6 | 0.18 | 0.39 | 9.2 |
+| 1.5 | 0.07 | 0.72 | 0.89 | 20 | 0.16 | 0.67 | 7.1 |
+| 1.6 | 0.05 | 0.76 | 0.94 | 46 | 0.17 | **0.86** | 6.5 |
+
+- Crossover, not a sharp transition at N=1000: E gain and ARI_mid rise monotonically; the
+  fastest change is at α 1.4–1.5. α_c ≈ 1.45 (ARI_mid ≈ 0.5).
+- The emerging self-boundary is the **mid level (100 nodes)**, not the leaf groups, once degree
+  is held fixed.
+- In mixing-parameter terms the crossover sits at **μ ≈ 0.08–0.10**: a dynamical sub-agent
+  appears only when fewer than ~10% of its links leave it. Structural community detectability
+  (LFR benchmarks) fails around μ ≈ 0.5 — **self-boundaries are far stricter than communities**.
+- Design rule for EIA drive/motive graphs: keep cross-motive coupling ≲ 10% of a motive's total
+  coupling if motives should behave as separate endogenous sub-agents (auditable, containable);
+  above ~20–30% the agent behaves as a single undivided initiator.
+
 ## Queue (next ticks)
-- [ ] α sweep 1.0–1.6 for p-adic: locate α_c (E gain, median part, jump)
+- [x] α sweep done (tick 23)
+- [ ] test μ≈0.1 rule on a different family (LFR / SBM with tuned μ) — universality?
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
 - [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
