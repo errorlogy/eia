@@ -459,3 +459,21 @@ inferred on the first half, scored on the second). Mean over regions per module,
   because nothing is inferred to drive them. The ranking therefore does not identify an internal generator; at most
   it shows sensory cortex is the most externally driven (0.50) and DMN intermediate. Not promoted to FINDINGS.
 - A clean empirical test of B1 would need SNR-matched regions or a causal perturbation dataset (e.g. TMS-fMRI).
+
+## Tick 80 — tick 79 with confounds regressed out (`tick80_residual_initiators.py`)
+
+Per subject, self-initiated share regressed on SC strength, inferred in-degree and event count (these explain
+R² = 0.57–0.68); residuals averaged per module over 4 subjects.
+
+| module | BG | **DMN** | VAL | SAL | FPN | SMA | **SEN** |
+|---|---|---|---|---|---|---|---|
+| residual self-initiation | +0.053 | **+0.046** | +0.008 | −0.000 | −0.021 | −0.041 | **−0.064** |
+| z vs regional spread | +1.7 | **+2.1** | +0.3 | 0.0 | −0.7 | −0.9 | **−3.1** |
+
+- The orbitofrontal/value "top" of tick 79 **disappears** once connectivity and signal proxies are removed (VAL ≈ 0) —
+  it was the dropout artefact.
+- What remains: **DMN (and basal ganglia) modestly more self-initiating than their connectivity predicts, sensory
+  cortex clearly less**. This is the first empirical hint of DMN specificity — the thing none of the connectome models
+  reproduced (B1). Tension with the models: real DMN may carry an ingredient they lack.
+- Tentative: z is against regional spread, not across subjects; the residual *regional* profile is weakly consistent
+  across subjects (Spearman 0.13), only the module-level pattern is. Needs more subjects (HCP has ~1000).

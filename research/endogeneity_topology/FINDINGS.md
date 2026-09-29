@@ -50,6 +50,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | B11 | In the human model, gating multiplies the local effect of do(Z) on the DMN+value block (+6.6 % → +16.8 %, paired z 5.7) and cuts leakage ~85 % (+4.5 % → +0.7 %, z −13) — containment like toy A4. The tick-44 suppression (sign flip) did not replicate at n = 24 | **robust** (tick 45); sign flip withdrawn |
 | B12 | With excitatory drive-units on the human connectome, onset of self-driven activity is smoother for real SC than randomised SC (max jump 10.5 vs 16.8) and ~2.8× smoother again with functional gating (3.8); homotopic links add nothing to smoothness — toy A2 transfers to human anatomy | **robust** (ticks 47–48, 4 subj × 2 seeds) |
 | B13 | On the human connectome a timescale hierarchy (slow DMN+value, fast sensory) does not make DMN more specific than hubs (0.26 vs 0.25 remaining), but makes initiative largely independent of sensory cortex (silencing it: 0.36 → 0.80 of loop activity kept) | holds (tick 76, 2 subj × 2 seeds) |
+| B14 | Empirical (tentative): after regressing out SC strength, inferred in-degree and event count (R² ≈ 0.64), DMN (+0.046, z 2.1) and BG are modestly more self-initiating than connectivity predicts, sensory cortex less (−0.064, z −3.1); the raw orbitofrontal 'top' was a dropout artefact. First hint of DMN specificity in data — which no model reproduced (B1) | tentative (ticks 79–80, 4 subjects, weak regional consistency) |
 | B8 | SC + modest homotopic boost (h≈0.05–0.1) + tonic functional gating reproduces the empirical endogeneity profile on held-out subjects (EIA map 0.19–0.27 vs 0.25; hemispheres 0.06/−0.10 vs 0.05); subject-specific parts ≈ 0.3 vs held-out empirical ≈ 0.45 (see B9); FC does not constrain it | holds (ticks 37–38, 1 seed) |
 
 ## C. MVP-0 pipeline audit (eia_prototype)
@@ -106,3 +107,4 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 ## E. Open threads
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model
 - causal gate (D1) as an actual patch + tests in `src/`, then re-run PAI-EI-E0-001 baselines
+- B14 with many more HCP subjects (and SNR-matched regions): is empirical DMN self-initiation real, and what model ingredient reproduces it?
