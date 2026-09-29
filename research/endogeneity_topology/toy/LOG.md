@@ -122,8 +122,27 @@ do(Z): at t0 set d=1, u=1 on module S. D = hamming / 2p(1-p) (1 = fully decorrel
   motive reliably alter that motive's initiatives without hijacking the whole agent —
   a structural form of "motive separability" useful for audit and for E_endo cond. 4.
 
+## Tick 8 — tick 7 with 10 seeds (50 interventions / topology) (`tick8.py`)
+
+| topology | D_out first 50 | extra initiatives in S | z | spill-over z |
+|---|---|---|---|---|
+| ER | 0.74 | 93 | 4.9 | **+2.2** |
+| modular | 0.35 | 44 | 2.7 | +0.4 |
+| hier-modular | **0.27** | 82 | 4.1 | **−3.2** |
+
+- Containment ordering robust: hier < modular < ER (spread).
+- Flat modular weak local effect confirmed (44 vs 82–93) — not variance.
+- Tick-7 "hier strongest local effect" **not confirmed**: ER ≈ hier (z 4.9 vs 4.1).
+- **New: sign of spill-over depends on topology.** ER: do(Z) in one motive *excites*
+  the rest (+). Hierarchy: it *suppresses* the rest (−), with purely excitatory coupling.
+  Hypothesis: the forced burst discharges the module (refractory + uncertainty reset),
+  removing it as a future avalanche trigger for its super-module neighbours →
+  emergent competition between motives without inhibition.
+- Revised EIA reading: hierarchy gives containment + emergent motive competition
+  (a structural "attention/priority" mechanism); ER gives contagion.
+
 ## Queue (next ticks)
-- [ ] more samples (10 seeds) for modular vs hier do(Z) z-scores
+- [ ] test discharge hypothesis: do(Z) that raises u only (no forced spike) — does negative spill-over vanish?
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
