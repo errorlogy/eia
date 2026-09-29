@@ -1013,6 +1013,24 @@ flat profile, ℓ ≈ 8–11 λ. Redone with signed Δ.)
   centre–surround profile (fuel-depletion channel, A8). Small effects, 8 samples — directional.
 - Divergence (|Δ|) is global in every case; only the signed effect has a finite reach.
 
+## Tick 75 — hierarchy of timescales (`tick75.py`)
+
+SBM 10×100 (μ 0.1); modules 0–4 fast (drive decay ρ 0.30), 5–9 slow (ρ 0.05); α scaled with ρ so the drive
+equilibrium is unchanged (first run without this silenced the fast modules — invalid). Rate-matched 0.03, 3 seeds.
+E = raw module endogeneity (true W); flow = cross-group triggers per unit of source activity.
+
+| condition | E fast | E slow | fast→slow per source act. | slow→fast per source act. | slow / fast activity |
+|---|---|---|---|---|---|
+| uniform ρ | 0.95 | 0.93 | 0.009 | 0.010 | 0.79 |
+| hierarchy | 0.89 | **0.96** | 0.007 | 0.004 | **4.3** |
+
+- With a timescale hierarchy the **slow modules carry most of the activity (×4.3) and are the more self-driven**
+  (E 0.96 vs 0.89). Per unit of activity fast modules trigger slow ones slightly more, but in absolute counts slow→fast
+  triggering dominates (≈ 0.017 vs 0.007, ~2.5×): slow modules act as the internal generator, fast ones as driven
+  periphery.
+- Mirrors the human picture (slow association/DMN as internal generator vs faster sensory cortex) and suggests a
+  design knob: give "reflective" motives slow integration and "reactive" ones fast integration. Modest effect sizes.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

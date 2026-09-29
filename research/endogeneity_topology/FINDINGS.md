@@ -32,6 +32,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A22 | Plain lagged-Hebbian plasticity + rate homeostasis on ER does not grow sub-agents: weights become heterogeneous (CV 0.5) but modularity stays below the shuffled null (0.33 vs 0.41) — learning builds cross-module cascade highways | holds (tick 69, 2 seeds) |
 | A23 | Plasticity rule decides the sign: lagged Hebb is anti-modular (Q − Q_null −0.075), synchronous Hebb with competitive input/output normalisation is modular (+0.02), + global inhibition +0.04 — sub-agents can self-organise, but slowly and weakly; the learned communities are functional (E_norm +0.12–0.14 vs the same partition on unlearned weights, 3 seeds; lagged Hebb ≈ 0) | **robust** (ticks 70–72) |
 | A24 | Spatial exponential-distance wiring (cortex-like EDR) without modules gives a characteristic sub-agent size ≈ 3λ (side where E_norm = 0.5: 0.17 at λ 0.05, 0.35 at λ 0.12) — continuous, location-free sub-agents with tunable grain; the signed causal reach of do(Z) matches it (ℓ ≈ 4λ at λ 0.05; centre–surround sign flip at λ 0.12), while trajectory divergence is global | holds (ticks 73–74) |
+| A25 | A timescale hierarchy (slow vs fast drive integration, equal equilibrium) makes slow modules the internal generator: ×4.3 activity, higher endogeneity (0.96 vs 0.89), ~2.5× more slow→fast than fast→slow triggering in absolute terms | holds (tick 75, 3 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
