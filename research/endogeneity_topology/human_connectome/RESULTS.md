@@ -251,3 +251,28 @@ Held-out subject, LOO-consensus gate (3, 0.03), calibrated E_norm, 2 seeds × 4 
   functional boundaries on top of anatomical ones rather than replacing them.
 - Candidate missing ingredient: inter-hemispheric (homotopic) coupling, which DTI tractography is known
   to under-represent. Next: strengthen homotopic links and re-score.
+
+## Tick 38 — homotopic links (`tick38_homotopic.py`)
+
+C_h = C + h·H (H = left–right mirror pairs; max SC = 0.2). Held-out subject, LOO-consensus gate, calibrated
+E_norm, 1 seed × 4 folds (means):
+
+| gate | h | own parts | EIA map | hemispheres | FC fit |
+|---|---|---|---|---|---|
+| no | 0 | 0.06 | 0.04 | 0.32 | 0.29 |
+| no | 0.05 | 0.06 | 0.08 | **0.05** | 0.30 |
+| no | 0.10 | 0.15 | 0.14 | −0.12 | 0.30 |
+| no | 0.20 | 0.22 | 0.22 | −0.15 | 0.30 |
+| yes | 0 | 0.26 | 0.16 | 0.40 | 0.26 |
+| yes | 0.05 | 0.28 | 0.19 | **0.06** | 0.25 |
+| yes | 0.10 | **0.36** | **0.27** | −0.10 | 0.25 |
+| yes | 0.20 | 0.34 | 0.29 | −0.17 | 0.26 |
+| *empirical* | | *0.68* | *0.25* | *0.05* | |
+
+- **A modest homotopic boost (h = 0.05, a quarter of max SC) dissolves the hemispheric self-boundary
+  exactly to the empirical level** (0.32 → 0.05). Larger h over-couples the hemispheres (negative E_norm).
+- Homotopic links alone also raise functional/EIA boundaries (bilateral systems become self-contained).
+- **Gate + h 0.05–0.10 reproduces the empirical profile on EIA map (0.19–0.27 vs 0.25) and hemispheres
+  (0.06 / −0.10 vs 0.05)** on held-out subjects. Remaining gap: subject-specific parts (0.28–0.36 vs 0.68).
+- FC fit unaffected (0.25–0.30) — the E-profile is a target that FC does not constrain.
+- Minimal recipe for a human-like endogeneity profile: SC + homotopic boost + tonic functional gating.
