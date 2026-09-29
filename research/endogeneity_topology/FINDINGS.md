@@ -86,11 +86,11 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 3. **Design rule for motive graphs**: excitatory cross-motive coupling ≲ 10 % of a motive's coupling if
    motives must be auditable *without labels* (A12; with labels, ≲ 30 % suffices); dense cross-coupling only as mutual inhibition (A15). Prefer hierarchical organisation for
    containment (A4) and graded endogeneity gain (A2).
-4b. **Define 'internal generator' by two interventions**, not attribution: keeps activity when inputs are cut AND
-   drives others when present (A26) — otherwise audits reward mere isolation.
 4. **Audit at natural boundaries**: compute the endogeneity profile E(B) and audit initiatives (EOI,
    AuthenticReason) at the boundary with the largest E jump (A10–A11); auditing at a non-natural
    boundary labels most initiatives exogenous.
+4b. **Define 'internal generator' by two interventions**, not attribution: keeps activity when inputs are cut AND
+   drives others when present (A26) — otherwise audits reward mere isolation.
 5. **Condition intervention audits on dominance state** when the governor is competitive (A17).
 6. **Close the loop through IntentionGenesis** (C4, C9): minimal eval-compatible step = inhibition of return on
    asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %) — with a
