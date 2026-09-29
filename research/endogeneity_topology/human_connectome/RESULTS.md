@@ -395,3 +395,19 @@ Tick-47 design, all 4 subjects × 2 seeds, gain 0.90–1.20. Max step jump of ra
   homotopic links contribute nothing to smoothness (their role is the boundary profile, tick 38).
 - Division of labour: gating → graded endogeneity gain + containment (B11, B12); homotopic coupling →
   human-like (function-, not hemisphere-bounded) sub-agent profile (B8).
+
+## Tick 76 — timescale hierarchy on the human connectome (`tick76_timescale_brain.py`)
+
+Drive-units on SC (94 regions × 10 units). Homogeneous ρ vs hierarchy (DMN+value slow ρ 0.05, sensory fast ρ 0.30,
+α scaled with ρ). Outcome: initiation-loop (SAL+BG+SMA) activity after silencing, relative to intact; rate-matched,
+2 subjects × 2 seeds.
+
+| condition | silence DMN | silence 16 strongest non-DMN | silence sensory |
+|---|---|---|---|
+| homogeneous | 0.29 | 0.28 | 0.36 |
+| hierarchy | 0.26 | 0.25 | **0.80** |
+
+- DMN is still **not** more specific than equally strong hubs (0.26 vs 0.25) — B1 stands under a timescale hierarchy too.
+- But the hierarchy **decouples initiative from the sensory channel**: silencing sensory cortex costs 64 % of
+  initiation-loop activity in the homogeneous model and only 20 % with slow association / fast sensory timescales —
+  the endogenous drive migrates to the slow, internal part of the network (cf. A25).
