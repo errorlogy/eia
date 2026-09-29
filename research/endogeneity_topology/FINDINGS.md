@@ -62,6 +62,7 @@ draft patches: [`patches/`](patches/).
 | A26 | Attribution-based self-initiation cannot tell an intrinsic generator from an isolated module (isolated scores highest, 1.00). Two interventions can: generator = high out-influence (0.17) + high independence (0.82); isolated = low out-influence (0.10) + high independence (0.92) | holds (tick 85, 4 seeds) |
 | A27 | Topology alone makes relays, not generators: the hub module of a star gets the largest out-influence (5.4) but the lowest independence (0.18); ring/complete stay collective. Centrality ≠ generator; generators need intrinsic excitability (A26) | holds (tick 87, 2 seeds) |
 | A28 | A stronger intrinsic generator becomes self-sustaining (indep 0.49 → 0.97) and takes more of the activity budget (share 0.17 → 0.42) without driving others more or dissolving their sub-agency (E 0.94 → 0.91): crowding-out, not enslavement — cap activity share per motive | holds (tick 88, 2 seeds) |
+| A29 | A share-capping Governor (adaptive per-module threshold) holds a strong generator at its cap (0.42 → 0.14) without destroying its self-sustainment (0.91) and restores the others' endogeneity (0.91 → 0.94); cost: total initiative −38 % | holds (tick 89, 2 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 

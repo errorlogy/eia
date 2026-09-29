@@ -1084,6 +1084,21 @@ SBM 10×100 (μ 0.1); module 0 excitability × f; rate-matched (global activity 
 - Design reading: an intrinsically strong motive is a *budget* risk (dominance of initiative share), not a *control*
   risk (other motives keep their own causes). A Governor should cap per-motive activity share, not per-motive influence.
 
+## Tick 89 — share-capping Governor (`tick89.py`)
+
+SBM 10×100, module 0 excitability ×2.5; Governor raises a module's firing threshold while its activity share exceeds the
+cap (checked every 50 ticks). Same W in both conditions; 2 seeds.
+
+| condition | generator share | generator independence | E of other modules | overall rate |
+|---|---|---|---|---|
+| no governor | 0.42 | 0.97 | 0.91 | 0.029 |
+| cap 0.15 | **0.14** | **0.91** | **0.94** | 0.018 |
+
+- The cap holds the strong motive at its budget (0.42 → 0.14) while it **stays a self-sustaining generator** (0.91) and the
+  other motives regain their endogeneity (0.91 → 0.94).
+- Cost: total initiative drops (0.029 → 0.018) — the others do not refill the freed budget; the generator was also
+  feeding them. A budget Governor trades volume for balance.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
