@@ -1,8 +1,34 @@
-# Endogeneity × Topology — consolidated findings (ticks 1–33, 2026-09-29)
+# Endogeneity × Topology — consolidated findings (ticks 1–86, 2026-09-29)
 
 Exploratory, toy-model and small-sample evidence. "Status" says how far each claim survived our own
 replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
-[`human_connectome/RESULTS.md`](human_connectome/RESULTS.md), [`eia_prototype/`](eia_prototype/).
+[`human_connectome/RESULTS.md`](human_connectome/RESULTS.md), [`eia_prototype/`](eia_prototype/),
+draft patches: [`patches/`](patches/).
+
+## TL;DR — ten takeaways
+
+1. **Endogeneity is a property of (system, boundary)**, not of a system: single units are ~7 % self-caused; natural
+   sub-agent boundaries are where the endogeneity profile E(B) jumps (A9–A11), and can be found blind (A11).
+2. **Sub-agents need sparse excitatory cross-coupling to be discoverable** (μ ≲ 0.1–0.15, A12) — or dense *inhibitory*
+   cross-coupling (A15). With labels they are endogenous up to μ ≈ 0.3.
+3. **Collective endogeneity needs cycles** (A18); sparse recurrence and modular/hierarchical wiring give a graded,
+   controllable onset (A2, A19, B12); criticality gives richness *within* a motive but flattens differences *between*
+   motives (C12).
+4. **Attribution ≠ generation**: attribution-based metrics (EOI-style, E(B), self-initiation) reward isolation; a
+   generator must keep activity when inputs are cut *and* drive others (A26, B15).
+5. **Human brain**: functional self-boundaries (sensory / DMN+value / BG+SMA / FPN) exist, are degenerate/metastable
+   (B3, B9–B10) and need tonic gating, not just wiring (B5); sensory cortex is the most externally driven region
+   empirically and in models (B13–B14).
+6. **DMN specificity is a model–data gap**: data show a modest DMN (and BG) self-initiation excess (B14), no connectome
+   model reproduces DMN's (B1 robust, B16); BG's is explained by weak input (B15).
+7. **MVP-0 audit**: the structural-drive gate is lexical and wrong both ways (C3); the cognitive cycle is a DAG (C8); in
+   silence the agent perseverates on one question (C9).
+8. **Fixes that keep evals unchanged**: causal drive attribution (D1), state-dependent inhibition of return (D6), crash
+   guard (C11) — as draft patches with tests.
+9. **Calibrated population drives** (tension-set uncertainty targets, subcritical motives) keep eval initiatives 100 %
+   while making silent initiative sparse, irregular and drive-dependent (C12–C13).
+10. **Learning**: plain Hebbian plasticity builds integrative highways, not sub-agents; competitive synchronous learning
+    grows weak but functional sub-agents (A22–A23).
 
 ## A. What topology does to endogenous initiative (toy drive-unit networks, X_trigger = 0)
 
