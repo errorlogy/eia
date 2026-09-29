@@ -362,8 +362,30 @@ SBM 10×100, μ=0.2, rate-matched, u-only do(Z) on one module, exact twin, 10 se
   but makes the agent's response to a changed internal state unpredictable per-motive; needs a
   complementary mechanism (e.g. priority/bias input to the competition) for controllability.
 
+## Tick 27 — who holds the floor? (`tick27.py`)
+
+Same setup as tick 26 but **all 10 modules** as targets (10 seeds → 100 interventions); split by
+whether the target was the top module in [t0−20, t0).
+
+| condition | WTA index | effect if target held the floor (n=10) | effect otherwise (n=90) | sd | mean (z) |
+|---|---|---|---|---|---|
+| all excitatory | 0.37 | +226 | +204 | 169 | +206 (12.1) |
+| cross-module inhibitory | 0.36 | **−400** | **+237** (z 5.3) | **516** | +173 (3.3) |
+
+- **Tick-26 "abolished" was too strong** (3 targets/seed, underpowered): with all modules the mean
+  effect under lateral inhibition is positive (z 3.3).
+- **Controllability becomes state-dependent and sign-flipping**: boosting a motive that is *not*
+  currently acting raises its initiatives (+237), boosting the *current floor holder* lowers them
+  (−400, n=10 — small). Variance triples (sd 516 vs 169).
+- WTA index is equal in both conditions, so it is not "more winner-take-all" in share terms; the
+  difference is in how the holder responds (plausibly: extra drive → harder burst → refractory +
+  uncertainty resolution → loses the floor sooner; to verify).
+- Revised EIA reading: with a mutual-inhibition Governor, the effect of changing a motive's internal
+  state depends on whether that motive is currently in control — an intervention audit (E_endo
+  cond. 4) must condition on the agent's current "floor" state, otherwise effects average out.
+
 ## Queue (next ticks)
-- [ ] check tick-26 variance hypothesis: condition do(Z) effect on which module holds the floor at t0
+- [ ] holder sign-flip mechanism: track holder's u / refractory after boost (n larger)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
