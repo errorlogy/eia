@@ -163,3 +163,24 @@ Subject 131217, 2 seeds. Intermittent = telegraph process (mean dwell 20 s), ON 
   need the gate on most of the time — a *tonic* property, not an occasional state.
 - Next: cross-validation — gate with 131217's blocks on other subjects' SC and score their FC,
   vs shuffled-block gating (control for "any gating helps FC").
+
+## Tick 20 — cross-subject validation (`tick20_crossval.py`)
+
+Blocks learned on 131217 gate (3, 0.03) the SC of the other 3 subjects; scored against *their*
+empirical FC and *their own* empirical partitions. Controls: no gate; 3 shuffled block sets. 2 seeds.
+
+| condition (mean of 3 subjects) | FC fit | ARI vs own empirical partition | E gain |
+|---|---|---|---|
+| no gate | **0.33** | 0.01 | 0.12 |
+| 131217 blocks | 0.31 | **0.19** | **0.35** |
+| shuffled blocks | 0.16 | 0.02 | 0.26 |
+
+- **Tick-19 FC doubling does not transfer**: across subjects the gated model fits FC no better
+  than the ungated one (0.31 vs 0.33). The within-subject gain was largely subject-specific /
+  circular. What transfers is weaker: the empirical blocks are *FC-compatible* (random gating
+  halves FC fit, real blocks do not).
+- **Boundary structure transfers partially**: gating with another person's blocks makes the model
+  reproduce this person's own empirical partition (ARI 0.19 vs 0.01–0.02), same order as the
+  empirical cross-subject consistency (0.18, tick 15).
+- E gain rises with *any* gating (0.26 shuffled) — partly generic — but more with real blocks (0.35).
+- Net status: "self-boundaries require gating" stands; "gating explains FC" is withdrawn.

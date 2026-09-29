@@ -260,7 +260,9 @@ chosen by blind score. Held-out test. 2 seeds.
 - [x] tick 17: HRF lag (≤2 s) + SNR (≤3×) do NOT fake boundaries → empirical boundaries likely genuine
 - [x] tick 18: block gating (g_in 3, g_out 0.03) reproduces empirical boundaries + E gain; empirical blocks are SC-compatible (easier to impose than random)
 - [x] tick 19: gating doubles FC fit (0.23→0.49); intermittent gate no shortcut (tonic property)
-- [ ] cross-subject validation of gated model vs shuffled-block gating
+- [x] tick 20: cross-subject — boundaries transfer partially (ARI 0.19), FC gain does NOT (withdrawn)
+- [ ] consensus blocks from 3 subjects → leave-one-out on the 4th
+- [ ] back to toy: hyperbolic / p-adic tree; directed + inhibition
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
