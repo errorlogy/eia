@@ -185,8 +185,33 @@ u-only do(Z), rate-matched, 10 seeds × 5 modules.
   an "external" (neighbour) cause. Endogeneity is level-dependent — boundary choice
   matters (cf. Markov-blanket point, growth item 18).
 
+## Tick 11 — endogeneity profile E(boundary size) (`tick11.py`)
+
+E(B) = fraction of initiatives in part B that are spontaneous or ≥50% triggered from
+inside B. Rate-matched (0.03), N=1000, 3 seeds. Aligned = structural partition
+(contiguous blocks; greedy BFS balls for ER); random = null.
+
+| topology | partition | 1 | 10 | 50 | 250 | 1000 |
+|---|---|---|---|---|---|---|
+| small-world | aligned | 0.06 | **0.80** | 0.89 | 0.93 | 1 |
+| ER | aligned | 0.08 | 0.34 | 0.41 | 0.59 | 1 |
+| modular | aligned | 0.08 | 0.26 | **0.93** | 0.95 | 1 |
+| hier-modular | aligned | 0.08 | **0.75** | **0.96** | 0.97 | 1 |
+| any | random | 0.06–0.08 | 0.09 | 0.13 | 0.35 | 1 |
+
+- Single units are ~7% endogenous in every topology; random boundaries only gain the
+  trivial size/N share — **endogeneity is a property of the (system, boundary) pair**.
+- **Natural self-boundaries** = where E(B) jumps: modular → at module size (50);
+  hier → two levels (10 and 50) = nested sub-agents; small-world → no preferred scale
+  (any contiguous arc is fairly endogenous); **ER → none** — only the whole system is an
+  endogenous agent, no sub-agents.
+- Proposed metric for EIA: **endogeneity profile E(B)** + natural boundary (largest jump
+  over random-partition null). Use it to decide at which level to audit initiative
+  (EOI, AuthenticReason) — auditing at a non-natural boundary misclassifies most
+  initiatives as exogenous. Links growth item 18 (Markov blanket) to an operational test.
+
 ## Queue (next ticks)
-- [ ] level-dependent endogeneity metric: fraction spontaneous per module vs per super-module vs whole
+- [ ] boundary discovery: find partition maximising E(B) − null without structural labels (e.g. from spike trains only)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
