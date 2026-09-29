@@ -1151,6 +1151,19 @@ on non-dominant motives; 6 seeds × 2 targets.
 - Governor recipe: slow, leaky, one-sided (upward only) share control for chronic dominance + a global budget loop;
   never let the per-motive loop integrate on fast timescales.
 
+## Tick 93 — leaky Governor + slow global integral (`tick93.py`)
+
+| condition | generator share | rate (window 1000–2000) | Δ target (z) | Δ rest (z) |
+|---|---|---|---|---|
+| no governor | 0.41 | 0.029 | +122 (6.7) | +77 (0.8) |
+| leaky (tick 92) | 0.14 | 0.021 | +158 (4.4) | −87 (−0.4) |
+| **leaky + global integral** | **0.14** | **0.025** | **+181 (4.3)** | −29 (−0.2) |
+
+- A slow integral term on the global budget loop only narrows the rate shortfall (0.021 → 0.025, still converging within
+  the measured window) while keeping the cap (0.14) and per-motive controllability (+181, z 4.3) and making spill-over
+  neutral. This is the working Governor recipe of the toy line: **slow one-sided leaky share cap per motive + global
+  budget loop with a slow integral**.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

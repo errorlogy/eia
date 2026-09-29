@@ -62,7 +62,7 @@ draft patches: [`patches/`](patches/).
 | A26 | Attribution-based self-initiation cannot tell an intrinsic generator from an isolated module (isolated scores highest, 1.00). Two interventions can: generator = high out-influence (0.17) + high independence (0.82); isolated = low out-influence (0.10) + high independence (0.92) | holds (tick 85, 4 seeds) |
 | A27 | Topology alone makes relays, not generators: the hub module of a star gets the largest out-influence (5.4) but the lowest independence (0.18); ring/complete stay collective. Centrality ≠ generator; generators need intrinsic excitability (A26) | holds (tick 87, 2 seeds) |
 | A28 | A stronger intrinsic generator becomes self-sustaining (indep 0.49 → 0.97) and takes more of the activity budget (share 0.17 → 0.42) without driving others more or dissolving their sub-agency (E 0.94 → 0.91): crowding-out, not enslavement — cap activity share per motive | holds (tick 88, 2 seeds) |
-| A29 | A share-capping Governor (adaptive per-module threshold) holds a strong generator at its cap (0.42 → 0.14) without destroying its self-sustainment (0.91) and restores the others' endogeneity (0.91 → 0.94); cost: total initiative −38 %. Adding a global rate-holding loop removes the cost (rate 0.035 vs 0.029, share 0.07, generator indep 0.90, others 0.94); a share rule that lets others' thresholds drop without the global loop runs away (rate ×5). **But** the integrating two-loop Governor reverses per-motive controllability (boosting a motive: +153 → −343 initiatives, tick 91) — share control must be leaky / deadbanded. A slow, leaky, upward-only chronic-dominance Governor caps the motive (0.41 → 0.14) while keeping controllability (boost +158, z 4.4); residual rate shortfall 0.021 vs 0.03 | holds (ticks 89–92) |
+| A29 | A share-capping Governor (adaptive per-module threshold) holds a strong generator at its cap (0.42 → 0.14) without destroying its self-sustainment (0.91) and restores the others' endogeneity (0.91 → 0.94); cost: total initiative −38 %. Adding a global rate-holding loop removes the cost (rate 0.035 vs 0.029, share 0.07, generator indep 0.90, others 0.94); a share rule that lets others' thresholds drop without the global loop runs away (rate ×5). **But** the integrating two-loop Governor reverses per-motive controllability (boosting a motive: +153 → −343 initiatives, tick 91) — share control must be leaky / deadbanded. A slow, leaky, upward-only chronic-dominance Governor caps the motive (0.41 → 0.14) while keeping controllability (boost +158, z 4.4); a slow integral on the global loop narrows the rate shortfall (0.025) with controllability intact (+181, z 4.3) | holds (ticks 89–93) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
@@ -121,6 +121,9 @@ draft patches: [`patches/`](patches/).
    boundary labels most initiatives exogenous.
 4b. **Define 'internal generator' by two interventions**, not attribution: keeps activity when inputs are cut AND
    drives others when present (A26) — otherwise audits reward mere isolation.
+4c. **Governor recipe** (A28–A29): cap each motive's *chronic* activity share with a slow, leaky, upward-only threshold
+   term, plus a global budget loop with a slow integral; never integrate the per-motive loop on fast timescales
+   (it reverses controllability).
 5. **Condition intervention audits on dominance state** when the governor is competitive (A17).
 6. **Close the loop through IntentionGenesis** (C4, C9): minimal eval-compatible step = inhibition of return on
    asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %) — with a
