@@ -141,8 +141,28 @@ do(Z): at t0 set d=1, u=1 on module S. D = hamming / 2p(1-p) (1 = fully decorrel
 - Revised EIA reading: hierarchy gives containment + emergent motive competition
   (a structural "attention/priority" mechanism); ER gives contagion.
 
+## Tick 9 — discharge hypothesis, 3 do(Z) variants × 10 seeds (`tick9.py`)
+
+| topology | variant | extra in S (z) | spill-over total (z) | spill-over first 100 ticks (z) |
+|---|---|---|---|---|
+| ER | full (d=1,u=1) | +93 (4.9) | +517 (2.2) | +600 (3.0) |
+| ER | u only | +121 (5.1) | +954 (3.0) | +891 (3.7) |
+| ER | d only | +84 (3.2) | +751 (2.2) | +557 (2.7) |
+| hier | full | +82 (4.1) | −452 (−3.2) | +28 (0.6) |
+| hier | **u only** | +84 (3.8) | **−627 (−5.3)** | +6 (0.1) |
+| hier | d only | +41 (3.2) | −207 (−1.4) | −13 (−0.3) |
+
+- **Discharge hypothesis refuted**: no forced spike (u only) gives the *strongest*
+  suppression; a forced spike alone (d only) gives the weakest (n.s.).
+- Suppression is **delayed**: zero in the first 100 ticks, builds later.
+- New hypothesis — **fuel depletion**: a module with raised uncertainty becomes a
+  persistent initiator; its frequent small cascades drive neighbours often, each
+  neighbour initiative resolves their uncertainty (RESOLVE·u), draining the "fuel"
+  that would power later large avalanches. In ER the same drive is contagion because
+  there are no super-module walls to keep cascades small.
+
 ## Queue (next ticks)
-- [ ] test discharge hypothesis: do(Z) that raises u only (no forced spike) — does negative spill-over vanish?
+- [ ] fuel-depletion test: RESOLVE=0 (initiatives don't resolve uncertainty) — does negative spill-over vanish in hier?
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
