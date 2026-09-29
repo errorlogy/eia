@@ -752,6 +752,24 @@ proposed = PopulationDriveEngine + closed loop + state-dependent IOR + stochasti
   stochasticity. For a src/ patch the order should be: causal gate (D1) and state-IOR (D6) first (eval-neutral,
   ticks 31–33, 53–56), population drives later with re-baselined evals.
 
+## Tick 58 — why the proposed system shifts eval initiatives (`../eia_prototype/tick58_calibration.py`)
+
+twin_world_003: current commitment intensity 0.15 (< 0.2 gate) → epistemic question; population engine gives
+commitment 0.73–0.84 from a tension of only 0.14 → commitment question wins on the per-kind constants.
+Population intensity is dominated by intrinsic dynamics. Sweep of the tension coupling (7 scenarios × 3 seeds):
+
+| ext_gain | Spearman(tension, intensity) | 1st initiative same | mean intensity |
+|---|---|---|---|
+| 0.02 | 0.36 | 0.81 | 0.75 |
+| 0.1 | 0.48 | 0.86 | 0.91 |
+| 0.3 | **0.63** | 0.86 | 0.97 |
+| 1.0 | 0.31 | 0.86 | 0.97 |
+
+- Stronger coupling ties intensity to tension (ρ up to 0.63) but the readout **saturates** (mean 0.97) and
+  agreement plateaus at 0.86: the bottleneck is the intensity readout (activity / burst_frac, clipped), not only
+  the coupling. Next fix: read intensity as evoked-minus-spontaneous activity (relative to the motive's own
+  baseline), so intrinsic dynamics set timing while tension sets level.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
