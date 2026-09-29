@@ -299,9 +299,26 @@ N=1000, 3 seeds. Sweep 0.85–1.25; blind boundary detector at rate 0.03.
   coupling if motives should behave as separate endogenous sub-agents (auditable, containable);
   above ~20–30% the agent behaves as a single undivided initiator.
 
+## Tick 24 — universality of the μ rule (`tick24.py`)
+
+Mean degree 5, rate-matched, blind detector, 3 seeds. Cells: ARI(found, true communities) / E gain.
+
+| family | μ=0.3 | 0.2 | 0.15 | 0.1 | 0.07 | 0.05 | 0.03 | μ_c (ARI=0.5) |
+|---|---|---|---|---|---|---|---|---|
+| SBM 10×100 | 0.05/0.29 | 0.13/0.35 | 0.17/0.39 | 0.56/0.57 | 0.80/0.72 | 0.89/0.76 | 0.95/0.80 | ≈ 0.10 |
+| SBM 20×50 | 0.08/0.31 | 0.23/0.41 | 0.49/0.56 | 0.79/0.78 | 0.84/0.82 | 0.81/0.80 | 0.82/0.83 | ≈ 0.15 |
+| LFR (heterogeneous) | 0.06/0.35 | 0.22/0.44 | 0.53/0.60 | 0.62/0.67 | 0.72/0.74 | 0.74/0.76 | 0.82/0.78 | ≈ 0.15 |
+| p-adic (tick 23) | | | | | | | | ≈ 0.08–0.10 |
+
+- **The rule is approximately universal**: across 4 families the self-boundary crossover lies at
+  **μ_c ≈ 0.08–0.15**, always far below structural detectability (~0.5).
+- Mild size dependence: smaller modules (50) tolerate more leakage (0.15) than larger ones (100: 0.10);
+  degree heterogeneity (LFR) does not change it.
+- Refined design rule: cross-motive coupling ≲ 10% guarantees separate endogenous sub-agents;
+  10–15% is the grey zone; ≳ 20% gives one undivided initiator.
+
 ## Queue (next ticks)
-- [x] α sweep done (tick 23)
-- [ ] test μ≈0.1 rule on a different family (LFR / SBM with tuned μ) — universality?
+- [ ] directed graphs + inhibition (E/I balance): does inhibition relax μ_c?
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
 - [x] tick 15: empirical rs-fMRI HAS functional self-boundaries (sensory / DMN+value / BG+SMA / FPN; ARI with EIA map up to 0.40) that the Hopf model lacks — see ../human_connectome/RESULTS.md
