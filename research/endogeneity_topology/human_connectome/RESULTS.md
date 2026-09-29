@@ -535,3 +535,22 @@ Gating blocks from the 4 original subjects; evaluation only on the 3 new subject
   circularity (4 of the 7 subjects shaped the blocks) and group averaging. **Tick-82 conclusion withdrawn**: the
   empirical DMN excess is *not* shown to be a gating effect. Both models get the sensory deficit; neither reproduces
   BG or a consistent DMN excess. B1 and B14 stand as an unresolved model–data gap.
+
+## Tick 84 — basal-ganglia self-initiation from weak cortical input (`tick84_bg_input.py`)
+
+Plain Hopf model; incoming SC of BG regions scaled by k; 7 subjects × 2 seeds; tick-81 residual pipeline.
+
+| k (BG input) | BG | DMN | SEN | r (7-module profile vs empirical) |
+|---|---|---|---|---|
+| 1.0 | +0.011 | +0.005 | −0.003 | +0.10 |
+| 0.3 | +0.032 | +0.006 | −0.004 | +0.57 |
+| 0.1 | **+0.042** | −0.007 | −0.011 | +0.59 |
+| *empirical* | *+0.052* | *+0.034* | *−0.066* | |
+
+- Weakening the effective cortical input to BG reproduces most of the empirical BG excess (0.011 → 0.042 vs 0.052).
+  Parsimonious reading: BG looks "self-initiating" because it is **weakly driven** (or DTI overstates cortex→BG
+  effective input), not necessarily because it generates activity intrinsically.
+- **Methodological caveat for every endogeneity metric used here**: attribution-based self-initiation cannot by itself
+  distinguish an intrinsic generator from a weakly coupled / isolated unit. A causal intervention (do(Z) inside vs
+  input manipulation) is needed to tell them apart.
+- Profile correlations are noisy across seed sets (plain r 0.10 here vs 0.59 in tick 82).
