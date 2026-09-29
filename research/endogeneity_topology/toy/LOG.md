@@ -1117,6 +1117,22 @@ global offset that holds total rate at 0.03. Module 0 excitability ×2.5; 2 seed
   removing the tick-89 volume cost.
 - Governor design: *two* loops — per-motive share cap + global budget hold. Either alone fails (volume loss / runaway).
 
+## Tick 91 — two-loop Governor kills per-motive controllability (`tick91.py`)
+
+Strong generator (module 0, ×2.5); u-only do(Z) on a non-dominant motive (5, 8); exact twin; 600 ticks; 6 seeds × 2 targets.
+
+| condition | Δ target (z) | Δ rest (z) |
+|---|---|---|
+| no governor | **+153 (12.6)** | −143 (−1.8) |
+| two-loop governor (tick 90) | **−343 (−2.7)** | −606 (−1.3) |
+
+- **Negative result**: under the two-loop Governor, raising a motive's uncertainty makes it act *less* — the Governor sees
+  its share rise and raises its threshold (the per-motive loop integrates without leak or deadband, and under-cap motives
+  have drifted to the lower threshold bound, so any surge overshoots the cap).
+- The budget Governor of tick 90 buys balance at the price of controllability: it treats a legitimate internal change as
+  a budget violation. Needs a deadband / leaky (proportional) share control, or a cap that applies only to the chronically
+  dominant motive. Next: test a leaky, deadband version.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
