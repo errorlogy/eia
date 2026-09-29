@@ -28,6 +28,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A18 | Collective (network-level) endogeneity requires cycles: a strict DAG never self-amplifies (×6 at branching 1.5, only per-unit aging clocks), while any cyclic directed/undirected graph shows the onset at g≈1 | holds (tick 49) |
 | A19 | The fraction of recurrent (cycle-forming) edges sets loop gain ρ(W)/g continuously; onset follows ρ(W) ≈ 1; sparse recurrence (2–5 % reversed edges) gives strong but graded collective amplification, dense recurrence a sharp onset | holds (tick 50, 2 seeds) |
 | A20 | Higher-order (coincidence) interactions add effective gain (onset at lower pairwise coupling) but produce no bistability/hysteresis in noisy refractory units — no latching regime | directional (tick 66, 1 seed) |
+| A21 | A sparse cross-module hub ("global workspace") layer doubles global ignitions (13.5 → 27.7 / 1000 ticks, up to 9/10 modules) while module endogeneity stays ≈ intact (E_norm 0.97 → 0.95) — broadcast without dissolving sub-agents | holds (tick 67, 2 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 

@@ -881,6 +881,26 @@ to look for hysteresis (bistability, the hallmark of simplicial contagion).
   motives agree") does not by itself create a latching/obsessive regime in noisy units.
 - 1 seed, one graph; directional.
 
+## Tick 67 — multilayer: modular motives + global-workspace hub layer (`tick67.py`)
+
+Layer A: SBM 10×100 (μ 0.05); layer B: 50 hubs (5 per module) linked across modules; layers normalised separately,
+W = g·A + w·B, g bisected to rate 0.03. Per tick: modules bursting (≥ 10 % active); ignition = ≥ 5 modules. 2 seeds.
+(First attempt with joint normalisation was invalid: the hub clique took the spectral radius and at rate 0.03 there
+are no silent ticks to delimit avalanches — redone.)
+
+| w (workspace) | ignitions / 1000 ticks | global share of multi-module ticks | max modules co-bursting | module E_norm |
+|---|---|---|---|---|
+| 0 | 13.5 | 0.036 | 6.0 | 0.97 |
+| 0.1 | 10.1 | 0.028 | 7.5 | 0.97 |
+| 0.2 | 12.6 | 0.038 | 7.5 | 0.97 |
+| 0.4 | **27.7** | **0.078** | **9.0** | **0.95** |
+
+- A sparse workspace layer doubles global ignitions and lets bursts reach almost all modules, **while module
+  self-boundaries are preserved** (E_norm 0.97 → 0.95): broadcast without dissolving sub-agents.
+- No all-or-none ignition at these weights — graded. Stronger w not tested (would need rate re-matching range).
+- EIA reading: a thin "workspace" layer between motive modules is a candidate mechanism for occasional
+  agent-wide initiatives (a motive recruits the whole agent) without losing per-motive auditability.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
