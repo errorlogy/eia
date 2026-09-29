@@ -47,29 +47,30 @@ def infer(sp):
 def rand_same_sizes(labels, rng):
     return labels[rng.permutation(len(labels))]
 
-print(f"{'topology':<13}{'res':>5}{'#parts':>7}{'med size':>9}{'E_found':>8}{'E_null':>7}{'gain':>6}{'ARI_mod':>8}{'ARI_super':>10}")
-for name in ["small_world", "erdos_renyi", "modular_sbm", "hier_modular"]:
-    for seed in [1, 2]:
-        rng = np.random.default_rng(seed)
-        g = nx.watts_strogatz_graph(N, 4, 0.1, seed=seed) if name == "small_world" else build(name, seed)[0]
-        A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float)
-        A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
-        lo, hi = 0.8, 1.2
-        for _ in range(10):
-            mid = (lo + hi) / 2
-            lo, hi = (mid, hi) if sim(A1*mid, seed, 1000)[500:].mean() < TARGET else (lo, mid)
-        W = sps.csr_matrix(A1 * (lo + hi) / 2)
-        sp = sim(W, seed, 4500)[500:]
-        train, test = sp[:2000], sp[2000:]            # infer on train, score E on held-out test
-        G = infer(train)
-        best = None
-        for res in [0.5, 1, 2, 4, 8]:
-            comms = nx.community.louvain_communities(G, weight="weight", resolution=res, seed=seed)
-            lab = np.empty(N, int)
-            for k, c in enumerate(comms): lab[list(c)] = k
-            ef = E_of(test, W, lab); en = E_of(test, W, rand_same_sizes(lab, rng))
-            if best is None or ef - en > best[4] - best[5]:
-                best = (res, len(comms), int(np.median([len(c) for c in comms])), lab, ef, en)
-        res, npart, med, lab, ef, en = best
-        mod10, mod50 = np.arange(N) // (10 if name == "hier_modular" else 50), np.arange(N) // 50
-        print(f"{name:<13}{res:>5}{npart:>7}{med:>9}{ef:>8.2f}{en:>7.2f}{ef-en:>6.2f}{ari(lab, mod10):>8.2f}{ari(lab, mod50):>10.2f}")
+if __name__ == "__main__":
+    print(f"{'topology':<13}{'res':>5}{'#parts':>7}{'med size':>9}{'E_found':>8}{'E_null':>7}{'gain':>6}{'ARI_mod':>8}{'ARI_super':>10}")
+    for name in ["small_world", "erdos_renyi", "modular_sbm", "hier_modular"]:
+        for seed in [1, 2]:
+            rng = np.random.default_rng(seed)
+            g = nx.watts_strogatz_graph(N, 4, 0.1, seed=seed) if name == "small_world" else build(name, seed)[0]
+            A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float)
+            A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
+            lo, hi = 0.8, 1.2
+            for _ in range(10):
+                mid = (lo + hi) / 2
+                lo, hi = (mid, hi) if sim(A1*mid, seed, 1000)[500:].mean() < TARGET else (lo, mid)
+            W = sps.csr_matrix(A1 * (lo + hi) / 2)
+            sp = sim(W, seed, 4500)[500:]
+            train, test = sp[:2000], sp[2000:]            # infer on train, score E on held-out test
+            G = infer(train)
+            best = None
+            for res in [0.5, 1, 2, 4, 8]:
+                comms = nx.community.louvain_communities(G, weight="weight", resolution=res, seed=seed)
+                lab = np.empty(N, int)
+                for k, c in enumerate(comms): lab[list(c)] = k
+                ef = E_of(test, W, lab); en = E_of(test, W, rand_same_sizes(lab, rng))
+                if best is None or ef - en > best[4] - best[5]:
+                    best = (res, len(comms), int(np.median([len(c) for c in comms])), lab, ef, en)
+            res, npart, med, lab, ef, en = best
+            mod10, mod50 = np.arange(N) // (10 if name == "hier_modular" else 50), np.arange(N) // 50
+            print(f"{name:<13}{res:>5}{npart:>7}{med:>9}{ef:>8.2f}{en:>7.2f}{ef-en:>6.2f}{ari(lab, mod10):>8.2f}{ari(lab, mod50):>10.2f}")
