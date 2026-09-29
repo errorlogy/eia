@@ -384,8 +384,28 @@ whether the target was the top module in [t0−20, t0).
   state depends on whether that motive is currently in control — an intervention audit (E_endo
   cond. 4) must condition on the agent's current "floor" state, otherwise effects average out.
 
+## Tick 28 — holder vs non-holder, time course (`tick28.py`)
+
+Cross-module inhibitory SBM (μ=0.2), 10 seeds × 4 intervention times → n=40 each. Boost u=1 of the
+floor holder vs a random non-holder; differences vs exact twin per 25-tick bin.
+
+| target | pre-share | total Δ target | total Δ rest | time course of Δ target |
+|---|---|---|---|---|
+| floor holder | 0.37 | **+4** (sd 550) | +145 | +85 burst → ~0 → slow deficit (−6…−21 per bin) |
+| non-holder | 0.07 | **+269** (sd 363) | **−229** | +218, +53 → dip → recovery |
+
+- **Tick-27 sign flip does not replicate** (n=10 → n=40): boosting the holder gives ≈ 0 net effect,
+  not −400. Corrected statement: state-dependent **gating of effect size**, not sign.
+- Mechanism visible in the time course:
+  - non-holder boost = **floor takeover** — large burst in the target, the rest suppressed;
+  - holder boost = **saturation + compensation** — the holder is already near its refractory ceiling,
+    gets a brief burst, then a deficit; the rest recover (+145) as the holder's inhibition wanes.
+- EIA reading: in a mutual-inhibition Governor, strengthening an already-dominant motive is nearly
+  inert; the controllable lever is promoting a *non-dominant* motive, which then preempts the others.
+  Intervention audits must condition on the current dominance state.
+
 ## Queue (next ticks)
-- [ ] holder sign-flip mechanism: track holder's u / refractory after boost (n larger)
+- [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
