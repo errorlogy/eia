@@ -28,16 +28,17 @@ def layers(seed):
 def enorm(sp, W, lab, rng):
     en = np.mean([E_of(sp, W, lab[rng.permutation(N)]) for _ in range(5)]); return (E_of(sp, W, lab) - en) / (1 - en)
 
-print(f"{'w_ws':>5}{'g':>6}{'ignitions/1000t':>16}{'global | multi':>15}{'max modules':>12}{'module E_norm':>14}")
-for w in (0.0, 0.1, 0.2, 0.4):
-    rows = []
-    for seed in (1, 2):
-        A, B = layers(seed)
-        lo, hi = 0.5, 1.4
-        for _ in range(10):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(A*mid + B*w, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
-        g = (lo+hi)/2; W = sps.csr_matrix(A*g + B*w); sp = sim(W, seed, 5500)[500:]
-        burst = np.stack([sp[:, mods == m].mean(1) >= 0.10 for m in range(10)], 1).sum(1)
-        multi = burst >= 2; glob = burst >= 5
-        rows.append((g, glob.sum() / len(sp) * 1000, glob.sum() / max(multi.sum(), 1), burst.max(), enorm(sp, W, mods, np.random.default_rng(seed))))
-    m = np.mean(rows, 0); print(f"{w:>5}{m[0]:>6.2f}{m[1]:>16.2f}{m[2]:>15.3f}{m[3]:>12.1f}{m[4]:>14.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'w_ws':>5}{'g':>6}{'ignitions/1000t':>16}{'global | multi':>15}{'max modules':>12}{'module E_norm':>14}")
+    for w in (0.0, 0.1, 0.2, 0.4):
+        rows = []
+        for seed in (1, 2):
+            A, B = layers(seed)
+            lo, hi = 0.5, 1.4
+            for _ in range(10):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(A*mid + B*w, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
+            g = (lo+hi)/2; W = sps.csr_matrix(A*g + B*w); sp = sim(W, seed, 5500)[500:]
+            burst = np.stack([sp[:, mods == m].mean(1) >= 0.10 for m in range(10)], 1).sum(1)
+            multi = burst >= 2; glob = burst >= 5
+            rows.append((g, glob.sum() / len(sp) * 1000, glob.sum() / max(multi.sum(), 1), burst.max(), enorm(sp, W, mods, np.random.default_rng(seed))))
+        m = np.mean(rows, 0); print(f"{w:>5}{m[0]:>6.2f}{m[1]:>16.2f}{m[2]:>15.3f}{m[3]:>12.1f}{m[4]:>14.2f}", flush=True)

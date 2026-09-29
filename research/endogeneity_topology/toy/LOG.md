@@ -901,6 +901,22 @@ are no silent ticks to delimit avalanches — redone.)
 - EIA reading: a thin "workspace" layer between motive modules is a candidate mechanism for occasional
   agent-wide initiatives (a motive recruits the whole agent) without losing per-motive auditability.
 
+## Tick 68 — can one motive recruit the whole agent via the workspace? (`tick68.py`)
+
+u-only do(Z) on one module, exact twin, 8 seeds × 3 modules, rate-matched; 600 ticks after the intervention.
+
+| workspace w | Δ self (z) | Δ rest (z) | Δ global ignitions (z) |
+|---|---|---|---|
+| 0 | +160 (2.6) | −326 (−1.1) | −0.9 (−0.6) |
+| 0.4 | +138 (**3.8**) | −323 (−1.6) | **−5.8 (−2.2)** |
+
+- **No recruitment**: boosting one motive does not trigger agent-wide ignition; with the workspace layer global
+  ignitions even *drop* (−5.8, z −2.2). The boosted module fires early and drains its neighbours and the hubs
+  (the fuel-depletion channel of A8), pre-empting the spontaneous global events.
+- The tick-67 reading ("a motive recruits the whole agent") is **not supported**: workspace ignitions are
+  emergent, collective events that a single motive's internal boost suppresses rather than triggers.
+- Per-motive controllability is kept (z 3.8).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
