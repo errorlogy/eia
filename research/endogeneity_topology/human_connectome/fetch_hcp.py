@@ -1,10 +1,10 @@
-"""Download the 4 HCP subjects used by brain_eia.py from neurolib's public dataset into ./data."""
+"""Download the HCP subjects (4 used by brain_eia.py, all 7 by tick 81) from neurolib's public dataset into ./data."""
 
 from pathlib import Path
 from urllib.request import urlretrieve
 
 BASE = "https://raw.githubusercontent.com/neurolib-dev/neurolib/master/neurolib/data/datasets/hcp/subjects"
-SUBJECTS = ["101309", "102311", "102816", "131217"]
+SUBJECTS = ["101309", "102311", "102816", "131217", "211619", "213522", "377451"]  # all 7 in neurolib
 FILES = ["structural/DTI_CM.mat", "structural/DTI_LEN.mat", "functional/TC_rsfMRI_REST1_LR.mat"]
 
 data = Path(__file__).parent / "data"

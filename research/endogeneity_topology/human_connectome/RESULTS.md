@@ -477,3 +477,24 @@ R² = 0.57–0.68); residuals averaged per module over 4 subjects.
   reproduced (B1). Tension with the models: real DMN may carry an ingredient they lack.
 - Tentative: z is against regional spread, not across subjects; the residual *regional* profile is weakly consistent
   across subjects (Spearman 0.13), only the module-level pattern is. Needs more subjects (HCP has ~1000).
+
+## Tick 81 — B14 on all 7 neurolib HCP subjects (`tick81_initiators_7subj.py`)
+
+Residualised self-initiation (tick 80 method), module means per subject, one-sample t across subjects (n = 7).
+
+| module | mean residual | sd | t | p | subjects > 0 |
+|---|---|---|---|---|---|
+| BG | +0.052 | 0.034 | 4.10 | **0.006** | 7/7 |
+| DMN | +0.034 | 0.032 | 2.75 | 0.033 | **7/7** |
+| SMA | +0.024 | 0.105 | 0.61 | 0.56 | 5/7 |
+| SAL | +0.015 | 0.066 | 0.59 | 0.58 | 4/7 |
+| FPN | −0.003 | 0.085 | −0.09 | 0.93 | 3/7 |
+| VAL | −0.003 | 0.026 | −0.34 | 0.74 | 4/7 |
+| SEN | −0.066 | 0.043 | −4.06 | **0.007** | 0/7 |
+
+- Across subjects: **basal ganglia and DMN self-initiate more than their connectivity/signal predict, in 7/7 subjects;
+  sensory cortex less, in 7/7.** BG and SEN survive Bonferroni over 7 modules (p < 0.007); DMN is nominal
+  (p = 0.033; sign test 7/7, p = 0.016).
+- Consistent with the EIA mapping in an interesting way: the *action-gate* (BG) and *internal generator* (DMN) blocks
+  are the empirically self-starting ones, the exogenous channel (SEN) the most driven. The connectome models capture the
+  SEN side (B13) but not DMN/BG specificity (B1).
