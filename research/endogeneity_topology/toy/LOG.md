@@ -430,8 +430,33 @@ Boost u=1 of a non-dominant drive (10 seeds, n=20):
 - Known issue: strong belief tension still drives the readout near ceiling (ext_gain / intensity
   normalisation need calibration).
 
+## Tick 30 — PopulationDriveEngine inside the MVP-0 pipeline (`../eia_prototype/tick30_pipeline.py`)
+
+Monkeypatched harness (no `src/` changes): 40 internal steps per cognition tick, exact deep-copy twin
+(incl. RNG). 7 scenarios; baseline `DriveEngine` vs population engine (μ 0.05, 5 engine seeds each).
+
+| metric | baseline | population |
+|---|---|---|
+| mean EOI | 1.00 | 0.89 |
+| initiative | ask_question in 7/7 | ask_question in 34/35, 1 abstain (twin_world_003) |
+| seeds disagree on initiative | — (deterministic) | 1/7 scenarios |
+| contact | 6 send_now, 1 deny (twin_world_005) | send_now 34/35 (005 → send_now) |
+| AuthenticReason class | endogenous 7/7 | **stochastic 35/35** |
+
+- The pipeline runs unchanged with the population engine; EOI stays high (< 1 only because the twin
+  advances one more cognition tick of genuinely evolving dynamics).
+- **All population initiatives are labelled "stochastic" — an audit artefact**: `AuthenticReason
+  ._drive_is_structural` (src/eia/audit/authentic_reason.py:122–126) requires `error_term ≥ min` AND
+  the *explanation string* to contain "belieffield" / "gradient" / "structural". The prototype's
+  explanation says "population activity…", so it fails a **lexical** test, not a causal one.
+  Conversely any engine can pass by wording its explanation — the structural gate is gameable
+  (same failure class as F-DECL). Growth point: replace the keyword check with a causal one
+  (e.g. do(Z) on the drive → change in initiative, tick 6–10 style).
+- Governor outcome for twin_world_005 changed (deny → send_now): drive intensities feed the contact
+  score; population readout needs calibration before any behavioural comparison.
+
 ## Queue (next ticks)
-- [ ] calibrate PopulationDriveEngine (ext_gain, intensity readout) and run it inside the MVP-0 pipeline on twin_world scenarios (EOI/EUIR vs baseline DriveEngine)
+- [ ] causal replacement for AuthenticReason structural check: per-drive do(Z) test inside the pipeline
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
