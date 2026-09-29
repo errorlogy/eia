@@ -699,6 +699,24 @@ IOR+drive = IOR + softmax choice weighted by drive intensity × info gain.
   uncertainty has grown since it was asked, or new evidence arrived), not a fixed decay — otherwise it
   reintroduces identification threat #1 (hidden scheduler).
 
+## Tick 55 — state-dependent IOR release (`../eia_prototype/tick55_state_ior.py`)
+
+A target asked at entropy H0 is re-admitted only when its belief's entropy exceeds H0 + 0.05. World staleness
+deterministic (aging 0.03 per episode) or stochastic (same mean: p = 0.1 events of 0.3). 200 silent episodes,
+4 scenarios × 2 seeds. Cells: asks / ISI CV.
+
+| IOR release | deterministic aging | stochastic aging |
+|---|---|---|
+| fixed decay (tick 53) | 59 / 0.43 | 59 / 0.43 |
+| **state-dependent** | 7 / 0.85 | 5 / **1.05** |
+
+- Fixed-decay IOR ignores the world entirely (identical numbers under both staleness models) — a pure internal clock.
+- State-dependent release cuts re-asking ~10× (the agent asks only when its knowledge actually went stale) and
+  makes timing irregular (CV 0.85–1.05); with stochastic staleness the timing inherits the world's event
+  statistics (≈ Poisson). Under deterministic aging a single-belief scenario is still partly periodic (CV 0.44):
+  the release is only as non-clock-like as the state dynamics that drive it.
+- Few events per run (3–12) → CV estimates are noisy; directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
