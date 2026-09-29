@@ -276,3 +276,28 @@ E_norm, 1 seed × 4 folds (means):
   (0.06 / −0.10 vs 0.05)** on held-out subjects. Remaining gap: subject-specific parts (0.28–0.36 vs 0.68).
 - FC fit unaffected (0.25–0.30) — the E-profile is a target that FC does not constrain.
 - Minimal recipe for a human-like endogeneity profile: SC + homotopic boost + tonic functional gating.
+
+## Tick 39 — the subject-specific gap is mostly an artefact; boundaries are degenerate (`tick39_subject_specific.py`)
+
+Split each empirical scan in halves; blocks lab1 (first half) and lab2 (second half, never seen by the model).
+
+| quantity (mean of 4) | value |
+|---|---|
+| empirical split-half agreement ARI(lab1, lab2) | **0.09** |
+| empirical E_norm of lab1 on second half (held-out) | **0.49** |
+| empirical E_norm of lab2 on second half | 0.42 |
+| model gated by lab1 (+homotopic 0.05): E_norm(lab1) | 0.88 (circular) |
+| same model: E_norm(lab2, held-out) | 0.19 |
+| model gated by LOO consensus: E_norm(lab2) | 0.15 |
+
+- **Tick-36 "0.68" was inflated** (blocks found on the full scan incl. the test half). Honest held-out
+  empirical boundary strength is **≈ 0.42–0.49**.
+- **Empirical self-boundaries are real but degenerate**: two halves of the same 14-min scan yield almost
+  unrelated partitions (ARI 0.09), yet each partition stays strongly endogenous on the other half (0.49).
+  Many near-equivalent partitions exist; the detector picks one. Not simple drift (lab1 remains valid
+  in the second half).
+- A fixed-gating model imposes one rigid partition (0.88 on it) and does not reproduce the degeneracy
+  (0.19 on the alternative). Real brain boundaries look like a **landscape of near-equivalent sub-agent
+  decompositions**, not a single fixed modular structure.
+- EIA reading: an agent's "sub-agents" need not be a unique fixed decomposition; audits should report the
+  set/ensemble of high-E_norm partitions, not a single one.
