@@ -6,6 +6,7 @@ X_trigger = 0. Hypothesis-generation mode — toy models, no claim-ladder framin
 | Folder | What |
 |---|---|
 | [`toy/`](toy/) | N EIA-like drive units (spec §7.2) + uncertainty aging + noise + neighbour coupling on synthetic graphs. Iteration log: [`toy/LOG.md`](toy/LOG.md) |
+| [`eia_prototype/`](eia_prototype/) | `PopulationDriveEngine`: EIA-compatible drive engine built from the toy findings (populations per drive, aging+noise, μ, lateral inhibition). Demo: `tick29_demo.py` |
 | [`human_connectome/`](human_connectome/) | Stuart–Landau whole-brain model on HCP DTI connectomes (AAL2, 4 subjects) with an EIA initiative readout. Summary: [`human_connectome/RESULTS.md`](human_connectome/RESULTS.md) |
 
 ## Run

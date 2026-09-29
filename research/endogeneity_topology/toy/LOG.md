@@ -404,8 +404,34 @@ floor holder vs a random non-holder; differences vs exact twin per 25-tick bin.
   inert; the controllable lever is promoting a *non-dominant* motive, which then preempts the others.
   Intervention audits must condition on the current dominance state.
 
+## Tick 29 — EIA-compatible prototype `PopulationDriveEngine` (`../eia_prototype/`)
+
+Each DriveKind = population of 60 units; aging + noise; within-motive excitation; cross-motive mixing μ
+(excitatory or lateral inhibition); BeliefField gradients raise motive uncertainty; outputs the standard
+`Motivation` schema. Not wired into `src/`. Demo `tick29_demo.py` (fixed gain 1.0, not rate-matched):
+
+| test | eia `DriveEngine` | `PopulationDriveEngine` |
+|---|---|---|
+| silence, belief u=0.05: epistemic at t=10/50/200/400 | 0.851 0.852 0.852 0.852 (sd 0) | 0.00 0.74 0.13 0.72 (sd 0.15) |
+| silence, belief u=0.5 | 0.871 flat (sd 0) | 0.84–0.89 (sd 0.03) — near ceiling too |
+| initiative events, 3000 silent ticks, no beliefs | none (drives decay to 0) | 81–252 per drive, ISI CV 1.6–2.1 (bursty) |
+
+Boost u=1 of a non-dominant drive (10 seeds, n=20):
+
+| config | Δ self (z) | Δ rest (z) |
+|---|---|---|
+| μ 0.05 excitatory | +136 (2.8) | −27 (−0.2) — separable |
+| μ 0.30 excitatory | +172 (2.0) | **+291 (1.6)** — contagion |
+| μ 0.30 lateral inhibition | +126 (1.2) | **−146 (−1.0)** — competition |
+
+- The toy-model findings carry over qualitatively to a 3-motive EIA engine: intrinsic bursty initiative
+  in silence; μ ≲ 0.1 → separable motives; excitatory cross-talk → contagion; lateral inhibition →
+  competition with weaker per-motive control. Small n, not rate-matched — directional only.
+- Known issue: strong belief tension still drives the readout near ceiling (ext_gain / intensity
+  normalisation need calibration).
+
 ## Queue (next ticks)
-- [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
+- [ ] calibrate PopulationDriveEngine (ext_gain, intensity readout) and run it inside the MVP-0 pipeline on twin_world scenarios (EOI/EUIR vs baseline DriveEngine)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
