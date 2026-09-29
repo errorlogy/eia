@@ -59,6 +59,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | C8 | Static audit: in `run_scenario` the cognitive cycle is a DAG per episode (only a leaky drive self-loop); the satisfaction channel is dead code; `shadow_multitick` closes Action→Belief but with a content-free update (zero loop gain); novelty is a constant schedule | tick 51 |
 | C9 | In silence MVP-0 perseverates: the same question is proposed in 30/30 episodes, the Governor denies 29; closing Action→Belief does not help because intention selection ignores drive state and denials (no goal succession) | tick 52 |
 | C10 | System card (harness): proposed combination (population drives + closed loop + state-IOR) vs current — questions in 200 silent episodes 200 → 3.6, same-question run 199 → 1, ISI CV 0.03 → 1.24, drive-dependence 0.71 → 0.99; cost: first eval initiative unchanged 0.81, EOI 0.82 | tick 57 |
+| C11 | Latent crash: `pipeline.py:159` assumes `motivation.dominant_drive` is not None although the schema allows None (all-zero drives) | tick 60 |
 
 ## D. Concrete proposals for EIA
 
@@ -67,7 +68,8 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    subsets); record Shapley φ and v(all) under *state-only* and *state + channel* interventions.
    Classify initiatives as field-driven / memory-driven / overdetermined. Cost: ≤ 8 extra computes.
 2. **Give drives intrinsic dynamics** (aging + noise, or the population engine) so that silence produces
-   graded, bursty initiative instead of pinning or decay (C1); calibrate readout before behavioural use.
+   graded, bursty initiative instead of pinning or decay (C1); let BeliefField tension set the uncertainty
+   *target* rather than its growth rate (ticks 58–60: tension–intensity ρ 0.36 → 0.78); calibrate readout.
 3. **Design rule for motive graphs**: excitatory cross-motive coupling ≲ 10 % of a motive's coupling if
    motives must be auditable *without labels* (A12; with labels, ≲ 30 % suffices); dense cross-coupling only as mutual inhibition (A15). Prefer hierarchical organisation for
    containment (A4) and graded endogeneity gain (A2).

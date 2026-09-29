@@ -785,6 +785,25 @@ Intensity = (recent activity − motive's own zero-tension spontaneous rate) / (
   tension is lost and acts as an on/off switch. Evoked activity is therefore the same for tension 0.14 and 0.54.
 - Fix to try: let tension set the uncertainty *target* (u relaxes towards u*(e)) instead of its growth rate.
 
+## Tick 60 — tension as uncertainty *target* (`../eia_prototype/tick60_target_uncertainty.py`)
+
+u relaxes toward u*(e) = 0.2 + 0.8·e (instead of growing at a tension-dependent rate). 7 scenarios × 3 seeds;
+silent dynamics at fixed tension 0.5 over 3000 steps.
+
+| aging_k | alpha | Spearman(tension, intensity) | 1st initiative same | mean intensity | silent burst ISI CV |
+|---|---|---|---|---|---|
+| 0.01 | 0.14 | 0.34 | 0.81 | 0.67 | 0.77 |
+| 0.01 | 0.20 | 0.40 | 0.86 | 0.84 | 0.64 |
+| 0.05 | 0.14 | 0.67 | 0.86 | 0.89 | 0.50 |
+| 0.05 | 0.20 | **0.78** | 0.86 | 0.94 | 0.66 |
+
+- Setting the target instead of the rate restores tension information: ρ up to **0.78** (vs 0.36 at the tick-58
+  default), while intrinsic bursty dynamics in silence remain (CV 0.5–0.8).
+- Eval agreement still plateaus at 0.86 and intensities stay high (readout ceiling remains a second, smaller issue).
+- Side finding (src robustness): `pipeline.py:159` dereferences `motivation.dominant_drive.value`, but the
+  `Motivation` schema allows `dominant_drive=None`; an engine whose drives are all 0 crashes the pipeline. The
+  current DriveEngine never returns None, so this is latent.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
