@@ -37,23 +37,24 @@ def detect(ev, seed):
     return lab, dict(parts=int(lab.max() + 1), E_found=E_blind(te, Wh, lab), E_null=E_blind(te, Wh, lab[rng.permutation(94)]),
                      E_eia=E_blind(te, Wh, eia), E_hemi=E_blind(te, Wh, HEMI))
 
-G = json.loads(open(b.HERE / "results.json").read())["G_star"]
-subj = {s: b.load(s) for s in b.SUBJECTS}
-w = np.mean([b.peak_freqs(tc) for _, tc in subj.values()], axis=0)
-known = MODLAB >= 0
-labs = {"emp": {}, "model": {}}
-print(f"{'source':<7}{'subj':<8}{'parts':>6}{'E_found':>8}{'E_null':>7}{'E_EIA':>7}{'E_hemi':>7}{'ARI_EIA':>8}{'ARI_hemi':>9}{'ARI_SC':>7}")
-out = []
-for s, (C, tc) in subj.items():
-    seed = zlib.crc32(repr((s, 15)).encode())
-    x_model, _ = b.simulate(C, w, G, np.random.default_rng(seed), T=1200 * b.TR)
-    for src, x in [("emp", tc), ("model", x_model)]:
-        lab, m = detect(events(x), seed); labs[src][s] = lab
-        m.update(src=src, subj=s, ARI_eia=ari(lab[known], MODLAB[known]), ARI_hemi=ari(lab, HEMI), ARI_sc=ari(lab, louvain(C, 1.0, seed)),
-                 groups={int(k): [b.LABELS[i] for i in np.flatnonzero(lab == k)] for k in np.unique(lab)})
-        out.append(m)
-        print(f"{src:<7}{s:<8}{m['parts']:>6}{m['E_found']:>8.2f}{m['E_null']:>7.2f}{m['E_eia']:>7.2f}{m['E_hemi']:>7.2f}{m['ARI_eia']:>8.2f}{m['ARI_hemi']:>9.2f}{m['ARI_sc']:>7.2f}")
-for src in labs:
-    ss = list(labs[src]); pa = [ari(labs[src][a], labs[src][c]) for i, a in enumerate(ss) for c in ss[i+1:]]
-    print(f"cross-subject consistency ({src}): mean ARI {np.mean(pa):.2f}")
-json.dump(out, open(b.HERE / "tick15_empirical.json", "w"), indent=1)
+if __name__ == "__main__":
+    G = json.loads(open(b.HERE / "results.json").read())["G_star"]
+    subj = {s: b.load(s) for s in b.SUBJECTS}
+    w = np.mean([b.peak_freqs(tc) for _, tc in subj.values()], axis=0)
+    known = MODLAB >= 0
+    labs = {"emp": {}, "model": {}}
+    print(f"{'source':<7}{'subj':<8}{'parts':>6}{'E_found':>8}{'E_null':>7}{'E_EIA':>7}{'E_hemi':>7}{'ARI_EIA':>8}{'ARI_hemi':>9}{'ARI_SC':>7}")
+    out = []
+    for s, (C, tc) in subj.items():
+        seed = zlib.crc32(repr((s, 15)).encode())
+        x_model, _ = b.simulate(C, w, G, np.random.default_rng(seed), T=1200 * b.TR)
+        for src, x in [("emp", tc), ("model", x_model)]:
+            lab, m = detect(events(x), seed); labs[src][s] = lab
+            m.update(src=src, subj=s, ARI_eia=ari(lab[known], MODLAB[known]), ARI_hemi=ari(lab, HEMI), ARI_sc=ari(lab, louvain(C, 1.0, seed)),
+                     groups={int(k): [b.LABELS[i] for i in np.flatnonzero(lab == k)] for k in np.unique(lab)})
+            out.append(m)
+            print(f"{src:<7}{s:<8}{m['parts']:>6}{m['E_found']:>8.2f}{m['E_null']:>7.2f}{m['E_eia']:>7.2f}{m['E_hemi']:>7.2f}{m['ARI_eia']:>8.2f}{m['ARI_hemi']:>9.2f}{m['ARI_sc']:>7.2f}")
+    for src in labs:
+        ss = list(labs[src]); pa = [ari(labs[src][a], labs[src][c]) for i, a in enumerate(ss) for c in ss[i+1:]]
+        print(f"cross-subject consistency ({src}): mean ARI {np.mean(pa):.2f}")
+    json.dump(out, open(b.HERE / "tick15_empirical.json", "w"), indent=1)

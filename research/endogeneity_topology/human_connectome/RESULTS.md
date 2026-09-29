@@ -68,3 +68,28 @@ self-boundaries.
   especially subcortex); 1200 TRs; AAL2 coarse; E uses inferred Ŵ (biased low, tick 13).
 - Next: fit per-region a_j / frequency so the model reproduces the empirical boundaries —
   an "endogeneity-profile fit" as a new model-fitting target beyond FC.
+
+## Tick 16 — can local dynamics reproduce the empirical self-boundaries? (`tick16_fit.py`)
+
+Subject 131217, blocks = its 4 empirical parts. Random search (15 samples) over per-block
+bifurcation a_k (A) or per-block frequency detuning (W); null = same search with block labels
+shuffled; best candidate re-tested on a fresh noise seed. Empirical E gain for this subject 0.34.
+
+| mechanism | best ARI (search) | fresh-seed ARI | E gain |
+|---|---|---|---|
+| homogeneous baseline | 0.01 | — | 0.19 |
+| A true blocks | 0.07 | −0.01 | 0.11–0.13 |
+| A shuffled (null) | 0.03 | 0.01 | 0.08 |
+| W true blocks | 0.04 | 0.01 | 0.14–0.15 |
+| W shuffled (null) | 0.07 | −0.01 | 0.15–0.16 |
+
+- **Negative result**: neither block-wise excitability nor frequency detuning makes the diffusive
+  Hopf model reproduce the empirical boundaries; search gains are indistinguishable from the
+  shuffled-label null and vanish on retest.
+- Two live explanations:
+  1. **measurement artefact** — region-specific hemodynamics / SNR (subcortical BG block, sensory
+     block) could create the empirical grouping without causal self-boundaries;
+  2. **effective connectivity ≠ SC** — boundaries require gating of coupling (within-block gain vs
+     between-block gain), which neither knob changes.
+- Next: (1) pass model output through a Balloon–Windkessel HRF with block-specific lags — does the
+  detector then "find" blocks with no causal boundary? (2) block-wise coupling gain search.
