@@ -536,6 +536,25 @@ Structural partition, held-out data, 2 seeds.
 - **Null normalisation cancels the bias**: conditional E_norm matches ground truth within 0.03 in all four
   topologies. Blind endogeneity profiles are now *calibrated*, not just rank-preserving (upgrades A11).
 
+## Tick 41 — metastable motive decomposition in the engine (`../eia_prototype/tick41_metastable_engine.py`)
+
+180 units (3 drives × 60) on an unstructured graph; coupling gated by a decomposition: D0 = drive-aligned,
+D1/D2 = cross-drive coalitions. Rate-matched (mean unit activity 0.03), 10 seeds, n = 20 boosts per mode.
+
+| mode | drive-burst rate | co-initiative pattern entropy (bits) | Δ self (z) | Δ rest (z) |
+|---|---|---|---|---|
+| fixed D0 (drive-aligned) | 0.012 | 0.77 | +45 (1.4) | −12 (−0.2) |
+| metastable D0↔D1↔D2 (dwell 300) | 0.008 | **0.98** | +21 (0.6) | +32 (1.0) |
+| fixed D1 (coalitions) | 0.002 | 0.57 | +60 (2.5) | +38 (0.7) |
+| ungated | **0.093** | **2.60** | **+165 (2.8)** | **+271 (2.3)** |
+
+- First (non-rate-matched) run was confounded (ungated near seizure); rerun with gain bisection.
+- **Weak / inconclusive at this n**: metastability gives a slightly richer co-initiative repertoire than a fixed
+  drive-aligned decomposition (0.98 vs 0.77 bits) but does not improve per-drive controllability (z 0.6).
+- Even at matched unit activity, gating suppresses *drive-level* bursts (0.002–0.012 vs 0.093 ungated):
+  gating trades initiative volume and repertoire for containment. Ungated = rich + controllable + contagious.
+- Not promoted to FINDINGS; would need larger n and a readout where coalitions (not only drives) can initiate.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
@@ -543,7 +562,7 @@ Structural partition, held-out data, 2 seeds.
 - [x] tick 38: homotopic h≈0.05 dissolves hemispheric boundary to empirical level; gate+homotopic reproduces EIA-map profile (B8)
 - [x] tick 39: empirical boundaries degenerate (split-half ARI 0.09, each E_norm ≈ 0.45); 0.68 was inflated (B9)
 - [x] tick 40: metastable gating (dwell ~120 s) reproduces degenerate boundaries; fixed does not (B10)
-- [ ] toy/prototype: metastable motive decomposition in PopulationDriveEngine — effect on controllability and containment
+- [x] tick 41: metastable decomposition in engine — weak/inconclusive (richer repertoire, no control gain)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
