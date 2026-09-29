@@ -969,6 +969,16 @@ the learned weights; same partition evaluated on the unlearned ER weights as bas
 - Random graphs already have weak Louvain communities (E_norm ≈ 0.43), so the learned increment, not the level, is
   the signal. 1 seed — directional.
 
+## Tick 72 — replication of tick 71 on seeds 2–3 (`tick72.py`, `tick72.out`)
+
+| rule | seed | E_norm learned | E_norm initial | gain |
+|---|---|---|---|---|
+| lagged Hebb | 2 / 3 | 0.43 / 0.42 | 0.43 / 0.41 | 0.00 / 0.00 |
+| synchronous + competitive + inhibition | 2 / 3 | 0.57 / 0.59 | 0.45 / 0.46 | +0.12 / +0.13 |
+
+- Replicates across 3 seeds (with tick 71): competitive synchronous learning adds +0.12–0.14 endogeneity to its own
+  communities; lagged Hebb adds none. A23 upgraded to robust.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

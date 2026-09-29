@@ -22,14 +22,15 @@ def E(sp, W, lab):
 def E_norm(sp, W, lab, rng):
     en = np.mean([E(sp, W, lab[rng.permutation(N)]) for _ in range(5)]); return (E(sp, W, lab) - en) / (1 - en)
 
-print(f"{'rule':<16}{'#parts':>7}{'E_norm learned W':>18}{'E_norm initial W':>18}")
-for variant in ("lagged", "sync+norm", "sync+norm+inh"):
-    _, W, gain = run(variant, 1, return_w=True)
-    Ws = (W + W.T) / 2
-    lab = np.empty(N, int)
-    for k, c in enumerate(nx.community.louvain_communities(nx.from_numpy_array(Ws), weight="weight", seed=1)): lab[list(c)] = k
-    A0 = nx.to_numpy_array(nx.erdos_renyi_graph(N, 8/N, seed=1)) / 8.0
-    rng = np.random.default_rng(1)
-    e_l = E_norm(simulate(W, gain, 1), W, lab, rng)
-    e_0 = E_norm(simulate(A0, 0.9, 1), A0, lab, rng)
-    print(f"{variant:<16}{lab.max()+1:>7}{e_l:>18.2f}{e_0:>18.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'rule':<16}{'#parts':>7}{'E_norm learned W':>18}{'E_norm initial W':>18}")
+    for variant in ("lagged", "sync+norm", "sync+norm+inh"):
+        _, W, gain = run(variant, 1, return_w=True)
+        Ws = (W + W.T) / 2
+        lab = np.empty(N, int)
+        for k, c in enumerate(nx.community.louvain_communities(nx.from_numpy_array(Ws), weight="weight", seed=1)): lab[list(c)] = k
+        A0 = nx.to_numpy_array(nx.erdos_renyi_graph(N, 8/N, seed=1)) / 8.0
+        rng = np.random.default_rng(1)
+        e_l = E_norm(simulate(W, gain, 1), W, lab, rng)
+        e_0 = E_norm(simulate(A0, 0.9, 1), A0, lab, rng)
+        print(f"{variant:<16}{lab.max()+1:>7}{e_l:>18.2f}{e_0:>18.2f}", flush=True)
