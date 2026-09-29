@@ -996,6 +996,23 @@ grid blocks; rate-matched, 2 seeds.
 - Cortex-like EDR wiring therefore yields a graded, location-free sub-agent structure whose grain is tunable by a
   single parameter — an alternative to discrete modules for motive graphs embedded in a feature space.
 
+## Tick 74 — causal reach of do(Z) in EDR space (`tick74.py`)
+
+u-only do(Z) on the 50 units nearest a centre; exact twin; extra initiatives per unit in distance rings over 400 ticks;
+4 seeds × 2 centres. (First pass used |Δ| per unit — that measures trajectory divergence, which is global (tick 6):
+flat profile, ℓ ≈ 8–11 λ. Redone with signed Δ.)
+
+| λ | signed Δ per unit, rings 0–.05 / .05–.1 / .1–.15 / .15–.2 / .2–.3 / .3–.45 | decay length ℓ | ℓ/λ |
+|---|---|---|---|
+| 0.05 | 2.60 / 3.20 / 2.44 / 2.04 / 1.48 / 0.65 | 0.19 | **3.9** |
+| 0.12 | 0.60 / 0.82 / 0.32 / −0.33 / −0.23 / −0.19 | — | sign flip at ≈ 0.15 |
+
+- Short-range wiring (λ = 0.05): the mean causal effect of an internal intervention decays with ℓ ≈ 4λ — matching the
+  sub-agent size ≈ 3λ from tick 73: **the causal reach of a motive equals its sub-agent scale**.
+- Longer-range wiring (λ = 0.12): weak excitation near the centre and **suppression beyond ≈ 1.2λ** — a
+  centre–surround profile (fuel-depletion channel, A8). Small effects, 8 samples — directional.
+- Divergence (|Δ|) is global in every case; only the signed effect has a finite reach.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
