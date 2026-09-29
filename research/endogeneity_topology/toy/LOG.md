@@ -679,6 +679,26 @@ IOR+drive = IOR + softmax choice weighted by drive intensity × info gain.
 - Minimal, eval-compatible patch candidate for proposal 6: an IOR term in IntentionGenesis fed by
   asked/denied history.
 
+## Tick 54 — timing in the full closed architecture (`../eia_prototype/tick54_timing.py`)
+
+200 silent episodes, closed loop + aging + IOR; baseline vs population drive engine; 4 scenarios × 2 seeds.
+
+| scenario | engine | asks | ISI CV | distinct | abstain |
+|---|---|---|---|---|---|
+| twin_world_003 | baseline / population | 67 / 62 | 0.34 / 0.56 | 2 / 2 | 0.01 / 0.03 |
+| twin_world_005 | baseline / population | 68 / 66 | 0.67 / 0.63 | 2 / 2 | 0 / 0.04 |
+| twin_world_001 | baseline / population | 68 / 68 | 0.67 / 0.48 | 2 / 2 | 0 / 0.02 |
+| autonomous_question | baseline / population | 34 / 34 | **0.03 / 0.03** | 1 / 1 | 0 / 0 |
+| mean | | 59 / 58 | 0.43 / 0.42 | | |
+
+- **IOR becomes a hidden clock**: re-asking is sub-Poisson (CV ≈ 0.4) and, with a single belief, strictly
+  periodic (CV 0.03, every ~6 episodes = the penalty decay time). Timing is set by the IOR constant, not by
+  internal state.
+- The population drive engine does not change timing (0.43 vs 0.42) — again because drives only gate (C4).
+- Caveat on proposal 6: IOR release must be **state-dependent** (e.g. a target is re-admitted when its belief's
+  uncertainty has grown since it was asked, or new evidence arrived), not a fixed decay — otherwise it
+  reintroduces identification threat #1 (hidden scheduler).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

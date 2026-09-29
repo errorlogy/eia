@@ -75,7 +75,8 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    boundary labels most initiatives exogenous.
 5. **Condition intervention audits on dominance state** when the governor is competitive (A17).
 6. **Close the loop through IntentionGenesis** (C4, C9): minimal eval-compatible step = inhibition of return on
-   asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %); drive-weighted
+   asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %) — with a
+   *state-dependent* release, since fixed-decay IOR is itself a hidden clock (tick 54: CV 0.03 with one belief); drive-weighted
    choice is a later step (changes eval initiatives). Also make IntentionGenesis sensitive to drive intensity
    beyond a gate, otherwise drive dynamics
    cannot shape *which* initiative is chosen.
