@@ -58,6 +58,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | C7 | `source_drives` over-credits one drive where Shapley splits ≈ 0.5/0.5 | tick 33 |
 | C8 | Static audit: in `run_scenario` the cognitive cycle is a DAG per episode (only a leaky drive self-loop); the satisfaction channel is dead code; `shadow_multitick` closes Action→Belief but with a content-free update (zero loop gain); novelty is a constant schedule | tick 51 |
 | C9 | In silence MVP-0 perseverates: the same question is proposed in 30/30 episodes, the Governor denies 29; closing Action→Belief does not help because intention selection ignores drive state and denials (no goal succession) | tick 52 |
+| C10 | System card (harness): proposed combination (population drives + closed loop + state-IOR) vs current — questions in 200 silent episodes 200 → 3.6, same-question run 199 → 1, ISI CV 0.03 → 1.24, drive-dependence 0.71 → 0.99; cost: first eval initiative unchanged 0.81, EOI 0.82 | tick 57 |
 
 ## D. Concrete proposals for EIA
 

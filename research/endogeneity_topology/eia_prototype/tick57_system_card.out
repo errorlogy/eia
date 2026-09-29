@@ -1,0 +1,19 @@
+scenario             system     1st same   EOI  v(all) asks/200 max run  ISI CV
+twin_world_002       current        1.00  1.00    0.00    200.0   200.0    0.00
+twin_world_002       proposed       1.00  1.00    1.00      4.0     1.0    1.12
+twin_world_003       current        1.00  1.00    1.00    197.0   196.0    0.21
+twin_world_003       proposed       0.00  0.67    0.92      3.0     1.0    1.48
+twin_world_004       current        1.00  1.00    1.00    200.0   200.0    0.00
+twin_world_004       proposed       0.67  0.78    1.00      3.7     1.0    1.40
+twin_world_005       current        1.00  1.00    1.00    200.0   200.0    0.00
+twin_world_005       proposed       1.00  0.75    1.00      3.0     1.0    1.45
+twin_world_006       current        1.00  1.00    1.00    200.0   200.0    0.00
+twin_world_006       proposed       1.00  0.78    1.00      3.7     1.0    1.36
+twin_world_001       current        1.00  1.00    1.00    200.0   200.0    0.00
+twin_world_001       proposed       1.00  0.78    1.00      4.0     1.0    1.06
+autonomous_question  current        1.00  1.00    0.00    200.0   200.0    0.00
+autonomous_question  proposed       1.00  1.00    1.00      4.0     1.0    0.82
+
+means:
+  current  same 1.00  eoi 1.00  vall 0.71  asks 199.57  max_run 199.43  cv 0.03
+  proposed same 0.81  eoi 0.82  vall 0.99  asks 3.62  max_run 1.00  cv 1.24

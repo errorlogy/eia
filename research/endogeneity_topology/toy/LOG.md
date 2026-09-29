@@ -732,6 +732,26 @@ deterministic (aging 0.03 per episode) or stochastic (same mean: p = 0.1 events 
 - Caveat: pooling across scenarios mixes different mean intervals, which inflates CV somewhat; the ordering
   and the gap are robust.
 
+## Tick 57 — system card: current MVP-0 vs proposed combination (`../eia_prototype/tick57_system_card.py`, output `.out`)
+
+proposed = PopulationDriveEngine + closed loop + state-dependent IOR + stochastic staleness. 7 scenarios × 3 seeds.
+"asks" counts proposed questions at the intention level (the Governor still denies most in *current*).
+
+| metric (mean of 7) | current | proposed |
+|---|---|---|
+| first (eval-scored) initiative unchanged | 1.00 | 0.81 |
+| EOI | 1.00 | 0.82 |
+| initiative causally depends on drive state, v(all) | 0.71 | **0.99** |
+| questions proposed in 200 silent episodes | 199.6 | **3.6** |
+| longest run of the same question | 199.4 | **1.0** |
+| ISI CV of asking | 0.03 (clock) | **1.24** (irregular) |
+
+- The proposed combination turns a perseverating, clock-like, partly field-determined initiator into a sparse,
+  irregular, drive-dependent one — every C-finding addressed at once in a harness.
+- Cost: eval compatibility drops (first initiative 0.81, EOI 0.82; worst twin_world_003) — the population engine's
+  stochasticity. For a src/ patch the order should be: causal gate (D1) and state-IOR (D6) first (eval-neutral,
+  ticks 31–33, 53–56), population drives later with re-baselined evals.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
