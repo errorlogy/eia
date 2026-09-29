@@ -630,6 +630,10 @@ Rate × base:
   strong collective amplification (×15–19 at g = 2) with a graded onset — a second design knob, alongside
   modularity/gating, for a controllable endogeneity gain.
 
+## Tick 51 — static loop audit of MVP-0: [`../eia_prototype/tick51_pipeline_loops.md`](../eia_prototype/tick51_pipeline_loops.md)
+
+Pipeline is a DAG per episode; satisfaction channel dead; shadow post-action loop has zero gain; novelty is a schedule.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
