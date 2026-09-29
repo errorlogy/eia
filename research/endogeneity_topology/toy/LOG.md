@@ -491,8 +491,29 @@ silencing non-source drives. Population: 8 noise draws; baseline deterministic.
   from the field gradient in one step, so the persistent drive state is causally inert; initiative is
   a function of BeliefField alone except near the 0.2 gate.
 
+## Tick 33 — Shapley drive attribution, all scenarios (`../eia_prototype/tick33_shapley.py`)
+
+v(S) = P(initiative changes | silence drives S). Exact 3-player Shapley φ. Modes: baseline-weak (zero
+drive *state*), baseline-strong (zero state + block field→drive *channel*), population (4 draws).
+
+| scenario | src label | baseline-weak φ e/c/m (v_all) | baseline-strong | population |
+|---|---|---|---|---|
+| twin_world_002 | comm | 0/0/0 (**0**) | .50/0/.50 (1) | .42/.04/.54 (1) |
+| twin_world_003 | epis | .50/.50/0 (1) | .50/.50/0 (1) | 0/0/1 (1) |
+| twin_world_004–006, 001 | comm | 0/0/1 (1) | 0/0/1 (1) | 0/0/1 (1) |
+| autonomous_question | epis | 0/0/0 (**0**) | .50/.50/0 (1) | .50/.50/0 (1) |
+
+- **State vs channel**: blocking the field→drive channel makes every initiative drive-dependent (7/7);
+  zeroing only the persistent drive state matters in 5/7. So the drive *channel* is causal, the drive
+  *memory* is causal only near the gate. The population engine's state is causal in 7/7.
+- **`source_drives` label vs Shapley**: in overdetermined cases (002, 003, autonomous_question) the label
+  names one drive while φ splits ≈ 0.5/0.5 between two — the label over-credits.
+- Proposed audit record per initiative: φ vector + v(all) under *state-only* and *state+channel*
+  interventions. Distinguishes field-driven (weak v_all = 0), memory-driven, and overdetermined initiatives
+  — a causal, non-lexical replacement for `_drive_is_structural` and for `source_drives` credit.
+
 ## Queue (next ticks)
-- [ ] subset-based causal gate (Shapley-style drive attribution) over all scenarios, both engines
+- [ ] write up: consolidated findings + concrete EIA change proposals (docs note in this strand)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
