@@ -321,3 +321,21 @@ between repertoire partitions (telegraph, mean dwell τ). Same split-half pipeli
 - Residual: split-half ARI still 0.17 vs 0.09 (repertoire of only 3 partitions).
 - Picture: the brain's endogenous sub-agent decomposition is **metastable** — tonic gating that re-routes
   among several near-equivalent decompositions on a minutes timescale.
+
+## Tick 44 — do(Z) in the human model: gating gives controllability + suppressive spill-over (`tick44_brain_doZ.py`)
+
+Target = LOO-consensus block with most DMN regions (43 regions, DMN+value). do(Z): bifurcation parameter
+a → +0.02 for 30 s; exact twin; relative envelope change over the next 120 s. 4 subjects × 2 seeds (n = 8).
+
+| condition | Δ inside target | Δ outside | Δ initiation loop (SAL+BG+SMA, outside target) | leak ratio |
+|---|---|---|---|---|
+| no gate | +3.5 % | +0.4 % | +0.6 % | +0.11 |
+| gate | **+10.2 %** | **−0.8 %** | −0.7 % | −0.06 |
+| gate + homotopic 0.05 | **+12.0 %** | **−0.9 %** | −0.9 % | −0.11 |
+
+- Gating ~triples the local effect of an internal intervention and **flips the spill-over sign** from
+  excitatory leak to mild suppression — the same pattern as the toy networks (ER contagion vs hierarchical
+  suppression, A4/A6), now in a connectome-based oscillator model with population-derived blocks.
+- Boosting the internal-generator block (DMN+value) slightly *lowers* the initiation loop outside it under
+  gating: blocks compete rather than recruit each other.
+- Small effects (≤ 1 % outside), n = 8, no CIs — directional.
