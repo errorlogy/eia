@@ -21,19 +21,6 @@ cd research/endogeneity_topology/human_connectome; python brain_eia.py; python c
 
 Dependencies: numpy, scipy, networkx.
 
-## Key findings so far
+## Key findings
 
-1. Current `DriveEngine` has no intrinsic temporal dynamics in silence: drives either pin at
-   saturation (any non-zero belief entropy) or decay to 0. Uncertainty aging alone acts as a
-   hidden clock (ISI CV ≈ 0.16).
-2. **Modularity smooths the silence→seizure transition** (~5× smaller max rate jump at
-   N=3000, 5 seeds) and shifts critical coupling right; hierarchy widens the rich band ~33%.
-3. **Hierarchical-modular graphs give motive separability**: at matched activity, do(Z) on
-   one module yields a reliable local change in initiatives (z 6.2) with the slowest global
-   spread and no significant spill-over. ER spreads fastest (on its explosive edge).
-4. Human connectome: initiative at X=0 emerges and is bursty near the FC-fitted operating
-   point, but in a homogeneous model it is a **distributed hub property, not DMN-specific**
-   (strength-matched silencing control beats DMN). DMN specificity needs heterogeneous local
-   dynamics. Degree-preserving rewiring kills burstiness and FC fit.
-
-All results are single-model, few-seed, exploratory.
+See **[`FINDINGS.md`](FINDINGS.md)** — consolidated claims with status (robust / holds / withdrawn / refuted) and concrete proposals for EIA.

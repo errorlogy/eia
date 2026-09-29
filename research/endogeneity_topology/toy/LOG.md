@@ -512,8 +512,11 @@ drive *state*), baseline-strong (zero state + block field→drive *channel*), po
   interventions. Distinguishes field-driven (weak v_all = 0), memory-driven, and overdetermined initiatives
   — a causal, non-lexical replacement for `_drive_is_structural` and for `source_drives` credit.
 
+## Tick 34 — consolidated write-up: [`../FINDINGS.md`](../FINDINGS.md)
+
 ## Queue (next ticks)
-- [ ] write up: consolidated findings + concrete EIA change proposals (docs note in this strand)
+- [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
+- [ ] better blind attribution (conditional lagged excess / transfer entropy)
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)
