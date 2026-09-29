@@ -57,6 +57,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | C6 | Baseline drive *state* is causally inert in 2/7 scenarios (field alone determines initiative); the field→drive *channel* is causal in 7/7 | ticks 32–33 |
 | C7 | `source_drives` over-credits one drive where Shapley splits ≈ 0.5/0.5 | tick 33 |
 | C8 | Static audit: in `run_scenario` the cognitive cycle is a DAG per episode (only a leaky drive self-loop); the satisfaction channel is dead code; `shadow_multitick` closes Action→Belief but with a content-free update (zero loop gain); novelty is a constant schedule | tick 51 |
+| C9 | In silence MVP-0 perseverates: the same question is proposed in 30/30 episodes, the Governor denies 29; closing Action→Belief does not help because intention selection ignores drive state and denials (no goal succession) | tick 52 |
 
 ## D. Concrete proposals for EIA
 

@@ -634,6 +634,30 @@ Rate × base:
 
 Pipeline is a DAG per episode; satisfaction channel dead; shadow post-action loop has zero gain; novelty is a schedule.
 
+## Tick 52 — closing the loop in a harness: perseveration (`../eia_prototype/tick52_closed_loop.py`)
+
+30 consecutive cognition episodes after each scenario, no new user input; open vs closed (answer p = 0.7 →
+targeted belief sharpened + satisfaction to source drive) vs closed + belief aging. 4 scenarios × 3 seeds.
+
+| mode | contacts / 30 | distinct targets | longest run of same question | abstain |
+|---|---|---|---|---|
+| open | 1.0 | 1.0 | 30.0 | 0.00 |
+| closed | 1.0 | 1.0 | 29.8 | 0.00 |
+| closed + aging | 1.0 | 1.0 | 29.8 | 0.00 |
+
+Governor outcomes (twin_world_001, autonomous_question): send_now 1, **deny 29**; intention = the same
+(ask_question, same belief) in 30/30 episodes.
+
+- **Perseveration**: in silence, IntentionGenesis proposes the identical question every episode; only the
+  Governor's budget/anti-spam stops repeats. The closure has nothing to act on because just one contact is
+  ever sent.
+- Structural cause (C4 + C8): the target is chosen from BeliefField alone (highest entropy / open commitment),
+  drive intensity only gates, and denials/deferrals do not feed back anywhere. Satisfaction drain (0.3) never
+  pushes the drive below the 0.2 gate while the field tension persists.
+- Closing Action→Belief is necessary but not sufficient; the loop also has to pass through **intention
+  selection** (e.g. denied/asked-recently candidates lose priority, drive intensity weights the choice), or
+  the agent has no goal succession. Adds to proposals 6 and 9.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
