@@ -1,0 +1,220 @@
+diff --git a/src/eia/audit/authentic_reason.py b/src/eia/audit/authentic_reason.py
+index 208a419..450a4c5 100644
+--- a/src/eia/audit/authentic_reason.py
++++ b/src/eia/audit/authentic_reason.py
+@@ -193,8 +193,14 @@ class AuthenticReasonDiscriminator:
+         eoi: float,
+         governor_state: GovernorState | None = None,
+         sandbox_certificates: list[SandboxCertificate] | None = None,
++        causal_structural: bool | None = None,
+     ) -> AuthenticReasonVerdict:
+-        """Run all authentic-reason checks; return verdict with reason codes."""
++        """Run all authentic-reason checks; return verdict with reason codes.
++
++        ``causal_structural`` (optional): result of the interventional drive test
++        (``eia.audit.causal_drive.attribute_drives(...).structural``). When given, it replaces the
++        lexical explanation-keyword check, which can be passed or failed by wording alone.
++        """
+         codes: list[AuthenticReasonCode] = []
+         failed: list[str] = []
+ 
+@@ -220,7 +226,11 @@ class AuthenticReasonDiscriminator:
+             codes.append(AuthenticReasonCode.CAUSAL_CHAIN_MISSING)
+             failed.append("causal_chain")
+ 
+-        structural = self._drive_is_structural(motivation, initiative)
++        structural = (
++            causal_structural
++            if causal_structural is not None
++            else self._drive_is_structural(motivation, initiative)
++        )
+         if structural:
+             codes.append(AuthenticReasonCode.DRIVE_STRUCTURAL)
+         else:
+diff --git a/src/eia/audit/causal_drive.py b/src/eia/audit/causal_drive.py
+new file mode 100644
+index 0000000..e6eacd5
+--- /dev/null
++++ b/src/eia/audit/causal_drive.py
+@@ -0,0 +1,101 @@
++"""Causal drive attribution — interventional replacement for the lexical structural-drive check.
++
++From a post-cognition snapshot (drive engine + belief field), re-run MotiveFormation -> IntentionGenesis under
++do(silence drives S) for every subset S of drives and record whether the initiative changes:
++
++  * state-only    zero the persistent drive state of S (memory);
++  * state+channel additionally block the BeliefField gradient into S during the recompute.
++
++v(S) = 1 if the initiative (abstained, kind, target) changes. Exact Shapley values over the three drives give
++per-drive credit; v(all) says whether the initiative depends on drive state at all. A drive is causally
++structural for the initiative iff blocking its channel changes the initiative (v_channel(all) > 0).
++See research/endogeneity_topology ticks 30-33.
++"""
++
++from __future__ import annotations
++
++import copy
++import itertools
++from dataclasses import dataclass
++from math import factorial
++
++from eia.beliefs import BeliefField
++from eia.drives import DriveEngine
++from eia.intention import IntentionGenesis
++from eia.schemas.initiative import Initiative
++from eia.schemas.motivation import DriveKind
++
++DRIVES = list(DriveKind)
++
++
++def _signature(ini: Initiative) -> tuple:
++    c = ini.candidate
++    return (ini.abstained, c.kind.value if c else None, c.target_belief_id if c else None)
++
++
++@dataclass
++class DriveAttribution:
++    shapley_state: dict[str, float]
++    shapley_channel: dict[str, float]
++    v_all_state: float
++    v_all_channel: float
++
++    @property
++    def structural(self) -> bool:
++        return self.v_all_channel > 0
++
++    @property
++    def origin(self) -> str:
++        if self.v_all_state > 0:
++            return "memory_driven"
++        if self.v_all_channel > 0:
++            return "field_driven"
++        return "drive_independent"
++
++    @property
++    def overdetermined(self) -> bool:
++        credited = [v for v in self.shapley_channel.values() if v > 0.05]
++        return len(credited) > 1
++
++    def as_dict(self) -> dict:
++        return {"shapley_state": self.shapley_state, "shapley_channel": self.shapley_channel,
++                "v_all_state": self.v_all_state, "v_all_channel": self.v_all_channel,
++                "structural": self.structural, "origin": self.origin, "overdetermined": self.overdetermined}
++
++
++def _recompute(engine: DriveEngine, field: BeliefField, silenced: tuple[DriveKind, ...], block_channel: bool,
++               intention: IntentionGenesis) -> tuple:
++    eng = copy.deepcopy(engine)
++    fld = BeliefField.model_validate(field.model_dump())
++    names = {d.value for d in silenced}
++    for n in names:
++        setattr(eng.state, n, 0.0)
++    if block_channel and names:
++        grads = fld.gradient_snapshot()
++        blocked = {k: (0.0 if k in names else v) for k, v in grads.items()}
++        object.__setattr__(fld, "gradient_snapshot", lambda: blocked)
++    motivation = eng.compute(fld, motivation_id="mot-do")
++    return _signature(intention.best_or_abstain(motivation, fld))
++
++
++def _shapley(v: dict[tuple, float]) -> dict[str, float]:
++    n, phi = len(DRIVES), {}
++    for i in DRIVES:
++        tot = 0.0
++        others = [d for d in DRIVES if d != i]
++        for r in range(n):
++            for s in itertools.combinations(others, r):
++                with_i = tuple(sorted(s + (i,), key=DRIVES.index))
++                tot += factorial(r) * factorial(n - r - 1) / factorial(n) * (v[with_i] - v[tuple(sorted(s, key=DRIVES.index))])
++        phi[i.value] = round(tot, 4)
++    return phi
++
++
++def attribute_drives(engine: DriveEngine, field: BeliefField, intention: IntentionGenesis) -> DriveAttribution:
++    """Interventional drive attribution from a snapshot (engine and field are not modified)."""
++    ref = _recompute(engine, field, (), False, intention)
++    subsets = [tuple(s) for r in range(4) for s in itertools.combinations(DRIVES, r)]
++    v_state = {s: float(_recompute(engine, field, s, False, intention) != ref) for s in subsets}
++    v_chan = {s: float(_recompute(engine, field, s, True, intention) != ref) for s in subsets}
++    full = tuple(DRIVES)
++    return DriveAttribution(_shapley(v_state), _shapley(v_chan), v_state[full], v_chan[full])
+diff --git a/src/eia/pipeline.py b/src/eia/pipeline.py
+index 010cfe6..d3b8649 100644
+--- a/src/eia/pipeline.py
++++ b/src/eia/pipeline.py
+@@ -255,6 +255,7 @@ def run_scenario(
+     twin_policy: TwinInterventionPolicy = DEFAULT_TWIN_POLICY,
+     twin_remove_last_n: int = 1,
+     baseline: BaselineCondition = BaselineCondition.FULL_EIA,
++    causal_audit: bool = False,
+ ) -> dict:
+     """Full end-to-end scenario run with labeled pipeline stages."""
+     scenario = load_scenario(scenario_path)
+@@ -344,7 +345,14 @@ def run_scenario(
+         if namm_intent is not None:
+             loop.namm.get_or_run_sandbox(namm_intent.namm_experiment_ref)
+ 
++        attribution = None
++        if causal_audit and loop._snapshot_field is not None and not initiative.abstained:
++            from eia.audit.causal_drive import attribute_drives
++
++            attribution = attribute_drives(loop.drives, loop._snapshot_field, loop.intention)
++
+         auth_verdict = loop.authentic_reason.evaluate(
++            causal_structural=attribution.structural if attribution is not None else None,
+             trace=loop.trace,
+             motivation=motivation,
+             initiative=initiative,
+@@ -384,6 +392,7 @@ def run_scenario(
+         "namm_intent": namm_intent,
+         "twin_result": twin_result,
+         "authentic_verdict": auth_verdict,
++        "drive_attribution": attribution.as_dict() if attribution is not None else None,
+         "agent_state": agent_state,
+         "trace_path": trace_path,
+         "stage_log": loop.stage_log,
+diff --git a/tests/test_causal_drive.py b/tests/test_causal_drive.py
+new file mode 100644
+index 0000000..0c842ff
+--- /dev/null
++++ b/tests/test_causal_drive.py
+@@ -0,0 +1,39 @@
++"""Interventional drive attribution (D1) — opt-in replacement for the lexical structural check."""
++
++from pathlib import Path
++
++from eia.pipeline import run_scenario
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def _run(name: str, tmp_path, **kw):
++    path = ROOT / "evals" / f"{name}.yaml"
++    if not path.exists():
++        path = ROOT / "scenarios" / f"{name}.yaml"
++    return run_scenario(path, traces_dir=tmp_path, seed=100, **kw)
++
++
++def test_default_has_no_attribution(tmp_path):
++    r = _run("twin_world_004", tmp_path)
++    assert r["drive_attribution"] is None
++
++
++def test_commitment_initiative_is_memory_driven(tmp_path):
++    r = _run("twin_world_004", tmp_path, causal_audit=True)
++    a = r["drive_attribution"]
++    assert a["structural"] and a["origin"] == "memory_driven"
++    assert a["shapley_state"]["commitment"] > 0.9
++
++
++def test_overdetermined_field_driven_initiative(tmp_path):
++    r = _run("autonomous_question", tmp_path, causal_audit=True)
++    a = r["drive_attribution"]
++    assert a["origin"] == "field_driven"          # zeroing drive memory alone changes nothing
++    assert a["structural"] and a["overdetermined"]  # epistemic and coherence share credit
++
++
++def test_first_initiative_unchanged_by_causal_audit(tmp_path):
++    a = _run("twin_world_004", tmp_path)["initiative"]
++    b = _run("twin_world_004", tmp_path, causal_audit=True)["initiative"]
++    assert (a.candidate.kind, a.candidate.target_belief_id) == (b.candidate.kind, b.candidate.target_belief_id)

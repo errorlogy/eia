@@ -858,6 +858,10 @@ tick 62) + closed loop + state-dependent IOR + stochastic staleness. 7 scenarios
 
 Verified on a clean HEAD copy: 3 new tests pass, no regressions (6 pre-existing failures unrelated).
 
+## Tick 65 — draft patch D1 (`../patches/draft_D1.patch`), not applied
+
+Interventional drive attribution as opt-in replacement for the lexical structural check; full suite 294 passed, 6 pre-existing failures, 4 new tests pass.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
