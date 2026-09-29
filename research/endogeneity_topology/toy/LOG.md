@@ -1133,6 +1133,24 @@ Strong generator (module 0, ×2.5); u-only do(Z) on a non-dominant motive (5, 8)
   a budget violation. Needs a deadband / leaky (proportional) share control, or a cap that applies only to the chronically
   dominant motive. Next: test a leaky, deadband version.
 
+## Tick 92 — leaky, chronic-dominance Governor (`tick92.py`)
+
+Per-motive threshold θ0 + kp·max(0, S_m − 0.15) with S_m a slow EMA of share (τ ≈ 1000 ticks, reacts only to chronic
+dominance, never below θ0, no integration); global proportional loop on a slow EMA of rate. Module 0 ×2.5; u-only do(Z)
+on non-dominant motives; 6 seeds × 2 targets.
+
+| condition | generator share | rate | Δ target (z) | Δ rest (z) |
+|---|---|---|---|---|
+| no governor | 0.41 | 0.029 | +122 (6.7) | +77 (0.8) |
+| **leaky governor** | **0.14** | 0.021 | **+158 (4.4)** | −87 (−0.4) |
+
+- The leaky chronic-dominance Governor caps the strong motive (0.41 → 0.14) **and keeps per-motive controllability**
+  (boost → +158, z 4.4) — fixing the tick-91 reversal.
+- Residual cost: rate 0.021 vs 0.03 target (proportional global loop leaves a steady-state error); an integral term with
+  a slow time constant on the *global* loop only would close it.
+- Governor recipe: slow, leaky, one-sided (upward only) share control for chronic dominance + a global budget loop;
+  never let the per-motive loop integrate on fast timescales.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
