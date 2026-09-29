@@ -1049,6 +1049,23 @@ Rate-matched, 4 seeds.
   inputs are cut and (ii) drives others when present. Attribution alone (EOI-style, SourceMass, E(B)) measures only (i)'s
   shadow and rewards isolation.
 
+## Tick 87 — does module-graph topology create a generator? (`tick87.py`)
+
+10 modules × 100 units; cross-module links only along a module graph (ring / star with hub module 0 / complete), same total
+cross edges; rate-matched, 2 seeds. A26 signature for module 0 (hub in the star) and module 5 (leaf).
+
+| module graph | out m0 | indep m0 | out m5 | indep m5 |
+|---|---|---|---|---|
+| ring | 0.66 | 0.41 | 1.69 | 0.37 |
+| star | **5.44** | **0.18** | 1.56 | 0.40 |
+| complete | 2.37 | 0.38 | 2.38 | 0.39 |
+
+- The star's hub module gets by far the largest out-influence but the **lowest independence**: it is a **relay /
+  integrator** that depends on its leaves, not a self-sustaining generator. Ring and complete graphs stay collective.
+- **Centrality ≠ generator**: topology alone produces drivers that need input; a generator in the A26 sense (keeps going
+  when cut off *and* drives others) required intrinsic excitability (tick 85). Consistent with B16 (hub-rich SAL/SMA are
+  high-influence but dependent).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

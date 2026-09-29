@@ -60,6 +60,7 @@ draft patches: [`patches/`](patches/).
 | A24 | Spatial exponential-distance wiring (cortex-like EDR) without modules gives a characteristic sub-agent size ≈ 3λ (side where E_norm = 0.5: 0.17 at λ 0.05, 0.35 at λ 0.12) — continuous, location-free sub-agents with tunable grain; the signed causal reach of do(Z) matches it (ℓ ≈ 4λ at λ 0.05; centre–surround sign flip at λ 0.12), while trajectory divergence is global | holds (ticks 73–74) |
 | A25 | A timescale hierarchy (slow vs fast drive integration, equal equilibrium) makes slow modules the internal generator: ×4.3 activity, higher endogeneity (0.96 vs 0.89), ~2.5× more slow→fast than fast→slow triggering in absolute terms | holds (tick 75, 3 seeds) |
 | A26 | Attribution-based self-initiation cannot tell an intrinsic generator from an isolated module (isolated scores highest, 1.00). Two interventions can: generator = high out-influence (0.17) + high independence (0.82); isolated = low out-influence (0.10) + high independence (0.92) | holds (tick 85, 4 seeds) |
+| A27 | Topology alone makes relays, not generators: the hub module of a star gets the largest out-influence (5.4) but the lowest independence (0.18); ring/complete stay collective. Centrality ≠ generator; generators need intrinsic excitability (A26) | holds (tick 87, 2 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
