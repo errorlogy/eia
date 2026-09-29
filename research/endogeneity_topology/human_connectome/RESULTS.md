@@ -211,3 +211,25 @@ held-out subject's SC. 4 folds × 2 seeds.
 EIA implication: the functional separation "exogenous channel / internal generator + value /
 action gate / executive" is maintained by active gating, i.e. a Governor-like function is
 constitutive of endogenous sub-agents, not an add-on safety layer.
+
+## Tick 36 — re-scored with calibrated blind attribution (`tick36_calibrated.py`)
+
+Conditional regression attribution (lags 1–3 TR) + null-normalised E_norm (20 size-matched permutations);
+infer on first half, score second half. Mean of 4 subjects:
+
+| partition | empirical E_norm | model E_norm |
+|---|---|---|
+| found parts (tick 15)* | **0.68** | 0.09 |
+| EIA functional map | **0.25** | 0.03 |
+| hemispheres | 0.05 | **0.37** |
+| SC communities | 0.24 | 0.27 |
+
+\* found parts came from the full scan in tick 15, so this row is not fully held-out.
+
+- Confirms B3 with calibrated numbers: the real brain has strong functional self-boundaries (0.68) and
+  partially respects the EIA functional map (0.25); the model has neither.
+- **Revises B2**: the model is *not* boundary-free — it is bounded by **anatomy** (hemispheres 0.37,
+  SC communities 0.27). The real brain is bounded by **function** (hemispheres ≈ 0.05). The uncalibrated
+  detector (tick 14) missed the model's hemispheric boundary.
+- Sharper statement: SC-diffusive dynamics produce anatomical self-boundaries; the brain overrides them
+  with functional ones — consistent with gating (B5) re-routing effective connectivity across anatomy.

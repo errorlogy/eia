@@ -538,7 +538,8 @@ Structural partition, held-out data, 2 seeds.
 
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
-- [ ] re-run human empirical boundaries (tick 15) with conditional attribution + E_norm
+- [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
+- [ ] gated model (tick 18–21) re-scored with E_norm: does gating convert anatomical → functional boundaries?
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)

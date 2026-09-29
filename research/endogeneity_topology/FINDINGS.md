@@ -31,7 +31,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | # | Claim | Status |
 |---|---|---|
 | B1 | In a homogeneous Hopf model, initiative at X = 0 is a distributed hub property, not DMN-specific (strength-matched control beats DMN) | holds |
-| B2 | That model has no anatomical self-boundaries (ER-like) | holds |
+| B2 | That model has no *functional* self-boundaries; calibrated attribution shows it *is* bounded by anatomy (hemispheres E_norm 0.37), while the real brain is bounded by function (found parts 0.68, EIA map 0.25, hemispheres 0.05) | revised (tick 36) |
 | B3 | Empirical rs-fMRI has functional self-boundaries: sensory / DMN+value / BG+SMA / FPN, partly consistent across people | holds (4 subjects) |
 | B4 | Not a hemodynamic lag (≤ 2 s) or SNR (≤ 3×) artefact | holds; motion/physio untested |
 | B5 | Local excitability / frequency heterogeneity cannot reproduce B3; tonic inter-block gating can | holds |
