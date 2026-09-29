@@ -161,8 +161,34 @@ do(Z): at t0 set d=1, u=1 on module S. D = hamming / 2p(1-p) (1 = fully decorrel
   that would power later large avalanches. In ER the same drive is contagion because
   there are no super-module walls to keep cascades small.
 
+## Tick 10 — fuel-depletion test (`tick10.py`)
+
+Variant `no_trig_resolve`: initiatives triggered by neighbour input do not resolve
+uncertainty (spontaneous ones still do). Global RESOLVE=0 is degenerate (u→1, d* > θ).
+u-only do(Z), rate-matched, 10 seeds × 5 modules.
+
+| topology | variant | gain | triggered initiatives | extra in S (z) | spill-over (z) |
+|---|---|---|---|---|---|
+| ER | base | 0.97 | 92% | +121 (5.1) | **+954 (3.0)** |
+| ER | no_trig_resolve | 0.52 | 73% | +87 (6.5) | +22 (0.2) |
+| hier | base | 1.01 | 92% | +84 (3.8) | **−627 (−5.3)** |
+| hier | no_trig_resolve | 0.55 | 73% | +226 (12.2) | +77 (0.6) |
+
+- **Hier suppression vanishes** when triggered initiatives stop draining uncertainty →
+  consistent with fuel depletion. But **ER contagion vanishes too**: the channel
+  "triggered initiative resolves neighbour's uncertainty" mediates inter-motive
+  influence in *both* directions; topology decides the sign.
+- Without the drain, do(Z) on a motive becomes strongly local (hier z 12).
+- Caveat: operating gain halves (0.97 → 0.52) — regime shift, not a clean ablation.
+- Side result: **92% of initiatives are cascade-triggered**, only ~8% spontaneous. At
+  system level the network is endogenous (X=0); at unit level almost every initiative has
+  an "external" (neighbour) cause. Endogeneity is level-dependent — boundary choice
+  matters (cf. Markov-blanket point, growth item 18).
+
 ## Queue (next ticks)
-- [ ] fuel-depletion test: RESOLVE=0 (initiatives don't resolve uncertainty) — does negative spill-over vanish in hier?
+- [ ] level-dependent endogeneity metric: fraction spontaneous per module vs per super-module vs whole
+- [ ] hyperbolic / p-adic tree (Kairologos link)
+- [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
 - [ ] directed graphs, inhibition (E/I balance)
 - [ ] hyperbolic / p-adic tree (Kairologos link)
