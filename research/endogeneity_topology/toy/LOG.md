@@ -658,6 +658,27 @@ Governor outcomes (twin_world_001, autonomous_question): send_now 1, **deny 29**
   selection** (e.g. denied/asked-recently candidates lose priority, drive intensity weights the choice), or
   the agent has no goal succession. Adds to proposals 6 and 9.
 
+## Tick 53 — closing the loop through intention selection (`../eia_prototype/tick53_intention_loop.py`)
+
+Tick-52 closed+aging environment, 30 silent episodes, 7 scenarios × 3 seeds.
+IOR = inhibition of return (asked/denied target penalised, decays ×0.8/episode; skip if > 0.5 → observe).
+IOR+drive = IOR + softmax choice weighted by drive intensity × info gain.
+
+| mode | contacts | distinct targets | longest same-question run | share of episodes asking | 1st initiative = unmodified |
+|---|---|---|---|---|---|
+| baseline | 1.10 | 1.14 | **29.4** | 0.99 | 1.00 |
+| **IOR** | 1.14 | 1.86 | **1.0** | 0.34 | **1.00** |
+| IOR+drive | 1.14 | 1.95 | 1.0 | 0.36 | 0.43 |
+
+- **IOR removes perseveration completely** (run 29 → 1), roughly doubles goal succession (distinct targets
+  1.1 → 1.9) and makes the agent observe instead of re-asking two episodes out of three — while leaving the
+  first (eval-scored) initiative unchanged in 100 % of runs, so G2 evals are unaffected.
+- Drive-weighted choice adds little diversity and changes the eval initiative in 57 % of runs — not worth it
+  as a first step.
+- Contacts stay ≈ 1 (the Governor's budget is the binding limit in silence).
+- Minimal, eval-compatible patch candidate for proposal 6: an IOR term in IntentionGenesis fed by
+  asked/denied history.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

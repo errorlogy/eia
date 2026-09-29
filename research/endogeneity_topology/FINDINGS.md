@@ -74,7 +74,10 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    AuthenticReason) at the boundary with the largest E jump (A10–A11); auditing at a non-natural
    boundary labels most initiatives exogenous.
 5. **Condition intervention audits on dominance state** when the governor is competitive (A17).
-6. **Make IntentionGenesis sensitive to drive intensity** beyond a gate (C4), otherwise drive dynamics
+6. **Close the loop through IntentionGenesis** (C4, C9): minimal eval-compatible step = inhibition of return on
+   asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %); drive-weighted
+   choice is a later step (changes eval initiatives). Also make IntentionGenesis sensitive to drive intensity
+   beyond a gate, otherwise drive dynamics
    cannot shape *which* initiative is chosen.
 7. **Governor as constitutive, not add-on**: in the human data, functional self-boundaries need tonic
    gating (B5) — the Governor role is part of what makes sub-agents endogenous.
