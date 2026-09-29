@@ -542,7 +542,8 @@ Structural partition, held-out data, 2 seeds.
 - [x] tick 37: consensus gating triples functional boundaries (held-out) but leaves hemispheric boundary (0.28 vs emp 0.05)
 - [x] tick 38: homotopic h≈0.05 dissolves hemispheric boundary to empirical level; gate+homotopic reproduces EIA-map profile (B8)
 - [x] tick 39: empirical boundaries degenerate (split-half ARI 0.09, each E_norm ≈ 0.45); 0.68 was inflated (B9)
-- [ ] model of degeneracy: gating that switches between several decompositions (metastable) vs fixed — which reproduces split-half ARI≈0.1 with E_norm≈0.45?
+- [x] tick 40: metastable gating (dwell ~120 s) reproduces degenerate boundaries; fixed does not (B10)
+- [ ] toy/prototype: metastable motive decomposition in PopulationDriveEngine — effect on controllability and containment
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)

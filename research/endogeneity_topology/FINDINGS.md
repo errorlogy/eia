@@ -38,6 +38,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | B6 | Gating explains FC | **withdrawn** (does not cross-validate) |
 | B7 | Population (leave-one-out) blocks + gating predict a held-out subject's boundaries | holds (4/4 folds, ARI ≈ 0.17) |
 | B9 | Empirical self-boundaries are **degenerate**: split-half partitions barely agree (ARI 0.09) yet each stays endogenous on held-out data (E_norm ≈ 0.45). Held-out empirical strength is ≈ 0.42–0.49 (tick-36 0.68 was inflated). Fixed-gating models impose one rigid partition and miss this | holds (tick 39) |
+| B10 | Metastable gating (switching among a repertoire of decompositions, dwell ≈ 2 min) reproduces the degenerate empirical profile (ARI 0.17 / E 0.55 / 0.41 vs 0.09 / 0.49 / 0.42); fixed gating does not (0.43 / 0.77 / 0.69) | holds (tick 40) |
 | B8 | SC + modest homotopic boost (h≈0.05–0.1) + tonic functional gating reproduces the empirical endogeneity profile on held-out subjects (EIA map 0.19–0.27 vs 0.25; hemispheres 0.06/−0.10 vs 0.05); subject-specific parts ≈ 0.3 vs held-out empirical ≈ 0.45 (see B9); FC does not constrain it | holds (ticks 37–38, 1 seed) |
 
 ## C. MVP-0 pipeline audit (eia_prototype)
@@ -71,6 +72,8 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    cannot shape *which* initiative is chosen.
 7. **Governor as constitutive, not add-on**: in the human data, functional self-boundaries need tonic
    gating (B5) — the Governor role is part of what makes sub-agents endogenous.
+8. **Metastable decomposition**: let the Governor re-route among several motive decompositions on a slow
+   timescale (B9–B10) instead of fixing one; audit the ensemble of high-E_norm partitions.
 
 ## E. Open threads
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model

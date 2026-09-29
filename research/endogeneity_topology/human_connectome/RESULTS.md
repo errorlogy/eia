@@ -301,3 +301,23 @@ Split each empirical scan in halves; blocks lab1 (first half) and lab2 (second h
   decompositions**, not a single fixed modular structure.
 - EIA reading: an agent's "sub-agents" need not be a unique fixed decomposition; audits should report the
   set/ensemble of high-E_norm partitions, not a single one.
+
+## Tick 40 — metastable gating reproduces degenerate boundaries (`tick40_metastable.py`)
+
+Repertoire = the other 3 subjects' empirical partitions (non-circular); homotopic h = 0.05; the gate switches
+between repertoire partitions (telegraph, mean dwell τ). Same split-half pipeline as tick 39; 4 subjects × 2 seeds.
+
+| condition | split-half ARI | E_norm(l1) on 2nd half | E_norm(l2) |
+|---|---|---|---|
+| no gate | 0.00 | 0.32 | 0.10 |
+| fixed gate (consensus) | 0.43 | 0.77 | 0.69 |
+| **switching, τ = 120 s** | **0.17** | **0.55** | **0.41** |
+| switching, τ = 30 s | 0.18 | 0.56 | 0.60 |
+| *empirical* | *0.09* | *0.49* | *0.42* |
+
+- **Metastable gating with ~2-min dwell comes closest to the empirical profile** on all three numbers; fixed
+  gating is too stable and too strong; no gating has no boundaries; fast switching (30 s) over-strengthens
+  the second-half partition.
+- Residual: split-half ARI still 0.17 vs 0.09 (repertoire of only 3 partitions).
+- Picture: the brain's endogenous sub-agent decomposition is **metastable** — tonic gating that re-routes
+  among several near-equivalent decompositions on a minutes timescale.
