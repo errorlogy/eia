@@ -555,6 +555,23 @@ D1/D2 = cross-drive coalitions. Rate-matched (mean unit activity 0.03), 10 seeds
   gating trades initiative volume and repertoire for containment. Ungated = rich + controllable + contagious.
 - Not promoted to FINDINGS; would need larger n and a readout where coalitions (not only drives) can initiate.
 
+## Tick 42 — is boundary degeneracy generic? (`tick42.py`, helpers `tick35_lib.py`)
+
+Toy networks at rate 0.03, 8000 ticks split in halves; blind detection per half; conditional attribution +
+E_norm on the second half. 2 seeds.
+
+| network | split-half ARI | E_norm(l1) on h2 | E_norm(l2) |
+|---|---|---|---|
+| SBM μ=0.10 fixed | 0.66 | 0.88 | 0.87 |
+| SBM μ=0.05 fixed | 0.98 | 0.99 | 0.99 |
+| hier-modular fixed | 0.75 | 0.96 | 0.96 |
+| SBM μ=0.05 **metastable** (3 partitions, dwell 400) | **0.43** | **0.64** | **0.60** |
+| *human empirical (tick 39)* | *0.09* | *0.49* | *0.42* |
+
+- **Degeneracy is not a generic property of near-critical modular networks**: fixed toy topologies give
+  stable, strong self-boundaries. Switching the effective decomposition moves both numbers toward the human
+  values — independent support (different model family) for B10's metastable-gating account.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
