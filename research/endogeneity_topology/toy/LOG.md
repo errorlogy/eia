@@ -837,6 +837,23 @@ TargetEngine (tension sets uncertainty target), aging_k 0.05, alpha 0.2; recurre
   *between* motives; for an EIA drive engine the working point is below criticality with tension-set targets.
 - This makes the population-drive proposal eval-compatible (removes the tick-57 cost).
 
+## Tick 63 — system card v2 with the calibrated engine (`../eia_prototype/tick63_system_card_v2.py`, `.out`)
+
+proposed = population drives with tension-set uncertainty targets (tick 60) + subcritical motives (gain 0.4,
+tick 62) + closed loop + state-dependent IOR + stochastic staleness. 7 scenarios × 3 seeds.
+
+| metric (mean of 7) | current | proposed v1 (tick 57) | **proposed v2** |
+|---|---|---|---|
+| first (eval-scored) initiative unchanged | 1.00 | 0.81 | **1.00** |
+| EOI | 1.00 | 0.82 | **0.95** |
+| initiative causally depends on drive state | 0.71 | 0.99 | 0.98 |
+| questions in 200 silent episodes | 199.6 | 3.6 | 4.6 |
+| longest same-question run | 199.4 | 1.0 | 1.0 |
+| ISI CV | 0.03 | 1.24 | 1.17 |
+
+- With calibration the proposed architecture keeps every behavioural gain **and** is eval-compatible (first
+  initiative 100 %, EOI 0.95; only twin_world_005 drops to 0.67). The tick-57 cost is essentially gone.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

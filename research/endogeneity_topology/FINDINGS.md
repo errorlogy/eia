@@ -60,6 +60,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | C9 | In silence MVP-0 perseverates: the same question is proposed in 30/30 episodes, the Governor denies 29; closing Action→Belief does not help because intention selection ignores drive state and denials (no goal succession) | tick 52 |
 | C10 | System card (harness): proposed combination (population drives + closed loop + state-IOR) vs current — questions in 200 silent episodes 200 → 3.6, same-question run 199 → 1, ISI CV 0.03 → 1.24, drive-dependence 0.71 → 0.99; cost: first eval initiative unchanged 0.81, EOI 0.82 | tick 57 |
 | C12 | Subcritical population motives with tension-set uncertainty targets make the population engine eval-compatible (first initiative unchanged 100 %) while keeping irregular silent initiative (CV ≈ 1); near-critical motives flatten between-drive differences | tick 62 |
+| C13 | System card v2 (calibrated: tension-set targets + subcritical motives): first eval initiative unchanged 1.00, EOI 0.95, drive-dependence 0.98, silent questions 200 → 4.6, same-question run 199 → 1, ISI CV 0.03 → 1.17 | tick 63 |
 | C11 | Latent crash: `pipeline.py:159` assumes `motivation.dominant_drive` is not None although the schema allows None (all-zero drives) | tick 60 |
 
 ## D. Concrete proposals for EIA
