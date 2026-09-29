@@ -917,6 +917,24 @@ u-only do(Z) on one module, exact twin, 8 seeds × 3 modules, rate-matched; 600 
   emergent, collective events that a single motive's internal boost suppresses rather than triggers.
 - Per-motive controllability is kept (z 3.8).
 
+## Tick 69 — do sub-agents self-organise under Hebbian plasticity? (`tick69.py`)
+
+ER support (N=500, degree 8); every 20 ticks weights move toward lagged co-activation (row-normalised), global gain
+adapted to keep rate ≈ 0.03 (homeostasis). Louvain Q of the weight graph vs weight-shuffled null. 2 seeds, 30 000 ticks.
+
+| eta | weight CV at 30k | Q | Q (shuffled-weight null) |
+|---|---|---|---|
+| 0 (control) | 0.00 | 0.33 | 0.33 |
+| 0.02 | 0.18 | 0.32 | 0.34 |
+| 0.05 | 0.50 | 0.33–0.34 | **0.41** |
+
+- Plasticity makes weights strongly heterogeneous (CV 0 → 0.5) while homeostasis holds the rate, but **modularity
+  does not emerge**: Q stays flat and falls *below* the shuffled-weight null (0.33 vs 0.41).
+- Strong weights therefore run *across* communities: lagged Hebbian learning reinforces the cascade routes, which
+  bridge modules — it builds **integrative highways, not segregated sub-agents**.
+- Implication: sub-agent structure does not self-organise from plain Hebbian + homeostatic rules; it needs
+  competitive/normalising rules or lateral inhibition (cf. A15) or has to be imposed (gating, B5).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
