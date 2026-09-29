@@ -514,9 +514,31 @@ drive *state*), baseline-strong (zero state + block field→drive *channel*), po
 
 ## Tick 34 — consolidated write-up: [`../FINDINGS.md`](../FINDINGS.md)
 
+## Tick 35 — calibrated blind attribution (`tick35.py`)
+
+Conditional attribution: per node, least squares of s_i(t+1) on its top-20 pairwise candidates (+ own
+past), keep positive coefficients (top 10%). Null-normalised E_norm = (E(B) − E(random)) / (1 − E(random)).
+Structural partition, held-out data, 2 seeds.
+
+| topology | method | edge precision | recall | E_norm true | **E_norm blind** |
+|---|---|---|---|---|---|
+| small-world | pairwise | 0.04 | 0.80 | 0.78 | 0.17 |
+| small-world | conditional | **0.97** | 0.46 | 0.78 | **0.75** |
+| ER | pairwise | 0.03 | 0.67 | 0.00 | 0.00 |
+| ER | conditional | 0.91 | 0.40 | 0.00 | **0.00** |
+| modular | pairwise | 0.05 | 0.76 | 0.92 | 0.49 |
+| modular | conditional | 0.91 | 0.38 | 0.92 | **0.93** |
+| hier | pairwise | 0.07 | 0.79 | 0.95 | 0.63 |
+| hier | conditional | 0.93 | 0.38 | 0.95 | **0.95** |
+
+- Pairwise excess: many false edges (precision ≤ 0.07) → E biased low. Conditional: precise but misses
+  edges → raw E biased high (random partitions get ~0.45).
+- **Null normalisation cancels the bias**: conditional E_norm matches ground truth within 0.03 in all four
+  topologies. Blind endogeneity profiles are now *calibrated*, not just rank-preserving (upgrades A11).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
-- [ ] better blind attribution (conditional lagged excess / transfer entropy)
+- [ ] re-run human empirical boundaries (tick 15) with conditional attribution + E_norm
 - [ ] integrate findings into EIA DriveEngine prototype (modular drive graph + lateral inhibition + aging/noise)
 - [ ] (optional) better blind attribution: conditional lagged excess / surrogates
 - [x] tick 14: boundary detector on human-connectome Hopf model → no anatomical self-boundaries, ER-like (see ../human_connectome/RESULTS.md)

@@ -18,7 +18,7 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 | A8 | Both signs are carried by one channel: triggered initiatives resolving neighbours' uncertainty | tick 10 | holds, with regime-shift caveat |
 | A9 | ~92% of unit-level initiatives are neighbour-triggered: endogeneity is boundary-dependent | tick 10–11 | **robust** |
 | A10 | Endogeneity profile E(B): natural self-boundaries exist in modular / hierarchical graphs, not in ER | tick 11 | **robust** |
-| A11 | Self-boundaries are recoverable blind from activity (held-out), E biased low but ranking kept | ticks 12–13 | holds |
+| A11 | Self-boundaries are recoverable blind from activity (held-out); with conditional attribution + null-normalised E_norm the blind profile is calibrated (within 0.03 of truth) | ticks 12–13, 35 | **robust** |
 | A12 | Sub-agents appear only when < ~10–15 % of a module's links leave it (μ_c ≈ 0.08–0.15), far stricter than community detectability (~0.5) | ticks 22–24, 4 graph families | **robust** |
 | A13 | Hierarchy steepness, not ultrametricity per se, controls sub-agents (p-adic α_c ≈ 1.45) | ticks 22–23 | holds |
 | A14 | Hyperbolic graphs behave like scale-free dynamically (never rich) but have real sub-agents | tick 22 | holds, not rate-matched |
@@ -71,6 +71,5 @@ replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
    gating (B5) — the Governor role is part of what makes sub-agents endogenous.
 
 ## E. Open threads
-- better blind attribution (conditional / transfer entropy) to remove the low bias of blind E (A11)
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model
 - causal gate (D1) as an actual patch + tests in `src/`, then re-run PAI-EI-E0-001 baselines
