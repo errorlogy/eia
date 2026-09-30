@@ -100,6 +100,7 @@ reactive, audit with world-cut/replay (4d) regardless of topology.
 | A32 | Core–periphery: the sparse periphery seeds 87 % of cascades (independence 0.51), the dense core amplifies them (70 % of activity, highest influence, independence 0.21) — endogeneity as peripheral sparks × core amplification | holds (tick 101, 3 seeds) |
 | A33 | Near-critical collective endogeneity is fragile to lesions (5 % random loss → survivors at 0.59–0.70; floor ≈ 0.3 = unit clocks); hierarchy is the most resilient, scale-free is robust to small random loss but collapses when hubs are removed — needs gain homeostasis. With homeostatic re-tuning, modular/hierarchical agents fully recover graded initiative and intact sub-agents (hier needs ×1.22 gain), scale-free needs ×2.15 and only recovers clock-like activity (CV 0.53) | holds (ticks 104–105, 2 seeds) |
 | A34 | Without noise, hierarchical-modular endogeneity is almost fully self-sustained (94 % kept), scale-free mostly noise-driven (38 %), ER/SBM/EDR in between (54–64 %); the deterministic dynamics stays irregular (CV 1.3–2.1) — irregular initiative does not require noise | holds (tick 106, 2 seeds) |
+| A35 | Module-level integration and TSE complexity rank exactly opposite to sub-agent endogeneity across 5 topologies (ER highest integration / E_norm 0; hierarchy lowest / 0.95): whole-level integration and part-level endogeneity pull in opposite directions | directional (tick 116, 2 seeds, Gaussian block-level estimate) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 

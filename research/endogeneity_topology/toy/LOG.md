@@ -1436,6 +1436,28 @@ tension rises 0.2 → 0.8 (5 seeds). Eval compatibility = first initiative uncha
 
 Full suite 300 passed, 6 pre-existing failures; 10 new tests pass (eval initiative unchanged in 7/7 scenarios).
 
+## Tick 116 — integration / TSE complexity vs sub-agent endogeneity (`tick116.py`)
+
+Module-level signals (10 blocks × 100 units, 10-tick bins), Gaussian estimates; rate-matched, 2 seeds.
+
+| topology | integration I(X) | TSE complexity | module E_norm |
+|---|---|---|---|
+| ER | **22.2** | **13.1** | −0.00 |
+| scale-free | 10.3 | 7.1 | 0.21 |
+| small-world | 8.4 | 6.1 | 0.88 |
+| flat modular | 4.6 | 4.5 | 0.93 |
+| hier-modular | **1.2** | **1.5** | **0.95** |
+
+- Across topologies, integration and TSE complexity rank **exactly opposite** to sub-agent endogeneity (Spearman −1.0 over 5).
+  At this level, high integration means the blocks rise and fall together (global bursts); high sub-agent endogeneity means
+  they run on their own causes.
+- So "more integration = more agency" (IIT-style intuitions) and "more sub-agent endogeneity" pull in opposite directions:
+  integration is a property of the *whole* acting as one, E(B) of the *parts* acting for themselves. An architecture has
+  to choose the level at which it wants to be endogenous — or get both via a hierarchy plus a thin workspace layer (A21:
+  ignitions without dissolving sub-agents).
+- Caveats: Gaussian estimator on 10 coarse block signals; blocks are arbitrary index sets in ER/BA; classic TSE is expected
+  to peak at intermediate structure with finer-grained measurement. Directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
