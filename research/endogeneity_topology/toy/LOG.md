@@ -1612,6 +1612,22 @@ Weak modulation A = 0.05; carrier period P swept; PLV of burst onsets; 2 seeds.
 - Replicates tick 125: slow carriers entrain most (P 192: 0.73 / 0.87), the 24-tick period is the minimum for both topologies,
   and hierarchy keeps its fast peak at P = 6. A36 upgraded to robust.
 
+## Tick 130 — adaptation ("boredom") and the internal-clock risk (`tick130.py`)
+
+Unit adaptation current (strength b, τ 100 ticks) subtracted from the drive; rate-matched; 2 seeds.
+
+| topology | b | burst CV | autocorrelation peak | period (ticks) | module E_norm |
+|---|---|---|---|---|---|
+| hier | 0 / 0.1 / 0.3 | 1.28 / 1.57 / 1.34 | 0.57 / 0.52 / **0.79** | 128 / 82 / 150 | 0.95 |
+| ER | 0 / 0.1 / 0.3 | 1.63 / 1.65 / 1.71 | 0.60 / 0.72 / **0.77** | 165 / 163 / 168 | 0.00 |
+
+- Even without adaptation the population activity has a **slow quasi-periodic envelope** (autocorrelation peak ≈ 0.6 at
+  ~130–165 ticks) — the uncertainty aging/resolution cycle (A1) acting collectively — while burst *onsets* stay irregular
+  (CV > 1). "Irregular initiative" (CV) and "no internal clock" are not the same property.
+- Strong adaptation deepens that slow rhythm (peak → 0.77–0.79) without changing sub-agent structure. Combined with A36
+  (slow rhythms are the most entraining), adaptation/boredom currents are a route to an **internal slow scheduler**; audits
+  should report the envelope autocorrelation, not only ISI CV.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
