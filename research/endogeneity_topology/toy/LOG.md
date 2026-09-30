@@ -1830,6 +1830,21 @@ Pattern = set of the 10 blocks bursting together in a tick (≥ 10 % active), mu
   a workspace layer (A21) or task-dependent routing are candidate ways to regain combinatorial novelty on a hierarchy.
 - Routing needs a coalition-level (not block-level) pattern definition — left open.
 
+## Tick 149 — does a workspace give the hierarchy back its novelty? (`tick149.py`)
+
+hier-modular + hub workspace layer w; rate-matched; 15 000 ticks; 2 seeds.
+
+| w | distinct patterns | new / 1000 ticks (late) | entropy |
+|---|---|---|---|
+| 0 | 288 | 9.1 | 6.8 |
+| **0.2** | **370** | **18.1** | 7.2 |
+| 0.4 | 366 | 13.2 | 7.2 |
+| *flat SBM (tick 148)* | *637* | *20.6* | *7.6* |
+
+- A thin workspace (w ≈ 0.2) roughly **doubles the late discovery rate** of the hierarchy (9 → 18 per 1000 ticks, close to flat
+  SBM) and raises the number of distinct combinations by ~30 %, while (ticks 117–119) keeping sub-agents. The total repertoire
+  stays below flat modular (370 vs 637). A small workspace weight is the better setting for novelty (0.4 no further gain).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

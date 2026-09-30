@@ -36,22 +36,23 @@ def graph(kind, seed):
     if kind == "hier": return build("hier_modular", seed)[0]
     return nx.stochastic_block_model([100]*10, [[5*0.9/99 if i == j else 5*0.1/900 for j in range(10)] for i in range(10)], seed=seed, sparse=True)
 
-print(f"{'topology':<18}{'distinct patterns':>18}{'late new / 1000t':>18}{'pattern entropy':>17}")
-for kind in ("ER", "SBM", "hier", "SBM + routing b2"):
-    rows = []
-    for seed in (1, 2):
-        A = nx.to_scipy_sparse_array(graph(kind, seed), nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
-        if kind.startswith("SBM +"):
-            lo, hi = 0.3, 8.0
-            for _ in range(10):
-                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim_route(sps.csr_matrix(A1*mid), seed, 2.0, 1500)[0].mean() < 0.03 else (lo, mid)
-            sp, _ = sim_route(sps.csr_matrix(A1*(lo+hi)/2), seed, 2.0, T)
-            P = np.stack([sp[:, mods == m].mean(1) >= 0.10 for m in range(10)], 1)
-        else:
-            # rate-match on unit activity via the routing sim with beta 0 (same dynamics)
-            lo, hi = 0.5, 1.5
-            for _ in range(9):
-                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim_route(sps.csr_matrix(A1*mid), seed, 0.0, 1500)[0].mean() < 0.03 else (lo, mid)
-            P = sim(sps.csr_matrix(A1*(lo+hi)/2), seed, T)[500:]
-        rows.append(discovery(P))
-    m = np.mean(rows, 0); print(f"{kind:<18}{m[0]:>18.0f}{m[1]:>18.2f}{m[2]:>17.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'topology':<18}{'distinct patterns':>18}{'late new / 1000t':>18}{'pattern entropy':>17}")
+    for kind in ("ER", "SBM", "hier", "SBM + routing b2"):
+        rows = []
+        for seed in (1, 2):
+            A = nx.to_scipy_sparse_array(graph(kind, seed), nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
+            if kind.startswith("SBM +"):
+                lo, hi = 0.3, 8.0
+                for _ in range(10):
+                    mid = (lo+hi)/2; lo, hi = (mid, hi) if sim_route(sps.csr_matrix(A1*mid), seed, 2.0, 1500)[0].mean() < 0.03 else (lo, mid)
+                sp, _ = sim_route(sps.csr_matrix(A1*(lo+hi)/2), seed, 2.0, T)
+                P = np.stack([sp[:, mods == m].mean(1) >= 0.10 for m in range(10)], 1)
+            else:
+                # rate-match on unit activity via the routing sim with beta 0 (same dynamics)
+                lo, hi = 0.5, 1.5
+                for _ in range(9):
+                    mid = (lo+hi)/2; lo, hi = (mid, hi) if sim_route(sps.csr_matrix(A1*mid), seed, 0.0, 1500)[0].mean() < 0.03 else (lo, mid)
+                P = sim(sps.csr_matrix(A1*(lo+hi)/2), seed, T)[500:]
+            rows.append(discovery(P))
+        m = np.mean(rows, 0); print(f"{kind:<18}{m[0]:>18.0f}{m[1]:>18.2f}{m[2]:>17.2f}", flush=True)
