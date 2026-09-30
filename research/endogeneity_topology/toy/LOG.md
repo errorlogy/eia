@@ -1681,6 +1681,15 @@ across ticks; 3 seeds.
 - Recommendation added to D1: report origin + Shapley per run, but do not let a causal drive path by itself upgrade a
   predictive-P3 initiative to 'endogenous'.
 
+## Tick 134 — D1 fix: audit only the engine that produced the motivation
+
+The P3 stub builds its own Motivation without `loop.drives`, but D1 recomputed counterfactuals on `loop.drives` — it audited
+an engine that did not produce the initiative (source of tick 133's 0/6 → 2/6). Fix in the draft patches: P3 / reactive
+stubs are not audited through the drive engine (`origin = not_from_drive_engine`, structural False); new test.
+Re-verified: combined patch applies to HEAD, full suite **308 passed / 6 pre-existing failures**; PAI-EI-E0-001 with the
+causal gate now gives P3 **0/6** (as the lexical gate), all other baselines unchanged. C17's P3 caveat resolved; its main
+point (no gate separates full_eia from scheduled/event-rule stubs) stands.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
