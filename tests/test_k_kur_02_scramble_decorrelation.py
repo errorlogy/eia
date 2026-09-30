@@ -54,7 +54,11 @@ def test_genesis_invariant_under_scramble():
 
 
 def test_diagnostic_pass_bundled():
+    # Match CI (no [brain] extra): synthetic spike arms, not optional Brian2 LIF.
     payload = _h.build_k_kur_02_payload(
-        seed=42, generated="2026-09-11", sources=("bundled_tiny",)
+        seed=42,
+        generated="2026-09-11",
+        sources=("bundled_tiny",),
+        prefer_brian2=False,
     )
     assert payload["diagnostic_pass"] is True

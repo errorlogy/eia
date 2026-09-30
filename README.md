@@ -6,12 +6,12 @@
 
 | | |
 |---|---|
-| **Branch** | [
-esearch/cursor-starter-v0.2-woe-eis](https://github.com/errorlogy/eia/tree/research/cursor-starter-v0.2-woe-eis) |
-| **Release tag** | [sci-flow-v0.3](https://github.com/errorlogy/eia/releases/tag/sci-flow-v0.3) (44e7808) |
+| **Sci-flow harness (legacy)** | [`research/cursor-starter-v0.2-woe-eis`](https://github.com/errorlogy/eia/tree/research/cursor-starter-v0.2-woe-eis) — full S1–S5 ATT/WoE runtime; not merged into `main/src/eia/` |
+| **Release tag** | [sci-flow-v0.3](https://github.com/errorlogy/eia/releases/tag/sci-flow-v0.3) (`44e7808`) — see [release notes](./docs/SCI_FLOW_RELEASE.md) |
 | **Claim ceiling** | **C2** — partial evidence only; claim_allowed=false; **no AGI\*** claims in papers or release notes |
+| **CI** | [EIA CI](https://github.com/errorlogy/eia/actions/workflows/eia-ci.yml) green on `main` ([PR #2](https://github.com/errorlogy/eia/pull/2) — vendor-skip gates for optional M-O fixtures) |
 
-**Research strands (on main):** [`research/brain_ai/`](./research/brain_ai/) (connectome→O_t, T-BRAIN-01..06) · [`research/agent_eia/`](./research/agent_eia/) (LLM+EIA at X^trigger=0, T-AGENT-01..03)
+**Research strands (on `main`):** [`research/brain_ai/`](./research/brain_ai/) (Brain-AI connectome→O_t, T-BRAIN-01..06) · [`research/agent_eia/`](./research/agent_eia/) (Agent-EIA: LLM+EIA at X^trigger=0, T-AGENT-01..03) · [`research/kairologos_experiments/`](./research/kairologos_experiments/) (Tier C Kairologos harnesses, K-KUR/K-WOE/K-HDC)
 
 **Papers (at tag):** [EIA framework PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/main.pdf) · [3D Evidence Cube PDF](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/arxiv/sci_flow_3d_cube/main.pdf) · [arXiv submission guide](https://github.com/errorlogy/eia/blob/sci-flow-v0.3/docs/ARXIV_SUBMISSION.md) · [release notes](./docs/SCI_FLOW_RELEASE.md)
 

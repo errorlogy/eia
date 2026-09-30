@@ -6,8 +6,9 @@ Thank you for contributing to the Endogenous Initiative Architecture (EIA) resea
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Production harness under `src/eia/` — no WoE research runtime merges |
-| `research/cursor-starter-v0.2-woe-eis` | Sci-flow, WoE v0.2, ATT milestones, theory notes |
+| `main` | Production harness under `src/eia/` plus `research/brain_ai/`, `research/agent_eia/`, `research/kairologos_experiments/` |
+| `research/cursor-starter-v0.2-woe-eis` | Legacy sci-flow harness, WoE v0.2, ATT milestones (not merged into `main/src/eia/`) |
+| `research/endogeneity-topology` | Endogeneity topology research under `research/endogeneity_topology/` |
 
 **Hard stop:** Do not merge WoE research runtime (`research/cursor-starter-v0.2/src/eia/`) into `main/src/eia/`.
 
@@ -29,19 +30,38 @@ Thank you for contributing to the Endogenous Initiative Architecture (EIA) resea
 - Commit messages and user-facing docs on shared paths: **English only**.
 - Do not commit `.env`, tokens, or credentials.
 
-## Tests before push
+## Local setup
 
 From repo root (Python 3.12+):
 
 ```powershell
 pip install -e ".[dev,sim]"
+```
+
+Optional extras for Brain-AI Brian2 subgraphs and connectome tooling:
+
+```powershell
+pip install -e ".[dev,sim,brain]"
+pip install -e ".[dev,sim,connectome]"   # when vendor connectome snapshots are present
+```
+
+CI installs `.[dev,sim]` only (no Brian2); K-KUR bundled diagnostics match that path.
+
+## Tests before push
+
+```powershell
 pytest tests/test_shadow_multitick.py tests/test_oscillatory_mo.py -q
 cd research\cursor-starter-v0.2
 $env:PYTHONPATH="src"; python -m pytest tests/test_model_roles.py -q
 ```
 
+## CI scope
+
+EIA CI runs on pushes and PRs to `main` and `research/cursor-starter-v0.2-woe-eis`. The long-running `research/endogeneity-topology` branch is not in the workflow matrix yet (dense research scripts; run `pytest` locally before push). See [`docs/CI_CD.md`](docs/CI_CD.md).
+
 ## Related docs
 
+- [`docs/INDEX.md`](docs/INDEX.md) — documentation entry points
 - [`docs/CI_CD.md`](docs/CI_CD.md) — CI/CD workflows, local commands, branch protection
 - [`docs/RESEARCH_BRANCHES.md`](docs/RESEARCH_BRANCHES.md)
 - [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md)
