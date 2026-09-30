@@ -35,24 +35,25 @@ def multilag(sp, L=10):
     X = sum(np.vstack([np.zeros((l, N)), sp[:-l]]).astype(float) for l in range(1, L + 1))
     return X
 
-print(f"{'delays':<8}{'lag-1 detector ARI':>19}{'multi-lag detector ARI':>24}")
-for cond in ("none", "0-9"):
-    r1, rm = [], []
-    for seed in (1, 2):
-        g = nx.stochastic_block_model([100]*10, [[5*0.9/99 if i == j else 5*0.1/900 for j in range(10)] for i in range(10)], seed=seed, sparse=True)
-        A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
-        delays = np.zeros(A1.nnz, int) if cond == "none" else np.random.default_rng(seed).integers(0, 10, A1.tocoo().nnz)
-        lo, hi = 0.5, 2.0
-        for _ in range(9):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(split(sps.csr_matrix(A1*mid), delays), seed, 1500).mean() < 0.03 else (lo, mid)
-        sp = sim(split(sps.csr_matrix(A1*(lo+hi)/2), delays), seed, 4500)[:2000]
-        r1.append(detect(t35.top10(t35.conditional(sp, t35.pairwise(sp))), seed))
-        X = multilag(sp); Kp = (sps.csr_matrix(X[:-1]).T @ sps.csr_matrix(sp[1:].astype(float))).toarray().T - np.outer(sp.mean(0), X.mean(0)) * (len(sp) - 1)
-        np.fill_diagonal(Kp, 0); Kp = np.clip(Kp, 0, None)
-        B = np.zeros((N, N)); Y = sp[1:].astype(float); Xp = X[:-1]
-        for i in range(N):
-            js = np.argsort(Kp[i])[-20:]; js = js[Kp[i, js] > 0]
-            if len(js) == 0 or Y[:, i].sum() < 3: continue
-            Xi = np.column_stack([np.ones(len(Xp)), Xp[:, i], Xp[:, js]]); B[i, js] = np.clip(np.linalg.lstsq(Xi, Y[:, i], rcond=None)[0][2:], 0, None)
-        rm.append(detect(t35.top10(B), seed))
-    print(f"{cond:<8}{np.mean(r1):>19.2f}{np.mean(rm):>24.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'delays':<8}{'lag-1 detector ARI':>19}{'multi-lag detector ARI':>24}")
+    for cond in ("none", "0-9"):
+        r1, rm = [], []
+        for seed in (1, 2):
+            g = nx.stochastic_block_model([100]*10, [[5*0.9/99 if i == j else 5*0.1/900 for j in range(10)] for i in range(10)], seed=seed, sparse=True)
+            A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
+            delays = np.zeros(A1.nnz, int) if cond == "none" else np.random.default_rng(seed).integers(0, 10, A1.tocoo().nnz)
+            lo, hi = 0.5, 2.0
+            for _ in range(9):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(split(sps.csr_matrix(A1*mid), delays), seed, 1500).mean() < 0.03 else (lo, mid)
+            sp = sim(split(sps.csr_matrix(A1*(lo+hi)/2), delays), seed, 4500)[:2000]
+            r1.append(detect(t35.top10(t35.conditional(sp, t35.pairwise(sp))), seed))
+            X = multilag(sp); Kp = (sps.csr_matrix(X[:-1]).T @ sps.csr_matrix(sp[1:].astype(float))).toarray().T - np.outer(sp.mean(0), X.mean(0)) * (len(sp) - 1)
+            np.fill_diagonal(Kp, 0); Kp = np.clip(Kp, 0, None)
+            B = np.zeros((N, N)); Y = sp[1:].astype(float); Xp = X[:-1]
+            for i in range(N):
+                js = np.argsort(Kp[i])[-20:]; js = js[Kp[i, js] > 0]
+                if len(js) == 0 or Y[:, i].sum() < 3: continue
+                Xi = np.column_stack([np.ones(len(Xp)), Xp[:, i], Xp[:, js]]); B[i, js] = np.clip(np.linalg.lstsq(Xi, Y[:, i], rcond=None)[0][2:], 0, None)
+            rm.append(detect(t35.top10(B), seed))
+        print(f"{cond:<8}{np.mean(r1):>19.2f}{np.mean(rm):>24.2f}", flush=True)

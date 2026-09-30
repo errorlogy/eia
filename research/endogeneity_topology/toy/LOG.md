@@ -1729,6 +1729,19 @@ detector (upper bound); ARI vs true modules; 2 seeds.
   structure first (or use a lag-selective model, e.g. per-lag regression / transfer entropy with lag search) before blind
   boundary detection. Complements tick 138 (the same mismatch biases E_norm).
 
+## Tick 140 — lag-selective blind detector (`tick140.py`)
+
+Per ordered pair, the lag (1–10) with the largest lagged excess; per target, regression on the top-20 candidates each at its
+own best lag; Louvain (best resolution); 2 seeds.
+
+| delays | lag-1 | summed multi-lag | **lag-selective** |
+|---|---|---|---|
+| none | 0.82 | 0.34 | **0.78** |
+| 0–9 ticks | 0.08 | 0.58 | **0.73** |
+
+- The lag-selective detector is **robust to unknown delays**: near-optimal without delays (0.78 vs 0.82) and best with them
+  (0.73). Recommended default for blind sub-agent detection on real agent logs / neural data with unknown latencies.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
