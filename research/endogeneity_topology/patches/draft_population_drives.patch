@@ -1,0 +1,261 @@
+diff --git a/src/eia/drives/population.py b/src/eia/drives/population.py
+new file mode 100644
+index 0000000..211358d
+--- /dev/null
++++ b/src/eia/drives/population.py
+@@ -0,0 +1,124 @@
++"""PopulationDrives — opt-in drive engine with intrinsic dynamics (research/endogeneity_topology, ticks 29–114).
++
++Each DriveKind is a population of units (one motive = one module):
++  * BeliefField tension sets each motive's uncertainty *target* (not its growth rate), so tension level is preserved;
++  * noise + uncertainty aging/resolution give irregular initiative in silence (no pinning, no hidden clock);
++  * motives run subcritical (gain 0.4) so drive intensities stay discriminable between drives;
++  * sparse cross-drive coupling (mu 0.15) gives graded inter-motive interaction while motives stay separable.
++Output is the standard ``Motivation``; ``state`` mirrors ``DriveState`` scalars for AgentState / shadow code.
++Recommended configuration "v3" (system card: eval-scored initiative unchanged in 21/21 runs, EOI 0.90).
++"""
++
++from __future__ import annotations
++
++from dataclasses import dataclass
++from datetime import datetime, timezone
++
++import numpy as np
++
++from eia.beliefs import BeliefField
++from eia.drives import DriveState
++from eia.schemas.motivation import DriveKind, Motivation, MotivationSignal
++
++DRIVES = list(DriveKind)
++
++
++@dataclass
++class PopulationParams:
++    units: int = 60
++    degree: float = 5.0
++    mu: float = 0.15            # cross-drive share of each unit's links
++    gain: float = 0.4           # spectral-radius-normalised recurrent gain (subcritical)
++    rho: float = 0.12
++    alpha: float = 0.20
++    theta: float = 0.60
++    u0: float = 0.20            # uncertainty target at zero tension
++    aging_k: float = 0.05       # relaxation rate toward the tension-set target
++    resolve: float = 0.6
++    beta_u: float = 0.15
++    sigma: float = 0.03
++    refractory: int = 5
++    window: int = 20
++    burst_frac: float = 0.15
++    inner_steps: int = 40       # population steps per cognition tick
++    seed: int = 0
++
++
++class PopulationDrives:
++    """Drop-in alternative to ``DriveEngine`` (same ``compute`` signature, same ``Motivation`` output)."""
++
++    def __init__(self, params: PopulationParams | None = None) -> None:
++        self.p = p = params or PopulationParams()
++        self.rng = np.random.default_rng(p.seed)
++        n = p.units * len(DRIVES)
++        self.label = np.repeat(np.arange(len(DRIVES)), p.units)
++        same = self.label[:, None] == self.label[None, :]
++        p_in = p.degree * (1 - p.mu) / (p.units - 1)
++        p_out = p.degree * p.mu / (n - p.units)
++        A = np.triu(self.rng.random((n, n)) < np.where(same, p_in, p_out), 1).astype(float)
++        A = A + A.T
++        lam = max(float(np.max(np.abs(np.linalg.eigvals(A)))), 1e-9)
++        self.W = A * (p.gain / lam)
++        self.d = self.rng.uniform(0, 0.3, n)
++        self.u = self.rng.uniform(0.2, 0.6, n)
++        self.s = np.zeros(n)
++        self.refr = np.zeros(n)
++        self.history: list[np.ndarray] = []
++        self.state = DriveState()
++
++    def _step(self, tension: np.ndarray) -> np.ndarray:
++        p = self.p
++        inp = self.W @ self.s
++        target = p.u0 + (1 - p.u0) * np.clip(tension, 0, 1)[self.label]
++        self.u = np.clip(self.u + p.aging_k * (target - self.u) + p.beta_u * inp * (1 - self.u)
++                         - p.resolve * self.u * self.s, 0, 1)
++        self.d = np.clip((1 - p.rho) * self.d + p.alpha * self.u + inp
++                         + p.sigma * self.rng.standard_normal(len(self.d)) - 0.8 * self.s, 0, 1)
++        self.s = ((self.d > p.theta) & (self.refr <= 0)).astype(float)
++        self.refr = np.where(self.s > 0, p.refractory, self.refr - 1)
++        per = np.array([self.s[self.label == k].mean() for k in range(len(DRIVES))])
++        self.history.append(per)
++        return per
++
++    def compute(
++        self,
++        field: BeliefField,
++        *,
++        novelty_events: dict[DriveKind, float] | None = None,
++        satisfaction: dict[DriveKind, float] | None = None,
++        motivation_id: str = "mot-0",
++    ) -> Motivation:
++        grads = field.gradient_snapshot()
++        tension = np.array([grads[k.value] for k in DRIVES])
++        for _ in range(self.p.inner_steps):
++            self._step(tension)
++        recent = np.array(self.history[-self.p.window:]).mean(0)
++        intensity = np.clip(recent / self.p.burst_frac, 0, 1)
++        targets = {
++            DriveKind.EPISTEMIC: [b.id for b in field.highest_entropy_beliefs(2)],
++            DriveKind.COHERENCE: [c[0] for c in field.contradictions[:2]],
++            DriveKind.COMMITMENT: [b.id for b in field.beliefs.values() if b.kind.value == "commitment"],
++        }
++        signals = [
++            MotivationSignal(
++                drive=k,
++                intensity=float(intensity[i]),
++                error_term=float(tension[i]),
++                decay_rate=self.p.rho,
++                target_belief_ids=targets[k],
++                explanation=(f"{k.value}: population activity {recent[i]:.3f}; BeliefField gradient {tension[i]:.3f} "
++                             f"sets uncertainty target"),
++            )
++            for i, k in enumerate(DRIVES)
++        ]
++        dominant = max(signals, key=lambda s_: s_.intensity)
++        self.state.epistemic, self.state.coherence, self.state.commitment = (float(x) for x in intensity)
++        self.state.tick += 1
++        return Motivation(
++            id=motivation_id,
++            timestamp=datetime.now(timezone.utc),
++            signals=signals,
++            composite_lex_score=(dominant.intensity, float(tension[1]), float(tension[2])),
++            dominant_drive=dominant.drive,
++            parent_belief_update_ids=[u.id for u in field.updates[-3:]],
++        )
+diff --git a/src/eia/pipeline.py b/src/eia/pipeline.py
+index 010cfe6..c3cce02 100644
+--- a/src/eia/pipeline.py
++++ b/src/eia/pipeline.py
+@@ -55,10 +55,18 @@ class PipelineStageResult:
+ class CognitiveLoop:
+     """End-to-end five-stage pipeline with NAMM artifact hooks."""
+ 
+-    def __init__(self, *, seed: int = 42) -> None:
++    def __init__(self, *, seed: int = 42, drive_engine: str = "classic") -> None:
+         self.field = BeliefField()
+         self.sense_making = SenseMakingEngine(self.field)
+-        self.drives = DriveEngine()
++        if drive_engine == "population":
++            from eia.drives.population import PopulationDrives, PopulationParams
++
++            self.drives = PopulationDrives(PopulationParams(seed=seed))
++        elif drive_engine == "classic":
++            self.drives = DriveEngine()
++        else:
++            raise ValueError(f"unknown drive_engine {drive_engine!r}")
++        self._drives_snapshot = None
+         self.intention = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12)
+         self.governor = ContactGovernor()
+         self.namm = NammAdapter(epistemic_threshold=0.50)
+@@ -219,6 +227,10 @@ class CognitiveLoop:
+             decision = None
+ 
+         self._snapshot_field = BeliefField.model_validate(self.field.model_dump())
++        if not isinstance(self.drives, DriveEngine):
++            import copy
++
++            self._drives_snapshot = copy.deepcopy(self.drives)   # exact twin incl. RNG for stochastic engines
+ 
+         return motivation, initiative, decision, namm_intent
+ 
+@@ -228,11 +240,16 @@ class CognitiveLoop:
+             raise RuntimeError("No snapshot — run tick_cognition first")
+ 
+         twin_field = BeliefField.model_validate(self._snapshot_field.model_dump())
+-        twin_drives = DriveEngine()
+-        twin_drives.state.epistemic = self.drives.state.epistemic
+-        twin_drives.state.coherence = self.drives.state.coherence
+-        twin_drives.state.commitment = self.drives.state.commitment
+-        twin_drives.state.tick = self.drives.state.tick
++        if self._drives_snapshot is not None:
++            import copy
++
++            twin_drives = copy.deepcopy(self._drives_snapshot)
++        else:
++            twin_drives = DriveEngine()
++            twin_drives.state.epistemic = self.drives.state.epistemic
++            twin_drives.state.coherence = self.drives.state.coherence
++            twin_drives.state.commitment = self.drives.state.commitment
++            twin_drives.state.tick = self.drives.state.tick
+         twin_intention = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12)
+         twin_gov = ContactGovernor()
+         twin_gov.state = GovernorState(
+@@ -255,6 +272,7 @@ def run_scenario(
+     twin_policy: TwinInterventionPolicy = DEFAULT_TWIN_POLICY,
+     twin_remove_last_n: int = 1,
+     baseline: BaselineCondition = BaselineCondition.FULL_EIA,
++    drive_engine: str = "classic",
+ ) -> dict:
+     """Full end-to-end scenario run with labeled pipeline stages."""
+     scenario = load_scenario(scenario_path)
+@@ -263,7 +281,7 @@ def run_scenario(
+ 
+     with seeded_context(run_seed):
+         sim = Simulator(scenario, seed=run_seed)
+-        loop = CognitiveLoop(seed=run_seed)
++        loop = CognitiveLoop(seed=run_seed, drive_engine=drive_engine)
+         loop.twin_runner = TwinRunner(
+             policy=twin_policy,
+             remove_last_n=twin_remove_last_n,
+diff --git a/tests/test_population_drives.py b/tests/test_population_drives.py
+new file mode 100644
+index 0000000..42b4e8a
+--- /dev/null
++++ b/tests/test_population_drives.py
+@@ -0,0 +1,50 @@
++"""Opt-in PopulationDrives engine (research/endogeneity_topology, config v3)."""
++
++from pathlib import Path
++
++import numpy as np
++import pytest
++
++from eia.pipeline import run_scenario
++
++ROOT = Path(__file__).resolve().parents[1]
++SCENARIOS = sorted((ROOT / "evals").glob("twin_world_*.yaml")) + [
++    ROOT / "scenarios" / "twin_world_001.yaml", ROOT / "scenarios" / "autonomous_question.yaml"]
++
++
++def _sig(r):
++    c = r["initiative"].candidate
++    return (r["initiative"].abstained, c.kind.value if c else None, c.target_belief_id if c else None)
++
++
++def test_unknown_engine_rejected(tmp_path):
++    with pytest.raises(ValueError):
++        run_scenario(SCENARIOS[0], traces_dir=tmp_path, seed=100, drive_engine="nope")
++
++
++@pytest.mark.parametrize("path", SCENARIOS, ids=lambda p: p.stem)
++def test_population_engine_keeps_eval_initiative(path, tmp_path):
++    classic = run_scenario(path, traces_dir=tmp_path, seed=100)
++    pop = run_scenario(path, traces_dir=tmp_path, seed=100, drive_engine="population")
++    assert _sig(pop) == _sig(classic)
++
++
++def test_population_twin_is_exact_copy(tmp_path):
++    r = run_scenario(SCENARIOS[0], traces_dir=tmp_path, seed=100, drive_engine="population")
++    assert r["twin_result"].eoi > 0.5
++
++
++def test_population_drives_are_not_pinned_in_silence():
++    from datetime import datetime, timezone
++
++    from eia.beliefs import BeliefField
++    from eia.drives.population import PopulationDrives, PopulationParams
++    from eia.schemas.belief import Belief, BeliefKind
++
++    now = datetime.now(timezone.utc)
++    f = BeliefField()
++    f.add_belief(Belief(id="b1", kind=BeliefKind.CATEGORICAL, subject="s", claim="c",
++                        distribution={"a": 0.9, "b": 0.1}, created_at=now, updated_at=now))
++    eng = PopulationDrives(PopulationParams(seed=1))
++    trace = [eng.compute(f).signals[0].intensity for _ in range(60)]
++    assert np.std(trace[20:]) > 0.01          # classic DriveEngine pins at a constant here

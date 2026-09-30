@@ -1432,6 +1432,10 @@ tension rises 0.2 → 0.8 (5 seeds). Eval compatibility = first initiative uncha
 - Adding inter-motive interaction (μ 0.15) keeps every gain of v2 and full eval compatibility; EOI drops slightly
   (0.95 → 0.90) because coupled drives make the twin diverge a little more. v3 is the recommended prototype configuration.
 
+## Tick 115 — draft patch for opt-in population drives v3 (`../patches/draft_population_drives.patch`), not applied
+
+Full suite 300 passed, 6 pre-existing failures; 10 new tests pass (eval initiative unchanged in 7/7 scenarios).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
