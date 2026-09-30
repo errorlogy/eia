@@ -41,6 +41,14 @@ sim = [
     "numpy",
     "matplotlib",
 ]
+# Brian2 LIF subgraph (research/brain_ai); numpy codegen works on Windows without Cython
+brain = [
+    "brian2>=2.5.1",
+]
+# FlyWire / neuPrint live API — optional; offline JSON in research/brain_ai/data/ needs NEUPRINT_TOKEN to fetch
+connectome = [
+    "neuprint-python",
+]
 live = [
     "apscheduler>=3.10",
     "httpx>=0.27",

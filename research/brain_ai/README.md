@@ -4,6 +4,27 @@ Tier **C** adjunct strand: connectome subgraph → spike dynamics → `OmegaWave
 
 **Claim ceiling:** C2 · `claim_allowed=false` · `agi_star_claim=false` · no D1 `e_endo_support` bleed.
 
+## Install (Brian2 + sim)
+
+From repo root (Python 3.12+):
+
+```bash
+py -3.12 -m venv .venv   # requires-python >=3.12
+.venv\Scripts\activate
+pip install -e ".[dev,sim,brain]"
+```
+
+Optional neuPrint (FlyWire live export, not required for offline harnesses):
+
+```bash
+pip install -e ".[connectome]"
+export NEUPRINT_TOKEN=...   # or setenv NEUPRINT_TOKEN on Windows
+```
+
+Place fetched subgraph JSON under `research/brain_ai/data/` (gitignored exports). See `data/README.md` and `CONNECTOME_SOURCES.md`.
+
+Brian2 uses `prefs.codegen.target = "numpy"` in adapters — no MSVC/Cython build on Windows. If install fails, try `pip install brian2` in the venv only (never global torch/CUDA stacks).
+
 ## Quick start
 
 ```bash

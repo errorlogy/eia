@@ -2779,3 +2779,21 @@ K-HYP-01 Poincaré connectome viz (descriptive); paired do(O) with HDC carryover
 ### Next
 
 K-HYP-01 Poincaré connectome viz; cross-source replication of paired scramble; no C raise.
+
+---
+
+## Entry 080 — 2026-09-30 — Optional `[brain]` extra (Brian2) + venv docs
+
+**Session:** Real Brian2 install path for `research/brain_ai` (LIF subgraph); optional `[connectome]` for neuPrint/FlyWire API.
+**Branch:** `research/endogeneity-topology`
+
+### Actions
+
+| Loop | Summary |
+|------|---------|
+| S1 | `pyproject.toml` — `[project.optional-dependencies] brain` (`brian2>=2.5.1`), `connectome` (`neuprint-python`) |
+| S2 | `research/brain_ai/README.md` — venv install; NEUPRINT_TOKEN + `data/` offline notes |
+
+### Next
+
+Fetch `flywire_female_subgraph.json` via neuPrint when token available; verify `prefer_brian2` in T-BRAIN-01 artifact path.
