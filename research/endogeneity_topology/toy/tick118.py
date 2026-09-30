@@ -23,23 +23,24 @@ def sim_boost(W, seed, S=None):
         s = ((d > te.THETA) & (refr <= 0)).astype(float); refr = np.where(s > 0, 5, refr-1); out[t] = s > 0
     return out
 
-z = lambda x: x.mean() / (x.std(ddof=1) / np.sqrt(len(x)))
-print(f"{'architecture':<18}{'integration':>12}{'TSE':>7}{'module E_norm':>15}{'d self':>8}{'z':>6}")
-for name, w in (("hier alone", 0.0), ("hier + workspace", 0.4)):
-    rows, dself = [], []
-    for seed in (1, 2, 3):
-        H = nx.to_scipy_sparse_array(build("hier_modular", seed)[0], nodelist=range(N), format="csr", dtype=float)
-        H = H / abs(eigs(H, k=1, which="LM", return_eigenvectors=False)[0]); _, B = layers(seed)
-        lo, hi = 0.3, 1.4
-        for _ in range(10):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(H*mid + B*w, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
-        W = sps.csr_matrix(H*(lo+hi)/2 + B*w); sp = sim(W, seed, 6500)[500:]
-        X = np.stack([sp[:, mods == m].reshape(-1, 10, 100).mean((1, 2)) for m in range(10)])
-        rng = np.random.default_rng(seed); I, C = tse(X, rng)
-        en = np.mean([E_of(sp, W, mods[rng.permutation(N)]) for _ in range(5)]); e = (E_of(sp, W, mods) - en) / (1 - en)
-        rows.append((I, C, e))
-        tw = sim_boost(W, seed)
-        for m in (5, 8):
-            ins = mods == m; pe = sim_boost(W, seed, np.flatnonzero(ins)); dself.append(int(pe[T0:, ins].sum()) - int(tw[T0:, ins].sum()))
-    m = np.mean(rows, 0); d = np.array(dself)
-    print(f"{name:<18}{m[0]:>12.2f}{m[1]:>7.2f}{m[2]:>15.2f}{d.mean():>8.1f}{z(d):>6.2f}", flush=True)
+if __name__ == "__main__":
+    z = lambda x: x.mean() / (x.std(ddof=1) / np.sqrt(len(x)))
+    print(f"{'architecture':<18}{'integration':>12}{'TSE':>7}{'module E_norm':>15}{'d self':>8}{'z':>6}")
+    for name, w in (("hier alone", 0.0), ("hier + workspace", 0.4)):
+        rows, dself = [], []
+        for seed in (1, 2, 3):
+            H = nx.to_scipy_sparse_array(build("hier_modular", seed)[0], nodelist=range(N), format="csr", dtype=float)
+            H = H / abs(eigs(H, k=1, which="LM", return_eigenvectors=False)[0]); _, B = layers(seed)
+            lo, hi = 0.3, 1.4
+            for _ in range(10):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(H*mid + B*w, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
+            W = sps.csr_matrix(H*(lo+hi)/2 + B*w); sp = sim(W, seed, 6500)[500:]
+            X = np.stack([sp[:, mods == m].reshape(-1, 10, 100).mean((1, 2)) for m in range(10)])
+            rng = np.random.default_rng(seed); I, C = tse(X, rng)
+            en = np.mean([E_of(sp, W, mods[rng.permutation(N)]) for _ in range(5)]); e = (E_of(sp, W, mods) - en) / (1 - en)
+            rows.append((I, C, e))
+            tw = sim_boost(W, seed)
+            for m in (5, 8):
+                ins = mods == m; pe = sim_boost(W, seed, np.flatnonzero(ins)); dself.append(int(pe[T0:, ins].sum()) - int(tw[T0:, ins].sum()))
+        m = np.mean(rows, 0); d = np.array(dself)
+        print(f"{name:<18}{m[0]:>12.2f}{m[1]:>7.2f}{m[2]:>15.2f}{d.mean():>8.1f}{z(d):>6.2f}", flush=True)

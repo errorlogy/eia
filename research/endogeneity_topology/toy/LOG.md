@@ -1487,6 +1487,19 @@ Hierarchical-modular motives ± thin workspace layer (w 0.4); rate-matched; 3 se
   boost is broadcast). The combined recommendation (hierarchy + thin workspace) holds its promise on all three axes at once.
 - Small n (6 boosts): controllability z ≈ 2 in both — directional.
 
+## Tick 119 — tick 118 controllability with 18 boosts (`tick119.py`)
+
+| architecture | Δ boosted motive (z) | Δ rest of the agent (z) |
+|---|---|---|
+| hier alone | +210 (**3.8**) | +214 (1.2) |
+| hier + workspace | +133 (**2.4**) | **−555 (−2.0)** |
+
+- With more samples the workspace **does cost controllability**: the boosted motive's gain drops ~35 % (z 3.8 → 2.4), and the
+  rest of the agent is now *suppressed* (−555, z −2.0) instead of mildly excited — the boosted motive drains the shared hubs
+  (same mechanism as tick 68). Tick 118's "controllability kept" (n = 6) was too optimistic.
+- Refined recommendation: the thin workspace buys integration at a moderate controllability price and turns inter-motive
+  influence competitive; keep w small (≤ 0.4) and pair it with the leaky share-cap Governor (A29) if balance matters.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
