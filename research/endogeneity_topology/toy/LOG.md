@@ -1296,6 +1296,25 @@ Gain re-bisected so survivors return to rate 0.03. 2 seeds.
 - Completes A33: lesion fragility near criticality is repairable by homeostasis in modular/hierarchical architectures,
   not in hub-dependent ones.
 
+## Tick 106 — noise-driven vs self-sustained endogeneity (`tick106.py`)
+
+Rate-matched gain; noise switched off after 2000 ticks. 2 seeds.
+
+| topology | activity kept without noise | burst CV with noise | burst CV without noise |
+|---|---|---|---|
+| **hier-modular** | **0.94** | 1.24 | 1.37 |
+| ER | 0.64 | 1.81 | 2.10 |
+| SBM | 0.64 | 1.48 | 1.95 |
+| EDR (λ 0.05) | 0.54 | 1.37 | 1.34 |
+| scale-free (BA) | **0.38** | 1.08 | 1.83 |
+
+- Hierarchical-modular endogeneity is almost entirely **self-sustained** (94 % survives without noise); scale-free is mostly
+  **noise-driven** (38 %); flat modular/ER/spatial in between.
+- Without noise the dynamics stays **irregular** (CV 1.3–2.1, not a clock): uncertainty aging + resolution + coupling generate
+  deterministic irregular initiative. Noise is not what makes initiative non-periodic here; it mainly sustains activity in
+  hub-dependent topologies.
+- Adds to A33/A34-style resilience: hierarchy = least dependent on noise, on lesions and on gain re-tuning.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
