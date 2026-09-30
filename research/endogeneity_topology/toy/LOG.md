@@ -1164,6 +1164,21 @@ on non-dominant motives; 6 seeds × 2 targets.
   neutral. This is the working Governor recipe of the toy line: **slow one-sided leaky share cap per motive + global
   budget loop with a slow integral**.
 
+## Tick 94 — Governor recipe across topologies (`tick94.py`)
+
+Motive labels = 10 blocks of 100 units; module 0 excitability ×2.5; 4 seeds × 2 targets.
+
+| topology | governor | generator share | rate | Δ boosted motive (z) |
+|---|---|---|---|---|
+| SBM | no / yes | 0.40 / **0.13** | 0.029 / 0.026 | +126 (6.1) / **+187 (6.5)** |
+| hier-modular | no / yes | 0.39 / **0.19** | 0.030 / 0.027 | +138 (4.0) / **+209 (4.2)** |
+| ER (labels only) | no / yes | 0.16 / 0.12 | 0.030 / 0.026 | +48 (1.5) / **+152 (3.3)** |
+
+- The recipe transfers: it caps the dominant motive in every topology (hierarchy only partly: 0.19 vs cap 0.15) and
+  per-motive controllability is kept or **improved** — in ER it goes from not significant to z 3.3, because capping the
+  generator frees budget that the boosted motive can use.
+- Rate settles slightly below target (0.026–0.027) within the window.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
