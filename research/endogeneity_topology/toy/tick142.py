@@ -38,18 +38,19 @@ def detect(sp, seed):
         if best is None or sc > best[0]: best = (sc, lab)
     return best[1]
 
-print(f"{'beta':>5}{'split-half ARI':>15}{'ARI vs modules':>15}{'held-out E_norm':>16}")
-for beta in (0.0, 0.5, 1.0, 2.0):
-    rows = []
-    for seed in (1, 2):
-        g = nx.stochastic_block_model([100]*10, [[5*0.8/99 if i == j else 5*0.2/900 for j in range(10)] for i in range(10)], seed=seed, sparse=True)
-        A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
-        lo, hi = 0.3, 2.0
-        for _ in range(9):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(sps.csr_matrix(A1*mid), seed, beta, 1500)[0].mean() < 0.03 else (lo, mid)
-        sp, Wm = sim(sps.csr_matrix(A1*(lo+hi)/2), seed, beta, 8500); h1, h2 = sp[:4000], sp[4000:]
-        l1, l2 = detect(h1, seed), detect(h2, seed + 1); rng = np.random.default_rng(seed)
-        en = np.mean([E_of(h2, Wm, l1[rng.permutation(N)]) for _ in range(5)]); e = (E_of(h2, Wm, l1) - en) / (1 - en)
-        rows.append((ari(l1, l2), ari(l1, np.arange(N) // 100), e))
-    m = np.mean(rows, 0); print(f"{beta:>5}{m[0]:>15.2f}{m[1]:>15.2f}{m[2]:>16.2f}", flush=True)
-print("brain (B9): split-half ARI ~0.02-0.08, held-out E_norm ~0.3-0.5")
+if __name__ == "__main__":
+    print(f"{'beta':>5}{'split-half ARI':>15}{'ARI vs modules':>15}{'held-out E_norm':>16}")
+    for beta in (0.0, 0.5, 1.0, 2.0):
+        rows = []
+        for seed in (1, 2):
+            g = nx.stochastic_block_model([100]*10, [[5*0.8/99 if i == j else 5*0.2/900 for j in range(10)] for i in range(10)], seed=seed, sparse=True)
+            A = nx.to_scipy_sparse_array(g, nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
+            lo, hi = 0.3, 2.0
+            for _ in range(9):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(sps.csr_matrix(A1*mid), seed, beta, 1500)[0].mean() < 0.03 else (lo, mid)
+            sp, Wm = sim(sps.csr_matrix(A1*(lo+hi)/2), seed, beta, 8500); h1, h2 = sp[:4000], sp[4000:]
+            l1, l2 = detect(h1, seed), detect(h2, seed + 1); rng = np.random.default_rng(seed)
+            en = np.mean([E_of(h2, Wm, l1[rng.permutation(N)]) for _ in range(5)]); e = (E_of(h2, Wm, l1) - en) / (1 - en)
+            rows.append((ari(l1, l2), ari(l1, np.arange(N) // 100), e))
+        m = np.mean(rows, 0); print(f"{beta:>5}{m[0]:>15.2f}{m[1]:>15.2f}{m[2]:>16.2f}", flush=True)
+    print("brain (B9): split-half ARI ~0.02-0.08, held-out E_norm ~0.3-0.5")
