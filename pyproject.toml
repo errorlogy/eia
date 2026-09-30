@@ -65,6 +65,7 @@ exclude = [
     "research/vendor",
     "research/cursor-starter-v0.1",
     "_extracted",
+    "scripts/audit",
 ]
 
 [tool.ruff.lint]

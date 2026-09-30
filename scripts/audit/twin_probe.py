@@ -1,5 +1,6 @@
 """Probe: does the twin actually lack the removed user events?"""
-import glob, tempfile
+import glob
+import tempfile
 from pathlib import Path
 from eia.pipeline import run_scenario, CognitiveLoop
 from eia.schemas.belief import BeliefKind

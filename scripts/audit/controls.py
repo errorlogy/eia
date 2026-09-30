@@ -1,6 +1,14 @@
 """Control matrix for EIA initiative: which inputs is the initiative actually sensitive to?
 Usage: PYTHONPATH=<src> python controls.py <repo_root> <engine> <seeds...>"""
-import copy, sys, tempfile, glob, json, collections, inspect, io, contextlib
+import copy
+import sys
+import tempfile
+import glob
+import json
+import collections
+import inspect
+import io
+import contextlib
 from pathlib import Path
 import yaml
 from eia.pipeline import run_scenario
