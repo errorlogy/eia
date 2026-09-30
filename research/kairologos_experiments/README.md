@@ -26,6 +26,7 @@ claims.
 | **K-WOE-42b** | `research/brain_ai/harnesses/k_woe_42b_midband_ablation.py` | `artifacts/M-K-WOE-42b_2026-09-11.json` | F-GAMMA-UNIQUE-ABLATION |
 | **K-HDC-02** | `research/agent_eia/harnesses/k_hdc_02_carryover.py` | `artifacts/M-K-HDC-02_2026-09-11.json` | F-HDC-AS-AGI (annotation) |
 | **K-KUR-02** | `research/brain_ai/harnesses/k_kur_02_scramble_decorrelation.py` | `artifacts/M-K-KUR-02_2026-09-11.json` | F-KURAMOTO-AS-E (causal) |
+| **K-RHYTHM-01** | `research/brain_ai/harnesses/k_rhythm_01_incommensurable_vs_metronome.py` | `artifacts/M-K-RHYTHM-01_2026-09-30.json` | F-METRONOME-NOVELTY-PARITY, F-RHYTHM-AS-E |
 
 ## Run commands
 
@@ -37,8 +38,11 @@ python research/brain_ai/run_k_woe_42.py
 python research/brain_ai/run_k_woe_42b.py
 python research/agent_eia/run_k_hdc_01.py
 python research/agent_eia/run_k_hdc_02.py
-pytest tests/test_k_kur_01_kuramoto_omega_genesis.py tests/test_k_kur_02_scramble_decorrelation.py tests/test_k_woe_42_carrier_surrogate.py tests/test_k_woe_42b_midband_ablation.py tests/test_k_hdc_01_agent_binding.py tests/test_k_hdc_02_carryover.py -q
+python research/brain_ai/run_k_rhythm_01.py
+pytest tests/test_k_kur_01_kuramoto_omega_genesis.py tests/test_k_kur_02_scramble_decorrelation.py tests/test_k_woe_42_carrier_surrogate.py tests/test_k_woe_42b_midband_ablation.py tests/test_k_hdc_01_agent_binding.py tests/test_k_hdc_02_carryover.py tests/test_k_rhythm_01_incommensurable_vs_metronome.py -q
 ```
+
+Theory note (rhythm endogeneity essay import, `claim_allowed=false`): `docs/RHYTHM_ENDOGENEITY_HYPOTHESIS_2026-09-30.md`.
 
 ## Disclaimers
 
