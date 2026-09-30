@@ -9,5 +9,9 @@
 Apply (after review): `git apply research/endogeneity_topology/patches/draft_C11_D6.patch` and/or `draft_D1.patch`
 (verified: both apply cleanly on HEAD in the order C11_D6 then D1 (other order not tested) and together pass the new tests plus
 `test_mvp0` / `test_authentic_reason`, 30/30).
+`draft_population_drives.patch` applies cleanly to HEAD on its own, but **conflicts with `draft_D1.patch`** at the
+`run_scenario(...)` signature in `pipeline.py` (both add a keyword argument after `baseline=`): after applying D1, add
+`drive_engine: str = "classic"` there by hand and apply the remaining hunks (verified: HEAD + C11_D6 + D1 → population patch
+fails at `pipeline.py:255`).
 Default behaviour is unchanged; enabling `state_ior=True` in `CognitiveLoop` and calling `note_asked()` after
 emission is a separate decision (see FINDINGS D6, ticks 53–56).
