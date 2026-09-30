@@ -1179,6 +1179,20 @@ Motive labels = 10 blocks of 100 units; module 0 excitability ×2.5; 4 seeds × 
   generator frees budget that the boosted motive can use.
 - Rate settles slightly below target (0.026–0.027) within the window.
 
+## Tick 95 — discoverability threshold with calibrated inference (`tick95.py`)
+
+SBM 10×100, degree 5, rate 0.03, 2 seeds. ARI of blindly found parts vs true modules, graph inferred by pairwise lagged
+excess (as tick 24) vs conditional attribution (tick 35).
+
+| inference | μ=0.3 | 0.2 | 0.15 | 0.1 | 0.07 | 0.05 | μ_c (ARI = 0.5) |
+|---|---|---|---|---|---|---|---|
+| pairwise | 0.05 | 0.16 | 0.17 | 0.39 | 0.60 | 0.79 | ≈ 0.08 |
+| **conditional** | 0.13 | 0.44 | **0.57** | **0.82** | 0.87 | 0.91 | **≈ 0.17** |
+
+- Better (conditional) inference **roughly doubles the discoverability threshold** (μ_c 0.08 → 0.17). A12's μ_c is a
+  property of the detector as much as of the network: with calibrated attribution, sub-agents with up to ~15–20 %
+  outgoing links are recoverable blind. Design rule D3 relaxes accordingly.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
