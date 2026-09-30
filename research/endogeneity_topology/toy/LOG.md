@@ -1812,6 +1812,24 @@ u-only do(Z) on an anatomical module; exact twin; 600 ticks; 5 seeds × 2 module
 - So an activity-bound (routing) motive graph offers containment without fixed boundaries — separability by dynamics rather
   than by wiring. Controllability does not require detectable self-boundaries.
 
+## Tick 148 — open-endedness of initiative patterns (`tick148.py`)
+
+Pattern = set of the 10 blocks bursting together in a tick (≥ 10 % active), multi-block only; 15 000 silent ticks; 2 seeds.
+
+| topology | distinct patterns | new patterns / 1000 ticks (last third) | pattern entropy (bits) |
+|---|---|---|---|
+| ER (blocks = arbitrary index sets) | 790 | 21.2 | 8.5 |
+| SBM (μ 0.1) | 637 | 20.6 | 7.6 |
+| hier-modular | **248** | **7.8** | 6.7 |
+| SBM + routing β 2 | 0 | 0 | — (invalid: routing coalitions ignore the anatomical blocks, A38, so block-level bursts never occur) |
+
+- All static topologies are still discovering new co-activation patterns late in the run (no saturation within 15 000 ticks).
+- **Hierarchy trades combinatorial novelty for containment**: ~⅓ of the distinct patterns and discovery rate of flat
+  modular/ER — the same containment that protects motives (A4) limits how many new motive *combinations* the agent explores.
+- Open-endedness at the level of motive combinations is therefore another axis of the design trade-off (scorecard);
+  a workspace layer (A21) or task-dependent routing are candidate ways to regain combinatorial novelty on a hierarchy.
+- Routing needs a coalition-level (not block-level) pattern definition — left open.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
