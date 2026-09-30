@@ -6,6 +6,10 @@ import importlib.util
 import sys
 from pathlib import Path
 
+from conftest import requires_neuraxon_vendor
+
+pytestmark = requires_neuraxon_vendor
+
 _ARMS = Path(__file__).resolve().parents[1] / "research" / "sci_flow" / "run_mo_do_o_arms.py"
 _spec = importlib.util.spec_from_file_location("run_mo_do_o_arms", _ARMS)
 assert _spec and _spec.loader

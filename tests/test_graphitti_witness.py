@@ -6,6 +6,8 @@ import importlib.util
 import sys
 from pathlib import Path
 
+from conftest import requires_graphitti_regression_fixture
+
 _WITNESS = Path(__file__).resolve().parents[1] / "research" / "sci_flow" / "run_graphitti_witness.py"
 _spec = importlib.util.spec_from_file_location("run_graphitti_witness", _WITNESS)
 assert _spec and _spec.loader
@@ -43,6 +45,7 @@ def test_build_payload_tier_c_stub() -> None:
         assert witness["spike_count_total"] > 0
 
 
+@requires_graphitti_regression_fixture
 def test_parse_spike_metrics_regression_good_output() -> None:
     assert GOOD_OUTPUT.is_file()
     metrics = _witness.parse_spike_metrics(GOOD_OUTPUT, epoch_duration_s=1.0)
