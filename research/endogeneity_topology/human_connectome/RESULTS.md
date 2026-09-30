@@ -633,3 +633,20 @@ raw and partial on SC strength. 4 subjects.
 - The model predicts the empirical regional pattern moderately (ρ ≈ 0.33, every subject positive), but **entirely through
   SC strength**: beyond strength it predicts nothing (partial ≈ 0). Anatomy explains the periphery-seeding part of the
   empirical profile; the remaining regional differences (incl. the BG/DMN excess of B14) need ingredients outside SC.
+
+## Tick 127 — are empirical events paced by the slow global signal? (`tick127_global_phase.py` + inline leave-own-module-out check)
+
+Global signal band-passed 0.01–0.03 Hz, Hilbert phase; PLV of each region's BOLD events to it; 7 subjects.
+
+| | all regions | SMA | SEN | SAL | FPN | DMN | BG | VAL |
+|---|---|---|---|---|---|---|---|---|
+| PLV (global incl. own region) | 0.40 | 0.51 | 0.50 | 0.45 | 0.42 | 0.37 | 0.26 | 0.26 |
+| PLV (global **excluding own module**) | **0.38** | 0.51 | 0.45 | 0.44 | 0.40 | 0.34 | **0.26** | **0.26** |
+| null (circular shifts): mean / 95 % | 0.16 / 0.21 | | | | | | | |
+
+- Real "spontaneous" events are strongly **paced by the slow global fluctuation** (PLV 0.38 vs null 0.16 / 0.21), and this
+  survives removing the region's own module from the global signal — A36's "slow rhythms schedule *when*" holds in data.
+- **Basal ganglia and value regions are the least paced** (0.26) — the same blocks that looked most self-initiating (B14–B15):
+  their events keep their own timing rather than riding the global wave. Sensory and SMA are the most paced.
+- Caveat: shared slow BOLD fluctuations (vascular / arousal / respiration) are a known confound; the global signal is not
+  a pure "carrier".
