@@ -1628,6 +1628,22 @@ Unit adaptation current (strength b, τ 100 ticks) subtracted from the drive; ra
   (slow rhythms are the most entraining), adaptation/boredom currents are a route to an **internal slow scheduler**; audits
   should report the envelope autocorrelation, not only ISI CV.
 
+## Tick 131 — internal rhythm of the prototype engine (`../eia_prototype/tick131_prototype_envelope.py`)
+
+TargetEngine, fixed tension 0.5, 20 000 steps, total activity (10-step smoothing); 3 seeds.
+
+| engine | burst CV | autocorrelation peak | period (engine steps) |
+|---|---|---|---|
+| v3 (gain 0.4, μ 0.15) | 1.08 | 0.56 | ~30 |
+| near-critical (gain 1.0) | 1.14 | **0.97** | ~28 |
+
+- The near-critical engine is effectively an **oscillator** (autocorrelation 0.97 at ~28 steps) — an internal clock hidden
+  behind a CV > 1. The subcritical v3 choice (C12) roughly halves this (0.56): another reason to run motives below
+  criticality.
+- The residual ~30-step rhythm is shorter than one cognition tick (40 inner steps; readout averages 20), so at pipeline
+  level it is mostly averaged out — but a different `inner_steps` could alias it into a visible periodicity. Keep
+  inner_steps not near a multiple of ~30, or randomise it.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
