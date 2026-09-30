@@ -195,12 +195,15 @@ reactive, audit with world-cut/replay (4d) regardless of topology.
    outcomes into `satisfaction`, make post-action belief updates depend on the action, derive novelty from
    state; report the measured loop gain as an architectural metric. See `eia_prototype/tick51_pipeline_loops.md`.
 
-10. **Audit timing across episodes, not just the single initiative** (C17, A36–A37; *reasoning, not yet tested*): full_eia,
+10. **Audit timing across episodes, not just the single initiative** (C17, A36–A37): full_eia,
     scheduled and event-rule stubs emit the same initiative in a single episode, so any single-episode audit (EOI, lexical or
     causal gate) cannot separate them. They differ in *when* they fire: on a schedule (clock-like, ISI CV ≈ 0), on a
     salience threshold (fires whenever tension persists → perseveration), or from internal dynamics (sparse, irregular,
     state-dependent). A multi-episode silent-run audit — ISI CV, envelope autocorrelation, phase locking to known schedules,
-    response to do(Z) — is the missing discriminator (cf. the system cards, ticks 57/63/114).
+    response to do(Z) — is the missing discriminator (cf. the system cards, ticks 57/63/114). **Tested (tick 136)**: it separates
+    scheduled (CV 0.07, lag-5 autocorrelation 0.97) from the rest, but current full_eia and the event-rule stub are
+    identical in silence (both fire every episode, run 199) — they are the same policy there; only v3 has a distinct
+    signature (3.6/200, CV 1.08).
 
 ## E. Open threads
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model

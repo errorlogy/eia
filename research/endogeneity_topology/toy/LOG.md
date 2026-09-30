@@ -1692,8 +1692,27 @@ point (no gate separates full_eia from scheduled/event-rule stubs) stands.
 
 ## Tick 135 — proposal D10 (reasoning): multi-episode timing audit as the missing baseline discriminator
 
+## Tick 136 — D10 tested: multi-episode timing audit (`../eia_prototype/tick136_timing_audit.py`)
+
+200 silent episodes, 7 scenarios × 3 seeds, same harness.
+
+| policy | initiatives / 200 | ISI CV | longest same-question run | lag-5 autocorrelation |
+|---|---|---|---|---|
+| scheduled (every 5th) | 39.6 | **0.07** (clock) | 1.0 | **0.97** |
+| event_rule | **199.7** | 0.00 | **199.7** (perseveration) | 0.00 |
+| full_eia (current MVP-0) | **199.6** | 0.03 | **199.4** | 0.00 |
+| full_eia v3 (tick 114) | 3.6 | **1.08** | 1.05 | — |
+
+- The timing audit cleanly separates **scheduled** (clock: CV ≈ 0, lag-5 autocorrelation 0.97) from both others — D10 works
+  against scheduler confounds.
+- But **current full_eia is indistinguishable from the event-rule stub** even over 200 episodes: both fire every episode on
+  the same question. Under silence the MVP-0 full pipeline *behaves as* an event rule (C9) — neither a single-episode nor a
+  multi-episode audit can separate them, because they are the same policy in silence.
+- Only **v3** has a distinct timing signature (sparse, irregular, no perseveration). So D10 is a valid discriminator, and it
+  shows that the separation "full_eia ≠ event rule" is currently not realised in silence — it becomes real with the
+  closed loop + state-IOR + population drives.
+
 ## Queue (next ticks)
-- [ ] test D10: multi-episode silent runs of scheduled / event-rule / full_eia under the same harness (timing statistics)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
 - [x] tick 37: consensus gating triples functional boundaries (held-out) but leaves hemispheric boundary (0.28 vs emp 0.05)
