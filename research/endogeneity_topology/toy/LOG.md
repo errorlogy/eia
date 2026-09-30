@@ -1758,7 +1758,7 @@ Blind detection per half (conditional detector), held-out E_norm with the time-a
 - With strong enough routing (β ≥ 1) the detected sub-agents **detach from anatomy entirely** (ARI with the wired modules 0)
   but are still endogenous on held-out data at a brain-like level (0.38–0.41) and only moderately stable across halves (0.13–0.14).
 - This reproduces two brain signatures *without* imposed gating or switching: **function-over-anatomy boundaries** (B2
-  revised, B36) and **partial degeneracy** (B9; brain is still less stable, 0.02–0.08). Content-dependent routing is a candidate
+  revised, tick 36) and **partial degeneracy** (B9; brain is still less stable, 0.02–0.08). Content-dependent routing is a candidate
   mechanism for the brain's metastable functional sub-agents — and a design option for motive graphs whose decomposition
   should follow the current task rather than fixed wiring.
 - β = 0.5 result unexplained (everything ≈ 0); 2 seeds — directional.
