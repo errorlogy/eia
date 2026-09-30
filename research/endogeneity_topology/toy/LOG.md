@@ -1568,6 +1568,24 @@ Gated Governor, ki 0.002 vs 0.0005; 6 seeds × 3 motives.
 - Governor line closed for the toy model: the gated cap + slow budget loop is a workable default (caps dominance, keeps
   z ≈ 3–6), with an irreducible, noisy controllability cost of ~⅓–½ of the ungoverned z.
 
+## Tick 124 — a global carrier rhythm ("42 Hz" as test assumption) (`tick124.py`)
+
+Global gain × (1 + A·sin(2πt/24)); rate-matched at A = 0; 2 seeds. PLV = phase locking of population burst onsets to the carrier.
+
+| topology | A | rate | PLV to carrier | burst CV | module E_norm |
+|---|---|---|---|---|---|
+| hier | 0 / 0.05 / 0.15 / 0.3 | 0.031 / 0.029 / 0.021 / 0.016 | 0.04 / **0.21** / 0.52 / **0.71** | 1.42 / 1.31 / 0.87 / **0.65** | 0.95 (all) |
+| ER | 0 / 0.05 / 0.15 / 0.3 | 0.028 / 0.025 / 0.021 / 0.015 | 0.03 / 0.05 / 0.17 / 0.41 | 1.53 / 1.42 / 1.10 / 0.73 | 0.00 (all) |
+
+- A carrier **captures the timing** of initiative: bursts phase-lock to it (PLV up to 0.71) and become more regular (CV 1.4 →
+  0.65), while *which* sub-agent acts and why (module E_norm 0.95) is untouched. Timing becomes carrier-driven — a hidden
+  scheduler for "when", not for "who/why".
+- The hierarchical agent is **more entrainable** than ER (PLV 0.21 vs 0.05 already at 5 % modulation): the structure that
+  makes it rich and graded also makes it resonant to a global rhythm.
+- For EIA/Kairologos: a global carrier (e.g. the 42 Hz assumption) should be treated as a *timing input* in audits — "why now"
+  claims must be checked against phase locking to any global rhythm, or the carrier acts as identification threat #1.
+  Strong carriers also reduce the overall rate (−50 % at A = 0.3).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
