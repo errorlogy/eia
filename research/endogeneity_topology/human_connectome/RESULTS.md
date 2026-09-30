@@ -619,3 +619,17 @@ cascade, activity, SC strength.
   mechanistically*, not only an SNR artefact (orbitofrontal dropout still inflates the top of the raw ranking).
   Consequently residualising on strength (tick 80–81) also removes a real peripheral-seeding effect; the BG/DMN/SEN residual
   pattern (B14) is what remains *beyond* that effect.
+
+## Tick 103 — does the model predict WHICH regions self-initiate? (`tick103_model_vs_emp_regions.py`)
+
+Per subject, Spearman between the model's regional cascade-start share (tick 102) and empirical self-initiation (tick 79),
+raw and partial on SC strength. 4 subjects.
+
+| | mean ρ (range) |
+|---|---|
+| raw | **+0.33** (+0.27 … +0.43) |
+| partial, controlling SC strength | **+0.03** (−0.10 … +0.24) |
+
+- The model predicts the empirical regional pattern moderately (ρ ≈ 0.33, every subject positive), but **entirely through
+  SC strength**: beyond strength it predicts nothing (partial ≈ 0). Anatomy explains the periphery-seeding part of the
+  empirical profile; the remaining regional differences (incl. the BG/DMN excess of B14) need ingredients outside SC.
