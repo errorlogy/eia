@@ -1458,6 +1458,21 @@ Module-level signals (10 blocks × 100 units, 10-tick bins), Gaussian estimates;
 - Caveats: Gaussian estimator on 10 coarse block signals; blocks are arbitrary index sets in ER/BA; classic TSE is expected
   to peak at intermediate structure with finer-grained measurement. Directional.
 
+## Tick 117 — workspace layer: integration without losing sub-agents (`tick117.py`)
+
+SBM 10×100 (μ 0.05) + hub workspace layer of weight w; rate-matched; block-level Gaussian integration / TSE; 2 seeds.
+
+| w | integration | TSE | module E_norm |
+|---|---|---|---|
+| 0 | 0.36 | 0.62 | 0.97 |
+| 0.2 | 0.60 | 0.97 | 0.97 |
+| **0.4** | **1.65** | **2.28** | **0.95** |
+| 0.8 | 1.81 | 2.21 | 0.80 |
+
+- A moderate workspace layer (w ≈ 0.4) raises whole-level integration ~4.6× and TSE ~3.7× while sub-agent endogeneity stays
+  at 0.95 — the A35 trade-off is **escapable**. Beyond that (w 0.8) integration saturates and sub-agents start to dissolve
+  (0.80). Sweet spot w ≈ 0.4: both levels endogenous. Supports the "hierarchy + thin workspace" recommendation.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

@@ -27,17 +27,18 @@ def graph(kind, seed):
     if kind == "SW": return nx.watts_strogatz_graph(N, 4, 0.1, seed=seed)
     return g104(kind, seed)
 
-print(f"{'topology':<9}{'integration':>12}{'TSE':>8}{'module E_norm':>15}")
-for kind in ("ER", "SW", "SBM", "hier", "BA"):
-    rows = []
-    for seed in (1, 2):
-        A = nx.to_scipy_sparse_array(graph(kind, seed), nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
-        lo, hi = 0.7, 1.4
-        for _ in range(10):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(A1*mid, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
-        W = sps.csr_matrix(A1*(lo+hi)/2); sp = sim(W, seed, 6500)[500:]
-        X = np.stack([sp[:, mods == m].reshape(-1, 10, 100).mean((1, 2)) for m in range(10)])
-        rng = np.random.default_rng(seed); I, C = tse(X, rng)
-        en = np.mean([E_of(sp, W, mods[rng.permutation(N)]) for _ in range(5)]); e = (E_of(sp, W, mods) - en) / (1 - en)
-        rows.append((I, C, e))
-    m = np.mean(rows, 0); print(f"{kind:<9}{m[0]:>12.2f}{m[1]:>8.2f}{m[2]:>15.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'topology':<9}{'integration':>12}{'TSE':>8}{'module E_norm':>15}")
+    for kind in ("ER", "SW", "SBM", "hier", "BA"):
+        rows = []
+        for seed in (1, 2):
+            A = nx.to_scipy_sparse_array(graph(kind, seed), nodelist=range(N), format="csr", dtype=float); A1 = A / abs(eigs(A, k=1, which="LM", return_eigenvectors=False)[0])
+            lo, hi = 0.7, 1.4
+            for _ in range(10):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(A1*mid, seed, 1000)[500:].mean() < 0.03 else (lo, mid)
+            W = sps.csr_matrix(A1*(lo+hi)/2); sp = sim(W, seed, 6500)[500:]
+            X = np.stack([sp[:, mods == m].reshape(-1, 10, 100).mean((1, 2)) for m in range(10)])
+            rng = np.random.default_rng(seed); I, C = tse(X, rng)
+            en = np.mean([E_of(sp, W, mods[rng.permutation(N)]) for _ in range(5)]); e = (E_of(sp, W, mods) - en) / (1 - en)
+            rows.append((I, C, e))
+        m = np.mean(rows, 0); print(f"{kind:<9}{m[0]:>12.2f}{m[1]:>8.2f}{m[2]:>15.2f}", flush=True)
