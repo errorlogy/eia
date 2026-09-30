@@ -1644,6 +1644,21 @@ TargetEngine, fixed tension 0.5, 20 000 steps, total activity (10-step smoothing
   level it is mostly averaged out — but a different `inner_steps` could alias it into a visible periodicity. Keep
   inner_steps not near a multiple of ~30, or randomise it.
 
+## Tick 132 — aliasing check of the patched engine (inline, on `combined_all.patch` applied to a HEAD copy)
+
+`PopulationDrives` in silence (one categorical belief 0.6/0.4), 550 cognition ticks, epistemic intensity autocorrelation
+across ticks; 3 seeds.
+
+| inner_steps | lag-1 autocorrelation | largest |ac| at lags 2–20 |
+|---|---|---|
+| 30 | −0.13 | 0.05 |
+| 40 (default) | −0.09 | 0.05 |
+| 60 | 0.00 | 0.05 |
+
+- **No aliasing** at the cognition-tick level for any tested setting: the ~30-step internal rhythm (C16) averages out;
+  intensities are nearly uncorrelated tick to tick (slight negative lag-1 from refractoriness). The C16 caution is
+  theoretical for the default configuration.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
