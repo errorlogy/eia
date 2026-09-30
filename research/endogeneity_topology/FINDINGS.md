@@ -1,11 +1,11 @@
-# Endogeneity × Topology — consolidated findings (ticks 1–97, 2026-09-29/30)
+# Endogeneity × Topology — consolidated findings (ticks 1–110, 2026-09-29/30)
 
 Exploratory, toy-model and small-sample evidence. "Status" says how far each claim survived our own
 replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 [`human_connectome/RESULTS.md`](human_connectome/RESULTS.md), [`eia_prototype/`](eia_prototype/),
 draft patches: [`patches/`](patches/).
 
-## TL;DR — twelve takeaways
+## TL;DR — fourteen takeaways
 
 1. **Endogeneity is a property of (system, boundary)**, not of a system: single units are ~7 % self-caused; natural
    sub-agent boundaries are where the endogeneity profile E(B) jumps (A9–A11), and can be found blind (A11).
@@ -34,6 +34,13 @@ draft patches: [`patches/`](patches/).
 12. **Governor recipe** (robust across topologies): slow, leaky, upward-only cap on each motive's *chronic* activity
     share + a global budget loop with a slow integral. Integrating the per-motive loop fast reverses controllability
     (A29, proposal 4c). Detector quality matters: calibrated inference doubles the blind-discoverability threshold (A12).
+13. **The world as hidden memory**: at X = 0 a world that merely echoes the agent's actions carries ~15–35 % of its
+    "endogenous" activity, ~3× more than attribution shows; ~20 % of that needs contingency. Audit with world-cut +
+    non-contingent replay (A30–A31, proposal 4d). What limits it is a dedicated sensorimotor interface module, not
+    modularity per se (ticks 108–110 — earlier topology contrasts were interface-placement artefacts).
+14. **Robustness**: hierarchical-modular agents are the most resilient to lesions, repairable by gain homeostasis, and
+    self-sustained without noise; scale-free agents collapse with hubs and are noise-driven; the periphery seeds
+    initiatives and the core amplifies them (A32–A34, B17).
 
 ## Topology scorecard (from ticks 3–107; ++ best, + good, 0 neutral, − poor)
 
