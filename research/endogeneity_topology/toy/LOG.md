@@ -1211,6 +1211,21 @@ Agent SBM 10×100 at X = 0; a 'world' of 100 relays echoes the agent's own motor
   memory/scaffold (identification threats #2 memory leakage and #7 sensor leakage); only a cut-the-world intervention
   (world held frozen / replayed without contingency) reveals it.
 
+## Tick 99 — world-echo delay and agent topology (`tick99.py`)
+
+w = 1; hidden support = activity lost when the world is cut, net of the w = 0 noise floor; 3 seeds.
+
+| agent | delay D | direct share | hidden support | hidden / direct |
+|---|---|---|---|---|
+| SBM | 5 / 20 / 100 / 300 | 0.04 / 0.04 / 0.12 / 0.05 | 0.09 / 0.15 / **0.19** / 0.15 | 2.4 / 3.5 / 1.6 / 2.9 |
+| ER | 5 / 20 / 100 / 300 | 0.07 / 0.17 / 0.16 / 0.08 | **0.32 / 0.32 / 0.34 / 0.30** | 4.5 / 1.9 / 2.1 / 4.0 |
+
+- Hidden world support is always **1.6–4.5× the directly attributed share**; it peaks at intermediate delays in the modular
+  agent (0.19 at D = 100) and is roughly delay-independent in ER.
+- **Topology matters more than delay**: the ER agent leans on the world ~2× more (≈ 0.32) than the modular one
+  (≈ 0.15) — without sub-agents to sustain activity internally, an agent outsources its persistence to the environment.
+  Modularity is a protection against externalised endogeneity.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
