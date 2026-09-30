@@ -576,3 +576,15 @@ by the block's share of units; indep = block activity kept when its incoming cro
 - Endogeneity in the connectome model is **collective**: blocks drive each other (small hub-rich blocks SAL/SMA have the
   largest per-unit influence) but none sustains itself alone. DMN is a mid-level driver, not a self-sustaining source.
 - Caveat: out is normalised by block size, which inflates small blocks; 2 subjects, 1 seed.
+
+## Tick 96 — boundary degeneracy is not a detector artefact (`tick96_degeneracy_conditional.py`)
+
+Split-half test on all 7 subjects, detection and scoring with the conditional-attribution graph (vs the pairwise detector).
+
+| | pairwise split-half ARI | conditional split-half ARI | E_norm of first-half parts on second half (conditional) |
+|---|---|---|---|
+| mean of 7 | 0.08 | **0.04** | **0.38** |
+
+- With the calibrated detector the two halves of a scan agree even less (0.04), while each half's partition stays strongly
+  endogenous on the other half (0.38). **B9 holds with a better detector and 7 subjects**: many near-equivalent
+  sub-agent decompositions, not one noisy one.
