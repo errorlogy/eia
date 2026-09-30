@@ -1370,6 +1370,22 @@ Hidden world support (w = 1, D = 20), sensors and motors as contiguous blocks vs
 - Stable part of A30–A31: attribution under-counts world support; world-cut + non-contingent replay separate volume from
   contingency; confining the interface to one sub-agent reduces both.
 
+## Tick 111 — dedicated interface module (`tick111.py`)
+
+SBM with 10 motive modules + 1 interface module (N = 1100); echo w = 1, D = 20; identical random stream across conditions; 3 seeds.
+
+| placement of 100 sensors / 100 motors | hidden world support (whole agent) | motive-module activity kept when world cut |
+|---|---|---|
+| in two motive modules (0 and 9) | 0.06 | 0.93 |
+| **dedicated interface module** | 0.24 | **0.91** |
+| scattered over motives | 0.29 | **0.69** |
+
+- A dedicated interface module **protects the motives**: they keep 91 % of their activity without the world (vs 69 % with a
+  scattered interface). The interface module itself is world-driven — whole-agent hidden support (0.24) is dominated by it,
+  which is the intended division of labour.
+- Audit implication: report world dependence **per sub-agent**, not for the whole agent; a whole-agent number mixes the
+  (legitimately reactive) interface with the (supposedly endogenous) motives.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
