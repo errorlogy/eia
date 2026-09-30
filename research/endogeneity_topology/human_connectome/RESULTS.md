@@ -727,3 +727,20 @@ Split-half test on 7 subjects with the lag-selective detector (best lag 1–3 TR
 
 - Degeneracy is **not** a detector artefact: with the lag-selective detector the two halves agree even less (0.02), and the
   first-half partition stays endogenous on the held-out half (0.29, lower than 0.38). B9 holds under all three detectors.
+
+## Tick 146 — activity-bound routing on the human connectome (`tick146_routing_brain.py`)
+
+Drive-units on SC with co-activity gating; E_norm (true time-averaged W, unit level) of anatomical vs functional partitions;
+2 subjects.
+
+| β | hemispheres | SC communities | EIA map |
+|---|---|---|---|
+| 0 | 0.80 | 0.71 | 0.23 |
+| 2 | 0.82 | 0.59 | 0.19 |
+
+- **A38 does not transfer as is**: routing leaves the model bounded by anatomy (hemispheres 0.80 → 0.82) and does not raise the
+  functional EIA partition. Routing only re-weights *existing* edges; where cross-hemisphere / cross-community edges are sparse
+  (SC), there is nothing to route through. (Magnitudes are true-W unit-level values, not comparable one-to-one with the blind
+  empirical numbers.)
+- So function-over-anatomy in the brain needs both: enough cross-anatomical wiring (e.g. homotopic links, B8) *and* a routing /
+  gating mechanism to use it (B5, A38). Next: routing + homotopic boost.
