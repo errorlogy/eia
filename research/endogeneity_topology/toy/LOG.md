@@ -1781,6 +1781,21 @@ Blind detection per half (conditional detector), held-out E_norm with the time-a
 - Revised A38: dynamic routing is **non-monotonic** — weak routing can destroy self-boundaries; only strong routing creates
   new functional sub-agents. A design using attention-like motive routing must avoid the intermediate regime.
 
+## Tick 144 — fine β sweep of dynamic routing (`tick144.py`)
+
+Rate-matched (0.030–0.034), 2 seeds.
+
+| β | 0 (tick 143) | 0.25 | 0.5 | 0.75 | 1.0 | 1.5 | 2.0 | 3.0 |
+|---|---|---|---|---|---|---|---|---|
+| ARI with anatomical modules | 0.39 | 0.14 | 0.01 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| held-out E_norm | 0.63 | 0.13 | **0.02** | **−0.04** | 0.21 | 0.33 | **0.48** | 0.41 |
+| split-half ARI | 0.26 | 0.09 | 0.01 | 0.02 | 0.14 | 0.14 | 0.21 | 0.14 |
+
+- Clean **U-shaped** curve: anatomical sub-agents fade already at β = 0.25, a **dissolution zone at β ≈ 0.5–0.75** has no
+  endogenous parts at all, and functional (anatomy-independent) sub-agents re-emerge from β ≈ 1, peaking around β ≈ 2.
+- Interpretation: two regimes of self-organisation — *structure-bound* (static wiring decides the sub-agents) and
+  *activity-bound* (routing decides) — separated by a transition where neither holds. Confirms and sharpens A38.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
