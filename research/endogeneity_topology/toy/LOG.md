@@ -1243,6 +1243,22 @@ stream, shuffled in 50-tick blocks and replayed regardless of the agent's action
 - Audit protocol for X = 0 claims: run both *world-cut* (total external support) and *non-contingent replay* (contingent
   part); only the contingent part is a hidden agent–world loop; the rest is ordinary input dependence.
 
+## Tick 101 — core–periphery: who starts, who amplifies (`tick101.py`)
+
+Core 200 units (dense), periphery 800 (sparse, attached to the core), mean degree ≈ 5, rate-matched, 3 seeds.
+Cascade start = a unit that fires with no active in-neighbour at t − 1.
+
+| block (share of units) | out-influence per unit share | independence | share of cascade starts | share of activity |
+|---|---|---|---|---|
+| core (20 %) | **2.43** | 0.21 | 0.13 | **0.70** |
+| periphery (80 %) | 0.98 | **0.51** | **0.87** | 0.30 |
+
+- **Division of labour**: initiatives are *seeded* in the periphery (87 % of cascade starts, more independent) and
+  *amplified* by the core (70 % of activity, highest influence, dependent — a relay in the A27 sense).
+- Neither block is a generator alone; endogeneity = peripheral sparks × core amplification. EIA reading: many weakly
+  coupled peripheral motives supply novelty, a dense core broadcasts it — the core is where a Governor's share cap
+  (A29) bites, the periphery is where new initiatives come from.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
