@@ -37,6 +37,7 @@ from eia.intention import IntentionGenesis
 from eia.namm import NammAdapter, NammHook
 from eia.scheduler import LoopScheduler, PipelineStage
 from eia.schemas.agent_state import AgentState
+from eia.schemas.initiative import Initiative
 from eia.schemas.belief import BeliefKind
 from eia.schemas.observation import Observation
 from eia.sense_making import ComprehensionResult, SenseMakingEngine
@@ -69,6 +70,8 @@ class CognitiveLoop:
         self.seed = seed
         self._motivation_count = 0
         self._snapshot_field: BeliefField | None = None
+        self._observation_baseline_field: BeliefField | None = None
+        self._observation_log: list[Observation] = []
         self._last_comprehension: ComprehensionResult | None = None
         self.stage_log: list[PipelineStageResult] = []
 
@@ -97,8 +100,38 @@ class CognitiveLoop:
             parent_kind=parent_kind,
         )
 
+    def mark_observation_phase_begin(self) -> None:
+        """Snapshot beliefs before replayable observation ingest (twin counterfactual)."""
+        self._observation_baseline_field = BeliefField.model_validate(
+            self.field.model_dump()
+        )
+        self._observation_log = []
+
+    def replay_field_excluding_observations(
+        self, removed_event_ids: list[str]
+    ) -> BeliefField:
+        """Rebuild belief field from baseline, skipping removed observation ids."""
+        if self._observation_baseline_field is None:
+            raise RuntimeError(
+                "No observation baseline — ingest observations or call "
+                "mark_observation_phase_begin first"
+            )
+        removed = set(removed_event_ids)
+        twin_field = BeliefField.model_validate(
+            self._observation_baseline_field.model_dump()
+        )
+        twin_sm = SenseMakingEngine(twin_field)
+        for obs in self._observation_log:
+            if obs.id in removed:
+                continue
+            twin_sm.ingest_observation(obs)
+        return twin_field
+
     def apply_observation(self, obs: Observation) -> ComprehensionResult | None:
         """Stage 1–2: ObservationIngest → SenseMaking."""
+        if self._observation_baseline_field is None:
+            self.mark_observation_phase_begin()
+        self._observation_log.append(obs)
         self._record_stage(
             PipelineStage.OBSERVATION_INGEST,
             f"Ingested observation topic={obs.topic}",
@@ -222,17 +255,17 @@ class CognitiveLoop:
 
         return motivation, initiative, decision, namm_intent
 
-    def run_twin(self, removed_event_ids: list[str], sim: Simulator) -> tuple:
-        """Counterfactual: restore pre-user-removal state, re-run cognition."""
-        if not self._snapshot_field:
-            raise RuntimeError("No snapshot — run tick_cognition first")
+    def run_twin(
+        self,
+        removed_event_ids: list[str],
+        sim: Simulator,
+        *,
+        cognition_ticks: int = 1,
+    ) -> tuple:
+        """Counterfactual: replay observations without removed ids, re-run cognition."""
+        twin_field = self.replay_field_excluding_observations(removed_event_ids)
 
-        twin_field = BeliefField.model_validate(self._snapshot_field.model_dump())
         twin_drives = DriveEngine()
-        twin_drives.state.epistemic = self.drives.state.epistemic
-        twin_drives.state.coherence = self.drives.state.coherence
-        twin_drives.state.commitment = self.drives.state.commitment
-        twin_drives.state.tick = self.drives.state.tick
         twin_intention = IntentionGenesis(abstain_threshold=0.30, min_evsi=0.12)
         twin_gov = ContactGovernor()
         twin_gov.state = GovernorState(
@@ -240,10 +273,45 @@ class CognitiveLoop:
             hour=sim.clock.hour,
         )
 
-        motivation = twin_drives.compute(twin_field, motivation_id="mot-twin")
-        initiative = twin_intention.best_or_abstain(motivation, twin_field)
-        decision = twin_gov.evaluate(initiative)
+        if cognition_ticks <= 0:
+            from eia.schemas.initiative import InitiativeCandidate, InitiativeKind
+            from datetime import datetime, timezone
 
+            motivation = self.drives.compute(twin_field, motivation_id="mot-twin-0")
+            abstain = InitiativeCandidate(id="cand-twin-abstain", kind=InitiativeKind.ABSTAIN)
+            initiative = Initiative(
+                id="init-twin-abstain",
+                timestamp=datetime.now(timezone.utc),
+                candidate=abstain,
+                abstained=True,
+                parent_motivation_id=motivation.id,
+                evsi=0.0,
+            )
+            decision = twin_gov.evaluate(initiative)
+            return motivation, initiative, decision
+
+        motivation = None
+        initiative = None
+        decision = None
+        for i in range(cognition_ticks):
+            tick = sim.clock.tick + i
+            novelty: dict = {}
+            if tick > 2:
+                from eia.schemas.motivation import DriveKind
+
+                novelty[DriveKind.EPISTEMIC] = 0.15
+                novelty[DriveKind.COHERENCE] = 0.20
+
+            motivation = twin_drives.compute(
+                twin_field,
+                novelty_events=novelty or None,
+                motivation_id=f"mot-twin-{i}",
+            )
+            initiative = twin_intention.best_or_abstain(motivation, twin_field)
+            if i == cognition_ticks - 1:
+                decision = twin_gov.evaluate(initiative)
+
+        assert motivation is not None and initiative is not None and decision is not None
         return motivation, initiative, decision
 
 
@@ -283,6 +351,8 @@ def run_scenario(
         for contra in scenario.metadata.get("contradictions", []):
             loop.field.register_contradiction(contra[0], contra[1], contra[2])
 
+        loop.mark_observation_phase_begin()
+
         max_tick = max((e.tick for e in scenario.events), default=10)
         sim.run_until(max_tick)
 
@@ -311,7 +381,9 @@ def run_scenario(
         removed_ids = [o.id for o in removed]
 
         orig_initiative = initiative
-        _, twin_initiative, _ = loop.run_twin(removed_ids, sim)
+        _, twin_initiative, _ = loop.run_twin(
+            removed_ids, sim, cognition_ticks=cognition_tick_count(baseline)
+        )
         twin_result = loop.twin_runner.compare(orig_initiative, twin_initiative, removed_ids)
 
         loop.trace.add_node(

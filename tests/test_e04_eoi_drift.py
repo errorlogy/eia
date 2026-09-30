@@ -59,11 +59,15 @@ def test_eoi_drift_longitudinal_50_tick_session() -> None:
     assert result.eoi_drift_span <= 0.25
 
 
-def test_run_e04_eoi_drift_runner_smoke() -> None:
+def test_run_e04_eoi_drift_runner_smoke(tmp_path: Path) -> None:
     runner = SCI_FLOW / "run_e04_eoi_drift.py"
     spec = importlib.util.spec_from_file_location("run_e04_eoi_drift", runner)
     assert spec and spec.loader
     mod = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = mod
     spec.loader.exec_module(mod)
-    assert mod.main() == 0
+    assert mod.main(artifact_dir=tmp_path) == 0
+    md = tmp_path / "M-E04_EOI_drift_2026-09-02.md"
+    assert md.is_file()
+    text = md.read_text(encoding="utf-8")
+    assert "C:/" not in text and ":\\" not in text

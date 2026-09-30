@@ -19,14 +19,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SCENARIO = ROOT / "scenarios" / "twin_world_001.yaml"
 
 
-def test_baseline_reactive_only_abstains() -> None:
+def test_baseline_reactive_only_user_message_reply() -> None:
     result = run_scenario(
         DEFAULT_SCENARIO,
         traces_dir=Path("traces/test_baseline"),
         baseline=BaselineCondition.REACTIVE_ONLY,
     )
-    assert result["initiative"].abstained is True
-    assert result["decision"].outcome.value == "abstain"
+    assert result["initiative"].abstained is False
+    assert result["initiative"].candidate.question_text
     assert result["loop"].trace.metadata.initial_state["baseline"] == "reactive_only"
 
 
