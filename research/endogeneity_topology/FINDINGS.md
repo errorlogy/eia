@@ -69,6 +69,7 @@ draft patches: [`patches/`](patches/).
 | A28 | A stronger intrinsic generator becomes self-sustaining (indep 0.49 → 0.97) and takes more of the activity budget (share 0.17 → 0.42) without driving others more or dissolving their sub-agency (E 0.94 → 0.91): crowding-out, not enslavement — cap activity share per motive | holds (tick 88, 2 seeds) |
 | A29 | A share-capping Governor (adaptive per-module threshold) holds a strong generator at its cap (0.42 → 0.14) without destroying its self-sustainment (0.91) and restores the others' endogeneity (0.91 → 0.94); cost: total initiative −38 %. Adding a global rate-holding loop removes the cost (rate 0.035 vs 0.029, share 0.07, generator indep 0.90, others 0.94); a share rule that lets others' thresholds drop without the global loop runs away (rate ×5). **But** the integrating two-loop Governor reverses per-motive controllability (boosting a motive: +153 → −343 initiatives, tick 91) — share control must be leaky / deadbanded. A slow, leaky, upward-only chronic-dominance Governor caps the motive (0.41 → 0.14) while keeping controllability (boost +158, z 4.4); a slow integral on the global loop narrows the rate shortfall (0.025) with controllability intact (+181, z 4.3); the recipe transfers to hierarchical and ER graphs (cap holds, controllability kept or improved) | **robust** (ticks 89–94) |
 | A30 | At X = 0 a world that merely echoes the agent's own actions silently supports ~13 % of its activity (cut-the-world test) while only ~4–5 % of initiatives show a direct world cause — attribution under-counts externalised loops ~3×; audits need a world-cut / non-contingent-replay intervention. Hidden support is 1.6–4.5× the direct share at all delays and ~2× larger in an ER agent (≈ 0.32) than a modular one (≈ 0.15): modularity protects against externalised endogeneity | holds (ticks 98–99, 3 seeds) |
+| A31 | World-cut vs non-contingent replay separates two kinds of external support: the modular agent needs only input volume (replay fully substitutes), the ER agent's larger dependence (cut → 0.64) is ~30 % contingency — a genuine externalised memory loop | holds (tick 100, 3 seeds) |
 
 ## B. Human connectome (HCP, AAL2, 4 subjects)
 
@@ -130,6 +131,8 @@ draft patches: [`patches/`](patches/).
 4c. **Governor recipe** (A28–A29): cap each motive's *chronic* activity share with a slow, leaky, upward-only threshold
    term, plus a global budget loop with a slow integral; never integrate the per-motive loop on fast timescales
    (it reverses controllability).
+4d. **X = 0 audits need two world interventions** (A30–A31): world-cut (total external support) and non-contingent replay
+   (the contingent agent–world loop); attribution under-counts both.
 5. **Condition intervention audits on dominance state** when the governor is competitive (A17).
 6. **Close the loop through IntentionGenesis** (C4, C9): minimal eval-compatible step = inhibition of return on
    asked/denied targets (tick 53: perseveration 29 → 1 episodes, first initiative unchanged 100 %) — with a

@@ -1226,6 +1226,23 @@ w = 1; hidden support = activity lost when the world is cut, net of the w = 0 no
   (≈ 0.15) — without sub-agents to sustain activity internally, an agent outsources its persistence to the environment.
   Modularity is a protection against externalised endogeneity.
 
+## Tick 100 — contingency vs input volume (`tick100.py`)
+
+w = 1, D = 20; the random stream is now identical across modes (no noise floor). Non-contingent replay = the recorded echo
+stream, shuffled in 50-tick blocks and replayed regardless of the agent's actions. 3 seeds.
+
+| agent | activity kept: world cut | kept: non-contingent replay | share of world support due to contingency |
+|---|---|---|---|
+| modular (SBM) | 0.89 | 1.06 | ≤ 0 |
+| ER | 0.64 | 0.89 | **0.30** |
+
+- The modular agent depends on the world only as **input volume**: a non-contingent replay fully substitutes for the real
+  loop (even slightly over-supports it).
+- The ER agent depends on it more (cut → 0.64), and **~30 % of that support needs the echo to be contingent** on its own
+  actions — a genuine externalised memory loop that a replay cannot replace.
+- Audit protocol for X = 0 claims: run both *world-cut* (total external support) and *non-contingent replay* (contingent
+  part); only the contingent part is a hidden agent–world loop; the rest is ordinary input dependence.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
