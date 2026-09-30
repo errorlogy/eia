@@ -35,6 +35,23 @@ draft patches: [`patches/`](patches/).
     share + a global budget loop with a slow integral. Integrating the per-motive loop fast reverses controllability
     (A29, proposal 4c). Detector quality matters: calibrated inference doubles the blind-discoverability threshold (A12).
 
+## Topology scorecard (from ticks 3–106; ++ best, + good, 0 neutral, − poor)
+
+| property (evidence) | ER | small-world | flat modular | **hier-modular** | scale-free | spatial EDR |
+|---|---|---|---|---|---|---|
+| graded onset / controllable gain (A2, A19) | − | − | + | **++** | + (never rich) | + |
+| containment of internal interventions (A4, A6) | − (contagion) | − | + | **++** | 0 | + (reach ≈ 4λ) |
+| per-motive controllability (A4, A17) | + | + | 0 | **+** | 0 | + |
+| natural sub-agent boundaries (A10–A12) | − (none) | 0 (no scale) | + | **++** (nested) | − | + (size ≈ 3λ) |
+| independence from a reactive world (A30–A31) | − (0.32 hidden) | ? | + (0.15, volume only) | ? | ? | ? |
+| resilience to lesions (A33) | − | ? | 0 | **++** | − (hub collapse) | ? |
+| repair by gain homeostasis (A33) | 0 | ? | + | **++** (×1.22) | − (×2.15, clock-like) | ? |
+| self-sustained without noise (A34) | 0 (0.64) | ? | 0 (0.64) | **++** (0.94) | − (0.38) | 0 (0.54) |
+
+**Recommendation for EIA motive graphs**: hierarchical-modular wiring with sparse excitatory cross-motive coupling (≲ 10–20 %,
+A12), mutual inhibition where dense coupling is needed (A15), slow integration for reflective motives (A25), a thin workspace
+layer if agent-wide broadcast is wanted (A21), and the two-loop leaky Governor (A29). "?" = not measured.
+
 ## A. What topology does to endogenous initiative (toy drive-unit networks, X_trigger = 0)
 
 | # | Claim | Evidence | Status |
