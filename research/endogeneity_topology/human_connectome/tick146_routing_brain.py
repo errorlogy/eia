@@ -33,16 +33,17 @@ def E_norm(sp, W, lab, rng):
         return ((tot <= 1e-12) | ((P @ Win.T).toarray() >= 0.5 * tot))[Sn].mean()
     en = np.mean([E(lab[rng.permutation(N)]) for _ in range(3)]); return (E(lab) - en) / (1 - en)
 
-eia = np.where(MODLAB >= 0, MODLAB, 100 + np.arange(R))
-print(f"{'beta':>5}{'hemispheres':>13}{'SC communities':>16}{'EIA map':>9}")
-for beta in (0.0, 2.0):
-    rows = []
-    for s_ in b.SUBJECTS[:2]:
-        C, _ = b.load(s_); sc = louvain(C, 1.0, 146)
-        W1 = sps.csr_matrix(unit_matrix(C, 1)); lo, hi = 0.3, 8.0
-        for _ in range(10):
-            mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(W1*mid, 1, beta, 1500)[0].mean() < 0.03 else (lo, mid)
-        sp, Wm = sim(W1*(lo+hi)/2, 1, beta, 4000); rng = np.random.default_rng(1)
-        rows.append([E_norm(sp, Wm, lab[reg], rng) for lab in (HEMI, sc, eia)])
-    m = np.mean(rows, 0); print(f"{beta:>5}{m[0]:>13.2f}{m[1]:>16.2f}{m[2]:>9.2f}", flush=True)
-print("empirical (tick 36): hemispheres 0.05, SC communities 0.24, EIA map 0.25")
+if __name__ == "__main__":
+    eia = np.where(MODLAB >= 0, MODLAB, 100 + np.arange(R))
+    print(f"{'beta':>5}{'hemispheres':>13}{'SC communities':>16}{'EIA map':>9}")
+    for beta in (0.0, 2.0):
+        rows = []
+        for s_ in b.SUBJECTS[:2]:
+            C, _ = b.load(s_); sc = louvain(C, 1.0, 146)
+            W1 = sps.csr_matrix(unit_matrix(C, 1)); lo, hi = 0.3, 8.0
+            for _ in range(10):
+                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(W1*mid, 1, beta, 1500)[0].mean() < 0.03 else (lo, mid)
+            sp, Wm = sim(W1*(lo+hi)/2, 1, beta, 4000); rng = np.random.default_rng(1)
+            rows.append([E_norm(sp, Wm, lab[reg], rng) for lab in (HEMI, sc, eia)])
+        m = np.mean(rows, 0); print(f"{beta:>5}{m[0]:>13.2f}{m[1]:>16.2f}{m[2]:>9.2f}", flush=True)
+    print("empirical (tick 36): hemispheres 0.05, SC communities 0.24, EIA map 0.25")

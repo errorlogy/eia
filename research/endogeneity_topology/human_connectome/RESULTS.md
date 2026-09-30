@@ -744,3 +744,20 @@ Drive-units on SC with co-activity gating; E_norm (true time-averaged W, unit le
   empirical numbers.)
 - So function-over-anatomy in the brain needs both: enough cross-anatomical wiring (e.g. homotopic links, B8) *and* a routing /
   gating mechanism to use it (B5, A38). Next: routing + homotopic boost.
+
+## Tick 147 — routing × homotopic boost (`tick147_routing_homotopic.py`)
+
+Drive-units on SC; E_norm (true time-averaged W) of hemispheres / SC communities / EIA map; 2 subjects.
+
+| β | h | hemispheres | SC communities | EIA map |
+|---|---|---|---|---|
+| 0 | 0 | 0.80 | 0.71 | 0.23 |
+| 2 | 0 | 0.82 | 0.59 | 0.19 |
+| 0 | 0.1 | 0.54 | 0.61 | **0.35** |
+| 2 | 0.1 | **0.46** | **0.49** | 0.28 |
+
+- The homotopic boost is what moves boundaries off anatomy (hemispheres 0.80 → 0.54) and raises the functional EIA partition
+  (0.23 → 0.35). Routing on top loosens anatomy further (hemispheres 0.46, SC communities 0.49) but does not raise the EIA
+  partition (0.28): it produces *activity* coalitions, not specifically the EIA blocks.
+- Consistent with B8 (homotopic links → hemisphere boundary dissolves) and with the tick-146 reading: cross-anatomical wiring
+  is necessary; routing only amplifies its use. The EIA-specific pattern still needs the gating of B5 / B18.
