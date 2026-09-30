@@ -1402,6 +1402,22 @@ TargetEngine (tension-set targets), fixed tension 0.5, μ 0.05; calibrated gain 
   the cross-drive coupling has to be raised deliberately (toward μ ≈ 0.1–0.2, still discoverable with a conditional
   detector, A12) or routed through a workspace layer (A21); the current prototype has none.
 
+## Tick 113 — adding inter-motive interaction to the prototype (`../eia_prototype/tick113_cross_drive.py`)
+
+Calibrated TargetEngine; cross-drive mixing μ. Interaction = relative change of epistemic activity when only coherence
+tension rises 0.2 → 0.8 (5 seeds). Eval compatibility = first initiative unchanged vs the current pipeline (7 scenarios × 3 seeds).
+
+| μ | epistemic response to coherence tension | first initiative unchanged |
+|---|---|---|
+| 0.05 | +4 % | 1.00 |
+| 0.15 | +11 % | 1.00 |
+| 0.30 | **+20 %** | **1.00** |
+
+- Raising cross-drive coupling gives a graded inter-motive interaction (a coherence conflict raises epistemic activity by up to
+  20 %) **without any loss of eval compatibility** (100 % at every μ). Combined with A12 (μ ≲ 0.15–0.2 stays blindly
+  discoverable with the conditional detector), **μ ≈ 0.15 is a reasonable default**: motives interact (+11 %), stay auditable,
+  evals unchanged.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
