@@ -650,3 +650,15 @@ Global signal band-passed 0.01–0.03 Hz, Hilbert phase; PLV of each region's BO
   their events keep their own timing rather than riding the global wave. Sensory and SMA are the most paced.
 - Caveat: shared slow BOLD fluctuations (vascular / arousal / respiration) are a known confound; the global signal is not
   a pure "carrier".
+
+## Tick 128 — region-level pacing vs self-initiation (`tick128_pacing_vs_selfinit.py`)
+
+Spearman across regions between global-rhythm pacing (leave-own-module-out PLV) and residual self-initiation, per subject.
+
+| | mean ρ | subjects negative | mean partial ρ (| event count) |
+|---|---|---|---|
+| pacing vs residual self-initiation | **−0.13** | 6/7 | −0.13 |
+
+- Weak but consistent: regions less paced by the global slow rhythm self-initiate slightly more than their connectivity
+  predicts (6/7 subjects negative, small effect). The module-level match of B14/B18 (BG, value: least paced, most
+  self-initiating) is mostly a between-module effect; within the region set the link is weak.
