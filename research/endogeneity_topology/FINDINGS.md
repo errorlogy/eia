@@ -1,11 +1,11 @@
-# Endogeneity × Topology — consolidated findings (ticks 1–110, 2026-09-29/30)
+# Endogeneity × Topology — consolidated findings (ticks 1–126, 2026-09-29/30)
 
 Exploratory, toy-model and small-sample evidence. "Status" says how far each claim survived our own
 replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 [`human_connectome/RESULTS.md`](human_connectome/RESULTS.md), [`eia_prototype/`](eia_prototype/),
 draft patches: [`patches/`](patches/).
 
-## TL;DR — fourteen takeaways
+## TL;DR — sixteen takeaways
 
 1. **Endogeneity is a property of (system, boundary)**, not of a system: single units are ~7 % self-caused; natural
    sub-agent boundaries are where the endogeneity profile E(B) jumps (A9–A11), and can be found blind (A11).
@@ -41,6 +41,12 @@ draft patches: [`patches/`](patches/).
 14. **Robustness**: hierarchical-modular agents are the most resilient to lesions, repairable by gain homeostasis, and
     self-sustained without noise; scale-free agents collapse with hubs and are noise-driven; the periphery seeds
     initiatives and the core amplifies them (A32–A34, B17).
+15. **Whole vs parts**: integration/TSE of the whole and endogeneity of the parts rank opposite across topologies; a thin
+    workspace layer on a hierarchy raises integration ~2× while keeping sub-agents (E_norm 0.92), at a ~⅓ controllability
+    cost and competitive spill-over (A35). A Governor should cap only *chronic* dominance (A29, dominance-gated).
+16. **Rhythms schedule 'when', not 'who/why'**: a global carrier phase-locks initiative timing without touching which
+    sub-agent acts; slow carriers entrain most, and the '42 Hz' period is the least entraining in this model — audit "why
+    now" against slow global modulations first (A36).
 
 ## Topology scorecard (from ticks 3–107; ++ best, + good, 0 neutral, − poor)
 
