@@ -1,11 +1,11 @@
-# Endogeneity × Topology — consolidated findings (ticks 1–86, 2026-09-29)
+# Endogeneity × Topology — consolidated findings (ticks 1–97, 2026-09-29/30)
 
 Exploratory, toy-model and small-sample evidence. "Status" says how far each claim survived our own
 replications and controls. Details and numbers: [`toy/LOG.md`](toy/LOG.md),
 [`human_connectome/RESULTS.md`](human_connectome/RESULTS.md), [`eia_prototype/`](eia_prototype/),
 draft patches: [`patches/`](patches/).
 
-## TL;DR — ten takeaways
+## TL;DR — twelve takeaways
 
 1. **Endogeneity is a property of (system, boundary)**, not of a system: single units are ~7 % self-caused; natural
    sub-agent boundaries are where the endogeneity profile E(B) jumps (A9–A11), and can be found blind (A11).
@@ -29,6 +29,11 @@ draft patches: [`patches/`](patches/).
    while making silent initiative sparse, irregular and drive-dependent (C12–C13).
 10. **Learning**: plain Hebbian plasticity builds integrative highways, not sub-agents; competitive synchronous learning
     grows weak but functional sub-agents (A22–A23).
+11. **Generators vs relays**: topology alone makes relays (central, high influence, dependent), not generators; a strong
+    intrinsic generator crowds other motives out of the activity budget rather than enslaving them (A26–A28).
+12. **Governor recipe** (robust across topologies): slow, leaky, upward-only cap on each motive's *chronic* activity
+    share + a global budget loop with a slow integral. Integrating the per-motive loop fast reverses controllability
+    (A29, proposal 4c). Detector quality matters: calibrated inference doubles the blind-discoverability threshold (A12).
 
 ## A. What topology does to endogenous initiative (toy drive-unit networks, X_trigger = 0)
 
