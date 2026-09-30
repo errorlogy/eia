@@ -1418,6 +1418,20 @@ tension rises 0.2 → 0.8 (5 seeds). Eval compatibility = first initiative uncha
   discoverable with the conditional detector), **μ ≈ 0.15 is a reasonable default**: motives interact (+11 %), stay auditable,
   evals unchanged.
 
+## Tick 114 — system card v3 with cross-drive μ = 0.15 (`../eia_prototype/tick114_system_card_v3.py`, `.out`)
+
+| metric (mean of 7 scenarios × 3 seeds) | current | v2 (μ 0.05, tick 63) | **v3 (μ 0.15)** |
+|---|---|---|---|
+| first initiative unchanged | 1.00 | 1.00 | **1.00** |
+| EOI | 1.00 | 0.95 | 0.90 |
+| drive-dependence v(all) | 0.71 | 0.98 | 0.99 |
+| questions in 200 silent episodes | 199.6 | 4.6 | 3.6 |
+| longest same-question run | 199.4 | 1.0 | 1.05 |
+| ISI CV | 0.03 | 1.17 | 1.08 |
+
+- Adding inter-motive interaction (μ 0.15) keeps every gain of v2 and full eval compatibility; EOI drops slightly
+  (0.95 → 0.90) because coupled drives make the twin diverge a little more. v3 is the recommended prototype configuration.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

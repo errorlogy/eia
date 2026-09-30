@@ -140,6 +140,7 @@ reactive, audit with world-cut/replay (4d) regardless of topology.
 | C12 | Subcritical population motives with tension-set uncertainty targets make the population engine eval-compatible (first initiative unchanged 100 %) while keeping irregular silent initiative (CV ≈ 1); near-critical motives flatten between-drive differences | tick 62 |
 | C13 | System card v2 (calibrated: tension-set targets + subcritical motives): first eval initiative unchanged 1.00, EOI 0.95, drive-dependence 0.98, silent questions 200 → 4.6, same-question run 199 → 1, ISI CV 0.03 → 1.17 | tick 63 |
 | C14 | In the calibrated prototype every drive is isolated-type (independence ≈ 0.97, out-influence ≈ 0.01): separability by non-interaction — drives never influence each other; inter-motive interaction needs deliberate coupling: μ 0.15 / 0.30 gives +11 % / +20 % epistemic response to coherence tension with eval initiatives still 100 % unchanged — μ ≈ 0.15 is a sensible default | ticks 112–113 |
+| C15 | System card v3 (calibrated engine + cross-drive μ 0.15): first initiative 1.00, EOI 0.90, drive-dependence 0.99, silent questions 3.6, same-question run 1.05, ISI CV 1.08 — interaction added at a small EOI cost; recommended prototype configuration | tick 114 |
 | C11 | Latent crash: `pipeline.py:159` assumes `motivation.dominant_drive` is not None although the schema allows None (all-zero drives) | tick 60 |
 
 ## D. Concrete proposals for EIA
