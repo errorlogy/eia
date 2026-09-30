@@ -1328,6 +1328,22 @@ Rate-matched gain; noise switched off after 2000 ticks. 2 seeds.
   0.85 here), but it is **not** the most world-independent: small-world (0.12) and flat modular (0.15) lean on a reactive
   world less. Scorecard updated with a caveat.
 
+## Tick 108 — sensor/motor placement confound (`tick108.py`)
+
+Hidden world support (w = 1, D = 20), sensors and motors as contiguous blocks vs scattered at random; 2 seeds.
+
+| topology | contiguous | scattered |
+|---|---|---|
+| small-world | **0.12** | 0.25 |
+| hier-modular | 0.24 | 0.27 |
+
+- Small-world's low world dependence in tick 107 was a **placement artefact**: contiguous sensors form one local ring patch,
+  so the echo stays local; scattered sensors double the dependence (0.25), matching hierarchy (0.27). Hierarchy is
+  insensitive to placement.
+- Corrected reading: with realistic distributed sensors, small-world and hierarchy lean on a reactive world equally
+  (~0.25); world dependence is governed more by **how the interface is embedded** (local vs distributed) than by topology
+  class. Scorecard caveat updated.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
