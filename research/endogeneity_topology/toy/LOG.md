@@ -1473,6 +1473,20 @@ SBM 10×100 (μ 0.05) + hub workspace layer of weight w; rate-matched; block-lev
   at 0.95 — the A35 trade-off is **escapable**. Beyond that (w 0.8) integration saturates and sub-agents start to dissolve
   (0.80). Sweet spot w ≈ 0.4: both levels endogenous. Supports the "hierarchy + thin workspace" recommendation.
 
+## Tick 118 — the recommended architecture as a whole (`tick118.py`)
+
+Hierarchical-modular motives ± thin workspace layer (w 0.4); rate-matched; 3 seeds (6 boosts per condition).
+
+| architecture | integration | TSE | module E_norm | Δ boosted motive (z) |
+|---|---|---|---|---|
+| hier alone | 1.52 | 1.82 | 0.95 | +310 (2.1) |
+| **hier + workspace** | **2.82** | **2.86** | **0.92** | +223 (2.1) |
+
+- Adding the workspace to the hierarchy nearly doubles whole-level integration and TSE (×1.9 / ×1.6) while sub-agent
+  endogeneity stays high (0.95 → 0.92) and per-motive controllability is kept (same z; smaller mean effect as some of the
+  boost is broadcast). The combined recommendation (hierarchy + thin workspace) holds its promise on all three axes at once.
+- Small n (6 boosts): controllability z ≈ 2 in both — directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
