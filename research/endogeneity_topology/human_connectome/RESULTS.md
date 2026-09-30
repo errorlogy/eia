@@ -588,3 +588,17 @@ Split-half test on all 7 subjects, detection and scoring with the conditional-at
 - With the calibrated detector the two halves of a scan agree even less (0.04), while each half's partition stays strongly
   endogenous on the other half (0.38). **B9 holds with a better detector and 7 subjects**: many near-equivalent
   sub-agent decompositions, not one noisy one.
+
+## Tick 97 — B10 re-checked with the conditional detector (`tick97_metastable_conditional.py`)
+
+4 subjects × 2 seeds, homotopic h = 0.05, same split-half pipeline as tick 96.
+
+| condition | split-half ARI | E_norm of first-half parts on second half |
+|---|---|---|
+| no gate | −0.00 | 0.24 |
+| fixed gate | 0.20 | 0.55 |
+| **switching gate (dwell 120 s)** | **0.06** | **0.43** |
+| *empirical (tick 96)* | *0.04* | *0.38* |
+
+- With the calibrated detector the metastable-gating model matches the empirical degeneracy even more closely than in
+  tick 40 (0.06 / 0.43 vs 0.04 / 0.38); fixed gating stays too stable and too strong, no gating too weak. B10 robust.

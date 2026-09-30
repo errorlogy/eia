@@ -28,21 +28,22 @@ def split_half(x, seed):
     W = infer_cond(h1); rng = np.random.default_rng(seed)
     return ari(l1, l2), E_norm(h2, W, l1, rng), E_norm(h2, W, l2, rng)
 
-agg = {}
-print(f"{'subj':<8}{'condition':<16}{'switches':>9}{'ARI l1~l2':>10}{'E(l1)':>7}{'E(l2)':>7}")
-for s in b.SUBJECTS:
-    C, _ = b.load(s); Ch = C + 0.05 * H
-    reps = [labels_of(x) for x in b.SUBJECTS if x != s]
-    co = sum((l[:, None] == l[None, :]).astype(float) for l in reps) / 3; np.fill_diagonal(co, 0)
-    cons = louvain(co, 1.0, 21)
-    conds = {"no gate": ([Ch], 0), "fixed gate": ([gate(Ch, cons)], 0),
-             "switch 120 s": ([gate(Ch, l) for l in reps], 120.0), "switch 30 s": ([gate(Ch, l) for l in reps], 30.0)}
-    for name, (Cs, dwell) in conds.items():
-        r = []
-        for seed in (91, 92):
-            x, sw = sim_switch(Cs, dwell, seed); r.append((sw,) + split_half(x, seed))
-        m = np.mean(r, 0); agg.setdefault(name, []).append(m)
-        print(f"{s:<8}{name:<16}{m[0]:>9.0f}{m[1]:>10.2f}{m[2]:>7.2f}{m[3]:>7.2f}", flush=True)
-print("\nmeans (empirical tick 39: ARI 0.09, E(l1) 0.49, E(l2) 0.42)")
-for name, rows in agg.items():
-    m = np.mean(rows, 0); print(f"  {name:<14} ARI {m[1]:.2f}  E(l1) {m[2]:.2f}  E(l2) {m[3]:.2f}")
+if __name__ == "__main__":
+    agg = {}
+    print(f"{'subj':<8}{'condition':<16}{'switches':>9}{'ARI l1~l2':>10}{'E(l1)':>7}{'E(l2)':>7}")
+    for s in b.SUBJECTS:
+        C, _ = b.load(s); Ch = C + 0.05 * H
+        reps = [labels_of(x) for x in b.SUBJECTS if x != s]
+        co = sum((l[:, None] == l[None, :]).astype(float) for l in reps) / 3; np.fill_diagonal(co, 0)
+        cons = louvain(co, 1.0, 21)
+        conds = {"no gate": ([Ch], 0), "fixed gate": ([gate(Ch, cons)], 0),
+                 "switch 120 s": ([gate(Ch, l) for l in reps], 120.0), "switch 30 s": ([gate(Ch, l) for l in reps], 30.0)}
+        for name, (Cs, dwell) in conds.items():
+            r = []
+            for seed in (91, 92):
+                x, sw = sim_switch(Cs, dwell, seed); r.append((sw,) + split_half(x, seed))
+            m = np.mean(r, 0); agg.setdefault(name, []).append(m)
+            print(f"{s:<8}{name:<16}{m[0]:>9.0f}{m[1]:>10.2f}{m[2]:>7.2f}{m[3]:>7.2f}", flush=True)
+    print("\nmeans (empirical tick 39: ARI 0.09, E(l1) 0.49, E(l2) 0.42)")
+    for name, rows in agg.items():
+        m = np.mean(rows, 0); print(f"  {name:<14} ARI {m[1]:.2f}  E(l1) {m[2]:.2f}  E(l2) {m[3]:.2f}")
