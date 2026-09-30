@@ -1518,6 +1518,24 @@ Protocol of ticks 92–93 (boost at t0 = 2000 after Governor warm-up, 600-tick h
 - Governor use rule: apply the share cap only when a motive is chronically dominant (e.g. gate the cap on a long-window
   share test), not as a standing regulator in balanced agents.
 
+## Tick 121 — dominance-gated Governor (`tick121.py`)
+
+Per-motive cap applied only while a motive's slow share exceeds 0.25; global budget loop unchanged. 6 seeds × 3 motives.
+
+| case / governor | module-0 share | Δ boosted motive | z |
+|---|---|---|---|
+| A strong generator / none | 0.40 | +152 | 6.2 |
+| A strong generator / always-on cap | 0.14 | +137 | 4.0 |
+| **A strong generator / gated cap** | **0.14** | **+217** | **4.1** |
+| B balanced hier+ws / none | 0.10 | +171 | 7.5 |
+| B balanced hier+ws / always-on cap | 0.10 | +88 | 1.9 |
+| **B balanced hier+ws / gated cap** | 0.10 | **+137** | **3.7** |
+
+- Gating the cap on chronic dominance keeps the generator capped (0.14, same as always-on) and **recovers much of the
+  controllability** lost in balanced agents (z 1.9 → 3.7; +88 → +137), and even improves it in the generator case (+217).
+- Not a full recovery in B (z 7.5 without any Governor): the global budget loop still leans against any surge. Final recipe:
+  **dominance-gated share cap + slow global budget loop**; accept a moderate controllability cost for budget safety.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
