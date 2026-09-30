@@ -1193,6 +1193,24 @@ excess (as tick 24) vs conditional attribution (tick 35).
   property of the detector as much as of the network: with calibrated attribution, sub-agents with up to ~15–20 %
   outgoing links are recoverable blind. Design rule D3 relaxes accordingly.
 
+## Tick 98 — agent–world loop: the world as hidden memory (`tick98.py`)
+
+Agent SBM 10×100 at X = 0; a 'world' of 100 relays echoes the agent's own motor initiatives back to sensory units after
+20 ticks (p 0.8, weight w). Rate-matched on the agent; 3 seeds.
+
+| w (world echo) | initiatives directly touched by world input | agent activity kept when the world is cut |
+|---|---|---|
+| 0 | 0.000 | 0.97 (noise floor: different RNG stream) |
+| 0.5 | 0.051 | 0.89 |
+| 1.0 | 0.043 | **0.84** |
+
+- A world that only reflects the agent's own actions silently carries **~13 % of its "endogenous" activity** (net of the
+  3 % noise floor), while only **~4–5 %** of initiatives show a direct world cause: attribution under-counts the
+  externalised loop ~3×, because each echo seeds internal cascades.
+- For EIA audits at X = 0: "no external trigger" does not mean "no external dependence". The environment can act as
+  memory/scaffold (identification threats #2 memory leakage and #7 sensor leakage); only a cut-the-world intervention
+  (world held frozen / replayed without contingency) reveals it.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
