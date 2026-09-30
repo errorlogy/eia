@@ -1551,6 +1551,23 @@ Balanced hier + workspace; 6 seeds × 3 motives.
 - So the residual "controllability loss" of the final recipe is mostly noise injected by the budget integrator — tunable by a
   slower / smaller integral gain, not a structural limit.
 
+## Tick 123 — slower budget integrator (`tick123.py`)
+
+Gated Governor, ki 0.002 vs 0.0005; 6 seeds × 3 motives.
+
+| ki | case | generator share | Δ boosted motive | z |
+|---|---|---|---|---|
+| 0.002 | A (generator) | 0.14 | +217 | 4.1 |
+| 0.002 | B (balanced) | 0.10 | +137 | 3.7 |
+| 0.0005 | A | 0.16 | +160 | 6.3 |
+| 0.0005 | B | 0.10 | +123 | 2.5 |
+
+- **No clean tuning fix**: a slower integrator helps controllability in the generator case (z 4.1 → 6.3, slightly weaker cap
+  0.16) but not in the balanced case (3.7 → 2.5). Tick 122's "residual loss is integrator variance, tunable" is **not
+  confirmed** — at n = 18 boosts these z values are too noisy to rank settings finely.
+- Governor line closed for the toy model: the gated cap + slow budget loop is a workable default (caps dominance, keeps
+  z ≈ 3–6), with an irreducible, noisy controllability cost of ~⅓–½ of the ungoverned z.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
