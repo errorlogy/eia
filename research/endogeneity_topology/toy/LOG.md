@@ -1259,6 +1259,25 @@ Cascade start = a unit that fires with no active in-neighbour at t − 1.
   coupled peripheral motives supply novelty, a dense core broadcasts it — the core is where a Governor's share cap
   (A29) bites, the periphery is where new initiatives come from.
 
+## Tick 104 — resilience of endogenous initiative to lesions (`tick104.py`)
+
+Gain fixed at the intact rate-matched value; 5 / 10 / 20 % of units removed at random or highest-degree first; activity of
+the remaining units relative to intact. 2 seeds.
+
+| topology | random 5 / 10 / 20 % | hubs 5 / 10 / 20 % |
+|---|---|---|
+| ER | 0.59 / 0.45 / 0.36 | 0.41 / 0.32 / 0.28 |
+| SBM | 0.66 / 0.49 / 0.38 | 0.43 / 0.35 / 0.30 |
+| **hier-modular** | **0.70 / 0.58 / 0.45** | **0.54 / 0.39 / 0.36** |
+| scale-free (BA) | **0.91** / 0.39 / 0.35 | **0.30** / 0.30 / 0.30 |
+
+- Collective endogeneity near the critical point is **fragile**: losing 5 % of units at random already removes 30–40 % of
+  the survivors' activity (lower loop gain); the floor ≈ 0.28–0.30 is the per-unit aging clock (A1) — collective activity gone.
+- **Hierarchy is the most resilient** to both random and targeted loss; scale-free is robust to small random loss but
+  collapses at once when hubs go (the classic robust-yet-fragile pattern).
+- Design note: an endogenous agent operated near criticality needs **gain homeostasis** (re-tuning after loss) or it
+  falls back to clock-like unit activity; hierarchical organisation buys the most slack.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
