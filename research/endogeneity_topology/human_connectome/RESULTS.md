@@ -602,3 +602,20 @@ Split-half test on all 7 subjects, detection and scoring with the conditional-at
 
 - With the calibrated detector the metastable-gating model matches the empirical degeneracy even more closely than in
   tick 40 (0.06 / 0.43 vs 0.04 / 0.38); fixed gating stays too stable and too strong, no gating too weak. B10 robust.
+
+## Tick 102 — periphery seeds, hubs amplify: also in the connectome model (`tick102_periphery_brain.py`)
+
+Drive-units on SC (homogeneous timescales, no SNR differences), 4 subjects. Per region: share of initiatives that start a
+cascade, activity, SC strength.
+
+| | Spearman with SC strength |
+|---|---|
+| cascade-start share | **−0.84** (all subjects −0.82 … −0.87) |
+| activity | **+0.95** |
+| *empirical self-initiation (tick 79)* | *−0.55* |
+
+- The model reproduces A32 on human anatomy: weakly connected regions seed cascades, hubs carry the activity.
+- **Revises tick 79**: the empirical negative correlation between self-initiation and SC strength is *expected
+  mechanistically*, not only an SNR artefact (orbitofrontal dropout still inflates the top of the raw ranking).
+  Consequently residualising on strength (tick 80–81) also removes a real peripheral-seeding effect; the BG/DMN/SEN residual
+  pattern (B14) is what remains *beyond* that effect.
