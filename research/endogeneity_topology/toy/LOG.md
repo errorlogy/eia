@@ -1845,6 +1845,21 @@ hier-modular + hub workspace layer w; rate-matched; 15 000 ticks; 2 seeds.
   SBM) and raises the number of distinct combinations by ~30 %, while (ticks 117–119) keeping sub-agents. The total repertoire
   stays below flat modular (370 vs 637). A small workspace weight is the better setting for novelty (0.4 no further gain).
 
+## Tick 150 — noise colour: coloured noise does not become a hidden scheduler
+
+`tick150.py`. Hier-modular, rate-matched (0.03), same noise variance; 2 seeds x 5000 ticks.
+
+| noise | burst CV | envelope autocorr peak (lag 20–800) | module E_norm (true W) |
+|---|---|---|---|
+| white | 1.62 | 0.59 | 0.95 |
+| independent pink (1/f) | 1.51 | 0.24 | 0.95 |
+| half-shared pink | 1.26 | 0.19 | 0.95 |
+
+- The slow internal rhythm of the global envelope (ac 0.59) is **endogenous**: it appears with white noise and is *masked*, not created, by 1/f noise (0.24 / 0.19).
+- A shared slow input makes bursts more regular (CV 1.62 → 1.26) — the same sign as pacing under a common driver (A36/A37) — but does not lock them into a rhythm.
+- Module E_norm is unchanged (0.95). Caveat: E_of attributes through the true W, so it is blind to where the noise comes from by construction; a do(noise) audit is needed to measure exogenous share.
+- Design implication: the scale-free "background" of the environment competes with the system's own slow cycle; the cycle is a property of the recurrence, not of the input spectrum.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
