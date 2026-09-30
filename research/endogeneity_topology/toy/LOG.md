@@ -1586,6 +1586,22 @@ Global gain × (1 + A·sin(2πt/24)); rate-matched at A = 0; 2 seeds. PLV = phas
   claims must be checked against phase locking to any global rhythm, or the carrier acts as identification threat #1.
   Strong carriers also reduce the overall rate (−50 % at A = 0.3).
 
+## Tick 125 — carrier resonance (`tick125.py`)
+
+Weak modulation A = 0.05; carrier period P swept; PLV of burst onsets; 2 seeds.
+
+| topology | P = 6 | 12 | **24** | 48 | 96 | 192 |
+|---|---|---|---|---|---|---|
+| hier | 0.38 | 0.19 | **0.21** | 0.37 | 0.20 | **0.80** |
+| ER | 0.15 | 0.10 | **0.05** | 0.59 | 0.42 | **0.87** |
+
+- Entrainment is strongest for **slow** carriers (P = 192: PLV 0.80–0.87 at only 5 % modulation) — slow gain changes are
+  followed quasi-statically by the burst dynamics. The "42 Hz" period (24 ticks) sits near a *local minimum* of
+  entrainability for both topologies; it is not a privileged frequency in this model. Hierarchy has an extra fast peak at
+  P = 6 (≈ refractory period + 1).
+- Audit consequence: the most dangerous hidden schedulers are **slow** rhythms (circadian-like, polling cycles), not fast
+  carriers; check "why now" against slow global modulations first. 2 seeds, noisy (non-monotonic mid-range).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
