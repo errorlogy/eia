@@ -1742,6 +1742,27 @@ own best lag; Louvain (best resolution); 2 seeds.
 - The lag-selective detector is **robust to unknown delays**: near-optimal without delays (0.78 vs 0.82) and best with them
   (0.73). Recommended default for blind sub-agent detection on real agent logs / neural data with unknown latencies.
 
+## Tick 142 — attention-like dynamic routing (`tick142.py`)
+
+Fixed SBM edge set (μ 0.2); each edge gated by recent co-activity of its endpoints, g = 1 + β(z_i z_j − 1) ≥ 0 (trace τ 20).
+Blind detection per half (conditional detector), held-out E_norm with the time-averaged gated W; 2 seeds.
+
+| β | split-half ARI | ARI with anatomical modules | held-out E_norm |
+|---|---|---|---|
+| 0 (static) | 0.20 | 0.33 | 0.62 |
+| 0.5 | 0.01 | 0.01 | 0.01 (unexplained — detection failed; regime?) |
+| 1.0 | 0.14 | **0.00** | **0.41** |
+| 2.0 | 0.13 | **0.00** | **0.38** |
+| *brain (B9, B2)* | *0.02–0.08* | *functional ≠ anatomical* | *0.3–0.5* |
+
+- With strong enough routing (β ≥ 1) the detected sub-agents **detach from anatomy entirely** (ARI with the wired modules 0)
+  but are still endogenous on held-out data at a brain-like level (0.38–0.41) and only moderately stable across halves (0.13–0.14).
+- This reproduces two brain signatures *without* imposed gating or switching: **function-over-anatomy boundaries** (B2
+  revised, B36) and **partial degeneracy** (B9; brain is still less stable, 0.02–0.08). Content-dependent routing is a candidate
+  mechanism for the brain's metastable functional sub-agents — and a design option for motive graphs whose decomposition
+  should follow the current task rather than fixed wiring.
+- β = 0.5 result unexplained (everything ≈ 0); 2 seeds — directional.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
