@@ -1602,6 +1602,16 @@ Weak modulation A = 0.05; carrier period P swept; PLV of burst onsets; 2 seeds.
 - Audit consequence: the most dangerous hidden schedulers are **slow** rhythms (circadian-like, polling cycles), not fast
   carriers; check "why now" against slow global modulations first. 2 seeds, noisy (non-monotonic mid-range).
 
+## Tick 126 — carrier resonance on 5 seeds (`tick126.py`)
+
+| topology | P = 6 | **24** | 48 | 192 |
+|---|---|---|---|---|
+| hier | 0.32 | **0.23** | 0.33 | 0.73 |
+| ER | 0.13 | **0.05** | 0.59 | 0.87 |
+
+- Replicates tick 125: slow carriers entrain most (P 192: 0.73 / 0.87), the 24-tick period is the minimum for both topologies,
+  and hierarchy keeps its fast peak at P = 6. A36 upgraded to robust.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
