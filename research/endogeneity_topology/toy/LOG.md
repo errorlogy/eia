@@ -1690,7 +1690,10 @@ Re-verified: combined patch applies to HEAD, full suite **308 passed / 6 pre-exi
 causal gate now gives P3 **0/6** (as the lexical gate), all other baselines unchanged. C17's P3 caveat resolved; its main
 point (no gate separates full_eia from scheduled/event-rule stubs) stands.
 
+## Tick 135 — proposal D10 (reasoning): multi-episode timing audit as the missing baseline discriminator
+
 ## Queue (next ticks)
+- [ ] test D10: multi-episode silent runs of scheduled / event-rule / full_eia under the same harness (timing statistics)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
 - [x] tick 37: consensus gating triples functional boundaries (held-out) but leaves hemispheric boundary (0.28 vs emp 0.05)
