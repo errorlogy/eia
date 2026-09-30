@@ -662,3 +662,17 @@ Spearman across regions between global-rhythm pacing (leave-own-module-out PLV) 
 - Weak but consistent: regions less paced by the global slow rhythm self-initiate slightly more than their connectivity
   predicts (6/7 subjects negative, small effect). The module-level match of B14/B18 (BG, value: least paced, most
   self-initiating) is mostly a between-module effect; within the region set the link is weak.
+
+## Tick 129 — global pacing in the connectome model (`tick129_model_pacing.py`)
+
+Same leave-own-module-out PLV analysis on Hopf-model output (plain SC), 7 subjects.
+
+| | all | DMN | SAL | BG | SMA | VAL | FPN | SEN |
+|---|---|---|---|---|---|---|---|---|
+| model | 0.24 | 0.27 | 0.26 | 0.23 | 0.24 | **0.15** | 0.28 | 0.26 |
+| empirical | 0.38 | 0.34 | 0.44 | 0.26 | **0.51** | 0.26 | 0.40 | 0.45 |
+
+- The model shows weaker global pacing (0.24 vs 0.38) and only partly the module pattern (r = 0.57): it reproduces the *low*
+  end (VAL lowest, BG low — weakly connected regions ride the global wave less, an anatomical effect) but not the strong
+  pacing of SMA/SAL/SEN. The extra empirical pacing of those blocks is not explained by SC — plausibly arousal/vascular
+  global fluctuations that act most on sensorimotor and salience regions.
