@@ -698,3 +698,19 @@ at least partly a **measurement artefact** — not interpreted.
   its period is set by delays and refractoriness (12–19 ms here ≈ 50–80 Hz in this toy time scale).
 - Method note: every lag-1 attribution metric (E, E_norm, conditional attribution) must be generalised to multi-lag before
   it is used on delayed systems.
+
+## Tick 138 — multi-lag endogeneity under delays (`tick138_multilag_E.py`)
+
+Causes attributed per delay class (input via M_k comes from spiking at t − 1 − k). 2 subjects × 1 seed.
+
+| velocity | E_norm, lag-1 attribution | E_norm, multi-lag attribution |
+|---|---|---|
+| none | 0.22 | 0.22 |
+| 10 m/s | 0.14 | **0.20** |
+| 3 m/s | 0.05 | **0.25** |
+
+- With correct (multi-lag) attribution, **sub-agent endogeneity is unchanged by delays** (0.20–0.25 vs 0.22): the tick-137
+  drop was entirely a lag-1 measurement artefact — the lag-1 metric fell to 0.05 while the true value did not move.
+- So delays change *when* (intrinsic carrier, B19) but not *who/why* — the same separation as for imposed carriers (A36).
+- Method rule: endogeneity metrics must match the system's causal lags; a lag mismatch silently reads delayed internal
+  causation as external. (Relevant for any LLM/agent log with variable latencies.)

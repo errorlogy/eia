@@ -45,16 +45,17 @@ def E_norm(sp, W, lab, rng):
         tot = (P @ W.T).toarray(); ins = (P @ Win.T).toarray(); return ((tot <= 1e-12) | (ins >= 0.5 * tot))[Sn].mean()
     en = np.mean([E(lab[rng.permutation(N)]) for _ in range(3)]); return (E(lab) - en) / (1 - en)
 
-print(f"{'velocity':<10}{'median delay':>13}{'burst CV':>9}{'envelope ac':>12}{'period':>8}{'EIA-module E_norm':>19}")
-for v in (None, 10.0, 3.0):
-    rows = []
-    for s_ in b.SUBJECTS[:2]:
-        C, _ = b.load(s_); Lmm = sio.loadmat(b.DATA / f"{s_}_DTI_LEN.mat")["len"].astype(float)
-        for seed in (1, 2):
-            W1 = sps.csr_matrix(unit_matrix(C, seed)); lo, hi = 0.5, 2.5
-            for _ in range(9):
-                mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(delay_mats(W1*mid, Lmm, v), seed, 1500).mean() < 0.03 else (lo, mid)
-            W = W1*(lo+hi)/2; sp = sim(delay_mats(W, Lmm, v), seed); cv, ac, per = env_stats(sp)
-            rows.append((cv, ac, per, E_norm(sp, W, lab_units, np.random.default_rng(seed))))
-    m = np.nanmean(rows, 0); med = 0 if v is None else np.median(Lmm[Lmm > 0]) / v
-    print(f"{'none' if v is None else str(v)+' m/s':<10}{med:>13.0f}{m[0]:>9.2f}{m[1]:>12.2f}{m[2]:>8.0f}{m[3]:>19.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'velocity':<10}{'median delay':>13}{'burst CV':>9}{'envelope ac':>12}{'period':>8}{'EIA-module E_norm':>19}")
+    for v in (None, 10.0, 3.0):
+        rows = []
+        for s_ in b.SUBJECTS[:2]:
+            C, _ = b.load(s_); Lmm = sio.loadmat(b.DATA / f"{s_}_DTI_LEN.mat")["len"].astype(float)
+            for seed in (1, 2):
+                W1 = sps.csr_matrix(unit_matrix(C, seed)); lo, hi = 0.5, 2.5
+                for _ in range(9):
+                    mid = (lo+hi)/2; lo, hi = (mid, hi) if sim(delay_mats(W1*mid, Lmm, v), seed, 1500).mean() < 0.03 else (lo, mid)
+                W = W1*(lo+hi)/2; sp = sim(delay_mats(W, Lmm, v), seed); cv, ac, per = env_stats(sp)
+                rows.append((cv, ac, per, E_norm(sp, W, lab_units, np.random.default_rng(seed))))
+        m = np.nanmean(rows, 0); med = 0 if v is None else np.median(Lmm[Lmm > 0]) / v
+        print(f"{'none' if v is None else str(v)+' m/s':<10}{med:>13.0f}{m[0]:>9.2f}{m[1]:>12.2f}{m[2]:>8.0f}{m[3]:>19.2f}", flush=True)
