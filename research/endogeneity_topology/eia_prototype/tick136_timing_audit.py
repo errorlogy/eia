@@ -9,7 +9,6 @@ from pathlib import Path
 import numpy as np
 import tick30_pipeline as h
 import tick114_system_card_v3 as v3            # sets up calibrated engine params (mu 0.15)
-import tick57_system_card as t57
 from eia.experiment.baseline import load_event_rule_salience
 from eia.intention import IntentionGenesis
 from tick53_intention_loop import _ORIG_BEST
@@ -46,7 +45,6 @@ for sp in h.SCENARIOS:
     for seed in (1, 2, 3):
         for pol in ("scheduled", "event_rule", "full_eia"):
             rows.setdefault(pol, []).append(silent(pol, sp, seed))
-        c = t57.card(sp, "proposed", seed) if False else None
 print(f"{'policy':<14}{'initiatives/200':>16}{'ISI CV':>8}{'longest run':>13}{'lag-5 ac':>10}")
 for pol, rs in rows.items():
     m = np.nanmean(np.array(rs, float), 0); print(f"{pol:<14}{m[0]:>16.1f}{m[1]:>8.2f}{m[2]:>13.1f}{m[3]:>10.2f}", flush=True)
