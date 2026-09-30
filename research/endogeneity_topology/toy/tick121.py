@@ -17,6 +17,7 @@ def sim(W, alpha, seed, mode, boost=None, kp=1.5, kg=2.0, ki=0.002, tau=1000.0, 
         else:
             cap = kp * np.maximum(0, S - 0.15)
             if mode == "gated": cap = np.where(S > gate, cap, 0.0)
+            if mode == "budget": cap = 0.0 * cap
             thr = (te.THETA + cap + kg * (R - 0.03) + I)[mods]
         inp = W @ s
         u = np.clip(u + te.AGE*(1-u) + te.BETA_U*inp*(1-u) - te.RESOLVE*u*s, 0, 1)
@@ -49,8 +50,9 @@ def case(kind, mode):
             ins = mods == m; pe = sim(W, alpha, seed, mode, boost=np.flatnonzero(ins)); a.append(int(pe[T0:, ins].sum()) - int(tw[T0:, ins].sum()))
     a = np.array(a); return np.mean(shares), a.mean(), z(a)
 
-print(f"{'case':<32}{'module-0 share':>15}{'d self':>8}{'z':>7}")
-for kind, label in (("A", "A: strong generator"), ("B", "B: balanced hier+workspace")):
-    for mode in ("none", "always", "gated"):
-        sh, d, zz = case(kind, mode)
-        print(f"{label + ' / ' + mode:<32}{sh:>15.2f}{d:>8.1f}{zz:>7.2f}", flush=True)
+if __name__ == "__main__":
+    print(f"{'case':<32}{'module-0 share':>15}{'d self':>8}{'z':>7}")
+    for kind, label in (("A", "A: strong generator"), ("B", "B: balanced hier+workspace")):
+        for mode in ("none", "always", "gated"):
+            sh, d, zz = case(kind, mode)
+            print(f"{label + ' / ' + mode:<32}{sh:>15.2f}{d:>8.1f}{zz:>7.2f}", flush=True)

@@ -1536,6 +1536,21 @@ Per-motive cap applied only while a motive's slow share exceeds 0.25; global bud
 - Not a full recovery in B (z 7.5 without any Governor): the global budget loop still leans against any surge. Final recipe:
   **dominance-gated share cap + slow global budget loop**; accept a moderate controllability cost for budget safety.
 
+## Tick 122 — where does the residual control loss come from? (`tick122.py`)
+
+Balanced hier + workspace; 6 seeds × 3 motives.
+
+| governor | Δ boosted motive | z |
+|---|---|---|
+| none | +171 | 7.5 |
+| global budget loop only | +156 | 3.9 |
+| gated cap + budget loop | +137 | 3.7 |
+
+- The global budget loop alone barely reduces the *mean* effect (171 → 156) but halves z: it adds **variance** (a fluctuating
+  shared threshold), not suppression. The gated cap adds only a small further mean cost (156 → 137).
+- So the residual "controllability loss" of the final recipe is mostly noise injected by the budget integrator — tunable by a
+  slower / smaller integral gain, not a structural limit.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
