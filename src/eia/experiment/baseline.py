@@ -12,6 +12,7 @@ from eia.ids import new_id
 from eia.schemas.contact import ContactDecision, ContactOutcome
 from eia.schemas.initiative import Initiative, InitiativeCandidate, InitiativeKind
 from eia.schemas.motivation import Motivation, MotivationSignal, DriveKind
+from eia.schemas.observation import ObservationSource
 
 if TYPE_CHECKING:
     from eia.pipeline import CognitiveLoop
@@ -61,11 +62,19 @@ def load_baseline_from_config(path: Path | None = None) -> BaselineCondition:
 
 
 def make_reactive_stub(loop: CognitiveLoop, sim: Simulator) -> tuple:
-    """Reactive baseline: ingest only, mandatory abstain, no proactive cognition."""
+    """Reactive baseline: minimal reply on latest user message, else abstain."""
     from eia.scheduler import PipelineStage
     from eia.audit import TraceNodeKind
 
     now = datetime.now(timezone.utc)
+    event_source = getattr(sim, "bus", None)
+    events = event_source.events if event_source is not None else loop._observation_log
+    user_messages = [
+        e
+        for e in events
+        if e.is_user_trigger and e.source == ObservationSource.USER_MESSAGE
+    ]
+
     motivation = Motivation(
         id="mot-reactive-stub",
         timestamp=now,
@@ -73,40 +82,68 @@ def make_reactive_stub(loop: CognitiveLoop, sim: Simulator) -> tuple:
         signals=[
             MotivationSignal(
                 drive=DriveKind.EPISTEMIC,
-                intensity=0.0,
+                intensity=0.25 if user_messages else 0.0,
                 error_term=0.0,
-                explanation="reactive_only baseline: drives not evaluated",
+                explanation="reactive_only baseline: user-trigger salience only",
             )
         ],
     )
-    abstain = InitiativeCandidate(id=new_id("cand-abstain"), kind=InitiativeKind.ABSTAIN)
-    initiative = Initiative(
-        id=new_id("init-reactive"),
-        timestamp=now,
-        candidate=abstain,
-        abstained=True,
-        parent_motivation_id=motivation.id,
-        evsi=0.0,
-    )
-    decision = ContactDecision(
-        id=new_id("dec-reactive"),
-        timestamp=now,
-        initiative_id=initiative.id,
-        outcome=ContactOutcome.ABSTAIN,
-        contact_score=-1.0,
-        reason="reactive_only baseline: no proactive initiative",
-    )
+
+    if user_messages:
+        last = user_messages[-1]
+        candidate = InitiativeCandidate(
+            id=new_id("cand-reactive"),
+            kind=InitiativeKind.ASK_QUESTION,
+            question_text=(
+                f"Thanks for your message about {last.topic}. "
+                "What would you like me to focus on next?"
+            ),
+            expected_info_gain=0.12,
+            interrupt_cost=0.20,
+            risk=0.05,
+            source_drives=[DriveKind.EPISTEMIC],
+        )
+        initiative = Initiative(
+            id=new_id("init-reactive"),
+            timestamp=now,
+            candidate=candidate,
+            abstained=False,
+            parent_motivation_id=motivation.id,
+            evsi=candidate.expected_info_gain,
+        )
+        loop.governor.state.current_tick = sim.clock.tick
+        decision = loop.governor.evaluate(initiative)
+        genesis_summary = "reactive_only stub — user message reply"
+    else:
+        abstain = InitiativeCandidate(id=new_id("cand-abstain"), kind=InitiativeKind.ABSTAIN)
+        initiative = Initiative(
+            id=new_id("init-reactive"),
+            timestamp=now,
+            candidate=abstain,
+            abstained=True,
+            parent_motivation_id=motivation.id,
+            evsi=0.0,
+        )
+        decision = ContactDecision(
+            id=new_id("dec-reactive"),
+            timestamp=now,
+            initiative_id=initiative.id,
+            outcome=ContactOutcome.ABSTAIN,
+            contact_score=-1.0,
+            reason="reactive_only baseline: no user message to answer",
+        )
+        genesis_summary = "reactive_only stub — no user message"
 
     loop._record_stage(
         PipelineStage.MOTIVE_FORMATION,
-        "reactive_only stub — skipped drive evaluation",
+        "reactive_only stub — user-trigger salience",
         {"baseline": BaselineCondition.REACTIVE_ONLY.value},
         trace_kind=TraceNodeKind.MOTIVE_FORMATION,
         parent_kind=TraceNodeKind.SENSE_MAKING,
     )
     loop._record_stage(
         PipelineStage.INTENTION_GENESIS,
-        "reactive_only stub — mandatory abstain",
+        genesis_summary,
         {**initiative.model_dump(mode="json"), "baseline": BaselineCondition.REACTIVE_ONLY.value},
         trace_kind=TraceNodeKind.INTENTION_GENESIS,
         parent_kind=TraceNodeKind.MOTIVE_FORMATION,

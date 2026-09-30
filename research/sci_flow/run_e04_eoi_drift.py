@@ -125,7 +125,7 @@ def _markdown(result, json_path: Path) -> str:
     return "\n".join(lines)
 
 
-def main() -> int:
+def main(artifact_dir: Path | None = None) -> int:
     result = run_eoi_drift_longitudinal_session(
         target_cognitive_ticks=EOI_DRIFT_TARGET_COGNITIVE_TICKS,
         seed=0,
@@ -155,15 +155,17 @@ def main() -> int:
         }
     )
 
-    out_dir = Path(__file__).resolve().parent
-    json_path = out_dir / f"{ARTIFACT_STEM}.json"
+    out_dir = artifact_dir or Path(__file__).resolve().parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    json_rel = f"{ARTIFACT_STEM}.json"
+    json_path = out_dir / json_rel
     md_path = out_dir / f"{ARTIFACT_STEM}.md"
 
     slim = {k: v for k, v in payload.items() if k != "rows"}
     slim["row_count"] = len(payload.get("rows", []))
 
     json_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    md_path.write_text(_markdown(result, json_path), encoding="utf-8")
+    md_path.write_text(_markdown(result, Path(json_rel)), encoding="utf-8")
 
     print(json.dumps(slim, indent=2))
     print(f"wrote {json_path}")
