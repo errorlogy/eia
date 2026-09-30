@@ -676,3 +676,25 @@ Same leave-own-module-out PLV analysis on Hopf-model output (plain SC), 7 subjec
   end (VAL lowest, BG low — weakly connected regions ride the global wave less, an anatomical effect) but not the strong
   pacing of SMA/SAL/SEN. The extra empirical pacing of those blocks is not explained by SC — plausibly arousal/vascular
   global fluctuations that act most on sensorimotor and salience regions.
+
+## Tick 137 — conduction delays from real tract lengths (`tick137_delays.py`)
+
+Drive-units on SC; between-region links delayed by length / velocity (1 tick = 1 ms), 8 delay classes; rate-matched;
+2 subjects × 2 seeds.
+
+| velocity | median delay | burst CV | envelope autocorrelation | period (ticks) | EIA-module E_norm* |
+|---|---|---|---|---|---|
+| no delays | 0 | 1.56 | 0.58 | 12 | 0.22 |
+| 10 m/s | 13 ms | 1.20 | **0.95** | 12 | 0.10 |
+| 3 m/s | 44 ms | **0.44** | **0.99** | 19 | 0.09 |
+
+\* E_norm here attributes causes at a 1-tick lag; with delays the true causes are k ticks back, so the E_norm drop is
+at least partly a **measurement artefact** — not interpreted.
+
+- Realistic conduction delays turn the collective activity into a **near-periodic oscillation** (envelope autocorrelation
+  0.95–0.99; burst CV down to 0.44 at slow conduction): the network generates its *own* carrier rhythm from wiring
+  geometry. Per A36/A37 such an intrinsic rhythm acts as an internal scheduler of *when* initiatives occur.
+- Link to the Kairologos carrier assumption: a fast carrier need not be imposed — delays + recurrent coupling produce one;
+  its period is set by delays and refractoriness (12–19 ms here ≈ 50–80 Hz in this toy time scale).
+- Method note: every lag-1 attribution metric (E, E_norm, conditional attribution) must be generalised to multi-lag before
+  it is used on delayed systems.
