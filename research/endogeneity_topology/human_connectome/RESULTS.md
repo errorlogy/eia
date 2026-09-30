@@ -714,3 +714,16 @@ Causes attributed per delay class (input via M_k comes from spiking at t − 1 �
 - So delays change *when* (intrinsic carrier, B19) but not *who/why* — the same separation as for imposed carriers (A36).
 - Method rule: endogeneity metrics must match the system's causal lags; a lag mismatch silently reads delayed internal
   causation as external. (Relevant for any LLM/agent log with variable latencies.)
+
+## Tick 141 — B9 with the lag-selective detector (`tick141_degeneracy_lagsel.py`)
+
+Split-half test on 7 subjects with the lag-selective detector (best lag 1–3 TR per pair) for detection and attribution.
+
+| detector | split-half ARI | held-out E_norm of first-half parts |
+|---|---|---|
+| pairwise summed lags (tick 39) | 0.08 | — |
+| conditional summed lags (tick 96) | 0.04 | 0.38 |
+| **lag-selective** | **0.02** | **0.29** |
+
+- Degeneracy is **not** a detector artefact: with the lag-selective detector the two halves agree even less (0.02), and the
+  first-half partition stays endogenous on the held-out half (0.29, lower than 0.38). B9 holds under all three detectors.
