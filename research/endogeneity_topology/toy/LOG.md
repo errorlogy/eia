@@ -1659,6 +1659,28 @@ across ticks; 3 seeds.
   intensities are nearly uncorrelated tick to tick (slight negative lag-1 from refractoriness). The C16 caution is
   theoretical for the default configuration.
 
+## Tick 133 — PAI-EI-E0-001 baseline matrix with the causal gate (`../eia_prototype/tick133_matrix_causal.py`, run on a patched copy)
+
+6 scenarios (twin_world_001 + evals 002–006), seed 100; AuthenticReason class 'endogenous' with the lexical gate vs D1.
+
+| baseline | endogenous, lexical | endogenous, causal (D1) | causal origin of the initiative |
+|---|---|---|---|
+| reactive_only | 0/6 | 0/6 | abstain / stub 6 |
+| scheduled_stub | 4/6 | 4/6 | memory 4, field 1, none 1 |
+| event_rule | 5/6 | 5/6 | memory 5, field 1 |
+| predictive_p3 | 0/6 | **2/6** | drive-independent 3, field 2, none 1 |
+| full_eia | 6/6 | 6/6 | memory 5, field 1 |
+
+- **Neither gate separates full_eia from the scheduled / event-rule stubs** (4–6/6 'endogenous' for all three) — in MVP-0 the
+  G2 separation comes from EUIR/contact criteria, not from AuthenticReason's class. The drive-attribution origins of
+  full_eia and event_rule are identical (memory 5, field 1): these stubs reuse the same drive → intention path.
+- **D1 changes one baseline**: predictive_p3 goes from 0/6 to 2/6 'endogenous' — its initiatives are field-driven through the
+  drive channel, so the causal structural test passes where the keyword test failed. D1 is more honest about *drive causation*
+  but, alone, would weaken the P3 separation; it should be combined with the EOI/twin criterion (already in the class rule)
+  and an exogeneity check on the *inputs* of the drive channel.
+- Recommendation added to D1: report origin + Shapley per run, but do not let a causal drive path by itself upgrade a
+  predictive-P3 initiative to 'endogenous'.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

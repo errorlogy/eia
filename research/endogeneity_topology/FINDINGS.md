@@ -152,6 +152,7 @@ reactive, audit with world-cut/replay (4d) regardless of topology.
 | C14 | In the calibrated prototype every drive is isolated-type (independence ≈ 0.97, out-influence ≈ 0.01): separability by non-interaction — drives never influence each other; inter-motive interaction needs deliberate coupling: μ 0.15 / 0.30 gives +11 % / +20 % epistemic response to coherence tension with eval initiatives still 100 % unchanged — μ ≈ 0.15 is a sensible default | ticks 112–113 |
 | C15 | System card v3 (calibrated engine + cross-drive μ 0.15): first initiative 1.00, EOI 0.90, drive-dependence 0.99, silent questions 3.6, same-question run 1.05, ISI CV 1.08 — interaction added at a small EOI cost; recommended prototype configuration | tick 114 |
 | C16 | The near-critical population engine is an internal oscillator (envelope autocorrelation 0.97 at ~28 steps) despite CV > 1; v3's subcritical gain halves it (0.56). The ~30-step rhythm is below one cognition tick (40 steps); checked on the patched engine it does not alias at the tick level for inner_steps 30/40/60 (|ac| ≤ 0.13, tick 132) | ticks 131–132 |
+| C17 | PAI-EI-E0-001 with D1: neither the lexical nor the causal gate separates full_eia (6/6 'endogenous') from scheduled (4/6) / event-rule (5/6) stubs — G2 separation rests on EUIR/contact criteria; D1 lifts predictive_p3 from 0/6 to 2/6 (field-driven via the drive channel) — D1 must not by itself upgrade P3 initiatives | tick 133 |
 | C11 | Latent crash: `pipeline.py:159` assumes `motivation.dominant_drive` is not None although the schema allows None (all-zero drives) | tick 60 |
 
 ## D. Concrete proposals for EIA
@@ -196,5 +197,5 @@ reactive, audit with world-cut/replay (4d) regardless of topology.
 
 ## E. Open threads
 - finer parcellation (Schaefer-200) and empirically fitted local dynamics for the human model
-- causal gate (D1) as an actual patch + tests in `src/`, then re-run PAI-EI-E0-001 baselines
+- causal gate (D1): patch drafted (patches/), PAI-EI-E0-001 re-run on a patched copy (C17); needs a P3 safeguard before adoption
 - B14 with many more HCP subjects (and SNR-matched regions): is empirical DMN self-initiation real, and what model ingredient reproduces it?
