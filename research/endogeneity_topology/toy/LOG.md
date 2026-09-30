@@ -1278,6 +1278,24 @@ the remaining units relative to intact. 2 seeds.
 - Design note: an endogenous agent operated near criticality needs **gain homeostasis** (re-tuning after loss) or it
   falls back to clock-like unit activity; hierarchical organisation buys the most slack.
 
+## Tick 105 — gain homeostasis after a 10 % hub lesion (`tick105.py`)
+
+Gain re-bisected so survivors return to rate 0.03. 2 seeds.
+
+| topology | gain increase needed | burst CV intact → retuned | module E_norm intact → retuned |
+|---|---|---|---|
+| ER | ×1.34 | 1.76 → 1.54 | — |
+| SBM | ×1.30 | 1.38 → 1.39 | 0.93 → 0.92 |
+| **hier-modular** | **×1.22** | 1.39 → 1.47 | **0.95 → 0.95** |
+| scale-free (BA) | **×2.15** | 1.03 → **0.53** | — |
+
+- With gain homeostasis, modular and hierarchical agents **fully recover** graded, bursty collective initiative and keep their
+  sub-agents intact; hierarchy needs the least compensation (×1.22).
+- Scale-free needs twice the gain and recovers only **clock-like** activity (CV 1.03 → 0.53): after losing its hubs the
+  remaining network cannot regain rich endogeneity by gain alone.
+- Completes A33: lesion fragility near criticality is repairable by homeostasis in modular/hierarchical architectures,
+  not in hub-dependent ones.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
