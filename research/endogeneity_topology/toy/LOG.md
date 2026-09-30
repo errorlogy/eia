@@ -1500,6 +1500,24 @@ Hierarchical-modular motives ± thin workspace layer (w 0.4); rate-matched; 3 se
 - Refined recommendation: the thin workspace buys integration at a moderate controllability price and turns inter-motive
   influence competitive; keep w small (≤ 0.4) and pair it with the leaky share-cap Governor (A29) if balance matters.
 
+## Tick 120 — hierarchy + workspace with the leaky Governor (`tick120.py`)
+
+Protocol of ticks 92–93 (boost at t0 = 2000 after Governor warm-up, 600-tick horizon); 6 seeds × 3 motives.
+
+| condition | Δ boosted motive (z) | Δ rest (z) |
+|---|---|---|
+| hier + workspace, no governor | +171 (**7.5**) | +408 (2.2) |
+| hier + workspace + leaky governor | +88 (1.9) | −305 (−1.7) |
+
+- **The Governor does not restore control here — it halves it** (z 7.5 → 1.9): without a chronically dominant generator,
+  a boosted motive's rising share is itself what the cap acts on. A share cap cannot distinguish a legitimate internal
+  surge from chronic dominance within its time constant.
+- **Protocol sensitivity**: the same architecture without Governor gave z 2.4 and spill −555 in tick 119 (boost at t0 = 1000)
+  but z 7.5 and spill +408 here (t0 = 2000). Spill-over sign and controllability magnitude depend on the intervention time /
+  warm-up — spill-over estimates in this line (A35, A21) are therefore only indicative.
+- Governor use rule: apply the share cap only when a motive is chronically dominant (e.g. gate the cap on a long-window
+  share test), not as a standing regulator in balanced agents.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
