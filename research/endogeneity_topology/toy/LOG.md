@@ -1796,6 +1796,22 @@ Rate-matched (0.030–0.034), 2 seeds.
 - Interpretation: two regimes of self-organisation — *structure-bound* (static wiring decides the sub-agents) and
   *activity-bound* (routing decides) — separated by a transition where neither holds. Confirms and sharpens A38.
 
+## Tick 145 — per-motive controllability across routing regimes (`tick145.py`)
+
+u-only do(Z) on an anatomical module; exact twin; 600 ticks; 5 seeds × 2 modules.
+
+| β | Δ boosted motive (z) | Δ rest (z) |
+|---|---|---|
+| 0 (structure-bound) | +220 (5.3) | **+806 (3.0)** — contagion |
+| 0.5 (dissolution zone) | +239 (3.9) | −19 (−1.1) |
+| 2 (activity-bound) | +263 (4.6) | −3 (−2.1, tiny) |
+
+- Boosting a motive works in all regimes (z 3.9–5.3) — even where no sub-agent boundary is detectable (β 0.5).
+- **Dynamic routing removes contagion**: with static wiring at μ 0.2 a boost spreads (+806 to the rest), with co-activity
+  gating the rest is essentially untouched — gating routes activity *within* the currently co-active coalition.
+- So an activity-bound (routing) motive graph offers containment without fixed boundaries — separability by dynamics rather
+  than by wiring. Controllability does not require detectable self-boundaries.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
