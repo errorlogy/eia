@@ -1386,6 +1386,22 @@ SBM with 10 motive modules + 1 interface module (N = 1100); echo w = 1, D = 20; 
 - Audit implication: report world dependence **per sub-agent**, not for the whole agent; a whole-agent number mixes the
   (legitimately reactive) interface with the (supposedly endogenous) motives.
 
+## Tick 112 — A26 signature of the prototype's drives (`../eia_prototype/tick112_prototype_signature.py`)
+
+TargetEngine (tension-set targets), fixed tension 0.5, μ 0.05; calibrated gain 0.4 vs near-critical 1.0; 5 seeds.
+
+| engine | out-influence (each drive) | independence (each drive) | activity |
+|---|---|---|---|
+| calibrated (0.4) | 0.01–0.02 | 0.97–0.98 | ≈ 0.07 |
+| near-critical (1.0) | 0.01 | 0.98 | ≈ 0.15 |
+
+- All three drives are **isolated-type** in the A26 sense: fully self-sustaining (their own tension-set uncertainty keeps them
+  going) but with essentially **no influence on each other** at μ = 0.05. The prototype achieves separability by
+  non-interaction — motives never recruit or inhibit one another.
+- Design consequence: if inter-motive interaction is wanted (e.g. an epistemic question triggered by a coherence conflict),
+  the cross-drive coupling has to be raised deliberately (toward μ ≈ 0.1–0.2, still discoverable with a conditional
+  detector, A12) or routed through a workspace layer (A21); the current prototype has none.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
