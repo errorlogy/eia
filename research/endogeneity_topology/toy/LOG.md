@@ -1357,6 +1357,19 @@ Hidden world support (w = 1, D = 20), sensors and motors as contiguous blocks vs
 - Revised design point: give the agent a dedicated interface module rather than distributing sensors/motors over its motives;
   modularity helps only if the interface respects the module boundaries.
 
+## Tick 110 — A31 with a scattered interface (`tick110.py`)
+
+| agent | kept: world cut | kept: non-contingent replay | contingency share of world support |
+|---|---|---|---|
+| SBM | 0.68 | 0.94 | 0.21 |
+| ER | 0.67 | 0.94 | 0.19 |
+
+- With a scattered interface the SBM/ER contrast of tick 100 **disappears**: both lose ~1/3 of activity when the world is cut
+  and ~20 % of that support requires contingency (a real agent–world memory loop). Tick 100's "modular agent needs only
+  volume" was, like A30, an effect of confining the interface to one module.
+- Stable part of A30–A31: attribution under-counts world support; world-cut + non-contingent replay separate volume from
+  contingency; confining the interface to one sub-agent reduces both.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
