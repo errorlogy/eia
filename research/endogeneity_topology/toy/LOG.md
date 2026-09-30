@@ -1344,6 +1344,19 @@ Hidden world support (w = 1, D = 20), sensors and motors as contiguous blocks vs
   (~0.25); world dependence is governed more by **how the interface is embedded** (local vs distributed) than by topology
   class. Scorecard caveat updated.
 
+## Tick 109 — A30 re-checked with scattered sensors (`tick109.py`)
+
+| topology | contiguous interface (= one module in SBM) | scattered interface |
+|---|---|---|
+| SBM | 0.15 | **0.31** |
+| ER | 0.32 | 0.36 |
+
+- **A30's "modularity protects against externalised endogeneity" was largely a placement artefact**: when the sensors and
+  motors are scattered, the modular agent leans on the world almost as much as ER (0.31 vs 0.36). What protects is
+  **confining the world interface to one sub-agent** (a dedicated sensorimotor module) — then the echo stays inside it.
+- Revised design point: give the agent a dedicated interface module rather than distributing sensors/motors over its motives;
+  modularity helps only if the interface respects the module boundaries.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
