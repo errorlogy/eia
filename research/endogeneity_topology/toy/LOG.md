@@ -1315,6 +1315,19 @@ Rate-matched gain; noise switched off after 2000 ticks. 2 seeds.
   hub-dependent topologies.
 - Adds to A33/A34-style resilience: hierarchy = least dependent on noise, on lesions and on gain re-tuning.
 
+## Tick 107 — filling the scorecard gaps (`tick107.py`)
+
+| topology | lesion 10 % random | lesion 10 % hubs | kept without noise | hidden world support |
+|---|---|---|---|---|
+| small-world | 0.51 | 0.43 | 0.67 | **0.12** |
+| EDR (λ 0.05) | 0.52 | 0.35 | 0.54 | 0.33 |
+| hier-modular | 0.59 | 0.39 | 0.94 | 0.24 |
+| scale-free | 0.85 | 0.30 | 0.38 | 0.41 |
+
+- Hierarchy remains best on noise-independence and lesions (except BA's random-loss value, which is noisy: 0.39 in tick 104,
+  0.85 here), but it is **not** the most world-independent: small-world (0.12) and flat modular (0.15) lean on a reactive
+  world less. Scorecard updated with a caveat.
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md

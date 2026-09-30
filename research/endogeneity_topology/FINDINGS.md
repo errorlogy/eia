@@ -35,7 +35,7 @@ draft patches: [`patches/`](patches/).
     share + a global budget loop with a slow integral. Integrating the per-motive loop fast reverses controllability
     (A29, proposal 4c). Detector quality matters: calibrated inference doubles the blind-discoverability threshold (A12).
 
-## Topology scorecard (from ticks 3–106; ++ best, + good, 0 neutral, − poor)
+## Topology scorecard (from ticks 3–107; ++ best, + good, 0 neutral, − poor)
 
 | property (evidence) | ER | small-world | flat modular | **hier-modular** | scale-free | spatial EDR |
 |---|---|---|---|---|---|---|
@@ -43,14 +43,16 @@ draft patches: [`patches/`](patches/).
 | containment of internal interventions (A4, A6) | − (contagion) | − | + | **++** | 0 | + (reach ≈ 4λ) |
 | per-motive controllability (A4, A17) | + | + | 0 | **+** | 0 | + |
 | natural sub-agent boundaries (A10–A12) | − (none) | 0 (no scale) | + | **++** (nested) | − | + (size ≈ 3λ) |
-| independence from a reactive world (A30–A31) | − (0.32 hidden) | ? | + (0.15, volume only) | ? | ? | ? |
-| resilience to lesions (A33) | − | ? | 0 | **++** | − (hub collapse) | ? |
+| independence from a reactive world (A30–A31; hidden support) | − (0.32) | **++ (0.12)** | + (0.15, volume only) | 0 (0.24) | − (0.41) | − (0.33) |
+| resilience to lesions (A33; 10 % random / hubs) | − | 0 (0.51 / 0.43) | 0 | **+** (0.59 / 0.39) | − hubs (0.30); random noisy (0.39–0.85) | 0 (0.52 / 0.35) |
 | repair by gain homeostasis (A33) | 0 | ? | + | **++** (×1.22) | − (×2.15, clock-like) | ? |
-| self-sustained without noise (A34) | 0 (0.64) | ? | 0 (0.64) | **++** (0.94) | − (0.38) | 0 (0.54) |
+| self-sustained without noise (A34) | 0 (0.64) | 0 (0.67) | 0 (0.64) | **++** (0.94) | − (0.38) | 0 (0.54) |
 
 **Recommendation for EIA motive graphs**: hierarchical-modular wiring with sparse excitatory cross-motive coupling (≲ 10–20 %,
 A12), mutual inhibition where dense coupling is needed (A15), slow integration for reflective motives (A25), a thin workspace
 layer if agent-wide broadcast is wanted (A21), and the two-loop leaky Governor (A29). "?" = not measured.
+Caveat (tick 107): hierarchy is *not* the most world-independent (hidden support 0.24 vs small-world 0.12, flat modular 0.15) —
+if the environment is reactive, audit with world-cut/replay (4d) regardless of topology.
 
 ## A. What topology does to endogenous initiative (toy drive-unit networks, X_trigger = 0)
 
