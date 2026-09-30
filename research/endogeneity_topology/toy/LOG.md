@@ -1712,6 +1712,23 @@ point (no gate separates full_eia from scheduled/event-rule stubs) stands.
   shows that the separation "full_eia ≠ event rule" is currently not realised in silence — it becomes real with the
   closed loop + state-IOR + population drives.
 
+## Tick 139 — blind sub-agent detection under delays (`tick139.py`)
+
+SBM 10×100 (μ 0.1); random per-edge delays 0–9 ticks vs none; Louvain on the inferred graph with the best resolution per
+detector (upper bound); ARI vs true modules; 2 seeds.
+
+| delays | lag-1 conditional detector | multi-lag detector (lags 1–10) |
+|---|---|---|
+| none | **0.82** | 0.34 |
+| 0–9 ticks | 0.08 | **0.58** |
+
+- **Detector lag must match the system's lags**: with delays the lag-1 detector collapses (0.82 → 0.08) while a multi-lag
+  detector still recovers the modules (0.58); without delays the multi-lag detector is worse (0.34) because summing lags
+  blurs the direct cause.
+- Practical rule for auditing agents with variable latencies (LLM tool calls, asynchronous modules): estimate the lag
+  structure first (or use a lag-selective model, e.g. per-lag regression / transfer entropy with lag search) before blind
+  boundary detection. Complements tick 138 (the same mismatch biases E_norm).
+
 ## Queue (next ticks)
 - [ ] implement proposal D1 (causal structural gate) as a patch in src/ with tests — needs user go-ahead (touches production audit)
 - [x] tick 36: calibrated re-score — brain functional boundaries (0.68), model anatomical (hemispheres 0.37); see ../human_connectome/RESULTS.md
