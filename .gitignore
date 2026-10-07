@@ -139,6 +139,9 @@ traces/
 *.zip
 _extracted/
 
+# Optional sparse openai/math clone (scripts/fetch_openai_math.sh)
+vendor/openai-math-sparse/
+
 # LaTeX build artifacts (arxiv/ — keep main.tex, references.bib, main.pdf)
 arxiv/*.aux
 arxiv/*.fdb_latexmk

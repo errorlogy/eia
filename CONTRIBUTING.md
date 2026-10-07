@@ -38,6 +38,14 @@ From repo root (Python 3.12+):
 pip install -e ".[dev,sim]"
 ```
 
+Optional reference corpus (OpenAI `math` submodule, ~1 GB working tree; **not** required for CI):
+
+```powershell
+git submodule update --init --depth 1 research/external/openai-math
+```
+
+See [`docs/INTEGRATION_OPENAI_MATH.md`](docs/INTEGRATION_OPENAI_MATH.md). EIA does **not** treat upstream manuscripts or Lean artifacts as verified evidence (`claim_allowed=false`).
+
 Optional extras for Brain-AI Brian2 subgraphs and connectome tooling:
 
 ```powershell
@@ -62,6 +70,7 @@ EIA CI runs on pushes and PRs to `main` and `research/cursor-starter-v0.2-woe-ei
 ## Related docs
 
 - [`docs/INDEX.md`](docs/INDEX.md) — documentation entry points
+- [`docs/INTEGRATION_OPENAI_MATH.md`](docs/INTEGRATION_OPENAI_MATH.md) — openai/math submodule (Tier C reference)
 - [`docs/CI_CD.md`](docs/CI_CD.md) — CI/CD workflows, local commands, branch protection
 - [`docs/RESEARCH_BRANCHES.md`](docs/RESEARCH_BRANCHES.md)
 - [`docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md`](docs/ENDOGENEITY_IMPLEMENTATION_PLAN.md)

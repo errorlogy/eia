@@ -41,6 +41,7 @@ Entry points for navigating the EIA repository. Status: **active** (current), **
 | Brain-AI | [`../research/brain_ai/README.md`](../research/brain_ai/README.md) |
 | Agent-EIA | [`../research/agent_eia/README.md`](../research/agent_eia/README.md) |
 | Kairologos (Tier C) | [`../research/kairologos_experiments/README.md`](../research/kairologos_experiments/README.md) |
+| OpenAI `math` (Tier C reference) | [`INTEGRATION_OPENAI_MATH.md`](INTEGRATION_OPENAI_MATH.md) · [`../research/sci_flow/M-OPENAI-MATH-POINTER.md`](../research/sci_flow/M-OPENAI-MATH-POINTER.md) |
 
 ## Other indexes
 

@@ -1,0 +1,4 @@
+[submodule "research/external/openai-math"]
+	path = research/external/openai-math
+	url = https://github.com/openai/math.git
+	shallow = true
